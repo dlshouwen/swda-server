@@ -17,7 +17,6 @@
     <!-- modules -->
     <modules>
         <module>swda-common</module>
-        <module>swda-source</module>
         <module>swda-auth</module>
         <module>swda-base</module>
         <module>swda-bms</module>
