@@ -36,7 +36,11 @@
         <!-- spring cloud alibaba -->
         <spring.cloud.alibaba.version>2023.0.0.0-RC1</spring.cloud.alibaba.version>
         <!-- mybatis plus -->
-        <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+         <!-- spring boot data redis -->
+        <spring.boot.data.redis.version>3.2.5</spring.boot.data.redis.version>
+         <!-- spring boot security -->
+        <spring.boot.security.version>3.2.5</spring.boot.security.version>
         <!-- mysql -->
         <mysql.version>5.1.47</mysql.version>
         <!-- druid -->
@@ -89,6 +93,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- string boot security -->
+			<dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-security</artifactId>
+			    <version>${spring.boot.security.version}</version>
+			</dependency>
+            <!-- spring boot data redis -->
+			<dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-data-redis</artifactId>
+			    <version>${spring.boot.data.redis.version}</version>
+			</dependency>
             <!-- mybatis plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
