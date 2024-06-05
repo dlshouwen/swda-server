@@ -22,54 +22,56 @@
         <module>swda-bms</module>
     </modules>
 
-    <!-- properties -->
+	<!-- properties -->
     <properties>
-        <!-- maven compile -->
+		<!-- maven compile -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <!-- source encoding -->
+		<!-- source encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- spring boot -->
+		<!-- swda common -->
+        <swda.common.version>1.0.0</swda.common.version>
+		<!-- spring boot -->
         <spring.boot.version>3.2.0</spring.boot.version>
-        <!-- spring cloud -->
+		<!-- spring cloud -->
         <spring.cloud.version>2023.0.0</spring.cloud.version>
-        <!-- spring cloud alibaba -->
+		<!-- spring cloud alibaba -->
         <spring.cloud.alibaba.version>2023.0.0.0-RC1</spring.cloud.alibaba.version>
-        <!-- mybatis plus -->
+		<!-- mybatis plus -->
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
-         <!-- spring boot data redis -->
+		<!-- spring boot data redis -->
         <spring.boot.data.redis.version>3.2.5</spring.boot.data.redis.version>
-         <!-- spring boot security -->
+		<!-- spring boot security -->
         <spring.boot.security.version>3.2.5</spring.boot.security.version>
-        <!-- mysql -->
+		<!-- mysql -->
         <mysql.version>5.1.47</mysql.version>
-        <!-- druid -->
+		<!-- druid -->
         <druid.version>1.1.20</druid.version>
-        <!-- persistence api -->
+		<!-- persistence api -->
         <persistence-api.version>1.0.2</persistence-api.version>
-        <!-- fastjson2 -->
+		<!-- fastjson2 -->
         <fastjson2.version>2.0.40</fastjson2.version>
-        <!-- swagger3 -->
+		<!-- swagger3 -->
         <swagger3.version>2.2.0</swagger3.version>
-        <!-- hutool -->
+		<!-- hutool -->
         <hutool.version>5.8.22</hutool.version>
-        <!-- lombok -->
+		<!-- lombok -->
         <lombok.version>1.18.26</lombok.version>
-        <!-- spring boot test -->
+		<!-- spring boot test -->
         <spring.boot.test.version>3.1.5</spring.boot.test.version>
-        <!-- micrometer -->
+		<!-- micrometer -->
         <micrometer-tracing.version>1.2.0</micrometer-tracing.version>
         <micrometer-observation.version>1.12.0</micrometer-observation.version>
-        <!-- feign micrometer -->
+		<!-- feign micrometer -->
         <feign-micrometer.version>12.5</feign-micrometer.version>
-        <!-- zipkin reporter brave -->
+		<!-- zipkin reporter brave -->
         <zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
     </properties>
 
-    <!-- dependency management -->
+	<!-- dependency management -->
     <dependencyManagement>
         <dependencies>
-            <!-- spring boot -->
+			<!-- spring boot -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
@@ -77,7 +79,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- spring cloud -->
+			<!-- spring cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -85,7 +87,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- spring cloud alibaba -->
+			<!-- spring cloud alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -93,75 +95,81 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- string boot security -->
+			<!-- string boot security -->
 			<dependency>
 			    <groupId>org.springframework.boot</groupId>
 			    <artifactId>spring-boot-starter-security</artifactId>
 			    <version>${spring.boot.security.version}</version>
 			</dependency>
-            <!-- spring boot data redis -->
+			<!-- spring boot data redis -->
 			<dependency>
 			    <groupId>org.springframework.boot</groupId>
 			    <artifactId>spring-boot-starter-data-redis</artifactId>
 			    <version>${spring.boot.data.redis.version}</version>
 			</dependency>
-            <!-- mybatis plus -->
+			<!-- swda common -->
+			<dependency>
+			    <groupId>com.dlshouwen</groupId>
+			    <artifactId>swda-common</artifactId>
+			    <version>${swda.common.version}</version>
+			</dependency>
+			<!-- mybatis plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
-            <!-- mysql -->
+			<!-- mysql -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
-            <!-- druid -->
+			<!-- druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <!-- persistence -->
+			<!-- persistence -->
             <dependency>
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>${persistence-api.version}</version>
             </dependency>
-            <!-- fastjson2 -->
+			<!-- fastjson2 -->
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
             </dependency>
-            <!-- swagger3 -->
+			<!-- swagger3 -->
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${swagger3.version}</version>
             </dependency>
-            <!-- hutool -->
+			<!-- hutool -->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-            <!-- lombok -->
+			<!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <optional>true</optional>
             </dependency>
-            <!-- spring boot starter test -->
+			<!-- spring boot starter test -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring.boot.test.version}</version>
                 <scope>test</scope>
             </dependency>
-            <!-- micrometer-->
+			<!-- micrometer-->
             <dependency>
                 <groupId>io.micrometer</groupId>
                 <artifactId>micrometer-tracing-bom</artifactId>
@@ -184,13 +192,13 @@
                 <artifactId>micrometer-observation</artifactId>
                 <version>${micrometer-observation.version}</version>
             </dependency>
-            <!-- feign micrometer -->
+			<!-- feign micrometer -->
             <dependency>
                 <groupId>io.github.openfeign</groupId>
                 <artifactId>feign-micrometer</artifactId>
                 <version>${feign-micrometer.version}</version>
             </dependency>
-            <!-- zipkin reporter brave -->
+			<!-- zipkin reporter brave -->
             <dependency>
                 <groupId>io.zipkin.reporter2</groupId>
                 <artifactId>zipkin-reporter-brave</artifactId>

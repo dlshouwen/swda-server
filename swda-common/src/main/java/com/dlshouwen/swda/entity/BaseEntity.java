@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.entity.base;
+package com.dlshouwen.swda.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 
@@ -7,14 +7,13 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * base entity
  * @author liujingcheng@live.cn
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @Data
-public class BaseEntity {
+public abstract class BaseEntity {
 
 	/** 
 	 * info
