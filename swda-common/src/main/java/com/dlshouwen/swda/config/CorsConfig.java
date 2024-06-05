@@ -1,43 +1,38 @@
 package com.dlshouwen.swda.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  * cors config
  * @author liujingcheng@live.cn
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @Configuration
-@EnableWebMvc
-public class CorsConfig implements WebMvcConfigurer {
-
+public class CorsConfig {
+	
 	/**
-	 * add resource handlers
-	 * <p>to fixed swagger-ui resource cannot visit</p>
-	 * @param registry
+	 * cors filter
+	 * @return cors filter
 	 */
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-	}
-
-	/**
-	 * add cors mappings
-	 * @param registry
-	 */
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-				.allowedOriginPatterns("*")
-				.allowCredentials(true)
-				.allowedMethods("GET", "POST", "DELETE", "PUT")
-				.maxAge(3600);
+	@Bean
+	public CorsFilter corsFilter() {
+//		defined url based cors config source
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		defined cors config
+		final CorsConfiguration corsConfiguration = new CorsConfiguration();
+//		set cors info
+		corsConfiguration.setAllowCredentials(true);
+		corsConfiguration.addAllowedHeader("*");
+		corsConfiguration.addAllowedOriginPattern("*");
+		corsConfiguration.addAllowedMethod("*");
+//		register cors config
+		source.registerCorsConfiguration("/**", corsConfiguration);
+//		return filter
+        return new CorsFilter(source);
 	}
 
 }

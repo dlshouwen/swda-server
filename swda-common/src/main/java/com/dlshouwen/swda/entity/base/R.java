@@ -1,77 +1,49 @@
 package com.dlshouwen.swda.entity.base;
 
-import lombok.Data;
-
-import java.util.HashMap;
 import java.util.Map;
 
-/**
- * R
- * @author liujingcheng@live.cn
- * @since 0.0.1-SNAPSHOT
- */
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
 @Data
-public class R {
+@Schema(description="Result")
+public class R<T> {
+	
+	@Schema(description="code, 0:success, other:failure")
+	private int code = 0;
 
-	/** result */
-	private Boolean result;
+	@Schema(description="message")
+	private String message = "success";
 
-	/** code */
-	private Integer code;
+	@Schema(description="data")
+	private T data;
 
-	/** message */
-	private String message;
-
-	/** data */
-	private Map<String, Object> data = new HashMap<>();
-
-	/**
-	 * construct
-	 */
-	private R(){}
-
-	/**
-	 * success
-	 * @return R
-	 */
-	public static R success() {
-		R r = new R();
-		r.setResult(true);
-		r.setCode(ResultCode.SUCCESS);
-		r.setMessage("success");
-		return r;
+	public static <T> R<T> ok() {
+		return ok(null);
 	}
 
-	/**
-	 * error
-	 * @return R
-	 */
-	public static R error(){
-		R r = new R();
-		r.setResult(false);
-		r.setCode(ResultCode.ERROR);
-		r.setMessage("has error");
-		return r;
+	public static <T> R<T> ok(T data) {
+		return new R<T>().data(data);
 	}
 
-	/**
-	 * result
-	 * @param result
-	 * @return R
-	 */
-	public R result(Boolean result){
-		this.setResult(result);
-		return this;
+	public static <T> R<T> error() {
+		return error(ResultCode.INTERNAL_SERVER_ERROR);
 	}
 
-	/**
-	 * message
-	 * @param message
-	 * @return R
-	 */
-	public R message(String message){
-		this.setMessage(message);
-		return this;
+	public static <T> R<T> error(ResultCode resultCode) {
+		return error(resultCode.getCode(), resultCode.getMessage());
+	}
+
+	public static <T> R<T> error(String message) {
+		return error(ResultCode.INTERNAL_SERVER_ERROR.getCode(), message);
+	}
+
+	public static <T> R<T> error(int code, String message) {
+		return error(code, message, null);
+	}
+	
+	public static <T> R<T> error(int code, String message, T data) {
+		return new R<T>().code(code).message(message).data(data);
 	}
 
 	/**
@@ -79,13 +51,18 @@ public class R {
 	 * @param code
 	 * @return R
 	 */
-	public R code(Integer code){
-		if(code.intValue()==ResultCode.SUCCESS){
-			this.setResult(true);
-		}else{
-			this.setResult(false);
-		}
+	public R<T> code(Integer code){
 		this.setCode(code);
+		return this;
+	}
+	
+	/**
+	 * message
+	 * @param message
+	 * @return R
+	 */
+	public R<T> message(String message){
+		this.setMessage(message);
 		return this;
 	}
 
@@ -94,7 +71,7 @@ public class R {
 	 * @param data
 	 * @return R
 	 */
-	public R data(Map<String, Object> data){
+	public R<T> data(T data){
 		this.setData(data);
 		return this;
 	}
@@ -105,8 +82,9 @@ public class R {
 	 * @param value
 	 * @return R
 	 */
-	public R data(String key, Object value){
-		this.getData().put(key, value);
+	@SuppressWarnings("unchecked")
+	public R<T> data(String key, Object value){
+		((Map<String, Object>)this.getData()).put(key, value);
 		return this;
 	}
 

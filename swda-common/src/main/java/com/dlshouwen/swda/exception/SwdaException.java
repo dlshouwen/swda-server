@@ -1,9 +1,9 @@
 package com.dlshouwen.swda.exception;
 
-import lombok.AllArgsConstructor;
+import com.dlshouwen.swda.entity.base.ResultCode;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
  * swda expcetion
@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @EqualsAndHashCode(callSuper=true)
-@AllArgsConstructor
-@NoArgsConstructor
 public class SwdaException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
@@ -23,14 +21,36 @@ public class SwdaException extends RuntimeException {
 
 	/** message */
 	private String message;
-
+	
 	/**
-	 * to string
-	 * @return info
+	 * constructor
+	 * @param message
 	 */
-	@Override
-	public String toString(){
-		return "SwdaException{code="+this.getCode()+", message="+this.getMessage()+"}";
-	}
+    public SwdaException(String message) {
+        super(message);
+        this.code = ResultCode.INTERNAL_SERVER_ERROR.getCode();
+        this.message = message;
+    }
+
+    /**
+     * constructor
+     * @param resultCode
+     */
+    public SwdaException(ResultCode resultCode) {
+        super(resultCode.getMessage());
+        this.code = resultCode.getCode();
+        this.message = resultCode.getMessage();
+    }
+
+    /**
+     * constructor
+     * @param message
+     * @param e
+     */
+    public SwdaException(String message, Throwable e) {
+        super(message, e);
+        this.code = ResultCode.INTERNAL_SERVER_ERROR.getCode();
+        this.message = message;
+    }
 
 }
