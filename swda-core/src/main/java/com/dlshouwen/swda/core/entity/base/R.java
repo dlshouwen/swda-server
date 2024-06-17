@@ -14,16 +14,16 @@ import lombok.Data;
  * @since 1.0.0
  */
 @Data
-@Schema(description="Result")
+@Schema(description = "Result")
 public class R<T> {
-	
-	@Schema(description="code, 0:success, other:failure")
+
+	@Schema(description = "code, 0:success, other:failure")
 	private int code = 0;
 
-	@Schema(description="message")
+	@Schema(description = "message")
 	private String message = "success";
 
-	@Schema(description="data")
+	@Schema(description = "data")
 	private T data;
 
 	/**
@@ -84,7 +84,7 @@ public class R<T> {
 	public static <T> R<T> error(int code, String message) {
 		return error(code, message, null);
 	}
-	
+
 	/**
 	 * error
 	 * @param <T>
@@ -102,17 +102,17 @@ public class R<T> {
 	 * @param code
 	 * @return R
 	 */
-	public R<T> code(Integer code){
+	public R<T> code(Integer code) {
 		this.setCode(code);
 		return this;
 	}
-	
+
 	/**
 	 * message
 	 * @param message
 	 * @return R
 	 */
-	public R<T> message(String message){
+	public R<T> message(String message) {
 		this.setMessage(message);
 		return this;
 	}
@@ -122,7 +122,7 @@ public class R<T> {
 	 * @param data
 	 * @return R
 	 */
-	public R<T> data(T data){
+	public R<T> data(T data) {
 		this.setData(data);
 		return this;
 	}
@@ -134,11 +134,11 @@ public class R<T> {
 	 * @return R
 	 */
 	@SuppressWarnings("unchecked")
-	public R<T> data(String key, Object value){
-		if(this.getData()==null) {
-			data((T)new HashMap<String, Object>());
+	public R<T> data(String key, Object value) {
+		if (this.getData() == null) {
+			data((T) new HashMap<String, Object>());
 		}
-		((Map<String, Object>)this.getData()).put(key, value);
+		((Map<String, Object>) this.getData()).put(key, value);
 		return this;
 	}
 

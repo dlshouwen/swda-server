@@ -8,26 +8,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 树节点，所有需要实现树节点的，都需要继承该类
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * tree node
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 public class TreeNode<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
-    /**
-     * 主键
-     */
-    @Schema(description = "id")
-    private Long id;
-    /**
-     * 上级ID
-     */
-    @Schema(description = "上级ID")
-    private Long pid;
-    /**
-     * 子节点列表
-     */
-    private List<T> children = new ArrayList<>();
+	
+	/** serial version uid */
+	private static final long serialVersionUID = 1L;
+	
+	/** id */
+	@Schema(description = "id")
+	private Long id;
+	
+	/** pid */
+	@Schema(description = "parent id")
+	private Long pid;
+	
+	/** name */
+	@Schema(description = "name")
+	private String name;
+	
+	/** children */
+	private List<T> children = new ArrayList<>();
+
 }
