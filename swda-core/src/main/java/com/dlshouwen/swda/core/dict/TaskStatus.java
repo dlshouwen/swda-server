@@ -4,16 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * dict task_status
- * @author 大连首闻科技有限公司
- * @since 1.0
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Schema(description = "任务状态")
-public class TaskStatus {
+public interface TaskStatus {
 
-	@Schema(description= "未启动")
-	public static Integer STOP = 0;
+	@Schema(description = "未启动")
+	int STOP = 0;
 
-	@Schema(description= "已启动")
-	public static Integer START = 1;
+	@Schema(description = "已启动")
+	int START = 1;
 
 }

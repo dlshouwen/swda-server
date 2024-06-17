@@ -145,7 +145,7 @@ public class MyBatisLogInterceptor implements Interceptor {
                 }
                 // 如果仅存储DML并且是查询操作则不进行存储
                 String data_log_store_type = MapUtil.getStr(Data.attr, "data_log_store_type");
-                if("2".equals(data_log_store_type) && OperationType.SELECT.equals(dataLog.getOperationType())){
+                if("2".equals(data_log_store_type) && OperationType.SELECT==dataLog.getOperationType()){
                     isWriteLog = false;
                 }
             }

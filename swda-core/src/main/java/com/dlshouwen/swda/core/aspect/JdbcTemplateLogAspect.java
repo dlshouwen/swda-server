@@ -107,7 +107,7 @@ public class JdbcTemplateLogAspect {
 				}
 //				if only store dml
 				String data_log_store_type = MapUtil.getStr(Data.attr, "data_log_store_type");
-				if ("2".equals(data_log_store_type) && OperationType.SELECT.equals(dataLog.getOperationType())) {
+				if ("2".equals(data_log_store_type) && OperationType.SELECT==dataLog.getOperationType()) {
 					isWriteLog = false;
 				}
 			}

@@ -4,19 +4,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * dict region_type
- * @author 大连首闻科技有限公司
- * @since 1.0
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Schema(description = "区域类型")
-public class RegionType {
+public interface RegionType {
 
-	@Schema(description= "省级")
-	public static Integer PROVINCE = 1;
+	@Schema(description = "省级")
+	int PROVINCE = 1;
 
-	@Schema(description= "市级")
-	public static Integer CITY = 2;
+	@Schema(description = "市级")
+	int CITY = 2;
 
-	@Schema(description= "区级")
-	public static Integer COUNTY = 3;
+	@Schema(description = "区级")
+	int COUNTY = 3;
 
 }
