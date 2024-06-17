@@ -28,7 +28,12 @@
         <!-- swda common -->
 		<dependency>
 			 <groupId>com.dlshouwen</groupId>
-             <artifactId>swda-common</artifactId>
+             <artifactId>swda-core</artifactId>
+		</dependency>
+        <!-- swda api -->
+		<dependency>
+			 <groupId>com.dlshouwen</groupId>
+             <artifactId>swda-api</artifactId>
 		</dependency>
         <!-- lombok -->
         <dependency>
@@ -36,6 +41,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        
+		<dependency>
+			<groupId>me.zhyd.oauth</groupId>
+			<artifactId>JustAuth</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

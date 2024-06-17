@@ -1,0 +1,196 @@
+package com.dlshouwen.swda.core.aspect;
+
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.dlshouwen.swda.core.annotation.Operation;
+import com.dlshouwen.swda.core.cache.RedisCache;
+import com.dlshouwen.swda.core.constant.Constant;
+import com.dlshouwen.swda.core.entity.auth.SecurityUser;
+import com.dlshouwen.swda.core.entity.auth.UserDetail;
+import com.dlshouwen.swda.core.entity.log.OperationLog;
+import com.dlshouwen.swda.core.dict.CallResult;
+import com.dlshouwen.swda.core.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.utils.IpUtils;
+import com.dlshouwen.swda.core.utils.JsonUtils;
+
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
+
+/**
+ * operation log aspect
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
+@Aspect
+@Component
+@AllArgsConstructor
+public class OperationLogAspect {
+
+	/** redis cache */
+	private final RedisCache redisCache;
+
+	/**
+	 * arround
+	 * @param joinPoint
+	 * @param operation
+	 * @return
+	 * @throws Throwable
+	 */
+	@Around("@annotation(operateLog)")
+	public Object around(ProceedingJoinPoint joinPoint, Operation operation) throws Throwable {
+//		defined start time
+		LocalDateTime startTime = LocalDateTime.now();
+//		try all exception
+		try {
+//			proceed
+			Object result = joinPoint.proceed();
+//			save operation log
+			saveOperationLog(joinPoint, operation, startTime, CallResult.SUCCESS);
+//			return result
+			return result;
+		} catch (Exception e) {
+//			save operation log
+			saveOperationLog(joinPoint, operation, startTime, CallResult.FAILURE);
+//			throw e
+			throw e;
+		}
+	}
+
+	/**
+	 * save operation log
+	 * @param joinPoint
+	 * @param operation
+	 * @param startTime
+	 * @param status
+	 */
+	private void saveOperationLog(ProceedingJoinPoint joinPoint, Operation operation, LocalDateTime startTime,
+			Integer callResult) {
+//		defined operation log
+		OperationLog operationLog = new OperationLog();
+//		set end time, cost
+		operationLog.setResponseEnd(LocalDateTime.now());
+		operationLog.setCost((int) LocalDateTimeUtil.between(startTime, operationLog.getResponseEnd()).toMillis());
+//      get method
+		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+		Method method = signature.getMethod();
+//		set call source
+		operationLog.setCallSource(joinPoint.getTarget().getClass().getName() + "." + method.getName());
+//		set operation type
+		operationLog.setOperationType(operation.type()[0].getValue());
+//		get user
+		UserDetail user = SecurityUser.getUser();
+//		if user is not null
+		if (user != null) {
+//			set user id, user name, organ id, organ name
+			operationLog.setUserId(user.getUserId());
+			operationLog.setUserName(user.getUsername());
+			operationLog.setOrganId(user.getOrganId());
+			operationLog.setOrganName(user.getOrganName());
+//			log.setTenantId(user.getTenantId());
+		}
+//		set name, module, operation type
+		operationLog.setName(operation.name());
+		operationLog.setModule(operation.module());
+		operationLog.setOperationType(operation.type()[0].getValue());
+//		if no module
+		if (StrUtil.isBlank(operationLog.getModule())) {
+//			get swagger tag
+			Tag tag = ((MethodSignature) joinPoint.getSignature()).getMethod().getDeclaringClass().getAnnotation(Tag.class);
+//			if tag not null then set module
+			if (tag != null) {
+				operationLog.setModule(tag.name());
+			}
+		}
+//		if no name
+		if (StrUtil.isBlank(operationLog.getName())) {
+//			get swagger tag
+			io.swagger.v3.oas.annotations.Operation _operation = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(io.swagger.v3.oas.annotations.Operation.class);
+			if (_operation != null) {
+				operationLog.setName(_operation.summary());
+			}
+		}
+//		get request
+		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+//		if has request
+		if (request != null) {
+//			set ip, user agent, request url, request method
+			operationLog.setIp(IpUtils.getIpAddr(request));
+			operationLog.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
+			operationLog.setUrl(request.getRequestURI());
+			operationLog.setMethod(request.getMethod());
+		}
+//		set params, call result
+		operationLog.setParams(getMethodParams(joinPoint));
+		operationLog.setCallResult(callResult);
+//		save log
+		redisCache.leftPush(Constant.OPERATION_LOG_KEY, operationLog, RedisCache.NOT_EXPIRE);
+	}
+
+	/**
+	 * get method params
+	 * @param joinPoint
+	 * @return method params
+	 */
+	private String getMethodParams(ProceedingJoinPoint joinPoint) {
+//		get method names, values
+		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+		String[] names = methodSignature.getParameterNames();
+		Object[] values = joinPoint.getArgs();
+//		defined params
+		Map<String, Object> params = MapUtil.newHashMap(values.length);
+//		for each names
+		for (int i=0; i<names.length; i++) {
+//			put params
+			params.put(names[i], ignoreParams(values[i])?"[ignore]":values[i]);
+		}
+//		return params json string
+		return JsonUtils.toJsonString(params);
+	}
+
+	/**
+	 * ignore params
+	 * @param object
+	 * @return is ignore
+	 */
+	private static boolean ignoreParams(Object object) {
+//		get class
+		Class<?> clazz = object.getClass();
+//		handle array
+		if (clazz.isArray()) {
+			return IntStream.range(0, Array.getLength(object)).anyMatch(index -> ignoreParams(Array.get(object, index)));
+		}
+//		handle collection
+		if (Collection.class.isAssignableFrom(clazz)) {
+			return ((Collection<?>) object).stream().anyMatch((Predicate<Object>) OperationLogAspect::ignoreParams);
+		}
+//		handle map
+		if (Map.class.isAssignableFrom(clazz)) {
+			return ignoreParams(((Map<?, ?>) object).values());
+		}
+//		ignore: mutipart file, request, response, bind result, model, model and view 
+		return object instanceof MultipartFile || object instanceof HttpServletRequest || object instanceof HttpServletResponse 
+				|| object instanceof BindingResult || object instanceof Model || object instanceof ModelAndView;
+	}
+
+}

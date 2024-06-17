@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.dlshouwen</groupId>
+    <artifactId>swda-server</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>swda-oss</artifactId>
+  
+  
+    
+    <!-- dependencies -->
+    <dependencies>
+        <!-- swda common -->
+		<dependency>
+			 <groupId>com.dlshouwen</groupId>
+             <artifactId>swda-core</artifactId>
+		</dependency>
+        <!-- swda api -->
+		<dependency>
+			 <groupId>com.dlshouwen</groupId>
+             <artifactId>swda-api</artifactId>
+		</dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>cos_api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.huaweicloud</groupId>
+			<artifactId>esdk-obs-java-bundle</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+		</dependency>
+	</dependencies>
+</project>

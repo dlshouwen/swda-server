@@ -16,5 +16,35 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <!-- dependencies -->
+    <dependencies>
+        <!-- swda common -->
+		<dependency>
+			 <groupId>com.dlshouwen</groupId>
+             <artifactId>swda-core</artifactId>
+		</dependency>
+        <!-- swda common -->
+		<dependency>
+			 <groupId>com.dlshouwen</groupId>
+             <artifactId>swda-auth</artifactId>
+		</dependency>
+        <!-- swda api -->
+		<dependency>
+			 <groupId>com.dlshouwen</groupId>
+             <artifactId>swda-api</artifactId>
+		</dependency>
+        <!-- swda api -->
+		<dependency>
+			 <groupId>com.dlshouwen</groupId>
+             <artifactId>swda-oss</artifactId>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>com.github.whvcse</groupId>
+			<artifactId>easy-captcha</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>
