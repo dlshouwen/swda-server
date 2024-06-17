@@ -3,12 +3,12 @@ package com.dlshouwen.swda.core.dict;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * dict sex
+ * dict gender
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Schema(description = "性别")
-public interface Sex {
+public interface Gender {
 
 	@Schema(description = "男")
 	int MALE = 1;
