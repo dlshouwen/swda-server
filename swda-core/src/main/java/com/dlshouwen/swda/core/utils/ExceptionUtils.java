@@ -6,27 +6,29 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Exception工具类
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * exception utils
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class ExceptionUtils {
 
-    /**
-     * 获取异常信息
-     * @param e  异常
-     * @return    返回异常信息
-     */
-    public static String toString(Throwable e) {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw, true);
-        e.printStackTrace(pw);
+	/**
+	 * to string
+	 * @param e
+	 * @return
+	 */
+	public static String toString(Throwable e) {
+//		create string write
+		StringWriter stringWriter = new StringWriter();
+//		create print writer
+		PrintWriter printWriter = new PrintWriter(stringWriter, true);
+//		print to writer
+		e.printStackTrace(printWriter);
+//		close writer
+		IoUtil.close(printWriter);
+		IoUtil.close(stringWriter);
+//		return data
+		return stringWriter.toString();
+	}
 
-        // 关闭IO流
-        IoUtil.close(pw);
-        IoUtil.close(sw);
-
-        return sw.toString();
-    }
 }

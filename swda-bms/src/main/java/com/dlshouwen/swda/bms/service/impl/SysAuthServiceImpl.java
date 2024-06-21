@@ -15,7 +15,7 @@ import com.dlshouwen.swda.core.cache.TokenCache;
 import com.dlshouwen.swda.core.dict.CallResult;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.exception.SwdaException;
-import com.dlshouwen.swda.core.utils.Sm2Util;
+import com.dlshouwen.swda.core.utils.Sm2Utils;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -55,7 +55,7 @@ public class SysAuthServiceImpl implements SysAuthService {
         try {
             // 用户认证
             authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Util.decrypt(login.getPassword())));
+                    new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Utils.decrypt(login.getPassword())));
         } catch (BadCredentialsException e) {
             throw new SwdaException("用户名或密码错误");
         }

@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * xss properties
+ * unique properties
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @Component
-@ConfigurationProperties(prefix="swda")
+@ConfigurationProperties(prefix = "swda")
 public class UniqueProperties {
-	
+
 	/** enabled */
 	private Map<String, String> uniques;
-	
+
 }

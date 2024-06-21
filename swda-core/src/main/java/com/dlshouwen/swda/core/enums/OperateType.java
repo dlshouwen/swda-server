@@ -4,51 +4,35 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 操作类型
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * operation type
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Getter
 @AllArgsConstructor
 public enum OperateType {
-	/**
-	 * 查询
-	 */
+
 	UNKNOW(0),
-    /**
-     * 查询
-     */
-    SEARCH(1),
-    /**
-     * 新增
-     */
-    INSERT(2),
-    /**
-     * 修改
-     */
-    UPDATE(3),
-    /**
-     * 删除
-     */
-    DELETE(4),
-    /**
-     * 导出
-     */
-    EXPORT(5),
-    /**
-     * 导入
-     */
-    IMPORT(6),
-	/** 登录 */
+
+	SEARCH(1),
+
+	INSERT(2),
+
+	UPDATE(3),
+
+	DELETE(4),
+
+	EXPORT(5),
+
+	IMPORT(6),
+
 	LOGIN(7),
 
-	/** 登出 */
 	LOGOUT(8),
-    /**
-     * 其它
-     */
-    OTHER(9);
 
-    private final int value;
+	OTHER(9);
+
+	/** value */
+	private final int value;
+
 }

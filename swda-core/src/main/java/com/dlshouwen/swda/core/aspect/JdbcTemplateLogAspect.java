@@ -148,7 +148,7 @@ public class JdbcTemplateLogAspect {
 //			get request
 			HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 //			set ip
-			dataLog.setIp(IpUtils.getIpAddr(request));
+			dataLog.setIp(IpUtils.getIp(request));
 //			set operation sql
 			dataLog.setOperationSql(joinPoint.getArgs()[0].toString());
 //			handler operation sql
@@ -176,7 +176,8 @@ public class JdbcTemplateLogAspect {
 			UserDetail user = SecurityUser.getUser();
 //			if user is not null
 			if(user!=null) {
-//				set user id, user name, organ id, organ name
+//				set tenant id, user id, user name, organ id, organ name
+				dataLog.setTenantId(user.getTenantId());
 				dataLog.setUserId(user.getUserId());
 				dataLog.setUserName(user.getUsername());
 				dataLog.setOrganId(user.getOrganId());

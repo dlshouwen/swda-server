@@ -13,19 +13,27 @@ import com.dlshouwen.swda.core.utils.JsonUtils;
 import java.io.IOException;
 
 /**
- * 匿名用户(token不存在、错误)，异常处理器
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * security authentication entry point
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-        response.setContentType("application/json; charset=utf-8");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
+	/**
+	 * commence
+	 * @param request
+	 * @param response
+	 * @param authException
+	 */
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException authException) throws IOException {
+//		set response
+		response.setContentType("application/json; charset=utf-8");
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+		response.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
+//		writer
+		response.getWriter().print(JsonUtils.toJsonString(R.error(ResultCode.UNAUTHORIZED)));
+	}
 
-        response.getWriter().print(JsonUtils.toJsonString(R.error(ResultCode.UNAUTHORIZED)));
-    }
 }

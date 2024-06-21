@@ -35,25 +35,26 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
 		}
 	}
 
-    /**
-     * 获取分页对象
-     *
-     * @param query 分页参数
-     */
-    protected IPage<T> getPage(Query query) {
-        Page<T> page = new Page<>(query.getPage(), query.getLimit());
-
-        // 排序
-        if (StringUtils.isNotBlank(query.getOrder())) {
-            if (query.isAsc()) {
-                return page.addOrder(OrderItem.asc(query.getOrder()));
-            } else {
-                return page.addOrder(OrderItem.desc(query.getOrder()));
-            }
-        }
-
-        return page;
-    }
+	/**
+	 * get pager
+	 * @param query
+	 * @return
+	 */
+	protected IPage<T> getPage(Query query) {
+//		create page
+		Page<T> page = new Page<>(query.getPage(), query.getLimit());
+//		if has order
+		if (StringUtils.isNotBlank(query.getOrder())) {
+//			set order
+			if (query.isAsc()) {
+				return page.addOrder(OrderItem.asc(query.getOrder()));
+			} else {
+				return page.addOrder(OrderItem.desc(query.getOrder()));
+			}
+		}
+//		return page
+		return page;
+	}
 
 	/**
 	 * get data scrope
@@ -69,7 +70,7 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
 			return null;
 		}
 //		is null then enpty
-		tableAlias = tableAlias==null?"":tableAlias;
+		tableAlias = tableAlias == null ? "" : tableAlias;
 //		append .
 		if (StringUtils.isNotBlank(tableAlias)) {
 			tableAlias += ".";

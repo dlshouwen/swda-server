@@ -11,8 +11,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DataScope {
-	
+
 	/** sql filter */
-    private String sqlFilter;
+	private String sqlFilter;
 
 }

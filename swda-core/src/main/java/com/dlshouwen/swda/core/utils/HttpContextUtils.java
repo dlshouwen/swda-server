@@ -14,64 +14,104 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Http
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * http context utils
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class HttpContextUtils {
 
-    public static HttpServletRequest getHttpServletRequest() {
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        if (requestAttributes == null) {
-            return null;
-        }
+	/**
+	 * get http servlet request
+	 * @return request
+	 */
+	public static HttpServletRequest getHttpServletRequest() {
+//		get request attributes
+		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+//		if empty return null
+		if (requestAttributes == null) {
+			return null;
+		}
+//		get request and return
+		return ((ServletRequestAttributes) requestAttributes).getRequest();
+	}
 
-        return ((ServletRequestAttributes) requestAttributes).getRequest();
-    }
+	/**
+	 * get http servlet response
+	 * @return response
+	 */
+	public static HttpServletResponse getHttpServletResponse() {
+//		get request attributes
+		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+//		if empty return null
+		if (requestAttributes == null) {
+			return null;
+		}
+//		get response and return
+		return ((ServletRequestAttributes) requestAttributes).getResponse();
+	}
 
+	/**
+	 * get parameter map
+	 * @param request
+	 * @return parameter map
+	 */
+	public static Map<String, String> getParameterMap(HttpServletRequest request) {
+//		get parameter names
+		Enumeration<String> parameters = request.getParameterNames();
+//		defined params
+		Map<String, String> params = new HashMap<>();
+//		for each parameters
+		while (parameters.hasMoreElements()) {
+//			get parameter
+			String parameter = parameters.nextElement();
+//			get value
+			String value = request.getParameter(parameter);
+//			put to params
+			if (StrUtil.isNotBlank(value)) {
+				params.put(parameter, value);
+			}
+		}
+//		return params
+		return params;
+	}
 
-    public static HttpServletResponse getHttpServletResponse() {
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        if (requestAttributes == null) {
-            return null;
-        }
+	/**
+	 * get domain
+	 * @return domain
+	 */
+	public static String getDomain() {
+//		get request
+		HttpServletRequest request = getHttpServletRequest();
+//		get domain
+		return getDomain(request);
+	}
 
-        return ((ServletRequestAttributes) requestAttributes).getResponse();
-    }
+	/**
+	 * get domain
+	 * @param request
+	 * @return domain
+	 */
+	public static String getDomain(HttpServletRequest request) {
+//		get domain
+		String domain = request.getHeader(HttpHeaders.ORIGIN);
+//		if empty
+		if (StrUtil.isBlank(domain)) {
+//			get domain from referer
+			domain = request.getHeader(HttpHeaders.REFERER);
+		}
+//		remove domain
+		return StringUtils.removeEnd(domain, "/");
+	}
 
+	/**
+	 * get origin
+	 * @return origin
+	 */
+	public static String getOrigin() {
+//		get request
+		HttpServletRequest request = getHttpServletRequest();
+//		get origin
+		return request.getHeader(HttpHeaders.ORIGIN);
+	}
 
-    public static Map<String, String> getParameterMap(HttpServletRequest request) {
-        Enumeration<String> parameters = request.getParameterNames();
-
-        Map<String, String> params = new HashMap<>();
-        while (parameters.hasMoreElements()) {
-            String parameter = parameters.nextElement();
-            String value = request.getParameter(parameter);
-            if (StrUtil.isNotBlank(value)) {
-                params.put(parameter, value);
-            }
-        }
-
-        return params;
-    }
-
-    public static String getDomain() {
-        HttpServletRequest request = getHttpServletRequest();
-        
-        return getDomain(request);
-    }
-
-    public static String getDomain(HttpServletRequest request) {
-        String domain = request.getHeader(HttpHeaders.ORIGIN);
-        if (StrUtil.isBlank(domain)) {
-            domain = request.getHeader(HttpHeaders.REFERER);
-        }
-        return StringUtils.removeEnd(domain, "/");
-    }
-
-    public static String getOrigin() {
-        HttpServletRequest request = getHttpServletRequest();
-        return request.getHeader(HttpHeaders.ORIGIN);
-    }
 }

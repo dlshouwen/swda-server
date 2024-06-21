@@ -8,9 +8,9 @@ import com.dlshouwen.swda.bms.convert.SysThirdLoginConfigConvert;
 import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
 import com.dlshouwen.swda.bms.vo.SysThirdLoginConfigVO;
+import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.query.Query;
-import com.dlshouwen.swda.core.utils.PageResult;
 
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;

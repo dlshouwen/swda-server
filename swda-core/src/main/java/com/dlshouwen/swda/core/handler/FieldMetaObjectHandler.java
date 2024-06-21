@@ -14,7 +14,7 @@ import com.dlshouwen.swda.core.entity.auth.UserDetail;
  * @since 1.0.0
  */
 public class FieldMetaObjectHandler implements MetaObjectHandler {
-	
+
 	/** const */
 	private final static String CREATE_TIME = "createTime";
 	private final static String CREATOR = "creator";

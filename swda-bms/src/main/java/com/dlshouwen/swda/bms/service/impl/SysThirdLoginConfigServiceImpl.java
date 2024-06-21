@@ -6,7 +6,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.request.*;
-import com.dlshouwen.swda.core.utils.PageResult;
+
+import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.query.Query;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;

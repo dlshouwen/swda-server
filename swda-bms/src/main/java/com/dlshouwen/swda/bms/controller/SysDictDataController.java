@@ -5,9 +5,9 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.annotation.Operation;
+import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
-import com.dlshouwen.swda.core.utils.PageResult;
 import com.dlshouwen.swda.bms.convert.SysDictDataConvert;
 import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;

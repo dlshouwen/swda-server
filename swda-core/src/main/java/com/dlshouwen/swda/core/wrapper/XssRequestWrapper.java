@@ -9,65 +9,101 @@ import java.util.Map;
 
 import com.dlshouwen.swda.core.utils.XssUtils;
 
-
 /**
- * XSS Request Wrapper
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * xss request wrapper
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class XssRequestWrapper extends HttpServletRequestWrapper {
 
-    public XssRequestWrapper(HttpServletRequest request) {
-        super(request);
-    }
+	/**
+	 * constructor
+	 * @param request
+	 */
+	public XssRequestWrapper(HttpServletRequest request) {
+		super(request);
+	}
 
-    @Override
-    public String getParameter(String name) {
-        String value = super.getParameter(name);
+	/**
+	 * get parameter
+	 * @param name
+	 * @return filter xss value
+	 */
+	@Override
+	public String getParameter(String name) {
+		return filterXss(super.getParameter(name));
+	}
 
-        return filterXss(value);
-    }
+	/**
+	 * get parameter values
+	 * @param name
+	 * @return filter xss values
+	 */
+	@Override
+	public String[] getParameterValues(String name) {
+//		get parameters
+		String[] parameters = super.getParameterValues(name);
+//		if empty return null
+		if (parameters == null || parameters.length == 0) {
+			return null;
+		}
+//		for each parameter
+		for (int i = 0; i < parameters.length; i++) {
+//			filter xss
+			parameters[i] = filterXss(parameters[i]);
+		}
+//		return parameters
+		return parameters;
+	}
 
-    @Override
-    public String[] getParameterValues(String name) {
-        String[] parameters = super.getParameterValues(name);
-        if (parameters == null || parameters.length == 0) {
-            return null;
-        }
+	/**
+	 * get parameter map
+	 * @return filter xss parameter map
+	 */
+	@Override
+	public Map<String, String[]> getParameterMap() {
+//		defined params
+		Map<String, String[]> params = new LinkedHashMap<>();
+//		get parameter map
+		Map<String, String[]> parameters = super.getParameterMap();
+//		for each parameters
+		for (String key : parameters.keySet()) {
+//			get values
+			String[] values = parameters.get(key);
+//			for each value
+			for (int i = 0; i < values.length; i++) {
+//				filter xss
+				values[i] = filterXss(values[i]);
+			}
+//			put params
+			params.put(key, values);
+		}
+//		return params
+		return params;
+	}
 
-        for (int i = 0; i < parameters.length; i++) {
-            parameters[i] = filterXss(parameters[i]);
-        }
-        return parameters;
-    }
+	/**
+	 * set header
+	 * @param name
+	 * @return filter xss header
+	 */
+	@Override
+	public String getHeader(String name) {
+		return filterXss(super.getHeader(name));
+	}
 
-    @Override
-    public Map<String, String[]> getParameterMap() {
-        Map<String, String[]> map = new LinkedHashMap<>();
-        Map<String, String[]> parameters = super.getParameterMap();
-        for (String key : parameters.keySet()) {
-            String[] values = parameters.get(key);
-            for (int i = 0; i < values.length; i++) {
-                values[i] = filterXss(values[i]);
-            }
-            map.put(key, values);
-        }
-        return map;
-    }
+	/**
+	 * filter xss
+	 * @param content
+	 * @return filter xss content
+	 */
+	private String filterXss(String content) {
+//		if empty return content
+		if (StrUtil.isBlank(content)) {
+			return content;
+		}
+//		return filter xss content
+		return XssUtils.filter(content);
+	}
 
-    @Override
-    public String getHeader(String name) {
-        String value = super.getHeader(name);
-        return filterXss(value);
-    }
-
-    private String filterXss(String content) {
-        if (StrUtil.isBlank(content)) {
-            return content;
-        }
-
-        return XssUtils.filter(content);
-    }
-    
 }

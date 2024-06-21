@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
-import com.dlshouwen.swda.core.utils.PageResult;
+
+import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysPostConvert;
 import com.dlshouwen.swda.bms.mapper.SysPostDao;

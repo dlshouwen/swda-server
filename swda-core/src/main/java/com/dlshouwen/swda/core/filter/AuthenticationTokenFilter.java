@@ -20,40 +20,53 @@ import com.dlshouwen.swda.core.utils.TokenUtils;
 import java.io.IOException;
 
 /**
- * 认证过滤器
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * authentication token filter
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Component
 @AllArgsConstructor
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
-    private final TokenCache tokenStoreCache;
+	
+	/** token store cache */
+	private final TokenCache tokenStoreCache;
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        String accessToken = TokenUtils.getAccessToken(request);
-        // accessToken为空，表示未登录
-        if (StringUtils.isBlank(accessToken)) {
-            chain.doFilter(request, response);
-            return;
-        }
+	/**
+	 * do filter internal
+	 * @param request
+	 * @param response
+	 * @param chain
+	 * @throws ServletException, IOException
+	 */
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+//		get access token
+		String accessToken = TokenUtils.getAccessToken(request);
+//		if access token is blank
+		if (StringUtils.isBlank(accessToken)) {
+//			do filter
+			chain.doFilter(request, response);
+//			return
+			return;
+		}
+//		get user info
+		UserDetail user = tokenStoreCache.getUser(accessToken);
+//		if user is null
+		if (user == null) {
+//			do filter
+			chain.doFilter(request, response);
+//			return
+			return;
+		}
+//		get authentication
+		Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+//		create context set authentication
+		SecurityContext context = SecurityContextHolder.createEmptyContext();
+		context.setAuthentication(authentication);
+//		set context
+		SecurityContextHolder.setContext(context);
+//		do filter
+		chain.doFilter(request, response);
+	}
 
-        // 获取登录用户信息
-        UserDetail user = tokenStoreCache.getUser(accessToken);
-        if (user == null) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        // 用户存在
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-
-        // 新建 SecurityContext
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
-
-        chain.doFilter(request, response);
-    }
 }

@@ -12,12 +12,12 @@ import java.util.List;
  * @since 1.0.0
  */
 @Data
-@ConfigurationProperties(prefix="swda.xss")
+@ConfigurationProperties(prefix = "swda.xss")
 public class XssProperties {
-	
+
 	/** enabled */
 	private boolean enabled;
-	
+
 	/** exclude urls */
 	private List<String> excludeUrls = Collections.emptyList();
 

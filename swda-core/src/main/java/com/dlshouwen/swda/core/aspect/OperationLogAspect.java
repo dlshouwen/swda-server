@@ -102,12 +102,12 @@ public class OperationLogAspect {
 		UserDetail user = SecurityUser.getUser();
 //		if user is not null
 		if (user != null) {
-//			set user id, user name, organ id, organ name
+//			set tenant id, user id, user name, organ id, organ name
+			operationLog.setTenantId(user.getTenantId());
 			operationLog.setUserId(user.getUserId());
 			operationLog.setUserName(user.getUsername());
 			operationLog.setOrganId(user.getOrganId());
 			operationLog.setOrganName(user.getOrganName());
-//			log.setTenantId(user.getTenantId());
 		}
 //		set name, module, operation type
 		operationLog.setName(operation.name());
@@ -116,7 +116,8 @@ public class OperationLogAspect {
 //		if no module
 		if (StrUtil.isBlank(operationLog.getModule())) {
 //			get swagger tag
-			Tag tag = ((MethodSignature) joinPoint.getSignature()).getMethod().getDeclaringClass().getAnnotation(Tag.class);
+			Tag tag = ((MethodSignature) joinPoint.getSignature()).getMethod().getDeclaringClass()
+					.getAnnotation(Tag.class);
 //			if tag not null then set module
 			if (tag != null) {
 				operationLog.setModule(tag.name());
@@ -125,7 +126,8 @@ public class OperationLogAspect {
 //		if no name
 		if (StrUtil.isBlank(operationLog.getName())) {
 //			get swagger tag
-			io.swagger.v3.oas.annotations.Operation _operation = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(io.swagger.v3.oas.annotations.Operation.class);
+			io.swagger.v3.oas.annotations.Operation _operation = ((MethodSignature) joinPoint.getSignature())
+					.getMethod().getAnnotation(io.swagger.v3.oas.annotations.Operation.class);
 			if (_operation != null) {
 				operationLog.setName(_operation.summary());
 			}
@@ -135,7 +137,7 @@ public class OperationLogAspect {
 //		if has request
 		if (request != null) {
 //			set ip, user agent, request url, request method
-			operationLog.setIp(IpUtils.getIpAddr(request));
+			operationLog.setIp(IpUtils.getIp(request));
 			operationLog.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
 			operationLog.setUrl(request.getRequestURI());
 			operationLog.setMethod(request.getMethod());
@@ -160,9 +162,9 @@ public class OperationLogAspect {
 //		defined params
 		Map<String, Object> params = MapUtil.newHashMap(values.length);
 //		for each names
-		for (int i=0; i<names.length; i++) {
+		for (int i = 0; i < names.length; i++) {
 //			put params
-			params.put(names[i], ignoreParams(values[i])?"[ignore]":values[i]);
+			params.put(names[i], ignoreParams(values[i]) ? "[ignore]" : values[i]);
 		}
 //		return params json string
 		return JsonUtils.toJsonString(params);
@@ -178,7 +180,8 @@ public class OperationLogAspect {
 		Class<?> clazz = object.getClass();
 //		handle array
 		if (clazz.isArray()) {
-			return IntStream.range(0, Array.getLength(object)).anyMatch(index -> ignoreParams(Array.get(object, index)));
+			return IntStream.range(0, Array.getLength(object))
+					.anyMatch(index -> ignoreParams(Array.get(object, index)));
 		}
 //		handle collection
 		if (Collection.class.isAssignableFrom(clazz)) {
@@ -189,8 +192,9 @@ public class OperationLogAspect {
 			return ignoreParams(((Map<?, ?>) object).values());
 		}
 //		ignore: mutipart file, request, response, bind result, model, model and view 
-		return object instanceof MultipartFile || object instanceof HttpServletRequest || object instanceof HttpServletResponse 
-				|| object instanceof BindingResult || object instanceof Model || object instanceof ModelAndView;
+		return object instanceof MultipartFile || object instanceof HttpServletRequest
+				|| object instanceof HttpServletResponse || object instanceof BindingResult || object instanceof Model
+				|| object instanceof ModelAndView;
 	}
 
 }

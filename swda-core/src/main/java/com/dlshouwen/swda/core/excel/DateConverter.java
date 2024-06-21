@@ -11,31 +11,53 @@ import com.dlshouwen.swda.core.utils.DateUtils;
 import java.util.Date;
 
 /**
- * 日期转换
- *
- * @author eden
+ * date converter
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class DateConverter implements Converter<Date> {
 
-    @Override
-    public Class<Date> supportJavaTypeKey() {
-        return Date.class;
-    }
+	/**
+	 * support java type key
+	 * @return
+	 */
+	@Override
+	public Class<Date> supportJavaTypeKey() {
+		return Date.class;
+	}
 
-    @Override
-    public CellDataTypeEnum supportExcelTypeKey() {
-        return CellDataTypeEnum.STRING;
-    }
+	/**
+	 * support excel type key
+	 * @return
+	 */
+	@Override
+	public CellDataTypeEnum supportExcelTypeKey() {
+		return CellDataTypeEnum.STRING;
+	}
 
-    @Override
-    public Date convertToJavaData(ReadCellData<?> cellData, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) {
-        String dateString = cellData.getStringValue();
-        return dateString == null ? null : DateUtils.parse(dateString, DateUtils.DATE_TIME_PATTERN);
-    }
+	/**
+	 * convert to java date
+	 * @param cellData
+	 * @param contentProperty
+	 * @param globalConfiguration
+	 * @return date
+	 */
+	@Override
+	public Date convertToJavaData(ReadCellData<?> cellData, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) {
+		String value = cellData.getStringValue();
+		return value == null ? null : DateUtils.parse(value, DateUtils.DATE_TIME_PATTERN);
+	}
 
-    @Override
-    public WriteCellData<Date> convertToExcelData(Date value, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) {
-        String dateValue = DateUtils.format(value, DateUtils.DATE_TIME_PATTERN);
-        return new WriteCellData<>(dateValue);
-    }
+	/**
+	 * convert to excel date
+	 * @param value
+	 * @param contentProperty
+	 * @param globalConfiguration
+	 * @return cell date
+	 */
+	@Override
+	public WriteCellData<Date> convertToExcelData(Date value, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) {
+		return new WriteCellData<>(DateUtils.format(value, DateUtils.DATE_TIME_PATTERN));
+	}
+
 }

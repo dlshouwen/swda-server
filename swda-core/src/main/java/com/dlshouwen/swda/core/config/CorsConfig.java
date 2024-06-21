@@ -13,7 +13,7 @@ import org.springframework.web.filter.CorsFilter;
  */
 @Configuration
 public class CorsConfig {
-	
+
 	/**
 	 * cors filter
 	 * @return cors filter
@@ -32,7 +32,7 @@ public class CorsConfig {
 //		register cors config
 		source.registerCorsConfiguration("/**", corsConfiguration);
 //		return filter
-        return new CorsFilter(source);
+		return new CorsFilter(source);
 	}
 
 }

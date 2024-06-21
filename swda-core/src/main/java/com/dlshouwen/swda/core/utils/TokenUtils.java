@@ -1,45 +1,46 @@
 package com.dlshouwen.swda.core.utils;
 
 import cn.hutool.core.lang.UUID;
-import cn.hutool.core.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * Token 工具类
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * token utils
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class TokenUtils {
 
-    /**
-     * 生成 AccessToken
-     */
-    public static String generator() {
-        return UUID.fastUUID().toString(true);
-    }
+	/**
+	 * generator
+	 * @return uuid
+	 */
+	public static String generator() {
+		return UUID.fastUUID().toString(true);
+	}
 
-    /**
-     * 获取 AccessToken
-     */
-    public static String getAccessToken() {
-        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
-        if (request == null) {
-            return null;
-        }
+	/**
+	 * get access token
+	 * @return access token
+	 */
+	public static String getAccessToken() {
+//		get request
+		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+//		request is empty then return null
+		if (request == null) {
+			return null;
+		}
+//		get access token
+		return getAccessToken(request);
+	}
 
-        return getAccessToken(request);
-    }
+	/**
+	 * get access token
+	 * @param request
+	 * @return access token
+	 */
+	public static String getAccessToken(HttpServletRequest request) {
+//		get and return access token
+		return request.getHeader("access_token");
+	}
 
-    /**
-     * 获取 AccessToken
-     */
-    public static String getAccessToken(HttpServletRequest request) {
-        String accessToken = request.getHeader("Authorization");
-        if (StrUtil.isBlank(accessToken)) {
-            accessToken = request.getParameter("access_token");
-        }
-
-        return accessToken;
-    }
 }

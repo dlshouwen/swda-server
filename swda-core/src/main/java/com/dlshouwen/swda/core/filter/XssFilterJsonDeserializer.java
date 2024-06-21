@@ -17,37 +17,37 @@ import java.io.IOException;
 /**
  * xss json过滤
  *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author 阿沐 babamu@126.com <a href="https://maku.net">MAKU</a>
  */
 @AllArgsConstructor
 public class XssFilterJsonDeserializer extends JsonDeserializer<String> {
-    private final XssProperties properties;
-    private final PathMatcher pathMatcher;
+	private final XssProperties properties;
+	private final PathMatcher pathMatcher;
 
-    @Override
-    public String deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        String value = jsonParser.getValueAsString();
-        if (StrUtil.isBlank(value)) {
-            return null;
-        }
+	@Override
+	public String deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+		String value = jsonParser.getValueAsString();
+		if (StrUtil.isBlank(value)) {
+			return null;
+		}
 
-        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
-        if (request == null) {
-            return value;
-        }
-        
-        // 判断该URI是否放行
-        boolean flag = properties.getExcludeUrls().stream().anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, request.getRequestURI()));
-        if (flag) {
-            return value;
-        }
+		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+		if (request == null) {
+			return value;
+		}
 
-        return XssUtils.filter(value);
-    }
+		// 判断该URI是否放行
+		boolean flag = properties.getExcludeUrls().stream()
+				.anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, request.getRequestURI()));
+		if (flag) {
+			return value;
+		}
 
-    @Override
-    public Class<String> handledType() {
-        return String.class;
-    }
+		return XssUtils.filter(value);
+	}
+
+	@Override
+	public Class<String> handledType() {
+		return String.class;
+	}
 }

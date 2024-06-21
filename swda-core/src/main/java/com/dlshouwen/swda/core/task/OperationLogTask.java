@@ -17,35 +17,44 @@ import cn.hutool.core.thread.ThreadUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 
+/**
+ * operation log task
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Service
 @AllArgsConstructor
 public class OperationLogTask extends BaseServiceImpl<BaseMapper<OperationLog>, OperationLog> implements BaseService<OperationLog> {
-	
-	private final RedisCache redisCache;
-	
-    /**
-     * 启动项目时，从Redis队列获取操作日志并保存
-     */
-    @PostConstruct
-    public void saveLog() {
-        ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
 
-        // 每隔10秒钟，执行一次
-        scheduledService.scheduleWithFixedDelay(() -> {
-            try {
-                // 每次插入10条
-                int count = 10;
-                for (int i = 0; i < count; i++) {
-                    OperationLog log = (OperationLog) redisCache.rightPop(Constant.OPERATION_LOG_KEY);
-                    if (log == null) {
-                        return;
-                    }
-                    baseMapper.insert(log);
-                }
-            } catch (Exception e) {
-                log.error("LogTask.saveLog Error：" + ExceptionUtils.toString(e));
-            }
-        }, 1, 10, TimeUnit.SECONDS);
-    }
+	/** redis cache */
+	private final RedisCache redisCache;
+
+	/**
+	 * run
+	 */
+	@PostConstruct
+	public void run() {
+//		get scheduled service
+		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
+//		schedule run
+		scheduledService.scheduleWithFixedDelay(() -> {
+			try {
+//				for each pop 10
+				for (int i=0; i<10; i++) {
+//					get data log
+					OperationLog operationLog = (OperationLog) redisCache.rightPop(Constant.OPERATION_LOG_KEY);
+//					if operation log is null then return
+					if (operationLog == null) {
+						return;
+					}
+//					insert operation log
+					baseMapper.insert(operationLog);
+				}
+			} catch (Exception e) {
+//				has error
+				log.error("operation log task run error: " + ExceptionUtils.toString(e));
+			}
+		}, 1, 10, TimeUnit.SECONDS);
+	}
 
 }

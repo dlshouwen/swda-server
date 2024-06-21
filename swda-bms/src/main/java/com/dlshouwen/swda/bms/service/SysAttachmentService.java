@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.service;
 
-import com.dlshouwen.swda.core.utils.PageResult;
+import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysAttachmentEntity;
 import com.dlshouwen.swda.bms.query.SysAttachmentQuery;

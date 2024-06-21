@@ -5,8 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
+import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
-import com.dlshouwen.swda.core.utils.PageResult;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
 import com.dlshouwen.swda.bms.service.SysLogOperateService;
 import com.dlshouwen.swda.bms.vo.SysLogOperateVO;

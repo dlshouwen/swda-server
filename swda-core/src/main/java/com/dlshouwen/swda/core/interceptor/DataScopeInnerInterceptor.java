@@ -38,7 +38,8 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+	public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds,
+			ResultHandler resultHandler, BoundSql boundSql) {
 //		get scope
 		DataScope scope = getDataScope(parameter);
 //		if null then return
@@ -107,4 +108,5 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
 			return buildSql;
 		}
 	}
+
 }

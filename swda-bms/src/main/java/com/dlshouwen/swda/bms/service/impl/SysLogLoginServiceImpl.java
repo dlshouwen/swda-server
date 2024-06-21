@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import com.dlshouwen.swda.core.utils.*;
+import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysLogLoginConvert;
 import com.dlshouwen.swda.bms.mapper.SysLogLoginDao;

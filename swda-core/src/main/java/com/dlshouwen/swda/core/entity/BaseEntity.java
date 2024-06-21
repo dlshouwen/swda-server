@@ -16,11 +16,10 @@ import java.util.Map;
 @Data
 public abstract class BaseEntity implements TransPojo {
 
-	/** 
+	/**
 	 * info
-	 * <p>query for map not has filed set to this info</p>
 	 */
-	@TableField(exist=false)
+	@TableField(exist = false)
 	private Map<String, Object> info = new HashMap<>();
 
 	/**

@@ -17,35 +17,44 @@ import cn.hutool.core.thread.ThreadUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 
+/**
+ * data log task
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Service
 @AllArgsConstructor
 public class DataLogTask extends BaseServiceImpl<BaseMapper<DataLog>, DataLog> implements BaseService<DataLog> {
-	
-	private final RedisCache redisCache;
-	
-    /**
-     * 启动项目时，从Redis队列获取操作日志并保存
-     */
-    @PostConstruct
-    public void saveLog() {
-        ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
 
-        // 每隔10秒钟，执行一次
-        scheduledService.scheduleWithFixedDelay(() -> {
-            try {
-                // 每次插入10条
-                int count = 10;
-                for (int i = 0; i < count; i++) {
-                	DataLog log = (DataLog) redisCache.rightPop(Constant.DATA_LOG_KEY);
-                    if (log == null) {
-                        return;
-                    }
-                    baseMapper.insert(log);
-                }
-            } catch (Exception e) {
-                log.error("LogTask.saveLog Error：" + ExceptionUtils.toString(e));
-            }
-        }, 1, 10, TimeUnit.SECONDS);
-    }
+	/** redis cache */
+	private final RedisCache redisCache;
+
+	/**
+	 * run
+	 */
+	@PostConstruct
+	public void run() {
+//		get scheduled service
+		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
+//		schedule run
+		scheduledService.scheduleWithFixedDelay(() -> {
+			try {
+//				for each pop 10
+				for (int i=0; i<10; i++) {
+//					get data log
+					DataLog dataLog = (DataLog) redisCache.rightPop(Constant.DATA_LOG_KEY);
+//					if data log is null then return
+					if (dataLog == null) {
+						return;
+					}
+//					insert data log
+					baseMapper.insert(dataLog);
+				}
+			} catch (Exception e) {
+//				has error
+				log.error("data log task run error: " + ExceptionUtils.toString(e));
+			}
+		}, 1, 10, TimeUnit.SECONDS);
+	}
 
 }

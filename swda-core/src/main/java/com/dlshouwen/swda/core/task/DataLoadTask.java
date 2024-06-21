@@ -18,28 +18,38 @@ import cn.hutool.core.thread.ThreadUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 
+/**
+ * data load task
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Service
 @AllArgsConstructor
 public class DataLoadTask extends BaseServiceImpl<BaseMapper<DataLog>, DataLog> implements BaseService<DataLog> {
-	
-	private final UniqueProperties uniqueProperties;
-	private final JdbcTemplate jdbcTemplate;
-	
-    /**
-     * 启动项目时，从Redis队列获取操作日志并保存
-     */
-    @PostConstruct
-    public void saveLog() {
-        ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
 
-        // 每隔10秒钟，执行一次
-        scheduledService.scheduleWithFixedDelay(() -> {
-            try {
-            	DataLoader.load(uniqueProperties, jdbcTemplate);
-            } catch (Exception e) {
-                log.error("LogTask.saveLog Error：" + ExceptionUtils.toString(e));
-            }
-        }, 1, 10, TimeUnit.SECONDS);
-    }
+	/** unique properties */
+	private final UniqueProperties uniqueProperties;
+	
+	/** jdbc template */
+	private final JdbcTemplate jdbcTemplate;
+
+	/**
+	 * run
+	 */
+	@PostConstruct
+	public void run() {
+//		get scheduled service
+		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
+//		schedule run
+		scheduledService.scheduleWithFixedDelay(() -> {
+			try {
+//				laod data
+				DataLoader.load(uniqueProperties, jdbcTemplate);
+			} catch (Exception e) {
+//				has error
+				log.error("data load task run error: " + ExceptionUtils.toString(e));
+			}
+		}, 1, 10, TimeUnit.SECONDS);
+	}
 
 }

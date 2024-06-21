@@ -1,57 +1,58 @@
 package com.dlshouwen.swda.core.utils;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 日期处理
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * date utils
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class DateUtils {
-	/** 时间格式(yyyy-MM-dd) */
+	
+	/** date pattern */
 	public final static String DATE_PATTERN = "yyyy-MM-dd";
-	/** 时间格式(yyyy-MM-dd HH:mm:ss) */
+	
+	/** date time pattern */
 	public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-    /**
-     * 日期格式化 日期格式为：yyyy-MM-dd
-     * @param date  日期
-     * @return  返回yyyy-MM-dd格式日期
-     */
+	/**
+	 * format
+	 * @param date
+	 * @return
+	 */
 	public static String format(Date date) {
-        return format(date, DATE_PATTERN);
-    }
+		return format(date, DATE_PATTERN);
+	}
 
-    /**
-     * 日期格式化 日期格式为：yyyy-MM-dd
-     * @param date  日期
-     * @param pattern  格式，如：DateUtils.DATE_TIME_PATTERN
-     * @return  返回yyyy-MM-dd格式日期
-     */
-    public static String format(Date date, String pattern) {
-        if(date != null){
-            SimpleDateFormat df = new SimpleDateFormat(pattern);
-            return df.format(date);
-        }
-        return null;
-    }
+	/**
+	 * format
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static String format(Date date, String pattern) {
+		if (date != null) {
+			SimpleDateFormat df = new SimpleDateFormat(pattern);
+			return df.format(date);
+		}
+		return null;
+	}
 
-    /**
-     * 日期解析
-     * @param date  日期
-     * @param pattern  格式，如：DateUtils.DATE_TIME_PATTERN
-     * @return  返回Date
-     */
-    public static Date parse(String date, String pattern) {
-        try {
-            return new SimpleDateFormat(pattern).parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	/**
+	 * parse
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static Date parse(String date, String pattern) {
+		try {
+			return new SimpleDateFormat(pattern).parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
