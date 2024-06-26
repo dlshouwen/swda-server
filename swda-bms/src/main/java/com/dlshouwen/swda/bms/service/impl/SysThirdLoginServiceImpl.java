@@ -17,47 +17,47 @@ import java.util.List;
 
 /**
  * 第三方登录
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
-public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, SysThirdLoginEntity> implements SysThirdLoginService {
+public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, SysThirdLoginEntity>
+		implements SysThirdLoginService {
 
-    @Override
-    public List<SysThirdLoginVO> listByUserId(Long userId) {
-        List<SysThirdLoginEntity> list = baseMapper.selectList(
-                Wrappers.<SysThirdLoginEntity>lambdaQuery().eq(SysThirdLoginEntity::getUserId, userId));
+	@Override
+	public List<SysThirdLoginVO> listByUserId(Long userId) {
+		List<SysThirdLoginEntity> list = baseMapper
+				.selectList(Wrappers.<SysThirdLoginEntity>lambdaQuery().eq(SysThirdLoginEntity::getUserId, userId));
 
-        return SysThirdLoginConvert.INSTANCE.convertList(list);
-    }
+		return SysThirdLoginConvert.INSTANCE.convertList(list);
+	}
 
-    @Override
-    public void unBind(Long userId, String openType) {
-        baseMapper.delete(Wrappers.<SysThirdLoginEntity>lambdaQuery().
-                eq(SysThirdLoginEntity::getUserId, userId).eq(SysThirdLoginEntity::getOpenType, openType));
-    }
+	@Override
+	public void unBind(Long userId, String openType) {
+		baseMapper.delete(Wrappers.<SysThirdLoginEntity>lambdaQuery().eq(SysThirdLoginEntity::getUserId, userId)
+				.eq(SysThirdLoginEntity::getOpenType, openType));
+	}
 
-    @Override
-    public void bind(Long userId, String openType, AuthUser authUser) {
-        SysThirdLoginEntity entity = new SysThirdLoginEntity();
-        entity.setUserId(userId);
-        entity.setOpenType(openType);
-        entity.setOpenId(authUser.getUuid());
-        entity.setUsername(authUser.getUsername());
+	@Override
+	public void bind(Long userId, String openType, AuthUser authUser) {
+		SysThirdLoginEntity entity = new SysThirdLoginEntity();
+		entity.setUserId(userId);
+		entity.setOpenType(openType);
+		entity.setOpenId(authUser.getUuid());
+		entity.setUsername(authUser.getUsername());
 
-        baseMapper.insert(entity);
-    }
+		baseMapper.insert(entity);
+	}
 
-    @Override
-    public Long getUserIdByOpenTypeAndOpenId(String openType, String openId) {
-        SysThirdLoginEntity entity = baseMapper.selectOne(Wrappers.<SysThirdLoginEntity>lambdaQuery()
-                .eq(SysThirdLoginEntity::getOpenType, openType).eq(SysThirdLoginEntity::getOpenId, openId));
-        if (entity == null) {
-            throw new SwdaException("还未绑定用户，请先绑定用户");
-        }
+	@Override
+	public Long getUserIdByOpenTypeAndOpenId(String openType, String openId) {
+		SysThirdLoginEntity entity = baseMapper.selectOne(Wrappers.<SysThirdLoginEntity>lambdaQuery()
+				.eq(SysThirdLoginEntity::getOpenType, openType).eq(SysThirdLoginEntity::getOpenId, openId));
+		if (entity == null) {
+			throw new SwdaException("还未绑定用户，请先绑定用户");
+		}
 
-        return entity.getUserId();
-    }
+		return entity.getUserId();
+	}
 }

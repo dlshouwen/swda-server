@@ -24,94 +24,93 @@ import java.util.Set;
 
 /**
  * 菜单管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
-    private final SysRoleMenuService sysRoleMenuService;
+	private final SysRoleMenuService sysRoleMenuService;
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void save(SysMenuVO vo) {
-        SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void save(SysMenuVO vo) {
+		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
 
-        // 保存菜单
-        baseMapper.insert(entity);
-    }
+		// 保存菜单
+		baseMapper.insert(entity);
+	}
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void update(SysMenuVO vo) {
-        SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void update(SysMenuVO vo) {
+		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
 
-        // 上级菜单不能为自己
-        if (entity.getId().equals(entity.getPid())) {
-            throw new SwdaException("上级菜单不能为自己");
-        }
+		// 上级菜单不能为自己
+		if (entity.getId().equals(entity.getPid())) {
+			throw new SwdaException("上级菜单不能为自己");
+		}
 
-        // 更新菜单
-        updateById(entity);
-    }
+		// 更新菜单
+		updateById(entity);
+	}
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void delete(Long id) {
-        // 删除菜单
-        removeById(id);
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void delete(Long id) {
+		// 删除菜单
+		removeById(id);
 
-        // 删除角色菜单关系
-        sysRoleMenuService.deleteByMenuId(id);
-    }
+		// 删除角色菜单关系
+		sysRoleMenuService.deleteByMenuId(id);
+	}
 
-    @Override
-    public List<SysMenuVO> getMenuList(Integer type) {
-        List<SysMenuEntity> menuList = baseMapper.getMenuList(type);
+	@Override
+	public List<SysMenuVO> getMenuList(Integer type) {
+		List<SysMenuEntity> menuList = baseMapper.getMenuList(type);
 
-        return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
-    }
+		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
+	}
 
-    @Override
-    public List<SysMenuVO> getUserMenuList(UserDetail user, Integer type) {
-        List<SysMenuEntity> menuList;
+	@Override
+	public List<SysMenuVO> getUserMenuList(UserDetail user, Integer type) {
+		List<SysMenuEntity> menuList;
 
-        // 系统管理员，拥有最高权限
-        if (user.getSuperAdmin().equals(ZeroOne.YES)) {
-            menuList = baseMapper.getMenuList(type);
-        } else {
-            menuList = baseMapper.getUserMenuList(user.getUserId(), type);
-        }
+		// 系统管理员，拥有最高权限
+		if (user.getSuperAdmin().equals(ZeroOne.YES)) {
+			menuList = baseMapper.getMenuList(type);
+		} else {
+			menuList = baseMapper.getUserMenuList(user.getUserId(), type);
+		}
 
-        return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
-    }
+		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
+	}
 
-    @Override
-    public Long getSubMenuCount(Long pid) {
-        return count(new LambdaQueryWrapper<SysMenuEntity>().eq(SysMenuEntity::getPid, pid));
-    }
+	@Override
+	public Long getSubMenuCount(Long pid) {
+		return count(new LambdaQueryWrapper<SysMenuEntity>().eq(SysMenuEntity::getPid, pid));
+	}
 
-    @Override
-    public Set<String> getUserAuthority(UserDetail user) {
-        // 系统管理员，拥有最高权限
-        List<String> authorityList;
-        if (user.getSuperAdmin().equals(ZeroOne.YES)) {
-            authorityList = baseMapper.getAuthorityList();
-        } else {
-            authorityList = baseMapper.getUserAuthorityList(user.getUserId());
-        }
+	@Override
+	public Set<String> getUserAuthority(UserDetail user) {
+		// 系统管理员，拥有最高权限
+		List<String> authorityList;
+		if (user.getSuperAdmin().equals(ZeroOne.YES)) {
+			authorityList = baseMapper.getAuthorityList();
+		} else {
+			authorityList = baseMapper.getUserAuthorityList(user.getUserId());
+		}
 
-        // 用户权限列表
-        Set<String> permsSet = new HashSet<>();
-        for (String authority : authorityList) {
-            if (StrUtil.isBlank(authority)) {
-                continue;
-            }
-            permsSet.addAll(Arrays.asList(authority.trim().split(",")));
-        }
+		// 用户权限列表
+		Set<String> permsSet = new HashSet<>();
+		for (String authority : authorityList) {
+			if (StrUtil.isBlank(authority)) {
+				continue;
+			}
+			permsSet.addAll(Arrays.asList(authority.trim().split(",")));
+		}
 
-        return permsSet;
-    }
+		return permsSet;
+	}
 
 }

@@ -25,139 +25,139 @@ import org.springframework.stereotype.Service;
 
 /**
  * 权限认证服务
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysAuthServiceImpl implements SysAuthService {
-    private final SysCaptchaService sysCaptchaService;
-    private final TokenCache tokenStoreCache;
-    private final AuthenticationManager authenticationManager;
-    private final SysLogLoginService sysLogLoginService;
-    private final SysUserService sysUserService;
-    private final SysUserTokenService sysUserTokenService;
-    private final SmsApi smsApi;
+	private final SysCaptchaService sysCaptchaService;
+	private final TokenCache tokenStoreCache;
+	private final AuthenticationManager authenticationManager;
+	private final SysLogLoginService sysLogLoginService;
+	private final SysUserService sysUserService;
+	private final SysUserTokenService sysUserTokenService;
+	private final SmsApi smsApi;
 
-    @Override
-    public SysUserTokenVO loginByAccount(SysAccountLoginVO login) {
-        // 验证码效验
-        boolean flag = sysCaptchaService.validate(login.getKey(), login.getCaptcha());
-        if (!flag) {
-            // 保存登录日志
-            sysLogLoginService.save(login.getUsername(), CallResult.FAILURE, LoginOperationEnum.CAPTCHA_FAIL.getValue());
+	@Override
+	public SysUserTokenVO loginByAccount(SysAccountLoginVO login) {
+		// 验证码效验
+		boolean flag = sysCaptchaService.validate(login.getKey(), login.getCaptcha());
+		if (!flag) {
+			// 保存登录日志
+			sysLogLoginService.save(login.getUsername(), CallResult.FAILURE,
+					LoginOperationEnum.CAPTCHA_FAIL.getValue());
 
-            throw new SwdaException("验证码错误");
-        }
+			throw new SwdaException("验证码错误");
+		}
 
-        Authentication authentication;
-        try {
-            // 用户认证
-            authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Utils.decrypt(login.getPassword())));
-        } catch (BadCredentialsException e) {
-            throw new SwdaException("用户名或密码错误");
-        }
+		Authentication authentication;
+		try {
+			// 用户认证
+			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+					login.getUsername(), Sm2Utils.decrypt(login.getPassword())));
+		} catch (BadCredentialsException e) {
+			throw new SwdaException("用户名或密码错误");
+		}
 
-        // 用户信息
-        UserDetail user = (UserDetail) authentication.getPrincipal();
+		// 用户信息
+		UserDetail user = (UserDetail) authentication.getPrincipal();
 
-        // 生成 accessToken
-        SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		// 生成 accessToken
+		SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
 
-        // 保存用户信息到缓存
-        tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
+		// 保存用户信息到缓存
+		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
 
-        return userTokenVO;
-    }
+		return userTokenVO;
+	}
 
-    @Override
-    public SysUserTokenVO loginByMobile(SysMobileLoginVO login) {
-        Authentication authentication;
-        try {
-            // 用户认证
-            authentication = authenticationManager.authenticate(
-                    new MobileAuthenticationToken(login.getMobile(), login.getCode()));
-        } catch (BadCredentialsException e) {
-            throw new SwdaException("手机号或验证码错误");
-        }
+	@Override
+	public SysUserTokenVO loginByMobile(SysMobileLoginVO login) {
+		Authentication authentication;
+		try {
+			// 用户认证
+			authentication = authenticationManager
+					.authenticate(new MobileAuthenticationToken(login.getMobile(), login.getCode()));
+		} catch (BadCredentialsException e) {
+			throw new SwdaException("手机号或验证码错误");
+		}
 
-        // 用户信息
-        UserDetail user = (UserDetail) authentication.getPrincipal();
+		// 用户信息
+		UserDetail user = (UserDetail) authentication.getPrincipal();
 
-        // 生成 accessToken
-        SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		// 生成 accessToken
+		SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
 
-        // 保存用户信息到缓存
-        tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
+		// 保存用户信息到缓存
+		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
 
-        return userTokenVO;
-    }
+		return userTokenVO;
+	}
 
-    @Override
-    public SysUserTokenVO loginByThird(SysThirdCallbackVO login) {
-        Authentication authentication;
-        try {
-            // 转换对象
-            ThirdLogin thirdLogin = BeanUtil.copyProperties(login, ThirdLogin.class);
+	@Override
+	public SysUserTokenVO loginByThird(SysThirdCallbackVO login) {
+		Authentication authentication;
+		try {
+			// 转换对象
+			ThirdLogin thirdLogin = BeanUtil.copyProperties(login, ThirdLogin.class);
 
-            // 用户认证
-            authentication = authenticationManager.authenticate(new ThirdAuthenticationToken(thirdLogin));
-        } catch (BadCredentialsException e) {
-            throw new SwdaException("第三方登录失败");
-        }
+			// 用户认证
+			authentication = authenticationManager.authenticate(new ThirdAuthenticationToken(thirdLogin));
+		} catch (BadCredentialsException e) {
+			throw new SwdaException("第三方登录失败");
+		}
 
-        // 用户信息
-        UserDetail user = (UserDetail) authentication.getPrincipal();
+		// 用户信息
+		UserDetail user = (UserDetail) authentication.getPrincipal();
 
-        // 生成 accessToken
-        SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		// 生成 accessToken
+		SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
 
-        // 保存用户信息到缓存
-        tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
+		// 保存用户信息到缓存
+		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
 
-        return userTokenVO;
-    }
+		return userTokenVO;
+	}
 
-    @Override
-    public boolean sendCode(String mobile) {
-        // 生成6位验证码
-        String code = RandomUtil.randomNumbers(6);
+	@Override
+	public boolean sendCode(String mobile) {
+		// 生成6位验证码
+		String code = RandomUtil.randomNumbers(6);
 
-        SysUserVO user = sysUserService.getByMobile(mobile);
-        if (user == null) {
-            throw new SwdaException("手机号未注册");
-        }
+		SysUserVO user = sysUserService.getByMobile(mobile);
+		if (user == null) {
+			throw new SwdaException("手机号未注册");
+		}
 
-        // 发送短信
-        return smsApi.sendCode(mobile, "code", code);
-    }
+		// 发送短信
+		return smsApi.sendCode(mobile, "code", code);
+	}
 
-    @Override
-    public AccessTokenVO getAccessToken(String refreshToken) {
-        SysUserTokenVO token = sysUserTokenService.refreshToken(refreshToken);
+	@Override
+	public AccessTokenVO getAccessToken(String refreshToken) {
+		SysUserTokenVO token = sysUserTokenService.refreshToken(refreshToken);
 
-        // 封装 AccessToken
-        AccessTokenVO accessToken = new AccessTokenVO();
-        accessToken.setAccessToken(token.getAccessToken());
-        accessToken.setAccessTokenExpire(token.getAccessTokenExpire());
+		// 封装 AccessToken
+		AccessTokenVO accessToken = new AccessTokenVO();
+		accessToken.setAccessToken(token.getAccessToken());
+		accessToken.setAccessTokenExpire(token.getAccessTokenExpire());
 
-        return accessToken;
-    }
+		return accessToken;
+	}
 
-    @Override
-    public void logout(String accessToken) {
-        // 用户信息
-        UserDetail user = tokenStoreCache.getUser(accessToken);
+	@Override
+	public void logout(String accessToken) {
+		// 用户信息
+		UserDetail user = tokenStoreCache.getUser(accessToken);
 
-        // 删除用户信息
-        tokenStoreCache.deleteUser(accessToken);
+		// 删除用户信息
+		tokenStoreCache.deleteUser(accessToken);
 
-        // Token过期
-        sysUserTokenService.expireToken(user.getUserId());
+		// Token过期
+		sysUserTokenService.expireToken(user.getUserId());
 
-        // 保存登录日志
-        sysLogLoginService.save(user.getUsername(), CallResult.SUCCESS, LoginOperationEnum.LOGOUT_SUCCESS.getValue());
-    }
+		// 保存登录日志
+		sysLogLoginService.save(user.getUsername(), CallResult.SUCCESS, LoginOperationEnum.LOGOUT_SUCCESS.getValue());
+	}
 }

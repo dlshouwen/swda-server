@@ -13,15 +13,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 /**
  * 角色与菜单对应关系
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
-public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysRoleMenuEntity> implements SysRoleMenuService {
+public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysRoleMenuEntity>
+		implements SysRoleMenuService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -31,7 +30,7 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysR
 
 		// 需要新增的菜单ID
 		Collection<Long> insertMenuIdList = CollUtil.subtract(menuIdList, dbMenuIdList);
-		if (CollUtil.isNotEmpty(insertMenuIdList)){
+		if (CollUtil.isNotEmpty(insertMenuIdList)) {
 			List<SysRoleMenuEntity> menuList = insertMenuIdList.stream().map(menuId -> {
 				SysRoleMenuEntity entity = new SysRoleMenuEntity();
 				entity.setMenuId(menuId);
@@ -45,14 +44,15 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysR
 
 		// 需要删除的菜单ID
 		Collection<Long> deleteMenuIdList = CollUtil.subtract(dbMenuIdList, menuIdList);
-		if (CollUtil.isNotEmpty(deleteMenuIdList)){
+		if (CollUtil.isNotEmpty(deleteMenuIdList)) {
 			LambdaQueryWrapper<SysRoleMenuEntity> queryWrapper = new LambdaQueryWrapper<>();
-			remove(queryWrapper.eq(SysRoleMenuEntity::getRoleId, roleId).in(SysRoleMenuEntity::getMenuId, deleteMenuIdList));
+			remove(queryWrapper.eq(SysRoleMenuEntity::getRoleId, roleId).in(SysRoleMenuEntity::getMenuId,
+					deleteMenuIdList));
 		}
 	}
 
 	@Override
-	public List<Long> getMenuIdList(Long roleId){
+	public List<Long> getMenuIdList(Long roleId) {
 		return baseMapper.getMenuIdList(roleId);
 	}
 
