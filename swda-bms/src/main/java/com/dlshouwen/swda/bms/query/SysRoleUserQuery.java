@@ -5,15 +5,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 分配角色查询
+ * role user query
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "分配角色查询")
+@Schema(description = "role user query")
 public class SysRoleUserQuery extends SysUserQuery {
-	@Schema(description = "角色ID")
+
+	@Schema(description = "role id")
 	private Long roleId;
 
 }

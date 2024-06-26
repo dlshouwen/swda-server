@@ -7,21 +7,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 登录日志查询
+ * login log query
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "登录日志查询")
+@Schema(description = "login log query")
 public class SysLogLoginQuery extends Query {
-	@Schema(description = "用户名")
+
+	@Schema(description = "username")
 	private String username;
 
-	@Schema(description = "登录地点")
+	@Schema(description = "address")
 	private String address;
 
-	@Schema(description = "登录状态  0：失败   1：成功")
+	@Schema(description = "status")
 	private Integer status;
 
 }

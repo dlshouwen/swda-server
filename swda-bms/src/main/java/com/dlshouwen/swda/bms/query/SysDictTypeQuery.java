@@ -7,18 +7,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 字典类型
+ * dict type query
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "字典类型查询")
+@Schema(description = "dict type query")
 public class SysDictTypeQuery extends Query {
-	@Schema(description = "字典类型")
+
+	@Schema(description = "dict type")
 	private String dictType;
 
-	@Schema(description = "字典名称")
+	@Schema(description = "dict name")
 	private String dictName;
 
 }

@@ -8,15 +8,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 字典数据
+ * dict data query
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "字典数据查询")
+@Schema(description = "dict data query")
 public class SysDictDataQuery extends Query {
-	@Schema(description = "字典类型ID", required = true)
+
+	@Schema(description = "dict type id")
 	@NotNull(message = "字典类型ID不能为空")
 	private Long dictTypeId;
 

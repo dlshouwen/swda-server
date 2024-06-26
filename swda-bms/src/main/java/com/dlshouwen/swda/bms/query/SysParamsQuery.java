@@ -7,21 +7,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 参数管理查询
+ * params query
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "参数管理查询")
+@Schema(description = "params query")
 public class SysParamsQuery extends Query {
-	@Schema(description = "系统参数")
+
+	@Schema(description = "param type")
 	private Integer paramType;
 
-	@Schema(description = "参数键")
+	@Schema(description = "param key")
 	private String paramKey;
 
-	@Schema(description = "参数值")
+	@Schema(description = "param value")
 	private String paramValue;
 
 }

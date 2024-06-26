@@ -7,24 +7,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 操作日志查询
+ * operation log query
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "操作日志查询")
+@Schema(description = "operation log query")
 public class SysLogOperateQuery extends Query {
-	@Schema(description = "用户")
+
+	@Schema(description = "real name")
 	private String realName;
 
-	@Schema(description = "模块名")
+	@Schema(description = "module")
 	private String module;
 
-	@Schema(description = "请求URI")
+	@Schema(description = "request uri")
 	private String reqUri;
 
-	@Schema(description = "操作状态")
+	@Schema(description = "status")
 	private Integer status;
 
 }

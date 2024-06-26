@@ -7,24 +7,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 用户查询
+ * user query
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "用户查询")
+@Schema(description = "user query")
 public class SysUserQuery extends Query {
-	@Schema(description = "用户名")
+	
+	@Schema(description = "username")
 	private String username;
 
-	@Schema(description = "手机号")
+	@Schema(description = "mobile")
 	private String mobile;
 
-	@Schema(description = "性别")
+	@Schema(description = "gender")
 	private Integer gender;
 
-	@Schema(description = "机构ID")
+	@Schema(description = "organ id")
 	private Long orgId;
 
 }
