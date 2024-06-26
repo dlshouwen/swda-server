@@ -8,12 +8,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 用户岗位关系
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @TableName("sys_user_post")
 public class SysUserPostEntity extends BaseEntity {
 	/**
@@ -21,7 +20,7 @@ public class SysUserPostEntity extends BaseEntity {
 	 */
 	private Long userId;
 	/**
-	* 岗位ID
-	*/
+	 * 岗位ID
+	 */
 	private Long postId;
 }

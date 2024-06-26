@@ -8,12 +8,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 角色菜单关系
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @TableName("sys_role_menu")
 public class SysRoleMenuEntity extends BaseEntity {
 	/**
