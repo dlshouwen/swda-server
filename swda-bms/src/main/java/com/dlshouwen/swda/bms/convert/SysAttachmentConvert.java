@@ -9,18 +9,17 @@ import java.util.List;
 
 /**
  * 附件管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysAttachmentConvert {
-    SysAttachmentConvert INSTANCE = Mappers.getMapper(SysAttachmentConvert.class);
+	SysAttachmentConvert INSTANCE = Mappers.getMapper(SysAttachmentConvert.class);
 
-    SysAttachmentEntity convert(SysAttachmentVO vo);
+	SysAttachmentEntity convert(SysAttachmentVO vo);
 
-    SysAttachmentVO convert(SysAttachmentEntity entity);
+	SysAttachmentVO convert(SysAttachmentEntity entity);
 
-    List<SysAttachmentVO> convertList(List<SysAttachmentEntity> list);
+	List<SysAttachmentVO> convertList(List<SysAttachmentEntity> list);
 
 }

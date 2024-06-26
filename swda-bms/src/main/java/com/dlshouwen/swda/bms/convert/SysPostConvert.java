@@ -7,15 +7,19 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-
+/**
+ * 
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Mapper
 public interface SysPostConvert {
-    SysPostConvert INSTANCE = Mappers.getMapper(SysPostConvert.class);
+	SysPostConvert INSTANCE = Mappers.getMapper(SysPostConvert.class);
 
-    SysPostVO convert(SysPostEntity entity);
+	SysPostVO convert(SysPostEntity entity);
 
-    SysPostEntity convert(SysPostVO vo);
+	SysPostEntity convert(SysPostVO vo);
 
-    List<SysPostVO> convertList(List<SysPostEntity> list);
+	List<SysPostVO> convertList(List<SysPostEntity> list);
 
 }

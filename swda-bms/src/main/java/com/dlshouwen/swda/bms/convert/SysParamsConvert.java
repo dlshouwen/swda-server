@@ -9,18 +9,17 @@ import java.util.List;
 
 /**
  * 参数管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysParamsConvert {
-    SysParamsConvert INSTANCE = Mappers.getMapper(SysParamsConvert.class);
+	SysParamsConvert INSTANCE = Mappers.getMapper(SysParamsConvert.class);
 
-    SysParamsEntity convert(SysParamsVO vo);
+	SysParamsEntity convert(SysParamsVO vo);
 
-    SysParamsVO convert(SysParamsEntity entity);
+	SysParamsVO convert(SysParamsEntity entity);
 
-    List<SysParamsVO> convertList(List<SysParamsEntity> list);
+	List<SysParamsVO> convertList(List<SysParamsEntity> list);
 
 }

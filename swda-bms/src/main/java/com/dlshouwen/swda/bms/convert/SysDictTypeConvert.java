@@ -7,14 +7,19 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
+/**
+ * 
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Mapper
 public interface SysDictTypeConvert {
-    SysDictTypeConvert INSTANCE = Mappers.getMapper(SysDictTypeConvert.class);
+	SysDictTypeConvert INSTANCE = Mappers.getMapper(SysDictTypeConvert.class);
 
-    SysDictTypeVO convert(SysDictTypeEntity entity);
+	SysDictTypeVO convert(SysDictTypeEntity entity);
 
-    SysDictTypeEntity convert(SysDictTypeVO vo);
-    
-    List<SysDictTypeVO> convertList(List<SysDictTypeEntity> list);
+	SysDictTypeEntity convert(SysDictTypeVO vo);
+
+	List<SysDictTypeVO> convertList(List<SysDictTypeEntity> list);
 
 }

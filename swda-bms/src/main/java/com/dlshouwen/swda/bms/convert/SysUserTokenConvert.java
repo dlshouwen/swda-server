@@ -7,15 +7,15 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * 用户Token
- *
- * @author 阿沐 babamu@126.com
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysUserTokenConvert {
-    SysUserTokenConvert INSTANCE = Mappers.getMapper(SysUserTokenConvert.class);
+	SysUserTokenConvert INSTANCE = Mappers.getMapper(SysUserTokenConvert.class);
 
-    SysUserTokenEntity convert(SysUserTokenVO vo);
+	SysUserTokenEntity convert(SysUserTokenVO vo);
 
-    SysUserTokenVO convert(SysUserTokenEntity entity);
+	SysUserTokenVO convert(SysUserTokenEntity entity);
 
 }

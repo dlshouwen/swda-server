@@ -7,15 +7,19 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-
+/**
+ * 
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Mapper
 public interface SysMenuConvert {
-    SysMenuConvert INSTANCE = Mappers.getMapper(SysMenuConvert.class);
+	SysMenuConvert INSTANCE = Mappers.getMapper(SysMenuConvert.class);
 
-    SysMenuEntity convert(SysMenuVO vo);
+	SysMenuEntity convert(SysMenuVO vo);
 
-    SysMenuVO convert(SysMenuEntity entity);
+	SysMenuVO convert(SysMenuEntity entity);
 
-    List<SysMenuVO> convertList(List<SysMenuEntity> list);
+	List<SysMenuVO> convertList(List<SysMenuEntity> list);
 
 }

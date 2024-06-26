@@ -9,18 +9,17 @@ import java.util.List;
 
 /**
  * 登录日志
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysLogLoginConvert {
-    SysLogLoginConvert INSTANCE = Mappers.getMapper(SysLogLoginConvert.class);
+	SysLogLoginConvert INSTANCE = Mappers.getMapper(SysLogLoginConvert.class);
 
-    SysLogLoginEntity convert(SysLogLoginVO vo);
+	SysLogLoginEntity convert(SysLogLoginVO vo);
 
-    SysLogLoginVO convert(SysLogLoginEntity entity);
+	SysLogLoginVO convert(SysLogLoginEntity entity);
 
-    List<SysLogLoginVO> convertList(List<SysLogLoginEntity> list);
+	List<SysLogLoginVO> convertList(List<SysLogLoginEntity> list);
 
 }

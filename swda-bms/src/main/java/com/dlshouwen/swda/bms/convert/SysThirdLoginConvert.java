@@ -9,18 +9,17 @@ import java.util.List;
 
 /**
  * 第三方登录
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysThirdLoginConvert {
-    SysThirdLoginConvert INSTANCE = Mappers.getMapper(SysThirdLoginConvert.class);
+	SysThirdLoginConvert INSTANCE = Mappers.getMapper(SysThirdLoginConvert.class);
 
-    SysThirdLoginEntity convert(SysThirdLoginVO vo);
+	SysThirdLoginEntity convert(SysThirdLoginVO vo);
 
-    SysThirdLoginVO convert(SysThirdLoginEntity entity);
+	SysThirdLoginVO convert(SysThirdLoginEntity entity);
 
-    List<SysThirdLoginVO> convertList(List<SysThirdLoginEntity> list);
+	List<SysThirdLoginVO> convertList(List<SysThirdLoginEntity> list);
 
 }

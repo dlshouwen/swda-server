@@ -9,18 +9,17 @@ import java.util.List;
 
 /**
  * 操作日志
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysLogOperateConvert {
-    SysLogOperateConvert INSTANCE = Mappers.getMapper(SysLogOperateConvert.class);
+	SysLogOperateConvert INSTANCE = Mappers.getMapper(SysLogOperateConvert.class);
 
-    SysLogOperateEntity convert(SysLogOperateVO vo);
+	SysLogOperateEntity convert(SysLogOperateVO vo);
 
-    SysLogOperateVO convert(SysLogOperateEntity entity);
+	SysLogOperateVO convert(SysLogOperateEntity entity);
 
-    List<SysLogOperateVO> convertList(List<SysLogOperateEntity> list);
+	List<SysLogOperateVO> convertList(List<SysLogOperateEntity> list);
 
 }
