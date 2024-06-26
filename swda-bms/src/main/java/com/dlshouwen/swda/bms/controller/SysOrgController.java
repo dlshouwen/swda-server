@@ -17,76 +17,114 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 机构管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * organ
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/org")
-@Tag(name = "机构管理")
+@Tag(name = "organ")
 @AllArgsConstructor
 public class SysOrgController {
-    private final SysOrgService sysOrgService;
+	
+	/** organ service */
+	private final SysOrgService sysOrgService;
 
-    @GetMapping("list")
-    @Operation(summary = "列表")
-    @PreAuthorize("hasAuthority('sys:org:list')")
-    public R<List<SysOrgVO>> list() {
-        List<SysOrgVO> list = sysOrgService.getList();
+	/**
+	 * list
+	 * @return result
+	 */
+	@GetMapping("list")
+	@Operation(name = "list")
+	@PreAuthorize("hasAuthority('sys:org:list')")
+	public R<List<SysOrgVO>> list() {
+//		get list
+		List<SysOrgVO> list = sysOrgService.getList();
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok(list);
-    }
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "get")
+	@PreAuthorize("hasAuthority('sys:org:info')")
+	public R<SysOrgVO> get(@PathVariable("id") Long id) {
+//		get organ
+		SysOrgEntity entity = sysOrgService.getById(id);
+//		convert to organ vo
+		SysOrgVO vo = SysOrgConvert.INSTANCE.convert(entity);
+//		if has parent
+		if (entity.getPid() != null) {
+//			get parent organ
+			SysOrgEntity parentEntity = sysOrgService.getById(entity.getPid());
+//			set parent name
+			vo.setParentName(parentEntity.getName());
+		}
+//		return
+		return R.ok(vo);
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:org:info')")
-    public R<SysOrgVO> get(@PathVariable("id") Long id) {
-        SysOrgEntity entity = sysOrgService.getById(id);
-        SysOrgVO vo = SysOrgConvert.INSTANCE.convert(entity);
+	/**
+	 * save
+	 * @param organVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:org:save')")
+	public R<String> save(@RequestBody @Valid SysOrgVO vo) {
+//		save
+		sysOrgService.save(vo);
+//		return
+		return R.ok();
+	}
 
-        // 获取上级机构名称
-        if (entity.getPid() != null) {
-            SysOrgEntity parentEntity = sysOrgService.getById(entity.getPid());
-            vo.setParentName(parentEntity.getName());
-        }
+	/**
+	 * update
+	 * @param organVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:org:update')")
+	public R<String> update(@RequestBody @Valid SysOrgVO vo) {
+//		update
+		sysOrgService.update(vo);
+//		return
+		return R.ok();
+	}
 
-        return R.ok(vo);
-    }
+	/**
+	 * delete
+	 * @param id
+	 * @return result
+	 */
+	@DeleteMapping("{id}")
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:org:delete')")
+	public R<String> delete(@PathVariable("id") Long id) {
+//		delete
+		sysOrgService.delete(id);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:org:save')")
-    public R<String> save(@RequestBody @Valid SysOrgVO vo) {
-        sysOrgService.save(vo);
-
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:org:update')")
-    public R<String> update(@RequestBody @Valid SysOrgVO vo) {
-        sysOrgService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping("{id}")
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:org:delete')")
-    public R<String> delete(@PathVariable("id") Long id) {
-        sysOrgService.delete(id);
-
-        return R.ok();
-    }
-
-    @PostMapping("nameList")
-    @Operation(summary = "名称列表")
-    public R<List<String>> nameList(@RequestBody List<Long> idList) {
-        List<String> list = sysOrgService.getNameList(idList);
-
-        return R.ok(list);
-    }
+	/**
+	 * get name list
+	 * @param idList
+	 * @return result
+	 */
+	@PostMapping("nameList")
+	@Operation(name = "get name list")
+	public R<List<String>> nameList(@RequestBody List<Long> idList) {
+//		get name list
+		List<String> list = sysOrgService.getNameList(idList);
+//		return
+		return R.ok(list);
+	}
 
 }

@@ -20,60 +20,92 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 参数管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * params
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/params")
-@Tag(name = "参数管理")
+@Tag(name = "params")
 @AllArgsConstructor
 public class SysParamsController {
-    private final SysParamsService sysParamsService;
+	
+	/** params service */
+	private final SysParamsService sysParamsService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:params:all')")
-    public R<PageResult<SysParamsVO>> page(@ParameterObject @Valid SysParamsQuery query) {
-        PageResult<SysParamsVO> page = sysParamsService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:params:all')")
+	public R<PageResult<SysParamsVO>> page(@ParameterObject @Valid SysParamsQuery query) {
+//		page
+		PageResult<SysParamsVO> page = sysParamsService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "get")
+	@PreAuthorize("hasAuthority('sys:params:all')")
+	public R<SysParamsVO> get(@PathVariable("id") Long id) {
+//		get params
+		SysParamsEntity entity = sysParamsService.getById(id);
+//		return
+		return R.ok(SysParamsConvert.INSTANCE.convert(entity));
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:params:all')")
-    public R<SysParamsVO> get(@PathVariable("id") Long id) {
-        SysParamsEntity entity = sysParamsService.getById(id);
+	/**
+	 * save
+	 * @param paramsVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:params:all')")
+	public R<String> save(@RequestBody SysParamsVO vo) {
+//		save
+		sysParamsService.save(vo);
+//		return
+		return R.ok();
+	}
 
-        return R.ok(SysParamsConvert.INSTANCE.convert(entity));
-    }
+	/**
+	 * update
+	 * @param paramsVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:params:all')")
+	public R<String> update(@RequestBody @Valid SysParamsVO vo) {
+//		update
+		sysParamsService.update(vo);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:params:all')")
-    public R<String> save(@RequestBody SysParamsVO vo) {
-        sysParamsService.save(vo);
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:params:all')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		delete
+		sysParamsService.delete(idList);
+//		return
+		return R.ok();
+	}
 
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:params:all')")
-    public R<String> update(@RequestBody @Valid SysParamsVO vo) {
-        sysParamsService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:params:all')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        sysParamsService.delete(idList);
-
-        return R.ok();
-    }
 }

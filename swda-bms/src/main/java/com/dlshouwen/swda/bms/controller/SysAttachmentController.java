@@ -18,41 +18,62 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 附件管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * attachment
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/attachment")
-@Tag(name = "附件管理")
+@Tag(name = "attachment")
 @AllArgsConstructor
 public class SysAttachmentController {
-    private final SysAttachmentService sysAttachmentService;
+	
+	/** attachment service */
+	private final SysAttachmentService sysAttachmentService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:attachment:page')")
-    public R<PageResult<SysAttachmentVO>> page(@ParameterObject @Valid SysAttachmentQuery query) {
-        PageResult<SysAttachmentVO> page = sysAttachmentService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:attachment:page')")
+	public R<PageResult<SysAttachmentVO>> page(@ParameterObject @Valid SysAttachmentQuery query) {
+//		page
+		PageResult<SysAttachmentVO> page = sysAttachmentService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * save
+	 * @param attachmentVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:attachment:save')")
+	public R<String> save(@RequestBody SysAttachmentVO vo) {
+//		save
+		sysAttachmentService.save(vo);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:attachment:save')")
-    public R<String> save(@RequestBody SysAttachmentVO vo) {
-        sysAttachmentService.save(vo);
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:attachment:delete')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		delete
+		sysAttachmentService.delete(idList);
+//		return
+		return R.ok();
+	}
 
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:attachment:delete')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        sysAttachmentService.delete(idList);
-        return R.ok();
-    }
 }

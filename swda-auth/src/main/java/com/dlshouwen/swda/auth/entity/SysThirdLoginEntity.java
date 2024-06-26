@@ -6,64 +6,37 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * 第三方登录
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 
 @Data
 @TableName("sys_third_login")
 public class SysThirdLoginEntity {
-    /**
-     * id
-     */
-    @TableId
-    private Long id;
 
-    /**
-     * 开放平台类型
-     */
-    private String openType;
+	@TableId
+	private Long id;
 
-    /**
-     * 开放平台，唯一标识
-     */
-    private String openId;
+	private String openType;
 
-    /**
-     * 昵称
-     */
-    private String username;
+	private String openId;
 
-    /**
-     * 用户ID
-     */
-    private Long userId;
+	private String username;
 
-    /**
-     * 租户ID
-     */
-    private Long tenantId;
+	private Long userId;
 
-    /**
-     * 版本号
-     */
-    @Version
-    @TableField(fill = FieldFill.INSERT)
-    private Integer version;
+	private Long tenantId;
 
-    /**
-     * 删除标记
-     */
-    @TableLogic
-    @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+	@Version
+	@TableField(fill = FieldFill.INSERT)
+	private Integer version;
 
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+	@TableLogic
+	@TableField(fill = FieldFill.INSERT)
+	private Integer deleted;
+
+	@TableField(fill = FieldFill.INSERT)
+	private LocalDateTime createTime;
 
 }

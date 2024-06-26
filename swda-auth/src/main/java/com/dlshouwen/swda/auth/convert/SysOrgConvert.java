@@ -8,15 +8,36 @@ import com.dlshouwen.swda.auth.vo.SysOrgVO;
 
 import java.util.List;
 
-
+/**
+ * organ convert
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Mapper
 public interface SysOrgConvert {
-    SysOrgConvert INSTANCE = Mappers.getMapper(SysOrgConvert.class);
+	
+	/** instance */
+	SysOrgConvert INSTANCE = Mappers.getMapper(SysOrgConvert.class);
 
-    SysOrgEntity convert(SysOrgVO vo);
+	/**
+	 * convert
+	 * @param organVO
+	 * @return organ
+	 */
+	SysOrgEntity convert(SysOrgVO vo);
 
-    SysOrgVO convert(SysOrgEntity entity);
+	/**
+	 * convert
+	 * @param organ
+	 * @return organVO
+	 */
+	SysOrgVO convert(SysOrgEntity entity);
 
-    List<SysOrgVO> convertList(List<SysOrgEntity> list);
+	/**
+	 * convert list
+	 * @param organList
+	 * @return organVOList
+	 */
+	List<SysOrgVO> convertList(List<SysOrgEntity> list);
 
 }

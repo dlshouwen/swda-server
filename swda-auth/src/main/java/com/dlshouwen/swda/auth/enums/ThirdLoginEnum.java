@@ -5,42 +5,37 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 第三方登录枚举
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Getter
 @AllArgsConstructor
 public enum ThirdLoginEnum {
-    /**
-     * 企业微信
-     */
-    WECHAT_WORK("wechat_work"),
 
-    /**
-     * 钉钉
-     */
-    DING_TALK("dingtalk"),
-    /**
-     * 飞书
-     */
-    FEI_SHU("feishu"),
+	WECHAT_WORK("wechat_work"),
 
-    /**
-     * 微信开放平台
-     */
-    WECHAT_OPEN("wechat_open");
+	DING_TALK("dingtalk"),
+	
+	FEI_SHU("feishu"),
 
-    private final String value;
+	WECHAT_OPEN("wechat_open");
 
-    public static ThirdLoginEnum toEnum(String value) {
-        for (ThirdLoginEnum item : values()) {
-            if (StrUtil.equalsIgnoreCase(item.getValue(), value)) {
-                return item;
-            }
-        }
+	/** value */
+	private final String value;
 
-        throw new IllegalArgumentException("Unsupported third login type: " + value);
-    }
+	/**
+	 * to enum
+	 * @param value
+	 * @return enum
+	 */
+	public static ThirdLoginEnum toEnum(String value) {
+		for (ThirdLoginEnum item : values()) {
+			if (StrUtil.equalsIgnoreCase(item.getValue(), value)) {
+				return item;
+			}
+		}
+		throw new IllegalArgumentException("Unsupported third login type: " + value);
+	}
+
 }

@@ -9,23 +9,35 @@ import com.dlshouwen.swda.auth.vo.SysThirdLoginConfigVO;
 import com.dlshouwen.swda.core.service.BaseService;
 
 /**
- * 第三方登录配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login config service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysThirdLoginConfigService extends BaseService<SysThirdLoginConfigEntity> {
 
-    void save(SysThirdLoginConfigVO vo);
+	/**
+	 * save
+	 * @param thirdLoginConfigVO
+	 */
+	void save(SysThirdLoginConfigVO vo);
 
-    void update(SysThirdLoginConfigVO vo);
+	/**
+	 * update
+	 * @param thirdLoginConfigVO
+	 */
+	void update(SysThirdLoginConfigVO vo);
 
-    void delete(List<Long> idList);
+	/**
+	 * delete
+	 * @param thirdLoginConfigIdList
+	 */
+	void delete(List<Long> idList);
 
-    /**
-     * 根据类型，获取授权请求
-     *
-     * @param openType 第三方登录类型
-     */
-    AuthRequest getAuthRequest(String openType);
+	/**
+	 * get auth request
+	 * @param openType
+	 * @return auth request
+	 */
+	AuthRequest getAuthRequest(String openType);
+
 }

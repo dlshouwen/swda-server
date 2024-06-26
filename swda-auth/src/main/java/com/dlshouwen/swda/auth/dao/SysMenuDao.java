@@ -9,37 +9,38 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * 菜单管理
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * menu mapper
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
-	
+
 	/**
-	 * 查询所有菜单列表
-	 *
-	 * @param type 菜单类型
+	 * get menu list
+	 * @param type
+	 * @return menu list
 	 */
 	List<SysMenuEntity> getMenuList(@Param("type") Integer type);
 
 	/**
-	 * 查询用户菜单列表
-	 *
-	 * @param userId 用户ID
-	 * @param type 菜单类型
+	 * user menu list
+	 * @param userId
+	 * @param type
+	 * @return menu list
 	 */
 	List<SysMenuEntity> getUserMenuList(@Param("userId") Long userId, @Param("type") Integer type);
 
 	/**
-	 * 查询用户权限列表
-	 * @param userId  用户ID
+	 * get user authority list
+	 * @param userId
+	 * @return authority list
 	 */
 	List<String> getUserAuthorityList(@Param("userId") Long userId);
 
 	/**
-	 * 查询所有权限列表
+	 * get authority list
+	 * @return authority list
 	 */
 	List<String> getAuthorityList();
 

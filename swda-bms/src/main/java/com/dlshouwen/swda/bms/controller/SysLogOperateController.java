@@ -1,10 +1,10 @@
 package com.dlshouwen.swda.bms.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
+import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
@@ -17,24 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 操作日志
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * operation log
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/log/operate")
-@Tag(name = "操作日志")
+@Tag(name = "operation log")
 @AllArgsConstructor
 public class SysLogOperateController {
-    private final SysLogOperateService sysLogOperateService;
+	
+	/** operation log service */
+	private final SysLogOperateService sysLogOperateService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:operate:all')")
-    public R<PageResult<SysLogOperateVO>> page(@ParameterObject @Valid SysLogOperateQuery query) {
-        PageResult<SysLogOperateVO> page = sysLogOperateService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:operate:all')")
+	public R<PageResult<SysLogOperateVO>> page(@ParameterObject @Valid SysLogOperateQuery query) {
+//		page
+		PageResult<SysLogOperateVO> page = sysLogOperateService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
 }

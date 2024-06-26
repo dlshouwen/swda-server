@@ -12,25 +12,36 @@ import com.dlshouwen.swda.auth.service.MobileUserDetailsService;
 import com.dlshouwen.swda.auth.service.SysUserDetailsService;
 
 /**
- * 手机验证码登录 MobileUserDetailsService
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * mobile user details service impl
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
-    private final SysUserDetailsService sysUserDetailsService;
-    private final SysUserDao sysUserDao;
 
-    @Override
-    public UserDetails loadUserByMobile(String mobile) throws UsernameNotFoundException {
-        SysUserEntity userEntity = sysUserDao.getByMobile(mobile);
-        if (userEntity == null) {
-            throw new UsernameNotFoundException("手机号或验证码错误");
-        }
+	/** user details service */
+	private final SysUserDetailsService sysUserDetailsService;
 
-        return sysUserDetailsService.getUserDetails(SysUserConvert.INSTANCE.convertDetail(userEntity));
-    }
+	/** user mapper */
+	private final SysUserDao sysUserDao;
+
+	/**
+	 * load user by mobile
+	 * @param mobile
+	 * @return user details
+	 */
+	@Override
+	public UserDetails loadUserByMobile(String mobile) throws UsernameNotFoundException {
+//		get user by mobile
+		SysUserEntity userEntity = sysUserDao.getByMobile(mobile);
+//		if user is empty
+		if (userEntity == null) {
+//			throw username not found exception
+			throw new UsernameNotFoundException("手机号或验证码错误");
+		}
+//		get user details and return
+		return sysUserDetailsService.getUserDetails(SysUserConvert.INSTANCE.convertDetail(userEntity));
+	}
 
 }

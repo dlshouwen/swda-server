@@ -9,19 +9,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 机构管理
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * organ mapper
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysOrgDao extends BaseMapper<SysOrgEntity> {
 
-    List<SysOrgEntity> getList(Map<String, Object> params);
+	/**
+	 * get organ list
+	 * @param params
+	 * @return organ list
+	 */
+	List<SysOrgEntity> getList(Map<String, Object> params);
 
-    /**
-     * 获取所有机构的id、pid列表
-     */
-    List<SysOrgEntity> getIdAndPidList();
+	/**
+	 * get id and pid list
+	 * @return organ list
+	 */
+	List<SysOrgEntity> getIdAndPidList();
 
 }

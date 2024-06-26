@@ -5,27 +5,23 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 第三方登录 表单数据
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 public class ThirdLogin implements Serializable {
-    private static final long serialVersionUID = 1L;
+	
+	/** seral version uid */
+	private static final long serialVersionUID = 1L;
 
-	/**
-     * 开放平台类型
-     */
-    private String openType;
+	/** open type */
+	private String openType;
 
-    /**
-     * 开放平台Code
-     */
-    private String code;
+	/** code */
+	private String code;
 
-    /**
-     * state
-     */
-    private String state;
+	/** state */
+	private String state;
+
 }

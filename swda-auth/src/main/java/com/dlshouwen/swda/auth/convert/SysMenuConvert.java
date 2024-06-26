@@ -8,15 +8,36 @@ import com.dlshouwen.swda.auth.vo.SysMenuVO;
 
 import java.util.List;
 
-
+/**
+ * menu convert
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
+ */
 @Mapper
 public interface SysMenuConvert {
-    SysMenuConvert INSTANCE = Mappers.getMapper(SysMenuConvert.class);
 
-    SysMenuEntity convert(SysMenuVO vo);
+	/** instance */
+	SysMenuConvert INSTANCE = Mappers.getMapper(SysMenuConvert.class);
 
-    SysMenuVO convert(SysMenuEntity entity);
+	/**
+	 * convert
+	 * @param menduVO
+	 * @return menu
+	 */
+	SysMenuEntity convert(SysMenuVO vo);
 
-    List<SysMenuVO> convertList(List<SysMenuEntity> list);
+	/**
+	 * convert
+	 * @param menu
+	 * @return menuVO
+	 */
+	SysMenuVO convert(SysMenuEntity entity);
+
+	/**
+	 * convert list
+	 * @param menuList
+	 * @return menuVOList
+	 */
+	List<SysMenuVO> convertList(List<SysMenuEntity> list);
 
 }

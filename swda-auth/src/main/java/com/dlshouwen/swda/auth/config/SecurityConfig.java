@@ -25,56 +25,87 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SpringSecurity 配置文件
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * security config
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-	
-    private final UserDetailsService userDetailsService;
-    
-    private final MobileUserDetailsService mobileUserDetailsService;
-    private final MobileVerifyCodeService mobileVerifyCodeService;
-    
-    private final ThirdUserDetailsService thirdUserDetailsService;
-    private final ThirdOpenIdService thirdOpenIdService;
-    
-    private final PasswordEncoder passwordEncoder;
-    private final ApplicationEventPublisher applicationEventPublisher;
 
-    @Bean
-    DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        return daoAuthenticationProvider;
-    }
+	/** user details service */
+	private final UserDetailsService userDetailsService;
 
-    @Bean
-    MobileAuthenticationProvider mobileAuthenticationProvider() {
-        return new MobileAuthenticationProvider(mobileUserDetailsService, mobileVerifyCodeService);
-    }
+	/** mobile user details service */
+	private final MobileUserDetailsService mobileUserDetailsService;
+	/** mobile verify code service */
+	private final MobileVerifyCodeService mobileVerifyCodeService;
 
-    @Bean
-    ThirdAuthenticationProvider thirdAuthenticationProvider() {
-        return new ThirdAuthenticationProvider(thirdUserDetailsService, thirdOpenIdService);
-    }
+	/** third user details service */
+	private final ThirdUserDetailsService thirdUserDetailsService;
+	/** third open id service */
+	private final ThirdOpenIdService thirdOpenIdService;
 
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        List<AuthenticationProvider> providerList = new ArrayList<>();
-        providerList.add(daoAuthenticationProvider());
-        providerList.add(mobileAuthenticationProvider());
-        providerList.add(thirdAuthenticationProvider());
+	/** password encoder */
+	private final PasswordEncoder passwordEncoder;
+	/** application event publisher */
+	private final ApplicationEventPublisher applicationEventPublisher;
 
-        ProviderManager providerManager = new ProviderManager(providerList);
-        providerManager.setAuthenticationEventPublisher(new DefaultAuthenticationEventPublisher(applicationEventPublisher));
+	/**
+	 * dao authentication provider
+	 * @return dao authentication provider
+	 */
+	@Bean
+	DaoAuthenticationProvider daoAuthenticationProvider() {
+//		create dao authentication provider
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//		set password encoder, user details service
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+//		return dao authentication provider
+		return daoAuthenticationProvider;
+	}
 
-        return providerManager;
-    }
+	/**
+	 * mobile authentication provider
+	 * @return mobile authentication provider
+	 */
+	@Bean
+	MobileAuthenticationProvider mobileAuthenticationProvider() {
+//		create and return mobile authentication provider
+		return new MobileAuthenticationProvider(mobileUserDetailsService, mobileVerifyCodeService);
+	}
+
+	/**
+	 * third authentication provider
+	 * @return third authentication provider
+	 */
+	@Bean
+	ThirdAuthenticationProvider thirdAuthenticationProvider() {
+//		create and return third authentication provider
+		return new ThirdAuthenticationProvider(thirdUserDetailsService, thirdOpenIdService);
+	}
+
+	/**
+	 * authentication manager
+	 * @return authentication manager
+	 */
+	@Bean
+	public AuthenticationManager authenticationManager() {
+//		create provider list
+		List<AuthenticationProvider> providerList = new ArrayList<>();
+//		add dao, mobile third authentcation provider
+		providerList.add(daoAuthenticationProvider());
+		providerList.add(mobileAuthenticationProvider());
+		providerList.add(thirdAuthenticationProvider());
+//		create provider manager
+		ProviderManager providerManager = new ProviderManager(providerList);
+//		set authencation event publisher
+		providerManager.setAuthenticationEventPublisher(new DefaultAuthenticationEventPublisher(applicationEventPublisher));
+//		return provider manager
+		return providerManager;
+	}
+
 }

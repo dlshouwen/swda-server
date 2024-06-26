@@ -5,40 +5,36 @@ import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
- * 短信服务
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * sms api
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
-@FeignClient(name="", contextId = "sms")
+@FeignClient(name = "", contextId = "sms")
 public interface SmsApi {
 
-    /**
-     * 发送短信
-     *
-     * @param mobile 手机号
-     * @param params 参数
-     * @return 是否发送成功
-     */
-    boolean send(String mobile, Map<String, String> params);
+	/**
+	 * send
+	 * @param mobile
+	 * @param params
+	 * @return is send success
+	 */
+	boolean send(String mobile, Map<String, String> params);
 
-    /**
-     * 发送短信
-     *
-     * @param mobile 手机号
-     * @param key    参数KEY
-     * @param value  参数Value
-     * @return 是否发送成功
-     */
-    boolean sendCode(String mobile, String key, String value);
+	/**
+	 * send code
+	 * @param mobile
+	 * @param key
+	 * @param value
+	 * @return is send success
+	 */
+	boolean sendCode(String mobile, String key, String value);
 
-    /**
-     * 效验短信验证码
-     *
-     * @param mobile 手机号
-     * @param code   验证码
-     * @return 是否效验成功
-     */
-    boolean verifyCode(String mobile, String code);
+	/**
+	 * verify code
+	 * @param mobile
+	 * @param code
+	 * @return is send success
+	 */
+	boolean verifyCode(String mobile, String code);
 
 }

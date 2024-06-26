@@ -1,18 +1,17 @@
 package com.dlshouwen.swda.auth.third;
 
 /**
- * 第三方登录，通过code，获取开放平台用户唯一标识
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third open id service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface ThirdOpenIdService {
 
-    /**
-     * 通过code，获取开放平台用户唯一标识
-     *
-     * @param login 第三方登录信息
-     * @return 开放平台用户唯一标识
-     */
-    String getOpenId(ThirdLogin login);
+	/**
+	 * get open id
+	 * @param thirdLogin
+	 * @return open id
+	 */
+	String getOpenId(ThirdLogin login);
+
 }

@@ -13,26 +13,41 @@ import com.dlshouwen.swda.auth.service.SysUserDetailsService;
 import com.dlshouwen.swda.auth.third.ThirdUserDetailsService;
 
 /**
- * 第三方登录，ThirdUserDetailsService
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third user details service impl
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class ThirdUserDetailsServiceImpl implements ThirdUserDetailsService {
-    private final SysUserDetailsService sysUserDetailsService;
-    private final SysThirdLoginService sysThirdLoginService;
-    private final SysUserDao sysUserDao;
 
-    @Override
-    public UserDetails loadUserByOpenTypeAndOpenId(String openType, String openId) throws UsernameNotFoundException {
-        Long userId = sysThirdLoginService.getUserIdByOpenTypeAndOpenId(openType, openId);
-        SysUserEntity userEntity = sysUserDao.getById(userId);
-        if (userEntity == null) {
-            throw new UsernameNotFoundException("绑定的系统用户，不存在");
-        }
+	/** user details service */
+	private final SysUserDetailsService sysUserDetailsService;
 
-        return sysUserDetailsService.getUserDetails(SysUserConvert.INSTANCE.convertDetail(userEntity));
-    }
+	/** third login service */
+	private final SysThirdLoginService sysThirdLoginService;
+
+	/** user mapper */
+	private final SysUserDao sysUserDao;
+
+	/**
+	 * load user by open type and open id
+	 * @param openType
+	 * @param openId
+	 * @return user details
+	 */
+	@Override
+	public UserDetails loadUserByOpenTypeAndOpenId(String openType, String openId) throws UsernameNotFoundException {
+//		get user id by open type and open id
+		Long userId = sysThirdLoginService.getUserIdByOpenTypeAndOpenId(openType, openId);
+//		get user
+		SysUserEntity userEntity = sysUserDao.getById(userId);
+//		if user is empty
+		if (userEntity == null) {
+//			throw exception
+			throw new UsernameNotFoundException("绑定的系统用户，不存在");
+		}
+//		convert user to get user details for return
+		return sysUserDetailsService.getUserDetails(SysUserConvert.INSTANCE.convertDetail(userEntity));
+	}
 }

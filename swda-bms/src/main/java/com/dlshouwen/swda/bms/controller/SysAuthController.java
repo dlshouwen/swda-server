@@ -1,95 +1,147 @@
 package com.dlshouwen.swda.bms.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.service.SysAuthService;
 import com.dlshouwen.swda.bms.service.SysCaptchaService;
 import com.dlshouwen.swda.bms.vo.*;
+import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.utils.TokenUtils;
 
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 认证管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * auth
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/auth")
-@Tag(name = "认证管理")
+@Tag(name = "auth")
 @AllArgsConstructor
 public class SysAuthController {
-    private final SysCaptchaService sysCaptchaService;
-    private final SysAuthService sysAuthService;
+	
+	/** captcha service */
+	private final SysCaptchaService sysCaptchaService;
+	
+	/** auth service */
+	private final SysAuthService sysAuthService;
 
-    @GetMapping("captcha")
-    @Operation(summary = "验证码")
-    public R<SysCaptchaVO> captcha() {
-        SysCaptchaVO captchaVO = sysCaptchaService.generate();
+	/**
+	 * captcha
+	 * @return result
+	 */
+	@GetMapping("captcha")
+	@Operation(name = "captcha")
+	public R<SysCaptchaVO> captcha() {
+//		generate captcha vo
+		SysCaptchaVO captchaVO = sysCaptchaService.generate();
+//		return
+		return R.ok(captchaVO);
+	}
 
-        return R.ok(captchaVO);
-    }
+	/**
+	 * captcha enabled
+	 * @return result
+	 */
+	@GetMapping("captcha/enabled")
+	@Operation(name = "is enabled captcha")
+	public R<Boolean> captchaEnabled() {
+//		is captcha enbaled
+		boolean enabled = sysCaptchaService.isCaptchaEnabled();
+//		return
+		return R.ok(enabled);
+	}
 
-    @GetMapping("captcha/enabled")
-    @Operation(summary = "是否开启验证码")
-    public R<Boolean> captchaEnabled() {
-        boolean enabled = sysCaptchaService.isCaptchaEnabled();
+	/**
+	 * login
+	 * @param loginVO
+	 * @return result
+	 */
+	@PostMapping("login")
+	@Operation(name = "login")
+	public R<SysUserTokenVO> login(@RequestBody SysAccountLoginVO login) {
+//		login by account
+		SysUserTokenVO token = sysAuthService.loginByAccount(login);
+//		return
+		return R.ok(token);
+	}
 
-        return R.ok(enabled);
-    }
+	/**
+	 * send code
+	 * @param mobile
+	 * @return result
+	 */
+	@PostMapping("send/code")
+	@Operation(name = "send code")
+	public R<String> sendCode(String mobile) {
+//		send code
+		boolean flag = sysAuthService.sendCode(mobile);
+//		if not success
+		if (!flag) {
+//			return
+			return R.error("短信发送失败！");
+		}
+//		return
+		return R.ok();
+	}
 
-    @PostMapping("login")
-    @Operation(summary = "账号密码登录")
-    public R<SysUserTokenVO> login(@RequestBody SysAccountLoginVO login) {
-        SysUserTokenVO token = sysAuthService.loginByAccount(login);
+	/**
+	 * mobile
+	 * @param mobileLoginVO
+	 * @return result
+	 */
+	@PostMapping("mobile")
+	@Operation(name = "mobile")
+	public R<SysUserTokenVO> mobile(@RequestBody SysMobileLoginVO login) {
+//		login by mobile
+		SysUserTokenVO token = sysAuthService.loginByMobile(login);
+//		return
+		return R.ok(token);
+	}
 
-        return R.ok(token);
-    }
+	/**
+	 * third
+	 * @param thirdLoginVO
+	 * @return result
+	 */
+	@PostMapping("third")
+	@Operation(name = "third login")
+	public R<SysUserTokenVO> third(@RequestBody SysThirdCallbackVO login) {
+//		login by third
+		SysUserTokenVO token = sysAuthService.loginByThird(login);
+//		return
+		return R.ok(token);
+	}
 
-    @PostMapping("send/code")
-    @Operation(summary = "发送短信验证码")
-    public R<String> sendCode(String mobile) {
-        boolean flag = sysAuthService.sendCode(mobile);
-        if (!flag) {
-            return R.error("短信发送失败！");
-        }
+	/**
+	 * get access token
+	 * @param refreshToken
+	 * @return result
+	 */
+	@PostMapping("token")
+	@Operation(name = "get access token")
+	public R<AccessTokenVO> token(String refreshToken) {
+//		get access token
+		AccessTokenVO token = sysAuthService.getAccessToken(refreshToken);
+//		return
+		return R.ok(token);
+	}
 
-        return R.ok();
-    }
+	/**
+	 * logout
+	 * @param request
+	 * @return result
+	 */
+	@PostMapping("logout")
+	@Operation(name = "logout")
+	public R<String> logout(HttpServletRequest request) {
+//		logout
+		sysAuthService.logout(TokenUtils.getAccessToken(request));
+//		return
+		return R.ok();
+	}
 
-    @PostMapping("mobile")
-    @Operation(summary = "手机号登录")
-    public R<SysUserTokenVO> mobile(@RequestBody SysMobileLoginVO login) {
-        SysUserTokenVO token = sysAuthService.loginByMobile(login);
-
-        return R.ok(token);
-    }
-
-    @PostMapping("third")
-    @Operation(summary = "第三方登录")
-    public R<SysUserTokenVO> third(@RequestBody SysThirdCallbackVO login) {
-        SysUserTokenVO token = sysAuthService.loginByThird(login);
-
-        return R.ok(token);
-    }
-
-    @PostMapping("token")
-    @Operation(summary = "获取 accessToken")
-    public R<AccessTokenVO> token(String refreshToken) {
-        AccessTokenVO token = sysAuthService.getAccessToken(refreshToken);
-
-        return R.ok(token);
-    }
-
-    @PostMapping("logout")
-    @Operation(summary = "退出")
-    public R<String> logout(HttpServletRequest request) {
-        sysAuthService.logout(TokenUtils.getAccessToken(request));
-
-        return R.ok();
-    }
 }

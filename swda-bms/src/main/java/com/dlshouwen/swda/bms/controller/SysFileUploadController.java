@@ -16,55 +16,73 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 文件上传
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * file upload
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/file")
-@Tag(name = "文件上传")
+@Tag(name = "file upload")
 @AllArgsConstructor
 public class SysFileUploadController {
-    private final StorageService storageService;
+	
+	/** storage service */
+	private final StorageService storageService;
 
-    @PostMapping("upload")
-    @Operation(summary = "上传", type = OperateType.INSERT)
-    public R<SysFileUploadVO> upload(@RequestParam("file") MultipartFile file) throws Exception {
-        if (file.isEmpty()) {
-            return R.error("请选择需要上传的文件");
-        }
+	/**
+	 * upload
+	 * @param file
+	 * @return result
+	 * @throws Exception
+	 */
+	@PostMapping("upload")
+	@Operation(name = "upload", type = OperateType.INSERT)
+	public R<SysFileUploadVO> upload(@RequestParam("file") MultipartFile file) throws Exception {
+//		file is empty
+		if (file.isEmpty()) {
+//			return
+			return R.error("请选择需要上传的文件");
+		}
+//		get path
+		String path = storageService.getPath(file.getOriginalFilename());
+//		upload file
+		String url = storageService.upload(file.getBytes(), path);
+//		create file upload vo
+		SysFileUploadVO vo = new SysFileUploadVO();
+//		set user, size, name, platform
+		vo.setUrl(url);
+		vo.setSize(file.getSize());
+		vo.setName(file.getOriginalFilename());
+		vo.setPlatform(storageService.properties.getConfig().getType().name());
+//		return
+		return R.ok(vo);
+	}
 
-        // 上传路径
-        String path = storageService.getPath(file.getOriginalFilename());
-        // 上传文件
-        String url = storageService.upload(file.getBytes(), path);
+	/**
+	 * uploads
+	 * @param file
+	 * @return result
+	 * @throws Exception
+	 */
+	@PostMapping("uploads")
+	@Operation(name = "uploads", type = OperateType.INSERT)
+	public SysFileUploadVO uploads(@RequestParam("file") MultipartFile file) throws Exception {
+//		file is empty
+		if (file.isEmpty()) {
+//			throw exceptiuon
+			throw new SwdaException("请选择需要上传的文件");
+		}
+//		get path
+		String path = storageService.getPath(file.getOriginalFilename());
+//		upload
+		String url = storageService.upload(file.getBytes(), path);
+//		create file upload vo
+		SysFileUploadVO vo = new SysFileUploadVO();
+//		set url, name
+		vo.setUrl(url);
+		vo.setName(file.getOriginalFilename());
+//		return
+		return vo;
+	}
 
-        SysFileUploadVO vo = new SysFileUploadVO();
-        vo.setUrl(url);
-        vo.setSize(file.getSize());
-        vo.setName(file.getOriginalFilename());
-        vo.setPlatform(storageService.properties.getConfig().getType().name());
-
-        return R.ok(vo);
-    }
-
-    @PostMapping("uploads")
-    @Operation(summary = "上传", type = OperateType.INSERT)
-    public SysFileUploadVO uploads(@RequestParam("file") MultipartFile file) throws Exception {
-        if (file.isEmpty()) {
-            throw new SwdaException("请选择需要上传的文件");
-        }
-
-        // 上传路径
-        String path = storageService.getPath(file.getOriginalFilename());
-        // 上传文件
-        String url = storageService.upload(file.getBytes(), path);
-
-        SysFileUploadVO vo = new SysFileUploadVO();
-        vo.setUrl(url);
-        vo.setName(file.getOriginalFilename());
-
-        return vo;
-    }
 }

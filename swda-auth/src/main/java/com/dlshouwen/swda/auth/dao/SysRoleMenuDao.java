@@ -9,16 +9,18 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * 角色与菜单对应关系
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * role menu mapper
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysRoleMenuDao extends BaseMapper<SysRoleMenuEntity> {
 
 	/**
-	 * 根据角色ID，获取菜单ID列表
+	 * get menu id list
+	 * @param roleId
+	 * @return menu id list
 	 */
 	List<Long> getMenuIdList(@Param("roleId") Long roleId);
+
 }

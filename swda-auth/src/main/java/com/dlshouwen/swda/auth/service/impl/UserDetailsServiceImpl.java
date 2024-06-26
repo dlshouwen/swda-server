@@ -12,25 +12,36 @@ import com.dlshouwen.swda.auth.entity.SysUserEntity;
 import com.dlshouwen.swda.auth.service.SysUserDetailsService;
 
 /**
- * 账号登录 UserDetailsService
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * user details service impl
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final SysUserDetailsService sysUserDetailsService;
-    private final SysUserDao sysUserDao;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUserEntity userEntity = sysUserDao.getByUsername(username);
-        if (userEntity == null) {
-            throw new UsernameNotFoundException("用户名或密码错误");
-        }
+	/** user details service */
+	private final SysUserDetailsService sysUserDetailsService;
 
-        return sysUserDetailsService.getUserDetails(SysUserConvert.INSTANCE.convertDetail(userEntity));
-    }
+	/** user mapper */
+	private final SysUserDao sysUserDao;
+
+	/**
+	 * load user by username
+	 * @param username
+	 * @return user details
+	 */
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		get user by username
+		SysUserEntity userEntity = sysUserDao.getByUsername(username);
+//		if user is empty
+		if (userEntity == null) {
+//			throw exception
+			throw new UsernameNotFoundException("用户名或密码错误");
+		}
+//		convert user to user detail and get user details for return
+		return sysUserDetailsService.getUserDetails(SysUserConvert.INSTANCE.convertDetail(userEntity));
+	}
 
 }

@@ -6,46 +6,44 @@ import org.springframework.stereotype.Service;
 import com.dlshouwen.swda.core.cache.RedisCache;
 
 /**
- * 参数管理 Cache
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * params cache
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysParamsCache {
-    private final RedisCache redisCache;
+	
+	/** redis cache */
+	private final RedisCache redisCache;
 
-    /**
-     * 参数管理 KEY
-     */
-    private final String SYSTEM_PARAMS_KEY = "system:params";
+	/** system params key */
+	private final String SYSTEM_PARAMS_KEY = "system:params";
 
-    /**
-     * 根据参数键，获取参数值
-     *
-     * @param paramKey 参数键
-     */
-    public String get(String paramKey) {
-        return (String) redisCache.hGet(SYSTEM_PARAMS_KEY, paramKey);
-    }
+	/**
+	 * get
+	 * @param key
+	 * @return value
+	 */
+	public String get(String key) {
+		return (String) redisCache.hGet(SYSTEM_PARAMS_KEY, key);
+	}
 
-    /**
-     * 根据参数键，获取参数值
-     *
-     * @param paramKey   参数键
-     * @param paramValue 参数值
-     */
-    public void save(String paramKey, String paramValue) {
-        redisCache.hSet(SYSTEM_PARAMS_KEY, paramKey, paramValue, RedisCache.NOT_EXPIRE);
-    }
+	/**
+	 * save
+	 * @param key
+	 * @param value
+	 */
+	public void save(String key, String value) {
+		redisCache.hSet(SYSTEM_PARAMS_KEY, key, value, RedisCache.NOT_EXPIRE);
+	}
 
-    /**
-     * 根据参数键，删除参数值
-     *
-     * @param paramKey 参数键
-     */
-    public void del(Object... paramKey) {
-        redisCache.hDel(SYSTEM_PARAMS_KEY, paramKey);
-    }
+	/**
+	 * delete
+	 * @param keys
+	 */
+	public void delete(Object... keys) {
+		redisCache.hDel(SYSTEM_PARAMS_KEY, keys);
+	}
+
 }

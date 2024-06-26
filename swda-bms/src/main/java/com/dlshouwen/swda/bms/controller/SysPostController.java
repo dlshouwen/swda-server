@@ -19,78 +19,120 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 /**
- * 岗位管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * post
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/post")
-@Tag(name = "岗位管理")
+@Tag(name = "post")
 @AllArgsConstructor
 public class SysPostController {
-    private final SysPostService sysPostService;
+	
+	/** post service */
+	private final SysPostService sysPostService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:post:page')")
-    public R<PageResult<SysPostVO>> page(@ParameterObject @Valid SysPostQuery query) {
-        PageResult<SysPostVO> page = sysPostService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:post:page')")
+	public R<PageResult<SysPostVO>> page(@ParameterObject @Valid SysPostQuery query) {
+//		page
+		PageResult<SysPostVO> page = sysPostService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * list
+	 * @return result
+	 */
+	@GetMapping("list")
+	@Operation(name = "list")
+	public R<List<SysPostVO>> list() {
+//		get list
+		List<SysPostVO> list = sysPostService.getList();
+//		return
+		return R.ok(list);
+	}
 
-    @GetMapping("list")
-    @Operation(summary = "列表")
-    public R<List<SysPostVO>> list() {
-        List<SysPostVO> list = sysPostService.getList();
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "get")
+	@PreAuthorize("hasAuthority('sys:post:info')")
+	public R<SysPostVO> get(@PathVariable("id") Long id) {
+//		get post by id
+		SysPostEntity entity = sysPostService.getById(id);
+//		return
+		return R.ok(SysPostConvert.INSTANCE.convert(entity));
+	}
 
-        return R.ok(list);
-    }
+	/**
+	 * save
+	 * @param postVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:post:save')")
+	public R<String> save(@RequestBody SysPostVO vo) {
+//		save
+		sysPostService.save(vo);
+//		return
+		return R.ok();
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:post:info')")
-    public R<SysPostVO> get(@PathVariable("id") Long id) {
-        SysPostEntity entity = sysPostService.getById(id);
+	/**
+	 * update
+	 * @param postVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:post:update')")
+	public R<String> update(@RequestBody @Valid SysPostVO vo) {
+//		update
+		sysPostService.update(vo);
+//		return
+		return R.ok();
+	}
 
-        return R.ok(SysPostConvert.INSTANCE.convert(entity));
-    }
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:post:delete')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		delete
+		sysPostService.delete(idList);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:post:save')")
-    public R<String> save(@RequestBody SysPostVO vo) {
-        sysPostService.save(vo);
+	/**
+	 * get name list
+	 * @param idList
+	 * @return result
+	 */
+	@PostMapping("nameList")
+	@Operation(name = "get name list")
+	public R<List<String>> nameList(@RequestBody List<Long> idList) {
+//		get name list
+		List<String> list = sysPostService.getNameList(idList);
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:post:update')")
-    public R<String> update(@RequestBody @Valid SysPostVO vo) {
-        sysPostService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:post:delete')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        sysPostService.delete(idList);
-
-        return R.ok();
-    }
-
-    @PostMapping("nameList")
-    @Operation(summary = "名称列表")
-    public R<List<String>> nameList(@RequestBody List<Long> idList) {
-        List<String> list = sysPostService.getNameList(idList);
-
-        return R.ok(list);
-    }
 }

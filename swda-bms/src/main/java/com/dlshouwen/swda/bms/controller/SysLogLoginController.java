@@ -18,32 +18,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 登录日志
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * login log
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/log/login")
-@Tag(name = "登录日志")
+@Tag(name = "login log")
 @AllArgsConstructor
 public class SysLogLoginController {
-    private final SysLogLoginService sysLogLoginService;
+	
+	/** login log service */
+	private final SysLogLoginService sysLogLoginService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:log:login')")
-    public R<PageResult<SysLogLoginVO>> page(@ParameterObject @Valid SysLogLoginQuery query) {
-        PageResult<SysLogLoginVO> page = sysLogLoginService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:log:login')")
+	public R<PageResult<SysLogLoginVO>> page(@ParameterObject @Valid SysLogLoginQuery query) {
+//		page
+		PageResult<SysLogLoginVO> page = sysLogLoginService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
-
-    @GetMapping("export")
-    @Operation(summary = "导出excel", type = OperateType.EXPORT)
-    @PreAuthorize("hasAuthority('sys:log:login')")
-    public void export() {
-        sysLogLoginService.export();
-    }
+	/**
+	 * export
+	 */
+	@GetMapping("export")
+	@Operation(name = "export excel", type = OperateType.EXPORT)
+	@PreAuthorize("hasAuthority('sys:log:login')")
+	public void export() {
+//		export
+		sysLogLoginService.export();
+	}
 
 }

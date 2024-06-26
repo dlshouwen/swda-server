@@ -13,30 +13,38 @@ import com.dlshouwen.swda.auth.third.ThirdOpenIdService;
 import com.dlshouwen.swda.core.exception.SwdaException;
 
 /**
- * 第三方登录，通过code，获取开放平台用户唯一标识
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third open id service impl
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class ThirdOpenIdServiceImpl implements ThirdOpenIdService {
-    private final SysThirdLoginConfigService sysThirdLoginConfigService;
+	
+	/** third login config service */
+	private final SysThirdLoginConfigService sysThirdLoginConfigService;
 
-    @SuppressWarnings("unchecked")
+	/**
+	 * get open id
+	 * @param thirdLogin
+	 * @return open id
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-    public String getOpenId(ThirdLogin login) {
-        AuthRequest authRequest = sysThirdLoginConfigService.getAuthRequest(login.getOpenType());
-        AuthCallback callback = AuthCallback.builder().code(login.getCode()).state(login.getState()).build();
+	public String getOpenId(ThirdLogin login) {
+//		get auth reqeust
+		AuthRequest authRequest = sysThirdLoginConfigService.getAuthRequest(login.getOpenType());
+//		get call back
+		AuthCallback callback = AuthCallback.builder().code(login.getCode()).state(login.getState()).build();
+//		do login
+		AuthResponse<AuthUser> response = authRequest.login(callback);
+//		if not success
+		if (!response.ok()) {
+//			throw exception
+			throw new SwdaException("第三方登录失败");
+		}
+//		get open id to renturn
+		return response.getData().getUuid();
+	}
 
-        // 根据code，获取用户信息
-        AuthResponse<AuthUser> response = authRequest.login(callback);
-
-        // 判断是否成功
-        if (!response.ok()) {
-            throw new SwdaException("第三方登录失败");
-        }
-
-        return response.getData().getUuid();
-    }
 }

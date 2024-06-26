@@ -3,14 +3,17 @@ package com.dlshouwen.swda.oss.properties;
 import lombok.Data;
 
 /**
- * 七牛云存储配置项
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * qiniu storage properties
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 public class QiniuStorageProperties {
-    private String accessKey;
-    private String secretKey;
-    private String bucketName;
+
+	private String accessKey;
+	
+	private String secretKey;
+	
+	private String bucketName;
+
 }

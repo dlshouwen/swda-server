@@ -11,26 +11,32 @@ import com.dlshouwen.swda.oss.properties.LocalStorageProperties;
 import com.dlshouwen.swda.oss.properties.StorageProperties;
 
 /**
- * 本地资源映射配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * local resource configuration
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Configuration
 @ConditionalOnProperty(prefix = "storage", value = "enabled")
 public class LocalResourceConfiguration implements WebMvcConfigurer {
-    @Resource
-    private StorageProperties properties;
+	
+	/** sotrage properties */
+	@Resource
+	private StorageProperties properties;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 如果不是本地存储，则返回
-        if (properties.getConfig().getType() != StorageTypeEnum.LOCAL) {
-            return;
-        }
+	/**
+	 * add resource handlers
+	 * @param registry
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		if not local storage type then return
+		if (properties.getConfig().getType() != StorageTypeEnum.LOCAL) {
+			return;
+		}
+//		get local
+		LocalStorageProperties local = properties.getLocal();
+//		add resource handler
+		registry.addResourceHandler("/" + local.getUrl() + "/**").addResourceLocations("file:" + local.getPath() + "/");
+	}
 
-        LocalStorageProperties local = properties.getLocal();
-        registry.addResourceHandler("/" + local.getUrl() + "/**")
-                .addResourceLocations("file:" + local.getPath() + "/");
-    }
 }

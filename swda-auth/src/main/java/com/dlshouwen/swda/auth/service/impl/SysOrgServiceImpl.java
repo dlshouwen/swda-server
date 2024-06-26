@@ -24,106 +24,139 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 机构管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * organ service impl
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> implements SysOrgService {
-    private final SysUserDao sysUserDao;
 
-    @Override
-    public List<SysOrgVO> getList() {
-        Map<String, Object> params = new HashMap<>();
+	/** user mapper */
+	private final SysUserDao sysUserDao;
 
-        // 数据权限
-        params.put(Constant.DATA_SCOPE, getDataScope("t1", "id"));
+	/**
+	 * get organ list
+	 * @return organ vo list
+	 */
+	@Override
+	public List<SysOrgVO> getList() {
+//		defined params
+		Map<String, Object> params = new HashMap<>();
+//		put data scope
+		params.put(Constant.DATA_SCOPE, getDataScope("t1", "id"));
+//		get organ list
+		List<SysOrgEntity> entityList = baseMapper.getList(params);
+//		convert to organ vo tree
+		return TreeUtils.build(SysOrgConvert.INSTANCE.convertList(entityList));
+	}
 
-        // 机构列表
-        List<SysOrgEntity> entityList = baseMapper.getList(params);
+	/**
+	 * save
+	 * @param organVO
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void save(SysOrgVO vo) {
+//		convert to organ
+		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
+//		insert organ
+		baseMapper.insert(entity);
+	}
 
-        return TreeUtils.build(SysOrgConvert.INSTANCE.convertList(entityList));
-    }
+	/**
+	 * update
+	 * @param organVO
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void update(SysOrgVO vo) {
+//		convert to organ
+		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
+//		parent is not self
+		if (entity.getOrganId().equals(entity.getPid())) {
+			throw new SwdaException("上级机构不能为自身");
+		}
+//		parent is not sub
+		List<Long> subOrgList = getSubOrgIdList(entity.getOrganId());
+		if (subOrgList.contains(entity.getPid())) {
+			throw new SwdaException("上级机构不能为下级");
+		}
+//		update organ
+		updateById(entity);
+	}
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void save(SysOrgVO vo) {
-        SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
+	/**
+	 * delete
+	 * @param organId
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void delete(Long id) {
+//		get sub organ count
+		long orgCount = count(new QueryWrapper<SysOrgEntity>().eq("pid", id));
+//		if has sub organs
+		if (orgCount > 0) {
+			throw new SwdaException("请先删除子机构");
+		}
+//		get user count
+		long userCount = sysUserDao.selectCount(new QueryWrapper<SysUserEntity>().eq("org_id", id));
+//		if has users
+		if (userCount > 0) {
+			throw new SwdaException("机构下面有用户，不能删除");
+		}
+//		delete organ
+		removeById(id);
+	}
 
-        baseMapper.insert(entity);
-    }
+	/**
+	 * get sub organ id list
+	 * @param organId
+	 * @return sub organ id list
+	 */
+	@Override
+	public List<Long> getSubOrgIdList(Long id) {
+//		get id and pid list
+		List<SysOrgEntity> orgList = baseMapper.getIdAndPidList();
+//		defined sub id list
+		List<Long> subIdList = new ArrayList<>();
+//		get sub id list
+		getTree(id, orgList, subIdList);
+//		add self id
+		subIdList.add(id);
+//		return sub id list
+		return subIdList;
+	}
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void update(SysOrgVO vo) {
-        SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
+	/**
+	 * get name list
+	 * @param idList
+	 * @return name list
+	 */
+	@Override
+	public List<String> getNameList(List<Long> idList) {
+//		if empty then return null
+		if (idList.isEmpty()) {
+			return null;
+		}
+//		select ids by name
+		return baseMapper.selectBatchIds(idList).stream().map(SysOrgEntity::getName).toList();
+	}
 
-        // 上级机构不能为自身
-        if (entity.getOrganId().equals(entity.getPid())) {
-            throw new SwdaException("上级机构不能为自身");
-        }
+	/**
+	 * get tree
+	 * @param id
+	 * @param orgList
+	 * @param subIdList
+	 */
+	private void getTree(Long id, List<SysOrgEntity> orgList, List<Long> subIdList) {
+		for (SysOrgEntity org : orgList) {
+			if (ObjectUtil.equals(org.getPid(), id)) {
+				getTree(org.getOrganId(), orgList, subIdList);
 
-        // 上级机构不能为下级
-        List<Long> subOrgList = getSubOrgIdList(entity.getOrganId());
-        if (subOrgList.contains(entity.getPid())) {
-            throw new SwdaException("上级机构不能为下级");
-        }
+				subIdList.add(org.getOrganId());
+			}
+		}
+	}
 
-        updateById(entity);
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void delete(Long id) {
-        // 判断是否有子机构
-        long orgCount = count(new QueryWrapper<SysOrgEntity>().eq("pid", id));
-        if (orgCount > 0) {
-            throw new SwdaException("请先删除子机构");
-        }
-
-        // 判断机构下面是否有用户
-        long userCount = sysUserDao.selectCount(new QueryWrapper<SysUserEntity>().eq("org_id", id));
-        if (userCount > 0) {
-            throw new SwdaException("机构下面有用户，不能删除");
-        }
-
-        // 删除
-        removeById(id);
-    }
-
-    @Override
-    public List<Long> getSubOrgIdList(Long id) {
-        // 所有机构的id、pid列表
-        List<SysOrgEntity> orgList = baseMapper.getIdAndPidList();
-
-        // 递归查询所有子机构ID列表
-        List<Long> subIdList = new ArrayList<>();
-        getTree(id, orgList, subIdList);
-
-        // 本机构也添加进去
-        subIdList.add(id);
-
-        return subIdList;
-    }
-
-    @Override
-    public List<String> getNameList(List<Long> idList) {
-        if (idList.isEmpty()) {
-            return null;
-        }
-
-        return baseMapper.selectBatchIds(idList).stream().map(SysOrgEntity::getName).toList();
-    }
-
-    private void getTree(Long id, List<SysOrgEntity> orgList, List<Long> subIdList) {
-        for (SysOrgEntity org : orgList) {
-            if (ObjectUtil.equals(org.getPid(), id)) {
-                getTree(org.getOrganId(), orgList, subIdList);
-
-                subIdList.add(org.getOrganId());
-            }
-        }
-    }
 }

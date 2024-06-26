@@ -3,15 +3,19 @@ package com.dlshouwen.swda.oss.properties;
 import lombok.Data;
 
 /**
- * Minio存储配置项
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * minio storage properties
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 public class MinioStorageProperties {
-    private String endPoint;
-    private String accessKey;
-    private String secretKey;
-    private String bucketName;
+	
+	private String endPoint;
+	
+	private String accessKey;
+	
+	private String secretKey;
+	
+	private String bucketName;
+
 }

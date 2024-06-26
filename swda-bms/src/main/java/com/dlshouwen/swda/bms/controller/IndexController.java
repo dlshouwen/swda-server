@@ -4,16 +4,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 首页 欢迎信息
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * index
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 public class IndexController {
 
-    @GetMapping("/")
-    public String index() {
-        return "您好，项目已启动，祝您使用愉快！";
-    }
+	/**
+	 * index
+	 * @return
+	 */
+	@GetMapping("/")
+	public String index() {
+		return "swda started!";
+	}
+
 }

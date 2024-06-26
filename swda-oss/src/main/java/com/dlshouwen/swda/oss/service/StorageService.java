@@ -10,74 +10,70 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * 存储服务
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * storage service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public abstract class StorageService {
-    public StorageProperties properties;
+	
+	/** storage properties */
+	public StorageProperties properties;
 
-    /**
-     * 根据文件名，生成带时间戳的新文件名
-     *
-     * @param fileName 文件名
-     * @return 返回带时间戳的文件名
-     */
-    public String getNewFileName(String fileName) {
-        // 主文件名，不包含扩展名
-        String prefix = FileNameUtil.getPrefix(fileName);
-        // 文件扩展名
-        String suffix = FileNameUtil.getSuffix(fileName);
-        // 把当天HH:mm:ss，转换成秒
-        long time = DateUtil.timeToSecond(DateUtil.formatTime(new Date()));
-        // 新文件名
-        return prefix + "_" + time + "." + suffix;
-    }
+	/**
+	 * get new file name
+	 * @param fileName
+	 * @return new file name
+	 */
+	public String getNewFileName(String fileName) {
+//		get file prefix
+		String prefix = FileNameUtil.getPrefix(fileName);
+//		get file suffix
+		String suffix = FileNameUtil.getSuffix(fileName);
+//		get second time
+		long time = DateUtil.timeToSecond(DateUtil.formatTime(new Date()));
+//		return new file name
+		return prefix + "_" + time + "." + suffix;
+	}
 
-    /**
-     * 生成路径，不包含文件名
-     *
-     * @return 返回生成的路径
-     */
-    public String getPath() {
-        // 文件路径
-        String path = DateUtil.format(new Date(), "yyyyMMdd");
+	/**
+	 * get path
+	 * @return path
+	 */
+	public String getPath() {
+//		get path by date
+		String path = DateUtil.format(new Date(), "yyyyMMdd");
+//		if has prrefix
+		if (StringUtils.hasText(properties.getConfig().getPrefix())) {
+//			add prefix to path
+			path = properties.getConfig().getPrefix() + "/" + path;
+		}
+//		return path
+		return path;
+	}
 
-        // 如果有前缀，则也带上
-        if (StringUtils.hasText(properties.getConfig().getPrefix())) {
-            path = properties.getConfig().getPrefix() + "/" + path;
-        }
+	/**
+	 * get path
+	 * @param fileName
+	 * @return path
+	 */
+	public String getPath(String fileName) {
+		return getPath() + "/" + getNewFileName(fileName);
+	}
 
-        return path;
-    }
+	/**
+	 * upload
+	 * @param data
+	 * @param path
+	 * @return url
+	 */
+	public abstract String upload(byte[] data, String path);
 
-    /**
-     * 根据文件名，生成路径
-     *
-     * @param fileName 文件名
-     * @return 生成文件路径
-     */
-    public String getPath(String fileName) {
-        return getPath() + "/" + getNewFileName(fileName);
-    }
-
-    /**
-     * 文件上传
-     *
-     * @param data 文件字节数组
-     * @param path 文件路径，包含文件名
-     * @return 返回http地址
-     */
-    public abstract String upload(byte[] data, String path);
-
-    /**
-     * 文件上传
-     *
-     * @param inputStream 字节流
-     * @param path        文件路径，包含文件名
-     * @return 返回http地址
-     */
-    public abstract String upload(InputStream inputStream, String path);
+	/**
+	 * upload
+	 * @param inputStream
+	 * @param path
+	 * @return url
+	 */
+	public abstract String upload(InputStream inputStream, String path);
 
 }

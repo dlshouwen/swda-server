@@ -19,73 +19,117 @@ import com.dlshouwen.swda.auth.service.MobileUserDetailsService;
 import com.dlshouwen.swda.auth.service.MobileVerifyCodeService;
 
 /**
- * 手机短信登录 AuthenticationProvider
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * mobile authentication provider
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class MobileAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
-    protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
-    private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-    private final MobileUserDetailsService mobileUserDetailsService;
-    private final MobileVerifyCodeService mobileVerifyCodeService;
+	
+	/** messages */
+	protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
+	
+	/** authorities mapper */
+	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
+	
+	/** mobile user details service */
+	private final MobileUserDetailsService mobileUserDetailsService;
+	/** mobile verify code service */
+	private final MobileVerifyCodeService mobileVerifyCodeService;
 
-    public MobileAuthenticationProvider(MobileUserDetailsService mobileUserDetailsService, MobileVerifyCodeService mobileVerifyCodeService) {
-        this.mobileUserDetailsService = mobileUserDetailsService;
-        this.mobileVerifyCodeService = mobileVerifyCodeService;
-    }
+	/**
+	 * constructor
+	 * @param mobileUserDetailsService
+	 * @param mobileVerifyCodeService
+	 */
+	public MobileAuthenticationProvider(MobileUserDetailsService mobileUserDetailsService, MobileVerifyCodeService mobileVerifyCodeService) {
+//		set mobile user details service
+		this.mobileUserDetailsService = mobileUserDetailsService;
+//		set mobile verify code service
+		this.mobileVerifyCodeService = mobileVerifyCodeService;
+	}
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Assert.isInstanceOf(MobileAuthenticationToken.class, authentication,
-                () -> messages.getMessage(
-                        "MobileAuthenticationProvider.onlySupports",
-                        "Only MobileAuthenticationProvider is supported"));
+	/**
+	 * authenticate
+	 * @param authentication
+	 * @return authencation
+	 * @throws authencation exception
+	 */
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+//		assert type
+		Assert.isInstanceOf(MobileAuthenticationToken.class, authentication, () -> messages.getMessage("MobileAuthenticationProvider.onlySupports", "Only MobileAuthenticationProvider is supported"));
+//		convert to mobile authentication token
+		MobileAuthenticationToken authenticationToken = (MobileAuthenticationToken) authentication;
+//		get mobile, code
+		String mobile = authenticationToken.getName();
+		String code = (String) authenticationToken.getCredentials();
+//		typ catch exception
+		try {
+//			load user by mobile
+			UserDetails userDetails = mobileUserDetailsService.loadUserByMobile(mobile);
+//			if user details is null
+			if (userDetails == null) {
+//				throw bad credentials exception
+				throw new BadCredentialsException("Bad credentials");
+			}
+//			verify mobile code
+			if (mobileVerifyCodeService.verifyCode(mobile, code)) {
+//				create success authentication and return
+				return createSuccessAuthentication(authentication, userDetails);
+			} else {
+//				throw bad credenticals exception
+				throw new BadCredentialsException("mobile code is not matched");
+			}
+		} catch (UsernameNotFoundException ex) {
+//			throw bad credenticals exception
+			throw new BadCredentialsException(this.messages.getMessage("MobileAuthenticationProvider.badCredentials", "Bad credentials"));
+		}
+	}
 
-        MobileAuthenticationToken authenticationToken = (MobileAuthenticationToken) authentication;
-        String mobile = authenticationToken.getName();
-        String code = (String) authenticationToken.getCredentials();
+	/**
+	 * create success authentication
+	 * @param authentication
+	 * @param user
+	 * @return authentication
+	 */
+	protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
+//		create mobild authentication token
+		MobileAuthenticationToken token = new MobileAuthenticationToken(user, null, authoritiesMapper.mapAuthorities(user.getAuthorities()));
+//		set details
+		token.setDetails(authentication.getDetails());
+//		return token
+		return token;
+	}
 
-        try {
-            UserDetails userDetails = mobileUserDetailsService.loadUserByMobile(mobile);
-            if (userDetails == null) {
-                throw new BadCredentialsException("Bad credentials");
-            }
+	/**
+	 * supports
+	 * @param authentication
+	 * @return is support
+	 */
+	@Override
+	public boolean supports(Class<?> authentication) {
+//		is assignabled from token
+		return MobileAuthenticationToken.class.isAssignableFrom(authentication);
+	}
 
-            // 短信验证码效验
-            if (mobileVerifyCodeService.verifyCode(mobile, code)) {
-                return createSuccessAuthentication(authentication, userDetails);
-            } else {
-                throw new BadCredentialsException("mobile code is not matched");
-            }
-        } catch (UsernameNotFoundException ex) {
-            throw new BadCredentialsException(this.messages
-                    .getMessage("MobileAuthenticationProvider.badCredentials", "Bad credentials"));
-        }
+	/**
+	 * after properties set
+	 */
+	@Override
+	public void afterPropertiesSet() throws Exception {
+//		assert not null
+		Assert.notNull(mobileUserDetailsService, "mobileUserDetailsService must not be null");
+		Assert.notNull(mobileVerifyCodeService, "mobileVerifyCodeService must not be null");
+	}
 
-    }
-
-    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
-        MobileAuthenticationToken result = new MobileAuthenticationToken(user, null,
-                authoritiesMapper.mapAuthorities(user.getAuthorities()));
-        result.setDetails(authentication.getDetails());
-        return result;
-    }
-
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return MobileAuthenticationToken.class.isAssignableFrom(authentication);
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        Assert.notNull(mobileUserDetailsService, "mobileUserDetailsService must not be null");
-        Assert.notNull(mobileVerifyCodeService, "mobileVerifyCodeService must not be null");
-    }
-
-    @Override
-    public void setMessageSource(MessageSource messageSource) {
-        this.messages = new MessageSourceAccessor(messageSource);
-    }
+	/**
+	 * set message source
+	 * @param messageSource
+	 */
+	@Override
+	public void setMessageSource(MessageSource messageSource) {
+//		set messages
+		this.messages = new MessageSourceAccessor(messageSource);
+	}
 
 }

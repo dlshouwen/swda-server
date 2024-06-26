@@ -22,92 +22,139 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 菜单管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * menu
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/menu")
-@Tag(name = "菜单管理")
+@Tag(name = "menu")
 @AllArgsConstructor
 public class SysMenuController {
-    private final SysMenuService sysMenuService;
+	
+	/** menu service */
+	private final SysMenuService sysMenuService;
 
-    @GetMapping("nav")
-    @Operation(summary = "菜单导航")
-    public R<List<SysMenuVO>> nav() {
-        UserDetail user = SecurityUser.getUser();
-        List<SysMenuVO> list = sysMenuService.getUserMenuList(user, MenuTypeEnum.MENU.getValue());
+	/**
+	 * nav
+	 * @return result
+	 */
+	@GetMapping("nav")
+	@Operation(name = "nav")
+	public R<List<SysMenuVO>> nav() {
+//		get login user
+		UserDetail user = SecurityUser.getUser();
+//		get user menu list
+		List<SysMenuVO> list = sysMenuService.getUserMenuList(user, MenuTypeEnum.MENU.getValue());
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok(list);
-    }
+	/**
+	 * authority
+	 * @return result
+	 */
+	@GetMapping("authority")
+	@Operation(name = "authority")
+	public R<Set<String>> authority() {
+//		get login user
+		UserDetail user = SecurityUser.getUser();
+//		get user authority
+		Set<String> set = sysMenuService.getUserAuthority(user);
+//		return
+		return R.ok(set);
+	}
 
-    @GetMapping("authority")
-    @Operation(summary = "用户权限标识")
-    public R<Set<String>> authority() {
-        UserDetail user = SecurityUser.getUser();
-        Set<String> set = sysMenuService.getUserAuthority(user);
+	/**
+	 * list
+	 * @param type
+	 * @return result
+	 */
+	@GetMapping("list")
+	@Operation(name = "list")
+	@Parameter(name = "type", description = "0:menu 1:button 2:interface null:all")
+	@PreAuthorize("hasAuthority('sys:menu:list')")
+	public R<List<SysMenuVO>> list(Integer type) {
+//		get menu list
+		List<SysMenuVO> list = sysMenuService.getMenuList(type);
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok(set);
-    }
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "get")
+	@PreAuthorize("hasAuthority('sys:menu:info')")
+	public R<SysMenuVO> get(@PathVariable("id") Long id) {
+//		get menu by id
+		SysMenuEntity entity = sysMenuService.getById(id);
+//		convert to menu vo
+		SysMenuVO vo = SysMenuConvert.INSTANCE.convert(entity);
+//		is has parent menu
+		if (entity.getPid() != null) {
+//			get parent menu
+			SysMenuEntity parentEntity = sysMenuService.getById(entity.getPid());
+//			set parent name
+			vo.setParentName(parentEntity.getName());
+		}
+//		return
+		return R.ok(vo);
+	}
 
-    @GetMapping("list")
-    @Operation(summary = "菜单列表")
-    @Parameter(name = "type", description = "菜单类型 0：菜单 1：按钮  2：接口  null：全部")
-    @PreAuthorize("hasAuthority('sys:menu:list')")
-    public R<List<SysMenuVO>> list(Integer type) {
-        List<SysMenuVO> list = sysMenuService.getMenuList(type);
+	/**
+	 * save
+	 * @param menuVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:menu:save')")
+	public R<String> save(@RequestBody @Valid SysMenuVO vo) {
+//		save
+		sysMenuService.save(vo);
+//		return
+		return R.ok();
+	}
 
-        return R.ok(list);
-    }
+	/**
+	 * update
+	 * @param menuVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:menu:update')")
+	public R<String> update(@RequestBody @Valid SysMenuVO vo) {
+//		update
+		sysMenuService.update(vo);
+//		return
+		return R.ok();
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:menu:info')")
-    public R<SysMenuVO> get(@PathVariable("id") Long id) {
-        SysMenuEntity entity = sysMenuService.getById(id);
-        SysMenuVO vo = SysMenuConvert.INSTANCE.convert(entity);
+	/**
+	 * delete
+	 * @param id
+	 * @return result
+	 */
+	@DeleteMapping("{id}")
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:menu:delete')")
+	public R<String> delete(@PathVariable("id") Long id) {
+//		get sub menu count
+		Long count = sysMenuService.getSubMenuCount(id);
+//		if has sub menu
+		if (count > 0) {
+//			return
+			return R.error("请先删除子菜单");
+		}
+//		delete
+		sysMenuService.delete(id);
+//		return
+		return R.ok();
+	}
 
-        // 获取上级菜单名称
-        if (entity.getPid() != null) {
-            SysMenuEntity parentEntity = sysMenuService.getById(entity.getPid());
-            vo.setParentName(parentEntity.getName());
-        }
-
-        return R.ok(vo);
-    }
-
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:menu:save')")
-    public R<String> save(@RequestBody @Valid SysMenuVO vo) {
-        sysMenuService.save(vo);
-
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:menu:update')")
-    public R<String> update(@RequestBody @Valid SysMenuVO vo) {
-        sysMenuService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping("{id}")
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:menu:delete')")
-    public R<String> delete(@PathVariable("id") Long id) {
-        // 判断是否有子菜单或按钮
-        Long count = sysMenuService.getSubMenuCount(id);
-        if (count > 0) {
-            return R.error("请先删除子菜单");
-        }
-
-        sysMenuService.delete(id);
-
-        return R.ok();
-    }
 }

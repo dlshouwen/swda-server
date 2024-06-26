@@ -30,171 +30,248 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-
 /**
- * 用户管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * user
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/user")
 @AllArgsConstructor
-@Tag(name = "用户管理")
+@Tag(name = "user")
 public class SysUserController {
-    private final SysUserService sysUserService;
-    private final SysUserRoleService sysUserRoleService;
-    private final SysUserPostService sysUserPostService;
-    private final SysPostService sysPostService;
-    private final PasswordEncoder passwordEncoder;
+	
+	/** user service */
+	private final SysUserService sysUserService;
+	
+	/** role service */
+	private final SysUserRoleService sysUserRoleService;
+	
+	/** user post service */
+	private final SysUserPostService sysUserPostService;
+	
+	/** post service */
+	private final SysPostService sysPostService;
+	
+	/** password encoder */
+	private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:user:page')")
-    public R<PageResult<SysUserVO>> page(@ParameterObject @Valid SysUserQuery query) {
-        PageResult<SysUserVO> page = sysUserService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:user:page')")
+	public R<PageResult<SysUserVO>> page(@ParameterObject @Valid SysUserQuery query) {
+//		page
+		PageResult<SysUserVO> page = sysUserService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "get")
+	@PreAuthorize("hasAuthority('sys:user:info')")
+	public R<SysUserVO> get(@PathVariable("id") Long id) {
+//		get user
+		SysUserEntity entity = sysUserService.getById(id);
+//		convert to user vo
+		SysUserVO vo = SysUserConvert.INSTANCE.convert(entity);
+//		get role id list set to user
+		List<Long> roleIdList = sysUserRoleService.getRoleIdList(id);
+		vo.setRoleIdList(roleIdList);
+//		get post id list set to user
+		List<Long> postIdList = sysUserPostService.getPostIdList(id);
+		vo.setPostIdList(postIdList);
+//		return
+		return R.ok(vo);
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:user:info')")
-    public R<SysUserVO> get(@PathVariable("id") Long id) {
-        SysUserEntity entity = sysUserService.getById(id);
+	/**
+	 * info
+	 * @return result
+	 */
+	@GetMapping("info")
+	@Operation(name = "info")
+	public R<SysUserVO> info() {
+//		convert user to user vo
+		SysUserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
+//		get post id list set to user
+		List<Long> postIdList = sysUserPostService.getPostIdList(user.getId());
+		user.setPostIdList(postIdList);
+//		get post name list set to user
+		List<String> postNameList = sysPostService.getNameList(postIdList);
+		user.setPostNameList(postNameList);
+//		return
+		return R.ok(user);
+	}
 
-        SysUserVO vo = SysUserConvert.INSTANCE.convert(entity);
+	/**
+	 * info
+	 * @param userBaseVO
+	 * @return result
+	 */
+	@PutMapping("info")
+	@Operation(name = "login info", type = OperateType.UPDATE)
+	public R<String> loginInfo(@RequestBody @Valid SysUserBaseVO vo) {
+//		update login info
+		sysUserService.updateLoginInfo(vo);
+//		return
+		return R.ok();
+	}
 
-        // 用户角色列表
-        List<Long> roleIdList = sysUserRoleService.getRoleIdList(id);
-        vo.setRoleIdList(roleIdList);
+	/**
+	 * avatar
+	 * @param avatar
+	 * @return result
+	 */
+	@PutMapping("avatar")
+	@Operation(name = "avatar", type = OperateType.UPDATE)
+	public R<String> avatar(@RequestBody SysUserAvatarVO avatar) {
+//		update avatar
+		sysUserService.updateAvatar(avatar);
+//		return
+		return R.ok();
+	}
 
-        // 用户岗位列表
-        List<Long> postIdList = sysUserPostService.getPostIdList(id);
-        vo.setPostIdList(postIdList);
+	/**
+	 * password
+	 * @param userPasswordVO
+	 * @return result
+	 */
+	@PutMapping("password")
+	@Operation(name = "password", type = OperateType.UPDATE)
+	public R<String> password(@RequestBody @Valid SysUserPasswordVO vo) {
+//		get user detail
+		UserDetail user = SecurityUser.getUser();
+//		if password not equals
+		if (!passwordEncoder.matches(vo.getPassword(), user.getPassword())) {
+//			return
+			return R.error("原密码不正确");
+		}
+//		update password
+		sysUserService.updatePassword(user.getUserId(), passwordEncoder.encode(vo.getNewPassword()));
+//		return
+		return R.ok();
+	}
 
-        return R.ok(vo);
-    }
+	/**
+	 * save
+	 * @param userVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:user:save')")
+	public R<String> save(@RequestBody @Valid SysUserVO vo) {
+//		password is not null
+		if (StrUtil.isBlank(vo.getPassword())) {
+//			return
+			return R.error("密码不能为空");
+		}
+//		set password
+		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+//		save user
+		sysUserService.save(vo);
+//		return
+		return R.ok();
+	}
 
-    @GetMapping("info")
-    @Operation(summary = "登录用户")
-    public R<SysUserVO> info() {
-        SysUserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
+	/**
+	 * update
+	 * @param userVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:user:update')")
+	public R<String> update(@RequestBody @Valid SysUserVO vo) {
+//		if user is blank
+		if (StrUtil.isBlank(vo.getPassword())) {
+//			set user password is null
+			vo.setPassword(null);
+		} else {
+//			set user password
+			vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+		}
+//		update user
+		sysUserService.update(vo);
+//		return
+		return R.ok();
+	}
 
-        // 用户岗位列表
-        List<Long> postIdList = sysUserPostService.getPostIdList(user.getId());
-        user.setPostIdList(postIdList);
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:user:delete')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		get login user id
+		Long userId = SecurityUser.getUserId();
+//		if has now user
+		if (idList.contains(userId)) {
+//			return
+			return R.error("不能删除当前登录用户");
+		}
+//		delete
+		sysUserService.delete(idList);
+//		return
+		return R.ok();
+	}
 
-        // 用户岗位名称列表
-        List<String> postNameList = sysPostService.getNameList(postIdList);
-        user.setPostNameList(postNameList);
+	/**
+	 * get name list
+	 * @param idList
+	 * @return return
+	 */
+	@PostMapping("nameList")
+	@Operation(name = "get real name list")
+	public R<List<String>> nameList(@RequestBody List<Long> idList) {
+//		get real name list
+		List<String> list = sysUserService.getRealNameList(idList);
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok(user);
-    }
+	/**
+	 * import
+	 * @param file
+	 * @return result
+	 */
+	@PostMapping("import")
+	@Operation(name = "import excel", type = OperateType.IMPORT)
+	@PreAuthorize("hasAuthority('sys:user:import')")
+	public R<String> importExcel(@RequestParam("file") MultipartFile file) {
+//		if file is empty
+		if (file.isEmpty()) {
+//			return
+			return R.error("请选择需要上传的文件");
+		}
+//		import by excel
+		sysUserService.importByExcel(file, passwordEncoder.encode("123456"));
+//		return
+		return R.ok();
+	}
 
-    @PutMapping("info")
-    @Operation(summary = "修改登录用户信息", type = OperateType.UPDATE)
-    public R<String> loginInfo(@RequestBody @Valid SysUserBaseVO vo) {
-        sysUserService.updateLoginInfo(vo);
+	/**
+	 * export
+	 */
+	@GetMapping("export")
+	@Operation(name = "export", type = OperateType.EXPORT)
+	@PreAuthorize("hasAuthority('sys:user:export')")
+	public void export() {
+//		export
+		sysUserService.export();
+	}
 
-        return R.ok();
-    }
-
-    @PutMapping("avatar")
-    @Operation(summary = "修改登录用户头像", type = OperateType.UPDATE)
-    public R<String> avatar(@RequestBody SysUserAvatarVO avatar) {
-        sysUserService.updateAvatar(avatar);
-
-        return R.ok();
-    }
-
-    @PutMapping("password")
-    @Operation(summary = "修改密码", type = OperateType.UPDATE)
-    public R<String> password(@RequestBody @Valid SysUserPasswordVO vo) {
-        // 原密码不正确
-        UserDetail user = SecurityUser.getUser();
-        if (!passwordEncoder.matches(vo.getPassword(), user.getPassword())) {
-            return R.error("原密码不正确");
-        }
-
-        // 修改密码
-        sysUserService.updatePassword(user.getUserId(), passwordEncoder.encode(vo.getNewPassword()));
-
-        return R.ok();
-    }
-
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:user:save')")
-    public R<String> save(@RequestBody @Valid SysUserVO vo) {
-        // 新增密码不能为空
-        if (StrUtil.isBlank(vo.getPassword())) {
-            return R.error("密码不能为空");
-        }
-
-        // 密码加密
-        vo.setPassword(passwordEncoder.encode(vo.getPassword()));
-
-        // 保存
-        sysUserService.save(vo);
-
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:user:update')")
-    public R<String> update(@RequestBody @Valid SysUserVO vo) {
-        // 如果密码不为空，则进行加密处理
-        if (StrUtil.isBlank(vo.getPassword())) {
-            vo.setPassword(null);
-        } else {
-            vo.setPassword(passwordEncoder.encode(vo.getPassword()));
-        }
-
-        sysUserService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:user:delete')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        Long userId = SecurityUser.getUserId();
-        if (idList.contains(userId)) {
-            return R.error("不能删除当前登录用户");
-        }
-
-        sysUserService.delete(idList);
-
-        return R.ok();
-    }
-
-    @PostMapping("nameList")
-    @Operation(summary = "用户姓名列表")
-    public R<List<String>> nameList(@RequestBody List<Long> idList) {
-        List<String> list = sysUserService.getRealNameList(idList);
-
-        return R.ok(list);
-    }
-
-    @PostMapping("import")
-    @Operation(summary = "导入用户", type = OperateType.IMPORT)
-    @PreAuthorize("hasAuthority('sys:user:import')")
-    public R<String> importExcel(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return R.error("请选择需要上传的文件");
-        }
-        sysUserService.importByExcel(file, passwordEncoder.encode("123456"));
-
-        return R.ok();
-    }
-
-    @GetMapping("export")
-    @Operation(summary = "导出用户", type = OperateType.EXPORT)
-    @PreAuthorize("hasAuthority('sys:user:export')")
-    public void export() {
-        sysUserService.export();
-    }
 }

@@ -9,19 +9,35 @@ import com.dlshouwen.swda.auth.vo.SysThirdLoginConfigVO;
 import java.util.List;
 
 /**
- * 第三方登录配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login config convert
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysThirdLoginConfigConvert {
-    SysThirdLoginConfigConvert INSTANCE = Mappers.getMapper(SysThirdLoginConfigConvert.class);
+	
+	/** instance */
+	SysThirdLoginConfigConvert INSTANCE = Mappers.getMapper(SysThirdLoginConfigConvert.class);
 
-    SysThirdLoginConfigEntity convert(SysThirdLoginConfigVO vo);
+	/**
+	 * convert
+	 * @param thirdLoginConfigVO
+	 * @return thirdLoginConfig
+	 */
+	SysThirdLoginConfigEntity convert(SysThirdLoginConfigVO vo);
 
-    SysThirdLoginConfigVO convert(SysThirdLoginConfigEntity entity);
+	/**
+	 * convert
+	 * @param thirdLoginConfig
+	 * @return thirdLoginConfigVO
+	 */
+	SysThirdLoginConfigVO convert(SysThirdLoginConfigEntity entity);
 
-    List<SysThirdLoginConfigVO> convertList(List<SysThirdLoginConfigEntity> list);
+	/**
+	 * convert list
+	 * @param thirdLoginConfigList
+	 * @return thirdLoginConfigVOList
+	 */
+	List<SysThirdLoginConfigVO> convertList(List<SysThirdLoginConfigEntity> list);
 
 }

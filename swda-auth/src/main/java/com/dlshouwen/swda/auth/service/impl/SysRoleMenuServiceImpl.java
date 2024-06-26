@@ -14,55 +14,77 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 /**
- * 角色与菜单对应关系
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * role menu service impl
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
-public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysRoleMenuEntity> implements SysRoleMenuService {
+public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysRoleMenuEntity>
+		implements SysRoleMenuService {
 
+	/**
+	 * save or update
+	 * @param roleId
+	 * @param menuIdList
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void saveOrUpdate(Long roleId, List<Long> menuIdList) {
-		// 数据库菜单ID列表
+//		get menu id list
 		List<Long> dbMenuIdList = getMenuIdList(roleId);
-
-		// 需要新增的菜单ID
+//		get insert menu id list
 		Collection<Long> insertMenuIdList = CollUtil.subtract(menuIdList, dbMenuIdList);
-		if (CollUtil.isNotEmpty(insertMenuIdList)){
+//		if not empty
+		if (CollUtil.isNotEmpty(insertMenuIdList)) {
+//			get insert menu list
 			List<SysRoleMenuEntity> menuList = insertMenuIdList.stream().map(menuId -> {
+//				create role menu
 				SysRoleMenuEntity entity = new SysRoleMenuEntity();
+//				set menu id, role id
 				entity.setMenuId(menuId);
 				entity.setRoleId(roleId);
+//				return role menu
 				return entity;
 			}).collect(Collectors.toList());
-
-			// 批量新增
+//			batch insert
 			saveBatch(menuList);
 		}
-
-		// 需要删除的菜单ID
+//		get delete menu id list
 		Collection<Long> deleteMenuIdList = CollUtil.subtract(dbMenuIdList, menuIdList);
-		if (CollUtil.isNotEmpty(deleteMenuIdList)){
+//		if not empty
+		if (CollUtil.isNotEmpty(deleteMenuIdList)) {
+//			create query wrapper
 			LambdaQueryWrapper<SysRoleMenuEntity> queryWrapper = new LambdaQueryWrapper<>();
+//			remove menu role list
 			remove(queryWrapper.eq(SysRoleMenuEntity::getRoleId, roleId).in(SysRoleMenuEntity::getMenuId, deleteMenuIdList));
 		}
 	}
 
+	/**
+	 * get menu id list
+	 * @param roleId
+	 * @return menu id list
+	 */
 	@Override
-	public List<Long> getMenuIdList(Long roleId){
+	public List<Long> getMenuIdList(Long roleId) {
 		return baseMapper.getMenuIdList(roleId);
 	}
 
+	/**
+	 * delete by role id list
+	 * @param roleIdList
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteByRoleIdList(List<Long> roleIdList) {
 		remove(new LambdaQueryWrapper<SysRoleMenuEntity>().in(SysRoleMenuEntity::getRoleId, roleIdList));
 	}
 
+	/**
+	 * delete by menu id
+	 * @param menuId
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteByMenuId(Long menuId) {

@@ -16,49 +16,78 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 /**
- * 腾讯云存储
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * tencent storage service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class TencentStorageService extends StorageService {
-    private final COSCredentials cred;
-    private final ClientConfig clientConfig;
 
-    public TencentStorageService(StorageProperties properties) {
-        this.properties = properties;
+	/** cos credentials */
+	private final COSCredentials cred;
 
-        cred = new BasicCOSCredentials(properties.getTencent().getAccessKey(), properties.getTencent().getSecretKey());
+	/** client config */
+	private final ClientConfig clientConfig;
 
-        clientConfig = new ClientConfig(new Region(properties.getTencent().getRegion()));
-        clientConfig.setHttpProtocol(HttpProtocol.https);
-    }
+	/**
+	 * constructor
+	 * @param properties
+	 */
+	public TencentStorageService(StorageProperties properties) {
+//		set properties
+		this.properties = properties;
+//		set cos credentials
+		cred = new BasicCOSCredentials(properties.getTencent().getAccessKey(), properties.getTencent().getSecretKey());
+//		create client config
+		clientConfig = new ClientConfig(new Region(properties.getTencent().getRegion()));
+//		set http protocol
+		clientConfig.setHttpProtocol(HttpProtocol.https);
+	}
 
-    @Override
-    public String upload(byte[] data, String path) {
-        return upload(new ByteArrayInputStream(data), path);
-    }
+	/**
+	 * upload
+	 * @param data
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(byte[] data, String path) {
+		return upload(new ByteArrayInputStream(data), path);
+	}
 
-    @Override
-    public String upload(InputStream inputStream, String path) {
-        try {
-            COSClient cosClient = new COSClient(cred, clientConfig);
-
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(inputStream.available());
-
-            PutObjectRequest request = new PutObjectRequest(properties.getTencent().getBucketName(), path, inputStream, metadata);
-            PutObjectResult result = cosClient.putObject(request);
-
-            cosClient.shutdown();
-            if (result.getETag() == null) {
-                throw new SwdaException("上传文件失败，请检查配置信息");
-            }
-        } catch (Exception e) {
-            throw new SwdaException("上传文件失败：", e);
-        }
-
-        return properties.getConfig().getDomain() + "/" + path;
-    }
+	/**
+	 * uplaod
+	 * @param inputStream
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(InputStream inputStream, String path) {
+//		try catch
+		try {
+//			create cos client
+			COSClient cosClient = new COSClient(cred, clientConfig);
+//			create metadata
+			ObjectMetadata metadata = new ObjectMetadata();
+//			set content length
+			metadata.setContentLength(inputStream.available());
+//			create request
+			PutObjectRequest request = new PutObjectRequest(properties.getTencent().getBucketName(), path, inputStream,
+					metadata);
+//			do put
+			PutObjectResult result = cosClient.putObject(request);
+//			shut down
+			cosClient.shutdown();
+//			if etag is empty
+			if (result.getETag() == null) {
+//				throw exception
+				throw new SwdaException("上传文件失败，请检查配置信息");
+			}
+		} catch (Exception e) {
+//			throw exception
+			throw new SwdaException("上传文件失败：", e);
+		}
+//		return url
+		return properties.getConfig().getDomain() + "/" + path;
+	}
 
 }

@@ -16,33 +16,37 @@ import com.dlshouwen.swda.oss.service.StorageService;
 import com.dlshouwen.swda.oss.service.TencentStorageService;
 
 /**
- * 存储配置文件
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * storage configuration
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Configuration
 @EnableConfigurationProperties(StorageProperties.class)
 @ConditionalOnProperty(prefix = "storage", value = "enabled")
 public class StorageConfiguration {
 
-    @Bean
-    public StorageService storageService(StorageProperties properties) {
-        if (properties.getConfig().getType() == StorageTypeEnum.LOCAL) {
-            return new LocalStorageService(properties);
-        } else if (properties.getConfig().getType() == StorageTypeEnum.ALIYUN) {
-            return new AliyunStorageService(properties);
-        } else if (properties.getConfig().getType() == StorageTypeEnum.TENCENT) {
-            return new TencentStorageService(properties);
-        } else if (properties.getConfig().getType() == StorageTypeEnum.QINIU) {
-            return new QiniuStorageService(properties);
-        } else if (properties.getConfig().getType() == StorageTypeEnum.HUAWEI) {
-            return new HuaweiStorageService(properties);
-        } else if (properties.getConfig().getType() == StorageTypeEnum.MINIO) {
-            return new MinioStorageService(properties);
-        }
-
-        return null;
-    }
+	/**
+	 * storage service
+	 * @param properties
+	 * @return storage service
+	 */
+	@Bean
+	public StorageService storageService(StorageProperties properties) {
+//		regist storage service
+		if (properties.getConfig().getType() == StorageTypeEnum.LOCAL) {
+			return new LocalStorageService(properties);
+		} else if (properties.getConfig().getType() == StorageTypeEnum.ALIYUN) {
+			return new AliyunStorageService(properties);
+		} else if (properties.getConfig().getType() == StorageTypeEnum.TENCENT) {
+			return new TencentStorageService(properties);
+		} else if (properties.getConfig().getType() == StorageTypeEnum.QINIU) {
+			return new QiniuStorageService(properties);
+		} else if (properties.getConfig().getType() == StorageTypeEnum.HUAWEI) {
+			return new HuaweiStorageService(properties);
+		} else if (properties.getConfig().getType() == StorageTypeEnum.MINIO) {
+			return new MinioStorageService(properties);
+		}
+		return null;
+	}
 
 }

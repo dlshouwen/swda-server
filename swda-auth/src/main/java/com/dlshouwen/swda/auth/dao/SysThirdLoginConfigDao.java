@@ -6,10 +6,9 @@ import com.dlshouwen.swda.auth.entity.SysThirdLoginConfigEntity;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * 第三方登录配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login config mapper
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysThirdLoginConfigDao extends BaseMapper<SysThirdLoginConfigEntity> {

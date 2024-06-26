@@ -8,25 +8,26 @@ import com.dlshouwen.swda.auth.vo.SysMenuVO;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.service.BaseService;
 
-
 /**
- * 菜单管理
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * menu service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysMenuService extends BaseService<SysMenuEntity> {
 
 	/**
-	 * 用户菜单列表
-	 *
-	 * @param user  用户
-	 * @param type 菜单类型
+	 * get user menu list
+	 * @param user
+	 * @param type
+	 * @return menu list
 	 */
 	List<SysMenuVO> getUserMenuList(UserDetail user, Integer type);
 
 	/**
-	 * 获取用户权限列表
+	 * get user authority
+	 * @param userDetail
+	 * @return user authority set
 	 */
 	Set<String> getUserAuthority(UserDetail user);
+	
 }

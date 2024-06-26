@@ -1,34 +1,22 @@
 package com.dlshouwen.swda.oss.enums;
 
 /**
- * 存储类型枚举
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * storage type enum
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public enum StorageTypeEnum {
-    /**
-     * 本地
-     */
-    LOCAL,
-    /**
-     * 阿里云
-     */
-    ALIYUN,
-    /**
-     * 腾讯云
-     */
-    TENCENT,
-    /**
-     * 七牛云
-     */
-    QINIU,
-    /**
-     * 华为云
-     */
-    HUAWEI,
-    /**
-     * Minio
-     */
-    MINIO;
+
+	LOCAL,
+
+	ALIYUN,
+
+	TENCENT,
+
+	QINIU,
+
+	HUAWEI,
+
+	MINIO;
+
 }

@@ -13,47 +13,48 @@ import org.hibernate.validator.constraints.Range;
 import java.time.LocalDateTime;
 
 /**
- * 菜单管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * menu vo
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "菜单")
+@Schema(description = "menu")
 public class SysMenuVO extends TreeNode<SysMenuVO> {
 
-    private static final long serialVersionUID = 1L;
+	/** serial version uid */
+	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "菜单名称")
-    @NotBlank(message = "菜单名称不能为空")
-    private String name;
+	@NotBlank(message = "菜单名称不能为空")
+	private String name;
 
-    @Schema(description = "菜单URL")
-    private String url;
+	@Schema(description = "菜单URL")
+	private String url;
 
-    @Schema(description = "类型  0：菜单   1：按钮   2：接口")
-    @Range(min = 0, max = 2, message = "类型不正确")
-    private Integer type;
+	@Schema(description = "类型  0：菜单   1：按钮   2：接口")
+	@Range(min = 0, max = 2, message = "类型不正确")
+	private Integer type;
 
-    @Schema(description = "打开方式   0：内部   1：外部")
-    @Range(min = 0, max = 1, message = "打开方式不正确")
-    private Integer openStyle;
+	@Schema(description = "打开方式   0：内部   1：外部")
+	@Range(min = 0, max = 1, message = "打开方式不正确")
+	private Integer openStyle;
 
-    @Schema(description = "菜单图标")
-    private String icon;
+	@Schema(description = "菜单图标")
+	private String icon;
 
-    @Schema(description = "授权标识(多个用逗号分隔，如：sys:menu:list,sys:menu:save)")
-    private String authority;
+	@Schema(description = "授权标识(多个用逗号分隔，如：sys:menu:list,sys:menu:save)")
+	private String authority;
 
-    @Schema(description = "排序")
-    @Min(value = 0, message = "排序值不能小于0")
-    private Integer sort;
+	@Schema(description = "排序")
+	@Min(value = 0, message = "排序值不能小于0")
+	private Integer sort;
 
-    @Schema(description = "创建时间")
-    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private LocalDateTime createTime;
+	@Schema(description = "创建时间")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime createTime;
 
-    @Schema(description = "上级菜单名称")
-    private String parentName;
+	@Schema(description = "上级菜单名称")
+	private String parentName;
+
 }

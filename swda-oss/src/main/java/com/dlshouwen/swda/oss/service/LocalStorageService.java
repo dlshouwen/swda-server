@@ -12,40 +12,59 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 /**
- * 本地存储
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * local storage service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class LocalStorageService extends StorageService {
 
-    public LocalStorageService(StorageProperties properties) {
-        this.properties = properties;
-    }
+	/**
+	 * constructor
+	 * @param properties
+	 */
+	public LocalStorageService(StorageProperties properties) {
+//		set properties
+		this.properties = properties;
+	}
 
-    @Override
-    public String upload(byte[] data, String path) {
-        return upload(new ByteArrayInputStream(data), path);
-    }
+	/**
+	 * upload
+	 * @param data
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(byte[] data, String path) {
+		return upload(new ByteArrayInputStream(data), path);
+	}
 
+	/**
+	 * upload
+	 * @param inputStream
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(InputStream inputStream, String path) {
+//		try catch
+		try {
+//			create file
+			File file = new File(properties.getLocal().getPath() + File.separator + path);
+//			get folder
+			File folder = file.getParentFile();
+//			if folder is file
+			if (folder != null && !folder.mkdirs() && !folder.isDirectory()) {
+//				throw exception
+				throw new IOException("目录 '" + folder + "' 创建失败");
+			}
+//			copy file
+			FileCopyUtils.copy(inputStream, Files.newOutputStream(file.toPath()));
+		} catch (Exception e) {
+//			throw exception
+			throw new SwdaException("上传文件失败：", e);
+		}
+//		return url
+		return properties.getConfig().getDomain() + "/" + properties.getLocal().getUrl() + "/" + path;
+	}
 
-    @Override
-    public String upload(InputStream inputStream, String path) {
-
-        try {
-            File file = new File(properties.getLocal().getPath() + File.separator + path);
-
-            // 没有目录，则自动创建目录
-            File parent = file.getParentFile();
-            if (parent != null && !parent.mkdirs() && !parent.isDirectory()) {
-                throw new IOException("目录 '" + parent + "' 创建失败");
-            }
-
-            FileCopyUtils.copy(inputStream, Files.newOutputStream(file.toPath()));
-        } catch (Exception e) {
-            throw new SwdaException("上传文件失败：", e);
-        }
-
-        return properties.getConfig().getDomain() + "/" + properties.getLocal().getUrl() + "/" + path;
-    }
 }

@@ -26,139 +26,216 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 角色管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * role
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/role")
-@Tag(name = "角色管理")
+@Tag(name = "role")
 @AllArgsConstructor
 public class SysRoleController {
-    private final SysRoleService sysRoleService;
-    private final SysUserService sysUserService;
-    private final SysRoleMenuService sysRoleMenuService;
-    private final SysRoleDataScopeService sysRoleDataScopeService;
-    private final SysMenuService sysMenuService;
-    private final SysUserRoleService sysUserRoleService;
+	
+	/** role service */
+	private final SysRoleService sysRoleService;
+	/** user service */
+	private final SysUserService sysUserService;
+	/** role menu service */
+	private final SysRoleMenuService sysRoleMenuService;
+	/** role data scope service */
+	private final SysRoleDataScopeService sysRoleDataScopeService;
+	/** menu service */
+	private final SysMenuService sysMenuService;
+	/** user role service */
+	private final SysUserRoleService sysUserRoleService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:role:page')")
-    public R<PageResult<SysRoleVO>> page(@ParameterObject @Valid SysRoleQuery query) {
-        PageResult<SysRoleVO> page = sysRoleService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:role:page')")
+	public R<PageResult<SysRoleVO>> page(@ParameterObject @Valid SysRoleQuery query) {
+//		page
+		PageResult<SysRoleVO> page = sysRoleService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * list
+	 * @return result
+	 */
+	@GetMapping("list")
+	@Operation(name = "list")
+	@PreAuthorize("hasAuthority('sys:role:list')")
+	public R<List<SysRoleVO>> list() {
+//		get list
+		List<SysRoleVO> list = sysRoleService.getList(new SysRoleQuery());
+//		result
+		return R.ok(list);
+	}
 
-    @GetMapping("list")
-    @Operation(summary = "列表")
-    @PreAuthorize("hasAuthority('sys:role:list')")
-    public R<List<SysRoleVO>> list() {
-        List<SysRoleVO> list = sysRoleService.getList(new SysRoleQuery());
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "信息")
+	@PreAuthorize("hasAuthority('sys:role:info')")
+	public R<SysRoleVO> get(@PathVariable("id") Long id) {
+//		get role by id
+		SysRoleEntity entity = sysRoleService.getById(id);
+//		convert to role vo
+		SysRoleVO role = SysRoleConvert.INSTANCE.convert(entity);
+//		get menu id list set to role
+		List<Long> menuIdList = sysRoleMenuService.getMenuIdList(id);
+		role.setMenuIdList(menuIdList);
+//		get organ id list set to role
+		List<Long> orgIdList = sysRoleDataScopeService.getOrgIdList(id);
+		role.setOrgIdList(orgIdList);
+//		return
+		return R.ok(role);
+	}
 
-        return R.ok(list);
-    }
+	/**
+	 * save
+	 * @param roleVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:role:save')")
+	public R<String> save(@RequestBody @Valid SysRoleVO vo) {
+//		save
+		sysRoleService.save(vo);
+//		return
+		return R.ok();
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:role:info')")
-    public R<SysRoleVO> get(@PathVariable("id") Long id) {
-        SysRoleEntity entity = sysRoleService.getById(id);
+	/**
+	 * update
+	 * @param roleVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:role:update')")
+	public R<String> update(@RequestBody @Valid SysRoleVO vo) {
+//		update
+		sysRoleService.update(vo);
+//		return
+		return R.ok();
+	}
 
-        // 转换对象
-        SysRoleVO role = SysRoleConvert.INSTANCE.convert(entity);
+	/**
+	 * data scope
+	 * @param vo
+	 * @return
+	 */
+	@PutMapping("data-scope")
+	@Operation(name = "data scope", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:role:update')")
+	public R<String> dataScope(@RequestBody @Valid SysRoleDataScopeVO vo) {
+//		data scope
+		sysRoleService.dataScope(vo);
+//		return
+		return R.ok();
+	}
 
-        // 查询角色对应的菜单
-        List<Long> menuIdList = sysRoleMenuService.getMenuIdList(id);
-        role.setMenuIdList(menuIdList);
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:role:delete')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		delete
+		sysRoleService.delete(idList);
+//		return
+		return R.ok();
+	}
 
-        // 查询角色对应的数据权限
-        List<Long> orgIdList = sysRoleDataScopeService.getOrgIdList(id);
-        role.setOrgIdList(orgIdList);
+	/**
+	 * menu
+	 * @return result
+	 */
+	@GetMapping("menu")
+	@Operation(name = "menu")
+	@PreAuthorize("hasAuthority('sys:role:menu')")
+	public R<List<SysMenuVO>> menu() {
+//		get login user
+		UserDetail user = SecurityUser.getUser();
+//		get user menu list
+		List<SysMenuVO> list = sysMenuService.getUserMenuList(user, null);
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok(role);
-    }
+	/**
+	 * user page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("user/page")
+	@Operation(name = "user page")
+	@PreAuthorize("hasAuthority('sys:role:update')")
+	public R<PageResult<SysUserVO>> userPage(@Valid SysRoleUserQuery query) {
+//		role user page
+		PageResult<SysUserVO> page = sysUserService.roleUserPage(query);
+//		return
+		return R.ok(page);
+	}
 
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:role:save')")
-    public R<String> save(@RequestBody @Valid SysRoleVO vo) {
-        sysRoleService.save(vo);
+	/**
+	 * user delete
+	 * @param roleId
+	 * @param userIdList
+	 * @return result
+	 */
+	@DeleteMapping("user/{roleId}")
+	@Operation(name = "delete role user", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:role:update')")
+	public R<String> userDelete(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {
+//		delete role user
+		sysUserRoleService.deleteByUserIdList(roleId, userIdList);
+//		return
+		return R.ok();
+	}
 
-        return R.ok();
-    }
+	/**
+	 * user save
+	 * @param roleId
+	 * @param userIdList
+	 * @return result
+	 */
+	@PostMapping("user/{roleId}")
+	@Operation(name = "user save", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:role:update')")
+	public R<String> userSave(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {
+//		save role user
+		sysUserRoleService.saveUserList(roleId, userIdList);
+//		return
+		return R.ok();
+	}
 
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:role:update')")
-    public R<String> update(@RequestBody @Valid SysRoleVO vo) {
-        sysRoleService.update(vo);
+	/**
+	 * get name list
+	 * @param idList
+	 * @return result
+	 */
+	@PostMapping("nameList")
+	@Operation(name = "get name list")
+	public R<List<String>> nameList(@RequestBody List<Long> idList) {
+//		get name list
+		List<String> list = sysRoleService.getNameList(idList);
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok();
-    }
-
-    @PutMapping("data-scope")
-    @Operation(summary = "数据权限", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:role:update')")
-    public R<String> dataScope(@RequestBody @Valid SysRoleDataScopeVO vo) {
-        sysRoleService.dataScope(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:role:delete')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        sysRoleService.delete(idList);
-
-        return R.ok();
-    }
-
-    @GetMapping("menu")
-    @Operation(summary = "角色菜单")
-    @PreAuthorize("hasAuthority('sys:role:menu')")
-    public R<List<SysMenuVO>> menu() {
-        UserDetail user = SecurityUser.getUser();
-        List<SysMenuVO> list = sysMenuService.getUserMenuList(user, null);
-
-        return R.ok(list);
-    }
-
-    @GetMapping("user/page")
-    @Operation(summary = "角色用户-分页")
-    @PreAuthorize("hasAuthority('sys:role:update')")
-    public R<PageResult<SysUserVO>> userPage(@Valid SysRoleUserQuery query) {
-        PageResult<SysUserVO> page = sysUserService.roleUserPage(query);
-
-        return R.ok(page);
-    }
-
-    @DeleteMapping("user/{roleId}")
-    @Operation(summary = "删除角色用户", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:role:update')")
-    public R<String> userDelete(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {
-        sysUserRoleService.deleteByUserIdList(roleId, userIdList);
-
-        return R.ok();
-    }
-
-    @PostMapping("user/{roleId}")
-    @Operation(summary = "分配角色给用户列表", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:role:update')")
-    public R<String> userSave(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {
-        sysUserRoleService.saveUserList(roleId, userIdList);
-
-        return R.ok();
-    }
-
-    @PostMapping("nameList")
-    @Operation(summary = "名称列表")
-    public R<List<String>> nameList(@RequestBody List<Long> idList) {
-        List<String> list = sysRoleService.getNameList(idList);
-
-        return R.ok(list);
-    }
 }

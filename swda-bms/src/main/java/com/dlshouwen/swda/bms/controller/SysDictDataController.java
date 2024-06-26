@@ -20,60 +20,92 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 字典数据
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * dict
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/dict/data")
-@Tag(name = "字典数据")
+@Tag(name = "dict")
 @AllArgsConstructor
 public class SysDictDataController {
-    private final SysDictDataService sysDictDataService;
+	
+	/** dict data service */
+	private final SysDictDataService sysDictDataService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:dict:page')")
-    public R<PageResult<SysDictDataVO>> page(@ParameterObject @Valid SysDictDataQuery query) {
-        PageResult<SysDictDataVO> page = sysDictDataService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:dict:page')")
+	public R<PageResult<SysDictDataVO>> page(@ParameterObject @Valid SysDictDataQuery query) {
+//		page
+		PageResult<SysDictDataVO> page = sysDictDataService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "data")
+	@PreAuthorize("hasAuthority('sys:dict:info')")
+	public R<SysDictDataVO> get(@PathVariable("id") Long id) {
+//		get dict
+		SysDictDataEntity entity = sysDictDataService.getById(id);
+//		return
+		return R.ok(SysDictDataConvert.INSTANCE.convert(entity));
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:dict:info')")
-    public R<SysDictDataVO> get(@PathVariable("id") Long id) {
-        SysDictDataEntity entity = sysDictDataService.getById(id);
+	/**
+	 * save
+	 * @param dictVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:dict:save')")
+	public R<String> save(@RequestBody @Valid SysDictDataVO vo) {
+//		save
+		sysDictDataService.save(vo);
+//		return
+		return R.ok();
+	}
 
-        return R.ok(SysDictDataConvert.INSTANCE.convert(entity));
-    }
+	/**
+	 * update
+	 * @param dictVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:dict:update')")
+	public R<String> update(@RequestBody @Valid SysDictDataVO vo) {
+//		update
+		sysDictDataService.update(vo);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:dict:save')")
-    public R<String> save(@RequestBody @Valid SysDictDataVO vo) {
-        sysDictDataService.save(vo);
-
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:dict:update')")
-    public R<String> update(@RequestBody @Valid SysDictDataVO vo) {
-        sysDictDataService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:dict:delete')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        sysDictDataService.delete(idList);
-        return R.ok();
-    }
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:dict:delete')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		delete
+		sysDictDataService.delete(idList);
+//		return
+		return R.ok();
+	}
 
 }

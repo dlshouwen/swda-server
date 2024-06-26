@@ -3,15 +3,19 @@ package com.dlshouwen.swda.oss.properties;
 import lombok.Data;
 
 /**
- * 阿里云存储配置项
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * aliyun storage properties
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 public class AliyunStorageProperties {
-    private String endPoint;
-    private String accessKeyId;
-    private String accessKeySecret;
-    private String bucketName;
+
+	private String endPoint;
+
+	private String accessKeyId;
+
+	private String accessKeySecret;
+
+	private String bucketName;
+
 }

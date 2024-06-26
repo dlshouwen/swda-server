@@ -26,70 +26,107 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 第三方账号登录
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/third")
-@Tag(name = "第三方账号")
+@Tag(name = "third login")
 @AllArgsConstructor
 public class SysThirdLoginController {
-    private final SysThirdLoginService sysThirdLoginService;
-    private final SysThirdLoginConfigService sysThirdLoginConfigService;
+	
+	/** third login service */
+	private final SysThirdLoginService sysThirdLoginService;
+	
+	/** third login config service */
+	private final SysThirdLoginConfigService sysThirdLoginConfigService;
 
-    @GetMapping("list")
-    @Operation(summary = "列表")
-    public R<List<SysThirdLoginVO>> list() {
-        List<SysThirdLoginVO> list = sysThirdLoginService.listByUserId(SecurityUser.getUserId());
+	/**
+	 * list
+	 * @return result
+	 */
+	@GetMapping("list")
+	@Operation(name = "list")
+	public R<List<SysThirdLoginVO>> list() {
+//		list by user id
+		List<SysThirdLoginVO> list = sysThirdLoginService.listByUserId(SecurityUser.getUserId());
+//		return
+		return R.ok(list);
+	}
 
-        return R.ok(list);
-    }
+	/**
+	 * render auth
+	 * @param source
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping("render/{source}")
+	public void renderAuth(@PathVariable("source") String source, HttpServletResponse response) throws IOException {
+//		get auth request
+		AuthRequest authRequest = sysThirdLoginConfigService.getAuthRequest(source);
+//		get authorize url
+		String authorizeUrl = authRequest.authorize(AuthStateUtils.createState());
+//		redirect
+		response.sendRedirect(authorizeUrl);
+	}
 
-    @RequestMapping("render/{source}")
-    public void renderAuth(@PathVariable("source") String source, HttpServletResponse response) throws IOException {
-        AuthRequest authRequest = sysThirdLoginConfigService.getAuthRequest(source);
-        String authorizeUrl = authRequest.authorize(AuthStateUtils.createState());
-        response.sendRedirect(authorizeUrl);
-    }
+	/**
+	 * login
+	 * @param source
+	 * @param callback
+	 * @return result
+	 */
+	@RequestMapping("/callback/{source}")
+	public ModelAndView login(@PathVariable("source") String source, AuthCallback callback) {
+//		create info
+		Map<String, Object> map = new HashMap<>();
+//		set open type, state, code
+		map.put("openType", source);
+		map.put("state", callback.getState());
+		map.put("code", callback.getCode());
+//		return model and view
+		return new ModelAndView("third_login", map);
+	}
 
-    @RequestMapping("/callback/{source}")
-    public ModelAndView login(@PathVariable("source") String source, AuthCallback callback) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("openType", source);
-        map.put("state", callback.getState());
-        map.put("code", callback.getCode());
-
-        return new ModelAndView("third_login", map);
-    }
-
-    @SuppressWarnings("unchecked")
+	/**
+	 * bind
+	 * @param thirdCallbackVO
+	 * @return result
+	 */
+	@SuppressWarnings("unchecked")
 	@PostMapping("bind")
-    @Operation(summary = "绑定", type = OperateType.INSERT)
-    public R<String> bind(@RequestBody SysThirdCallbackVO vo) {
-        AuthRequest authRequest = sysThirdLoginConfigService.getAuthRequest(vo.getOpenType());
-        AuthCallback callback = AuthCallback.builder().code(vo.getCode()).state(vo.getState()).build();
+	@Operation(name = "bind", type = OperateType.INSERT)
+	public R<String> bind(@RequestBody SysThirdCallbackVO vo) {
+//		get auth request
+		AuthRequest authRequest = sysThirdLoginConfigService.getAuthRequest(vo.getOpenType());
+//		get auth callback
+		AuthCallback callback = AuthCallback.builder().code(vo.getCode()).state(vo.getState()).build();
+//		do login
+		AuthResponse<AuthUser> response = authRequest.login(callback);
+//		if login not success
+		if (!response.ok()) {
+//			throw exception
+			throw new RuntimeException("第三方登录失败");
+		}
+//		bind user
+		sysThirdLoginService.bind(SecurityUser.getUserId(), vo.getOpenType(), response.getData());
+//		return
+		return R.ok();
+	}
 
-        // 根据code，获取用户信息
-        AuthResponse<AuthUser> response = authRequest.login(callback);
+	/**
+	 * unbind
+	 * @param openType
+	 * @return result
+	 */
+	@PutMapping("unbind/{openType}")
+	@Operation(name = "unbind", type = OperateType.UPDATE)
+	public R<String> unBind(@PathVariable("openType") String openType) {
+//		unbind
+		sysThirdLoginService.unBind(SecurityUser.getUserId(), openType);
+//		return
+		return R.ok();
+	}
 
-        // 判断是否成功
-        if (!response.ok()) {
-            throw new RuntimeException("第三方登录失败");
-        }
-
-        // 绑定用户信息
-        sysThirdLoginService.bind(SecurityUser.getUserId(), vo.getOpenType(), response.getData());
-
-        return R.ok();
-    }
-
-    @PutMapping("unbind/{openType}")
-    @Operation(summary = "解绑", type = OperateType.UPDATE)
-    public R<String> unBind(@PathVariable("openType") String openType) {
-        sysThirdLoginService.unBind(SecurityUser.getUserId(), openType);
-
-        return R.ok();
-    }
 }

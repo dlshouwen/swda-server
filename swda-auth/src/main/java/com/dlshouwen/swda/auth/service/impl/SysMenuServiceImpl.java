@@ -21,49 +21,63 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 菜单管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * menu service impl
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
 
-    @Override
-    public List<SysMenuVO> getUserMenuList(UserDetail user, Integer type) {
-        List<SysMenuEntity> menuList;
+	/**
+	 * get user menu list
+	 * @param userDetail
+	 * @param type
+	 * @return menu vo list
+	 */
+	@Override
+	public List<SysMenuVO> getUserMenuList(UserDetail user, Integer type) {
+//		defined menu list
+		List<SysMenuEntity> menuList;
+//		if super admin
+		if (user.getSuperAdmin().equals(SuperAdminEnum.YES.getValue())) {
+//			get all menu list
+			menuList = baseMapper.getMenuList(type);
+		} else {
+//			get user menu list
+			menuList = baseMapper.getUserMenuList(user.getUserId(), type);
+		}
+//		build menu list
+		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
+	}
 
-        // 系统管理员，拥有最高权限
-        if (user.getSuperAdmin().equals(SuperAdminEnum.YES.getValue())) {
-            menuList = baseMapper.getMenuList(type);
-        } else {
-            menuList = baseMapper.getUserMenuList(user.getUserId(), type);
-        }
-
-        return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
-    }
-
-    @Override
-    public Set<String> getUserAuthority(UserDetail user) {
-        // 系统管理员，拥有最高权限
-        List<String> authorityList;
-        if (user.getSuperAdmin().equals(SuperAdminEnum.YES.getValue())) {
-            authorityList = baseMapper.getAuthorityList();
-        } else {
-            authorityList = baseMapper.getUserAuthorityList(user.getUserId());
-        }
-
-        // 用户权限列表
-        Set<String> permsSet = new HashSet<>();
-        for (String authority : authorityList) {
-            if (StrUtil.isBlank(authority)) {
-                continue;
-            }
-            permsSet.addAll(Arrays.asList(authority.trim().split(",")));
-        }
-
-        return permsSet;
-    }
+	/**
+	 * get user authority
+	 * @param userDetail
+	 * @return authority list
+	 */
+	@Override
+	public Set<String> getUserAuthority(UserDetail user) {
+//		defined authority list
+		List<String> authorityList;
+//		if super admin
+		if (user.getSuperAdmin().equals(SuperAdminEnum.YES.getValue())) {
+//			get all authority list
+			authorityList = baseMapper.getAuthorityList();
+		} else {
+//			get user authority list
+			authorityList = baseMapper.getUserAuthorityList(user.getUserId());
+		}
+//		convert to permission set
+		Set<String> permsSet = new HashSet<>();
+		for (String authority : authorityList) {
+			if (StrUtil.isBlank(authority)) {
+				continue;
+			}
+			permsSet.addAll(Arrays.asList(authority.trim().split(",")));
+		}
+//		return permission set
+		return permsSet;
+	}
 
 }

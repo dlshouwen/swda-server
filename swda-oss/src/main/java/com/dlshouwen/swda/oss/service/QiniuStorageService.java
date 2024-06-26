@@ -13,46 +13,71 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * 七牛云存储
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * qiniu storage service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class QiniuStorageService extends StorageService {
-    private final UploadManager uploadManager;
+	
+	/** upload manager */
+	private final UploadManager uploadManager;
 
-    public QiniuStorageService(StorageProperties properties) {
-        this.properties = properties;
+	/**
+	 * constructor
+	 * @param properties
+	 */
+	public QiniuStorageService(StorageProperties properties) {
+//		set properties
+		this.properties = properties;
+//		create upload manager
+		uploadManager = new UploadManager(new Configuration(Region.autoRegion()));
+	}
 
-        uploadManager = new UploadManager(new Configuration(Region.autoRegion()));
+	/**
+	 * upload
+	 * @param data
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(byte[] data, String path) {
+//		try catch
+		try {
+//			get token
+			String token = Auth.create(properties.getQiniu().getAccessKey(), properties.getQiniu().getSecretKey()).uploadToken(properties.getQiniu().getBucketName());
+//			do put
+			Response res = uploadManager.put(data, path, token);
+//			if not success
+			if (!res.isOK()) {
+//				throw exception
+				throw new SwdaException(res.toString());
+			}
+//			return url
+			return properties.getConfig().getDomain() + "/" + path;
+		} catch (Exception e) {
+//			throw exception
+			throw new SwdaException("上传文件失败：", e);
+		}
+	}
 
-    }
-
-    @Override
-    public String upload(byte[] data, String path) {
-        try {
-            String token = Auth.create(properties.getQiniu().getAccessKey(), properties.getQiniu().getSecretKey()).
-                    uploadToken(properties.getQiniu().getBucketName());
-
-            Response res = uploadManager.put(data, path, token);
-            if (!res.isOK()) {
-                throw new SwdaException(res.toString());
-            }
-
-            return properties.getConfig().getDomain() + "/" + path;
-        } catch (Exception e) {
-            throw new SwdaException("上传文件失败：", e);
-        }
-    }
-
-    @Override
-    public String upload(InputStream inputStream, String path) {
-        try {
-            byte[] data = IOUtils.toByteArray(inputStream);
-            return this.upload(data, path);
-        } catch (IOException e) {
-            throw new SwdaException("上传文件失败：", e);
-        }
-    }
+	/**
+	 * upload
+	 * @param inputSream
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(InputStream inputStream, String path) {
+//		try catch
+		try {
+//			convert input stream to byte array
+			byte[] data = IOUtils.toByteArray(inputStream);
+//			upload
+			return this.upload(data, path);
+		} catch (IOException e) {
+//			throw exception
+			throw new SwdaException("上传文件失败：", e);
+		}
+	}
 
 }

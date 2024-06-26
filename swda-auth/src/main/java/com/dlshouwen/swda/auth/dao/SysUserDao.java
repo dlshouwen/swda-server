@@ -11,25 +11,50 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 系统用户
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * user mapper
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysUserDao extends BaseMapper<SysUserEntity> {
 
-    List<SysUserEntity> getList(Map<String, Object> params);
+	/**
+	 * get user list
+	 * @param params
+	 * @return user list
+	 */
+	List<SysUserEntity> getList(Map<String, Object> params);
 
-    SysUserEntity getById(@Param("id") Long id);
+	/**
+	 * get user by user id
+	 * @param userId
+	 * @return user
+	 */
+	SysUserEntity getById(@Param("id") Long id);
 
-    List<SysUserEntity> getRoleUserList(Map<String, Object> params);
+	/**
+	 * get role user list
+	 * @param params
+	 * @return role user list
+	 */
+	List<SysUserEntity> getRoleUserList(Map<String, Object> params);
 
-    default SysUserEntity getByUsername(String username) {
-        return this.selectOne(new QueryWrapper<SysUserEntity>().eq("username", username));
-    }
+	/**
+	 * get by user name
+	 * @param username
+	 * @return user
+	 */
+	default SysUserEntity getByUsername(String username) {
+		return this.selectOne(new QueryWrapper<SysUserEntity>().eq("username", username));
+	}
 
-    default SysUserEntity getByMobile(String mobile) {
-        return this.selectOne(new QueryWrapper<SysUserEntity>().eq("mobile", mobile));
-    }
+	/**
+	 * get by mobile
+	 * @param mobile
+	 * @return user
+	 */
+	default SysUserEntity getByMobile(String mobile) {
+		return this.selectOne(new QueryWrapper<SysUserEntity>().eq("mobile", mobile));
+	}
+
 }

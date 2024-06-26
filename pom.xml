@@ -135,7 +135,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-			<!-- swda common -->
+			<!-- swda core -->
 			<dependency>
 			    <groupId>com.dlshouwen</groupId>
 			    <artifactId>swda-core</artifactId>

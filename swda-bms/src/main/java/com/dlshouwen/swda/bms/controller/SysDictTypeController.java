@@ -21,89 +21,134 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 字典类型
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * dict type
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/dict/type")
-@Tag(name = "字典类型")
+@Tag(name = "dict type")
 @AllArgsConstructor
 public class SysDictTypeController {
-    private final SysDictTypeService sysDictTypeService;
+	private final SysDictTypeService sysDictTypeService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:dict:page')")
-    public R<PageResult<SysDictTypeVO>> page(@ParameterObject @Valid SysDictTypeQuery query) {
-        PageResult<SysDictTypeVO> page = sysDictTypeService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('sys:dict:page')")
+	public R<PageResult<SysDictTypeVO>> page(@ParameterObject @Valid SysDictTypeQuery query) {
+//		page
+		PageResult<SysDictTypeVO> page = sysDictTypeService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * list sql
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("list/sql")
+	@Operation(name = "list sql")
+	@PreAuthorize("hasAuthority('sys:dict:page')")
+	public R<PageResult<SysDictVO.DictData>> listSql(Long id) {
+//		get dict sql
+		List<SysDictVO.DictData> list = sysDictTypeService.getDictSql(id);
+//		page
+		PageResult<SysDictVO.DictData> page = new PageResult<>(list, list.size());
+//		return
+		return R.ok(page);
+	}
 
-    @GetMapping("list/sql")
-    @Operation(summary = "动态SQL数据")
-    @PreAuthorize("hasAuthority('sys:dict:page')")
-    public R<PageResult<SysDictVO.DictData>> listSql(Long id) {
-        List<SysDictVO.DictData> list = sysDictTypeService.getDictSql(id);
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "get")
+	@PreAuthorize("hasAuthority('sys:dict:info')")
+	public R<SysDictTypeVO> get(@PathVariable("id") Long id) {
+//		get dict type
+		SysDictTypeEntity entity = sysDictTypeService.getById(id);
+//		return
+		return R.ok(SysDictTypeConvert.INSTANCE.convert(entity));
+	}
 
-        PageResult<SysDictVO.DictData> page = new PageResult<>(list, list.size());
+	/**
+	 * save
+	 * @param dictTypeVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('sys:dict:save')")
+	public R<String> save(@RequestBody @Valid SysDictTypeVO vo) {
+//		save
+		sysDictTypeService.save(vo);
+//		return
+		return R.ok();
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * update
+	 * @param dictTypeVO
+	 * @return
+	 */
+	@PutMapping
+	@Operation(name = "update", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('sys:dict:update')")
+	public R<String> update(@RequestBody @Valid SysDictTypeVO vo) {
+//		update
+		sysDictTypeService.update(vo);
+//		return
+		return R.ok();
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:dict:info')")
-    public R<SysDictTypeVO> get(@PathVariable("id") Long id) {
-        SysDictTypeEntity entity = sysDictTypeService.getById(id);
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('sys:dict:delete')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		delete
+		sysDictTypeService.delete(idList);
+//		result
+		return R.ok();
+	}
 
-        return R.ok(SysDictTypeConvert.INSTANCE.convert(entity));
-    }
+	/**
+	 * all
+	 * @return result
+	 */
+	@GetMapping("all")
+	@Operation(name = "all dict")
+	public R<List<SysDictVO>> all() {
+//		get dict list
+		List<SysDictVO> dictList = sysDictTypeService.getDictList();
+//		result
+		return R.ok(dictList);
+	}
 
-    @PostMapping
-    @Operation(summary = "保存", type = OperateType.INSERT)
-    @PreAuthorize("hasAuthority('sys:dict:save')")
-    public R<String> save(@RequestBody @Valid SysDictTypeVO vo) {
-        sysDictTypeService.save(vo);
-
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改", type = OperateType.UPDATE)
-    @PreAuthorize("hasAuthority('sys:dict:update')")
-    public R<String> update(@RequestBody @Valid SysDictTypeVO vo) {
-        sysDictTypeService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除", type = OperateType.DELETE)
-    @PreAuthorize("hasAuthority('sys:dict:delete')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        sysDictTypeService.delete(idList);
-
-        return R.ok();
-    }
-
-    @GetMapping("all")
-    @Operation(summary = "全部字典数据")
-    public R<List<SysDictVO>> all() {
-        List<SysDictVO> dictList = sysDictTypeService.getDictList();
-
-        return R.ok(dictList);
-    }
-
-    @GetMapping("refreshTransCache")
-    @Operation(summary = "刷新字典翻译缓存数据")
-    @PreAuthorize("hasAuthority('sys:dict:refreshTransCache')")
-    public R<String> refreshTransCache() {
-        sysDictTypeService.refreshTransCache();
-        return R.ok();
-    }
-
+	/**
+	 * refresh trans cache
+	 * @return result
+	 */
+	@GetMapping("refreshTransCache")
+	@Operation(name = "refresh trans cache")
+	@PreAuthorize("hasAuthority('sys:dict:refreshTransCache')")
+	public R<String> refreshTransCache() {
+//		refresh trans cache
+		sysDictTypeService.refreshTransCache();
+//		result
+		return R.ok();
+	}
 
 }

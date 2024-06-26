@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.bms.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -8,6 +7,7 @@ import com.dlshouwen.swda.bms.convert.SysThirdLoginConfigConvert;
 import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
 import com.dlshouwen.swda.bms.vo.SysThirdLoginConfigVO;
+import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.query.Query;
@@ -19,60 +19,92 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 第三方登录配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * third login config
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("sys/third/config")
-@Tag(name = "第三方登录配置")
+@Tag(name = "third login config")
 @AllArgsConstructor
 public class SysThirdLoginConfigController {
-    private final SysThirdLoginConfigService sysThirdLoginConfigService;
+	
+	/** third login config service */
+	private final SysThirdLoginConfigService sysThirdLoginConfigService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('third:config:all')")
-    public R<PageResult<SysThirdLoginConfigVO>> page(@ParameterObject @Valid Query query) {
-        PageResult<SysThirdLoginConfigVO> page = sysThirdLoginConfigService.page(query);
+	/**
+	 * page
+	 * @param query
+	 * @return result
+	 */
+	@GetMapping("page")
+	@Operation(name = "page")
+	@PreAuthorize("hasAuthority('third:config:all')")
+	public R<PageResult<SysThirdLoginConfigVO>> page(@ParameterObject @Valid Query query) {
+//		page
+		PageResult<SysThirdLoginConfigVO> page = sysThirdLoginConfigService.page(query);
+//		return
+		return R.ok(page);
+	}
 
-        return R.ok(page);
-    }
+	/**
+	 * get
+	 * @param id
+	 * @return result
+	 */
+	@GetMapping("{id}")
+	@Operation(name = "get")
+	@PreAuthorize("hasAuthority('third:config:all')")
+	public R<SysThirdLoginConfigVO> get(@PathVariable("id") Long id) {
+//		get third login config
+		SysThirdLoginConfigEntity entity = sysThirdLoginConfigService.getById(id);
+//		result
+		return R.ok(SysThirdLoginConfigConvert.INSTANCE.convert(entity));
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('third:config:all')")
-    public R<SysThirdLoginConfigVO> get(@PathVariable("id") Long id) {
-        SysThirdLoginConfigEntity entity = sysThirdLoginConfigService.getById(id);
+	/**
+	 * save
+	 * @param thirdLoginConfigVO
+	 * @return result
+	 */
+	@PostMapping
+	@Operation(name = "save")
+	@PreAuthorize("hasAuthority('third:config:all')")
+	public R<String> save(@RequestBody SysThirdLoginConfigVO vo) {
+//		save
+		sysThirdLoginConfigService.save(vo);
+//		return
+		return R.ok();
+	}
 
-        return R.ok(SysThirdLoginConfigConvert.INSTANCE.convert(entity));
-    }
+	/**
+	 * update
+	 * @param thirdLoginConfigVO
+	 * @return result
+	 */
+	@PutMapping
+	@Operation(name = "update")
+	@PreAuthorize("hasAuthority('third:config:all')")
+	public R<String> update(@RequestBody @Valid SysThirdLoginConfigVO vo) {
+//		update
+		sysThirdLoginConfigService.update(vo);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存")
-    @PreAuthorize("hasAuthority('third:config:all')")
-    public R<String> save(@RequestBody SysThirdLoginConfigVO vo) {
-        sysThirdLoginConfigService.save(vo);
+	/**
+	 * delete
+	 * @param idList
+	 * @return result
+	 */
+	@DeleteMapping
+	@Operation(name = "delete")
+	@PreAuthorize("hasAuthority('third:config:all')")
+	public R<String> delete(@RequestBody List<Long> idList) {
+//		delete
+		sysThirdLoginConfigService.delete(idList);
+//		return
+		return R.ok();
+	}
 
-        return R.ok();
-    }
-
-    @PutMapping
-    @Operation(summary = "修改")
-    @PreAuthorize("hasAuthority('third:config:all')")
-    public R<String> update(@RequestBody @Valid SysThirdLoginConfigVO vo) {
-        sysThirdLoginConfigService.update(vo);
-
-        return R.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除")
-    @PreAuthorize("hasAuthority('third:config:all')")
-    public R<String> delete(@RequestBody List<Long> idList) {
-        sysThirdLoginConfigService.delete(idList);
-
-        return R.ok();
-    }
 }

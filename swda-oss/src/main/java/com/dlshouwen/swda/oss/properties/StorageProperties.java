@@ -7,97 +7,115 @@ import org.springframework.context.annotation.Bean;
 import com.dlshouwen.swda.oss.enums.StorageTypeEnum;
 
 /**
- * 存储配置项
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * storage properties
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @ConfigurationProperties(prefix = "storage")
 public class StorageProperties {
-    /**
-     * 是否开启存储
-     */
-    private boolean enabled;
-    /**
-     * 通用配置项
-     */
-    private StorageConfig config;
-    /**
-     * 本地配置项
-     */
-    private LocalStorageProperties local;
-    /**
-     * 阿里云配置项
-     */
-    private AliyunStorageProperties aliyun;
-    /**
-     * 七牛云配置项
-     */
-    private QiniuStorageProperties qiniu;
-    /**
-     * 华为云配置项
-     */
-    private HuaweiStorageProperties huawei;
-    /**
-     * Minio配置项
-     */
-    private MinioStorageProperties minio;
-    /**
-     * 腾讯云配置项
-     */
-    private TencentStorageProperties tencent;
+	
+	/** enabled */
+	private boolean enabled;
+	
+	/** config */
+	private StorageConfig config;
+	
+	/** local storage properties */
+	private LocalStorageProperties local;
+	
+	/** aliyun storage properties */
+	private AliyunStorageProperties aliyun;
+	
+	/** qiniu storage properties */
+	private QiniuStorageProperties qiniu;
+	
+	/** huawei storage properties */
+	private HuaweiStorageProperties huawei;
+	
+	/** minio storage properties */
+	private MinioStorageProperties minio;
+	
+	/** tencent storage properties */
+	private TencentStorageProperties tencent;
 
-    @Data
-    public static class StorageConfig {
-        /**
-         * 访问域名
-         */
-        private String domain;
-        /**
-         * 配置路径前缀
-         */
-        private String prefix;
-        /**
-         * 存储类型
-         */
-        private StorageTypeEnum type;
-    }
+	/**
+	 * storage config
+	 * @author liujingcheng@live.cn
+	 * @since 1.0.0
+	 */
+	@Data
+	public static class StorageConfig {
+		
+		/** domain */
+		private String domain;
+		
+		/** prefix */
+		private String prefix;
+		
+		/** type */
+		private StorageTypeEnum type;
 
-    @Bean
-    @ConfigurationProperties(prefix = "storage.local")
-    public LocalStorageProperties localStorageProperties() {
-        return new LocalStorageProperties();
-    }
+	}
 
-    @Bean
-    @ConfigurationProperties(prefix = "storage.aliyun")
-    public AliyunStorageProperties aliyunStorageProperties() {
-        return new AliyunStorageProperties();
-    }
+	/**
+	 * local storage properties
+	 * @return local storage properties
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "storage.local")
+	public LocalStorageProperties localStorageProperties() {
+		return new LocalStorageProperties();
+	}
 
-    @Bean
-    @ConfigurationProperties(prefix = "storage.qiniu")
-    public QiniuStorageProperties qiniuStorageProperties() {
-        return new QiniuStorageProperties();
-    }
+	/**
+	 * aliyun storage properties
+	 * @return aliyun storage properties
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "storage.aliyun")
+	public AliyunStorageProperties aliyunStorageProperties() {
+		return new AliyunStorageProperties();
+	}
 
-    @Bean
-    @ConfigurationProperties(prefix = "storage.huawei")
-    public HuaweiStorageProperties huaweiStorageProperties() {
-        return new HuaweiStorageProperties();
-    }
+	/**
+	 * qiniu storage properties
+	 * @return qiniu storage properties
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "storage.qiniu")
+	public QiniuStorageProperties qiniuStorageProperties() {
+		return new QiniuStorageProperties();
+	}
 
-    @Bean
-    @ConfigurationProperties(prefix = "storage.minio")
-    public MinioStorageProperties minioStorageProperties() {
-        return new MinioStorageProperties();
-    }
+	/**
+	 * huawei storage properties
+	 * @return huawei storage properties
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "storage.huawei")
+	public HuaweiStorageProperties huaweiStorageProperties() {
+		return new HuaweiStorageProperties();
+	}
 
-    @Bean
-    @ConfigurationProperties(prefix = "storage.tencent")
-    public TencentStorageProperties tencentStorageProperties() {
-        return new TencentStorageProperties();
-    }
+	/**
+	 * minio storage properties
+	 * @return minio storage properties
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "storage.minio")
+	public MinioStorageProperties minioStorageProperties() {
+		return new MinioStorageProperties();
+	}
+
+	/**
+	 * tencent storage properties
+	 * @return tencent storage properties
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "storage.tencent")
+	public TencentStorageProperties tencentStorageProperties() {
+		return new TencentStorageProperties();
+	}
 
 }

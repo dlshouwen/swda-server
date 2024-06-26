@@ -15,54 +15,71 @@ import java.io.InputStream;
 import java.util.Optional;
 
 /**
- * Minio存储
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * minio storage service
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class MinioStorageService extends StorageService {
-    private final MinioClient minioClient;
+	
+	/** minio client */
+	private final MinioClient minioClient;
 
-    public MinioStorageService(StorageProperties properties) {
-        this.properties = properties;
+	/**
+	 * constructor
+	 * @param properties
+	 */
+	public MinioStorageService(StorageProperties properties) {
+//		set properties
+		this.properties = properties;
+//		build monio client
+		minioClient = MinioClient.builder().endpoint(properties.getMinio().getEndPoint()).credentials(properties.getMinio().getAccessKey(), properties.getMinio().getSecretKey()).build();
+	}
 
-        minioClient = MinioClient.builder().endpoint(properties.getMinio().getEndPoint())
-                .credentials(properties.getMinio().getAccessKey(), properties.getMinio().getSecretKey()).build();
-    }
+	/**
+	 * upload
+	 * @param data
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(byte[] data, String path) {
+		return upload(new ByteArrayInputStream(data), path);
+	}
 
-    @Override
-    public String upload(byte[] data, String path) {
-        return upload(new ByteArrayInputStream(data), path);
-    }
+	/**
+	 * upload
+	 * @param inputStream
+	 * @param path
+	 * @return url
+	 */
+	@Override
+	public String upload(InputStream inputStream, String path) {
+//		try catch
+		try {
+//			get bucket is exists
+			boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(properties.getMinio().getBucketName()).build());
+//			if not found
+			if (!found) {
+//				create bucket
+				minioClient.makeBucket(MakeBucketArgs.builder().bucket(properties.getMinio().getBucketName()).build());
+			}
+//			set content type
+			String contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
+//			get media type
+			Optional<MediaType> mediaType = MediaTypeFactory.getMediaType(path);
+//			is present
+			if (mediaType.isPresent()) {
+//				set content type from media type
+				contentType = mediaType.get().toString();
+			}
+//			do put
+			minioClient.putObject(PutObjectArgs.builder().bucket(properties.getMinio().getBucketName()).contentType(contentType).object(path).stream(inputStream, inputStream.available(), -1).build());
+		} catch (Exception e) {
+//			throw exception
+			throw new SwdaException("上传文件失败：", e);
+		}
+//		return url
+		return properties.getMinio().getEndPoint() + "/" + properties.getMinio().getBucketName() + "/" + path;
+	}
 
-    @Override
-    public String upload(InputStream inputStream, String path) {
-        try {
-            //如果BucketName不存在，则创建
-            boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(properties.getMinio().getBucketName()).build());
-            if (!found) {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket(properties.getMinio().getBucketName()).build());
-            }
-
-            String contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
-            Optional<MediaType> mediaType = MediaTypeFactory.getMediaType(path);
-            if (mediaType.isPresent()) {
-                contentType = mediaType.get().toString();
-            }
-
-            minioClient.putObject(
-                    PutObjectArgs.builder()
-                            .bucket(properties.getMinio().getBucketName())
-                            .contentType(contentType)
-                            .object(path)
-                            .stream(inputStream, inputStream.available(), -1)
-                            .build()
-            );
-
-        } catch (Exception e) {
-            throw new SwdaException("上传文件失败：", e);
-        }
-
-        return properties.getMinio().getEndPoint() + "/" + properties.getMinio().getBucketName() + "/" + path;
-    }
 }
