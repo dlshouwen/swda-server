@@ -8,18 +8,17 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 附件管理查询
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "附件管理查询")
 public class SysAttachmentQuery extends Query {
-    @Schema(description = "附件名称")
-    private String name;
+	@Schema(description = "附件名称")
+	private String name;
 
-    @Schema(description = "存储平台")
-    private String platform;
+	@Schema(description = "存储平台")
+	private String platform;
 
 }

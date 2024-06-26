@@ -8,24 +8,23 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 操作日志查询
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "操作日志查询")
 public class SysLogOperateQuery extends Query {
-    @Schema(description = "用户")
-    private String realName;
+	@Schema(description = "用户")
+	private String realName;
 
-    @Schema(description = "模块名")
-    private String module;
+	@Schema(description = "模块名")
+	private String module;
 
-    @Schema(description = "请求URI")
-    private String reqUri;
+	@Schema(description = "请求URI")
+	private String reqUri;
 
-    @Schema(description = "操作状态")
-    private Integer status;
+	@Schema(description = "操作状态")
+	private Integer status;
 
 }

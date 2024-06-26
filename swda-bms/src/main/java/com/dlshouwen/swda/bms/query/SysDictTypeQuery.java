@@ -8,18 +8,17 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 字典类型
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "字典类型查询")
 public class SysDictTypeQuery extends Query {
-    @Schema(description = "字典类型")
-    private String dictType;
+	@Schema(description = "字典类型")
+	private String dictType;
 
-    @Schema(description = "字典名称")
-    private String dictName;
+	@Schema(description = "字典名称")
+	private String dictName;
 
 }

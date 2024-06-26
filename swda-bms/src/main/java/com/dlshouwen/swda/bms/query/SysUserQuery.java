@@ -8,24 +8,23 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 用户查询
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "用户查询")
 public class SysUserQuery extends Query {
-    @Schema(description = "用户名")
-    private String username;
+	@Schema(description = "用户名")
+	private String username;
 
-    @Schema(description = "手机号")
-    private String mobile;
+	@Schema(description = "手机号")
+	private String mobile;
 
-    @Schema(description = "性别")
-    private Integer gender;
+	@Schema(description = "性别")
+	private Integer gender;
 
-    @Schema(description = "机构ID")
-    private Long orgId;
+	@Schema(description = "机构ID")
+	private Long orgId;
 
 }
