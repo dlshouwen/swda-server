@@ -12,13 +12,12 @@ import java.util.List;
 
 /**
  * 字典数据
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysDictDataDao extends BaseMapper<SysDictDataEntity> {
 
-    @Select("${sql}")
-    List<SysDictVO.DictData> getListForSql(@Param("sql") String sql);
+	@Select("${sql}")
+	List<SysDictVO.DictData> getListForSql(@Param("sql") String sql);
 }

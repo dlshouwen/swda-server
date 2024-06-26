@@ -10,18 +10,18 @@ import java.util.List;
 
 /**
  * 用户角色关系
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysUserRoleDao extends BaseMapper<SysUserRoleEntity> {
 
-    /**
-     * 角色ID列表
-     * @param userId  用户ID
-     *
-     * @return  返回角色ID列表
-     */
-    List<Long> getRoleIdList(@Param("userId") Long userId);
+	/**
+	 * 角色ID列表
+	 * 
+	 * @param userId 用户ID
+	 *
+	 * @return 返回角色ID列表
+	 */
+	List<Long> getRoleIdList(@Param("userId") Long userId);
 }

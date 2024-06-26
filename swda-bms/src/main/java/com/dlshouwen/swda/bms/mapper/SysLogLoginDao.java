@@ -7,9 +7,8 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
  * 登录日志
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysLogLoginDao extends BaseMapper<SysLogLoginEntity> {

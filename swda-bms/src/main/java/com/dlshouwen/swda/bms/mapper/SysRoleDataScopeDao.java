@@ -10,21 +10,20 @@ import java.util.List;
 
 /**
  * 角色数据权限
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysRoleDataScopeDao extends BaseMapper<SysRoleDataScopeEntity> {
 
-    /**
-     * 根据角色ID，获取机构ID列表
-     */
-    List<Long> getOrgIdList(@Param("roleId") Long roleId);
+	/**
+	 * 根据角色ID，获取机构ID列表
+	 */
+	List<Long> getOrgIdList(@Param("roleId") Long roleId);
 
-    /**
-     * 获取用户的数据权限列表
-     */
-    List<Long> getDataScopeList(@Param("userId") Long userId);
+	/**
+	 * 获取用户的数据权限列表
+	 */
+	List<Long> getDataScopeList(@Param("userId") Long userId);
 
 }

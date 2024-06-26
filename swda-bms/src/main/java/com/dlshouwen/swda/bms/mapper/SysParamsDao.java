@@ -8,18 +8,17 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 参数管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysParamsDao extends BaseMapper<SysParamsEntity> {
 
-    default boolean isExist(String paramKey) {
-        return this.exists(new QueryWrapper<SysParamsEntity>().eq("param_key", paramKey));
-    }
+	default boolean isExist(String paramKey) {
+		return this.exists(new QueryWrapper<SysParamsEntity>().eq("param_key", paramKey));
+	}
 
-    default SysParamsEntity get(String paramKey) {
-        return this.selectOne(new QueryWrapper<SysParamsEntity>().eq("param_key", paramKey));
-    }
+	default SysParamsEntity get(String paramKey) {
+		return this.selectOne(new QueryWrapper<SysParamsEntity>().eq("param_key", paramKey));
+	}
 }

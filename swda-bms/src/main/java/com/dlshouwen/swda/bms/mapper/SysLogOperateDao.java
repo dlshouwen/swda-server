@@ -7,9 +7,8 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
  * 操作日志
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Mapper
 public interface SysLogOperateDao extends BaseMapper<SysLogOperateEntity> {
