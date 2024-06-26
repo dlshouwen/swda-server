@@ -11,33 +11,32 @@ import java.util.List;
 
 /**
  * 数据字典
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysDictTypeService extends BaseService<SysDictTypeEntity> {
 
-    PageResult<SysDictTypeVO> page(SysDictTypeQuery query);
+	PageResult<SysDictTypeVO> page(SysDictTypeQuery query);
 
-    void save(SysDictTypeVO vo);
+	void save(SysDictTypeVO vo);
 
-    void update(SysDictTypeVO vo);
+	void update(SysDictTypeVO vo);
 
-    void delete(List<Long> idList);
+	void delete(List<Long> idList);
 
-    /**
-     * 获取动态SQL数据
-     */
-    List<SysDictVO.DictData> getDictSql(Long id);
+	/**
+	 * 获取动态SQL数据
+	 */
+	List<SysDictVO.DictData> getDictSql(Long id);
 
-    /**
-     * 获取全部字典列表
-     */
-    List<SysDictVO> getDictList();
+	/**
+	 * 获取全部字典列表
+	 */
+	List<SysDictVO> getDictList();
 
-    /**
-     * 刷新字典缓存
-     */
-    void refreshTransCache();
+	/**
+	 * 刷新字典缓存
+	 */
+	void refreshTransCache();
 
 }

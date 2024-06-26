@@ -8,12 +8,10 @@ import com.dlshouwen.swda.bms.vo.SysMenuVO;
 import java.util.List;
 import java.util.Set;
 
-
 /**
  * 菜单管理
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysMenuService extends BaseService<SysMenuEntity> {
 
@@ -33,14 +31,15 @@ public interface SysMenuService extends BaseService<SysMenuEntity> {
 	/**
 	 * 用户菜单列表
 	 *
-	 * @param user  用户
+	 * @param user 用户
 	 * @param type 菜单类型
 	 */
 	List<SysMenuVO> getUserMenuList(UserDetail user, Integer type);
 
 	/**
 	 * 获取子菜单的数量
-	 * @param pid  父菜单ID
+	 * 
+	 * @param pid 父菜单ID
 	 */
 	Long getSubMenuCount(Long pid);
 

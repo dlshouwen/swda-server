@@ -10,17 +10,16 @@ import java.util.List;
 
 /**
  * 附件管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysAttachmentService extends BaseService<SysAttachmentEntity> {
 
-    PageResult<SysAttachmentVO> page(SysAttachmentQuery query);
+	PageResult<SysAttachmentVO> page(SysAttachmentQuery query);
 
-    void save(SysAttachmentVO vo);
+	void save(SysAttachmentVO vo);
 
-    void update(SysAttachmentVO vo);
+	void update(SysAttachmentVO vo);
 
-    void delete(List<Long> idList);
+	void delete(List<Long> idList);
 }

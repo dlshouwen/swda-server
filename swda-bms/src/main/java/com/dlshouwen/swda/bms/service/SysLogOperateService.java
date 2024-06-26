@@ -8,11 +8,10 @@ import com.dlshouwen.swda.bms.vo.SysLogOperateVO;
 
 /**
  * 操作日志
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysLogOperateService extends BaseService<SysLogOperateEntity> {
 
-    PageResult<SysLogOperateVO> page(SysLogOperateQuery query);
+	PageResult<SysLogOperateVO> page(SysLogOperateQuery query);
 }

@@ -12,24 +12,23 @@ import java.util.List;
 
 /**
  * 第三方登录配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysThirdLoginConfigService extends BaseService<SysThirdLoginConfigEntity> {
 
-    PageResult<SysThirdLoginConfigVO> page(Query query);
+	PageResult<SysThirdLoginConfigVO> page(Query query);
 
-    void save(SysThirdLoginConfigVO vo);
+	void save(SysThirdLoginConfigVO vo);
 
-    void update(SysThirdLoginConfigVO vo);
+	void update(SysThirdLoginConfigVO vo);
 
-    void delete(List<Long> idList);
+	void delete(List<Long> idList);
 
-    /**
-     * 根据类型，获取授权请求
-     *
-     * @param openType 第三方登录类型
-     */
-    AuthRequest getAuthRequest(String openType);
+	/**
+	 * 根据类型，获取授权请求
+	 *
+	 * @param openType 第三方登录类型
+	 */
+	AuthRequest getAuthRequest(String openType);
 }

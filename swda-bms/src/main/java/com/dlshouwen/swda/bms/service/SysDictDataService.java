@@ -10,18 +10,17 @@ import java.util.List;
 
 /**
  * 数据字典
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysDictDataService extends BaseService<SysDictDataEntity> {
 
-    PageResult<SysDictDataVO> page(SysDictDataQuery query);
+	PageResult<SysDictDataVO> page(SysDictDataQuery query);
 
-    void save(SysDictDataVO vo);
+	void save(SysDictDataVO vo);
 
-    void update(SysDictDataVO vo);
+	void update(SysDictDataVO vo);
 
-    void delete(List<Long> idList);
+	void delete(List<Long> idList);
 
 }

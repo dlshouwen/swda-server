@@ -1,17 +1,14 @@
 package com.dlshouwen.swda.bms.service;
 
-
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysRoleMenuEntity;
 
 import java.util.List;
 
-
 /**
  * 角色与菜单对应关系
- * 
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysRoleMenuService extends BaseService<SysRoleMenuEntity> {
 
@@ -22,19 +19,22 @@ public interface SysRoleMenuService extends BaseService<SysRoleMenuEntity> {
 
 	/**
 	 * 保存或修改
-	 * @param roleId      角色ID
-	 * @param menuIdList  菜单ID列表
+	 * 
+	 * @param roleId     角色ID
+	 * @param menuIdList 菜单ID列表
 	 */
 	void saveOrUpdate(Long roleId, List<Long> menuIdList);
 
 	/**
 	 * 根据角色id列表，删除角色菜单关系
+	 * 
 	 * @param roleIdList 角色id列表
 	 */
 	void deleteByRoleIdList(List<Long> roleIdList);
 
 	/**
 	 * 根据菜单id，删除角色菜单关系
+	 * 
 	 * @param menuId 菜单id
 	 */
 	void deleteByMenuId(Long menuId);

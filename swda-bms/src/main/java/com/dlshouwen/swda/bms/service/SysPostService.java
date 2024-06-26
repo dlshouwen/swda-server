@@ -10,21 +10,20 @@ import java.util.List;
 
 /**
  * 岗位管理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public interface SysPostService extends BaseService<SysPostEntity> {
 
-    PageResult<SysPostVO> page(SysPostQuery query);
+	PageResult<SysPostVO> page(SysPostQuery query);
 
-    List<SysPostVO> getList();
+	List<SysPostVO> getList();
 
-    List<String> getNameList(List<Long> idList);
+	List<String> getNameList(List<Long> idList);
 
-    void save(SysPostVO vo);
+	void save(SysPostVO vo);
 
-    void update(SysPostVO vo);
+	void update(SysPostVO vo);
 
-    void delete(List<Long> idList);
+	void delete(List<Long> idList);
 }
