@@ -8,18 +8,35 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * 第三方登录配置
+ * third login config convert
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
 public interface SysThirdLoginConfigConvert {
+	
+	/** instance */
 	SysThirdLoginConfigConvert INSTANCE = Mappers.getMapper(SysThirdLoginConfigConvert.class);
 
+	/**
+	 * convert
+	 * @param thirdLoginConfigVO
+	 * @return third login config
+	 */
 	SysThirdLoginConfigEntity convert(SysThirdLoginConfigVO vo);
 
+	/**
+	 * convert
+	 * @param thirdLoginConfig
+	 * @return third login config vo
+	 */
 	SysThirdLoginConfigVO convert(SysThirdLoginConfigEntity entity);
 
+	/**
+	 * convert list
+	 * @param thirdLoginConfigList
+	 * @return third login config vo list
+	 */
 	List<SysThirdLoginConfigVO> convertList(List<SysThirdLoginConfigEntity> list);
 
 }

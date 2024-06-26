@@ -8,18 +8,35 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * 附件管理
+ * attachment convert
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
 public interface SysAttachmentConvert {
+	
+	/** instance */
 	SysAttachmentConvert INSTANCE = Mappers.getMapper(SysAttachmentConvert.class);
 
+	/**
+	 * convert
+	 * @param attachmentVO
+	 * @return attachment
+	 */
 	SysAttachmentEntity convert(SysAttachmentVO vo);
 
+	/**
+	 * convert
+	 * @param attachment
+	 * @return attachment vo
+	 */
 	SysAttachmentVO convert(SysAttachmentEntity entity);
 
+	/**
+	 * convert list
+	 * @param attachmentList
+	 * @return attachment vo list
+	 */
 	List<SysAttachmentVO> convertList(List<SysAttachmentEntity> list);
 
 }
