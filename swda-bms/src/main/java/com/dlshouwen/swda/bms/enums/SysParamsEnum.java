@@ -1,14 +1,12 @@
 package com.dlshouwen.swda.bms.enums;
 
 /**
- * 系统参数 枚举
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * params
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public enum SysParamsEnum {
-    /**
-     * 登录验证码
-     */
-    LOGIN_CAPTCHA
+
+	LOGIN_CAPTCHA
+
 }
