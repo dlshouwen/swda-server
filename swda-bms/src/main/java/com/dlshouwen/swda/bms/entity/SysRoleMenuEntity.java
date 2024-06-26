@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 角色菜单关系
+ * role menu
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -15,13 +15,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_role_menu")
 public class SysRoleMenuEntity extends BaseEntity {
-	/**
-	 * 角色ID
-	 */
+
 	private Long roleId;
-	/**
-	 * 菜单ID
-	 */
+
 	private Long menuId;
 
 }

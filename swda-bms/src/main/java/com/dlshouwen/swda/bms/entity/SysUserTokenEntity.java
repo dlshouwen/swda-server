@@ -9,7 +9,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * 用户Token
+ * user token
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -21,39 +21,18 @@ public class SysUserTokenEntity {
 	@TableId
 	private Long id;
 
-	/**
-	 * 用户ID
-	 */
 	private Long userId;
 
-	/**
-	 * accessToken
-	 */
 	private String accessToken;
 
-	/**
-	 * accessToken 过期时间
-	 */
 	private LocalDateTime accessTokenExpire;
 
-	/**
-	 * refreshToken
-	 */
 	private String refreshToken;
 
-	/**
-	 * refreshToken 过期时间
-	 */
 	private LocalDateTime refreshTokenExpire;
 
-	/**
-	 * 租户ID
-	 */
 	private Long tenantId;
 
-	/**
-	 * 创建时间
-	 */
 	@TableField(fill = FieldFill.INSERT)
 	private LocalDateTime createTime;
 

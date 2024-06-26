@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 角色数据权限
+ * role data scope
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -15,13 +15,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_role_data_scope")
 public class SysRoleDataScopeEntity extends BaseEntity {
-	/**
-	 * 角色ID
-	 */
+
 	private Long roleId;
-	/**
-	 * 机构ID
-	 */
+
 	private Long orgId;
 
 }
