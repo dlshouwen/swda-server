@@ -6,7 +6,7 @@ import com.dlshouwen.swda.bms.entity.SysLogLoginEntity;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * 登录日志
+ * login log mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */

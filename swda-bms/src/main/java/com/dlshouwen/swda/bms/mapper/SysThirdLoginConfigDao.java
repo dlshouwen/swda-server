@@ -6,7 +6,7 @@ import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * 第三方登录配置
+ * third login config mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */

@@ -11,13 +11,19 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * 字典数据
+ * dict mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
 public interface SysDictDataDao extends BaseMapper<SysDictDataEntity> {
 
+	/**
+	 * get list for sql
+	 * @param sql
+	 * @return dict list
+	 */
 	@Select("${sql}")
 	List<SysDictVO.DictData> getListForSql(@Param("sql") String sql);
+
 }

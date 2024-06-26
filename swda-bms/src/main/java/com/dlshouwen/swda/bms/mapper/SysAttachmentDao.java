@@ -6,7 +6,7 @@ import com.dlshouwen.swda.bms.entity.SysAttachmentEntity;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * 附件管理
+ * attachment mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */

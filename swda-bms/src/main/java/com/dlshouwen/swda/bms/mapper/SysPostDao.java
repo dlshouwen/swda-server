@@ -6,7 +6,7 @@ import com.dlshouwen.swda.bms.entity.SysPostEntity;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * 岗位管理
+ * post mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */

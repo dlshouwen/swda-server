@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * 角色管理
+ * role mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -17,12 +17,16 @@ import java.util.List;
 public interface SysRoleDao extends BaseMapper<SysRoleEntity> {
 
 	/**
-	 * 根据用户ID，获取用户最大的数据范围
+	 * get data scope by user id
+	 * @param userId
+	 * @return data scope
 	 */
 	Integer getDataScopeByUserId(@Param("userId") Long userId);
 
 	/**
-	 * 根据用户ID，获取用户角色编码
+	 * get role code by user id
+	 * @param userId
+	 * @return role code list
 	 */
 	List<String> geRoleCodeByUserId(@Param("userId") Long userId);
 

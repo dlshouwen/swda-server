@@ -9,17 +9,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 机构管理
+ * organ mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
 public interface SysOrgDao extends BaseMapper<SysOrgEntity> {
 
+	/**
+	 * get list
+	 * @param params
+	 * @return organ list
+	 */
 	List<SysOrgEntity> getList(Map<String, Object> params);
 
 	/**
-	 * 获取所有机构的id、pid列表
+	 * get id and pid list
+	 * @return organ list
 	 */
 	List<SysOrgEntity> getIdAndPidList();
 

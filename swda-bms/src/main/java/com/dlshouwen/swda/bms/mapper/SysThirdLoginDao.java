@@ -6,7 +6,7 @@ import com.dlshouwen.swda.bms.entity.SysThirdLoginEntity;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * 第三方登录
+ * third login mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */

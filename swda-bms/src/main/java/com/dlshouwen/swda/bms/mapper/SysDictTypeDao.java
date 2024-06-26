@@ -6,7 +6,7 @@ import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * 字典类型
+ * dict type mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */

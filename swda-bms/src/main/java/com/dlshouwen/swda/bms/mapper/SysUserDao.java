@@ -11,24 +11,50 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 系统用户
+ * user mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
 public interface SysUserDao extends BaseMapper<SysUserEntity> {
 
+	/**
+	 * get user list
+	 * @param params
+	 * @return user list
+	 */
 	List<SysUserEntity> getList(Map<String, Object> params);
 
+	/**
+	 * get user by id
+	 * @param id
+	 * @return user
+	 */
 	SysUserEntity getById(@Param("id") Long id);
 
+	/**
+	 * get role user list
+	 * @param params
+	 * @return user
+	 */
 	List<SysUserEntity> getRoleUserList(Map<String, Object> params);
 
+	/**
+	 * get by user name
+	 * @param username
+	 * @return user
+	 */
 	default SysUserEntity getByUsername(String username) {
 		return this.selectOne(new QueryWrapper<SysUserEntity>().eq("username", username));
 	}
 
+	/**
+	 * get by mobile
+	 * @param mobile
+	 * @return user
+	 */
 	default SysUserEntity getByMobile(String mobile) {
 		return this.selectOne(new QueryWrapper<SysUserEntity>().eq("mobile", mobile));
 	}
+
 }

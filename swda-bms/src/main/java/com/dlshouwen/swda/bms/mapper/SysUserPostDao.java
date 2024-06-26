@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * 用户岗位关系
+ * user post
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -17,9 +17,10 @@ import java.util.List;
 public interface SysUserPostDao extends BaseMapper<SysUserPostEntity> {
 
 	/**
-	 * 岗位ID列表
-	 * 
-	 * @param userId 用户ID
+	 * get post id list
+	 * @param userId
+	 * @return post id list
 	 */
 	List<Long> getPostIdList(@Param("userId") Long userId);
+
 }

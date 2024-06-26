@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * 用户角色关系
+ * user role
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -17,11 +17,10 @@ import java.util.List;
 public interface SysUserRoleDao extends BaseMapper<SysUserRoleEntity> {
 
 	/**
-	 * 角色ID列表
-	 * 
-	 * @param userId 用户ID
-	 *
-	 * @return 返回角色ID列表
+	 * get role id list
+	 * @param userId
+	 * @return role id list
 	 */
 	List<Long> getRoleIdList(@Param("userId") Long userId);
+
 }
