@@ -6,38 +6,36 @@ import com.dlshouwen.swda.bms.entity.SysUserPostEntity;
 import java.util.List;
 
 /**
- * 用户岗位关系
+ * user post service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysUserPostService extends BaseService<SysUserPostEntity> {
 
 	/**
-	 * 保存或修改
-	 * 
-	 * @param userId     用户ID
-	 * @param postIdList 岗位ID列表
+	 * save or update
+	 * @param userId
+	 * @param postIdList
 	 */
 	void saveOrUpdate(Long userId, List<Long> postIdList);
 
 	/**
-	 * 根据岗位id列表，删除用户岗位关系
-	 * 
-	 * @param postIdList 岗位id列表
+	 * delete by post id list
+	 * @param postIdList
 	 */
 	void deleteByPostIdList(List<Long> postIdList);
 
 	/**
-	 * 根据用户id列表，删除用户岗位关系
-	 * 
-	 * @param userIdList 用户id列表
+	 * delete by user id list
+	 * @param userIdList
 	 */
 	void deleteByUserIdList(List<Long> userIdList);
 
 	/**
-	 * 岗位ID列表
-	 * 
-	 * @param userId 用户ID
+	 * get post id list
+	 * @param userId
+	 * @return post id list
 	 */
 	List<Long> getPostIdList(Long userId);
+
 }

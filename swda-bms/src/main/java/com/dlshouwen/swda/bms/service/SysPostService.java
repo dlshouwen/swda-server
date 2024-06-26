@@ -9,21 +9,48 @@ import com.dlshouwen.swda.bms.vo.SysPostVO;
 import java.util.List;
 
 /**
- * 岗位管理
+ * post service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysPostService extends BaseService<SysPostEntity> {
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	PageResult<SysPostVO> page(SysPostQuery query);
 
+	/**
+	 * get post list
+	 * @return post list
+	 */
 	List<SysPostVO> getList();
 
+	/**
+	 * get name list
+	 * @param idList
+	 * @return name list
+	 */
 	List<String> getNameList(List<Long> idList);
 
+	/**
+	 * save
+	 * @param postVO
+	 */
 	void save(SysPostVO vo);
 
+	/**
+	 * update
+	 * @param postVO
+	 */
 	void update(SysPostVO vo);
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	void delete(List<Long> idList);
+
 }

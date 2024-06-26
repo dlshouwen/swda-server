@@ -3,29 +3,30 @@ package com.dlshouwen.swda.bms.service;
 import com.dlshouwen.swda.bms.vo.SysCaptchaVO;
 
 /**
- * 验证码
+ * captcha service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysCaptchaService {
+
 	/**
-	 * 生成验证码
+	 * generate captcha
+	 * @return captcha vo
 	 */
 	SysCaptchaVO generate();
 
 	/**
-	 * 验证码效验
-	 *
-	 * @param key  key
-	 * @param code 验证码
-	 * @return true：成功 false：失败
+	 * valid
+	 * @param key
+	 * @param code
+	 * @return valid result
 	 */
 	boolean validate(String key, String code);
 
 	/**
-	 * 是否开启登录验证码
-	 *
-	 * @return true：开启 false：关闭
+	 * is captcha enabled
+	 * @return is captcha enabled
 	 */
 	boolean isCaptchaEnabled();
+
 }

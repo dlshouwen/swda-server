@@ -9,46 +9,64 @@ import com.dlshouwen.swda.bms.vo.SysParamsVO;
 import java.util.List;
 
 /**
- * 参数管理
+ * params service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysParamsService extends BaseService<SysParamsEntity> {
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	PageResult<SysParamsVO> page(SysParamsQuery query);
 
+	/**
+	 * save
+	 * @param paramsVO
+	 */
 	void save(SysParamsVO vo);
 
+	/**
+	 * update
+	 * @param paramsVO
+	 */
 	void update(SysParamsVO vo);
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	void delete(List<Long> idList);
 
 	/**
-	 * 根据paramKey，获取字符串值
-	 *
-	 * @param paramKey 参数Key
+	 * get string
+	 * @param paramKey
+	 * @return value
 	 */
 	String getString(String paramKey);
 
 	/**
-	 * 根据paramKey，获取整型值
-	 *
-	 * @param paramKey 参数Key
+	 * get int
+	 * @param paramKey
+	 * @return value
 	 */
 	int getInt(String paramKey);
 
 	/**
-	 * 根据paramKey，获取布尔值
-	 *
-	 * @param paramKey 参数Key
+	 * get boolean
+	 * @param paramKey
+	 * @return value
 	 */
 	boolean getBoolean(String paramKey);
 
 	/**
-	 * 根据paramKey，获取对象值
-	 *
-	 * @param paramKey  参数Key
-	 * @param valueType 类型
+	 * get json object
+	 * @param paramKey 
+	 * @param valueType
+	 * @return json object
 	 */
 	<T> T getJSONObject(String paramKey, Class<T> valueType);
+
 }

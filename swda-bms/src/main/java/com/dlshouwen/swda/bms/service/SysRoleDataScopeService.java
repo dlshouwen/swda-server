@@ -6,29 +6,30 @@ import com.dlshouwen.swda.bms.entity.SysRoleDataScopeEntity;
 import java.util.List;
 
 /**
- * 角色数据权限
+ * role data scope service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysRoleDataScopeService extends BaseService<SysRoleDataScopeEntity> {
 
 	/**
-	 * 保存或修改
-	 * 
-	 * @param roleId    角色ID
-	 * @param orgIdList 机构ID列表
+	 * save or update
+	 * @param roleId
+	 * @param orgIdList
 	 */
 	void saveOrUpdate(Long roleId, List<Long> orgIdList);
 
 	/**
-	 * 根据角色ID，获取机构ID列表
+	 * get organ id list
+	 * @param roleId
+	 * @return organ id list
 	 */
 	List<Long> getOrgIdList(Long roleId);
 
 	/**
-	 * 根据角色id列表，删除角色数据权限关系
-	 * 
-	 * @param roleIdList 角色id列表
+	 * delete by role id list
+	 * @param roleIdList
 	 */
 	void deleteByRoleIdList(List<Long> roleIdList);
+
 }

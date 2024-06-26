@@ -13,57 +13,87 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 /**
- * 用户管理
+ * user service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysUserService extends BaseService<SysUserEntity> {
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	PageResult<SysUserVO> page(SysUserQuery query);
 
+	/**
+	 * save
+	 * @param userVO
+	 */
 	void save(SysUserVO vo);
 
+	/**
+	 * update
+	 * @param userVO
+	 */
 	void update(SysUserVO vo);
 
+	/**
+	 * update login info
+	 * @param userBaseVO
+	 */
 	void updateLoginInfo(SysUserBaseVO vo);
 
+	/**
+	 * update avatar
+	 * @param userAvatarVO
+	 */
 	void updateAvatar(SysUserAvatarVO avatar);
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	void delete(List<Long> idList);
 
 	/**
-	 * 获取用户姓名列表
-	 *
-	 * @param idList 用户ID列表
-	 * @return 用户姓名列表
+	 * get real name list
+	 * @param idList
+	 * @return real name list
 	 */
 	List<String> getRealNameList(List<Long> idList);
 
+	/**
+	 * get user by mobile
+	 * @param mobile
+	 * @return user
+	 */
 	SysUserVO getByMobile(String mobile);
 
 	/**
-	 * 修改密码
-	 *
-	 * @param id          用户ID
-	 * @param newPassword 新密码
+	 * update password
+	 * @param id
+	 * @param newPassword
 	 */
 	void updatePassword(Long id, String newPassword);
 
 	/**
-	 * 分配角色，用户列表
+	 * role user page
+	 * @param query
+	 * @return page result
 	 */
 	PageResult<SysUserVO> roleUserPage(SysRoleUserQuery query);
 
 	/**
-	 * 批量导入用户
-	 *
-	 * @param file     excel文件
-	 * @param password 密码
+	 * import by excel
+	 * @param file
+	 * @param password
 	 */
 	void importByExcel(MultipartFile file, String password);
 
 	/**
-	 * 导出用户信息表格
+	 * export
 	 */
 	void export();
+
 }

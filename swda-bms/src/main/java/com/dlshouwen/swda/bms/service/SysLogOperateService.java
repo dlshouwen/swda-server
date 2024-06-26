@@ -7,11 +7,17 @@ import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
 import com.dlshouwen.swda.bms.vo.SysLogOperateVO;
 
 /**
- * 操作日志
+ * operation log service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysLogOperateService extends BaseService<SysLogOperateEntity> {
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	PageResult<SysLogOperateVO> page(SysLogOperateQuery query);
+
 }

@@ -3,51 +3,51 @@ package com.dlshouwen.swda.bms.service;
 import com.dlshouwen.swda.bms.vo.*;
 
 /**
- * 权限认证服务
+ * auth service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysAuthService {
 
 	/**
-	 * 账号密码登录
-	 *
-	 * @param login 登录信息
+	 * login by account
+	 * @param login
+	 * @return user token vo
 	 */
 	SysUserTokenVO loginByAccount(SysAccountLoginVO login);
 
 	/**
-	 * 手机短信登录
-	 *
-	 * @param login 登录信息
+	 * login by mobile
+	 * @param login
+	 * @return user token vo
 	 */
 	SysUserTokenVO loginByMobile(SysMobileLoginVO login);
 
 	/**
-	 * 第三方登录
-	 *
-	 * @param login 登录信息
+	 * login by third
+	 * @param login
+	 * @return user token vo
 	 */
 	SysUserTokenVO loginByThird(SysThirdCallbackVO login);
 
 	/**
-	 * 发送手机验证码
-	 *
-	 * @param mobile 手机号
+	 * send code
+	 * @param mobile
+	 * @return is success
 	 */
 	boolean sendCode(String mobile);
 
 	/**
-	 * 根据刷新Token，获取AccessToken
-	 *
-	 * @param refreshToken refreshToken
+	 * get access token
+	 * @param refreshToken
+	 * @return access token vo
 	 */
 	AccessTokenVO getAccessToken(String refreshToken);
 
 	/**
-	 * 退出登录
-	 *
-	 * @param accessToken accessToken
+	 * logout
+	 * @param accessToken
 	 */
 	void logout(String accessToken);
+
 }

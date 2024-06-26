@@ -9,17 +9,35 @@ import com.dlshouwen.swda.bms.vo.SysAttachmentVO;
 import java.util.List;
 
 /**
- * 附件管理
+ * attachment service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysAttachmentService extends BaseService<SysAttachmentEntity> {
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	PageResult<SysAttachmentVO> page(SysAttachmentQuery query);
 
+	/**
+	 * save
+	 * @param attachmentVO
+	 */
 	void save(SysAttachmentVO vo);
 
+	/**
+	 * update
+	 * @param attachmentVO
+	 */
 	void update(SysAttachmentVO vo);
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	void delete(List<Long> idList);
+
 }

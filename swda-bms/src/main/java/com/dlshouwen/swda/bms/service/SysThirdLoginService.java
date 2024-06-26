@@ -8,24 +8,39 @@ import com.dlshouwen.swda.bms.vo.SysThirdLoginVO;
 import java.util.List;
 
 /**
- * 第三方登录
+ * third login service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysThirdLoginService extends BaseService<SysThirdLoginEntity> {
 
+	/**
+	 * list by user id
+	 * @param userId
+	 * @return third login vo list
+	 */
 	List<SysThirdLoginVO> listByUserId(Long userId);
 
+	/**
+	 * unbind
+	 * @param userId
+	 * @param openType
+	 */
 	void unBind(Long userId, String openType);
 
+	/**
+	 * bind
+	 * @param userId
+	 * @param openType
+	 * @param authUser
+	 */
 	void bind(Long userId, String openType, AuthUser authUser);
 
 	/**
-	 * 根据第三方登录类型和openId，查询用户Id
-	 *
-	 * @param openType 第三方登录类型
-	 * @param openId   第三方用户唯一标识
-	 * @return 用户Id
+	 * get user id by open type and open id
+	 * @param openType
+	 * @param openId
+	 * @return user id
 	 */
 	Long getUserIdByOpenTypeAndOpenId(String openType, String openId);
 

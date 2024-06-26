@@ -5,46 +5,42 @@ import com.dlshouwen.swda.bms.entity.SysUserTokenEntity;
 import com.dlshouwen.swda.bms.vo.SysUserTokenVO;
 
 /**
- * 用户Token
+ * user token service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysUserTokenService extends BaseService<SysUserTokenEntity> {
 
 	/**
-	 * 根据用户ID，生成用户Token
-	 *
-	 * @param userId 用户ID
-	 * @return 用户Token
+	 * create token
+	 * @param userId
+	 * @return user token vo
 	 */
 	SysUserTokenVO createToken(Long userId);
 
 	/**
-	 * 根据refreshToken，生成新Token
-	 *
-	 * @param refreshToken refreshToken
-	 * @return 用户Token
+	 * refresh token
+	 * @param refreshToken
+	 * @return user token vo
 	 */
 	SysUserTokenVO refreshToken(String refreshToken);
 
 	/**
-	 * Token过期
-	 *
-	 * @param userId 用户ID
+	 * expire token
+	 * @param userId
 	 */
 	void expireToken(Long userId);
 
 	/**
-	 * 根据角色ID，更新用户缓存权限
-	 *
-	 * @param roleId 角色ID
+	 * update cache auth by role id
+	 * @param roleId
 	 */
 	void updateCacheAuthByRoleId(Long roleId);
 
 	/**
-	 * 根据用户ID，更新用户缓存权限
-	 *
-	 * @param userId 用户ID
+	 * update cache auth by user id
+	 * @param userId
 	 */
 	void updateCacheAuthByUserId(Long userId);
+
 }

@@ -9,42 +9,57 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 菜单管理
+ * menu service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysMenuService extends BaseService<SysMenuEntity> {
 
+	/**
+	 * save
+	 * @param menuVO
+	 */
 	void save(SysMenuVO vo);
 
+	/**
+	 * update
+	 * @param menuVO
+	 */
 	void update(SysMenuVO vo);
 
+	/**
+	 * delete
+	 * @param id
+	 */
 	void delete(Long id);
 
 	/**
-	 * 菜单列表
-	 *
-	 * @param type 菜单类型
+	 * get menu list
+	 * @param type
+	 * @return menu vo list
 	 */
 	List<SysMenuVO> getMenuList(Integer type);
 
 	/**
-	 * 用户菜单列表
-	 *
-	 * @param user 用户
-	 * @param type 菜单类型
+	 * get user menu list
+	 * @param user
+	 * @param type
+	 * @return menu vo list
 	 */
 	List<SysMenuVO> getUserMenuList(UserDetail user, Integer type);
 
 	/**
-	 * 获取子菜单的数量
-	 * 
-	 * @param pid 父菜单ID
+	 * get sub menu count
+	 * @param pid
+	 * @return sub menu count
 	 */
 	Long getSubMenuCount(Long pid);
 
 	/**
-	 * 获取用户权限列表
+	 * get user authority
+	 * @param user
+	 * @return user authority
 	 */
 	Set<String> getUserAuthority(UserDetail user);
+
 }

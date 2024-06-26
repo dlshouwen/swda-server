@@ -7,31 +7,48 @@ import com.dlshouwen.swda.bms.vo.SysOrgVO;
 import java.util.List;
 
 /**
- * 机构管理
+ * organ service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysOrgService extends BaseService<SysOrgEntity> {
 
+	/**
+	 * get organ list
+	 * @return organ vo list
+	 */
 	List<SysOrgVO> getList();
 
+	/**
+	 * save
+	 * @param organVO
+	 */
 	void save(SysOrgVO vo);
 
+	/**
+	 * update
+	 * @param organVO
+	 */
 	void update(SysOrgVO vo);
 
+	/**
+	 * delete
+	 * @param id
+	 */
 	void delete(Long id);
 
 	/**
-	 * 根据机构ID，获取子机构ID列表(包含本机构ID)
-	 *
-	 * @param id 机构ID
+	 * get sub organ id list
+	 * @param id
+	 * @return sub organ id list
 	 */
 	List<Long> getSubOrgIdList(Long id);
 
 	/**
-	 * 根据机构ID列表，获取机构名称列表
-	 *
-	 * @param idList 机构ID列表
+	 * get name list
+	 * @param idList
+	 * @return name list
 	 */
 	List<String> getNameList(List<Long> idList);
+
 }

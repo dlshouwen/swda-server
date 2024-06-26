@@ -9,18 +9,35 @@ import com.dlshouwen.swda.bms.vo.SysDictDataVO;
 import java.util.List;
 
 /**
- * 数据字典
+ * dict data service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysDictDataService extends BaseService<SysDictDataEntity> {
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	PageResult<SysDictDataVO> page(SysDictDataQuery query);
 
+	/**
+	 * save
+	 * @param dictVO
+	 */
 	void save(SysDictDataVO vo);
 
+	/**
+	 * update
+	 * @param dictVO
+	 */
 	void update(SysDictDataVO vo);
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	void delete(List<Long> idList);
 
 }

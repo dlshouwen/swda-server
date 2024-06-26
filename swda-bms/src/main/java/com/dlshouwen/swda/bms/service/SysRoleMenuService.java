@@ -6,36 +6,36 @@ import com.dlshouwen.swda.bms.entity.SysRoleMenuEntity;
 import java.util.List;
 
 /**
- * 角色与菜单对应关系
+ * role menu service
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysRoleMenuService extends BaseService<SysRoleMenuEntity> {
 
 	/**
-	 * 根据角色ID，获取菜单ID列表
+	 * get menu id list
+	 * @param roleId
+	 * @return menu id list
 	 */
 	List<Long> getMenuIdList(Long roleId);
 
 	/**
-	 * 保存或修改
-	 * 
-	 * @param roleId     角色ID
-	 * @param menuIdList 菜单ID列表
+	 * save or update
+	 * @param roleId
+	 * @param menuIdList
 	 */
 	void saveOrUpdate(Long roleId, List<Long> menuIdList);
 
 	/**
-	 * 根据角色id列表，删除角色菜单关系
-	 * 
-	 * @param roleIdList 角色id列表
+	 * delete by role id list
+	 * @param roleIdList
 	 */
 	void deleteByRoleIdList(List<Long> roleIdList);
 
 	/**
-	 * 根据菜单id，删除角色菜单关系
-	 * 
-	 * @param menuId 菜单id
+	 * delete by menu id
+	 * @param menuId
 	 */
 	void deleteByMenuId(Long menuId);
+
 }

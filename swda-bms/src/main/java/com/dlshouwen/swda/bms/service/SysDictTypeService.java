@@ -10,32 +10,52 @@ import com.dlshouwen.swda.bms.vo.SysDictVO;
 import java.util.List;
 
 /**
- * 数据字典
+ * dict type
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 public interface SysDictTypeService extends BaseService<SysDictTypeEntity> {
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	PageResult<SysDictTypeVO> page(SysDictTypeQuery query);
 
+	/**
+	 * save
+	 * @param dictTypeVO
+	 */
 	void save(SysDictTypeVO vo);
 
+	/**
+	 * update
+	 * @param dictTypeVO
+	 */
 	void update(SysDictTypeVO vo);
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	void delete(List<Long> idList);
 
 	/**
-	 * 获取动态SQL数据
+	 * get dict sql
+	 * @param id
+	 * @return dict list
 	 */
 	List<SysDictVO.DictData> getDictSql(Long id);
 
 	/**
-	 * 获取全部字典列表
+	 * get dict list
+	 * @return dict vo list
 	 */
 	List<SysDictVO> getDictList();
 
 	/**
-	 * 刷新字典缓存
+	 * refresh trans cache
 	 */
 	void refreshTransCache();
 
