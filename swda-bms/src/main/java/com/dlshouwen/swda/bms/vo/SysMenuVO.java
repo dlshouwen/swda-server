@@ -13,46 +13,48 @@ import org.hibernate.validator.constraints.Range;
 import java.time.LocalDateTime;
 
 /**
- * 菜单管理
+ * menu vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "菜单")
+@Schema(description = "menu")
 public class SysMenuVO extends TreeNode<SysMenuVO> {
 
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "菜单名称")
+	@Schema(description = "menu name")
 	@NotBlank(message = "菜单名称不能为空")
 	private String name;
 
-	@Schema(description = "菜单URL")
+	@Schema(description = "menu url")
 	private String url;
 
-	@Schema(description = "类型  0：菜单   1：按钮   2：接口")
+	@Schema(description = "menu type")
 	@Range(min = 0, max = 2, message = "类型不正确")
 	private Integer type;
 
-	@Schema(description = "打开方式   0：内部   1：外部")
+	@Schema(description = "open style")
 	@Range(min = 0, max = 1, message = "打开方式不正确")
 	private Integer openStyle;
 
-	@Schema(description = "菜单图标")
+	@Schema(description = "icon")
 	private String icon;
 
-	@Schema(description = "授权标识(多个用逗号分隔，如：sys:menu:list,sys:menu:save)")
+	@Schema(description = "authority")
 	private String authority;
 
-	@Schema(description = "排序")
+	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 
-	@Schema(description = "上级菜单名称")
+	@Schema(description = "parent name")
 	private String parentName;
+
 }

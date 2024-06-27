@@ -11,21 +11,23 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * AccessToken
+ * access token vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "AccessToken")
+@Schema(description = "access token")
 public class AccessTokenVO implements Serializable {
+
+	/** serial version uid */
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "access_token")
+	@Schema(description = "access token")
 	@JsonProperty(value = "access_token")
 	private String accessToken;
 
-	@Schema(description = "access_token 过期时间")
+	@Schema(description = "access token expire")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime accessTokenExpire;
 

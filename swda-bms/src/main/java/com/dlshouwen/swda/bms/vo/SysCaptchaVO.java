@@ -6,13 +6,15 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 图片验证码
+ * captcha vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "图片验证码")
+@Schema(description = "captcha")
 public class SysCaptchaVO implements Serializable {
+
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "key")
@@ -20,4 +22,5 @@ public class SysCaptchaVO implements Serializable {
 
 	@Schema(description = "image base64")
 	private String image;
+
 }

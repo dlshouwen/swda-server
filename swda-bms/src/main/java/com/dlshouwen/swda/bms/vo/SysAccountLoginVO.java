@@ -6,24 +6,27 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 账号登录
+ * account login vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "账号登录")
+@Schema(description = "account login")
 public class SysAccountLoginVO implements Serializable {
+
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "用户名")
+	@Schema(description = "username")
 	private String username;
 
-	@Schema(description = "密码")
+	@Schema(description = "password")
 	private String password;
 
-	@Schema(description = "唯一key")
+	@Schema(description = "key")
 	private String key;
 
-	@Schema(description = "验证码")
+	@Schema(description = "captcha")
 	private String captcha;
+
 }

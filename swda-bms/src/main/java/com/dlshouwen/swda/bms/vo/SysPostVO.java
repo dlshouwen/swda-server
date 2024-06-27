@@ -12,35 +12,37 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 岗位管理
+ * post vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "岗位管理")
+@Schema(description = "post")
 public class SysPostVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "岗位编码", required = true)
+	@Schema(description = "post code")
 	@NotBlank(message = "岗位编码不能为空")
 	private String postCode;
 
-	@Schema(description = "岗位名称", required = true)
+	@Schema(description = "post name")
 	@NotBlank(message = "岗位名称不能为空")
 	private String postName;
 
-	@Schema(description = "排序", required = true)
+	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
 
-	@Schema(description = "状态  0：停用   1：正常", required = true)
+	@Schema(description = "status 0：停用   1：正常")
 	@Range(min = 0, max = 1, message = "状态不正确")
 	private Integer status;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 

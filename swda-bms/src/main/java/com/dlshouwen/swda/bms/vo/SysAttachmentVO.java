@@ -9,31 +9,33 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 附件管理
+ * attachment vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "附件管理")
+@Schema(description = "attachment")
 public class SysAttachmentVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "附件名称")
+	@Schema(description = "name")
 	private String name;
 
-	@Schema(description = "附件地址")
+	@Schema(description = "url")
 	private String url;
 
-	@Schema(description = "附件大小")
+	@Schema(description = "size")
 	private Long size;
 
-	@Schema(description = "存储平台")
+	@Schema(description = "platform")
 	private String platform;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 

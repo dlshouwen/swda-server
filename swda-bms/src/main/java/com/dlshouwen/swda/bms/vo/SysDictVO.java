@@ -8,30 +8,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 全部字典
+ * dict vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "全部字典")
+@Schema(description = "dict")
 public class SysDictVO {
-	@Schema(description = "字典类型")
+	
+	@Schema(description = "dict type")
 	private String dictType;
 
-	@Schema(description = "字典数据列表")
+	@Schema(description = "dict list")
 	private List<DictData> dataList = new ArrayList<>();
 
 	@Data
 	@AllArgsConstructor
-	@Schema(description = "字典数据")
+	@Schema(description = "dict")
 	public static class DictData {
-		@Schema(description = "字典标签")
+
+		@Schema(description = "label")
 		private String dictLabel;
 
-		@Schema(description = "字典值")
+		@Schema(description = "value")
 		private String dictValue;
 
-		@Schema(description = "标签样式")
+		@Schema(description = "label class")
 		private String labelClass;
+
 	}
+
 }

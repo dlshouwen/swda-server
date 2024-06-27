@@ -11,39 +11,41 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 角色管理
+ * role vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "角色")
+@Schema(description = "role")
 public class SysRoleVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "角色名称")
+	@Schema(description = "role name")
 	@NotBlank(message = "角色名称不能为空")
 	private String name;
 
-	@Schema(description = "角色编码")
+	@Schema(description = "role code")
 	@NotBlank(message = "角色编码不能为空")
 	private String roleCode;
 
-	@Schema(description = "备注")
+	@Schema(description = "remark")
 	private String remark;
 
-	@Schema(description = "数据范围  0：全部数据  1：本机构及子机构数据  2：本机构数据  3：本人数据  4：自定义数据")
+	@Schema(description = "data scope 0：全部数据  1：本机构及子机构数据  2：本机构数据  3：本人数据  4：自定义数据")
 	private Integer dataScope;
 
-	@Schema(description = "菜单ID列表")
+	@Schema(description = "menu id list")
 	private List<Long> menuIdList;
 
-	@Schema(description = "机构ID列表")
+	@Schema(description = "organ id list")
 	private List<Long> orgIdList;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 

@@ -9,31 +9,33 @@ import org.hibernate.validator.constraints.Range;
 import java.io.Serializable;
 
 /**
- * 用户基本信息
+ * user base vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "用户基本信息")
+@Schema(description = "user base")
 public class SysUserBaseVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "姓名", required = true)
+	@Schema(description = "real name")
 	@NotBlank(message = "姓名不能为空")
 	private String realName;
 
-	@Schema(description = "头像")
+	@Schema(description = "avatar")
 	private String avatar;
 
-	@Schema(description = "性别 0：男   1：女   2：未知", required = true)
+	@Schema(description = "gender")
 	@Range(min = 0, max = 2, message = "性别不正确")
 	private Integer gender;
 
-	@Schema(description = "邮箱")
+	@Schema(description = "email")
 	@Email(message = "邮箱格式不正确")
 	private String email;
 
-	@Schema(description = "手机号", required = true)
+	@Schema(description = "mobile", required = true)
 	@NotBlank(message = "手机号不能为空")
 	private String mobile;
 

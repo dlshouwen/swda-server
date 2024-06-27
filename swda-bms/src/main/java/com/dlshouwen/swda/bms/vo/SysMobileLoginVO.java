@@ -6,18 +6,21 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 手机号登录
+ * mobile login vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "手机号登录")
+@Schema(description = "mobile login")
 public class SysMobileLoginVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "手机号")
+	@Schema(description = "mobile")
 	private String mobile;
 
-	@Schema(description = "验证码")
+	@Schema(description = "code")
 	private String code;
+
 }

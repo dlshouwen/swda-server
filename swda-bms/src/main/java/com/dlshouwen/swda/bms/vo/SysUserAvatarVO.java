@@ -7,17 +7,19 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 用户头像
+ * user avatar vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "用户头像")
+@Schema(description = "user avatar")
 public class SysUserAvatarVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@NotBlank(message = "头像不能为空")
-	@Schema(description = "头像")
+	@Schema(description = "avatar")
 	private String avatar;
 
 }

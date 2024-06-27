@@ -9,50 +9,52 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 参数管理
+ * params vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "参数管理")
+@Schema(description = "params")
 public class SysParamsVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "参数名称")
+	@Schema(description = "param name")
 	private String paramName;
 
-	@Schema(description = "系统参数")
+	@Schema(description = "param type")
 	private Integer paramType;
 
-	@Schema(description = "参数键")
+	@Schema(description = "param key")
 	private String paramKey;
 
-	@Schema(description = "参数值")
+	@Schema(description = "param value")
 	private String paramValue;
 
-	@Schema(description = "备注")
+	@Schema(description = "remark")
 	private String remark;
 
-	@Schema(description = "版本号")
+	@Schema(description = "version")
 	private Integer version;
 
-	@Schema(description = "删除标识")
+	@Schema(description = "deleted")
 	private Integer deleted;
 
-	@Schema(description = "创建者")
+	@Schema(description = "creator")
 	private Long creator;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 
-	@Schema(description = "更新者")
+	@Schema(description = "updater")
 	private Long updater;
 
-	@Schema(description = "更新时间")
+	@Schema(description = "update time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime updateTime;
 

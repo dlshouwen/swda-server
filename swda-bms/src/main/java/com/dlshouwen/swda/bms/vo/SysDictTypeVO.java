@@ -11,44 +11,47 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 字典类型
+ * dict type vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "字典类型")
+@Schema(description = "dict type")
 public class SysDictTypeVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "字典类型", required = true)
+	@Schema(description = "dict type")
 	@NotBlank(message = "字典类型不能为空")
 	private String dictType;
 
-	@Schema(description = "字典名称", required = true)
+	@Schema(description = "dict name")
 	@NotBlank(message = "字典名称不能为空")
 	private String dictName;
 
-	@Schema(description = "备注")
+	@Schema(description = "remark")
 	private String remark;
 
-	@Schema(description = "排序", required = true)
+	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 
-	@Schema(description = "更新时间")
+	@Schema(description = "update time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime updateTime;
 
-	@Schema(description = "来源  0：字典数据  1：动态SQL")
+	@Schema(description = "dict source")
 	private Integer dictSource;
 
-	@Schema(description = "动态sql")
+	@Schema(description = "dict sql")
 	private String dictSql;
+
 }

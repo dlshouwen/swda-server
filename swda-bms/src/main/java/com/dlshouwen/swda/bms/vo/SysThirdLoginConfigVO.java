@@ -9,34 +9,36 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 第三方登录配置
+ * third login config vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "第三方登录配置")
+@Schema(description = "third login config")
 public class SysThirdLoginConfigVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "开放平台类型")
+	@Schema(description = "open type")
 	private String openType;
 
-	@Schema(description = "ClientID")
+	@Schema(description = "client id")
 	private String clientId;
 
-	@Schema(description = "ClientSecret")
+	@Schema(description = "client secret")
 	private String clientSecret;
 
-	@Schema(description = "RedirectUri")
+	@Schema(description = "redirect uri")
 	private String redirectUri;
 
-	@Schema(description = "AgentID")
+	@Schema(description = "agent id")
 	private String agentId;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 

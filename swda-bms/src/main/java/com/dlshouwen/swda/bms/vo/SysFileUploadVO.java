@@ -6,24 +6,27 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 文件上传
+ * file upload vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "文件上传")
+@Schema(description = "file upload")
 public class SysFileUploadVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "文件名称")
+	@Schema(description = "file name")
 	private String name;
 
-	@Schema(description = "文件地址")
+	@Schema(description = "url")
 	private String url;
 
-	@Schema(description = "文件大小")
+	@Schema(description = "size")
 	private Long size;
 
-	@Schema(description = "存储平台")
+	@Schema(description = "platform")
 	private String platform;
+
 }

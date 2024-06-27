@@ -9,61 +9,63 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 操作日志
+ * operation log vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "操作日志")
+@Schema(description = "operation log")
 public class SysLogOperateVO implements Serializable {
+
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "用户ID")
+	@Schema(description = "user id")
 	private Long userId;
 
-	@Schema(description = "操作人")
+	@Schema(description = "real name")
 	private String realName;
 
-	@Schema(description = "模块名")
+	@Schema(description = "module")
 	private String module;
 
-	@Schema(description = "操作名")
+	@Schema(description = "name")
 	private String name;
 
-	@Schema(description = "请求URI")
+	@Schema(description = "request uri")
 	private String reqUri;
 
-	@Schema(description = "请求方法")
+	@Schema(description = "request method")
 	private String reqMethod;
 
-	@Schema(description = "请求参数")
+	@Schema(description = "request params")
 	private String reqParams;
 
-	@Schema(description = "操作IP")
+	@Schema(description = "ip")
 	private String ip;
 
-	@Schema(description = "登录地点")
+	@Schema(description = "address")
 	private String address;
 
-	@Schema(description = "User Agent")
+	@Schema(description = "user agent")
 	private String userAgent;
 
-	@Schema(description = "操作类型")
+	@Schema(description = "operate type")
 	private Integer operateType;
 
-	@Schema(description = "执行时长")
+	@Schema(description = "duration")
 	private Integer duration;
 
-	@Schema(description = "操作状态")
+	@Schema(description = "status")
 	private Integer status;
 
-	@Schema(description = "返回消息")
+	@Schema(description = "result message")
 	private String resultMsg;
 
-	@Schema(description = "创建时间")
+	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 

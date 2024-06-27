@@ -11,29 +11,32 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 用户Token
+ * user token vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @AllArgsConstructor
-@Schema(description = "用户Token")
+@Schema(description = "user token")
 public class SysUserTokenVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "access_token")
+	@Schema(description = "access token")
 	@JsonProperty(value = "access_token")
 	private String accessToken;
 
-	@Schema(description = "refresh_token")
+	@Schema(description = "refresh token")
 	@JsonProperty(value = "refresh_token")
 	private String refreshToken;
 
-	@Schema(description = "access_token 过期时间")
+	@Schema(description = "access token expire")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime accessTokenExpire;
 
-	@Schema(description = "refresh_token 过期时间")
+	@Schema(description = "refresh token expire")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime refreshTokenExpire;
+
 }

@@ -12,17 +12,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * excel用户表
+ * user excel vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 public class SysUserExcelVO implements Serializable, TransPojo {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 本属性对于导出无用，只是用于翻译
-	 */
 	@ExcelIgnore
 	private Long id;
 

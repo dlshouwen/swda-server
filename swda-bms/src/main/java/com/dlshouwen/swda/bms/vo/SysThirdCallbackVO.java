@@ -6,21 +6,24 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 第三方登录 回调参数
+ * third callback vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "第三方登录 回调参数")
+@Schema(description = "third callback")
 public class SysThirdCallbackVO implements Serializable {
+	
+	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "开放平台类型")
+	@Schema(description = "open type")
 	private String openType;
 
-	@Schema(description = "开放平台Code")
+	@Schema(description = "code")
 	private String code;
 
 	@Schema(description = "state")
 	private String state;
+
 }
