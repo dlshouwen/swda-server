@@ -12,29 +12,28 @@ import java.time.LocalDateTime;
 
 /**
  * 用户Token
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @AllArgsConstructor
 @Schema(description = "用户Token")
 public class SysUserTokenVO implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Schema(description = "access_token")
-    @JsonProperty(value = "access_token")
-    private String accessToken;
+	@Schema(description = "access_token")
+	@JsonProperty(value = "access_token")
+	private String accessToken;
 
-    @Schema(description = "refresh_token")
-    @JsonProperty(value = "refresh_token")
-    private String refreshToken;
+	@Schema(description = "refresh_token")
+	@JsonProperty(value = "refresh_token")
+	private String refreshToken;
 
-    @Schema(description = "access_token 过期时间")
-    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private LocalDateTime accessTokenExpire;
+	@Schema(description = "access_token 过期时间")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime accessTokenExpire;
 
-    @Schema(description = "refresh_token 过期时间")
-    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private LocalDateTime refreshTokenExpire;
+	@Schema(description = "refresh_token 过期时间")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime refreshTokenExpire;
 }

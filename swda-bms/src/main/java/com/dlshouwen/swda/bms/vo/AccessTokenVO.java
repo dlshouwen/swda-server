@@ -12,22 +12,21 @@ import java.time.LocalDateTime;
 
 /**
  * AccessToken
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @Schema(description = "AccessToken")
 public class AccessTokenVO implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+	@Serial
+	private static final long serialVersionUID = 1L;
 
-    @Schema(description = "access_token")
-    @JsonProperty(value = "access_token")
-    private String accessToken;
+	@Schema(description = "access_token")
+	@JsonProperty(value = "access_token")
+	private String accessToken;
 
-    @Schema(description = "access_token 过期时间")
-    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private LocalDateTime accessTokenExpire;
+	@Schema(description = "access_token 过期时间")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime accessTokenExpire;
 
 }

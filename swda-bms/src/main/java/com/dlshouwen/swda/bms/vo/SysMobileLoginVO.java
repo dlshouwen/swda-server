@@ -7,18 +7,17 @@ import java.io.Serializable;
 
 /**
  * 手机号登录
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Data
 @Schema(description = "手机号登录")
 public class SysMobileLoginVO implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Schema(description = "手机号")
-    private String mobile;
+	@Schema(description = "手机号")
+	private String mobile;
 
-    @Schema(description = "验证码")
-    private String code;
+	@Schema(description = "验证码")
+	private String code;
 }
