@@ -30,136 +30,170 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 用户Token
+ * user token service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
-public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, SysUserTokenEntity>
-		implements SysUserTokenService {
+public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, SysUserTokenEntity> implements SysUserTokenService {
+	
+	/** token store cache */
 	private final TokenCache tokenStoreCache;
+	
+	/** user details service */
 	private final SysUserDetailsService sysUserDetailsService;
+	
+	/** token properties */
 	private final TokenProperties securityProperties;
+	
+	/** user mapper */
 	private final SysUserDao sysUserDao;
 
+	/**
+	 * create token
+	 * @param userId
+	 * @return user token vo
+	 */
 	@Override
 	public SysUserTokenVO createToken(Long userId) {
-		// 生成token
+//		generate access token
 		String accessToken = TokenUtils.generator();
+//		generate refresh token
 		String refreshToken = TokenUtils.generator();
-
+//		create user token
 		SysUserTokenEntity entity = new SysUserTokenEntity();
+//		set user id, access token , refresh token
 		entity.setUserId(userId);
 		entity.setAccessToken(accessToken);
 		entity.setRefreshToken(refreshToken);
-
-		// 过期时间
+//		get now date
 		Date now = new Date();
-		entity.setAccessTokenExpire(
-				DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getAccessTokenExpire())));
-		entity.setRefreshTokenExpire(
-				DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getRefreshTokenExpire())));
-
-		// 是否存在Token
-		SysUserTokenEntity tokenEntity = baseMapper
-				.selectOne(new LambdaQueryWrapper<SysUserTokenEntity>().eq(SysUserTokenEntity::getUserId, userId));
+//		set access token expire
+		entity.setAccessTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getAccessTokenExpire())));
+//		set refresh token expire
+		entity.setRefreshTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getRefreshTokenExpire())));
+//		get user token
+		SysUserTokenEntity tokenEntity = baseMapper.selectOne(new LambdaQueryWrapper<SysUserTokenEntity>().eq(SysUserTokenEntity::getUserId, userId));
+//		if token is null
 		if (tokenEntity == null) {
+//			insert user
 			baseMapper.insert(entity);
 		} else {
+//			set token
 			entity.setId(tokenEntity.getId());
+//			update user
 			baseMapper.updateById(entity);
 		}
-
+//		return user token
 		return SysUserTokenConvert.INSTANCE.convert(entity);
 	}
 
+	/**
+	 * refresh token
+	 * @param refresh token
+	 * @return user token vo
+	 */
 	@Override
 	public SysUserTokenVO refreshToken(String refreshToken) {
+//		create wrapper
 		LambdaQueryWrapper<SysUserTokenEntity> query = Wrappers.lambdaQuery();
+//		set wrapper
 		query.eq(SysUserTokenEntity::getRefreshToken, refreshToken);
 		query.ge(SysUserTokenEntity::getRefreshTokenExpire, new Date());
-
-		// 不存在，则表示refreshToken错误，或者已过期
+//		get user token
 		SysUserTokenEntity entity = baseMapper.selectOne(query);
+//		if user token is null
 		if (entity == null) {
+//			throw exception
 			throw new SwdaException(ResultCode.REFRESH_TOKEN_INVALID);
 		}
-
-		// 删除缓存信息
+//		delete user cache
 		tokenStoreCache.deleteUser(entity.getAccessToken());
-
-		// 生成新 accessToken
+//		generate access token
 		String accessToken = TokenUtils.generator();
+//		set access token
 		entity.setAccessToken(accessToken);
-		entity.setAccessTokenExpire(
-				DateUtil.toLocalDateTime(DateUtil.offsetSecond(new Date(), securityProperties.getAccessTokenExpire())));
-
-		// 更新
+//		set access token expire
+		entity.setAccessTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(new Date(), securityProperties.getAccessTokenExpire())));
+//		update user token
 		baseMapper.updateById(entity);
-
-		// 设置用户权限信息
+//		get user
 		SysUserEntity user = sysUserDao.selectById(entity.getUserId());
+//		convert to user detail
 		UserDetail userDetail = SysUserConvert.INSTANCE.convertDetail(user);
+//		get user details
 		sysUserDetailsService.getUserDetails(userDetail);
-
-		// 保存用户信息到缓存
+//		save user cache
 		tokenStoreCache.saveUser(accessToken, userDetail);
-
+//		convert to user token for return
 		return SysUserTokenConvert.INSTANCE.convert(entity);
 	}
 
+	/**
+	 * expire token
+	 * @param userId
+	 */
 	@Override
 	public void expireToken(Long userId) {
+//		create user token
 		SysUserTokenEntity entity = new SysUserTokenEntity();
+//		get now date
 		LocalDateTime now = LocalDateTime.now();
+//		set access token expire, refresh token expire
 		entity.setAccessTokenExpire(now);
 		entity.setRefreshTokenExpire(now);
-
-		baseMapper.update(entity,
-				new LambdaQueryWrapper<SysUserTokenEntity>().eq(SysUserTokenEntity::getUserId, userId));
+//		update user token
+		baseMapper.update(entity, new LambdaQueryWrapper<SysUserTokenEntity>().eq(SysUserTokenEntity::getUserId, userId));
 	}
 
+	/**
+	 * update cache auth by role id
+	 * @param roleId
+	 */
 	@Async
 	@Override
 	public void updateCacheAuthByRoleId(Long roleId) {
-		// 根据角色ID，查询用户 access_token 列表
+//		get online access token list by role id
 		List<String> accessTokenList = baseMapper.getOnlineAccessTokenListByRoleId(roleId, LocalDateTime.now());
-
-		accessTokenList.forEach(this::updateCacheAuth);
-	}
-
-	@Async
-	@Override
-	public void updateCacheAuthByUserId(Long userId) {
-		// 根据用户ID，查询用户 access_token 列表
-		List<String> accessTokenList = baseMapper.getOnlineAccessTokenListByUserId(userId, LocalDateTime.now());
-
+//		update cache auth
 		accessTokenList.forEach(this::updateCacheAuth);
 	}
 
 	/**
-	 * 根据accessToken，更新Cache里面的用户权限
-	 *
-	 * @param accessToken access_token
+	 * update cache auth by user id
+	 * @param userId
+	 */
+	@Async
+	@Override
+	public void updateCacheAuthByUserId(Long userId) {
+//		get online access token list by user id
+		List<String> accessTokenList = baseMapper.getOnlineAccessTokenListByUserId(userId, LocalDateTime.now());
+//		update cache auth
+		accessTokenList.forEach(this::updateCacheAuth);
+	}
+
+	/**
+	 * update cache auth
+	 * @param accessToken
 	 */
 	private void updateCacheAuth(String accessToken) {
+//		get user detail
 		UserDetail user = tokenStoreCache.getUser(accessToken);
-		// 用户不存在
+//		user is null then return
 		if (user == null) {
 			return;
 		}
-
-		// 查询过期时间
+//		get expire
 		Long expire = tokenStoreCache.getExpire(accessToken);
+//		expire is null then return 
 		if (expire == null) {
 			return;
 		}
-
-		// 设置用户权限信息
+//		get user details
 		sysUserDetailsService.getUserDetails(user);
-		// 更新缓存
+//		save user
 		tokenStoreCache.saveUser(accessToken, user, expire);
-
 	}
+
 }

@@ -23,93 +23,136 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 菜单管理
+ * menu service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
+	
+	/** role menu service */
 	private final SysRoleMenuService sysRoleMenuService;
 
+	/**
+	 * save
+	 * @param menuVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void save(SysMenuVO vo) {
+//		convert to menu
 		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
-
-		// 保存菜单
+//		insert
 		baseMapper.insert(entity);
 	}
 
+	/**
+	 * update
+	 * @param menuVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(SysMenuVO vo) {
+//		convert to menu
 		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
-
-		// 上级菜单不能为自己
+//		if menu id equals pre menu id
 		if (entity.getId().equals(entity.getPid())) {
+//			throw exception
 			throw new SwdaException("上级菜单不能为自己");
 		}
-
-		// 更新菜单
+//		update
 		updateById(entity);
 	}
 
+	/**
+	 * delete
+	 * @param id
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Long id) {
-		// 删除菜单
+//		delete menu
 		removeById(id);
-
+//		delete role menu
 		// 删除角色菜单关系
 		sysRoleMenuService.deleteByMenuId(id);
 	}
 
+	/**
+	 * get menu list
+	 * @param type
+	 * @return menu list
+	 */
 	@Override
 	public List<SysMenuVO> getMenuList(Integer type) {
+//		get menu list
 		List<SysMenuEntity> menuList = baseMapper.getMenuList(type);
-
+//		build menu tree for return
 		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
 	}
 
+	/**
+	 * get user menu list
+	 * @param user
+	 * @param type
+	 * @return menu vo list
+	 */
 	@Override
 	public List<SysMenuVO> getUserMenuList(UserDetail user, Integer type) {
+//		defined menu list
 		List<SysMenuEntity> menuList;
-
-		// 系统管理员，拥有最高权限
+//		if user is super admin
 		if (user.getSuperAdmin().equals(ZeroOne.YES)) {
+//			get menu list
 			menuList = baseMapper.getMenuList(type);
 		} else {
+//			get user menu list
 			menuList = baseMapper.getUserMenuList(user.getUserId(), type);
 		}
-
+//		build menu tree for return
 		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
 	}
 
+	/**
+	 * get sub menu count
+	 * @param pid
+	 * @return sub menu count
+	 */
 	@Override
 	public Long getSubMenuCount(Long pid) {
 		return count(new LambdaQueryWrapper<SysMenuEntity>().eq(SysMenuEntity::getPid, pid));
 	}
 
+	/**
+	 * get user authority
+	 * @param user
+	 * @return user authority
+	 */
 	@Override
 	public Set<String> getUserAuthority(UserDetail user) {
-		// 系统管理员，拥有最高权限
+//		defined authority list
 		List<String> authorityList;
+//		if user is super admin
 		if (user.getSuperAdmin().equals(ZeroOne.YES)) {
+//			get authority list
 			authorityList = baseMapper.getAuthorityList();
 		} else {
+//			get user authority list
 			authorityList = baseMapper.getUserAuthorityList(user.getUserId());
 		}
-
-		// 用户权限列表
+//		defined perms set
 		Set<String> permsSet = new HashSet<>();
+//		for each authority
 		for (String authority : authorityList) {
+//			blank then continue
 			if (StrUtil.isBlank(authority)) {
 				continue;
 			}
+//			add to perms
 			permsSet.addAll(Arrays.asList(authority.trim().split(",")));
 		}
-
+//		return permission set
 		return permsSet;
 	}
 

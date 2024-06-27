@@ -13,54 +13,79 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 用户岗位关系
+ * user post service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
-public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, SysUserPostEntity>
-		implements SysUserPostService {
+public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, SysUserPostEntity> implements SysUserPostService {
 
+	/**
+	 * save or update
+	 * @param userId
+	 * @param postIdList
+	 */
 	@Override
 	public void saveOrUpdate(Long userId, List<Long> postIdList) {
-		// 数据库岗位ID列表
+//		get post id list
 		List<Long> dbPostIdList = getPostIdList(userId);
-
-		// 需要新增的岗位ID
+//		get insert post id list
 		Collection<Long> insertPostIdList = CollUtil.subtract(postIdList, dbPostIdList);
+//		if has insert datas
 		if (CollUtil.isNotEmpty(insertPostIdList)) {
+//			for each post id to construct user post list
 			List<SysUserPostEntity> postList = insertPostIdList.stream().map(postId -> {
+//				create user post
 				SysUserPostEntity entity = new SysUserPostEntity();
+//				set user id, post id
 				entity.setUserId(userId);
 				entity.setPostId(postId);
+//				return user post
 				return entity;
 			}).collect(Collectors.toList());
-
-			// 批量新增
+//			batch insert user post
 			saveBatch(postList);
 		}
-
-		// 需要删除的岗位ID
+//		get delete post id list
 		Collection<Long> deletePostIdList = CollUtil.subtract(dbPostIdList, postIdList);
+//		if has delete datas
 		if (CollUtil.isNotEmpty(deletePostIdList)) {
+//			get wrapper
 			LambdaQueryWrapper<SysUserPostEntity> queryWrapper = new LambdaQueryWrapper<>();
-			remove(queryWrapper.eq(SysUserPostEntity::getUserId, userId).in(SysUserPostEntity::getPostId,
-					deletePostIdList));
+//			delete user post
+			remove(queryWrapper.eq(SysUserPostEntity::getUserId, userId).in(SysUserPostEntity::getPostId, deletePostIdList));
 		}
 	}
 
+	/**
+	 * delete by post id list
+	 * @param postIdList
+	 */
 	@Override
 	public void deleteByPostIdList(List<Long> postIdList) {
+//		delete user post
 		remove(new LambdaQueryWrapper<SysUserPostEntity>().in(SysUserPostEntity::getPostId, postIdList));
 	}
 
+	/**
+	 * delete by user id list
+	 * @param userIdList
+	 */
 	@Override
 	public void deleteByUserIdList(List<Long> userIdList) {
+//		delete user post
 		remove(new LambdaQueryWrapper<SysUserPostEntity>().in(SysUserPostEntity::getUserId, userIdList));
 	}
 
+	/**
+	 * get post id list
+	 * @param userId
+	 * @return post id list
+	 */
 	@Override
 	public List<Long> getPostIdList(Long userId) {
+//		get post id list for return
 		return baseMapper.getPostIdList(userId);
 	}
+
 }

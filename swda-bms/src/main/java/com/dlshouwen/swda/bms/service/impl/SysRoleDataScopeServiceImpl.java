@@ -14,52 +14,73 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 角色数据权限
+ * role data scope service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
-public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScopeDao, SysRoleDataScopeEntity>
-		implements SysRoleDataScopeService {
+public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScopeDao, SysRoleDataScopeEntity> implements SysRoleDataScopeService {
 
+	/**
+	 * save or update
+	 * @param roleId
+	 * @param organIdList
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void saveOrUpdate(Long roleId, List<Long> orgIdList) {
-		// 数据库机构ID列表
+//		get organ id list
 		List<Long> dbOrgIdList = getOrgIdList(roleId);
-
-		// 需要新增的机构ID
+//		get insert organ id list
 		Collection<Long> insertOrgIdList = CollUtil.subtract(orgIdList, dbOrgIdList);
+//		if has insert datas
 		if (CollUtil.isNotEmpty(insertOrgIdList)) {
+//			construct role data scope list by organ id list
 			List<SysRoleDataScopeEntity> orgList = insertOrgIdList.stream().map(orgId -> {
+//				create role data scope
 				SysRoleDataScopeEntity entity = new SysRoleDataScopeEntity();
+//				set organ id, role id
 				entity.setOrgId(orgId);
 				entity.setRoleId(roleId);
+//				return role data scope
 				return entity;
 			}).collect(Collectors.toList());
-
-			// 批量新增
+//			batch insert role data scope
 			saveBatch(orgList);
 		}
-
-		// 需要删除的机构ID
+//		get delete organ id list
 		Collection<Long> deleteOrgIdList = CollUtil.subtract(dbOrgIdList, orgIdList);
+//		if has delete datas
 		if (CollUtil.isNotEmpty(deleteOrgIdList)) {
+//			get wrapper
 			LambdaQueryWrapper<SysRoleDataScopeEntity> queryWrapper = new LambdaQueryWrapper<>();
+//			set condition
 			queryWrapper.eq(SysRoleDataScopeEntity::getRoleId, roleId);
 			queryWrapper.in(SysRoleDataScopeEntity::getOrgId, deleteOrgIdList);
-
+//			delete role data scope
 			remove(queryWrapper);
 		}
 	}
 
+	/**
+	 * get organ id list
+	 * @param roleId
+	 * @return organ id list
+	 */
 	@Override
 	public List<Long> getOrgIdList(Long roleId) {
+//		get organ id list
 		return baseMapper.getOrgIdList(roleId);
 	}
 
+	/**
+	 * delete by role id list
+	 * @param roleIdList
+	 */
 	@Override
 	public void deleteByRoleIdList(List<Long> roleIdList) {
+//		delete role data scope
 		remove(new LambdaQueryWrapper<SysRoleDataScopeEntity>().in(SysRoleDataScopeEntity::getRoleId, roleIdList));
 	}
+
 }

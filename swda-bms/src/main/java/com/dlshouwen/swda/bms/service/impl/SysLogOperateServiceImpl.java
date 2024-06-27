@@ -26,58 +26,77 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 操作日志
+ * operation log service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
-public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, SysLogOperateEntity>
-		implements SysLogOperateService {
+public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, SysLogOperateEntity> implements SysLogOperateService {
+	
+	/** redis cache */
 	private final RedisCache redisCache;
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	@Override
 	public PageResult<SysLogOperateVO> page(SysLogOperateQuery query) {
+//		select page
 		IPage<SysLogOperateEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-
+//		return page result
 		return new PageResult<>(SysLogOperateConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
+	/**
+	 * get wrapper
+	 * @param query
+	 * @return wrapper
+	 */
 	private LambdaQueryWrapper<SysLogOperateEntity> getWrapper(SysLogOperateQuery query) {
+//		defined wrapper
 		LambdaQueryWrapper<SysLogOperateEntity> wrapper = Wrappers.lambdaQuery();
+//		set condition
 		wrapper.eq(query.getStatus() != null, SysLogOperateEntity::getStatus, query.getStatus());
 		wrapper.like(StrUtil.isNotBlank(query.getRealName()), SysLogOperateEntity::getRealName, query.getRealName());
 		wrapper.like(StrUtil.isNotBlank(query.getModule()), SysLogOperateEntity::getModule, query.getModule());
 		wrapper.like(StrUtil.isNotBlank(query.getReqUri()), SysLogOperateEntity::getReqUri, query.getReqUri());
 		wrapper.orderByDesc(SysLogOperateEntity::getId);
+//		return wrapper
 		return wrapper;
 	}
 
 	/**
-	 * 启动项目时，从Redis队列获取操作日志并保存
+	 * save log
 	 */
 	@PostConstruct
 	public void saveLog() {
+//		create schedule executor
 		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
-
-		// 每隔10秒钟，执行一次
+//		delay
 		scheduledService.scheduleWithFixedDelay(() -> {
+//			try catch
 			try {
-				String key = Constant.OPERATION_LOG_KEY;
-				// 每次插入10条
-				int count = 10;
-				for (int i = 0; i < count; i++) {
-					OperationLog log = (OperationLog) redisCache.rightPop(key);
+//				per 10
+				for (int i = 0; i < 10; i++) {
+//					get log
+					OperationLog log = (OperationLog) redisCache.rightPop(Constant.OPERATION_LOG_KEY);
+//					if log is null
 					if (log == null) {
 						return;
 					}
-
+//					convert to operation log
 					SysLogOperateEntity entity = BeanUtil.copyProperties(log, SysLogOperateEntity.class);
+//					insert
 					baseMapper.insert(entity);
 				}
 			} catch (Exception e) {
+//				log error
 				log.error("SysLogOperateServiceImpl.saveLog Error：" + ExceptionUtils.toString(e));
 			}
 		}, 1, 10, TimeUnit.SECONDS);
 	}
+
 }

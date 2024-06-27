@@ -15,81 +15,121 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 用户角色关系
+ * user role service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
-public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysUserRoleEntity>
-		implements SysUserRoleService {
+public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysUserRoleEntity> implements SysUserRoleService {
+	
+	/** user token service */
 	private final SysUserTokenService sysUserTokenService;
 
+	/**
+	 * save or update
+	 * @param userId
+	 * @param roleIdList
+	 */
 	@Override
 	public void saveOrUpdate(Long userId, List<Long> roleIdList) {
-		// 数据库角色ID列表
+//		get role id list
 		List<Long> dbRoleIdList = getRoleIdList(userId);
-
-		// 需要新增的角色ID
+//		get insert role id list
 		Collection<Long> insertRoleIdList = CollUtil.subtract(roleIdList, dbRoleIdList);
+//		if has insert datas
 		if (CollUtil.isNotEmpty(insertRoleIdList)) {
+//			for each id list to construct role list
 			List<SysUserRoleEntity> roleList = insertRoleIdList.stream().map(roleId -> {
+//				create user role
 				SysUserRoleEntity entity = new SysUserRoleEntity();
+//				set user id, role id
 				entity.setUserId(userId);
 				entity.setRoleId(roleId);
+//				return user role
 				return entity;
 			}).collect(Collectors.toList());
-
-			// 批量新增
+//			batch insert role list
 			saveBatch(roleList);
 		}
-
-		// 需要删除的角色ID
+//		get delete role id list
 		Collection<Long> deleteRoleIdList = CollUtil.subtract(dbRoleIdList, roleIdList);
+//		if has delete datas
 		if (CollUtil.isNotEmpty(deleteRoleIdList)) {
+//			create query wrapper
 			LambdaQueryWrapper<SysUserRoleEntity> queryWrapper = new LambdaQueryWrapper<>();
-			remove(queryWrapper.eq(SysUserRoleEntity::getUserId, userId).in(SysUserRoleEntity::getRoleId,
-					deleteRoleIdList));
+//			delete user role
+			remove(queryWrapper.eq(SysUserRoleEntity::getUserId, userId).in(SysUserRoleEntity::getRoleId, deleteRoleIdList));
 		}
 	}
 
+	/**
+	 * save user list
+	 * @param role
+	 * @param userIdList
+	 */
 	@Override
 	public void saveUserList(Long roleId, List<Long> userIdList) {
+//		for each user id list to construct user role list
 		List<SysUserRoleEntity> list = userIdList.stream().map(userId -> {
+//			create user role
 			SysUserRoleEntity entity = new SysUserRoleEntity();
+//			set user id, role id
 			entity.setUserId(userId);
 			entity.setRoleId(roleId);
+//			return user role
 			return entity;
 		}).collect(Collectors.toList());
-
-		// 批量新增
+//		batch insert user role
 		saveBatch(list);
-
-		// 更新用户的缓存权限
+//		update cache auth by user id
 		userIdList.forEach(sysUserTokenService::updateCacheAuthByUserId);
 	}
 
+	/**
+	 * delete by role id list
+	 * @param roleIdList
+	 */
 	@Override
 	public void deleteByRoleIdList(List<Long> roleIdList) {
+//		delete user role
 		remove(new LambdaQueryWrapper<SysUserRoleEntity>().in(SysUserRoleEntity::getRoleId, roleIdList));
 	}
 
+	/**
+	 * delete by user id list
+	 * @param userIdList
+	 */
 	@Override
 	public void deleteByUserIdList(List<Long> userIdList) {
+//		delete user role
 		remove(new LambdaQueryWrapper<SysUserRoleEntity>().in(SysUserRoleEntity::getUserId, userIdList));
 	}
 
+	/**
+	 * delete by user id list
+	 * @param roleId
+	 * @param userIdList
+	 */
 	@Override
 	public void deleteByUserIdList(Long roleId, List<Long> userIdList) {
+//		create wrapper
 		LambdaQueryWrapper<SysUserRoleEntity> queryWrapper = new LambdaQueryWrapper<>();
+//		delete user role
 		remove(queryWrapper.eq(SysUserRoleEntity::getRoleId, roleId).in(SysUserRoleEntity::getUserId, userIdList));
-
-		// 更新用户的缓存权限
+//		update cache auth
 		userIdList.forEach(sysUserTokenService::updateCacheAuthByUserId);
 	}
 
+	/**
+	 * get role id list
+	 * @param userId
+	 * @return role id list
+	 */
 	@Override
 	public List<Long> getRoleIdList(Long userId) {
+//		get role id list
 		return baseMapper.getRoleIdList(userId);
 	}
+
 }

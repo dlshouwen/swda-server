@@ -23,98 +23,137 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 机构管理
+ * organ service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> implements SysOrgService {
+	
+	/** user mapper */
 	private final SysUserDao sysUserDao;
 
+	/**
+	 * get list
+	 * @return organ list
+	 */
 	@Override
 	public List<SysOrgVO> getList() {
+//		defined params
 		Map<String, Object> params = new HashMap<>();
-
-		// 数据权限
+//		put data scope
 		params.put(Constant.DATA_SCOPE, getDataScope("t1", "id"));
-
-		// 机构列表
+//		get organ list
 		List<SysOrgEntity> entityList = baseMapper.getList(params);
-
+//		build organ tree for return
 		return TreeUtils.build(SysOrgConvert.INSTANCE.convertList(entityList));
 	}
 
+	/**
+	 * save
+	 * @param organVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void save(SysOrgVO vo) {
+//		convert organ vo to organ
 		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
-
+//		insert
 		baseMapper.insert(entity);
 	}
 
+	/**
+	 * update
+	 * @param organVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(SysOrgVO vo) {
+//		convert to organ
 		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
-
-		// 上级机构不能为自身
+//		if organ id equals pre organ id
 		if (entity.getId().equals(entity.getPid())) {
+//			throw exception
 			throw new SwdaException("上级机构不能为自身");
 		}
-
-		// 上级机构不能为下级
+//		get sub organ list
 		List<Long> subOrgList = getSubOrgIdList(entity.getId());
+//		if change to upper organ
 		if (subOrgList.contains(entity.getPid())) {
+//			throw exception
 			throw new SwdaException("上级机构不能为下级");
 		}
-
+//		update
 		updateById(entity);
 	}
 
+	/**
+	 * delete
+	 * @param id
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Long id) {
-		// 判断是否有子机构
+//		get sub organ count
 		long orgCount = count(new QueryWrapper<SysOrgEntity>().eq("pid", id));
+//		if has sub count
 		if (orgCount > 0) {
+//			throw exception
 			throw new SwdaException("请先删除子机构");
 		}
-
-		// 判断机构下面是否有用户
+//		get organ user count
 		long userCount = sysUserDao.selectCount(new QueryWrapper<SysUserEntity>().eq("org_id", id));
+//		if has user
 		if (userCount > 0) {
+//			throw exception
 			throw new SwdaException("机构下面有用户，不能删除");
 		}
-
-		// 删除
+//		delete
 		removeById(id);
 	}
 
+	/**
+	 * get sub organ id list
+	 * @param id
+	 * @return sub organ id list
+	 */
 	@Override
 	public List<Long> getSubOrgIdList(Long id) {
-		// 所有机构的id、pid列表
+//		get organ list
 		List<SysOrgEntity> orgList = baseMapper.getIdAndPidList();
-
-		// 递归查询所有子机构ID列表
+//		defined sub id list
 		List<Long> subIdList = new ArrayList<>();
+//		get sub id list
 		getTree(id, orgList, subIdList);
-
-		// 本机构也添加进去
+//		add self
 		subIdList.add(id);
-
+//		return sub id list
 		return subIdList;
 	}
 
+	/**
+	 * get name list
+	 * @param id list
+	 * @return name list
+	 */
 	@Override
 	public List<String> getNameList(List<Long> idList) {
+//		if id list is empty
 		if (idList.isEmpty()) {
+//			return null
 			return null;
 		}
-
+//		get name list for return
 		return baseMapper.selectBatchIds(idList).stream().map(SysOrgEntity::getName).toList();
 	}
 
+	/**
+	 * get tree
+	 * @param id
+	 * @param orgList
+	 * @param subIdList
+	 */
 	private void getTree(Long id, List<SysOrgEntity> orgList, List<Long> subIdList) {
 		for (SysOrgEntity org : orgList) {
 			if (ObjectUtil.equals(org.getPid(), id)) {
@@ -124,4 +163,5 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 			}
 		}
 	}
+
 }

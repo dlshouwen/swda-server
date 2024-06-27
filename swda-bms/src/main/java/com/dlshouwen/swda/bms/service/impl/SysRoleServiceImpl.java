@@ -23,114 +23,158 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 角色
+ * role service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntity> implements SysRoleService {
+	
+	/** role menu service */
 	private final SysRoleMenuService sysRoleMenuService;
+	
+	/** role data scope service */
 	private final SysRoleDataScopeService sysRoleDataScopeService;
+	
+	/** user role service */
 	private final SysUserRoleService sysUserRoleService;
+	
+	/** user token service */
 	private final SysUserTokenService sysUserTokenService;
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	@Override
 	public PageResult<SysRoleVO> page(SysRoleQuery query) {
+//		select page
 		IPage<SysRoleEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-
+//		return page result
 		return new PageResult<>(SysRoleConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
+	/**
+	 * get role list
+	 * @param query
+	 * @return role vo list
+	 */
 	@Override
 	public List<SysRoleVO> getList(SysRoleQuery query) {
+//		get role list
 		List<SysRoleEntity> entityList = baseMapper.selectList(getWrapper(query));
-
+//		convert to role vo list for result
 		return SysRoleConvert.INSTANCE.convertList(entityList);
 	}
 
+	/**
+	 * get wrapper
+	 * @param query
+	 * @return wrapper
+	 */
 	private Wrapper<SysRoleEntity> getWrapper(SysRoleQuery query) {
+//		create wrapper
 		LambdaQueryWrapper<SysRoleEntity> wrapper = new LambdaQueryWrapper<>();
+//		set condition
 		wrapper.like(StrUtil.isNotBlank(query.getName()), SysRoleEntity::getName, query.getName());
-
-		// 数据权限
+//		handle data scope wrapper
 		dataScopeWrapper(wrapper);
-
+//		return wrapper
 		return wrapper;
 	}
 
+	/**
+	 * save
+	 * @param roleVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void save(SysRoleVO vo) {
+//		convert to role
 		SysRoleEntity entity = SysRoleConvert.INSTANCE.convert(vo);
-
-		// 保存角色
+//		set data scope
 		entity.setDataScope(DataScopeEnum.SELF.getValue());
+//		insert role
 		baseMapper.insert(entity);
-
-		// 保存角色菜单关系
+//		save role menu
 		sysRoleMenuService.saveOrUpdate(entity.getId(), vo.getMenuIdList());
 	}
 
+	/**
+	 * update
+	 * @param roleVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(SysRoleVO vo) {
+//		convert to role
 		SysRoleEntity entity = SysRoleConvert.INSTANCE.convert(vo);
-
-		// 更新角色
+//		update role
 		updateById(entity);
-
-		// 更新角色菜单关系
+//		save role menu
 		sysRoleMenuService.saveOrUpdate(entity.getId(), vo.getMenuIdList());
-
-		// 更新角色对应用户的缓存权限
+//		update auth cache
 		sysUserTokenService.updateCacheAuthByRoleId(entity.getId());
 	}
 
+	/**
+	 * data scope
+	 * @param roleDataScopeVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void dataScope(SysRoleDataScopeVO vo) {
+//		get role
 		SysRoleEntity entity = getById(vo.getId());
+//		set data scope
 		entity.setDataScope(vo.getDataScope());
-		// 更新角色
+//		update role
 		updateById(entity);
-
-		// 更新角色数据权限关系
+//		if custom data scope
 		if (vo.getDataScope().equals(DataScopeEnum.CUSTOM.getValue())) {
+//			update role data scope
 			sysRoleDataScopeService.saveOrUpdate(entity.getId(), vo.getOrgIdList());
 		} else {
+//			delete role data scope
 			sysRoleDataScopeService.deleteByRoleIdList(Collections.singletonList(vo.getId()));
 		}
-
-		// 更新角色对应用户的缓存权限
+//		update auth cache
 		sysUserTokenService.updateCacheAuthByRoleId(entity.getId());
 	}
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(List<Long> idList) {
-		// 删除角色
+//		dlete role list
 		removeByIds(idList);
-
-		// 删除用户角色关系
+//		delete user role list
 		sysUserRoleService.deleteByRoleIdList(idList);
-
-		// 删除角色菜单关系
+//		delete role menu list
 		sysRoleMenuService.deleteByRoleIdList(idList);
-
-		// 删除角色数据权限关系
+//		delete role data scope list
 		sysRoleDataScopeService.deleteByRoleIdList(idList);
-
-		// 更新角色对应用户的缓存权限
+//		update auth cache
 		idList.forEach(sysUserTokenService::updateCacheAuthByRoleId);
 	}
 
+	/**
+	 * get role name list
+	 * @param idList
+	 * @return role name list
+	 */
 	@Override
 	public List<String> getNameList(List<Long> idList) {
+//		if id list is empty then return null
 		if (idList.isEmpty()) {
 			return null;
 		}
-
+//		get role name list for return
 		return baseMapper.selectBatchIds(idList).stream().map(SysRoleEntity::getName).toList();
 	}
 

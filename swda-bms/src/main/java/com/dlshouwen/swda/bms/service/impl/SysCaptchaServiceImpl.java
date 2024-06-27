@@ -16,70 +16,90 @@ import com.wf.captcha.base.Captcha;
 import org.springframework.stereotype.Service;
 
 /**
- * 验证码
+ * captcha service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysCaptchaServiceImpl implements SysCaptchaService {
+	
+	/** redis cache */
 	private final RedisCache redisCache;
+	
+	/** params service */
 	private final SysParamsService sysParamsService;
 
+	/**
+	 * generate
+	 * @return captcha vo
+	 */
 	@Override
 	public SysCaptchaVO generate() {
-		// 生成验证码key
+//		generate key
 		String key = UUID.randomUUID().toString();
-
-		// 生成验证码
+//		generate captcha
 		SpecCaptcha captcha = new SpecCaptcha(150, 40);
 		captcha.setLen(5);
 		captcha.setCharType(Captcha.TYPE_DEFAULT);
 		String image = captcha.toBase64();
-
-		// 保存到缓存
-		String redisKey = Constant.CAPTCHA_PREFIX + key;
-		redisCache.set(redisKey, captcha.text(), 300);
-
-		// 封装返回数据
+//		save to cache
+		redisCache.set(Constant.CAPTCHA_PREFIX + key, captcha.text(), 300);
+//		construct captcha vo
 		SysCaptchaVO captchaVO = new SysCaptchaVO();
 		captchaVO.setKey(key);
 		captchaVO.setImage(image);
-
+//		return captcha vo
 		return captchaVO;
 	}
 
+	/**
+	 * validate
+	 * @param key
+	 * @param code
+	 * @return is validate
+	 */
 	@Override
 	public boolean validate(String key, String code) {
-		// 如果关闭了验证码，则直接效验通过
+//		if captcha enabled close then return true
 		if (!isCaptchaEnabled()) {
 			return true;
 		}
-
+//		if key or code is empty then return false
 		if (StrUtil.isBlank(key) || StrUtil.isBlank(code)) {
 			return false;
 		}
-
-		// 获取验证码
+//		get cache
 		String captcha = getCache(key);
-
-		// 效验成功
+//		return validate result
 		return code.equalsIgnoreCase(captcha);
 	}
 
+	/**
+	 * is captcha enabled
+	 * @return is captcha enabled
+	 */
 	@Override
 	public boolean isCaptchaEnabled() {
 		return sysParamsService.getBoolean(SysParamsEnum.LOGIN_CAPTCHA.name());
 	}
 
+	/**
+	 * get cache
+	 * @param key
+	 * @return captcha
+	 */
 	private String getCache(String key) {
+//		append prefix
 		key = Constant.CAPTCHA_PREFIX + key;
+//		get captcha
 		String captcha = (String) redisCache.get(key);
-		// 删除验证码
+//		if has captcha
 		if (captcha != null) {
+//			delete cache
 			redisCache.delete(key);
 		}
-
+//		return captcha
 		return captcha;
 	}
 

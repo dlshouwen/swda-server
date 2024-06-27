@@ -22,124 +22,166 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 参数管理
+ * params service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParamsEntity> implements SysParamsService {
+	
+	/** params cache */
 	private final SysParamsCache sysParamsCache;
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	@Override
 	public PageResult<SysParamsVO> page(SysParamsQuery query) {
+//		select page
 		IPage<SysParamsEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-
+//		get page result for return
 		return new PageResult<>(SysParamsConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
+	/**
+	 * get wrapper
+	 * @param query
+	 * @return wrapper
+	 */
 	private LambdaQueryWrapper<SysParamsEntity> getWrapper(SysParamsQuery query) {
+//		get wrapper
 		LambdaQueryWrapper<SysParamsEntity> wrapper = Wrappers.lambdaQuery();
-
+//		set condition
 		wrapper.like(StrUtil.isNotBlank(query.getParamKey()), SysParamsEntity::getParamKey, query.getParamKey());
 		wrapper.eq(StrUtil.isNotBlank(query.getParamValue()), SysParamsEntity::getParamValue, query.getParamValue());
 		wrapper.eq(query.getParamType() != null, SysParamsEntity::getParamType, query.getParamType());
 		wrapper.orderByDesc(SysParamsEntity::getId);
-
+//		return wrapper
 		return wrapper;
 	}
 
+	/**
+	 * save
+	 * @param paramsVO
+	 */
 	@Override
 	public void save(SysParamsVO vo) {
-		// 判断 参数键 是否存在
+//		get is exist
 		boolean exist = baseMapper.isExist(vo.getParamKey());
+//		if exist
 		if (exist) {
+//			throw exception
 			throw new SwdaException("参数键已存在");
 		}
-
+//		convert to params
 		SysParamsEntity entity = SysParamsConvert.INSTANCE.convert(vo);
-
+//		insert
 		baseMapper.insert(entity);
-
-		// 保存到缓存
+//		save cache
 		sysParamsCache.save(entity.getParamKey(), entity.getParamValue());
 	}
 
+	/**
+	 * update
+	 * @param paramsVO
+	 */
 	@Override
 	public void update(SysParamsVO vo) {
+//		get params
 		SysParamsEntity entity = baseMapper.selectById(vo.getId());
-
-		// 如果 参数键 修改过
+//		if has change
 		if (!StrUtil.equalsIgnoreCase(entity.getParamKey(), vo.getParamKey())) {
-			// 判断 新参数键 是否存在
+//			is key exist
 			boolean exist = baseMapper.isExist(vo.getParamKey());
+//			if exist
 			if (exist) {
+//				throw exception
 				throw new SwdaException("参数键已存在");
 			}
-
-			// 删除修改前的缓存
+//			delete cache
 			sysParamsCache.delete(entity.getParamKey());
 		}
-
-		// 修改数据
+//		update
 		updateById(SysParamsConvert.INSTANCE.convert(vo));
-
-		// 保存到缓存
+//		save cache
 		sysParamsCache.save(vo.getParamKey(), vo.getParamValue());
 	}
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(List<Long> idList) {
-		// 查询列表
+//		get params list
 		List<SysParamsEntity> list = baseMapper.selectBatchIds(idList);
-
-		// 删除数据
+//		remove
 		removeByIds(idList);
-
-		// 删除缓存
+//		get delete keys
 		Object[] keys = list.stream().map(SysParamsEntity::getParamKey).toArray(String[]::new);
+//		delete cache
 		sysParamsCache.delete(keys);
 	}
 
+	/**
+	 * get string
+	 * @param key
+	 * @return value
+	 */
 	@Override
 	public String getString(String paramKey) {
+//		get value
 		String value = sysParamsCache.get(paramKey);
+//		if not blank
 		if (StrUtil.isNotBlank(value)) {
+//			return value
 			return value;
 		}
-
-		// 如果缓存没有，则查询数据库
+//		if cache emptyt then get from database
 		SysParamsEntity entity = baseMapper.get(paramKey);
+//		if params is empty
 		if (entity == null) {
+//			throw exception
 			throw new SwdaException("参数值不存在，paramKey：" + paramKey);
 		}
-
-		// 保存到缓存
+//		save cache
 		sysParamsCache.save(entity.getParamKey(), entity.getParamValue());
-
+//		return value
 		return entity.getParamValue();
 	}
 
+	/**
+	 * get int
+	 * @param key
+	 * @return value
+	 */
 	@Override
 	public int getInt(String paramKey) {
-		String value = getString(paramKey);
-
-		return Integer.parseInt(value);
+		return Integer.parseInt(getString(paramKey));
 	}
 
+	/**
+	 * get boolean
+	 * @param key
+	 * @return value
+	 */
 	@Override
 	public boolean getBoolean(String paramKey) {
-		String value = getString(paramKey);
-
-		return Boolean.parseBoolean(value);
+		return Boolean.parseBoolean(getString(paramKey));
 	}
 
+	/**
+	 * get json object
+	 * @param key
+	 * @return value
+	 */
 	@Override
 	public <T> T getJSONObject(String paramKey, Class<T> valueType) {
-		String value = getString(paramKey);
-
-		return JsonUtils.parseObject(value, valueType);
+		return JsonUtils.parseObject(getString(paramKey), valueType);
 	}
 
 }

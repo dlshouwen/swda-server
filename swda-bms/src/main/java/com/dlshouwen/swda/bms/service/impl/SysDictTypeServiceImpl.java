@@ -33,124 +33,183 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
- * 字典类型
+ * dict type service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
-public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysDictTypeEntity>
-		implements SysDictTypeService, InitializingBean {
+public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysDictTypeEntity> implements SysDictTypeService, InitializingBean {
+	
+	/** dict mapper */
 	private final SysDictDataDao sysDictDataDao;
+	
+	/** dict trans service */
 	private final DictionaryTransService dictionaryTransService;
 
+	/**
+	 * page
+	 * @param query
+	 * @return page result
+	 */
 	@Override
 	public PageResult<SysDictTypeVO> page(SysDictTypeQuery query) {
 		IPage<SysDictTypeEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 		return new PageResult<>(SysDictTypeConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
+	/**
+	 * get wrapper
+	 * @param query
+	 * @return wrapper
+	 */
 	private Wrapper<SysDictTypeEntity> getWrapper(SysDictTypeQuery query) {
+//		create wrapper
 		LambdaQueryWrapper<SysDictTypeEntity> wrapper = new LambdaQueryWrapper<>();
+//		set condition
 		wrapper.like(StrUtil.isNotBlank(query.getDictType()), SysDictTypeEntity::getDictType, query.getDictType());
 		wrapper.like(StrUtil.isNotBlank(query.getDictName()), SysDictTypeEntity::getDictName, query.getDictName());
 		wrapper.orderByAsc(SysDictTypeEntity::getSort);
-
+//		return wrapper
 		return wrapper;
 	}
 
+	/**
+	 * save
+	 * @param dictTypeVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void save(SysDictTypeVO vo) {
+//		convert to dict type
 		SysDictTypeEntity entity = SysDictTypeConvert.INSTANCE.convert(vo);
-
+//		insert
 		baseMapper.insert(entity);
 	}
 
+	/**
+	 * update
+	 * @param dictTypeVO
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(SysDictTypeVO vo) {
+//		convert to dict type
 		SysDictTypeEntity entity = SysDictTypeConvert.INSTANCE.convert(vo);
-
+//		update
 		updateById(entity);
 	}
 
+	/**
+	 * delete
+	 * @param idList
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(List<Long> idList) {
+//		delete
 		removeByIds(idList);
 	}
 
+	/**
+	 * get dict sql
+	 * @param id
+	 * @return dict list
+	 */
 	@Override
 	public List<SysDictVO.DictData> getDictSql(Long id) {
+//		get dict type
 		SysDictTypeEntity entity = this.getById(id);
+//		try catch
 		try {
+//			get dict list for return
 			return sysDictDataDao.getListForSql(entity.getDictSql());
 		} catch (Exception e) {
+//			throw exception
 			throw new SwdaException("动态SQL执行失败，请检查SQL是否正确！");
 		}
 	}
 
+	/**
+	 * get dict list
+	 * @return dict list
+	 */
 	@Override
 	public List<SysDictVO> getDictList() {
-		// 全部字典类型列表
+//		get dict type list
 		List<SysDictTypeEntity> typeList = this.list(Wrappers.emptyWrapper());
-
-		// 全部字典数据列表
+//		get dict list
 		QueryWrapper<SysDictDataEntity> query = new QueryWrapper<SysDictDataEntity>().orderByAsc("sort");
 		List<SysDictDataEntity> dataList = sysDictDataDao.selectList(query);
-
-		// 全部字典列表
+//		defined dict list
 		List<SysDictVO> dictList = new ArrayList<>(typeList.size());
+//		for each type
 		for (SysDictTypeEntity type : typeList) {
+//			defined dict
 			SysDictVO dict = new SysDictVO();
+//			set dict type
 			dict.setDictType(type.getDictType());
-
+//			for each dict
 			for (SysDictDataEntity data : dataList) {
+//				is this type
 				if (type.getId().equals(data.getDictTypeId())) {
-					dict.getDataList().add(
-							new SysDictVO.DictData(data.getDictLabel(), data.getDictValue(), data.getLabelClass()));
+//					add dict list
+					dict.getDataList().add(new SysDictVO.DictData(data.getDictLabel(), data.getDictValue(), data.getLabelClass()));
 				}
 			}
-
-			// 数据来源动态SQL
+//			if sql dict
 			if (type.getDictSource() == DictSourceEnum.SQL.getValue()) {
-				// 增加动态列表
+//				get sql
 				String sql = type.getDictSql();
+//				try catch
 				try {
+//					get dict list
 					dict.setDataList(sysDictDataDao.getListForSql(sql));
 				} catch (Exception e) {
+//					log error
 					log.error("增加动态字典异常: type=" + type, e);
 				}
 			}
-
+//			add dict
 			dictList.add(dict);
 		}
-
+//		return dict list
 		return dictList;
 	}
 
+	/**
+	 * after properties set
+	 */
 	@Override
 	public void afterPropertiesSet() {
+//		refresh trans cache
 		refreshTransCache();
 	}
 
+	/**
+	 * refresh trans cache
+	 */
 	public void refreshTransCache() {
-		// 异步不阻塞主线程，不会 增加启动用时
+//		async
 		CompletableFuture.supplyAsync(() -> {
-			// 获取所有的字典项数据
+//			get dict list
 			List<SysDictDataEntity> dataList = sysDictDataDao.selectList(new LambdaQueryWrapper<>());
-			// 根据类型分组
-			Map<Long, List<SysDictDataEntity>> dictTypeDataMap = dataList.stream()
-					.collect(Collectors.groupingBy(SysDictDataEntity::getDictTypeId));
+//			group by dict type
+			Map<Long, List<SysDictDataEntity>> dictTypeDataMap = dataList.stream().collect(Collectors.groupingBy(SysDictDataEntity::getDictTypeId));
+//			get dict type list
 			List<SysDictTypeEntity> dictTypeEntities = super.list();
+//			for each dict type
 			for (SysDictTypeEntity dictTypeEntity : dictTypeEntities) {
+//				contains key
 				if (dictTypeDataMap.containsKey(dictTypeEntity.getId())) {
+//					try catch
 					try {
+//						refresh cache
 						dictionaryTransService.refreshCache(dictTypeEntity.getDictType(),
 								dictTypeDataMap.get(dictTypeEntity.getId()).stream().collect(Collectors
 										.toMap(SysDictDataEntity::getDictValue, SysDictDataEntity::getDictLabel)));
 					} catch (Exception e) {
+//						log error
 						log.error("刷新字典缓存异常: type=" + dictTypeEntity, e);
 					}
 				}
@@ -158,4 +217,5 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 			return null;
 		});
 	}
+
 }

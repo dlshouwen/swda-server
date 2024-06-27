@@ -19,70 +19,92 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 用户 UserDetails 信息
+ * user details service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class SysUserDetailsServiceImpl implements SysUserDetailsService {
+	
+	/** menu service */
 	private final SysMenuService sysMenuService;
+	
+	/** organ service */
 	private final SysOrgService sysOrgService;
+	
+	/** role mapper */
 	private final SysRoleDao sysRoleDao;
+	
+	/** role data scope mapper */
 	private final SysRoleDataScopeDao sysRoleDataScopeDao;
 
+	/**
+	 * get user details
+	 * @param userDetail
+	 * @return user details
+	 */
 	@Override
 	public UserDetails getUserDetails(UserDetail userDetail) {
-		// 账号不可用
+//		if user disabled
 		if (userDetail.getStatus() == OpenClose.CLOSE) {
+//			set enabled false
 			userDetail.setEnabled(false);
 		}
-
-		// 数据权限范围
+//		get data scope set to user detail
 		List<Long> dataScopeList = getDataScope(userDetail);
 		userDetail.setDataScopeList(dataScopeList);
-
-		// 用户权限列表
+//		get user authority
 		Set<String> authoritySet = sysMenuService.getUserAuthority(userDetail);
-
-		// 用户角色编码列表
+//		get role code by user id
 		List<String> roleCodeList = sysRoleDao.geRoleCodeByUserId(userDetail.getUserId());
+//		set role code to authority set
 		roleCodeList.forEach(roleCode -> authoritySet.add("ROLE_" + roleCode));
-
+//		set authority set
 		userDetail.setAuthoritySet(authoritySet);
-
+//		return user details
 		return userDetail;
 	}
 
+	/**
+	 * get data scope
+	 * @param userDetail
+	 * @return data scope
+	 */
 	private List<Long> getDataScope(UserDetail userDetail) {
+//		get data scope by user id
 		Integer dataScope = sysRoleDao.getDataScopeByUserId(userDetail.getUserId());
+//		if data scope is null
 		if (dataScope == null) {
+//			return empty list
 			return new ArrayList<>();
 		}
-
+//		if all premission
 		if (dataScope.equals(DataScopeEnum.ALL.getValue())) {
-			// 全部数据权限，则返回null
+//			return null
 			return null;
 		} else if (dataScope.equals(DataScopeEnum.ORG_AND_CHILD.getValue())) {
-			// 本机构及子机构数据
+//			get sub organ id list
 			List<Long> dataScopeList = sysOrgService.getSubOrgIdList(userDetail.getOrganId());
-			// 自定义数据权限范围
+//			add user data scope list
 			dataScopeList.addAll(sysRoleDataScopeDao.getDataScopeList(userDetail.getUserId()));
-
+//			return data scope list
 			return dataScopeList;
 		} else if (dataScope.equals(DataScopeEnum.ORG_ONLY.getValue())) {
-			// 本机构数据
+//			create data scope list
 			List<Long> dataScopeList = new ArrayList<>();
+//			add self organ id
 			dataScopeList.add(userDetail.getOrganId());
-			// 自定义数据权限范围
+//			add user data scope list
 			dataScopeList.addAll(sysRoleDataScopeDao.getDataScopeList(userDetail.getUserId()));
-
+//			return data scope list
 			return dataScopeList;
 		} else if (dataScope.equals(DataScopeEnum.CUSTOM.getValue())) {
-			// 自定义数据权限范围
+//			add user data scope list
 			return sysRoleDataScopeDao.getDataScopeList(userDetail.getUserId());
 		}
-
+//		return empty list
 		return new ArrayList<>();
 	}
+
 }
