@@ -8,6 +8,7 @@ import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.entity.base.Data;
 import com.dlshouwen.swda.core.dict.CallResult;
 import com.dlshouwen.swda.core.dict.CallType;
+import com.dlshouwen.swda.core.dict.ExecuteType;
 import com.dlshouwen.swda.core.dict.OperationType;
 import com.dlshouwen.swda.core.entity.log.DataLog;
 import com.dlshouwen.swda.core.utils.ExceptionUtils;
@@ -107,7 +108,7 @@ public class JdbcTemplateLogAspect {
 				}
 //				if only store dml
 				String data_log_store_type = MapUtil.getStr(Data.attr, "data_log_store_type");
-				if ("2".equals(data_log_store_type) && OperationType.SELECT==dataLog.getOperationType()) {
+				if ("2".equals(data_log_store_type) && OperationType.SELECT==dataLog.getExecuteType()) {
 					isWriteLog = false;
 				}
 			}
@@ -149,29 +150,29 @@ public class JdbcTemplateLogAspect {
 			HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 //			set ip
 			dataLog.setIp(IpUtils.getIp(request));
-//			set operation sql
-			dataLog.setOperationSql(joinPoint.getArgs()[0].toString());
-//			handler operation sql
-			String sql = dataLog.getOperationSql().toLowerCase().trim();
-//			set operation type
-			dataLog.setOperationType(OperationType.UNKNOWN);
+//			set execute sql
+			dataLog.setExecuteSql(joinPoint.getArgs()[0].toString());
+//			handler execute sql
+			String sql = dataLog.getExecuteSql().toLowerCase().trim();
+//			set execute type
+			dataLog.setExecuteType(ExecuteType.UNKNOWN);
 			if (sql.startsWith("select"))
-				dataLog.setOperationType(OperationType.SELECT);
+				dataLog.setExecuteType(ExecuteType.SELECT);
 			if (sql.startsWith("insert"))
-				dataLog.setOperationType(OperationType.INSERT);
+				dataLog.setExecuteType(ExecuteType.INSERT);
 			if (sql.startsWith("update"))
-				dataLog.setOperationType(OperationType.UPDATE);
+				dataLog.setExecuteType(ExecuteType.UPDATE);
 			if (sql.startsWith("delete"))
-				dataLog.setOperationType(OperationType.DELETE);
+				dataLog.setExecuteType(ExecuteType.DELETE);
 //			set params
 			List<Object> args = new ArrayList<>();
 			for (int i = 1; i < joinPoint.getArgs().length; i++) {
 				args.add(joinPoint.getArgs()[i]);
 			}
-			dataLog.setParams(JsonUtils.toJsonString(args));
-//			set execute type, result type
-			dataLog.setExecuteType(joinPoint.getSignature().getName());
-			dataLog.setResultType(((MethodSignature) joinPoint.getSignature()).getMethod().getReturnType().getName());
+			dataLog.setExecuteParams(JsonUtils.toJsonString(args));
+//			set execute method, execute result class
+			dataLog.setExecuteMethod(joinPoint.getSignature().getName());
+			dataLog.setExecuteResultClass(((MethodSignature) joinPoint.getSignature()).getMethod().getReturnType().getName());
 //			get user detail
 			UserDetail user = SecurityUser.getUser();
 //			if user is not null

@@ -17,8 +17,8 @@ import lombok.Data;
 @Schema(description = "Result")
 public class R<T> {
 
-	@Schema(description = "code, 0:success, other:failure")
-	private int code = 0;
+	@Schema(description = "code")
+	private int code = 200;
 
 	@Schema(description = "message")
 	private String message = "success";

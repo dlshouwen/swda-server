@@ -89,8 +89,8 @@ public class OperationLogAspect {
 //		defined operation log
 		OperationLog operationLog = new OperationLog();
 //		set end time, cost
-		operationLog.setResponseEnd(LocalDateTime.now());
-		operationLog.setCost((int) LocalDateTimeUtil.between(startTime, operationLog.getResponseEnd()).toMillis());
+		operationLog.setEndTime(LocalDateTime.now());
+		operationLog.setCost((int) LocalDateTimeUtil.between(startTime, operationLog.getEndTime()).toMillis());
 //      get method
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
@@ -98,6 +98,17 @@ public class OperationLogAspect {
 		operationLog.setCallSource(joinPoint.getTarget().getClass().getName() + "." + method.getName());
 //		set operation type
 		operationLog.setOperationType(operation.type()[0].getValue());
+//		set call source, line no
+		StackTraceElement[] stack = (new Throwable()).getStackTrace();
+		if (stack != null) {
+			for (StackTraceElement element : stack) {
+				if (element.getClassName().startsWith("com.dlshouwen")) {
+					operationLog.setCallSource(element.getClassName());
+					operationLog.setLineNo(element.getLineNumber());
+					break;
+				}
+			}
+		}
 //		get user
 		UserDetail user = SecurityUser.getUser();
 //		if user is not null
@@ -109,27 +120,27 @@ public class OperationLogAspect {
 			operationLog.setOrganId(user.getOrganId());
 			operationLog.setOrganName(user.getOrganName());
 		}
-//		set name, module, operation type
-		operationLog.setName(operation.name());
-		operationLog.setModule(operation.module());
+//		set operation name, operation module, operation type
+		operationLog.setOperationName(operation.name());
+		operationLog.setOperationModule(operation.module());
 		operationLog.setOperationType(operation.type()[0].getValue());
 //		if no module
-		if (StrUtil.isBlank(operationLog.getModule())) {
+		if (StrUtil.isBlank(operationLog.getOperationModule())) {
 //			get swagger tag
 			Tag tag = ((MethodSignature) joinPoint.getSignature()).getMethod().getDeclaringClass()
 					.getAnnotation(Tag.class);
 //			if tag not null then set module
 			if (tag != null) {
-				operationLog.setModule(tag.name());
+				operationLog.setOperationModule(tag.name());
 			}
 		}
 //		if no name
-		if (StrUtil.isBlank(operationLog.getName())) {
+		if (StrUtil.isBlank(operationLog.getOperationName())) {
 //			get swagger tag
 			io.swagger.v3.oas.annotations.Operation _operation = ((MethodSignature) joinPoint.getSignature())
 					.getMethod().getAnnotation(io.swagger.v3.oas.annotations.Operation.class);
 			if (_operation != null) {
-				operationLog.setName(_operation.summary());
+				operationLog.setOperationName(_operation.summary());
 			}
 		}
 //		get request
@@ -139,11 +150,11 @@ public class OperationLogAspect {
 //			set ip, user agent, request url, request method
 			operationLog.setIp(IpUtils.getIp(request));
 			operationLog.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
-			operationLog.setUrl(request.getRequestURI());
-			operationLog.setMethod(request.getMethod());
+			operationLog.setReqeustUri(request.getRequestURI());
+			operationLog.setRequestMethod(request.getMethod());
 		}
-//		set params, call result
-		operationLog.setParams(getMethodParams(joinPoint));
+//		set request params, call result
+		operationLog.setRequestParams(getMethodParams(joinPoint));
 		operationLog.setCallResult(callResult);
 //		save log
 		redisCache.leftPush(Constant.OPERATION_LOG_KEY, operationLog, RedisCache.NOT_EXPIRE);

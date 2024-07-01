@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResultCode {
 
-	SUCCESS(0, "访问成功"), 
+	SUCCESS(200, "访问成功"), 
 	
 	UNAUTHORIZED(401, "未授权"), 
 	

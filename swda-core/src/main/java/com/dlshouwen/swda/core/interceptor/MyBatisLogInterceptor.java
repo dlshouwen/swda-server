@@ -8,6 +8,7 @@ import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.entity.base.Data;
 import com.dlshouwen.swda.core.dict.CallResult;
 import com.dlshouwen.swda.core.dict.CallType;
+import com.dlshouwen.swda.core.dict.ExecuteType;
 import com.dlshouwen.swda.core.dict.OperationType;
 import com.dlshouwen.swda.core.entity.log.DataLog;
 import com.dlshouwen.swda.core.utils.ExceptionUtils;
@@ -92,11 +93,11 @@ public class MyBatisLogInterceptor implements Interceptor {
 		}
 //		is write log
 		if (isWriteLog) {
-//			set call type, call result, start time, execute type
+//			set call type, call result, start time, execute method
 			dataLog.setCallType(CallType.MYBATIS);
 			dataLog.setCallResult(CallResult.SUCCESS);
 			dataLog.setStartTime(LocalDateTime.now());
-			dataLog.setExecuteType(invocation.getMethod().getName());
+			dataLog.setExecuteMethod(invocation.getMethod().getName());
 //			get reqeust
 			HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 //			set ip
@@ -120,25 +121,25 @@ public class MyBatisLogInterceptor implements Interceptor {
 			dataLog.setCallSource(mappedStatement.getId());
 //			get parameter
 			Object parameterObject = args[1];
-//			set operation type
-			dataLog.setOperationType(OperationType.UNKNOWN);
+//			set execute type
+			dataLog.setExecuteType(ExecuteType.UNKNOWN);
 			if (mappedStatement.getSqlCommandType() == SqlCommandType.SELECT)
-				dataLog.setOperationType(OperationType.SELECT);
+				dataLog.setExecuteType(ExecuteType.SELECT);
 			if (mappedStatement.getSqlCommandType() == SqlCommandType.INSERT)
-				dataLog.setOperationType(OperationType.INSERT);
+				dataLog.setExecuteType(ExecuteType.INSERT);
 			if (mappedStatement.getSqlCommandType() == SqlCommandType.UPDATE)
-				dataLog.setOperationType(OperationType.UPDATE);
+				dataLog.setExecuteType(ExecuteType.UPDATE);
 			if (mappedStatement.getSqlCommandType() == SqlCommandType.DELETE)
-				dataLog.setOperationType(OperationType.DELETE);
+				dataLog.setExecuteType(ExecuteType.DELETE);
 //			get bound sql
 			BoundSql boundSql = mappedStatement.getBoundSql(parameterObject);
 //			get paramter to json
 			String params = JsonUtils.toJsonString(boundSql.getParameterMappings());
 //			get return sql
 			String returnSQL = getSql(configuration, boundSql, mappedStatement.getId(), 0);
-//			set operation sql, params
-			dataLog.setOperationSql(returnSQL);
-			dataLog.setParams(params);
+//			set execute sql, execute params
+			dataLog.setExecuteSql(returnSQL);
+			dataLog.setExecuteParams(params);
 		}
 //		defined result
 		Object result = null;
@@ -147,9 +148,9 @@ public class MyBatisLogInterceptor implements Interceptor {
 			result = invocation.proceed();
 //			is write log
 			if (isWriteLog) {
-//				set execute result, result type
+//				set execute result, execute result type
 				dataLog.setExecuteResult(JsonUtils.toJsonString(result));
-				dataLog.setResultType(result.getClass().getName());
+				dataLog.setExecuteResultClass(result.getClass().getName());
 //				if only store error
 				String data_log_only_store_error = MapUtil.getStr(Data.attr, "data_log_only_store_error");
 				if ("1".equals(data_log_only_store_error)) {
@@ -157,7 +158,7 @@ public class MyBatisLogInterceptor implements Interceptor {
 				}
 //				filter store type
 				String data_log_store_type = MapUtil.getStr(Data.attr, "data_log_store_type");
-				if ("2".equals(data_log_store_type) && OperationType.SELECT == dataLog.getOperationType()) {
+				if ("2".equals(data_log_store_type) && OperationType.SELECT == dataLog.getExecuteType()) {
 					isWriteLog = false;
 				}
 			}

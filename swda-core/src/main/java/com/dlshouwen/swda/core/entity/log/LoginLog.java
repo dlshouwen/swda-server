@@ -22,9 +22,9 @@ public class LoginLog extends BaseEntity {
 
 	@TableId(value = "log_id", type = IdType.AUTO)
 	private Long logId;
-
+	
 	private String userAgent;
-
+	
 	private String token;
 	
 	private Long tenantId;

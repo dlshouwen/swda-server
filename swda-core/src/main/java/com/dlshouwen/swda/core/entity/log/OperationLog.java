@@ -22,32 +22,34 @@ public class OperationLog extends BaseEntity {
 
 	@TableId(value = "log_id", type = IdType.AUTO)
 	private Long logId;
-
-	private String callSource;
-
-	private String url;
-
-	private String method;
-
+	
 	private String userAgent;
 
-	private String module;
+	private String operationModule;
 
-	private String name;
-
-	private String params;
+	private String operationName;
 
 	private int operationType;
+	
+	private String reqeustUri;
 
-	private String operationResult;
+	private String requestMethod;
+	
+	private String requestParams;
 
+	private String responseResult;
+
+	private String callSource;
+	
+	private int lineNo;
+	
 	private int callResult;
-
+	
 	private String errorReason;
 
-	private LocalDateTime responseStart;
+	private LocalDateTime startTime;
 
-	private LocalDateTime responseEnd;
+	private LocalDateTime endTime;
 
 	private int cost;
 	

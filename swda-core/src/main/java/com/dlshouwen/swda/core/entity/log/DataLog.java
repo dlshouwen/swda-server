@@ -23,38 +23,38 @@ public class DataLog extends BaseEntity {
 	@TableId(value = "log_id", type = IdType.AUTO)
 	private Long logId;
 
-	private Integer callType;
+	private Integer executeType;
+	
+	private String executeSql;
 
+	private String executeMethod;
+	
+	private String executeParams;
+	
+	private String executeResultClass;
+	
+	private String executeResult;
+	
+	private int callType;
+	
 	private String callSource;
 
 	private int lineNo;
 
-	private Integer operationType;
-
-	private String operationSql;
-
-	private String params;
-
 	private Integer callResult;
 
 	private String errorReason;
-
-	private String executeType;
-
-	private String executeResult;
-
-	private String resultType;
 
 	private LocalDateTime startTime;
 
 	private LocalDateTime endTime;
 
 	private int cost;
-
-	private Long userId;
 	
 	private Long tenantId;
 
+	private Long userId;
+	
 	private String userName;
 
 	private Long organId;
