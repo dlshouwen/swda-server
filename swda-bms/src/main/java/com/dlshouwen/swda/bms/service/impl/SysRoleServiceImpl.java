@@ -14,7 +14,7 @@ import com.dlshouwen.swda.bms.mapper.SysRoleDao;
 import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.service.*;
-import com.dlshouwen.swda.bms.vo.RoleOrganVO;
+import com.dlshouwen.swda.bms.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.vo.RoleVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -125,7 +125,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, Role> implem
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void dataScope(RoleOrganVO vo) {
+	public void dataScope(RoleDataScopeVO vo) {
 //		get role
 		Role entity = getById(vo.getId());
 //		set data scope

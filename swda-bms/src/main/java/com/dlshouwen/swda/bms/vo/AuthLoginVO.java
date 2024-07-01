@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * third login vo
+ * auth login vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "third login")
+@Schema(description = "auth login")
 public class AuthLoginVO implements Serializable {
 	
 	/** serial version uid */

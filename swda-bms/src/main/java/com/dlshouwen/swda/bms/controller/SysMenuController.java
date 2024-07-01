@@ -8,7 +8,7 @@ import com.dlshouwen.swda.bms.convert.SysMenuConvert;
 import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.enums.MenuTypeEnum;
 import com.dlshouwen.swda.bms.service.SysMenuService;
-import com.dlshouwen.swda.bms.vo.PremissionVO;
+import com.dlshouwen.swda.bms.vo.PermissionVO;
 import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.auth.SecurityUser;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
@@ -41,11 +41,11 @@ public class SysMenuController {
 	 */
 	@GetMapping("nav")
 	@Operation(name = "nav")
-	public R<List<PremissionVO>> nav() {
+	public R<List<PermissionVO>> nav() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
 //		get user menu list
-		List<PremissionVO> list = sysMenuService.getUserMenuList(user, MenuTypeEnum.MENU.getValue());
+		List<PermissionVO> list = sysMenuService.getUserMenuList(user, MenuTypeEnum.MENU.getValue());
 //		return
 		return R.ok(list);
 	}
@@ -74,9 +74,9 @@ public class SysMenuController {
 	@Operation(name = "list")
 	@Parameter(name = "type", description = "0:menu 1:button 2:interface null:all")
 	@PreAuthorize("hasAuthority('sys:menu:list')")
-	public R<List<PremissionVO>> list(Integer type) {
+	public R<List<PermissionVO>> list(Integer type) {
 //		get menu list
-		List<PremissionVO> list = sysMenuService.getMenuList(type);
+		List<PermissionVO> list = sysMenuService.getMenuList(type);
 //		return
 		return R.ok(list);
 	}
@@ -89,11 +89,11 @@ public class SysMenuController {
 	@GetMapping("{id}")
 	@Operation(name = "get")
 	@PreAuthorize("hasAuthority('sys:menu:info')")
-	public R<PremissionVO> get(@PathVariable("id") Long id) {
+	public R<PermissionVO> get(@PathVariable("id") Long id) {
 //		get menu by id
 		Permission entity = sysMenuService.getById(id);
 //		convert to menu vo
-		PremissionVO vo = SysMenuConvert.INSTANCE.convert(entity);
+		PermissionVO vo = SysMenuConvert.INSTANCE.convert(entity);
 //		is has parent menu
 		if (entity.getPid() != null) {
 //			get parent menu
@@ -113,7 +113,7 @@ public class SysMenuController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:menu:save')")
-	public R<String> save(@RequestBody @Valid PremissionVO vo) {
+	public R<String> save(@RequestBody @Valid PermissionVO vo) {
 //		save
 		sysMenuService.save(vo);
 //		return
@@ -128,7 +128,7 @@ public class SysMenuController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:menu:update')")
-	public R<String> update(@RequestBody @Valid PremissionVO vo) {
+	public R<String> update(@RequestBody @Valid PermissionVO vo) {
 //		update
 		sysMenuService.update(vo);
 //		return

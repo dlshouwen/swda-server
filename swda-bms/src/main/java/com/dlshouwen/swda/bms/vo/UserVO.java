@@ -30,16 +30,21 @@ public class UserVO implements Serializable, TransPojo {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
-	private Long id;
+	@Schema(description = "user id")
+	private Long userId;
 
-	@Schema(description = "username")
+	@Schema(description = "organ id")
+	@NotNull(message = "机构ID不能为空")
+	@Trans(type = TransType.SIMPLE, target = Organ.class, fields = "name", ref = "orgName")
+	private Long organId;
+
+	@Schema(description = "user code")
 	@NotBlank(message = "用户名不能为空")
-	private String username;
+	private String userCode;
 
-	@Schema(description = "password")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	private String password;
+	@Schema(description = "user name")
+	@NotBlank(message = "用户名不能为空")
+	private String userName;
 
 	@Schema(description = "real name")
 	@NotBlank(message = "姓名不能为空")
@@ -48,26 +53,43 @@ public class UserVO implements Serializable, TransPojo {
 	@Schema(description = "avatar")
 	private String avatar;
 
+	@Schema(description = "password")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String password;
+
+	@Schema(description = "password expire time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime passwordExpireTime;
+
+	@Schema(description = "super admin")
+	@Range(min = 0, max = 1, message = "超级管理员不正确")
+	private Integer superAdmin;
+	
+	@Schema(description = "status")
+	@Range(min = 0, max = 1, message = "状态不正确")
+	private Integer status;
+
 	@Schema(description = "gender")
 	@Range(min = 0, max = 2, message = "性别不正确")
 	private Integer gender;
 
-	@Schema(description = "email")
-	@Email(message = "邮箱格式不正确")
-	private String email;
+	@Schema(description = "card id")
+	private String cardId;
 
 	@Schema(description = "mobile")
 	@NotBlank(message = "手机号不能为空")
 	private String mobile;
 
-	@Schema(description = "organ id")
-	@NotNull(message = "机构ID不能为空")
-	@Trans(type = TransType.SIMPLE, target = Organ.class, fields = "name", ref = "orgName")
-	private Long orgId;
+	@Schema(description = "email")
+	@Email(message = "邮箱格式不正确")
+	private String email;
 
-	@Schema(description = "status")
-	@Range(min = 0, max = 1, message = "用户状态不正确")
-	private Integer status;
+	@Schema(description = "address")
+	private String address;
+
+	@Schema(description = "create time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime createTime;
 
 	@Schema(description = "role id list")
 	private List<Long> roleIdList;
@@ -78,14 +100,7 @@ public class UserVO implements Serializable, TransPojo {
 	@Schema(description = "post name list")
 	private List<String> postNameList;
 
-	@Schema(description = "super admin")
-	private Integer superAdmin;
-
 	@Schema(description = "organ name")
-	private String orgName;
-
-	@Schema(description = "create time")
-	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private LocalDateTime createTime;
+	private String organName;
 
 }

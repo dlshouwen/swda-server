@@ -13,32 +13,40 @@ import org.hibernate.validator.constraints.Range;
 import java.time.LocalDateTime;
 
 /**
- * menu vo
+ * permission vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "menu")
-public class PremissionVO extends TreeNode<PremissionVO> {
+@Schema(description = "permission")
+public class PermissionVO extends TreeNode<PermissionVO> {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
+	
+	@Schema(description = "permission id")
+	private Long permissionId;
+	
+	@Schema(description = "parent permission id")
+	private Long prePermissionId;
 
-	@Schema(description = "menu name")
-	@NotBlank(message = "菜单名称不能为空")
-	private String name;
+	@Schema(description = "permission name")
+	@NotBlank(message = "权限名称不能为空")
+	private String permissionName;
 
-	@Schema(description = "menu url")
-	private String url;
-
-	@Schema(description = "menu type")
+	@Schema(description = "permission type")
 	@Range(min = 0, max = 2, message = "类型不正确")
-	private Integer type;
+	private Integer permissionType;
 
-	@Schema(description = "open style")
-	@Range(min = 0, max = 1, message = "打开方式不正确")
-	private Integer openStyle;
+	@Schema(description = "permission value")
+	private String permissionValue;
+
+	@Schema(description = "path")
+	private String path;
+
+	@Schema(description = "component")
+	private String component;
 
 	@Schema(description = "icon")
 	private String icon;
@@ -54,7 +62,7 @@ public class PremissionVO extends TreeNode<PremissionVO> {
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 
-	@Schema(description = "parent name")
-	private String parentName;
+	@Schema(description = "parent permission name")
+	private String prePermissionName;
 
 }

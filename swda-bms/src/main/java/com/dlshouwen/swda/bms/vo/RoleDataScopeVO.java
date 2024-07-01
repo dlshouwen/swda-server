@@ -14,16 +14,16 @@ import java.util.List;
  */
 @Data
 @Schema(description = "role data scope")
-public class RoleOrganVO implements Serializable {
+public class RoleDataScopeVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
+	@Schema(description = "role id")
 	@NotNull(message = "角色ID不能为空")
-	private Long id;
+	private Long roleId;
 
-	@Schema(description = "data scope 0：全部数据  1：本机构及子机构数据  2：本机构数据  3：本人数据  4：自定义数据")
+	@Schema(description = "data scope")
 	@NotNull(message = "数据范围不能为空")
 	private Integer dataScope;
 

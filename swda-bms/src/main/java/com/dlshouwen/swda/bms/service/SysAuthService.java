@@ -14,7 +14,7 @@ public interface SysAuthService {
 	 * @param login
 	 * @return user token vo
 	 */
-	UserTokenVO loginByAccount(AccountLoginVO login);
+	UserTokenVO loginByAccount(UserLoginVO login);
 
 	/**
 	 * login by mobile

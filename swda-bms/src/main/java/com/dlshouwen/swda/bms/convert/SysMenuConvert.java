@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.Permission;
-import com.dlshouwen.swda.bms.vo.PremissionVO;
+import com.dlshouwen.swda.bms.vo.PermissionVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,20 +23,20 @@ public interface SysMenuConvert {
 	 * @param menuVO
 	 * @return menu
 	 */
-	Permission convert(PremissionVO vo);
+	Permission convert(PermissionVO vo);
 
 	/**
 	 * convert
 	 * @param menu
 	 * @return menu vo
 	 */
-	PremissionVO convert(Permission entity);
+	PermissionVO convert(Permission entity);
 
 	/**
 	 * convert list
 	 * @param menuList
 	 * @return menu vo list
 	 */
-	List<PremissionVO> convertList(List<Permission> list);
+	List<PermissionVO> convertList(List<Permission> list);
 
 }

@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "account login")
-public class AccountLoginVO implements Serializable {
+public class UserLoginVO implements Serializable {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

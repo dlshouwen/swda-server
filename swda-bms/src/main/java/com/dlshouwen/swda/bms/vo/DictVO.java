@@ -22,30 +22,30 @@ public class DictVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
+	
+	@Schema(description = "dict category id")
+	private String dictCategoryId;
 
-	@Schema(description = "id")
-	private Long id;
+	@Schema(description = "dict id")
+	private String dictId;
 
-	@Schema(description = "dict type id")
-	@NotNull(message = "字典类型ID不能为空")
-	private Long dictTypeId;
-
-	@Schema(description = "dict label")
-	@NotBlank(message = "字典标签不能为空")
-	private String dictLabel;
-
-	@Schema(description = "label class")
-	private String labelClass;
+	@Schema(description = "dict key")
+	@NotNull(message = "字典键不能为空")
+	private Long dictKey;
 
 	@Schema(description = "dict value")
+	@NotBlank(message = "字典值不能为空")
 	private String dictValue;
 
-	@Schema(description = "remark")
-	private String remark;
+	@Schema(description = "dict class")
+	private String dictClass;
 
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
+
+	@Schema(description = "remark")
+	private String remark;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

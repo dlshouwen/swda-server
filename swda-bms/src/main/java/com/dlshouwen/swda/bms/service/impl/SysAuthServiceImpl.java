@@ -59,7 +59,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 	 * @return user token vo
 	 */
 	@Override
-	public UserTokenVO loginByAccount(AccountLoginVO login) {
+	public UserTokenVO loginByAccount(UserLoginVO login) {
 //		validate captcha
 		boolean flag = sysCaptchaService.validate(login.getKey(), login.getCaptcha());
 //		if error

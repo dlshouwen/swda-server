@@ -9,19 +9,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * third login config vo
+ * auth platform vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "third login config")
+@Schema(description = "auth platform")
 public class AuthPlatformVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
-	private Long id;
+	@Schema(description = "auth platform id")
+	private Long authPlatformId;
 
 	@Schema(description = "open type")
 	private String openType;

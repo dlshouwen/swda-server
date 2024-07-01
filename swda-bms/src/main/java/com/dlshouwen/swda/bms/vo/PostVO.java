@@ -23,8 +23,8 @@ public class PostVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
-	private Long id;
+	@Schema(description = "post id")
+	private Long postId;
 
 	@Schema(description = "post code")
 	@NotBlank(message = "岗位编码不能为空")
@@ -34,13 +34,16 @@ public class PostVO implements Serializable {
 	@NotBlank(message = "岗位名称不能为空")
 	private String postName;
 
+	@Schema(description = "status")
+	@Range(min = 0, max = 1, message = "状态不正确")
+	private Integer status;
+
+	@Schema(description = "assist search")
+	private String assistSearch;
+
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
-
-	@Schema(description = "status 0：停用   1：正常")
-	@Range(min = 0, max = 1, message = "状态不正确")
-	private Integer status;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

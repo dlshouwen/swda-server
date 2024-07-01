@@ -20,20 +20,20 @@ public class AttachmentVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
-	private Long id;
+	@Schema(description = "attachment id")
+	private Long attachmentId;
 
-	@Schema(description = "name")
-	private String name;
+	@Schema(description = "file name")
+	private String fileName;
 
-	@Schema(description = "url")
-	private String url;
+	@Schema(description = "file url")
+	private String fileUrl;
 
-	@Schema(description = "size")
-	private Long size;
+	@Schema(description = "file size")
+	private Long fileSize;
 
-	@Schema(description = "platform")
-	private String platform;
+	@Schema(description = "storage platform")
+	private String storagePlatform;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

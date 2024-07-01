@@ -19,7 +19,7 @@ import com.dlshouwen.swda.bms.mapper.SysLogOperateDao;
 import com.dlshouwen.swda.bms.entity.OperationLog;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
 import com.dlshouwen.swda.bms.service.SysLogOperateService;
-import com.dlshouwen.swda.bms.vo.OperationVO;
+import com.dlshouwen.swda.bms.vo.OperationLogVO;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ScheduledExecutorService;
@@ -43,7 +43,7 @@ public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, 
 	 * @return page result
 	 */
 	@Override
-	public PageResult<OperationVO> page(SysLogOperateQuery query) {
+	public PageResult<OperationLogVO> page(SysLogOperateQuery query) {
 //		select page
 		IPage<OperationLog> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result

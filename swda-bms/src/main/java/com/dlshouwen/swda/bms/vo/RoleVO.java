@@ -22,28 +22,28 @@ public class RoleVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
-	private Long id;
-
-	@Schema(description = "role name")
-	@NotBlank(message = "角色名称不能为空")
-	private String name;
-
+	@Schema(description = "role id")
+	private Long roleId;
+	
 	@Schema(description = "role code")
 	@NotBlank(message = "角色编码不能为空")
 	private String roleCode;
 
+	@Schema(description = "role name")
+	@NotBlank(message = "角色名称不能为空")
+	private String roleName;
+
 	@Schema(description = "remark")
 	private String remark;
 
-	@Schema(description = "data scope 0：全部数据  1：本机构及子机构数据  2：本机构数据  3：本人数据  4：自定义数据")
+	@Schema(description = "data scope")
 	private Integer dataScope;
 
 	@Schema(description = "menu id list")
 	private List<Long> menuIdList;
 
 	@Schema(description = "organ id list")
-	private List<Long> orgIdList;
+	private List<Long> organIdList;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

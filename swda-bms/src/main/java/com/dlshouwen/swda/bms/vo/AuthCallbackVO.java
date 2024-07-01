@@ -6,12 +6,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * third callback vo
+ * auth callback vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "third callback")
+@Schema(description = "auth callback")
 public class AuthCallbackVO implements Serializable {
 	
 	/** serial version uid */

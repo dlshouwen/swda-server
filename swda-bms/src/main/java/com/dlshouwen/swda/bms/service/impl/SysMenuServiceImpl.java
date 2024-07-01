@@ -13,7 +13,7 @@ import com.dlshouwen.swda.bms.mapper.SysMenuDao;
 import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.service.SysMenuService;
 import com.dlshouwen.swda.bms.service.SysRoleMenuService;
-import com.dlshouwen.swda.bms.vo.PremissionVO;
+import com.dlshouwen.swda.bms.vo.PermissionVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +40,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(PremissionVO vo) {
+	public void save(PermissionVO vo) {
 //		convert to menu
 		Permission entity = SysMenuConvert.INSTANCE.convert(vo);
 //		insert
@@ -53,7 +53,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(PremissionVO vo) {
+	public void update(PermissionVO vo) {
 //		convert to menu
 		Permission entity = SysMenuConvert.INSTANCE.convert(vo);
 //		if menu id equals pre menu id
@@ -85,7 +85,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 	 * @return menu list
 	 */
 	@Override
-	public List<PremissionVO> getMenuList(Integer type) {
+	public List<PermissionVO> getMenuList(Integer type) {
 //		get menu list
 		List<Permission> menuList = baseMapper.getMenuList(type);
 //		build menu tree for return
@@ -99,7 +99,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 	 * @return menu vo list
 	 */
 	@Override
-	public List<PremissionVO> getUserMenuList(UserDetail user, Integer type) {
+	public List<PermissionVO> getUserMenuList(UserDetail user, Integer type) {
 //		defined menu list
 		List<Permission> menuList;
 //		if user is super admin

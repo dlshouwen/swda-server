@@ -24,22 +24,55 @@ public class OrganVO extends TreeNode<OrganVO> {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
+	@Schema(description = "organ id")
+	private Long organId;
+	
+	@Schema(description = "pre organ id")
+	private Long preOrganId;
+	
+	@Schema(description = "organ code")
+	private String organCode;
+	
 	@Schema(description = "organ name")
 	@NotBlank(message = "机构名称不能为空")
-	private String name;
+	private String organName;
+	
+	@Schema(description = "contact")
+	private String contact;
+	
+	@Schema(description = "contact phone")
+	private String contactPhone;
+	
+	@Schema(description = "longitude")
+	private Double longitude;
+	
+	@Schema(description = "latitude")
+	private Double latitude;
+	
+	@Schema(description = "province id")
+	private Integer provinceId;
+	
+	@Schema(description = "city id")
+	private Integer cityId;
+	
+	@Schema(description = "county id")
+	private Integer countyId;
+	
+	@Schema(description = "address")
+	private String address;
+	
+	@Schema(description = "assist search")
+	private String assistSearch;
 
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
-
-	@Schema(description = "leader id")
-	private Long leaderId;
+	
+	@Schema(description = "remark")
+	private String remark;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
-
-	@Schema(description = "parent name")
-	private String parentName;
 
 }

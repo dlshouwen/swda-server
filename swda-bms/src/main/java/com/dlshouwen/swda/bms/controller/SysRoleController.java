@@ -15,8 +15,8 @@ import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.service.*;
-import com.dlshouwen.swda.bms.vo.PremissionVO;
-import com.dlshouwen.swda.bms.vo.RoleOrganVO;
+import com.dlshouwen.swda.bms.vo.PermissionVO;
+import com.dlshouwen.swda.bms.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.vo.RoleVO;
 import com.dlshouwen.swda.bms.vo.UserVO;
 import org.springdoc.core.annotations.ParameterObject;
@@ -139,7 +139,7 @@ public class SysRoleController {
 	@PutMapping("data-scope")
 	@Operation(name = "data scope", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:role:update')")
-	public R<String> dataScope(@RequestBody @Valid RoleOrganVO vo) {
+	public R<String> dataScope(@RequestBody @Valid RoleDataScopeVO vo) {
 //		data scope
 		sysRoleService.dataScope(vo);
 //		return
@@ -168,11 +168,11 @@ public class SysRoleController {
 	@GetMapping("menu")
 	@Operation(name = "menu")
 	@PreAuthorize("hasAuthority('sys:role:menu')")
-	public R<List<PremissionVO>> menu() {
+	public R<List<PermissionVO>> menu() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
 //		get user menu list
-		List<PremissionVO> list = sysMenuService.getUserMenuList(user, null);
+		List<PermissionVO> list = sysMenuService.getUserMenuList(user, null);
 //		return
 		return R.ok(list);
 	}

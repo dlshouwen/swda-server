@@ -4,7 +4,6 @@ import com.dlshouwen.swda.core.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,23 +21,27 @@ public class DictCategoryVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
-	private Long id;
+	@Schema(description = "dict category id")
+	private String dictCategoryId;
+	
+	@Schema(description = "dict category name")
+	private String dictCategoryName;
 
-	@Schema(description = "dict type")
-	@NotBlank(message = "字典类型不能为空")
-	private String dictType;
-
-	@Schema(description = "dict name")
-	@NotBlank(message = "字典名称不能为空")
-	private String dictName;
-
-	@Schema(description = "remark")
-	private String remark;
+	@Schema(description = "source type")
+	private String sourceType;
+	
+	@Schema(description = "source sql")
+	private String sourceSql;
 
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
+
+	@Schema(description = "remark")
+	private String remark;
+
+	@Schema(description = "tenant id")
+	private Long tenantId;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
@@ -47,11 +50,5 @@ public class DictCategoryVO implements Serializable {
 	@Schema(description = "update time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime updateTime;
-
-	@Schema(description = "dict source")
-	private Integer dictSource;
-
-	@Schema(description = "dict sql")
-	private String dictSql;
 
 }

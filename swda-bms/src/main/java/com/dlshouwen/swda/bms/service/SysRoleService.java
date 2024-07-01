@@ -4,7 +4,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
-import com.dlshouwen.swda.bms.vo.RoleOrganVO;
+import com.dlshouwen.swda.bms.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.vo.RoleVO;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public interface SysRoleService extends BaseService<Role> {
 	 * data scope
 	 * @param roleDataScopeVO
 	 */
-	void dataScope(RoleOrganVO vo);
+	void dataScope(RoleDataScopeVO vo);
 
 	/**
 	 * delete

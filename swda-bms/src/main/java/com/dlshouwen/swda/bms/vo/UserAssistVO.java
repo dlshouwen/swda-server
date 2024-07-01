@@ -9,16 +9,20 @@ import org.hibernate.validator.constraints.Range;
 import java.io.Serializable;
 
 /**
- * user base vo
+ * user assist vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "user base")
+@Schema(description = "user assist")
 public class UserAssistVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
+	
+	@Schema(description = "user name")
+	@NotBlank(message = "姓名不能为空")
+	private String userName;
 
 	@Schema(description = "real name")
 	@NotBlank(message = "姓名不能为空")
@@ -31,12 +35,18 @@ public class UserAssistVO implements Serializable {
 	@Range(min = 0, max = 2, message = "性别不正确")
 	private Integer gender;
 
+	@Schema(description = "card id")
+	private String cardId;
+
 	@Schema(description = "email")
 	@Email(message = "邮箱格式不正确")
 	private String email;
 
-	@Schema(description = "mobile", required = true)
+	@Schema(description = "mobile")
 	@NotBlank(message = "手机号不能为空")
 	private String mobile;
+
+	@Schema(description = "address")
+	private String address;
 
 }

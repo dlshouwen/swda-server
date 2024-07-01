@@ -62,7 +62,7 @@ public class SysAuthController {
 	 */
 	@PostMapping("login")
 	@Operation(name = "login")
-	public R<UserTokenVO> login(@RequestBody AccountLoginVO login) {
+	public R<UserTokenVO> login(@RequestBody UserLoginVO login) {
 //		login by account
 		UserTokenVO token = sysAuthService.loginByAccount(login);
 //		return
