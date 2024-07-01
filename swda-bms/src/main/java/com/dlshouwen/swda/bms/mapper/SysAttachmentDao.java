@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.dlshouwen.swda.bms.entity.SysAttachmentEntity;
+import com.dlshouwen.swda.bms.entity.Attachment;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
  * @since 1.0.0
  */
 @Mapper
-public interface SysAttachmentDao extends BaseMapper<SysAttachmentEntity> {
+public interface SysAttachmentDao extends BaseMapper<Attachment> {
 
 }

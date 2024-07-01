@@ -18,7 +18,7 @@ import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysUserConvert;
 import com.dlshouwen.swda.bms.mapper.SysUserDao;
-import com.dlshouwen.swda.bms.entity.SysUserEntity;
+import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.query.SysUserQuery;
 import com.dlshouwen.swda.bms.service.*;
@@ -42,7 +42,7 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
+public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, User> implements SysUserService {
 	
 	/** user role service */
 	private final SysUserRoleService sysUserRoleService;
@@ -72,10 +72,10 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 //		get params
 		Map<String, Object> params = getParams(query);
 //		get page
-		IPage<SysUserEntity> page = getPage(query);
+		IPage<User> page = getPage(query);
 		params.put(Constant.PAGE, page);
 //		get list
-		List<SysUserEntity> list = baseMapper.getList(params);
+		List<User> list = baseMapper.getList(params);
 //		return page result
 		return new PageResult<>(SysUserConvert.INSTANCE.convertList(list), page.getTotal());
 	}
@@ -113,11 +113,11 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	@Transactional(rollbackFor = Exception.class)
 	public void save(UserVO vo) {
 //		convert to user
-		SysUserEntity entity = SysUserConvert.INSTANCE.convert(vo);
+		User entity = SysUserConvert.INSTANCE.convert(vo);
 //		set super admin
 		entity.setSuperAdmin(ZeroOne.NO);
 //		get user from username
-		SysUserEntity user = baseMapper.getByUsername(entity.getUsername());
+		User user = baseMapper.getByUsername(entity.getUsername());
 //		if user is not null
 		if (user != null) {
 //			throw exception
@@ -145,9 +145,9 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	@Override
 	public void update(UserVO vo) {
 //		convert to user
-		SysUserEntity entity = SysUserConvert.INSTANCE.convert(vo);
+		User entity = SysUserConvert.INSTANCE.convert(vo);
 //		get user from username
-		SysUserEntity user = baseMapper.getByUsername(entity.getUsername());
+		User user = baseMapper.getByUsername(entity.getUsername());
 //		if user is not null
 		if (user != null) {
 //			throw exception
@@ -177,11 +177,11 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	@Override
 	public void updateLoginInfo(UserAssistVO vo) {
 //		convert to user
-		SysUserEntity entity = SysUserConvert.INSTANCE.convert(vo);
+		User entity = SysUserConvert.INSTANCE.convert(vo);
 //		set user id
 		entity.setId(SecurityUser.getUserId());
 //		get user from mobile
-		SysUserEntity user = baseMapper.getByMobile(entity.getMobile());
+		User user = baseMapper.getByMobile(entity.getMobile());
 //		if user is not null
 		if (user != null && !user.getId().equals(entity.getId())) {
 //			throw exception
@@ -200,7 +200,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	@Override
 	public void updateAvatar(UserAvatarVO avatar) {
 //		create user
-		SysUserEntity entity = new SysUserEntity();
+		User entity = new User();
 //		set user id, avatar
 		entity.setId(SecurityUser.getUserId());
 		entity.setAvatar(avatar.getAvatar());
@@ -236,7 +236,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 			return null;
 		}
 //		select names to list from return
-		return baseMapper.selectBatchIds(idList).stream().map(SysUserEntity::getRealName).toList();
+		return baseMapper.selectBatchIds(idList).stream().map(User::getRealName).toList();
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	@Override
 	public UserVO getByMobile(String mobile) {
 //		get user by mobile
-		SysUserEntity user = baseMapper.getByMobile(mobile);
+		User user = baseMapper.getByMobile(mobile);
 //		convert to user vo
 		return SysUserConvert.INSTANCE.convert(user);
 	}
@@ -260,7 +260,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	@Override
 	public void updatePassword(Long id, String newPassword) {
 //		get user
-		SysUserEntity user = getById(id);
+		User user = getById(id);
 //		set password
 		user.setPassword(newPassword);
 //		update user
@@ -279,10 +279,10 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 //		set role id
 		params.put("roleId", query.getRoleId());
 //		get page
-		IPage<SysUserEntity> page = getPage(query);
+		IPage<User> page = getPage(query);
 		params.put(Constant.PAGE, page);
 //		get role user list
-		List<SysUserEntity> list = baseMapper.getRoleUserList(params);
+		List<User> list = baseMapper.getRoleUserList(params);
 //		return page result
 		return new PageResult<>(SysUserConvert.INSTANCE.convertList(list), page.getTotal());
 	}
@@ -326,7 +326,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 //				parse dict
 				ExcelUtils.parseDict(result);
 //				convert to user list
-				List<SysUserEntity> sysUserEntities = SysUserConvert.INSTANCE.convertListEntity(result);
+				List<User> sysUserEntities = SysUserConvert.INSTANCE.convertListEntity(result);
 //				set password
 				sysUserEntities.forEach(user -> user.setPassword(password));
 //				batch save user
@@ -344,7 +344,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	@SneakyThrows
 	public void export() {
 //		get user list
-		List<SysUserEntity> list = list(Wrappers.lambdaQuery(SysUserEntity.class).eq(SysUserEntity::getSuperAdmin, ZeroOne.NO));
+		List<User> list = list(Wrappers.lambdaQuery(User.class).eq(User::getSuperAdmin, ZeroOne.NO));
 //		convert to user excel vo
 		List<SysUserExcelVO> userExcelVOS = SysUserConvert.INSTANCE.convert2List(list);
 //		trans batch

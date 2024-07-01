@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysRoleEntity;
+import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.vo.RoleOrganVO;
 import com.dlshouwen.swda.bms.vo.RoleVO;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysRoleService extends BaseService<SysRoleEntity> {
+public interface SysRoleService extends BaseService<Role> {
 
 	/**
 	 * page

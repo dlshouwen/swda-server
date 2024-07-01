@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysUserEntity;
+import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.query.SysUserQuery;
 import com.dlshouwen.swda.bms.vo.UserAvatarVO;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysUserService extends BaseService<SysUserEntity> {
+public interface SysUserService extends BaseService<User> {
 
 	/**
 	 * page

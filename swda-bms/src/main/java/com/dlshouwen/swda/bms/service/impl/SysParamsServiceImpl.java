@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.cache.AttrCache;
 import com.dlshouwen.swda.bms.convert.SysParamsConvert;
 import com.dlshouwen.swda.bms.mapper.SysParamsDao;
-import com.dlshouwen.swda.bms.entity.SysParamsEntity;
+import com.dlshouwen.swda.bms.entity.Attr;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
 import com.dlshouwen.swda.bms.service.SysParamsService;
 import com.dlshouwen.swda.bms.vo.AttrVO;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParamsEntity> implements SysParamsService {
+public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, Attr> implements SysParamsService {
 	
 	/** params cache */
 	private final AttrCache sysParamsCache;
@@ -41,7 +41,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 	@Override
 	public PageResult<AttrVO> page(SysParamsQuery query) {
 //		select page
-		IPage<SysParamsEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<Attr> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		get page result for return
 		return new PageResult<>(SysParamsConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -51,14 +51,14 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 	 * @param query
 	 * @return wrapper
 	 */
-	private LambdaQueryWrapper<SysParamsEntity> getWrapper(SysParamsQuery query) {
+	private LambdaQueryWrapper<Attr> getWrapper(SysParamsQuery query) {
 //		get wrapper
-		LambdaQueryWrapper<SysParamsEntity> wrapper = Wrappers.lambdaQuery();
+		LambdaQueryWrapper<Attr> wrapper = Wrappers.lambdaQuery();
 //		set condition
-		wrapper.like(StrUtil.isNotBlank(query.getParamKey()), SysParamsEntity::getParamKey, query.getParamKey());
-		wrapper.eq(StrUtil.isNotBlank(query.getParamValue()), SysParamsEntity::getParamValue, query.getParamValue());
-		wrapper.eq(query.getParamType() != null, SysParamsEntity::getParamType, query.getParamType());
-		wrapper.orderByDesc(SysParamsEntity::getId);
+		wrapper.like(StrUtil.isNotBlank(query.getParamKey()), Attr::getParamKey, query.getParamKey());
+		wrapper.eq(StrUtil.isNotBlank(query.getParamValue()), Attr::getParamValue, query.getParamValue());
+		wrapper.eq(query.getParamType() != null, Attr::getParamType, query.getParamType());
+		wrapper.orderByDesc(Attr::getId);
 //		return wrapper
 		return wrapper;
 	}
@@ -77,7 +77,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 			throw new SwdaException("参数键已存在");
 		}
 //		convert to params
-		SysParamsEntity entity = SysParamsConvert.INSTANCE.convert(vo);
+		Attr entity = SysParamsConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 //		save cache
@@ -91,7 +91,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 	@Override
 	public void update(AttrVO vo) {
 //		get params
-		SysParamsEntity entity = baseMapper.selectById(vo.getId());
+		Attr entity = baseMapper.selectById(vo.getId());
 //		if has change
 		if (!StrUtil.equalsIgnoreCase(entity.getParamKey(), vo.getParamKey())) {
 //			is key exist
@@ -118,11 +118,11 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(List<Long> idList) {
 //		get params list
-		List<SysParamsEntity> list = baseMapper.selectBatchIds(idList);
+		List<Attr> list = baseMapper.selectBatchIds(idList);
 //		remove
 		removeByIds(idList);
 //		get delete keys
-		Object[] keys = list.stream().map(SysParamsEntity::getParamKey).toArray(String[]::new);
+		Object[] keys = list.stream().map(Attr::getParamKey).toArray(String[]::new);
 //		delete cache
 		sysParamsCache.delete(keys);
 	}
@@ -142,7 +142,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 			return value;
 		}
 //		if cache emptyt then get from database
-		SysParamsEntity entity = baseMapper.get(paramKey);
+		Attr entity = baseMapper.get(paramKey);
 //		if params is empty
 		if (entity == null) {
 //			throw exception

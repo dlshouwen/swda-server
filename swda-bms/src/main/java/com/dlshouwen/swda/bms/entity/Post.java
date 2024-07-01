@@ -7,28 +7,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * dict type
+ * post
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_dict_type")
-public class SysDictTypeEntity extends BaseEntity {
+@TableName("sys_post")
+public class Post extends BaseEntity {
 
-	private Long id;
+	private String postCode;
 
-	private String dictType;
-
-	private String dictName;
-
-	private String remark;
+	private String postName;
 
 	private Integer sort;
 
-	private Integer dictSource;
-
-	private String dictSql;
+	private Integer status;
 
 	private Long tenantId;
 

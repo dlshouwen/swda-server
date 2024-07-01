@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
+import com.dlshouwen.swda.bms.entity.Dict;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
 import com.dlshouwen.swda.bms.vo.DictVO;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysDictDataService extends BaseService<SysDictDataEntity> {
+public interface SysDictDataService extends BaseService<Dict> {
 
 	/**
 	 * page

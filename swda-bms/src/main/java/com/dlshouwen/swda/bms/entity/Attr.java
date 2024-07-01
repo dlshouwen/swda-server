@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_params")
-public class SysParamsEntity extends BaseEntity {
+public class Attr extends BaseEntity {
 
 	private Long id;
 

@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.convert;
 
-import com.dlshouwen.swda.bms.entity.SysUserEntity;
+import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.vo.UserAssistVO;
 import com.dlshouwen.swda.bms.vo.SysUserExcelVO;
 import com.dlshouwen.swda.bms.vo.UserVO;
@@ -27,21 +27,21 @@ public interface SysUserConvert {
 	 * @param user
 	 * @return user vo
 	 */
-	UserVO convert(SysUserEntity entity);
+	UserVO convert(User entity);
 
 	/**
 	 * convert
 	 * @param userVO
 	 * @return user
 	 */
-	SysUserEntity convert(UserVO vo);
+	User convert(UserVO vo);
 
 	/**
 	 * convert
 	 * @param userBaseVO
 	 * @return user
 	 */
-	SysUserEntity convert(UserAssistVO vo);
+	User convert(UserAssistVO vo);
 
 	/**
 	 * convert
@@ -55,27 +55,27 @@ public interface SysUserConvert {
 	 * @param user
 	 * @return user detail
 	 */
-	UserDetail convertDetail(SysUserEntity entity);
+	UserDetail convertDetail(User entity);
 
 	/**
 	 * convert list
 	 * @param userList
 	 * @return user vo list
 	 */
-	List<UserVO> convertList(List<SysUserEntity> list);
+	List<UserVO> convertList(List<User> list);
 
 	/**
 	 * convert 2 list
 	 * @param userList
 	 * @return user excel vo list
 	 */
-	List<SysUserExcelVO> convert2List(List<SysUserEntity> list);
+	List<SysUserExcelVO> convert2List(List<User> list);
 
 	/**
 	 * convert list
 	 * @param userExcelVOList
 	 * @return user list
 	 */
-	List<SysUserEntity> convertListEntity(List<SysUserExcelVO> list);
+	List<User> convertListEntity(List<SysUserExcelVO> list);
 
 }

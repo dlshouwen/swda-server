@@ -8,7 +8,7 @@ import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysThirdLoginConvert;
 import com.dlshouwen.swda.bms.mapper.SysThirdLoginDao;
-import com.dlshouwen.swda.bms.entity.SysThirdLoginEntity;
+import com.dlshouwen.swda.bms.entity.Auth;
 import com.dlshouwen.swda.bms.service.SysThirdLoginService;
 import com.dlshouwen.swda.bms.vo.AuthLoginVO;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, SysThirdLoginEntity> implements SysThirdLoginService {
+public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, Auth> implements SysThirdLoginService {
 
 	/**
 	 * get third login vo list
@@ -32,7 +32,7 @@ public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, 
 	@Override
 	public List<AuthLoginVO> listByUserId(Long userId) {
 //		get third login list
-		List<SysThirdLoginEntity> list = baseMapper.selectList(Wrappers.<SysThirdLoginEntity>lambdaQuery().eq(SysThirdLoginEntity::getUserId, userId));
+		List<Auth> list = baseMapper.selectList(Wrappers.<Auth>lambdaQuery().eq(Auth::getUserId, userId));
 //		convert to third login vo list for return
 		return SysThirdLoginConvert.INSTANCE.convertList(list);
 	}
@@ -45,7 +45,7 @@ public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, 
 	@Override
 	public void unBind(Long userId, String openType) {
 //		delete bind info
-		baseMapper.delete(Wrappers.<SysThirdLoginEntity>lambdaQuery().eq(SysThirdLoginEntity::getUserId, userId).eq(SysThirdLoginEntity::getOpenType, openType));
+		baseMapper.delete(Wrappers.<Auth>lambdaQuery().eq(Auth::getUserId, userId).eq(Auth::getOpenType, openType));
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, 
 	@Override
 	public void bind(Long userId, String openType, AuthUser authUser) {
 //		create third login
-		SysThirdLoginEntity entity = new SysThirdLoginEntity();
+		Auth entity = new Auth();
 //		set user id, opentype, open id, username
 		entity.setUserId(userId);
 		entity.setOpenType(openType);
@@ -76,7 +76,7 @@ public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, 
 	@Override
 	public Long getUserIdByOpenTypeAndOpenId(String openType, String openId) {
 //		get third login
-		SysThirdLoginEntity entity = baseMapper.selectOne(Wrappers.<SysThirdLoginEntity>lambdaQuery().eq(SysThirdLoginEntity::getOpenType, openType).eq(SysThirdLoginEntity::getOpenId, openId));
+		Auth entity = baseMapper.selectOne(Wrappers.<Auth>lambdaQuery().eq(Auth::getOpenType, openType).eq(Auth::getOpenId, openId));
 //		if third login empty
 		if (entity == null) {
 //			throw exception

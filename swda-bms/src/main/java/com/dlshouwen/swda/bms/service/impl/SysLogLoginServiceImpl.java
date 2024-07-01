@@ -13,7 +13,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysLogLoginConvert;
 import com.dlshouwen.swda.bms.mapper.SysLogLoginDao;
-import com.dlshouwen.swda.bms.entity.SysLogLoginEntity;
+import com.dlshouwen.swda.bms.entity.LoginLog;
 import com.dlshouwen.swda.bms.query.SysLogLoginQuery;
 import com.dlshouwen.swda.bms.service.SysLogLoginService;
 import com.dlshouwen.swda.bms.vo.LoginLogVO;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysLogLoginEntity> implements SysLogLoginService {
+public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, LoginLog> implements SysLogLoginService {
 	
 	/** trans service */
 	private final TransService transService;
@@ -43,7 +43,7 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysL
 	@Override
 	public PageResult<LoginLogVO> page(SysLogLoginQuery query) {
 //		select page
-		IPage<SysLogLoginEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<LoginLog> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
 		return new PageResult<>(SysLogLoginConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -53,14 +53,14 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysL
 	 * @param query
 	 * @return wrapper
 	 */
-	private LambdaQueryWrapper<SysLogLoginEntity> getWrapper(SysLogLoginQuery query) {
+	private LambdaQueryWrapper<LoginLog> getWrapper(SysLogLoginQuery query) {
 //		create wrapper
-		LambdaQueryWrapper<SysLogLoginEntity> wrapper = Wrappers.lambdaQuery();
+		LambdaQueryWrapper<LoginLog> wrapper = Wrappers.lambdaQuery();
 //		set condition
-		wrapper.like(StrUtil.isNotBlank(query.getUsername()), SysLogLoginEntity::getUsername, query.getUsername());
-		wrapper.like(StrUtil.isNotBlank(query.getAddress()), SysLogLoginEntity::getAddress, query.getAddress());
-		wrapper.like(query.getStatus() != null, SysLogLoginEntity::getStatus, query.getStatus());
-		wrapper.orderByDesc(SysLogLoginEntity::getId);
+		wrapper.like(StrUtil.isNotBlank(query.getUsername()), LoginLog::getUsername, query.getUsername());
+		wrapper.like(StrUtil.isNotBlank(query.getAddress()), LoginLog::getAddress, query.getAddress());
+		wrapper.like(query.getStatus() != null, LoginLog::getStatus, query.getStatus());
+		wrapper.orderByDesc(LoginLog::getId);
 //		return wrapper
 		return wrapper;
 	}
@@ -82,7 +82,7 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysL
 		String ip = IpUtils.getIp(request);
 		String address = IpUtils.getAddressByIP(ip);
 //		defined login log
-		SysLogLoginEntity entity = new SysLogLoginEntity();
+		LoginLog entity = new LoginLog();
 //		set user name, status, operation, ip, address, user agent
 		entity.setUsername(username);
 		entity.setStatus(status);
@@ -101,7 +101,7 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysL
 	@SneakyThrows
 	public void export() {
 //		get login log list
-		List<SysLogLoginEntity> list = list();
+		List<LoginLog> list = list();
 //		convert to login log vo
 		List<LoginLogVO> sysLogLoginVOS = SysLogLoginConvert.INSTANCE.convertList(list);
 //		batch trans

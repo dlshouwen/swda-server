@@ -10,8 +10,8 @@ import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysOrgConvert;
 import com.dlshouwen.swda.bms.mapper.SysOrgDao;
 import com.dlshouwen.swda.bms.mapper.SysUserDao;
-import com.dlshouwen.swda.bms.entity.SysOrgEntity;
-import com.dlshouwen.swda.bms.entity.SysUserEntity;
+import com.dlshouwen.swda.bms.entity.Organ;
+import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.service.SysOrgService;
 import com.dlshouwen.swda.bms.vo.OrganVO;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> implements SysOrgService {
+public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, Organ> implements SysOrgService {
 	
 	/** user mapper */
 	private final SysUserDao sysUserDao;
@@ -45,7 +45,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 //		put data scope
 		params.put(Constant.DATA_SCOPE, getDataScope("t1", "id"));
 //		get organ list
-		List<SysOrgEntity> entityList = baseMapper.getList(params);
+		List<Organ> entityList = baseMapper.getList(params);
 //		build organ tree for return
 		return TreeUtils.build(SysOrgConvert.INSTANCE.convertList(entityList));
 	}
@@ -58,7 +58,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	@Transactional(rollbackFor = Exception.class)
 	public void save(OrganVO vo) {
 //		convert organ vo to organ
-		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
+		Organ entity = SysOrgConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -71,7 +71,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	@Transactional(rollbackFor = Exception.class)
 	public void update(OrganVO vo) {
 //		convert to organ
-		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
+		Organ entity = SysOrgConvert.INSTANCE.convert(vo);
 //		if organ id equals pre organ id
 		if (entity.getId().equals(entity.getPid())) {
 //			throw exception
@@ -96,14 +96,14 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Long id) {
 //		get sub organ count
-		long orgCount = count(new QueryWrapper<SysOrgEntity>().eq("pid", id));
+		long orgCount = count(new QueryWrapper<Organ>().eq("pid", id));
 //		if has sub count
 		if (orgCount > 0) {
 //			throw exception
 			throw new SwdaException("请先删除子机构");
 		}
 //		get organ user count
-		long userCount = sysUserDao.selectCount(new QueryWrapper<SysUserEntity>().eq("org_id", id));
+		long userCount = sysUserDao.selectCount(new QueryWrapper<User>().eq("org_id", id));
 //		if has user
 		if (userCount > 0) {
 //			throw exception
@@ -121,7 +121,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	@Override
 	public List<Long> getSubOrgIdList(Long id) {
 //		get organ list
-		List<SysOrgEntity> orgList = baseMapper.getIdAndPidList();
+		List<Organ> orgList = baseMapper.getIdAndPidList();
 //		defined sub id list
 		List<Long> subIdList = new ArrayList<>();
 //		get sub id list
@@ -145,7 +145,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 			return null;
 		}
 //		get name list for return
-		return baseMapper.selectBatchIds(idList).stream().map(SysOrgEntity::getName).toList();
+		return baseMapper.selectBatchIds(idList).stream().map(Organ::getName).toList();
 	}
 
 	/**
@@ -154,8 +154,8 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	 * @param orgList
 	 * @param subIdList
 	 */
-	private void getTree(Long id, List<SysOrgEntity> orgList, List<Long> subIdList) {
-		for (SysOrgEntity org : orgList) {
+	private void getTree(Long id, List<Organ> orgList, List<Long> subIdList) {
+		for (Organ org : orgList) {
 			if (ObjectUtil.equals(org.getPid(), id)) {
 				getTree(org.getId(), orgList, subIdList);
 

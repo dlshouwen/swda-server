@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.dlshouwen.swda.bms.entity.SysRoleDataScopeEntity;
+import com.dlshouwen.swda.bms.entity.RoleOrgan;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysRoleDataScopeDao extends BaseMapper<SysRoleDataScopeEntity> {
+public interface SysRoleDataScopeDao extends BaseMapper<RoleOrgan> {
 
 	/**
 	 * get organ id list

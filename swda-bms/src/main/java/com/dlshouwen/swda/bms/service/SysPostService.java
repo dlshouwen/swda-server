@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysPostEntity;
+import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.vo.PostVO;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysPostService extends BaseService<SysPostEntity> {
+public interface SysPostService extends BaseService<Post> {
 
 	/**
 	 * page

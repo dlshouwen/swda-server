@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.convert;
 
-import com.dlshouwen.swda.bms.entity.SysThirdLoginEntity;
+import com.dlshouwen.swda.bms.entity.Auth;
 import com.dlshouwen.swda.bms.vo.AuthLoginVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -23,20 +23,20 @@ public interface SysThirdLoginConvert {
 	 * @param thirdLoginVO
 	 * @return third login
 	 */
-	SysThirdLoginEntity convert(AuthLoginVO vo);
+	Auth convert(AuthLoginVO vo);
 
 	/**
 	 * convert
 	 * @param thirdLogin
 	 * @return third login vo
 	 */
-	AuthLoginVO convert(SysThirdLoginEntity entity);
+	AuthLoginVO convert(Auth entity);
 
 	/**
 	 * convert list
 	 * @param thirdLoginList
 	 * @return third login vo list
 	 */
-	List<AuthLoginVO> convertList(List<SysThirdLoginEntity> list);
+	List<AuthLoginVO> convertList(List<Auth> list);
 
 }

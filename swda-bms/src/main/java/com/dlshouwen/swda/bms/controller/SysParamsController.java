@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.convert.SysParamsConvert;
-import com.dlshouwen.swda.bms.entity.SysParamsEntity;
+import com.dlshouwen.swda.bms.entity.Attr;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
 import com.dlshouwen.swda.bms.service.SysParamsService;
 import com.dlshouwen.swda.bms.vo.AttrVO;
@@ -58,7 +58,7 @@ public class SysParamsController {
 	@PreAuthorize("hasAuthority('sys:params:all')")
 	public R<AttrVO> get(@PathVariable("id") Long id) {
 //		get params
-		SysParamsEntity entity = sysParamsService.getById(id);
+		Attr entity = sysParamsService.getById(id);
 //		return
 		return R.ok(SysParamsConvert.INSTANCE.convert(entity));
 	}

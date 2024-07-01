@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.dlshouwen.swda.bms.entity.SysMenuEntity;
+import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -14,14 +14,14 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
+public interface SysMenuDao extends BaseMapper<Permission> {
 
 	/**
 	 * get menu list
 	 * @param type
 	 * @return menu list
 	 */
-	List<SysMenuEntity> getMenuList(@Param("type") Integer type);
+	List<Permission> getMenuList(@Param("type") Integer type);
 
 	/**
 	 * get user menu list
@@ -29,7 +29,7 @@ public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
 	 * @param type
 	 * @return menu list
 	 */
-	List<SysMenuEntity> getUserMenuList(@Param("userId") Long userId, @Param("type") Integer type);
+	List<Permission> getUserMenuList(@Param("userId") Long userId, @Param("type") Integer type);
 
 	/**
 	 * user authority list

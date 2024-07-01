@@ -9,31 +9,18 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * operation log
+ * login log
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-
 @Data
-@TableName("sys_log_operate")
-public class SysLogOperateEntity {
+@TableName("sys_log_login")
+public class LoginLog {
 
 	@TableId
 	private Long id;
 
-	private Long userId;
-
-	private String realName;
-
-	private String module;
-
-	private String name;
-
-	private String reqUri;
-
-	private String reqMethod;
-
-	private String reqParams;
+	private String username;
 
 	private String ip;
 
@@ -41,13 +28,9 @@ public class SysLogOperateEntity {
 
 	private String userAgent;
 
-	private Integer operateType;
-
-	private Integer duration;
-
 	private Integer status;
 
-	private String resultMsg;
+	private Integer operation;
 
 	@TableField(fill = FieldFill.INSERT)
 	private LocalDateTime createTime;

@@ -9,32 +9,31 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * login log
+ * user token
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
+
 @Data
-@TableName("sys_log_login")
-public class SysLogLoginEntity {
+@TableName("sys_user_token")
+public class UserToken {
 
 	@TableId
 	private Long id;
 
-	private String username;
+	private Long userId;
 
-	private String ip;
+	private String accessToken;
 
-	private String address;
+	private LocalDateTime accessTokenExpire;
 
-	private String userAgent;
+	private String refreshToken;
 
-	private Integer status;
+	private LocalDateTime refreshTokenExpire;
 
-	private Integer operation;
+	private Long tenantId;
 
 	@TableField(fill = FieldFill.INSERT)
 	private LocalDateTime createTime;
-
-	private Long tenantId;
 
 }

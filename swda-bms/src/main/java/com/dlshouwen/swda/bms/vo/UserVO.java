@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.vo;
 
-import com.dlshouwen.swda.bms.entity.SysOrgEntity;
+import com.dlshouwen.swda.bms.entity.Organ;
 import com.dlshouwen.swda.core.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,7 +62,7 @@ public class UserVO implements Serializable, TransPojo {
 
 	@Schema(description = "organ id")
 	@NotNull(message = "机构ID不能为空")
-	@Trans(type = TransType.SIMPLE, target = SysOrgEntity.class, fields = "name", ref = "orgName")
+	@Trans(type = TransType.SIMPLE, target = Organ.class, fields = "name", ref = "orgName")
 	private Long orgId;
 
 	@Schema(description = "status")

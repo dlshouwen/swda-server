@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.convert.SysThirdLoginConfigConvert;
-import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
+import com.dlshouwen.swda.bms.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
 import com.dlshouwen.swda.bms.vo.AuthPlatformVO;
 import com.dlshouwen.swda.core.annotation.Operation;
@@ -57,7 +57,7 @@ public class SysThirdLoginConfigController {
 	@PreAuthorize("hasAuthority('third:config:all')")
 	public R<AuthPlatformVO> get(@PathVariable("id") Long id) {
 //		get third login config
-		SysThirdLoginConfigEntity entity = sysThirdLoginConfigService.getById(id);
+		AuthPlatform entity = sysThirdLoginConfigService.getById(id);
 //		result
 		return R.ok(SysThirdLoginConfigConvert.INSTANCE.convert(entity));
 	}

@@ -11,7 +11,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.convert.SysRoleConvert;
-import com.dlshouwen.swda.bms.entity.SysRoleEntity;
+import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.service.*;
@@ -88,7 +88,7 @@ public class SysRoleController {
 	@PreAuthorize("hasAuthority('sys:role:info')")
 	public R<RoleVO> get(@PathVariable("id") Long id) {
 //		get role by id
-		SysRoleEntity entity = sysRoleService.getById(id);
+		Role entity = sysRoleService.getById(id);
 //		convert to role vo
 		RoleVO role = SysRoleConvert.INSTANCE.convert(entity);
 //		get menu id list set to role

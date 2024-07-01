@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.convert.SysDictTypeConvert;
-import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
+import com.dlshouwen.swda.bms.entity.DictCategory;
 import com.dlshouwen.swda.bms.query.SysDictTypeQuery;
 import com.dlshouwen.swda.bms.service.SysDictTypeService;
 import com.dlshouwen.swda.bms.vo.DictCategoryVO;
@@ -74,7 +74,7 @@ public class SysDictTypeController {
 	@PreAuthorize("hasAuthority('sys:dict:info')")
 	public R<DictCategoryVO> get(@PathVariable("id") Long id) {
 //		get dict type
-		SysDictTypeEntity entity = sysDictTypeService.getById(id);
+		DictCategory entity = sysDictTypeService.getById(id);
 //		return
 		return R.ok(SysDictTypeConvert.INSTANCE.convert(entity));
 	}

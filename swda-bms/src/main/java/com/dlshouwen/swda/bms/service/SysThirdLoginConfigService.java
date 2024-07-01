@@ -5,7 +5,7 @@ import me.zhyd.oauth.request.AuthRequest;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.query.Query;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
+import com.dlshouwen.swda.bms.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.vo.AuthPlatformVO;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysThirdLoginConfigService extends BaseService<SysThirdLoginConfigEntity> {
+public interface SysThirdLoginConfigService extends BaseService<AuthPlatform> {
 
 	/**
 	 * page

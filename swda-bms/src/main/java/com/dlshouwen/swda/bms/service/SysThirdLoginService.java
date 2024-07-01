@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import me.zhyd.oauth.model.AuthUser;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysThirdLoginEntity;
+import com.dlshouwen.swda.bms.entity.Auth;
 import com.dlshouwen.swda.bms.vo.AuthLoginVO;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysThirdLoginService extends BaseService<SysThirdLoginEntity> {
+public interface SysThirdLoginService extends BaseService<Auth> {
 
 	/**
 	 * list by user id

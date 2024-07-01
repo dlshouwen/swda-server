@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.mapper.SysRoleDataScopeDao;
-import com.dlshouwen.swda.bms.entity.SysRoleDataScopeEntity;
+import com.dlshouwen.swda.bms.entity.RoleOrgan;
 import com.dlshouwen.swda.bms.service.SysRoleDataScopeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 @Service
-public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScopeDao, SysRoleDataScopeEntity> implements SysRoleDataScopeService {
+public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScopeDao, RoleOrgan> implements SysRoleDataScopeService {
 
 	/**
 	 * save or update
@@ -36,9 +36,9 @@ public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScop
 //		if has insert datas
 		if (CollUtil.isNotEmpty(insertOrgIdList)) {
 //			construct role data scope list by organ id list
-			List<SysRoleDataScopeEntity> orgList = insertOrgIdList.stream().map(orgId -> {
+			List<RoleOrgan> orgList = insertOrgIdList.stream().map(orgId -> {
 //				create role data scope
-				SysRoleDataScopeEntity entity = new SysRoleDataScopeEntity();
+				RoleOrgan entity = new RoleOrgan();
 //				set organ id, role id
 				entity.setOrgId(orgId);
 				entity.setRoleId(roleId);
@@ -53,10 +53,10 @@ public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScop
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deleteOrgIdList)) {
 //			get wrapper
-			LambdaQueryWrapper<SysRoleDataScopeEntity> queryWrapper = new LambdaQueryWrapper<>();
+			LambdaQueryWrapper<RoleOrgan> queryWrapper = new LambdaQueryWrapper<>();
 //			set condition
-			queryWrapper.eq(SysRoleDataScopeEntity::getRoleId, roleId);
-			queryWrapper.in(SysRoleDataScopeEntity::getOrgId, deleteOrgIdList);
+			queryWrapper.eq(RoleOrgan::getRoleId, roleId);
+			queryWrapper.in(RoleOrgan::getOrgId, deleteOrgIdList);
 //			delete role data scope
 			remove(queryWrapper);
 		}
@@ -80,7 +80,7 @@ public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScop
 	@Override
 	public void deleteByRoleIdList(List<Long> roleIdList) {
 //		delete role data scope
-		remove(new LambdaQueryWrapper<SysRoleDataScopeEntity>().in(SysRoleDataScopeEntity::getRoleId, roleIdList));
+		remove(new LambdaQueryWrapper<RoleOrgan>().in(RoleOrgan::getRoleId, roleIdList));
 	}
 
 }

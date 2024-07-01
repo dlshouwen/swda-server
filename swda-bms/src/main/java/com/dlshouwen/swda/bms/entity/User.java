@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.bms.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.dlshouwen.swda.core.entity.BaseEntity;
@@ -9,27 +8,39 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * role
+ * user
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_role")
-public class SysRoleEntity extends BaseEntity {
+@TableName("sys_user")
+public class User extends BaseEntity {
 
 	private Long id;
 
-	private String name;
+	private String username;
 
-	private String roleCode;
+	private String password;
 
-	private String remark;
+	private String realName;
 
-	private Integer dataScope;
+	private String avatar;
 
-	@TableField(fill = FieldFill.INSERT)
+	private Integer gender;
+
+	private String email;
+
+	private String mobile;
+
 	private Long orgId;
+
+	private Integer superAdmin;
+
+	private Integer status;
+
+	@TableField(exist = false)
+	private String orgName;
 
 	private Long tenantId;
 

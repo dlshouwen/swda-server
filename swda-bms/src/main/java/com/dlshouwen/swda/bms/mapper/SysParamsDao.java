@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dlshouwen.swda.bms.entity.SysParamsEntity;
+import com.dlshouwen.swda.bms.entity.Attr;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 1.0.0
  */
 @Mapper
-public interface SysParamsDao extends BaseMapper<SysParamsEntity> {
+public interface SysParamsDao extends BaseMapper<Attr> {
 
 	/**
 	 * is exist
@@ -20,7 +20,7 @@ public interface SysParamsDao extends BaseMapper<SysParamsEntity> {
 	 * @return is exist
 	 */
 	default boolean isExist(String paramKey) {
-		return this.exists(new QueryWrapper<SysParamsEntity>().eq("param_key", paramKey));
+		return this.exists(new QueryWrapper<Attr>().eq("param_key", paramKey));
 	}
 
 	/**
@@ -28,8 +28,8 @@ public interface SysParamsDao extends BaseMapper<SysParamsEntity> {
 	 * @param paramKey
 	 * @return params
 	 */
-	default SysParamsEntity get(String paramKey) {
-		return this.selectOne(new QueryWrapper<SysParamsEntity>().eq("param_key", paramKey));
+	default Attr get(String paramKey) {
+		return this.selectOne(new QueryWrapper<Attr>().eq("param_key", paramKey));
 	}
 
 }

@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.mapper.SysRoleMenuDao;
-import com.dlshouwen.swda.bms.entity.SysRoleMenuEntity;
+import com.dlshouwen.swda.bms.entity.RolePermission;
 import com.dlshouwen.swda.bms.service.SysRoleMenuService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 @Service
-public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysRoleMenuEntity> implements SysRoleMenuService {
+public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, RolePermission> implements SysRoleMenuService {
 
 	/**
 	 * save or update
@@ -36,9 +36,9 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysR
 //		if has insert datas
 		if (CollUtil.isNotEmpty(insertMenuIdList)) {
 //			construct role menu list by menu id
-			List<SysRoleMenuEntity> menuList = insertMenuIdList.stream().map(menuId -> {
+			List<RolePermission> menuList = insertMenuIdList.stream().map(menuId -> {
 //				create role menu
-				SysRoleMenuEntity entity = new SysRoleMenuEntity();
+				RolePermission entity = new RolePermission();
 //				set menu id, role id
 				entity.setMenuId(menuId);
 				entity.setRoleId(roleId);
@@ -53,9 +53,9 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysR
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deleteMenuIdList)) {
 //			get wrapper
-			LambdaQueryWrapper<SysRoleMenuEntity> queryWrapper = new LambdaQueryWrapper<>();
+			LambdaQueryWrapper<RolePermission> queryWrapper = new LambdaQueryWrapper<>();
 //			delete role menu list
-			remove(queryWrapper.eq(SysRoleMenuEntity::getRoleId, roleId).in(SysRoleMenuEntity::getMenuId, deleteMenuIdList));
+			remove(queryWrapper.eq(RolePermission::getRoleId, roleId).in(RolePermission::getMenuId, deleteMenuIdList));
 		}
 	}
 
@@ -77,7 +77,7 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysR
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteByRoleIdList(List<Long> roleIdList) {
 //		delete role menu list
-		remove(new LambdaQueryWrapper<SysRoleMenuEntity>().in(SysRoleMenuEntity::getRoleId, roleIdList));
+		remove(new LambdaQueryWrapper<RolePermission>().in(RolePermission::getRoleId, roleIdList));
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysR
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteByMenuId(Long menuId) {
 //		delete role menu list
-		remove(new LambdaQueryWrapper<SysRoleMenuEntity>().eq(SysRoleMenuEntity::getMenuId, menuId));
+		remove(new LambdaQueryWrapper<RolePermission>().eq(RolePermission::getMenuId, menuId));
 	}
 
 }

@@ -7,24 +7,28 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * attachment
+ * dict type
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_attachment")
-public class SysAttachmentEntity extends BaseEntity {
+@TableName("sys_dict_type")
+public class DictCategory extends BaseEntity {
 
 	private Long id;
 
-	private String name;
+	private String dictType;
 
-	private String url;
+	private String dictName;
 
-	private Long size;
+	private String remark;
 
-	private String platform;
+	private Integer sort;
+
+	private Integer dictSource;
+
+	private String dictSql;
 
 	private Long tenantId;
 

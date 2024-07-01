@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_user_role")
-public class SysUserRoleEntity extends BaseEntity {
+public class UserRole extends BaseEntity {
 
 	private Long roleId;
 

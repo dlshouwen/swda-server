@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_menu")
-public class SysMenuEntity extends BaseEntity {
+public class Permission extends BaseEntity {
 
 	private Long id;
 

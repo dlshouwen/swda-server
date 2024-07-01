@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysUserTokenEntity;
+import com.dlshouwen.swda.bms.entity.UserToken;
 import com.dlshouwen.swda.bms.vo.UserTokenVO;
 
 /**
@@ -9,7 +9,7 @@ import com.dlshouwen.swda.bms.vo.UserTokenVO;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysUserTokenService extends BaseService<SysUserTokenEntity> {
+public interface SysUserTokenService extends BaseService<UserToken> {
 
 	/**
 	 * create token

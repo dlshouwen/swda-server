@@ -11,7 +11,7 @@ import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.auth.enums.DataScopeEnum;
 import com.dlshouwen.swda.bms.convert.SysRoleConvert;
 import com.dlshouwen.swda.bms.mapper.SysRoleDao;
-import com.dlshouwen.swda.bms.entity.SysRoleEntity;
+import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.service.*;
 import com.dlshouwen.swda.bms.vo.RoleOrganVO;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntity> implements SysRoleService {
+public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, Role> implements SysRoleService {
 	
 	/** role menu service */
 	private final SysRoleMenuService sysRoleMenuService;
@@ -51,7 +51,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	@Override
 	public PageResult<RoleVO> page(SysRoleQuery query) {
 //		select page
-		IPage<SysRoleEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<Role> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
 		return new PageResult<>(SysRoleConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -64,7 +64,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	@Override
 	public List<RoleVO> getList(SysRoleQuery query) {
 //		get role list
-		List<SysRoleEntity> entityList = baseMapper.selectList(getWrapper(query));
+		List<Role> entityList = baseMapper.selectList(getWrapper(query));
 //		convert to role vo list for result
 		return SysRoleConvert.INSTANCE.convertList(entityList);
 	}
@@ -74,11 +74,11 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	 * @param query
 	 * @return wrapper
 	 */
-	private Wrapper<SysRoleEntity> getWrapper(SysRoleQuery query) {
+	private Wrapper<Role> getWrapper(SysRoleQuery query) {
 //		create wrapper
-		LambdaQueryWrapper<SysRoleEntity> wrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<>();
 //		set condition
-		wrapper.like(StrUtil.isNotBlank(query.getName()), SysRoleEntity::getName, query.getName());
+		wrapper.like(StrUtil.isNotBlank(query.getName()), Role::getName, query.getName());
 //		handle data scope wrapper
 		dataScopeWrapper(wrapper);
 //		return wrapper
@@ -93,7 +93,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	@Transactional(rollbackFor = Exception.class)
 	public void save(RoleVO vo) {
 //		convert to role
-		SysRoleEntity entity = SysRoleConvert.INSTANCE.convert(vo);
+		Role entity = SysRoleConvert.INSTANCE.convert(vo);
 //		set data scope
 		entity.setDataScope(DataScopeEnum.SELF.getValue());
 //		insert role
@@ -110,7 +110,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	@Transactional(rollbackFor = Exception.class)
 	public void update(RoleVO vo) {
 //		convert to role
-		SysRoleEntity entity = SysRoleConvert.INSTANCE.convert(vo);
+		Role entity = SysRoleConvert.INSTANCE.convert(vo);
 //		update role
 		updateById(entity);
 //		save role menu
@@ -127,7 +127,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	@Transactional(rollbackFor = Exception.class)
 	public void dataScope(RoleOrganVO vo) {
 //		get role
-		SysRoleEntity entity = getById(vo.getId());
+		Role entity = getById(vo.getId());
 //		set data scope
 		entity.setDataScope(vo.getDataScope());
 //		update role
@@ -175,7 +175,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 			return null;
 		}
 //		get role name list for return
-		return baseMapper.selectBatchIds(idList).stream().map(SysRoleEntity::getName).toList();
+		return baseMapper.selectBatchIds(idList).stream().map(Role::getName).toList();
 	}
 
 }

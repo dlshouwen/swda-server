@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.convert;
 
-import com.dlshouwen.swda.bms.entity.SysUserTokenEntity;
+import com.dlshouwen.swda.bms.entity.UserToken;
 import com.dlshouwen.swda.bms.vo.UserTokenVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -21,13 +21,13 @@ public interface SysUserTokenConvert {
 	 * @param userTokenVO
 	 * @return user token
 	 */
-	SysUserTokenEntity convert(UserTokenVO vo);
+	UserToken convert(UserTokenVO vo);
 
 	/**
 	 * convert
 	 * @param userToken
 	 * @return user token vo
 	 */
-	UserTokenVO convert(SysUserTokenEntity entity);
+	UserTokenVO convert(UserToken entity);
 
 }

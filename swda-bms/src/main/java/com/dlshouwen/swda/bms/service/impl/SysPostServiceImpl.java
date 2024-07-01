@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysPostConvert;
 import com.dlshouwen.swda.bms.mapper.SysPostDao;
-import com.dlshouwen.swda.bms.entity.SysPostEntity;
+import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
 import com.dlshouwen.swda.bms.service.SysUserPostService;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntity> implements SysPostService {
+public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, Post> implements SysPostService {
 	
 	/** user post service */
 	private final SysUserPostService sysUserPostService;
@@ -40,7 +40,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	@Override
 	public PageResult<PostVO> page(SysPostQuery query) {
 //		select page
-		IPage<SysPostEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<Post> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
 		return new PageResult<>(SysPostConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -56,7 +56,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 //		set status
 		query.setStatus(1);
 //		get post list
-		List<SysPostEntity> entityList = baseMapper.selectList(getWrapper(query));
+		List<Post> entityList = baseMapper.selectList(getWrapper(query));
 //		convert to post vo for return
 		return SysPostConvert.INSTANCE.convertList(entityList);
 	}
@@ -73,7 +73,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 			return null;
 		}
 //		get post name list for return
-		return baseMapper.selectBatchIds(idList).stream().map(SysPostEntity::getPostName).toList();
+		return baseMapper.selectBatchIds(idList).stream().map(Post::getPostName).toList();
 	}
 
 	/**
@@ -81,15 +81,15 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	 * @param query
 	 * @return wrapper
 	 */
-	private Wrapper<SysPostEntity> getWrapper(SysPostQuery query) {
+	private Wrapper<Post> getWrapper(SysPostQuery query) {
 //		create wrapper
-		LambdaQueryWrapper<SysPostEntity> wrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
 //		set condition
-		wrapper.like(StrUtil.isNotBlank(query.getPostCode()), SysPostEntity::getPostCode, query.getPostCode());
-		wrapper.like(StrUtil.isNotBlank(query.getPostName()), SysPostEntity::getPostName, query.getPostName());
-		wrapper.eq(query.getStatus() != null, SysPostEntity::getStatus, query.getStatus());
+		wrapper.like(StrUtil.isNotBlank(query.getPostCode()), Post::getPostCode, query.getPostCode());
+		wrapper.like(StrUtil.isNotBlank(query.getPostName()), Post::getPostName, query.getPostName());
+		wrapper.eq(query.getStatus() != null, Post::getStatus, query.getStatus());
 //		set sort
-		wrapper.orderByAsc(SysPostEntity::getSort);
+		wrapper.orderByAsc(Post::getSort);
 //		return wrapper
 		return wrapper;
 	}
@@ -101,7 +101,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	@Override
 	public void save(PostVO vo) {
 //		convert to post
-		SysPostEntity entity = SysPostConvert.INSTANCE.convert(vo);
+		Post entity = SysPostConvert.INSTANCE.convert(vo);
 //		insert post
 		baseMapper.insert(entity);
 	}
@@ -113,7 +113,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	@Override
 	public void update(PostVO vo) {
 //		convert to post
-		SysPostEntity entity = SysPostConvert.INSTANCE.convert(vo);
+		Post entity = SysPostConvert.INSTANCE.convert(vo);
 //		update post
 		updateById(entity);
 	}

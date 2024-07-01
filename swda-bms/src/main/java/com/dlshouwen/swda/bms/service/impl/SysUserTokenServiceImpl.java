@@ -16,8 +16,8 @@ import com.dlshouwen.swda.bms.convert.SysUserConvert;
 import com.dlshouwen.swda.bms.convert.SysUserTokenConvert;
 import com.dlshouwen.swda.bms.mapper.SysUserDao;
 import com.dlshouwen.swda.bms.mapper.SysUserTokenDao;
-import com.dlshouwen.swda.bms.entity.SysUserEntity;
-import com.dlshouwen.swda.bms.entity.SysUserTokenEntity;
+import com.dlshouwen.swda.bms.entity.User;
+import com.dlshouwen.swda.bms.entity.UserToken;
 import com.dlshouwen.swda.bms.service.SysUserDetailsService;
 import com.dlshouwen.swda.bms.service.SysUserTokenService;
 import com.dlshouwen.swda.bms.vo.UserTokenVO;
@@ -36,7 +36,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, SysUserTokenEntity> implements SysUserTokenService {
+public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, UserToken> implements SysUserTokenService {
 	
 	/** token store cache */
 	private final TokenCache tokenStoreCache;
@@ -62,7 +62,7 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Sy
 //		generate refresh token
 		String refreshToken = TokenUtils.generator();
 //		create user token
-		SysUserTokenEntity entity = new SysUserTokenEntity();
+		UserToken entity = new UserToken();
 //		set user id, access token , refresh token
 		entity.setUserId(userId);
 		entity.setAccessToken(accessToken);
@@ -74,7 +74,7 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Sy
 //		set refresh token expire
 		entity.setRefreshTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getRefreshTokenExpire())));
 //		get user token
-		SysUserTokenEntity tokenEntity = baseMapper.selectOne(new LambdaQueryWrapper<SysUserTokenEntity>().eq(SysUserTokenEntity::getUserId, userId));
+		UserToken tokenEntity = baseMapper.selectOne(new LambdaQueryWrapper<UserToken>().eq(UserToken::getUserId, userId));
 //		if token is null
 		if (tokenEntity == null) {
 //			insert user
@@ -97,12 +97,12 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Sy
 	@Override
 	public UserTokenVO refreshToken(String refreshToken) {
 //		create wrapper
-		LambdaQueryWrapper<SysUserTokenEntity> query = Wrappers.lambdaQuery();
+		LambdaQueryWrapper<UserToken> query = Wrappers.lambdaQuery();
 //		set wrapper
-		query.eq(SysUserTokenEntity::getRefreshToken, refreshToken);
-		query.ge(SysUserTokenEntity::getRefreshTokenExpire, new Date());
+		query.eq(UserToken::getRefreshToken, refreshToken);
+		query.ge(UserToken::getRefreshTokenExpire, new Date());
 //		get user token
-		SysUserTokenEntity entity = baseMapper.selectOne(query);
+		UserToken entity = baseMapper.selectOne(query);
 //		if user token is null
 		if (entity == null) {
 //			throw exception
@@ -119,7 +119,7 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Sy
 //		update user token
 		baseMapper.updateById(entity);
 //		get user
-		SysUserEntity user = sysUserDao.selectById(entity.getUserId());
+		User user = sysUserDao.selectById(entity.getUserId());
 //		convert to user detail
 		UserDetail userDetail = SysUserConvert.INSTANCE.convertDetail(user);
 //		get user details
@@ -137,14 +137,14 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Sy
 	@Override
 	public void expireToken(Long userId) {
 //		create user token
-		SysUserTokenEntity entity = new SysUserTokenEntity();
+		UserToken entity = new UserToken();
 //		get now date
 		LocalDateTime now = LocalDateTime.now();
 //		set access token expire, refresh token expire
 		entity.setAccessTokenExpire(now);
 		entity.setRefreshTokenExpire(now);
 //		update user token
-		baseMapper.update(entity, new LambdaQueryWrapper<SysUserTokenEntity>().eq(SysUserTokenEntity::getUserId, userId));
+		baseMapper.update(entity, new LambdaQueryWrapper<UserToken>().eq(UserToken::getUserId, userId));
 	}
 
 	/**

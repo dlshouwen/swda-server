@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.convert.SysUserConvert;
-import com.dlshouwen.swda.bms.entity.SysUserEntity;
+import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.query.SysUserQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
 import com.dlshouwen.swda.bms.service.SysUserPostService;
@@ -81,7 +81,7 @@ public class SysUserController {
 	@PreAuthorize("hasAuthority('sys:user:info')")
 	public R<UserVO> get(@PathVariable("id") Long id) {
 //		get user
-		SysUserEntity entity = sysUserService.getById(id);
+		User entity = sysUserService.getById(id);
 //		convert to user vo
 		UserVO vo = SysUserConvert.INSTANCE.convert(entity);
 //		get role id list set to user

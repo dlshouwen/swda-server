@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.convert;
 
-import com.dlshouwen.swda.bms.entity.SysPostEntity;
+import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.bms.vo.PostVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -23,20 +23,20 @@ public interface SysPostConvert {
 	 * @param post
 	 * @return post vo
 	 */
-	PostVO convert(SysPostEntity entity);
+	PostVO convert(Post entity);
 
 	/**
 	 * convert
 	 * @param postVO
 	 * @return post
 	 */
-	SysPostEntity convert(PostVO vo);
+	Post convert(PostVO vo);
 
 	/**
 	 * convert list
 	 * @param postList
 	 * @return post vo list
 	 */
-	List<PostVO> convertList(List<SysPostEntity> list);
+	List<PostVO> convertList(List<Post> list);
 
 }

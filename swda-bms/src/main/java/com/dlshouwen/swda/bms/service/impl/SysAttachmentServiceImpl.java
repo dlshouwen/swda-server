@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysAttachmentConvert;
 import com.dlshouwen.swda.bms.mapper.SysAttachmentDao;
-import com.dlshouwen.swda.bms.entity.SysAttachmentEntity;
+import com.dlshouwen.swda.bms.entity.Attachment;
 import com.dlshouwen.swda.bms.query.SysAttachmentQuery;
 import com.dlshouwen.swda.bms.service.SysAttachmentService;
 import com.dlshouwen.swda.bms.vo.AttachmentVO;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, SysAttachmentEntity> implements SysAttachmentService {
+public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, Attachment> implements SysAttachmentService {
 
 	/**
 	 * page
@@ -36,7 +36,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	@Override
 	public PageResult<AttachmentVO> page(SysAttachmentQuery query) {
 //		select page
-		IPage<SysAttachmentEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<Attachment> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
 		return new PageResult<>(SysAttachmentConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -46,13 +46,13 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	 * @param query
 	 * @return wrapper
 	 */
-	private LambdaQueryWrapper<SysAttachmentEntity> getWrapper(SysAttachmentQuery query) {
+	private LambdaQueryWrapper<Attachment> getWrapper(SysAttachmentQuery query) {
 //		create wrapper
-		LambdaQueryWrapper<SysAttachmentEntity> wrapper = Wrappers.lambdaQuery();
+		LambdaQueryWrapper<Attachment> wrapper = Wrappers.lambdaQuery();
 //		set condition
-		wrapper.eq(StrUtil.isNotBlank(query.getPlatform()), SysAttachmentEntity::getPlatform, query.getPlatform());
-		wrapper.like(StrUtil.isNotBlank(query.getName()), SysAttachmentEntity::getName, query.getName());
-		wrapper.orderByDesc(SysAttachmentEntity::getId);
+		wrapper.eq(StrUtil.isNotBlank(query.getPlatform()), Attachment::getPlatform, query.getPlatform());
+		wrapper.like(StrUtil.isNotBlank(query.getName()), Attachment::getName, query.getName());
+		wrapper.orderByDesc(Attachment::getId);
 //		return wrapper
 		return wrapper;
 	}
@@ -64,7 +64,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	@Override
 	public void save(AttachmentVO vo) {
 //		convert to attachment
-		SysAttachmentEntity entity = SysAttachmentConvert.INSTANCE.convert(vo);
+		Attachment entity = SysAttachmentConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -76,7 +76,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	@Override
 	public void update(AttachmentVO vo) {
 //		convert to attachment
-		SysAttachmentEntity entity = SysAttachmentConvert.INSTANCE.convert(vo);
+		Attachment entity = SysAttachmentConvert.INSTANCE.convert(vo);
 //		update
 		updateById(entity);
 	}

@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysUserRoleEntity;
+import com.dlshouwen.swda.bms.entity.UserRole;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysUserRoleService extends BaseService<SysUserRoleEntity> {
+public interface SysUserRoleService extends BaseService<UserRole> {
 
 	/**
 	 * save or update

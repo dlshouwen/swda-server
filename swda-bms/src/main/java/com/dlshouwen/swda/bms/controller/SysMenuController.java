@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.convert.SysMenuConvert;
-import com.dlshouwen.swda.bms.entity.SysMenuEntity;
+import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.enums.MenuTypeEnum;
 import com.dlshouwen.swda.bms.service.SysMenuService;
 import com.dlshouwen.swda.bms.vo.PremissionVO;
@@ -91,13 +91,13 @@ public class SysMenuController {
 	@PreAuthorize("hasAuthority('sys:menu:info')")
 	public R<PremissionVO> get(@PathVariable("id") Long id) {
 //		get menu by id
-		SysMenuEntity entity = sysMenuService.getById(id);
+		Permission entity = sysMenuService.getById(id);
 //		convert to menu vo
 		PremissionVO vo = SysMenuConvert.INSTANCE.convert(entity);
 //		is has parent menu
 		if (entity.getPid() != null) {
 //			get parent menu
-			SysMenuEntity parentEntity = sysMenuService.getById(entity.getPid());
+			Permission parentEntity = sysMenuService.getById(entity.getPid());
 //			set parent name
 			vo.setParentName(parentEntity.getName());
 		}

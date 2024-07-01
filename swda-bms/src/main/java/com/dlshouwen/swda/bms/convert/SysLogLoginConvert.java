@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.convert;
 
-import com.dlshouwen.swda.bms.entity.SysLogLoginEntity;
+import com.dlshouwen.swda.bms.entity.LoginLog;
 import com.dlshouwen.swda.bms.vo.LoginLogVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -23,20 +23,20 @@ public interface SysLogLoginConvert {
 	 * @param logonLogVO
 	 * @return login log
 	 */
-	SysLogLoginEntity convert(LoginLogVO vo);
+	LoginLog convert(LoginLogVO vo);
 
 	/**
 	 * convert
 	 * @param loginLog
 	 * @return login log vo
 	 */
-	LoginLogVO convert(SysLogLoginEntity entity);
+	LoginLogVO convert(LoginLog entity);
 
 	/**
 	 * convert list
 	 * @param loginLogList
 	 * @return login log vo list
 	 */
-	List<LoginLogVO> convertList(List<SysLogLoginEntity> list);
+	List<LoginLogVO> convertList(List<LoginLog> list);
 
 }

@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.convert.SysPostConvert;
-import com.dlshouwen.swda.bms.entity.SysPostEntity;
+import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
 import com.dlshouwen.swda.bms.vo.PostVO;
@@ -71,7 +71,7 @@ public class SysPostController {
 	@PreAuthorize("hasAuthority('sys:post:info')")
 	public R<PostVO> get(@PathVariable("id") Long id) {
 //		get post by id
-		SysPostEntity entity = sysPostService.getById(id);
+		Post entity = sysPostService.getById(id);
 //		return
 		return R.ok(SysPostConvert.INSTANCE.convert(entity));
 	}

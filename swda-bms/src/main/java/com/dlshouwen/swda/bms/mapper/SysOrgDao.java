@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.dlshouwen.swda.bms.entity.SysOrgEntity;
+import com.dlshouwen.swda.bms.entity.Organ;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -14,19 +14,19 @@ import java.util.Map;
  * @since 1.0.0
  */
 @Mapper
-public interface SysOrgDao extends BaseMapper<SysOrgEntity> {
+public interface SysOrgDao extends BaseMapper<Organ> {
 
 	/**
 	 * get list
 	 * @param params
 	 * @return organ list
 	 */
-	List<SysOrgEntity> getList(Map<String, Object> params);
+	List<Organ> getList(Map<String, Object> params);
 
 	/**
 	 * get id and pid list
 	 * @return organ list
 	 */
-	List<SysOrgEntity> getIdAndPidList();
+	List<Organ> getIdAndPidList();
 
 }

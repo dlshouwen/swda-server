@@ -7,23 +7,17 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * post
+ * role menu
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_post")
-public class SysPostEntity extends BaseEntity {
+@TableName("sys_role_menu")
+public class RolePermission extends BaseEntity {
 
-	private String postCode;
+	private Long roleId;
 
-	private String postName;
-
-	private Integer sort;
-
-	private Integer status;
-
-	private Long tenantId;
+	private Long menuId;
 
 }

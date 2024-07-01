@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.dlshouwen.swda.bms.entity.SysUserTokenEntity;
+import com.dlshouwen.swda.bms.entity.UserToken;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysUserTokenDao extends BaseMapper<SysUserTokenEntity> {
+public interface SysUserTokenDao extends BaseMapper<UserToken> {
 
 	/**
 	 * get online access token list by role id

@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysUserPostEntity;
+import com.dlshouwen.swda.bms.entity.UserPost;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysUserPostService extends BaseService<SysUserPostEntity> {
+public interface SysUserPostService extends BaseService<UserPost> {
 
 	/**
 	 * save or update

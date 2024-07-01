@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
+import com.dlshouwen.swda.bms.entity.DictCategory;
 import com.dlshouwen.swda.bms.query.SysDictTypeQuery;
 import com.dlshouwen.swda.bms.vo.DictCategoryVO;
 import com.dlshouwen.swda.bms.vo.SysDictVO;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysDictTypeService extends BaseService<SysDictTypeEntity> {
+public interface SysDictTypeService extends BaseService<DictCategory> {
 
 	/**
 	 * page

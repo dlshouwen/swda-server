@@ -7,17 +7,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * user post
+ * attachment
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_user_post")
-public class SysUserPostEntity extends BaseEntity {
+@TableName("sys_attachment")
+public class Attachment extends BaseEntity {
 
-	private Long userId;
+	private Long id;
 
-	private Long postId;
+	private String name;
+
+	private String url;
+
+	private Long size;
+
+	private String platform;
+
+	private Long tenantId;
 
 }

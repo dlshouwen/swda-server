@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.convert;
 
-import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
+import com.dlshouwen.swda.bms.entity.DictCategory;
 import com.dlshouwen.swda.bms.vo.DictCategoryVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -23,20 +23,20 @@ public interface SysDictTypeConvert {
 	 * @param dictType
 	 * @return dict type vo
 	 */
-	DictCategoryVO convert(SysDictTypeEntity entity);
+	DictCategoryVO convert(DictCategory entity);
 
 	/**
 	 * convert
 	 * @param dictTypeVO
 	 * @return dict type
 	 */
-	SysDictTypeEntity convert(DictCategoryVO vo);
+	DictCategory convert(DictCategoryVO vo);
 
 	/**
 	 * convert list
 	 * @param dictTypeList
 	 * @return dict type vo list
 	 */
-	List<DictCategoryVO> convertList(List<SysDictTypeEntity> list);
+	List<DictCategoryVO> convertList(List<DictCategory> list);
 
 }

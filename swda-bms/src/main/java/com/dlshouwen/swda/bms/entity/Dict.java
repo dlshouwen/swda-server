@@ -7,17 +7,29 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * role menu
+ * dict
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_role_menu")
-public class SysRoleMenuEntity extends BaseEntity {
+@TableName("sys_dict_data")
+public class Dict extends BaseEntity {
 
-	private Long roleId;
+	private Long id;
 
-	private Long menuId;
+	private Long dictTypeId;
+
+	private String dictLabel;
+
+	private String dictValue;
+
+	private String labelClass;
+
+	private String remark;
+
+	private Integer sort;
+
+	private Long tenantId;
 
 }

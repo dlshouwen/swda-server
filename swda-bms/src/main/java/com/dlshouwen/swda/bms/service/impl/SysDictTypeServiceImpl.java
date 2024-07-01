@@ -15,8 +15,8 @@ import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysDictTypeConvert;
 import com.dlshouwen.swda.bms.mapper.SysDictDataDao;
 import com.dlshouwen.swda.bms.mapper.SysDictTypeDao;
-import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
-import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
+import com.dlshouwen.swda.bms.entity.Dict;
+import com.dlshouwen.swda.bms.entity.DictCategory;
 import com.dlshouwen.swda.bms.enums.DictSourceEnum;
 import com.dlshouwen.swda.bms.query.SysDictTypeQuery;
 import com.dlshouwen.swda.bms.service.SysDictTypeService;
@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysDictTypeEntity> implements SysDictTypeService, InitializingBean {
+public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, DictCategory> implements SysDictTypeService, InitializingBean {
 	
 	/** dict mapper */
 	private final SysDictDataDao sysDictDataDao;
@@ -54,7 +54,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	 */
 	@Override
 	public PageResult<DictCategoryVO> page(SysDictTypeQuery query) {
-		IPage<SysDictTypeEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<DictCategory> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 		return new PageResult<>(SysDictTypeConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
@@ -63,13 +63,13 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	 * @param query
 	 * @return wrapper
 	 */
-	private Wrapper<SysDictTypeEntity> getWrapper(SysDictTypeQuery query) {
+	private Wrapper<DictCategory> getWrapper(SysDictTypeQuery query) {
 //		create wrapper
-		LambdaQueryWrapper<SysDictTypeEntity> wrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<DictCategory> wrapper = new LambdaQueryWrapper<>();
 //		set condition
-		wrapper.like(StrUtil.isNotBlank(query.getDictType()), SysDictTypeEntity::getDictType, query.getDictType());
-		wrapper.like(StrUtil.isNotBlank(query.getDictName()), SysDictTypeEntity::getDictName, query.getDictName());
-		wrapper.orderByAsc(SysDictTypeEntity::getSort);
+		wrapper.like(StrUtil.isNotBlank(query.getDictType()), DictCategory::getDictType, query.getDictType());
+		wrapper.like(StrUtil.isNotBlank(query.getDictName()), DictCategory::getDictName, query.getDictName());
+		wrapper.orderByAsc(DictCategory::getSort);
 //		return wrapper
 		return wrapper;
 	}
@@ -82,7 +82,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	@Transactional(rollbackFor = Exception.class)
 	public void save(DictCategoryVO vo) {
 //		convert to dict type
-		SysDictTypeEntity entity = SysDictTypeConvert.INSTANCE.convert(vo);
+		DictCategory entity = SysDictTypeConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -95,7 +95,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	@Transactional(rollbackFor = Exception.class)
 	public void update(DictCategoryVO vo) {
 //		convert to dict type
-		SysDictTypeEntity entity = SysDictTypeConvert.INSTANCE.convert(vo);
+		DictCategory entity = SysDictTypeConvert.INSTANCE.convert(vo);
 //		update
 		updateById(entity);
 	}
@@ -119,7 +119,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	@Override
 	public List<SysDictVO.DictData> getDictSql(Long id) {
 //		get dict type
-		SysDictTypeEntity entity = this.getById(id);
+		DictCategory entity = this.getById(id);
 //		try catch
 		try {
 //			get dict list for return
@@ -137,20 +137,20 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	@Override
 	public List<SysDictVO> getDictList() {
 //		get dict type list
-		List<SysDictTypeEntity> typeList = this.list(Wrappers.emptyWrapper());
+		List<DictCategory> typeList = this.list(Wrappers.emptyWrapper());
 //		get dict list
-		QueryWrapper<SysDictDataEntity> query = new QueryWrapper<SysDictDataEntity>().orderByAsc("sort");
-		List<SysDictDataEntity> dataList = sysDictDataDao.selectList(query);
+		QueryWrapper<Dict> query = new QueryWrapper<Dict>().orderByAsc("sort");
+		List<Dict> dataList = sysDictDataDao.selectList(query);
 //		defined dict list
 		List<SysDictVO> dictList = new ArrayList<>(typeList.size());
 //		for each type
-		for (SysDictTypeEntity type : typeList) {
+		for (DictCategory type : typeList) {
 //			defined dict
 			SysDictVO dict = new SysDictVO();
 //			set dict type
 			dict.setDictType(type.getDictType());
 //			for each dict
-			for (SysDictDataEntity data : dataList) {
+			for (Dict data : dataList) {
 //				is this type
 				if (type.getId().equals(data.getDictTypeId())) {
 //					add dict list
@@ -193,13 +193,13 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 //		async
 		CompletableFuture.supplyAsync(() -> {
 //			get dict list
-			List<SysDictDataEntity> dataList = sysDictDataDao.selectList(new LambdaQueryWrapper<>());
+			List<Dict> dataList = sysDictDataDao.selectList(new LambdaQueryWrapper<>());
 //			group by dict type
-			Map<Long, List<SysDictDataEntity>> dictTypeDataMap = dataList.stream().collect(Collectors.groupingBy(SysDictDataEntity::getDictTypeId));
+			Map<Long, List<Dict>> dictTypeDataMap = dataList.stream().collect(Collectors.groupingBy(Dict::getDictTypeId));
 //			get dict type list
-			List<SysDictTypeEntity> dictTypeEntities = super.list();
+			List<DictCategory> dictTypeEntities = super.list();
 //			for each dict type
-			for (SysDictTypeEntity dictTypeEntity : dictTypeEntities) {
+			for (DictCategory dictTypeEntity : dictTypeEntities) {
 //				contains key
 				if (dictTypeDataMap.containsKey(dictTypeEntity.getId())) {
 //					try catch
@@ -207,7 +207,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 //						refresh cache
 						dictionaryTransService.refreshCache(dictTypeEntity.getDictType(),
 								dictTypeDataMap.get(dictTypeEntity.getId()).stream().collect(Collectors
-										.toMap(SysDictDataEntity::getDictValue, SysDictDataEntity::getDictLabel)));
+										.toMap(Dict::getDictValue, Dict::getDictLabel)));
 					} catch (Exception e) {
 //						log error
 						log.error("刷新字典缓存异常: type=" + dictTypeEntity, e);

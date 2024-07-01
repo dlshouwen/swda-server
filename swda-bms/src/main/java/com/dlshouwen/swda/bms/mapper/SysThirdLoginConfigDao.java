@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
+import com.dlshouwen.swda.bms.entity.AuthPlatform;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
  * @since 1.0.0
  */
 @Mapper
-public interface SysThirdLoginConfigDao extends BaseMapper<SysThirdLoginConfigEntity> {
+public interface SysThirdLoginConfigDao extends BaseMapper<AuthPlatform> {
 
 }

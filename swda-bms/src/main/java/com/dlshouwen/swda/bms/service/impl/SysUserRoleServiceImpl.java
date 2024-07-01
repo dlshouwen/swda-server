@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.mapper.SysUserRoleDao;
-import com.dlshouwen.swda.bms.entity.SysUserRoleEntity;
+import com.dlshouwen.swda.bms.entity.UserRole;
 import com.dlshouwen.swda.bms.service.SysUserRoleService;
 import com.dlshouwen.swda.bms.service.SysUserTokenService;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysUserRoleEntity> implements SysUserRoleService {
+public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, UserRole> implements SysUserRoleService {
 	
 	/** user token service */
 	private final SysUserTokenService sysUserTokenService;
@@ -40,9 +40,9 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysU
 //		if has insert datas
 		if (CollUtil.isNotEmpty(insertRoleIdList)) {
 //			for each id list to construct role list
-			List<SysUserRoleEntity> roleList = insertRoleIdList.stream().map(roleId -> {
+			List<UserRole> roleList = insertRoleIdList.stream().map(roleId -> {
 //				create user role
-				SysUserRoleEntity entity = new SysUserRoleEntity();
+				UserRole entity = new UserRole();
 //				set user id, role id
 				entity.setUserId(userId);
 				entity.setRoleId(roleId);
@@ -57,9 +57,9 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysU
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deleteRoleIdList)) {
 //			create query wrapper
-			LambdaQueryWrapper<SysUserRoleEntity> queryWrapper = new LambdaQueryWrapper<>();
+			LambdaQueryWrapper<UserRole> queryWrapper = new LambdaQueryWrapper<>();
 //			delete user role
-			remove(queryWrapper.eq(SysUserRoleEntity::getUserId, userId).in(SysUserRoleEntity::getRoleId, deleteRoleIdList));
+			remove(queryWrapper.eq(UserRole::getUserId, userId).in(UserRole::getRoleId, deleteRoleIdList));
 		}
 	}
 
@@ -71,9 +71,9 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysU
 	@Override
 	public void saveUserList(Long roleId, List<Long> userIdList) {
 //		for each user id list to construct user role list
-		List<SysUserRoleEntity> list = userIdList.stream().map(userId -> {
+		List<UserRole> list = userIdList.stream().map(userId -> {
 //			create user role
-			SysUserRoleEntity entity = new SysUserRoleEntity();
+			UserRole entity = new UserRole();
 //			set user id, role id
 			entity.setUserId(userId);
 			entity.setRoleId(roleId);
@@ -93,7 +93,7 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysU
 	@Override
 	public void deleteByRoleIdList(List<Long> roleIdList) {
 //		delete user role
-		remove(new LambdaQueryWrapper<SysUserRoleEntity>().in(SysUserRoleEntity::getRoleId, roleIdList));
+		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getRoleId, roleIdList));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysU
 	@Override
 	public void deleteByUserIdList(List<Long> userIdList) {
 //		delete user role
-		remove(new LambdaQueryWrapper<SysUserRoleEntity>().in(SysUserRoleEntity::getUserId, userIdList));
+		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getUserId, userIdList));
 	}
 
 	/**
@@ -114,9 +114,9 @@ public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysU
 	@Override
 	public void deleteByUserIdList(Long roleId, List<Long> userIdList) {
 //		create wrapper
-		LambdaQueryWrapper<SysUserRoleEntity> queryWrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<UserRole> queryWrapper = new LambdaQueryWrapper<>();
 //		delete user role
-		remove(queryWrapper.eq(SysUserRoleEntity::getRoleId, roleId).in(SysUserRoleEntity::getUserId, userIdList));
+		remove(queryWrapper.eq(UserRole::getRoleId, roleId).in(UserRole::getUserId, userIdList));
 //		update cache auth
 		userIdList.forEach(sysUserTokenService::updateCacheAuthByUserId);
 	}

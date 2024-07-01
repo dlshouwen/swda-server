@@ -16,7 +16,7 @@ import com.dlshouwen.swda.core.entity.log.OperationLog;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysLogOperateConvert;
 import com.dlshouwen.swda.bms.mapper.SysLogOperateDao;
-import com.dlshouwen.swda.bms.entity.SysLogOperateEntity;
+import com.dlshouwen.swda.bms.entity.OperationLog;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
 import com.dlshouwen.swda.bms.service.SysLogOperateService;
 import com.dlshouwen.swda.bms.vo.OperationVO;
@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @AllArgsConstructor
-public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, SysLogOperateEntity> implements SysLogOperateService {
+public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, OperationLog> implements SysLogOperateService {
 	
 	/** redis cache */
 	private final RedisCache redisCache;
@@ -45,7 +45,7 @@ public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, 
 	@Override
 	public PageResult<OperationVO> page(SysLogOperateQuery query) {
 //		select page
-		IPage<SysLogOperateEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<OperationLog> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
 		return new PageResult<>(SysLogOperateConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -55,15 +55,15 @@ public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, 
 	 * @param query
 	 * @return wrapper
 	 */
-	private LambdaQueryWrapper<SysLogOperateEntity> getWrapper(SysLogOperateQuery query) {
+	private LambdaQueryWrapper<OperationLog> getWrapper(SysLogOperateQuery query) {
 //		defined wrapper
-		LambdaQueryWrapper<SysLogOperateEntity> wrapper = Wrappers.lambdaQuery();
+		LambdaQueryWrapper<OperationLog> wrapper = Wrappers.lambdaQuery();
 //		set condition
-		wrapper.eq(query.getStatus() != null, SysLogOperateEntity::getStatus, query.getStatus());
-		wrapper.like(StrUtil.isNotBlank(query.getRealName()), SysLogOperateEntity::getRealName, query.getRealName());
-		wrapper.like(StrUtil.isNotBlank(query.getModule()), SysLogOperateEntity::getModule, query.getModule());
-		wrapper.like(StrUtil.isNotBlank(query.getReqUri()), SysLogOperateEntity::getReqUri, query.getReqUri());
-		wrapper.orderByDesc(SysLogOperateEntity::getId);
+		wrapper.eq(query.getStatus() != null, OperationLog::getStatus, query.getStatus());
+		wrapper.like(StrUtil.isNotBlank(query.getRealName()), OperationLog::getRealName, query.getRealName());
+		wrapper.like(StrUtil.isNotBlank(query.getModule()), OperationLog::getModule, query.getModule());
+		wrapper.like(StrUtil.isNotBlank(query.getReqUri()), OperationLog::getReqUri, query.getReqUri());
+		wrapper.orderByDesc(OperationLog::getId);
 //		return wrapper
 		return wrapper;
 	}
@@ -88,7 +88,7 @@ public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, 
 						return;
 					}
 //					convert to operation log
-					SysLogOperateEntity entity = BeanUtil.copyProperties(log, SysLogOperateEntity.class);
+					OperationLog entity = BeanUtil.copyProperties(log, OperationLog.class);
 //					insert
 					baseMapper.insert(entity);
 				}

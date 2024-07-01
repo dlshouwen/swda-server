@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysParamsEntity;
+import com.dlshouwen.swda.bms.entity.Attr;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
 import com.dlshouwen.swda.bms.vo.AttrVO;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysParamsService extends BaseService<SysParamsEntity> {
+public interface SysParamsService extends BaseService<Attr> {
 
 	/**
 	 * page

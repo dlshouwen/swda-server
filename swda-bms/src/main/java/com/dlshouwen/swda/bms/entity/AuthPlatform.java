@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("sys_third_login_config")
-public class SysThirdLoginConfigEntity {
+public class AuthPlatform {
 
 	@TableId
 	private Long id;

@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.convert.SysOrgConvert;
-import com.dlshouwen.swda.bms.entity.SysOrgEntity;
+import com.dlshouwen.swda.bms.entity.Organ;
 import com.dlshouwen.swda.bms.service.SysOrgService;
 import com.dlshouwen.swda.bms.vo.OrganVO;
 import com.dlshouwen.swda.core.annotation.Operation;
@@ -54,13 +54,13 @@ public class SysOrgController {
 	@PreAuthorize("hasAuthority('sys:org:info')")
 	public R<OrganVO> get(@PathVariable("id") Long id) {
 //		get organ
-		SysOrgEntity entity = sysOrgService.getById(id);
+		Organ entity = sysOrgService.getById(id);
 //		convert to organ vo
 		OrganVO vo = SysOrgConvert.INSTANCE.convert(entity);
 //		if has parent
 		if (entity.getPid() != null) {
 //			get parent organ
-			SysOrgEntity parentEntity = sysOrgService.getById(entity.getPid());
+			Organ parentEntity = sysOrgService.getById(entity.getPid());
 //			set parent name
 			vo.setParentName(parentEntity.getName());
 		}

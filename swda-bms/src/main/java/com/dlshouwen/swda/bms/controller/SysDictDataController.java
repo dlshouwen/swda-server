@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.convert.SysDictDataConvert;
-import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
+import com.dlshouwen.swda.bms.entity.Dict;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
 import com.dlshouwen.swda.bms.service.SysDictDataService;
 import com.dlshouwen.swda.bms.vo.DictVO;
@@ -58,7 +58,7 @@ public class SysDictDataController {
 	@PreAuthorize("hasAuthority('sys:dict:info')")
 	public R<DictVO> get(@PathVariable("id") Long id) {
 //		get dict
-		SysDictDataEntity entity = sysDictDataService.getById(id);
+		Dict entity = sysDictDataService.getById(id);
 //		return
 		return R.ok(SysDictDataConvert.INSTANCE.convert(entity));
 	}

@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
+import com.dlshouwen.swda.bms.entity.Dict;
 import com.dlshouwen.swda.bms.vo.SysDictVO;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysDictDataDao extends BaseMapper<SysDictDataEntity> {
+public interface SysDictDataDao extends BaseMapper<Dict> {
 
 	/**
 	 * get list for sql

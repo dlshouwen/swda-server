@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysMenuEntity;
+import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.vo.PremissionVO;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Set;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysMenuService extends BaseService<SysMenuEntity> {
+public interface SysMenuService extends BaseService<Permission> {
 
 	/**
 	 * save

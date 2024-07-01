@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
+import com.dlshouwen.swda.bms.entity.DictCategory;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
  * @since 1.0.0
  */
 @Mapper
-public interface SysDictTypeDao extends BaseMapper<SysDictTypeEntity> {
+public interface SysDictTypeDao extends BaseMapper<DictCategory> {
 
 }

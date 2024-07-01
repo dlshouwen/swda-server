@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysMenuConvert;
 import com.dlshouwen.swda.bms.mapper.SysMenuDao;
-import com.dlshouwen.swda.bms.entity.SysMenuEntity;
+import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.service.SysMenuService;
 import com.dlshouwen.swda.bms.service.SysRoleMenuService;
 import com.dlshouwen.swda.bms.vo.PremissionVO;
@@ -29,7 +29,7 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
+public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> implements SysMenuService {
 	
 	/** role menu service */
 	private final SysRoleMenuService sysRoleMenuService;
@@ -42,7 +42,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	@Transactional(rollbackFor = Exception.class)
 	public void save(PremissionVO vo) {
 //		convert to menu
-		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
+		Permission entity = SysMenuConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -55,7 +55,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	@Transactional(rollbackFor = Exception.class)
 	public void update(PremissionVO vo) {
 //		convert to menu
-		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
+		Permission entity = SysMenuConvert.INSTANCE.convert(vo);
 //		if menu id equals pre menu id
 		if (entity.getId().equals(entity.getPid())) {
 //			throw exception
@@ -87,7 +87,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	@Override
 	public List<PremissionVO> getMenuList(Integer type) {
 //		get menu list
-		List<SysMenuEntity> menuList = baseMapper.getMenuList(type);
+		List<Permission> menuList = baseMapper.getMenuList(type);
 //		build menu tree for return
 		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
 	}
@@ -101,7 +101,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	@Override
 	public List<PremissionVO> getUserMenuList(UserDetail user, Integer type) {
 //		defined menu list
-		List<SysMenuEntity> menuList;
+		List<Permission> menuList;
 //		if user is super admin
 		if (user.getSuperAdmin().equals(ZeroOne.YES)) {
 //			get menu list
@@ -121,7 +121,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	 */
 	@Override
 	public Long getSubMenuCount(Long pid) {
-		return count(new LambdaQueryWrapper<SysMenuEntity>().eq(SysMenuEntity::getPid, pid));
+		return count(new LambdaQueryWrapper<Permission>().eq(Permission::getPid, pid));
 	}
 
 	/**

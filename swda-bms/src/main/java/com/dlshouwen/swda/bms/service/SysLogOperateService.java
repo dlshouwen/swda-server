@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.SysLogOperateEntity;
+import com.dlshouwen.swda.bms.entity.OperationLog;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
 import com.dlshouwen.swda.bms.vo.OperationVO;
 
@@ -11,7 +11,7 @@ import com.dlshouwen.swda.bms.vo.OperationVO;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface SysLogOperateService extends BaseService<SysLogOperateEntity> {
+public interface SysLogOperateService extends BaseService<OperationLog> {
 
 	/**
 	 * page

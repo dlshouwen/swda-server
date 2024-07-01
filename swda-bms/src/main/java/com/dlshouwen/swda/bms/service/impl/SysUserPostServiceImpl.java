@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.mapper.SysUserPostDao;
-import com.dlshouwen.swda.bms.entity.SysUserPostEntity;
+import com.dlshouwen.swda.bms.entity.UserPost;
 import com.dlshouwen.swda.bms.service.SysUserPostService;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 @Service
-public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, SysUserPostEntity> implements SysUserPostService {
+public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, UserPost> implements SysUserPostService {
 
 	/**
 	 * save or update
@@ -34,9 +34,9 @@ public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, SysU
 //		if has insert datas
 		if (CollUtil.isNotEmpty(insertPostIdList)) {
 //			for each post id to construct user post list
-			List<SysUserPostEntity> postList = insertPostIdList.stream().map(postId -> {
+			List<UserPost> postList = insertPostIdList.stream().map(postId -> {
 //				create user post
-				SysUserPostEntity entity = new SysUserPostEntity();
+				UserPost entity = new UserPost();
 //				set user id, post id
 				entity.setUserId(userId);
 				entity.setPostId(postId);
@@ -51,9 +51,9 @@ public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, SysU
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deletePostIdList)) {
 //			get wrapper
-			LambdaQueryWrapper<SysUserPostEntity> queryWrapper = new LambdaQueryWrapper<>();
+			LambdaQueryWrapper<UserPost> queryWrapper = new LambdaQueryWrapper<>();
 //			delete user post
-			remove(queryWrapper.eq(SysUserPostEntity::getUserId, userId).in(SysUserPostEntity::getPostId, deletePostIdList));
+			remove(queryWrapper.eq(UserPost::getUserId, userId).in(UserPost::getPostId, deletePostIdList));
 		}
 	}
 
@@ -64,7 +64,7 @@ public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, SysU
 	@Override
 	public void deleteByPostIdList(List<Long> postIdList) {
 //		delete user post
-		remove(new LambdaQueryWrapper<SysUserPostEntity>().in(SysUserPostEntity::getPostId, postIdList));
+		remove(new LambdaQueryWrapper<UserPost>().in(UserPost::getPostId, postIdList));
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, SysU
 	@Override
 	public void deleteByUserIdList(List<Long> userIdList) {
 //		delete user post
-		remove(new LambdaQueryWrapper<SysUserPostEntity>().in(SysUserPostEntity::getUserId, userIdList));
+		remove(new LambdaQueryWrapper<UserPost>().in(UserPost::getUserId, userIdList));
 	}
 
 	/**

@@ -11,7 +11,7 @@ import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.SysDictDataConvert;
 import com.dlshouwen.swda.bms.mapper.SysDictDataDao;
-import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
+import com.dlshouwen.swda.bms.entity.Dict;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
 import com.dlshouwen.swda.bms.service.SysDictDataService;
 import com.dlshouwen.swda.bms.vo.DictVO;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysDictDataEntity> implements SysDictDataService {
+public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, Dict> implements SysDictDataService {
 
 	/**
 	 * page
@@ -37,7 +37,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 	@Override
 	public PageResult<DictVO> page(SysDictDataQuery query) {
 //		select page
-		IPage<SysDictDataEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+		IPage<Dict> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
 		return new PageResult<>(SysDictDataConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -47,12 +47,12 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 	 * @param query
 	 * @return wrapper
 	 */
-	private Wrapper<SysDictDataEntity> getWrapper(SysDictDataQuery query) {
+	private Wrapper<Dict> getWrapper(SysDictDataQuery query) {
 //		create wrapper
-		LambdaQueryWrapper<SysDictDataEntity> wrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<Dict> wrapper = new LambdaQueryWrapper<>();
 //		set condition
-		wrapper.eq(SysDictDataEntity::getDictTypeId, query.getDictTypeId());
-		wrapper.orderByAsc(SysDictDataEntity::getSort);
+		wrapper.eq(Dict::getDictTypeId, query.getDictTypeId());
+		wrapper.orderByAsc(Dict::getSort);
 //		return wrapper
 		return wrapper;
 	}
@@ -65,16 +65,16 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 	@Transactional(rollbackFor = Exception.class)
 	public void save(DictVO vo) {
 //		get dict
-		SysDictDataEntity sysDictData = getOne(
-				Wrappers.<SysDictDataEntity>lambdaQuery().eq(SysDictDataEntity::getDictTypeId, vo.getDictTypeId())
-						.eq(SysDictDataEntity::getDictValue, vo.getDictValue()));
+		Dict sysDictData = getOne(
+				Wrappers.<Dict>lambdaQuery().eq(Dict::getDictTypeId, vo.getDictTypeId())
+						.eq(Dict::getDictValue, vo.getDictValue()));
 //		if has dict
 		if (sysDictData != null) {
 //			throw exception
 			throw new SwdaException("字典值重复!");
 		}
 //		convert to dict
-		SysDictDataEntity entity = SysDictDataConvert.INSTANCE.convert(vo);
+		Dict entity = SysDictDataConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -87,16 +87,16 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 	@Transactional(rollbackFor = Exception.class)
 	public void update(DictVO vo) {
 //		get dict
-		SysDictDataEntity sysDictData = getOne(Wrappers.<SysDictDataEntity>lambdaQuery()
-				.eq(SysDictDataEntity::getDictTypeId, vo.getDictTypeId())
-				.eq(SysDictDataEntity::getDictValue, vo.getDictValue()).ne(SysDictDataEntity::getId, vo.getId()));
+		Dict sysDictData = getOne(Wrappers.<Dict>lambdaQuery()
+				.eq(Dict::getDictTypeId, vo.getDictTypeId())
+				.eq(Dict::getDictValue, vo.getDictValue()).ne(Dict::getId, vo.getId()));
 //		if has dict
 		if (sysDictData != null) {
 //			throw exception
 			throw new SwdaException("字典值重复!");
 		}
 //		convert to dict
-		SysDictDataEntity entity = SysDictDataConvert.INSTANCE.convert(vo);
+		Dict entity = SysDictDataConvert.INSTANCE.convert(vo);
 //		update
 		updateById(entity);
 	}
