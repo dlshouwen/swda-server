@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.utils.JsonUtils;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.cache.SysParamsCache;
+import com.dlshouwen.swda.bms.cache.AttrCache;
 import com.dlshouwen.swda.bms.convert.SysParamsConvert;
 import com.dlshouwen.swda.bms.mapper.SysParamsDao;
 import com.dlshouwen.swda.bms.entity.SysParamsEntity;
@@ -31,7 +31,7 @@ import java.util.List;
 public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParamsEntity> implements SysParamsService {
 	
 	/** params cache */
-	private final SysParamsCache sysParamsCache;
+	private final AttrCache sysParamsCache;
 
 	/**
 	 * page

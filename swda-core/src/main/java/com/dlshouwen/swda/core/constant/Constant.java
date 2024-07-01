@@ -13,11 +13,14 @@ public class Constant {
 	/** captcha prefix */
 	public static final String CAPTCHA_PREFIX = "swda:captcha:";
 	
+	/** attr key */
+	public static final String ATTR_KEY = "swda:attr";
+	
 	/** operation log key */
-	public static final String OPERATION_LOG_KEY = "bms:operation:log";
+	public static final String OPERATION_LOG_KEY = "swda:log:operation";
 	
 	/** data log key */
-	public static final String DATA_LOG_KEY = "bms:data:log";
+	public static final String DATA_LOG_KEY = "swda:log:data";
 	
 	/** data scope */
 	public static final String DATA_SCOPE = "_ORGAN_DATA_SCOPE_";

@@ -27,13 +27,13 @@ public class SmsContext {
 	 */
 	public SmsContext(SmsPlatform platform) {
 //		instance sms strategy by type
-		if (platform.getPlatformType() == SmsPlatformType.ALIYUN) {
+		if (platform.getSmsPlatformType() == SmsPlatformType.ALIYUN) {
 			this.smsStrategy = new AliyunSmsStrategy(platform);
-		} else if (platform.getPlatformType() == SmsPlatformType.TENCENT) {
+		} else if (platform.getSmsPlatformType() == SmsPlatformType.TENCENT) {
 			this.smsStrategy = new TencentSmsStrategy(platform);
-		} else if (platform.getPlatformType() == SmsPlatformType.QINIU) {
+		} else if (platform.getSmsPlatformType() == SmsPlatformType.QINIU) {
 			this.smsStrategy = new QiniuSmsStrategy(platform);
-		} else if (platform.getPlatformType() == SmsPlatformType.HUAWEI) {
+		} else if (platform.getSmsPlatformType() == SmsPlatformType.HUAWEI) {
 			this.smsStrategy = new HuaweiSmsStrategy(platform);
 		} else {
 //			unknow sms strategy

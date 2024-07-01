@@ -14,6 +14,7 @@ import com.dlshouwen.swda.sms.context.SmsContext;
 import com.dlshouwen.swda.sms.entity.SmsLog;
 import com.dlshouwen.swda.sms.entity.SmsPlatform;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -79,8 +80,9 @@ public class SmsService {
 	public void saveLog(SmsPlatform platform, String mobile, Map<String, String> params, Exception e) {
 //		set log
 		SmsLog log = new SmsLog();
-		log.setPlatformId(platform.getPlatformId());
-		log.setPlatformType(platform.getPlatformType());
+		log.setSmsPlatformId(platform.getSmsPlatformId());
+		log.setSmsPlatformName(platform.getSmsPlatformName());
+		log.setSmsPlatformType(platform.getSmsPlatformType());
 		log.setMobile(mobile);
 		log.setParams(JsonUtils.toJsonString(params));
 		log.setCallResult(CallResult.SUCCESS);
@@ -90,6 +92,8 @@ public class SmsService {
 			log.setCallResult(CallResult.FAILURE);
 			log.setErrorReason(ExceptionUtils.toString(e));
 		}
+//		set send time
+		log.setSendTime(LocalDateTime.now());
 //		save log
 		smsLogService.save(log);
 	}

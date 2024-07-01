@@ -26,11 +26,20 @@ import lombok.EqualsAndHashCode;
 public class SmsPlatform extends BaseEntity {
 
 	@TableId
-	@Schema(description = "platform id")
-	private Long platformId;
+	@Schema(description = "sms platform id")
+	private Long smsPlatformId;
+	
+	@Schema(description = "sms platform code")
+	private Long smsPlatformCode;
+	
+	@Schema(description = "sms platform name")
+	private String smsPlatformName;
 
 	@Schema(description = "platform type")
-	private Integer platformType;
+	private Integer smsPlatformType;
+
+	@Schema(description = "status")
+	private Integer status;
 
 	@Schema(description = "sign name")
 	private String signName;
@@ -52,9 +61,15 @@ public class SmsPlatform extends BaseEntity {
 
 	@Schema(description = "secret key")
 	private String secretKey;
-
-	@Schema(description = "status")
-	private Integer status;
+	
+	@Schema(description = "assist search")
+	private String assistSearch;
+	
+	@Schema(description = "sort")
+	private int sort;
+	
+	@Schema(description = "remark")
+	private String remark;
 
     @TableField(fill = FieldFill.INSERT)
     @Schema(description = "creator")

@@ -24,11 +24,14 @@ public class SmsLog {
 	@Schema(description = "log id")
 	private Long logId;
 
-	@Schema(description = "platform id")
-	private Long platformId;
+	@Schema(description = "sms platform id")
+	private Long smsPlatformId;
+	
+	@Schema(description = "sms platform name")
+	private String smsPlatformName;
 
-	@Schema(description = "platform type")
-	private Integer platformType;
+	@Schema(description = "sms platform type")
+	private Integer smsPlatformType;
 
 	@Schema(description = "mobile")
 	private String mobile;

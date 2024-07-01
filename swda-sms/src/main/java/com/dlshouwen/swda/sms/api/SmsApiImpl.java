@@ -37,7 +37,7 @@ public class SmsApiImpl implements SmsApi {
 	}
 
 	/**
-	 * send 
+	 * send code
 	 * @param mobile
 	 * @param key
 	 * @param value

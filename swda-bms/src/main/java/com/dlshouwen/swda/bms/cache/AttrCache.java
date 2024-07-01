@@ -4,21 +4,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.core.cache.RedisCache;
+import com.dlshouwen.swda.core.constant.Constant;
 
 /**
- * params cache
+ * attr cache
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
-public class SysParamsCache {
+public class AttrCache {
 	
 	/** redis cache */
 	private final RedisCache redisCache;
-
-	/** system params key */
-	private final String SYSTEM_PARAMS_KEY = "system:params";
 
 	/**
 	 * get
@@ -26,7 +24,7 @@ public class SysParamsCache {
 	 * @return value
 	 */
 	public String get(String key) {
-		return (String) redisCache.hGet(SYSTEM_PARAMS_KEY, key);
+		return (String) redisCache.hGet(Constant.ATTR_KEY, key);
 	}
 
 	/**
@@ -35,7 +33,7 @@ public class SysParamsCache {
 	 * @param value
 	 */
 	public void save(String key, String value) {
-		redisCache.hSet(SYSTEM_PARAMS_KEY, key, value, RedisCache.NOT_EXPIRE);
+		redisCache.hSet(Constant.ATTR_KEY, key, value, RedisCache.NOT_EXPIRE);
 	}
 
 	/**
@@ -43,7 +41,7 @@ public class SysParamsCache {
 	 * @param keys
 	 */
 	public void delete(Object... keys) {
-		redisCache.hDel(SYSTEM_PARAMS_KEY, keys);
+		redisCache.hDel(Constant.ATTR_KEY, keys);
 	}
 
 }
