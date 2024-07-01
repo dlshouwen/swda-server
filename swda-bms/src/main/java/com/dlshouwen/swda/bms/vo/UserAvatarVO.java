@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "user avatar")
-public class SysUserAvatarVO implements Serializable {
+public class UserAvatarVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

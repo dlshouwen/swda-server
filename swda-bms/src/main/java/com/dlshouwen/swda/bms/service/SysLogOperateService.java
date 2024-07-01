@@ -4,7 +4,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysLogOperateEntity;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
-import com.dlshouwen.swda.bms.vo.SysLogOperateVO;
+import com.dlshouwen.swda.bms.vo.OperationVO;
 
 /**
  * operation log service
@@ -18,6 +18,6 @@ public interface SysLogOperateService extends BaseService<SysLogOperateEntity> {
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysLogOperateVO> page(SysLogOperateQuery query);
+	PageResult<OperationVO> page(SysLogOperateQuery query);
 
 }

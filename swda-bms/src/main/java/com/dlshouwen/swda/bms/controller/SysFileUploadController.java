@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import com.dlshouwen.swda.bms.vo.SysFileUploadVO;
+import com.dlshouwen.swda.bms.vo.FileUploadVO;
 import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
@@ -37,7 +37,7 @@ public class SysFileUploadController {
 	 */
 	@PostMapping("upload")
 	@Operation(name = "upload", type = OperateType.INSERT)
-	public R<SysFileUploadVO> upload(@RequestParam("file") MultipartFile file) throws Exception {
+	public R<FileUploadVO> upload(@RequestParam("file") MultipartFile file) throws Exception {
 //		file is empty
 		if (file.isEmpty()) {
 //			return
@@ -48,7 +48,7 @@ public class SysFileUploadController {
 //		upload file
 		String url = storageService.upload(file.getBytes(), path);
 //		create file upload vo
-		SysFileUploadVO vo = new SysFileUploadVO();
+		FileUploadVO vo = new FileUploadVO();
 //		set user, size, name, platform
 		vo.setUrl(url);
 		vo.setSize(file.getSize());
@@ -66,7 +66,7 @@ public class SysFileUploadController {
 	 */
 	@PostMapping("uploads")
 	@Operation(name = "uploads", type = OperateType.INSERT)
-	public SysFileUploadVO uploads(@RequestParam("file") MultipartFile file) throws Exception {
+	public FileUploadVO uploads(@RequestParam("file") MultipartFile file) throws Exception {
 //		file is empty
 		if (file.isEmpty()) {
 //			throw exceptiuon
@@ -77,7 +77,7 @@ public class SysFileUploadController {
 //		upload
 		String url = storageService.upload(file.getBytes(), path);
 //		create file upload vo
-		SysFileUploadVO vo = new SysFileUploadVO();
+		FileUploadVO vo = new FileUploadVO();
 //		set url, name
 		vo.setUrl(url);
 		vo.setName(file.getOriginalFilename());

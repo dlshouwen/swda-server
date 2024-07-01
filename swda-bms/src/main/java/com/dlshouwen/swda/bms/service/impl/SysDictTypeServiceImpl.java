@@ -20,7 +20,7 @@ import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
 import com.dlshouwen.swda.bms.enums.DictSourceEnum;
 import com.dlshouwen.swda.bms.query.SysDictTypeQuery;
 import com.dlshouwen.swda.bms.service.SysDictTypeService;
-import com.dlshouwen.swda.bms.vo.SysDictTypeVO;
+import com.dlshouwen.swda.bms.vo.DictCategoryVO;
 import com.dlshouwen.swda.bms.vo.SysDictVO;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -53,7 +53,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysDictTypeVO> page(SysDictTypeQuery query) {
+	public PageResult<DictCategoryVO> page(SysDictTypeQuery query) {
 		IPage<SysDictTypeEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 		return new PageResult<>(SysDictTypeConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
@@ -80,7 +80,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(SysDictTypeVO vo) {
+	public void save(DictCategoryVO vo) {
 //		convert to dict type
 		SysDictTypeEntity entity = SysDictTypeConvert.INSTANCE.convert(vo);
 //		insert
@@ -93,7 +93,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(SysDictTypeVO vo) {
+	public void update(DictCategoryVO vo) {
 //		convert to dict type
 		SysDictTypeEntity entity = SysDictTypeConvert.INSTANCE.convert(vo);
 //		update

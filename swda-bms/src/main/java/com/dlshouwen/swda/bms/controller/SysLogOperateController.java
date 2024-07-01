@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
 import com.dlshouwen.swda.bms.service.SysLogOperateService;
-import com.dlshouwen.swda.bms.vo.SysLogOperateVO;
+import com.dlshouwen.swda.bms.vo.OperationVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,9 +38,9 @@ public class SysLogOperateController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:operate:all')")
-	public R<PageResult<SysLogOperateVO>> page(@ParameterObject @Valid SysLogOperateQuery query) {
+	public R<PageResult<OperationVO>> page(@ParameterObject @Valid SysLogOperateQuery query) {
 //		page
-		PageResult<SysLogOperateVO> page = sysLogOperateService.page(query);
+		PageResult<OperationVO> page = sysLogOperateService.page(query);
 //		return
 		return R.ok(page);
 	}

@@ -5,9 +5,9 @@ import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysUserEntity;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.query.SysUserQuery;
-import com.dlshouwen.swda.bms.vo.SysUserAvatarVO;
-import com.dlshouwen.swda.bms.vo.SysUserBaseVO;
-import com.dlshouwen.swda.bms.vo.SysUserVO;
+import com.dlshouwen.swda.bms.vo.UserAvatarVO;
+import com.dlshouwen.swda.bms.vo.UserAssistVO;
+import com.dlshouwen.swda.bms.vo.UserVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -24,31 +24,31 @@ public interface SysUserService extends BaseService<SysUserEntity> {
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysUserVO> page(SysUserQuery query);
+	PageResult<UserVO> page(SysUserQuery query);
 
 	/**
 	 * save
 	 * @param userVO
 	 */
-	void save(SysUserVO vo);
+	void save(UserVO vo);
 
 	/**
 	 * update
 	 * @param userVO
 	 */
-	void update(SysUserVO vo);
+	void update(UserVO vo);
 
 	/**
 	 * update login info
 	 * @param userBaseVO
 	 */
-	void updateLoginInfo(SysUserBaseVO vo);
+	void updateLoginInfo(UserAssistVO vo);
 
 	/**
 	 * update avatar
 	 * @param userAvatarVO
 	 */
-	void updateAvatar(SysUserAvatarVO avatar);
+	void updateAvatar(UserAvatarVO avatar);
 
 	/**
 	 * delete
@@ -68,7 +68,7 @@ public interface SysUserService extends BaseService<SysUserEntity> {
 	 * @param mobile
 	 * @return user
 	 */
-	SysUserVO getByMobile(String mobile);
+	UserVO getByMobile(String mobile);
 
 	/**
 	 * update password
@@ -82,7 +82,7 @@ public interface SysUserService extends BaseService<SysUserEntity> {
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysUserVO> roleUserPage(SysRoleUserQuery query);
+	PageResult<UserVO> roleUserPage(SysRoleUserQuery query);
 
 	/**
 	 * import by excel

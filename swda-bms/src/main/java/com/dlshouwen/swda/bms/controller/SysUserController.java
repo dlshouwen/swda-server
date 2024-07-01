@@ -18,10 +18,10 @@ import com.dlshouwen.swda.bms.service.SysPostService;
 import com.dlshouwen.swda.bms.service.SysUserPostService;
 import com.dlshouwen.swda.bms.service.SysUserRoleService;
 import com.dlshouwen.swda.bms.service.SysUserService;
-import com.dlshouwen.swda.bms.vo.SysUserAvatarVO;
-import com.dlshouwen.swda.bms.vo.SysUserBaseVO;
-import com.dlshouwen.swda.bms.vo.SysUserPasswordVO;
-import com.dlshouwen.swda.bms.vo.SysUserVO;
+import com.dlshouwen.swda.bms.vo.UserAvatarVO;
+import com.dlshouwen.swda.bms.vo.UserAssistVO;
+import com.dlshouwen.swda.bms.vo.UserPasswordVO;
+import com.dlshouwen.swda.bms.vo.UserVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -64,9 +64,9 @@ public class SysUserController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:user:page')")
-	public R<PageResult<SysUserVO>> page(@ParameterObject @Valid SysUserQuery query) {
+	public R<PageResult<UserVO>> page(@ParameterObject @Valid SysUserQuery query) {
 //		page
-		PageResult<SysUserVO> page = sysUserService.page(query);
+		PageResult<UserVO> page = sysUserService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -79,11 +79,11 @@ public class SysUserController {
 	@GetMapping("{id}")
 	@Operation(name = "get")
 	@PreAuthorize("hasAuthority('sys:user:info')")
-	public R<SysUserVO> get(@PathVariable("id") Long id) {
+	public R<UserVO> get(@PathVariable("id") Long id) {
 //		get user
 		SysUserEntity entity = sysUserService.getById(id);
 //		convert to user vo
-		SysUserVO vo = SysUserConvert.INSTANCE.convert(entity);
+		UserVO vo = SysUserConvert.INSTANCE.convert(entity);
 //		get role id list set to user
 		List<Long> roleIdList = sysUserRoleService.getRoleIdList(id);
 		vo.setRoleIdList(roleIdList);
@@ -100,9 +100,9 @@ public class SysUserController {
 	 */
 	@GetMapping("info")
 	@Operation(name = "info")
-	public R<SysUserVO> info() {
+	public R<UserVO> info() {
 //		convert user to user vo
-		SysUserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
+		UserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
 //		get post id list set to user
 		List<Long> postIdList = sysUserPostService.getPostIdList(user.getId());
 		user.setPostIdList(postIdList);
@@ -120,7 +120,7 @@ public class SysUserController {
 	 */
 	@PutMapping("info")
 	@Operation(name = "login info", type = OperateType.UPDATE)
-	public R<String> loginInfo(@RequestBody @Valid SysUserBaseVO vo) {
+	public R<String> loginInfo(@RequestBody @Valid UserAssistVO vo) {
 //		update login info
 		sysUserService.updateLoginInfo(vo);
 //		return
@@ -134,7 +134,7 @@ public class SysUserController {
 	 */
 	@PutMapping("avatar")
 	@Operation(name = "avatar", type = OperateType.UPDATE)
-	public R<String> avatar(@RequestBody SysUserAvatarVO avatar) {
+	public R<String> avatar(@RequestBody UserAvatarVO avatar) {
 //		update avatar
 		sysUserService.updateAvatar(avatar);
 //		return
@@ -148,7 +148,7 @@ public class SysUserController {
 	 */
 	@PutMapping("password")
 	@Operation(name = "password", type = OperateType.UPDATE)
-	public R<String> password(@RequestBody @Valid SysUserPasswordVO vo) {
+	public R<String> password(@RequestBody @Valid UserPasswordVO vo) {
 //		get user detail
 		UserDetail user = SecurityUser.getUser();
 //		if password not equals
@@ -170,7 +170,7 @@ public class SysUserController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:user:save')")
-	public R<String> save(@RequestBody @Valid SysUserVO vo) {
+	public R<String> save(@RequestBody @Valid UserVO vo) {
 //		password is not null
 		if (StrUtil.isBlank(vo.getPassword())) {
 //			return
@@ -192,7 +192,7 @@ public class SysUserController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:user:update')")
-	public R<String> update(@RequestBody @Valid SysUserVO vo) {
+	public R<String> update(@RequestBody @Valid UserVO vo) {
 //		if user is blank
 		if (StrUtil.isBlank(vo.getPassword())) {
 //			set user password is null

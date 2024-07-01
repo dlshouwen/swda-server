@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.SysMenuEntity;
-import com.dlshouwen.swda.bms.vo.SysMenuVO;
+import com.dlshouwen.swda.bms.vo.PremissionVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,20 +23,20 @@ public interface SysMenuConvert {
 	 * @param menuVO
 	 * @return menu
 	 */
-	SysMenuEntity convert(SysMenuVO vo);
+	SysMenuEntity convert(PremissionVO vo);
 
 	/**
 	 * convert
 	 * @param menu
 	 * @return menu vo
 	 */
-	SysMenuVO convert(SysMenuEntity entity);
+	PremissionVO convert(SysMenuEntity entity);
 
 	/**
 	 * convert list
 	 * @param menuList
 	 * @return menu vo list
 	 */
-	List<SysMenuVO> convertList(List<SysMenuEntity> list);
+	List<PremissionVO> convertList(List<SysMenuEntity> list);
 
 }

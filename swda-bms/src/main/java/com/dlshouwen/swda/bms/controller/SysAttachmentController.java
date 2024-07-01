@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.query.SysAttachmentQuery;
 import com.dlshouwen.swda.bms.service.SysAttachmentService;
-import com.dlshouwen.swda.bms.vo.SysAttachmentVO;
+import com.dlshouwen.swda.bms.vo.AttachmentVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -39,9 +39,9 @@ public class SysAttachmentController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:attachment:page')")
-	public R<PageResult<SysAttachmentVO>> page(@ParameterObject @Valid SysAttachmentQuery query) {
+	public R<PageResult<AttachmentVO>> page(@ParameterObject @Valid SysAttachmentQuery query) {
 //		page
-		PageResult<SysAttachmentVO> page = sysAttachmentService.page(query);
+		PageResult<AttachmentVO> page = sysAttachmentService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -54,7 +54,7 @@ public class SysAttachmentController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:attachment:save')")
-	public R<String> save(@RequestBody SysAttachmentVO vo) {
+	public R<String> save(@RequestBody AttachmentVO vo) {
 //		save
 		sysAttachmentService.save(vo);
 //		return

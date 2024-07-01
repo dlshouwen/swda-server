@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.enums.SysParamsEnum;
 import com.dlshouwen.swda.bms.service.SysCaptchaService;
 import com.dlshouwen.swda.bms.service.SysParamsService;
-import com.dlshouwen.swda.bms.vo.SysCaptchaVO;
+import com.dlshouwen.swda.bms.vo.CaptchaVO;
 import com.dlshouwen.swda.core.cache.RedisCache;
 import com.dlshouwen.swda.core.constant.Constant;
 import com.wf.captcha.SpecCaptcha;
@@ -35,7 +35,7 @@ public class SysCaptchaServiceImpl implements SysCaptchaService {
 	 * @return captcha vo
 	 */
 	@Override
-	public SysCaptchaVO generate() {
+	public CaptchaVO generate() {
 //		generate key
 		String key = UUID.randomUUID().toString();
 //		generate captcha
@@ -46,7 +46,7 @@ public class SysCaptchaServiceImpl implements SysCaptchaService {
 //		save to cache
 		redisCache.set(Constant.CAPTCHA_PREFIX + key, captcha.text(), 300);
 //		construct captcha vo
-		SysCaptchaVO captchaVO = new SysCaptchaVO();
+		CaptchaVO captchaVO = new CaptchaVO();
 		captchaVO.setKey(key);
 		captchaVO.setImage(image);
 //		return captcha vo

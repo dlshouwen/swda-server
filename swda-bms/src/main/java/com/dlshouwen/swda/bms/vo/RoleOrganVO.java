@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @Schema(description = "role data scope")
-public class SysRoleDataScopeVO implements Serializable {
+public class RoleOrganVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

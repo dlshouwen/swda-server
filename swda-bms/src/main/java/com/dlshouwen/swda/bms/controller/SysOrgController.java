@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.convert.SysOrgConvert;
 import com.dlshouwen.swda.bms.entity.SysOrgEntity;
 import com.dlshouwen.swda.bms.service.SysOrgService;
-import com.dlshouwen.swda.bms.vo.SysOrgVO;
+import com.dlshouwen.swda.bms.vo.OrganVO;
 import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
@@ -37,9 +37,9 @@ public class SysOrgController {
 	@GetMapping("list")
 	@Operation(name = "list")
 	@PreAuthorize("hasAuthority('sys:org:list')")
-	public R<List<SysOrgVO>> list() {
+	public R<List<OrganVO>> list() {
 //		get list
-		List<SysOrgVO> list = sysOrgService.getList();
+		List<OrganVO> list = sysOrgService.getList();
 //		return
 		return R.ok(list);
 	}
@@ -52,11 +52,11 @@ public class SysOrgController {
 	@GetMapping("{id}")
 	@Operation(name = "get")
 	@PreAuthorize("hasAuthority('sys:org:info')")
-	public R<SysOrgVO> get(@PathVariable("id") Long id) {
+	public R<OrganVO> get(@PathVariable("id") Long id) {
 //		get organ
 		SysOrgEntity entity = sysOrgService.getById(id);
 //		convert to organ vo
-		SysOrgVO vo = SysOrgConvert.INSTANCE.convert(entity);
+		OrganVO vo = SysOrgConvert.INSTANCE.convert(entity);
 //		if has parent
 		if (entity.getPid() != null) {
 //			get parent organ
@@ -76,7 +76,7 @@ public class SysOrgController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:org:save')")
-	public R<String> save(@RequestBody @Valid SysOrgVO vo) {
+	public R<String> save(@RequestBody @Valid OrganVO vo) {
 //		save
 		sysOrgService.save(vo);
 //		return
@@ -91,7 +91,7 @@ public class SysOrgController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:org:update')")
-	public R<String> update(@RequestBody @Valid SysOrgVO vo) {
+	public R<String> update(@RequestBody @Valid OrganVO vo) {
 //		update
 		sysOrgService.update(vo);
 //		return

@@ -35,9 +35,9 @@ public class SysAuthController {
 	 */
 	@GetMapping("captcha")
 	@Operation(name = "captcha")
-	public R<SysCaptchaVO> captcha() {
+	public R<CaptchaVO> captcha() {
 //		generate captcha vo
-		SysCaptchaVO captchaVO = sysCaptchaService.generate();
+		CaptchaVO captchaVO = sysCaptchaService.generate();
 //		return
 		return R.ok(captchaVO);
 	}
@@ -62,9 +62,9 @@ public class SysAuthController {
 	 */
 	@PostMapping("login")
 	@Operation(name = "login")
-	public R<SysUserTokenVO> login(@RequestBody SysAccountLoginVO login) {
+	public R<UserTokenVO> login(@RequestBody AccountLoginVO login) {
 //		login by account
-		SysUserTokenVO token = sysAuthService.loginByAccount(login);
+		UserTokenVO token = sysAuthService.loginByAccount(login);
 //		return
 		return R.ok(token);
 	}
@@ -95,9 +95,9 @@ public class SysAuthController {
 	 */
 	@PostMapping("mobile")
 	@Operation(name = "mobile")
-	public R<SysUserTokenVO> mobile(@RequestBody SysMobileLoginVO login) {
+	public R<UserTokenVO> mobile(@RequestBody MobileLoginVO login) {
 //		login by mobile
-		SysUserTokenVO token = sysAuthService.loginByMobile(login);
+		UserTokenVO token = sysAuthService.loginByMobile(login);
 //		return
 		return R.ok(token);
 	}
@@ -109,9 +109,9 @@ public class SysAuthController {
 	 */
 	@PostMapping("third")
 	@Operation(name = "third login")
-	public R<SysUserTokenVO> third(@RequestBody SysThirdCallbackVO login) {
+	public R<UserTokenVO> third(@RequestBody AuthCallbackVO login) {
 //		login by third
-		SysUserTokenVO token = sysAuthService.loginByThird(login);
+		UserTokenVO token = sysAuthService.loginByThird(login);
 //		return
 		return R.ok(token);
 	}

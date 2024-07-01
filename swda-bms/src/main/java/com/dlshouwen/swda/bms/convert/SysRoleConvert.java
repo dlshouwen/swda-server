@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.SysRoleEntity;
-import com.dlshouwen.swda.bms.vo.SysRoleVO;
+import com.dlshouwen.swda.bms.vo.RoleVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,20 +23,20 @@ public interface SysRoleConvert {
 	 * @param role
 	 * @return role vo
 	 */
-	SysRoleVO convert(SysRoleEntity entity);
+	RoleVO convert(SysRoleEntity entity);
 
 	/**
 	 * convert
 	 * @param roleVO
 	 * @return role
 	 */
-	SysRoleEntity convert(SysRoleVO vo);
+	SysRoleEntity convert(RoleVO vo);
 
 	/**
 	 * convert list
 	 * @param roleList
 	 * @return role vo list
 	 */
-	List<SysRoleVO> convertList(List<SysRoleEntity> list);
+	List<RoleVO> convertList(List<SysRoleEntity> list);
 
 }

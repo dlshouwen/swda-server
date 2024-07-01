@@ -16,7 +16,7 @@ import com.dlshouwen.swda.bms.convert.SysThirdLoginConfigConvert;
 import com.dlshouwen.swda.bms.mapper.SysThirdLoginConfigDao;
 import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
-import com.dlshouwen.swda.bms.vo.SysThirdLoginConfigVO;
+import com.dlshouwen.swda.bms.vo.AuthPlatformVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +37,7 @@ public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<SysThirdLogi
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysThirdLoginConfigVO> page(Query query) {
+	public PageResult<AuthPlatformVO> page(Query query) {
 //		select page
 		IPage<SysThirdLoginConfigEntity> page = baseMapper.selectPage(getPage(query), Wrappers.lambdaQuery());
 //		return page result
@@ -49,7 +49,7 @@ public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<SysThirdLogi
 	 * @param thirdLoginConfigVO
 	 */
 	@Override
-	public void save(SysThirdLoginConfigVO vo) {
+	public void save(AuthPlatformVO vo) {
 //		convert to third login config
 		SysThirdLoginConfigEntity entity = SysThirdLoginConfigConvert.INSTANCE.convert(vo);
 //		insert third login config
@@ -61,7 +61,7 @@ public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<SysThirdLogi
 	 * @param thirdLoginConfigVO
 	 */
 	@Override
-	public void update(SysThirdLoginConfigVO vo) {
+	public void update(AuthPlatformVO vo) {
 //		convert to third login config
 		SysThirdLoginConfigEntity entity = SysThirdLoginConfigConvert.INSTANCE.convert(vo);
 //		update third login config

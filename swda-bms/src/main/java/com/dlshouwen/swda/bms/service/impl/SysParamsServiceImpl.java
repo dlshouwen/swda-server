@@ -15,7 +15,7 @@ import com.dlshouwen.swda.bms.mapper.SysParamsDao;
 import com.dlshouwen.swda.bms.entity.SysParamsEntity;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
 import com.dlshouwen.swda.bms.service.SysParamsService;
-import com.dlshouwen.swda.bms.vo.SysParamsVO;
+import com.dlshouwen.swda.bms.vo.AttrVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +39,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysParamsVO> page(SysParamsQuery query) {
+	public PageResult<AttrVO> page(SysParamsQuery query) {
 //		select page
 		IPage<SysParamsEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		get page result for return
@@ -68,7 +68,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 	 * @param paramsVO
 	 */
 	@Override
-	public void save(SysParamsVO vo) {
+	public void save(AttrVO vo) {
 //		get is exist
 		boolean exist = baseMapper.isExist(vo.getParamKey());
 //		if exist
@@ -89,7 +89,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 	 * @param paramsVO
 	 */
 	@Override
-	public void update(SysParamsVO vo) {
+	public void update(AttrVO vo) {
 //		get params
 		SysParamsEntity entity = baseMapper.selectById(vo.getId());
 //		if has change

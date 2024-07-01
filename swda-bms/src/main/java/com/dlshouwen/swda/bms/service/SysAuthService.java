@@ -14,21 +14,21 @@ public interface SysAuthService {
 	 * @param login
 	 * @return user token vo
 	 */
-	SysUserTokenVO loginByAccount(SysAccountLoginVO login);
+	UserTokenVO loginByAccount(AccountLoginVO login);
 
 	/**
 	 * login by mobile
 	 * @param login
 	 * @return user token vo
 	 */
-	SysUserTokenVO loginByMobile(SysMobileLoginVO login);
+	UserTokenVO loginByMobile(MobileLoginVO login);
 
 	/**
 	 * login by third
 	 * @param login
 	 * @return user token vo
 	 */
-	SysUserTokenVO loginByThird(SysThirdCallbackVO login);
+	UserTokenVO loginByThird(AuthCallbackVO login);
 
 	/**
 	 * send code

@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Data
 @Schema(description = "user")
-public class SysUserVO implements Serializable, TransPojo {
+public class UserVO implements Serializable, TransPojo {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

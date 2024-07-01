@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "file upload")
-public class SysFileUploadVO implements Serializable {
+public class FileUploadVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysOrgEntity;
-import com.dlshouwen.swda.bms.vo.SysOrgVO;
+import com.dlshouwen.swda.bms.vo.OrganVO;
 
 import java.util.List;
 
@@ -17,19 +17,19 @@ public interface SysOrgService extends BaseService<SysOrgEntity> {
 	 * get organ list
 	 * @return organ vo list
 	 */
-	List<SysOrgVO> getList();
+	List<OrganVO> getList();
 
 	/**
 	 * save
 	 * @param organVO
 	 */
-	void save(SysOrgVO vo);
+	void save(OrganVO vo);
 
 	/**
 	 * update
 	 * @param organVO
 	 */
-	void update(SysOrgVO vo);
+	void update(OrganVO vo);
 
 	/**
 	 * delete

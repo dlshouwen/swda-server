@@ -15,10 +15,10 @@ import com.dlshouwen.swda.bms.entity.SysRoleEntity;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.service.*;
-import com.dlshouwen.swda.bms.vo.SysMenuVO;
-import com.dlshouwen.swda.bms.vo.SysRoleDataScopeVO;
-import com.dlshouwen.swda.bms.vo.SysRoleVO;
-import com.dlshouwen.swda.bms.vo.SysUserVO;
+import com.dlshouwen.swda.bms.vo.PremissionVO;
+import com.dlshouwen.swda.bms.vo.RoleOrganVO;
+import com.dlshouwen.swda.bms.vo.RoleVO;
+import com.dlshouwen.swda.bms.vo.UserVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -57,9 +57,9 @@ public class SysRoleController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:role:page')")
-	public R<PageResult<SysRoleVO>> page(@ParameterObject @Valid SysRoleQuery query) {
+	public R<PageResult<RoleVO>> page(@ParameterObject @Valid SysRoleQuery query) {
 //		page
-		PageResult<SysRoleVO> page = sysRoleService.page(query);
+		PageResult<RoleVO> page = sysRoleService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -71,9 +71,9 @@ public class SysRoleController {
 	@GetMapping("list")
 	@Operation(name = "list")
 	@PreAuthorize("hasAuthority('sys:role:list')")
-	public R<List<SysRoleVO>> list() {
+	public R<List<RoleVO>> list() {
 //		get list
-		List<SysRoleVO> list = sysRoleService.getList(new SysRoleQuery());
+		List<RoleVO> list = sysRoleService.getList(new SysRoleQuery());
 //		result
 		return R.ok(list);
 	}
@@ -86,11 +86,11 @@ public class SysRoleController {
 	@GetMapping("{id}")
 	@Operation(name = "信息")
 	@PreAuthorize("hasAuthority('sys:role:info')")
-	public R<SysRoleVO> get(@PathVariable("id") Long id) {
+	public R<RoleVO> get(@PathVariable("id") Long id) {
 //		get role by id
 		SysRoleEntity entity = sysRoleService.getById(id);
 //		convert to role vo
-		SysRoleVO role = SysRoleConvert.INSTANCE.convert(entity);
+		RoleVO role = SysRoleConvert.INSTANCE.convert(entity);
 //		get menu id list set to role
 		List<Long> menuIdList = sysRoleMenuService.getMenuIdList(id);
 		role.setMenuIdList(menuIdList);
@@ -109,7 +109,7 @@ public class SysRoleController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:role:save')")
-	public R<String> save(@RequestBody @Valid SysRoleVO vo) {
+	public R<String> save(@RequestBody @Valid RoleVO vo) {
 //		save
 		sysRoleService.save(vo);
 //		return
@@ -124,7 +124,7 @@ public class SysRoleController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:role:update')")
-	public R<String> update(@RequestBody @Valid SysRoleVO vo) {
+	public R<String> update(@RequestBody @Valid RoleVO vo) {
 //		update
 		sysRoleService.update(vo);
 //		return
@@ -139,7 +139,7 @@ public class SysRoleController {
 	@PutMapping("data-scope")
 	@Operation(name = "data scope", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:role:update')")
-	public R<String> dataScope(@RequestBody @Valid SysRoleDataScopeVO vo) {
+	public R<String> dataScope(@RequestBody @Valid RoleOrganVO vo) {
 //		data scope
 		sysRoleService.dataScope(vo);
 //		return
@@ -168,11 +168,11 @@ public class SysRoleController {
 	@GetMapping("menu")
 	@Operation(name = "menu")
 	@PreAuthorize("hasAuthority('sys:role:menu')")
-	public R<List<SysMenuVO>> menu() {
+	public R<List<PremissionVO>> menu() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
 //		get user menu list
-		List<SysMenuVO> list = sysMenuService.getUserMenuList(user, null);
+		List<PremissionVO> list = sysMenuService.getUserMenuList(user, null);
 //		return
 		return R.ok(list);
 	}
@@ -185,9 +185,9 @@ public class SysRoleController {
 	@GetMapping("user/page")
 	@Operation(name = "user page")
 	@PreAuthorize("hasAuthority('sys:role:update')")
-	public R<PageResult<SysUserVO>> userPage(@Valid SysRoleUserQuery query) {
+	public R<PageResult<UserVO>> userPage(@Valid SysRoleUserQuery query) {
 //		role user page
-		PageResult<SysUserVO> page = sysUserService.roleUserPage(query);
+		PageResult<UserVO> page = sysUserService.roleUserPage(query);
 //		return
 		return R.ok(page);
 	}

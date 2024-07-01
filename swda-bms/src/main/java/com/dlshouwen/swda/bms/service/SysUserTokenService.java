@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysUserTokenEntity;
-import com.dlshouwen.swda.bms.vo.SysUserTokenVO;
+import com.dlshouwen.swda.bms.vo.UserTokenVO;
 
 /**
  * user token service
@@ -16,14 +16,14 @@ public interface SysUserTokenService extends BaseService<SysUserTokenEntity> {
 	 * @param userId
 	 * @return user token vo
 	 */
-	SysUserTokenVO createToken(Long userId);
+	UserTokenVO createToken(Long userId);
 
 	/**
 	 * refresh token
 	 * @param refreshToken
 	 * @return user token vo
 	 */
-	SysUserTokenVO refreshToken(String refreshToken);
+	UserTokenVO refreshToken(String refreshToken);
 
 	/**
 	 * expire token

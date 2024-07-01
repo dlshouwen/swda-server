@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.SysParamsEntity;
-import com.dlshouwen.swda.bms.vo.SysParamsVO;
+import com.dlshouwen.swda.bms.vo.AttrVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,20 +23,20 @@ public interface SysParamsConvert {
 	 * @param paramsVO
 	 * @return params
 	 */
-	SysParamsEntity convert(SysParamsVO vo);
+	SysParamsEntity convert(AttrVO vo);
 
 	/**
 	 * convert
 	 * @param params
 	 * @return params vo
 	 */
-	SysParamsVO convert(SysParamsEntity entity);
+	AttrVO convert(SysParamsEntity entity);
 
 	/**
 	 * convert list
 	 * @param paramsList
 	 * @return params vo list
 	 */
-	List<SysParamsVO> convertList(List<SysParamsEntity> list);
+	List<AttrVO> convertList(List<SysParamsEntity> list);
 
 }

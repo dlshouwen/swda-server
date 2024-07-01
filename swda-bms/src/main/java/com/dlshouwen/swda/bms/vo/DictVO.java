@@ -5,20 +5,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * post vo
+ * dict vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "post")
-public class SysPostVO implements Serializable {
+@Schema(description = "dict")
+public class DictVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
@@ -26,24 +26,33 @@ public class SysPostVO implements Serializable {
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "post code")
-	@NotBlank(message = "岗位编码不能为空")
-	private String postCode;
+	@Schema(description = "dict type id")
+	@NotNull(message = "字典类型ID不能为空")
+	private Long dictTypeId;
 
-	@Schema(description = "post name")
-	@NotBlank(message = "岗位名称不能为空")
-	private String postName;
+	@Schema(description = "dict label")
+	@NotBlank(message = "字典标签不能为空")
+	private String dictLabel;
+
+	@Schema(description = "label class")
+	private String labelClass;
+
+	@Schema(description = "dict value")
+	private String dictValue;
+
+	@Schema(description = "remark")
+	private String remark;
 
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
 
-	@Schema(description = "status 0：停用   1：正常")
-	@Range(min = 0, max = 1, message = "状态不正确")
-	private Integer status;
-
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
+
+	@Schema(description = "update time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime updateTime;
 
 }

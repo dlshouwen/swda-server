@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.SysAttachmentEntity;
-import com.dlshouwen.swda.bms.vo.SysAttachmentVO;
+import com.dlshouwen.swda.bms.vo.AttachmentVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,20 +23,20 @@ public interface SysAttachmentConvert {
 	 * @param attachmentVO
 	 * @return attachment
 	 */
-	SysAttachmentEntity convert(SysAttachmentVO vo);
+	SysAttachmentEntity convert(AttachmentVO vo);
 
 	/**
 	 * convert
 	 * @param attachment
 	 * @return attachment vo
 	 */
-	SysAttachmentVO convert(SysAttachmentEntity entity);
+	AttachmentVO convert(SysAttachmentEntity entity);
 
 	/**
 	 * convert list
 	 * @param attachmentList
 	 * @return attachment vo list
 	 */
-	List<SysAttachmentVO> convertList(List<SysAttachmentEntity> list);
+	List<AttachmentVO> convertList(List<SysAttachmentEntity> list);
 
 }

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Data
 @Schema(description = "role")
-public class SysRoleVO implements Serializable {
+public class RoleVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

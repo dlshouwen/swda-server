@@ -12,7 +12,7 @@ import com.dlshouwen.swda.bms.convert.SysDictTypeConvert;
 import com.dlshouwen.swda.bms.entity.SysDictTypeEntity;
 import com.dlshouwen.swda.bms.query.SysDictTypeQuery;
 import com.dlshouwen.swda.bms.service.SysDictTypeService;
-import com.dlshouwen.swda.bms.vo.SysDictTypeVO;
+import com.dlshouwen.swda.bms.vo.DictCategoryVO;
 import com.dlshouwen.swda.bms.vo.SysDictVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,9 +40,9 @@ public class SysDictTypeController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:dict:page')")
-	public R<PageResult<SysDictTypeVO>> page(@ParameterObject @Valid SysDictTypeQuery query) {
+	public R<PageResult<DictCategoryVO>> page(@ParameterObject @Valid SysDictTypeQuery query) {
 //		page
-		PageResult<SysDictTypeVO> page = sysDictTypeService.page(query);
+		PageResult<DictCategoryVO> page = sysDictTypeService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -72,7 +72,7 @@ public class SysDictTypeController {
 	@GetMapping("{id}")
 	@Operation(name = "get")
 	@PreAuthorize("hasAuthority('sys:dict:info')")
-	public R<SysDictTypeVO> get(@PathVariable("id") Long id) {
+	public R<DictCategoryVO> get(@PathVariable("id") Long id) {
 //		get dict type
 		SysDictTypeEntity entity = sysDictTypeService.getById(id);
 //		return
@@ -87,7 +87,7 @@ public class SysDictTypeController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:dict:save')")
-	public R<String> save(@RequestBody @Valid SysDictTypeVO vo) {
+	public R<String> save(@RequestBody @Valid DictCategoryVO vo) {
 //		save
 		sysDictTypeService.save(vo);
 //		return
@@ -102,7 +102,7 @@ public class SysDictTypeController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:dict:update')")
-	public R<String> update(@RequestBody @Valid SysDictTypeVO vo) {
+	public R<String> update(@RequestBody @Valid DictCategoryVO vo) {
 //		update
 		sysDictTypeService.update(vo);
 //		return

@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.SysOrgEntity;
-import com.dlshouwen.swda.bms.vo.SysOrgVO;
+import com.dlshouwen.swda.bms.vo.OrganVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,20 +23,20 @@ public interface SysOrgConvert {
 	 * @param organVO
 	 * @return organ
 	 */
-	SysOrgEntity convert(SysOrgVO vo);
+	SysOrgEntity convert(OrganVO vo);
 
 	/**
 	 * convert
 	 * @param organ
 	 * @return organ vo
 	 */
-	SysOrgVO convert(SysOrgEntity entity);
+	OrganVO convert(SysOrgEntity entity);
 
 	/**
 	 * convert list
 	 * @param organList
 	 * @return organ vo list
 	 */
-	List<SysOrgVO> convertList(List<SysOrgEntity> list);
+	List<OrganVO> convertList(List<SysOrgEntity> list);
 
 }

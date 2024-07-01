@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "mobile login")
-public class SysMobileLoginVO implements Serializable {
+public class MobileLoginVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

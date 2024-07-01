@@ -13,7 +13,7 @@ import com.dlshouwen.swda.bms.mapper.SysMenuDao;
 import com.dlshouwen.swda.bms.entity.SysMenuEntity;
 import com.dlshouwen.swda.bms.service.SysMenuService;
 import com.dlshouwen.swda.bms.service.SysRoleMenuService;
-import com.dlshouwen.swda.bms.vo.SysMenuVO;
+import com.dlshouwen.swda.bms.vo.PremissionVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +40,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(SysMenuVO vo) {
+	public void save(PremissionVO vo) {
 //		convert to menu
 		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
 //		insert
@@ -53,7 +53,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(SysMenuVO vo) {
+	public void update(PremissionVO vo) {
 //		convert to menu
 		SysMenuEntity entity = SysMenuConvert.INSTANCE.convert(vo);
 //		if menu id equals pre menu id
@@ -85,7 +85,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	 * @return menu list
 	 */
 	@Override
-	public List<SysMenuVO> getMenuList(Integer type) {
+	public List<PremissionVO> getMenuList(Integer type) {
 //		get menu list
 		List<SysMenuEntity> menuList = baseMapper.getMenuList(type);
 //		build menu tree for return
@@ -99,7 +99,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	 * @return menu vo list
 	 */
 	@Override
-	public List<SysMenuVO> getUserMenuList(UserDetail user, Integer type) {
+	public List<PremissionVO> getUserMenuList(UserDetail user, Integer type) {
 //		defined menu list
 		List<SysMenuEntity> menuList;
 //		if user is super admin

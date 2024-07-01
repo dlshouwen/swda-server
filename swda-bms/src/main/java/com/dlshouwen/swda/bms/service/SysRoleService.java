@@ -4,8 +4,8 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysRoleEntity;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
-import com.dlshouwen.swda.bms.vo.SysRoleDataScopeVO;
-import com.dlshouwen.swda.bms.vo.SysRoleVO;
+import com.dlshouwen.swda.bms.vo.RoleOrganVO;
+import com.dlshouwen.swda.bms.vo.RoleVO;
 
 import java.util.List;
 
@@ -21,32 +21,32 @@ public interface SysRoleService extends BaseService<SysRoleEntity> {
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysRoleVO> page(SysRoleQuery query);
+	PageResult<RoleVO> page(SysRoleQuery query);
 
 	/**
 	 * get role list
 	 * @param query
 	 * @return role vo list
 	 */
-	List<SysRoleVO> getList(SysRoleQuery query);
+	List<RoleVO> getList(SysRoleQuery query);
 
 	/**
 	 * save
 	 * @param roleVO
 	 */
-	void save(SysRoleVO vo);
+	void save(RoleVO vo);
 
 	/**
 	 * update
 	 * @param roleVO
 	 */
-	void update(SysRoleVO vo);
+	void update(RoleVO vo);
 
 	/**
 	 * data scope
 	 * @param roleDataScopeVO
 	 */
-	void dataScope(SysRoleDataScopeVO vo);
+	void dataScope(RoleOrganVO vo);
 
 	/**
 	 * delete

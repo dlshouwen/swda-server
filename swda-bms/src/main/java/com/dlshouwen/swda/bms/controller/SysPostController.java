@@ -12,7 +12,7 @@ import com.dlshouwen.swda.bms.convert.SysPostConvert;
 import com.dlshouwen.swda.bms.entity.SysPostEntity;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
-import com.dlshouwen.swda.bms.vo.SysPostVO;
+import com.dlshouwen.swda.bms.vo.PostVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +41,9 @@ public class SysPostController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:post:page')")
-	public R<PageResult<SysPostVO>> page(@ParameterObject @Valid SysPostQuery query) {
+	public R<PageResult<PostVO>> page(@ParameterObject @Valid SysPostQuery query) {
 //		page
-		PageResult<SysPostVO> page = sysPostService.page(query);
+		PageResult<PostVO> page = sysPostService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -54,9 +54,9 @@ public class SysPostController {
 	 */
 	@GetMapping("list")
 	@Operation(name = "list")
-	public R<List<SysPostVO>> list() {
+	public R<List<PostVO>> list() {
 //		get list
-		List<SysPostVO> list = sysPostService.getList();
+		List<PostVO> list = sysPostService.getList();
 //		return
 		return R.ok(list);
 	}
@@ -69,7 +69,7 @@ public class SysPostController {
 	@GetMapping("{id}")
 	@Operation(name = "get")
 	@PreAuthorize("hasAuthority('sys:post:info')")
-	public R<SysPostVO> get(@PathVariable("id") Long id) {
+	public R<PostVO> get(@PathVariable("id") Long id) {
 //		get post by id
 		SysPostEntity entity = sysPostService.getById(id);
 //		return
@@ -84,7 +84,7 @@ public class SysPostController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:post:save')")
-	public R<String> save(@RequestBody SysPostVO vo) {
+	public R<String> save(@RequestBody PostVO vo) {
 //		save
 		sysPostService.save(vo);
 //		return
@@ -99,7 +99,7 @@ public class SysPostController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:post:update')")
-	public R<String> update(@RequestBody @Valid SysPostVO vo) {
+	public R<String> update(@RequestBody @Valid PostVO vo) {
 //		update
 		sysPostService.update(vo);
 //		return

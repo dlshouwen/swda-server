@@ -4,7 +4,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
-import com.dlshouwen.swda.bms.vo.SysDictDataVO;
+import com.dlshouwen.swda.bms.vo.DictVO;
 
 import java.util.List;
 
@@ -20,19 +20,19 @@ public interface SysDictDataService extends BaseService<SysDictDataEntity> {
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysDictDataVO> page(SysDictDataQuery query);
+	PageResult<DictVO> page(SysDictDataQuery query);
 
 	/**
 	 * save
 	 * @param dictVO
 	 */
-	void save(SysDictDataVO vo);
+	void save(DictVO vo);
 
 	/**
 	 * update
 	 * @param dictVO
 	 */
-	void update(SysDictDataVO vo);
+	void update(DictVO vo);
 
 	/**
 	 * delete

@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.service;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysMenuEntity;
-import com.dlshouwen.swda.bms.vo.SysMenuVO;
+import com.dlshouwen.swda.bms.vo.PremissionVO;
 
 import java.util.List;
 import java.util.Set;
@@ -19,13 +19,13 @@ public interface SysMenuService extends BaseService<SysMenuEntity> {
 	 * save
 	 * @param menuVO
 	 */
-	void save(SysMenuVO vo);
+	void save(PremissionVO vo);
 
 	/**
 	 * update
 	 * @param menuVO
 	 */
-	void update(SysMenuVO vo);
+	void update(PremissionVO vo);
 
 	/**
 	 * delete
@@ -38,7 +38,7 @@ public interface SysMenuService extends BaseService<SysMenuEntity> {
 	 * @param type
 	 * @return menu vo list
 	 */
-	List<SysMenuVO> getMenuList(Integer type);
+	List<PremissionVO> getMenuList(Integer type);
 
 	/**
 	 * get user menu list
@@ -46,7 +46,7 @@ public interface SysMenuService extends BaseService<SysMenuEntity> {
 	 * @param type
 	 * @return menu vo list
 	 */
-	List<SysMenuVO> getUserMenuList(UserDetail user, Integer type);
+	List<PremissionVO> getUserMenuList(UserDetail user, Integer type);
 
 	/**
 	 * get sub menu count

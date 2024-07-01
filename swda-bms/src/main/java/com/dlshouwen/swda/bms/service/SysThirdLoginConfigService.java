@@ -6,7 +6,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.query.Query;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
-import com.dlshouwen.swda.bms.vo.SysThirdLoginConfigVO;
+import com.dlshouwen.swda.bms.vo.AuthPlatformVO;
 
 import java.util.List;
 
@@ -22,19 +22,19 @@ public interface SysThirdLoginConfigService extends BaseService<SysThirdLoginCon
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysThirdLoginConfigVO> page(Query query);
+	PageResult<AuthPlatformVO> page(Query query);
 
 	/**
 	 * save
 	 * @param thirdLoginConfigVO
 	 */
-	void save(SysThirdLoginConfigVO vo);
+	void save(AuthPlatformVO vo);
 
 	/**
 	 * update
 	 * @param thirdLoginConfigVO
 	 */
-	void update(SysThirdLoginConfigVO vo);
+	void update(AuthPlatformVO vo);
 
 	/**
 	 * delete

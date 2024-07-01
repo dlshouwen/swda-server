@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "attachment")
-public class SysAttachmentVO implements Serializable {
+public class AttachmentVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

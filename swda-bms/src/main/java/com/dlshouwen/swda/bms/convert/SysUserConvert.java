@@ -1,9 +1,9 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.SysUserEntity;
-import com.dlshouwen.swda.bms.vo.SysUserBaseVO;
+import com.dlshouwen.swda.bms.vo.UserAssistVO;
 import com.dlshouwen.swda.bms.vo.SysUserExcelVO;
-import com.dlshouwen.swda.bms.vo.SysUserVO;
+import com.dlshouwen.swda.bms.vo.UserVO;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 
 import org.mapstruct.Mapper;
@@ -27,28 +27,28 @@ public interface SysUserConvert {
 	 * @param user
 	 * @return user vo
 	 */
-	SysUserVO convert(SysUserEntity entity);
+	UserVO convert(SysUserEntity entity);
 
 	/**
 	 * convert
 	 * @param userVO
 	 * @return user
 	 */
-	SysUserEntity convert(SysUserVO vo);
+	SysUserEntity convert(UserVO vo);
 
 	/**
 	 * convert
 	 * @param userBaseVO
 	 * @return user
 	 */
-	SysUserEntity convert(SysUserBaseVO vo);
+	SysUserEntity convert(UserAssistVO vo);
 
 	/**
 	 * convert
 	 * @param userDetail
 	 * @return user vo
 	 */
-	SysUserVO convert(UserDetail userDetail);
+	UserVO convert(UserDetail userDetail);
 
 	/**
 	 * convert detail
@@ -62,7 +62,7 @@ public interface SysUserConvert {
 	 * @param userList
 	 * @return user vo list
 	 */
-	List<SysUserVO> convertList(List<SysUserEntity> list);
+	List<UserVO> convertList(List<SysUserEntity> list);
 
 	/**
 	 * convert 2 list

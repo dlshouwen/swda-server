@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.service;
 
-import com.dlshouwen.swda.bms.vo.SysCaptchaVO;
+import com.dlshouwen.swda.bms.vo.CaptchaVO;
 
 /**
  * captcha service
@@ -13,7 +13,7 @@ public interface SysCaptchaService {
 	 * generate captcha
 	 * @return captcha vo
 	 */
-	SysCaptchaVO generate();
+	CaptchaVO generate();
 
 	/**
 	 * valid

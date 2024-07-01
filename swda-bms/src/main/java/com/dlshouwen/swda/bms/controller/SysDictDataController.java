@@ -12,7 +12,7 @@ import com.dlshouwen.swda.bms.convert.SysDictDataConvert;
 import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
 import com.dlshouwen.swda.bms.service.SysDictDataService;
-import com.dlshouwen.swda.bms.vo.SysDictDataVO;
+import com.dlshouwen.swda.bms.vo.DictVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +41,9 @@ public class SysDictDataController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:dict:page')")
-	public R<PageResult<SysDictDataVO>> page(@ParameterObject @Valid SysDictDataQuery query) {
+	public R<PageResult<DictVO>> page(@ParameterObject @Valid SysDictDataQuery query) {
 //		page
-		PageResult<SysDictDataVO> page = sysDictDataService.page(query);
+		PageResult<DictVO> page = sysDictDataService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -56,7 +56,7 @@ public class SysDictDataController {
 	@GetMapping("{id}")
 	@Operation(name = "data")
 	@PreAuthorize("hasAuthority('sys:dict:info')")
-	public R<SysDictDataVO> get(@PathVariable("id") Long id) {
+	public R<DictVO> get(@PathVariable("id") Long id) {
 //		get dict
 		SysDictDataEntity entity = sysDictDataService.getById(id);
 //		return
@@ -71,7 +71,7 @@ public class SysDictDataController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:dict:save')")
-	public R<String> save(@RequestBody @Valid SysDictDataVO vo) {
+	public R<String> save(@RequestBody @Valid DictVO vo) {
 //		save
 		sysDictDataService.save(vo);
 //		return
@@ -86,7 +86,7 @@ public class SysDictDataController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:dict:update')")
-	public R<String> update(@RequestBody @Valid SysDictDataVO vo) {
+	public R<String> update(@RequestBody @Valid DictVO vo) {
 //		update
 		sysDictDataService.update(vo);
 //		return

@@ -4,7 +4,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysAttachmentEntity;
 import com.dlshouwen.swda.bms.query.SysAttachmentQuery;
-import com.dlshouwen.swda.bms.vo.SysAttachmentVO;
+import com.dlshouwen.swda.bms.vo.AttachmentVO;
 
 import java.util.List;
 
@@ -20,19 +20,19 @@ public interface SysAttachmentService extends BaseService<SysAttachmentEntity> {
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysAttachmentVO> page(SysAttachmentQuery query);
+	PageResult<AttachmentVO> page(SysAttachmentQuery query);
 
 	/**
 	 * save
 	 * @param attachmentVO
 	 */
-	void save(SysAttachmentVO vo);
+	void save(AttachmentVO vo);
 
 	/**
 	 * update
 	 * @param attachmentVO
 	 */
-	void update(SysAttachmentVO vo);
+	void update(AttachmentVO vo);
 
 	/**
 	 * delete

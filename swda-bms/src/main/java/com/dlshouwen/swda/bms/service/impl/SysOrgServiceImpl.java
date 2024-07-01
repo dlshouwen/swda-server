@@ -13,7 +13,7 @@ import com.dlshouwen.swda.bms.mapper.SysUserDao;
 import com.dlshouwen.swda.bms.entity.SysOrgEntity;
 import com.dlshouwen.swda.bms.entity.SysUserEntity;
 import com.dlshouwen.swda.bms.service.SysOrgService;
-import com.dlshouwen.swda.bms.vo.SysOrgVO;
+import com.dlshouwen.swda.bms.vo.OrganVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +39,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	 * @return organ list
 	 */
 	@Override
-	public List<SysOrgVO> getList() {
+	public List<OrganVO> getList() {
 //		defined params
 		Map<String, Object> params = new HashMap<>();
 //		put data scope
@@ -56,7 +56,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(SysOrgVO vo) {
+	public void save(OrganVO vo) {
 //		convert organ vo to organ
 		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
 //		insert
@@ -69,7 +69,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, SysOrgEntity> 
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(SysOrgVO vo) {
+	public void update(OrganVO vo) {
 //		convert to organ
 		SysOrgEntity entity = SysOrgConvert.INSTANCE.convert(vo);
 //		if organ id equals pre organ id

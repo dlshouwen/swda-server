@@ -22,10 +22,10 @@ import com.dlshouwen.swda.bms.entity.SysUserEntity;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.query.SysUserQuery;
 import com.dlshouwen.swda.bms.service.*;
-import com.dlshouwen.swda.bms.vo.SysUserAvatarVO;
-import com.dlshouwen.swda.bms.vo.SysUserBaseVO;
+import com.dlshouwen.swda.bms.vo.UserAvatarVO;
+import com.dlshouwen.swda.bms.vo.UserAssistVO;
 import com.dlshouwen.swda.bms.vo.SysUserExcelVO;
-import com.dlshouwen.swda.bms.vo.SysUserVO;
+import com.dlshouwen.swda.bms.vo.UserVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,7 +68,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysUserVO> page(SysUserQuery query) {
+	public PageResult<UserVO> page(SysUserQuery query) {
 //		get params
 		Map<String, Object> params = getParams(query);
 //		get page
@@ -111,7 +111,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(SysUserVO vo) {
+	public void save(UserVO vo) {
 //		convert to user
 		SysUserEntity entity = SysUserConvert.INSTANCE.convert(vo);
 //		set super admin
@@ -143,7 +143,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	 * @param userVO
 	 */
 	@Override
-	public void update(SysUserVO vo) {
+	public void update(UserVO vo) {
 //		convert to user
 		SysUserEntity entity = SysUserConvert.INSTANCE.convert(vo);
 //		get user from username
@@ -175,7 +175,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	 * @param userBaseVO
 	 */
 	@Override
-	public void updateLoginInfo(SysUserBaseVO vo) {
+	public void updateLoginInfo(UserAssistVO vo) {
 //		convert to user
 		SysUserEntity entity = SysUserConvert.INSTANCE.convert(vo);
 //		set user id
@@ -198,7 +198,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	 * @param userAvatarVO
 	 */
 	@Override
-	public void updateAvatar(SysUserAvatarVO avatar) {
+	public void updateAvatar(UserAvatarVO avatar) {
 //		create user
 		SysUserEntity entity = new SysUserEntity();
 //		set user id, avatar
@@ -245,7 +245,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	 * @return userVO
 	 */
 	@Override
-	public SysUserVO getByMobile(String mobile) {
+	public UserVO getByMobile(String mobile) {
 //		get user by mobile
 		SysUserEntity user = baseMapper.getByMobile(mobile);
 //		convert to user vo
@@ -273,7 +273,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysUserVO> roleUserPage(SysRoleUserQuery query) {
+	public PageResult<UserVO> roleUserPage(SysRoleUserQuery query) {
 //		get params
 		Map<String, Object> params = getParams(query);
 //		set role id

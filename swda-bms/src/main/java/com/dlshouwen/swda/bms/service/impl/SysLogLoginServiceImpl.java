@@ -16,7 +16,7 @@ import com.dlshouwen.swda.bms.mapper.SysLogLoginDao;
 import com.dlshouwen.swda.bms.entity.SysLogLoginEntity;
 import com.dlshouwen.swda.bms.query.SysLogLoginQuery;
 import com.dlshouwen.swda.bms.service.SysLogLoginService;
-import com.dlshouwen.swda.bms.vo.SysLogLoginVO;
+import com.dlshouwen.swda.bms.vo.LoginLogVO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysL
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysLogLoginVO> page(SysLogLoginQuery query) {
+	public PageResult<LoginLogVO> page(SysLogLoginQuery query) {
 //		select page
 		IPage<SysLogLoginEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
@@ -103,11 +103,11 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysL
 //		get login log list
 		List<SysLogLoginEntity> list = list();
 //		convert to login log vo
-		List<SysLogLoginVO> sysLogLoginVOS = SysLogLoginConvert.INSTANCE.convertList(list);
+		List<LoginLogVO> sysLogLoginVOS = SysLogLoginConvert.INSTANCE.convertList(list);
 //		batch trans
 		transService.transBatch(sysLogLoginVOS);
 //		export excel
-		ExcelUtils.excelExport(SysLogLoginVO.class, "system_login_log_excel" + DateUtils.format(new Date()), null, sysLogLoginVOS);
+		ExcelUtils.excelExport(LoginLogVO.class, "system_login_log_excel" + DateUtils.format(new Date()), null, sysLogLoginVOS);
 	}
 
 }

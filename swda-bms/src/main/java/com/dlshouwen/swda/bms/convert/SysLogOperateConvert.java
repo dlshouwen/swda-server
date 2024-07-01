@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.SysLogOperateEntity;
-import com.dlshouwen.swda.bms.vo.SysLogOperateVO;
+import com.dlshouwen.swda.bms.vo.OperationVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -23,20 +23,20 @@ public interface SysLogOperateConvert {
 	 * @param operationLogVO
 	 * @return operation log
 	 */
-	SysLogOperateEntity convert(SysLogOperateVO vo);
+	SysLogOperateEntity convert(OperationVO vo);
 
 	/**
 	 * convert
 	 * @param operationLog
 	 * @return operation log vo
 	 */
-	SysLogOperateVO convert(SysLogOperateEntity entity);
+	OperationVO convert(SysLogOperateEntity entity);
 
 	/**
 	 * convert list
 	 * @param operationLogList
 	 * @return operation log vo list
 	 */
-	List<SysLogOperateVO> convertList(List<SysLogOperateEntity> list);
+	List<OperationVO> convertList(List<SysLogOperateEntity> list);
 
 }

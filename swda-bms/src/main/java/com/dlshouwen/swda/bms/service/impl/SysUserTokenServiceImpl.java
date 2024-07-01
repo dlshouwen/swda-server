@@ -20,7 +20,7 @@ import com.dlshouwen.swda.bms.entity.SysUserEntity;
 import com.dlshouwen.swda.bms.entity.SysUserTokenEntity;
 import com.dlshouwen.swda.bms.service.SysUserDetailsService;
 import com.dlshouwen.swda.bms.service.SysUserTokenService;
-import com.dlshouwen.swda.bms.vo.SysUserTokenVO;
+import com.dlshouwen.swda.bms.vo.UserTokenVO;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -56,7 +56,7 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Sy
 	 * @return user token vo
 	 */
 	@Override
-	public SysUserTokenVO createToken(Long userId) {
+	public UserTokenVO createToken(Long userId) {
 //		generate access token
 		String accessToken = TokenUtils.generator();
 //		generate refresh token
@@ -95,7 +95,7 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Sy
 	 * @return user token vo
 	 */
 	@Override
-	public SysUserTokenVO refreshToken(String refreshToken) {
+	public UserTokenVO refreshToken(String refreshToken) {
 //		create wrapper
 		LambdaQueryWrapper<SysUserTokenEntity> query = Wrappers.lambdaQuery();
 //		set wrapper

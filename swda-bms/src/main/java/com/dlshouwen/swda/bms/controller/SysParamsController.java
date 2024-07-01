@@ -12,7 +12,7 @@ import com.dlshouwen.swda.bms.convert.SysParamsConvert;
 import com.dlshouwen.swda.bms.entity.SysParamsEntity;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
 import com.dlshouwen.swda.bms.service.SysParamsService;
-import com.dlshouwen.swda.bms.vo.SysParamsVO;
+import com.dlshouwen.swda.bms.vo.AttrVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +41,9 @@ public class SysParamsController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('sys:params:all')")
-	public R<PageResult<SysParamsVO>> page(@ParameterObject @Valid SysParamsQuery query) {
+	public R<PageResult<AttrVO>> page(@ParameterObject @Valid SysParamsQuery query) {
 //		page
-		PageResult<SysParamsVO> page = sysParamsService.page(query);
+		PageResult<AttrVO> page = sysParamsService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -56,7 +56,7 @@ public class SysParamsController {
 	@GetMapping("{id}")
 	@Operation(name = "get")
 	@PreAuthorize("hasAuthority('sys:params:all')")
-	public R<SysParamsVO> get(@PathVariable("id") Long id) {
+	public R<AttrVO> get(@PathVariable("id") Long id) {
 //		get params
 		SysParamsEntity entity = sysParamsService.getById(id);
 //		return
@@ -71,7 +71,7 @@ public class SysParamsController {
 	@PostMapping
 	@Operation(name = "save", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('sys:params:all')")
-	public R<String> save(@RequestBody SysParamsVO vo) {
+	public R<String> save(@RequestBody AttrVO vo) {
 //		save
 		sysParamsService.save(vo);
 //		return
@@ -86,7 +86,7 @@ public class SysParamsController {
 	@PutMapping
 	@Operation(name = "update", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('sys:params:all')")
-	public R<String> update(@RequestBody @Valid SysParamsVO vo) {
+	public R<String> update(@RequestBody @Valid AttrVO vo) {
 //		update
 		sysParamsService.update(vo);
 //		return

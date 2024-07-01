@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.convert.SysThirdLoginConfigConvert;
 import com.dlshouwen.swda.bms.entity.SysThirdLoginConfigEntity;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
-import com.dlshouwen.swda.bms.vo.SysThirdLoginConfigVO;
+import com.dlshouwen.swda.bms.vo.AuthPlatformVO;
 import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
@@ -40,9 +40,9 @@ public class SysThirdLoginConfigController {
 	@GetMapping("page")
 	@Operation(name = "page")
 	@PreAuthorize("hasAuthority('third:config:all')")
-	public R<PageResult<SysThirdLoginConfigVO>> page(@ParameterObject @Valid Query query) {
+	public R<PageResult<AuthPlatformVO>> page(@ParameterObject @Valid Query query) {
 //		page
-		PageResult<SysThirdLoginConfigVO> page = sysThirdLoginConfigService.page(query);
+		PageResult<AuthPlatformVO> page = sysThirdLoginConfigService.page(query);
 //		return
 		return R.ok(page);
 	}
@@ -55,7 +55,7 @@ public class SysThirdLoginConfigController {
 	@GetMapping("{id}")
 	@Operation(name = "get")
 	@PreAuthorize("hasAuthority('third:config:all')")
-	public R<SysThirdLoginConfigVO> get(@PathVariable("id") Long id) {
+	public R<AuthPlatformVO> get(@PathVariable("id") Long id) {
 //		get third login config
 		SysThirdLoginConfigEntity entity = sysThirdLoginConfigService.getById(id);
 //		result
@@ -70,7 +70,7 @@ public class SysThirdLoginConfigController {
 	@PostMapping
 	@Operation(name = "save")
 	@PreAuthorize("hasAuthority('third:config:all')")
-	public R<String> save(@RequestBody SysThirdLoginConfigVO vo) {
+	public R<String> save(@RequestBody AuthPlatformVO vo) {
 //		save
 		sysThirdLoginConfigService.save(vo);
 //		return
@@ -85,7 +85,7 @@ public class SysThirdLoginConfigController {
 	@PutMapping
 	@Operation(name = "update")
 	@PreAuthorize("hasAuthority('third:config:all')")
-	public R<String> update(@RequestBody @Valid SysThirdLoginConfigVO vo) {
+	public R<String> update(@RequestBody @Valid AuthPlatformVO vo) {
 //		update
 		sysThirdLoginConfigService.update(vo);
 //		return

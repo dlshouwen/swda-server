@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "login log")
-public class SysLogLoginVO implements Serializable, TransPojo {
+public class LoginLogVO implements Serializable, TransPojo {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "user base")
-public class SysUserBaseVO implements Serializable {
+public class UserAssistVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

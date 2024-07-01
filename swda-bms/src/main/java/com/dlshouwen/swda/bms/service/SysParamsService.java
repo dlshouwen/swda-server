@@ -4,7 +4,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.BaseService;
 import com.dlshouwen.swda.bms.entity.SysParamsEntity;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
-import com.dlshouwen.swda.bms.vo.SysParamsVO;
+import com.dlshouwen.swda.bms.vo.AttrVO;
 
 import java.util.List;
 
@@ -20,19 +20,19 @@ public interface SysParamsService extends BaseService<SysParamsEntity> {
 	 * @param query
 	 * @return page result
 	 */
-	PageResult<SysParamsVO> page(SysParamsQuery query);
+	PageResult<AttrVO> page(SysParamsQuery query);
 
 	/**
 	 * save
 	 * @param paramsVO
 	 */
-	void save(SysParamsVO vo);
+	void save(AttrVO vo);
 
 	/**
 	 * update
 	 * @param paramsVO
 	 */
-	void update(SysParamsVO vo);
+	void update(AttrVO vo);
 
 	/**
 	 * delete

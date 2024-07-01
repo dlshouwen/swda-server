@@ -3,21 +3,19 @@ package com.dlshouwen.swda.bms.vo;
 import com.dlshouwen.swda.core.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * dict type vo
+ * params vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "dict type")
-public class SysDictTypeVO implements Serializable {
+@Schema(description = "params")
+public class AttrVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
@@ -25,33 +23,39 @@ public class SysDictTypeVO implements Serializable {
 	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description = "dict type")
-	@NotBlank(message = "字典类型不能为空")
-	private String dictType;
+	@Schema(description = "param name")
+	private String paramName;
 
-	@Schema(description = "dict name")
-	@NotBlank(message = "字典名称不能为空")
-	private String dictName;
+	@Schema(description = "param type")
+	private Integer paramType;
+
+	@Schema(description = "param key")
+	private String paramKey;
+
+	@Schema(description = "param value")
+	private String paramValue;
 
 	@Schema(description = "remark")
 	private String remark;
 
-	@Schema(description = "sort")
-	@Min(value = 0, message = "排序值不能小于0")
-	private Integer sort;
+	@Schema(description = "version")
+	private Integer version;
+
+	@Schema(description = "deleted")
+	private Integer deleted;
+
+	@Schema(description = "creator")
+	private Long creator;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 
+	@Schema(description = "updater")
+	private Long updater;
+
 	@Schema(description = "update time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime updateTime;
-
-	@Schema(description = "dict source")
-	private Integer dictSource;
-
-	@Schema(description = "dict sql")
-	private String dictSql;
 
 }

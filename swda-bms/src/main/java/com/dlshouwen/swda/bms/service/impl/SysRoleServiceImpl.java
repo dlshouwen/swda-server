@@ -14,8 +14,8 @@ import com.dlshouwen.swda.bms.mapper.SysRoleDao;
 import com.dlshouwen.swda.bms.entity.SysRoleEntity;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.service.*;
-import com.dlshouwen.swda.bms.vo.SysRoleDataScopeVO;
-import com.dlshouwen.swda.bms.vo.SysRoleVO;
+import com.dlshouwen.swda.bms.vo.RoleOrganVO;
+import com.dlshouwen.swda.bms.vo.RoleVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,7 +49,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysRoleVO> page(SysRoleQuery query) {
+	public PageResult<RoleVO> page(SysRoleQuery query) {
 //		select page
 		IPage<SysRoleEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
@@ -62,7 +62,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	 * @return role vo list
 	 */
 	@Override
-	public List<SysRoleVO> getList(SysRoleQuery query) {
+	public List<RoleVO> getList(SysRoleQuery query) {
 //		get role list
 		List<SysRoleEntity> entityList = baseMapper.selectList(getWrapper(query));
 //		convert to role vo list for result
@@ -91,7 +91,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(SysRoleVO vo) {
+	public void save(RoleVO vo) {
 //		convert to role
 		SysRoleEntity entity = SysRoleConvert.INSTANCE.convert(vo);
 //		set data scope
@@ -108,7 +108,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(SysRoleVO vo) {
+	public void update(RoleVO vo) {
 //		convert to role
 		SysRoleEntity entity = SysRoleConvert.INSTANCE.convert(vo);
 //		update role
@@ -125,7 +125,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void dataScope(SysRoleDataScopeVO vo) {
+	public void dataScope(RoleOrganVO vo) {
 //		get role
 		SysRoleEntity entity = getById(vo.getId());
 //		set data scope

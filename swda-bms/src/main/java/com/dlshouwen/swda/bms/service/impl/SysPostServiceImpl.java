@@ -14,7 +14,7 @@ import com.dlshouwen.swda.bms.entity.SysPostEntity;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
 import com.dlshouwen.swda.bms.service.SysUserPostService;
-import com.dlshouwen.swda.bms.vo.SysPostVO;
+import com.dlshouwen.swda.bms.vo.PostVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +38,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysPostVO> page(SysPostQuery query) {
+	public PageResult<PostVO> page(SysPostQuery query) {
 //		select page
 		IPage<SysPostEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
@@ -50,7 +50,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	 * @return post vo list
 	 */
 	@Override
-	public List<SysPostVO> getList() {
+	public List<PostVO> getList() {
 //		create post query
 		SysPostQuery query = new SysPostQuery();
 //		set status
@@ -99,7 +99,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	 * @param postVO
 	 */
 	@Override
-	public void save(SysPostVO vo) {
+	public void save(PostVO vo) {
 //		convert to post
 		SysPostEntity entity = SysPostConvert.INSTANCE.convert(vo);
 //		insert post
@@ -111,7 +111,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, SysPostEntit
 	 * @param postVO
 	 */
 	@Override
-	public void update(SysPostVO vo) {
+	public void update(PostVO vo) {
 //		convert to post
 		SysPostEntity entity = SysPostConvert.INSTANCE.convert(vo);
 //		update post

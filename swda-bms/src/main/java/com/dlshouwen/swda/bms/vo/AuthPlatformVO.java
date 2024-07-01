@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "third login config")
-public class SysThirdLoginConfigVO implements Serializable {
+public class AuthPlatformVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

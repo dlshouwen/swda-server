@@ -15,8 +15,8 @@ import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
 import com.dlshouwen.swda.bms.service.SysThirdLoginService;
-import com.dlshouwen.swda.bms.vo.SysThirdCallbackVO;
-import com.dlshouwen.swda.bms.vo.SysThirdLoginVO;
+import com.dlshouwen.swda.bms.vo.AuthCallbackVO;
+import com.dlshouwen.swda.bms.vo.AuthLoginVO;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,9 +48,9 @@ public class SysThirdLoginController {
 	 */
 	@GetMapping("list")
 	@Operation(name = "list")
-	public R<List<SysThirdLoginVO>> list() {
+	public R<List<AuthLoginVO>> list() {
 //		list by user id
-		List<SysThirdLoginVO> list = sysThirdLoginService.listByUserId(SecurityUser.getUserId());
+		List<AuthLoginVO> list = sysThirdLoginService.listByUserId(SecurityUser.getUserId());
 //		return
 		return R.ok(list);
 	}
@@ -97,7 +97,7 @@ public class SysThirdLoginController {
 	@SuppressWarnings("unchecked")
 	@PostMapping("bind")
 	@Operation(name = "bind", type = OperateType.INSERT)
-	public R<String> bind(@RequestBody SysThirdCallbackVO vo) {
+	public R<String> bind(@RequestBody AuthCallbackVO vo) {
 //		get auth request
 		AuthRequest authRequest = sysThirdLoginConfigService.getAuthRequest(vo.getOpenType());
 //		get auth callback

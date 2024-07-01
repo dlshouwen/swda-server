@@ -59,7 +59,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 	 * @return user token vo
 	 */
 	@Override
-	public SysUserTokenVO loginByAccount(SysAccountLoginVO login) {
+	public UserTokenVO loginByAccount(AccountLoginVO login) {
 //		validate captcha
 		boolean flag = sysCaptchaService.validate(login.getKey(), login.getCaptcha());
 //		if error
@@ -82,7 +82,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 //		get principal
 		UserDetail user = (UserDetail) authentication.getPrincipal();
 //		create token
-		SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		UserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
 //		save user
 		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
@@ -95,7 +95,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 	 * @return user token vo
 	 */
 	@Override
-	public SysUserTokenVO loginByMobile(SysMobileLoginVO login) {
+	public UserTokenVO loginByMobile(MobileLoginVO login) {
 //		defined authentication
 		Authentication authentication;
 //		try catch
@@ -109,7 +109,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 //		get principal
 		UserDetail user = (UserDetail) authentication.getPrincipal();
 //		create token
-		SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		UserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
 //		save user
 		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
@@ -122,7 +122,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 	 * @return user token vo
 	 */
 	@Override
-	public SysUserTokenVO loginByThird(SysThirdCallbackVO login) {
+	public UserTokenVO loginByThird(AuthCallbackVO login) {
 //		defined authentication
 		Authentication authentication;
 		try {
@@ -137,7 +137,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 //		get principal
 		UserDetail user = (UserDetail) authentication.getPrincipal();
 //		create token
-		SysUserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		UserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
 //		save user
 		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
@@ -154,7 +154,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 //		generate code
 		String code = RandomUtil.randomNumbers(6);
 //		get user
-		SysUserVO user = sysUserService.getByMobile(mobile);
+		UserVO user = sysUserService.getByMobile(mobile);
 //		if user is empty
 		if (user == null) {
 //			throw exception
@@ -172,7 +172,7 @@ public class SysAuthServiceImpl implements SysAuthService {
 	@Override
 	public AccessTokenVO getAccessToken(String refreshToken) {
 //		get user token
-		SysUserTokenVO token = sysUserTokenService.refreshToken(refreshToken);
+		UserTokenVO token = sysUserTokenService.refreshToken(refreshToken);
 //		create access token
 		AccessTokenVO accessToken = new AccessTokenVO();
 //		set access token, access token expire

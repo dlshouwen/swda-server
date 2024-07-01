@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @Schema(description = "user token")
-public class SysUserTokenVO implements Serializable {
+public class UserTokenVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

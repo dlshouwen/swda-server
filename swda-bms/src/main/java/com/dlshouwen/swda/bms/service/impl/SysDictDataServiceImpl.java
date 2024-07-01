@@ -14,7 +14,7 @@ import com.dlshouwen.swda.bms.mapper.SysDictDataDao;
 import com.dlshouwen.swda.bms.entity.SysDictDataEntity;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
 import com.dlshouwen.swda.bms.service.SysDictDataService;
-import com.dlshouwen.swda.bms.vo.SysDictDataVO;
+import com.dlshouwen.swda.bms.vo.DictVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +35,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysDictDataVO> page(SysDictDataQuery query) {
+	public PageResult<DictVO> page(SysDictDataQuery query) {
 //		select page
 		IPage<SysDictDataEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
@@ -63,7 +63,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(SysDictDataVO vo) {
+	public void save(DictVO vo) {
 //		get dict
 		SysDictDataEntity sysDictData = getOne(
 				Wrappers.<SysDictDataEntity>lambdaQuery().eq(SysDictDataEntity::getDictTypeId, vo.getDictTypeId())
@@ -85,7 +85,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(SysDictDataVO vo) {
+	public void update(DictVO vo) {
 //		get dict
 		SysDictDataEntity sysDictData = getOne(Wrappers.<SysDictDataEntity>lambdaQuery()
 				.eq(SysDictDataEntity::getDictTypeId, vo.getDictTypeId())

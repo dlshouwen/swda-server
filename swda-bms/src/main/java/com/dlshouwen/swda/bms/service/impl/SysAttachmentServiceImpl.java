@@ -13,7 +13,7 @@ import com.dlshouwen.swda.bms.mapper.SysAttachmentDao;
 import com.dlshouwen.swda.bms.entity.SysAttachmentEntity;
 import com.dlshouwen.swda.bms.query.SysAttachmentQuery;
 import com.dlshouwen.swda.bms.service.SysAttachmentService;
-import com.dlshouwen.swda.bms.vo.SysAttachmentVO;
+import com.dlshouwen.swda.bms.vo.AttachmentVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +34,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	 * @return page result
 	 */
 	@Override
-	public PageResult<SysAttachmentVO> page(SysAttachmentQuery query) {
+	public PageResult<AttachmentVO> page(SysAttachmentQuery query) {
 //		select page
 		IPage<SysAttachmentEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
@@ -62,7 +62,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	 * @param attachmentVO
 	 */
 	@Override
-	public void save(SysAttachmentVO vo) {
+	public void save(AttachmentVO vo) {
 //		convert to attachment
 		SysAttachmentEntity entity = SysAttachmentConvert.INSTANCE.convert(vo);
 //		insert
@@ -74,7 +74,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	 * @param attachmentVO
 	 */
 	@Override
-	public void update(SysAttachmentVO vo) {
+	public void update(AttachmentVO vo) {
 //		convert to attachment
 		SysAttachmentEntity entity = SysAttachmentConvert.INSTANCE.convert(vo);
 //		update

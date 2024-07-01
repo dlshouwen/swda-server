@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "operation log")
-public class SysLogOperateVO implements Serializable {
+public class OperationVO implements Serializable {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

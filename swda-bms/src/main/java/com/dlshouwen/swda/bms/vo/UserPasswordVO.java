@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "user password")
-public class SysUserPasswordVO implements Serializable {
+public class UserPasswordVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

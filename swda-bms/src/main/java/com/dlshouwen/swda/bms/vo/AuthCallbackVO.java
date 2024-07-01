@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "third callback")
-public class SysThirdCallbackVO implements Serializable {
+public class AuthCallbackVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

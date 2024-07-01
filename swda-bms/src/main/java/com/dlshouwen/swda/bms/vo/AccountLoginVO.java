@@ -6,21 +6,27 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * captcha vo
+ * account login vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "captcha")
-public class SysCaptchaVO implements Serializable {
+@Schema(description = "account login")
+public class AccountLoginVO implements Serializable {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
+	@Schema(description = "username")
+	private String username;
+
+	@Schema(description = "password")
+	private String password;
+
 	@Schema(description = "key")
 	private String key;
 
-	@Schema(description = "image base64")
-	private String image;
+	@Schema(description = "captcha")
+	private String captcha;
 
 }
