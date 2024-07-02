@@ -11,10 +11,10 @@ import org.mapstruct.factory.Mappers;
  * @since 1.0.0
  */
 @Mapper
-public interface SysUserTokenConvert {
+public interface UserTokenConvert {
 	
 	/** instance */
-	SysUserTokenConvert INSTANCE = Mappers.getMapper(SysUserTokenConvert.class);
+	UserTokenConvert INSTANCE = Mappers.getMapper(UserTokenConvert.class);
 
 	/**
 	 * convert
@@ -24,10 +24,10 @@ public interface SysUserTokenConvert {
 	UserToken convert(UserTokenVO vo);
 
 	/**
-	 * convert
+	 * convert to vo
 	 * @param userToken
 	 * @return user token vo
 	 */
-	UserTokenVO convert(UserToken entity);
+	UserTokenVO convert2VO(UserToken entity);
 
 }

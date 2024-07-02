@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.query.Query;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.auth.enums.ThirdLoginEnum;
-import com.dlshouwen.swda.bms.convert.SysThirdLoginConfigConvert;
+import com.dlshouwen.swda.bms.convert.AuthPlatformConvert;
 import com.dlshouwen.swda.bms.mapper.SysThirdLoginConfigDao;
 import com.dlshouwen.swda.bms.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
@@ -41,7 +41,7 @@ public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<SysThirdLogi
 //		select page
 		IPage<AuthPlatform> page = baseMapper.selectPage(getPage(query), Wrappers.lambdaQuery());
 //		return page result
-		return new PageResult<>(SysThirdLoginConfigConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(AuthPlatformConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<SysThirdLogi
 	@Override
 	public void save(AuthPlatformVO vo) {
 //		convert to third login config
-		AuthPlatform entity = SysThirdLoginConfigConvert.INSTANCE.convert(vo);
+		AuthPlatform entity = AuthPlatformConvert.INSTANCE.convert(vo);
 //		insert third login config
 		baseMapper.insert(entity);
 	}
@@ -63,7 +63,7 @@ public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<SysThirdLogi
 	@Override
 	public void update(AuthPlatformVO vo) {
 //		convert to third login config
-		AuthPlatform entity = SysThirdLoginConfigConvert.INSTANCE.convert(vo);
+		AuthPlatform entity = AuthPlatformConvert.INSTANCE.convert(vo);
 //		update third login config
 		updateById(entity);
 	}

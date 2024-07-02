@@ -1,6 +1,13 @@
 package com.dlshouwen.swda.bms.entity;
 
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.dlshouwen.swda.core.entity.BaseEntity;
 
 import lombok.Data;
@@ -13,11 +20,34 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_user_post")
+@TableName("bms_user_post")
 public class UserPost extends BaseEntity {
+
+	@TableId
+	private Long relationId;
 
 	private Long userId;
 
 	private Long postId;
+	
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
+	
+    @TableField(fill = FieldFill.INSERT)
+    private Long creator;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updater;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @TableLogic
+    @TableField(fill = FieldFill.INSERT)
+    private Integer deleted;
 
 }

@@ -1,7 +1,5 @@
 package com.dlshouwen.swda.bms.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -15,43 +13,52 @@ import java.time.LocalDateTime;
  */
 
 @Data
-@TableName("sys_log_operate")
+@TableName("bms_operation_log")
 public class OperationLog {
 
 	@TableId
-	private Long id;
-
-	private Long userId;
-
-	private String realName;
-
-	private String module;
-
-	private String name;
-
-	private String reqUri;
-
-	private String reqMethod;
-
-	private String reqParams;
-
-	private String ip;
-
-	private String address;
+	private Long logId;
 
 	private String userAgent;
 
-	private Integer operateType;
+	private String operationModule;
 
-	private Integer duration;
+	private String operationName;
 
-	private Integer status;
+	private Integer operationType;
 
-	private String resultMsg;
+	private String requestUri;
 
-	@TableField(fill = FieldFill.INSERT)
-	private LocalDateTime createTime;
+	private String requestMethod;
 
+	private String requestParams;
+
+	private String responseResult;
+
+	private String callSource;
+
+	private Integer lineNo;
+
+	private Integer callResult;
+
+	private String errorReason;
+	
+	private LocalDateTime startTime;
+	
+	private LocalDateTime endTime;
+	
+	private Integer cost;
+	
 	private Long tenantId;
+	
+	private Long userId;
 
+	private String userName;
+	
+	private Long organId;
+	
+	private String organName;
+
+	private String ip;
+	
 }

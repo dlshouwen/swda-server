@@ -6,38 +6,55 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * third login config
+ * auth platform
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@TableName("sys_third_login_config")
+@TableName("bms_auth_platform")
 public class AuthPlatform {
 
 	@TableId
-	private Long id;
+	private Long authPlatformId;
 
-	private String openType;
-
+	private String authPlatformCode;
+	
+	private String authPlatformName;
+	
 	private String clientId;
-
+	
 	private String clientSecret;
 
 	private String redirectUri;
 
 	private String agentId;
 
+	private String assistSearch;
+	
+	private Integer sort;
+	
+	private String remark;
+	
 	private Long tenantId;
 
-	@Version
-	@TableField(fill = FieldFill.INSERT)
-	private Integer version;
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
+	
+    @TableField(fill = FieldFill.INSERT)
+    private Long creator;
 
-	@TableLogic
-	@TableField(fill = FieldFill.INSERT)
-	private Integer deleted;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
-	@TableField(fill = FieldFill.INSERT)
-	private LocalDateTime createTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updater;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @TableLogic
+    @TableField(fill = FieldFill.INSERT)
+    private Integer deleted;
 
 }

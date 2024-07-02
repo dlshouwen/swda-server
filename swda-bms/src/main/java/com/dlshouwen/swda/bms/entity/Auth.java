@@ -6,36 +6,33 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * third login
+ * auth
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@TableName("sys_third_login")
+@TableName("bms_auth")
 public class Auth {
 
 	@TableId
-	private Long id;
+	private Long authId;
+	
+	private Long authPlatformId;
 
-	private String openType;
-
-	private String openId;
-
-	private String username;
-
-	private Long userId;
+	private String authPlatformCode;
+	
+	private String authPlatformName;
+	
+	private String nickName;
 
 	private Long tenantId;
-
+	
 	@Version
 	@TableField(fill = FieldFill.INSERT)
 	private Integer version;
 
-	@TableLogic
-	@TableField(fill = FieldFill.INSERT)
-	private Integer deleted;
-
-	@TableField(fill = FieldFill.INSERT)
-	private LocalDateTime createTime;
+	private LocalDateTime authTime;
+	
+	private Integer status;
 
 }

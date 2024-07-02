@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.cache.AttrCache;
-import com.dlshouwen.swda.bms.convert.SysParamsConvert;
+import com.dlshouwen.swda.bms.convert.AttrConvert;
 import com.dlshouwen.swda.bms.mapper.SysParamsDao;
 import com.dlshouwen.swda.bms.entity.Attr;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
@@ -43,7 +43,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, Attr> im
 //		select page
 		IPage<Attr> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		get page result for return
-		return new PageResult<>(SysParamsConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(AttrConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, Attr> im
 			throw new SwdaException("参数键已存在");
 		}
 //		convert to params
-		Attr entity = SysParamsConvert.INSTANCE.convert(vo);
+		Attr entity = AttrConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 //		save cache
@@ -105,7 +105,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, Attr> im
 			sysParamsCache.delete(entity.getParamKey());
 		}
 //		update
-		updateById(SysParamsConvert.INSTANCE.convert(vo));
+		updateById(AttrConvert.INSTANCE.convert(vo));
 //		save cache
 		sysParamsCache.save(vo.getParamKey(), vo.getParamValue());
 	}

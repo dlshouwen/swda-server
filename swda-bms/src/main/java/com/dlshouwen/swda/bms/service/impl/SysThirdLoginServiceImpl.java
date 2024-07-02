@@ -6,11 +6,11 @@ import me.zhyd.oauth.model.AuthUser;
 
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysThirdLoginConvert;
+import com.dlshouwen.swda.bms.convert.AuthConvert;
 import com.dlshouwen.swda.bms.mapper.SysThirdLoginDao;
 import com.dlshouwen.swda.bms.entity.Auth;
 import com.dlshouwen.swda.bms.service.SysThirdLoginService;
-import com.dlshouwen.swda.bms.vo.AuthLoginVO;
+import com.dlshouwen.swda.bms.vo.AuthVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,11 +30,11 @@ public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, 
 	 * @return third login vo list
 	 */
 	@Override
-	public List<AuthLoginVO> listByUserId(Long userId) {
+	public List<AuthVO> listByUserId(Long userId) {
 //		get third login list
 		List<Auth> list = baseMapper.selectList(Wrappers.<Auth>lambdaQuery().eq(Auth::getUserId, userId));
 //		convert to third login vo list for return
-		return SysThirdLoginConvert.INSTANCE.convertList(list);
+		return AuthConvert.INSTANCE.convertList(list);
 	}
 
 	/**

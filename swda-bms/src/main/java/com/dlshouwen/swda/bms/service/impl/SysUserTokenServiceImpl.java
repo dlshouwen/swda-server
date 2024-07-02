@@ -12,8 +12,8 @@ import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.property.TokenProperties;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.utils.TokenUtils;
-import com.dlshouwen.swda.bms.convert.SysUserConvert;
-import com.dlshouwen.swda.bms.convert.SysUserTokenConvert;
+import com.dlshouwen.swda.bms.convert.UserConvert;
+import com.dlshouwen.swda.bms.convert.UserTokenConvert;
 import com.dlshouwen.swda.bms.mapper.SysUserDao;
 import com.dlshouwen.swda.bms.mapper.SysUserTokenDao;
 import com.dlshouwen.swda.bms.entity.User;
@@ -86,7 +86,7 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Us
 			baseMapper.updateById(entity);
 		}
 //		return user token
-		return SysUserTokenConvert.INSTANCE.convert(entity);
+		return UserTokenConvert.INSTANCE.convert(entity);
 	}
 
 	/**
@@ -121,13 +121,13 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Us
 //		get user
 		User user = sysUserDao.selectById(entity.getUserId());
 //		convert to user detail
-		UserDetail userDetail = SysUserConvert.INSTANCE.convertDetail(user);
+		UserDetail userDetail = UserConvert.INSTANCE.convertDetail(user);
 //		get user details
 		sysUserDetailsService.getUserDetails(userDetail);
 //		save user cache
 		tokenStoreCache.saveUser(accessToken, userDetail);
 //		convert to user token for return
-		return SysUserTokenConvert.INSTANCE.convert(entity);
+		return UserTokenConvert.INSTANCE.convert(entity);
 	}
 
 	/**

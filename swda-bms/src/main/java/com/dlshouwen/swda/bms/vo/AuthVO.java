@@ -9,13 +9,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * auth login vo
+ * auth vo
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@Schema(description = "auth login")
-public class AuthLoginVO implements Serializable {
+@Schema(description = "auth")
+public class AuthVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

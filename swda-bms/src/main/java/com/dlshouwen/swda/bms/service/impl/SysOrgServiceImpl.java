@@ -7,7 +7,7 @@ import com.dlshouwen.swda.core.utils.TreeUtils;
 import com.dlshouwen.swda.core.constant.Constant;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysOrgConvert;
+import com.dlshouwen.swda.bms.convert.OrganConvert;
 import com.dlshouwen.swda.bms.mapper.SysOrgDao;
 import com.dlshouwen.swda.bms.mapper.SysUserDao;
 import com.dlshouwen.swda.bms.entity.Organ;
@@ -47,7 +47,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, Organ> impleme
 //		get organ list
 		List<Organ> entityList = baseMapper.getList(params);
 //		build organ tree for return
-		return TreeUtils.build(SysOrgConvert.INSTANCE.convertList(entityList));
+		return TreeUtils.build(OrganConvert.INSTANCE.convertList(entityList));
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, Organ> impleme
 	@Transactional(rollbackFor = Exception.class)
 	public void save(OrganVO vo) {
 //		convert organ vo to organ
-		Organ entity = SysOrgConvert.INSTANCE.convert(vo);
+		Organ entity = OrganConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -71,7 +71,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, Organ> impleme
 	@Transactional(rollbackFor = Exception.class)
 	public void update(OrganVO vo) {
 //		convert to organ
-		Organ entity = SysOrgConvert.INSTANCE.convert(vo);
+		Organ entity = OrganConvert.INSTANCE.convert(vo);
 //		if organ id equals pre organ id
 		if (entity.getId().equals(entity.getPid())) {
 //			throw exception

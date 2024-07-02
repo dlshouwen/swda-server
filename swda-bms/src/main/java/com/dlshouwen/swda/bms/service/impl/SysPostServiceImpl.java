@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysPostConvert;
+import com.dlshouwen.swda.bms.convert.PostConvert;
 import com.dlshouwen.swda.bms.mapper.SysPostDao;
 import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
@@ -42,7 +42,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, Post> implem
 //		select page
 		IPage<Post> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
-		return new PageResult<>(SysPostConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(PostConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, Post> implem
 //		get post list
 		List<Post> entityList = baseMapper.selectList(getWrapper(query));
 //		convert to post vo for return
-		return SysPostConvert.INSTANCE.convertList(entityList);
+		return PostConvert.INSTANCE.convertList(entityList);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, Post> implem
 	@Override
 	public void save(PostVO vo) {
 //		convert to post
-		Post entity = SysPostConvert.INSTANCE.convert(vo);
+		Post entity = PostConvert.INSTANCE.convert(vo);
 //		insert post
 		baseMapper.insert(entity);
 	}
@@ -113,7 +113,7 @@ public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, Post> implem
 	@Override
 	public void update(PostVO vo) {
 //		convert to post
-		Post entity = SysPostConvert.INSTANCE.convert(vo);
+		Post entity = PostConvert.INSTANCE.convert(vo);
 //		update post
 		updateById(entity);
 	}

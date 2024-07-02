@@ -8,35 +8,35 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * menu convert
+ * permission convert
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysMenuConvert {
+public interface PermissionConvert {
 	
 	/** instance */
-	SysMenuConvert INSTANCE = Mappers.getMapper(SysMenuConvert.class);
+	PermissionConvert INSTANCE = Mappers.getMapper(PermissionConvert.class);
 
 	/**
 	 * convert
-	 * @param menuVO
-	 * @return menu
+	 * @param permissionVO
+	 * @return permission
 	 */
 	Permission convert(PermissionVO vo);
 
 	/**
-	 * convert
-	 * @param menu
-	 * @return menu vo
+	 * convert to vo
+	 * @param permission
+	 * @return permission vo
 	 */
 	PermissionVO convert(Permission entity);
 
 	/**
-	 * convert list
-	 * @param menuList
-	 * @return menu vo list
+	 * convert to vo list
+	 * @param permissionList
+	 * @return permission vo list
 	 */
-	List<PermissionVO> convertList(List<Permission> list);
+	List<PermissionVO> convert2VOList(List<Permission> list);
 
 }

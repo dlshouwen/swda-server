@@ -13,17 +13,10 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysPostConvert {
+public interface PostConvert {
 	
 	/** instance */
-	SysPostConvert INSTANCE = Mappers.getMapper(SysPostConvert.class);
-
-	/**
-	 * convert
-	 * @param post
-	 * @return post vo
-	 */
-	PostVO convert(Post entity);
+	PostConvert INSTANCE = Mappers.getMapper(PostConvert.class);
 
 	/**
 	 * convert
@@ -33,10 +26,17 @@ public interface SysPostConvert {
 	Post convert(PostVO vo);
 
 	/**
-	 * convert list
+	 * convert to vo
+	 * @param post
+	 * @return post vo
+	 */
+	PostVO convert2VO(Post entity);
+
+	/**
+	 * convert to vo list
 	 * @param postList
 	 * @return post vo list
 	 */
-	List<PostVO> convertList(List<Post> list);
+	List<PostVO> convert2VOList(List<Post> list);
 
 }

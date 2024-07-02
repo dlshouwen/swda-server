@@ -11,7 +11,7 @@ import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
-import com.dlshouwen.swda.bms.convert.SysUserConvert;
+import com.dlshouwen.swda.bms.convert.UserConvert;
 import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.query.SysUserQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
@@ -83,7 +83,7 @@ public class SysUserController {
 //		get user
 		User entity = sysUserService.getById(id);
 //		convert to user vo
-		UserVO vo = SysUserConvert.INSTANCE.convert(entity);
+		UserVO vo = UserConvert.INSTANCE.convert(entity);
 //		get role id list set to user
 		List<Long> roleIdList = sysUserRoleService.getRoleIdList(id);
 		vo.setRoleIdList(roleIdList);
@@ -102,7 +102,7 @@ public class SysUserController {
 	@Operation(name = "info")
 	public R<UserVO> info() {
 //		convert user to user vo
-		UserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
+		UserVO user = UserConvert.INSTANCE.convert(SecurityUser.getUser());
 //		get post id list set to user
 		List<Long> postIdList = sysUserPostService.getPostIdList(user.getId());
 		user.setPostIdList(postIdList);

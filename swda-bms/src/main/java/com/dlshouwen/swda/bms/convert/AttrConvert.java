@@ -8,35 +8,35 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * params convert
+ * attr convert
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysParamsConvert {
+public interface AttrConvert {
 	
 	/** instance */
-	SysParamsConvert INSTANCE = Mappers.getMapper(SysParamsConvert.class);
+	AttrConvert INSTANCE = Mappers.getMapper(AttrConvert.class);
 
 	/**
 	 * convert
-	 * @param paramsVO
-	 * @return params
+	 * @param attrVO
+	 * @return attr
 	 */
 	Attr convert(AttrVO vo);
 
 	/**
-	 * convert
-	 * @param params
-	 * @return params vo
+	 * convert to vo
+	 * @param attr
+	 * @return attr vo
 	 */
-	AttrVO convert(Attr entity);
+	AttrVO convert2VO(Attr entity);
 
 	/**
-	 * convert list
-	 * @param paramsList
-	 * @return params vo list
+	 * convert to vo list
+	 * @param attrList
+	 * @return attr vo list
 	 */
-	List<AttrVO> convertList(List<Attr> list);
+	List<AttrVO> convert2VOList(List<Attr> list);
 
 }

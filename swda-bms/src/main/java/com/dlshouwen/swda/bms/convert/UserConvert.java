@@ -2,7 +2,6 @@ package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.vo.UserAssistVO;
-import com.dlshouwen.swda.bms.vo.SysUserExcelVO;
 import com.dlshouwen.swda.bms.vo.UserVO;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 
@@ -17,17 +16,10 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysUserConvert {
+public interface UserConvert {
 	
 	/** instance */
-	SysUserConvert INSTANCE = Mappers.getMapper(SysUserConvert.class);
-
-	/**
-	 * convert
-	 * @param user
-	 * @return user vo
-	 */
-	UserVO convert(User entity);
+	UserConvert INSTANCE = Mappers.getMapper(UserConvert.class);
 
 	/**
 	 * convert
@@ -37,45 +29,38 @@ public interface SysUserConvert {
 	User convert(UserVO vo);
 
 	/**
+	 * convert to vo
+	 * @param user
+	 * @return user vo
+	 */
+	UserVO convert2VO(User entity);
+
+	/**
 	 * convert
-	 * @param userBaseVO
+	 * @param userAssistVO
 	 * @return user
 	 */
 	User convert(UserAssistVO vo);
 
 	/**
-	 * convert
+	 * convert to vo
 	 * @param userDetail
 	 * @return user vo
 	 */
-	UserVO convert(UserDetail userDetail);
+	UserVO convert2VO(UserDetail userDetail);
 
 	/**
-	 * convert detail
+	 * convert to detail
 	 * @param user
 	 * @return user detail
 	 */
-	UserDetail convertDetail(User entity);
+	UserDetail convert2Detail(User entity);
 
 	/**
-	 * convert list
+	 * convert to vo list
 	 * @param userList
 	 * @return user vo list
 	 */
-	List<UserVO> convertList(List<User> list);
-
-	/**
-	 * convert 2 list
-	 * @param userList
-	 * @return user excel vo list
-	 */
-	List<SysUserExcelVO> convert2List(List<User> list);
-
-	/**
-	 * convert list
-	 * @param userExcelVOList
-	 * @return user list
-	 */
-	List<User> convertListEntity(List<SysUserExcelVO> list);
+	List<UserVO> convert2VOList(List<User> list);
 
 }

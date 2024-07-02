@@ -1,7 +1,5 @@
 package com.dlshouwen.swda.bms.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -14,27 +12,36 @@ import java.time.LocalDateTime;
  * @since 1.0.0
  */
 @Data
-@TableName("sys_log_login")
+@TableName("bms_login_log")
 public class LoginLog {
 
 	@TableId
-	private Long id;
-
-	private String username;
-
-	private String ip;
-
-	private String address;
+	private Long logId;
 
 	private String userAgent;
-
-	private Integer status;
-
-	private Integer operation;
-
-	@TableField(fill = FieldFill.INSERT)
-	private LocalDateTime createTime;
-
+	
+	private String token;
+	
 	private Long tenantId;
-
+	
+	private Long userId;
+	
+	private String userName;
+	
+	private Long organId;
+	
+	private String organName;
+	
+	private LocalDateTime loginTime;
+	
+	private String ip;
+	
+	private Integer loginStatus;
+	
+	private Integer isLogout;
+	
+	private Integer logoutType;
+	
+	private LocalDateTime logoutTime;
+	
 }

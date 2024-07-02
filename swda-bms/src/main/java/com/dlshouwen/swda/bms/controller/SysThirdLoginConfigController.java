@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import com.dlshouwen.swda.bms.convert.SysThirdLoginConfigConvert;
+import com.dlshouwen.swda.bms.convert.AuthPlatformConvert;
 import com.dlshouwen.swda.bms.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
 import com.dlshouwen.swda.bms.vo.AuthPlatformVO;
@@ -59,7 +59,7 @@ public class SysThirdLoginConfigController {
 //		get third login config
 		AuthPlatform entity = sysThirdLoginConfigService.getById(id);
 //		result
-		return R.ok(SysThirdLoginConfigConvert.INSTANCE.convert(entity));
+		return R.ok(AuthPlatformConvert.INSTANCE.convert(entity));
 	}
 
 	/**

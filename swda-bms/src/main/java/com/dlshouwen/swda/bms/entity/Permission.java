@@ -1,8 +1,13 @@
 package com.dlshouwen.swda.bms.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.dlshouwen.swda.core.entity.BaseEntity;
 
 import lombok.Data;
@@ -15,26 +20,56 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_menu")
+@TableName("bms_permission")
 public class Permission extends BaseEntity {
 
-	private Long id;
+	@TableId
+	private Long permissionId;
 
-	private Long pid;
+	private Long prePermissionId;
+	
+	private Long systemId;
 
-	private String name;
-
-	private String url;
-
-	private String authority;
-
-	private Integer type;
-
-	private Integer openStyle;
-
-	@TableField(updateStrategy = FieldStrategy.ALWAYS)
+	private String permissionCode;
+	
+	private String permissionName;
+	
+	private Integer permissionType;
+	
+	private String permissionValue;
+	
+	private String path;
+	
+	private String component;
+	
 	private String icon;
-
+	
+	private String assistSearch;
+	
 	private Integer sort;
+	
+	private String remark;
+	
+	private Long tenantId;
+
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
+	
+    @TableField(fill = FieldFill.INSERT)
+    private Long creator;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updater;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @TableLogic
+    @TableField(fill = FieldFill.INSERT)
+    private Integer deleted;
 
 }

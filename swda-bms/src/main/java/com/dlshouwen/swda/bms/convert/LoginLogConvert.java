@@ -13,10 +13,10 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysLogLoginConvert {
+public interface LoginLogConvert {
 	
 	/** instance */
-	SysLogLoginConvert INSTANCE = Mappers.getMapper(SysLogLoginConvert.class);
+	LoginLogConvert INSTANCE = Mappers.getMapper(LoginLogConvert.class);
 
 	/**
 	 * convert
@@ -26,17 +26,17 @@ public interface SysLogLoginConvert {
 	LoginLog convert(LoginLogVO vo);
 
 	/**
-	 * convert
+	 * convert to vo
 	 * @param loginLog
 	 * @return login log vo
 	 */
-	LoginLogVO convert(LoginLog entity);
+	LoginLogVO convert2VO(LoginLog entity);
 
 	/**
-	 * convert list
+	 * convert to vo list
 	 * @param loginLogList
 	 * @return login log vo list
 	 */
-	List<LoginLogVO> convertList(List<LoginLog> list);
+	List<LoginLogVO> convert2VOList(List<LoginLog> list);
 
 }

@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysDictTypeConvert;
+import com.dlshouwen.swda.bms.convert.DictCategoryConvert;
 import com.dlshouwen.swda.bms.mapper.SysDictDataDao;
 import com.dlshouwen.swda.bms.mapper.SysDictTypeDao;
 import com.dlshouwen.swda.bms.entity.Dict;
@@ -55,7 +55,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, Dict
 	@Override
 	public PageResult<DictCategoryVO> page(SysDictTypeQuery query) {
 		IPage<DictCategory> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-		return new PageResult<>(SysDictTypeConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(DictCategoryConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, Dict
 	@Transactional(rollbackFor = Exception.class)
 	public void save(DictCategoryVO vo) {
 //		convert to dict type
-		DictCategory entity = SysDictTypeConvert.INSTANCE.convert(vo);
+		DictCategory entity = DictCategoryConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -95,7 +95,7 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, Dict
 	@Transactional(rollbackFor = Exception.class)
 	public void update(DictCategoryVO vo) {
 //		convert to dict type
-		DictCategory entity = SysDictTypeConvert.INSTANCE.convert(vo);
+		DictCategory entity = DictCategoryConvert.INSTANCE.convert(vo);
 //		update
 		updateById(entity);
 	}

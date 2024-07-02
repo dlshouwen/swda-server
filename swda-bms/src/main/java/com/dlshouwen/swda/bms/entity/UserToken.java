@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
  */
 
 @Data
-@TableName("sys_user_token")
+@TableName("bms_user_token")
 public class UserToken {
 
 	@TableId
-	private Long id;
+	private Long relationId;
 
 	private Long userId;
 

@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.auth.enums.DataScopeEnum;
-import com.dlshouwen.swda.bms.convert.SysRoleConvert;
+import com.dlshouwen.swda.bms.convert.RoleConvert;
 import com.dlshouwen.swda.bms.mapper.SysRoleDao;
 import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
@@ -53,7 +53,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, Role> implem
 //		select page
 		IPage<Role> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
-		return new PageResult<>(SysRoleConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(RoleConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, Role> implem
 //		get role list
 		List<Role> entityList = baseMapper.selectList(getWrapper(query));
 //		convert to role vo list for result
-		return SysRoleConvert.INSTANCE.convertList(entityList);
+		return RoleConvert.INSTANCE.convertList(entityList);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, Role> implem
 	@Transactional(rollbackFor = Exception.class)
 	public void save(RoleVO vo) {
 //		convert to role
-		Role entity = SysRoleConvert.INSTANCE.convert(vo);
+		Role entity = RoleConvert.INSTANCE.convert(vo);
 //		set data scope
 		entity.setDataScope(DataScopeEnum.SELF.getValue());
 //		insert role
@@ -110,7 +110,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, Role> implem
 	@Transactional(rollbackFor = Exception.class)
 	public void update(RoleVO vo) {
 //		convert to role
-		Role entity = SysRoleConvert.INSTANCE.convert(vo);
+		Role entity = RoleConvert.INSTANCE.convert(vo);
 //		update role
 		updateById(entity);
 //		save role menu

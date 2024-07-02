@@ -13,10 +13,10 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysLogOperateConvert {
+public interface OperationLogConvert {
 	
 	/** instance */
-	SysLogOperateConvert INSTANCE = Mappers.getMapper(SysLogOperateConvert.class);
+	OperationLogConvert INSTANCE = Mappers.getMapper(OperationLogConvert.class);
 
 	/**
 	 * convert
@@ -26,17 +26,17 @@ public interface SysLogOperateConvert {
 	OperationLog convert(OperationLogVO vo);
 
 	/**
-	 * convert
+	 * convert to vo
 	 * @param operationLog
 	 * @return operation log vo
 	 */
-	OperationLogVO convert(OperationLog entity);
+	OperationLogVO convert2VO(OperationLog entity);
 
 	/**
-	 * convert list
+	 * convert to vo list
 	 * @param operationLogList
 	 * @return operation log vo list
 	 */
-	List<OperationLogVO> convertList(List<OperationLog> list);
+	List<OperationLogVO> convert2VOList(List<OperationLog> list);
 
 }

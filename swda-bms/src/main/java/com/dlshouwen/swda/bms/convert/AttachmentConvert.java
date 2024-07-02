@@ -13,10 +13,10 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysAttachmentConvert {
+public interface AttachmentConvert {
 	
 	/** instance */
-	SysAttachmentConvert INSTANCE = Mappers.getMapper(SysAttachmentConvert.class);
+	AttachmentConvert INSTANCE = Mappers.getMapper(AttachmentConvert.class);
 
 	/**
 	 * convert
@@ -26,17 +26,17 @@ public interface SysAttachmentConvert {
 	Attachment convert(AttachmentVO vo);
 
 	/**
-	 * convert
+	 * convert to vo
 	 * @param attachment
 	 * @return attachment vo
 	 */
-	AttachmentVO convert(Attachment entity);
+	AttachmentVO convert2VO(Attachment entity);
 
 	/**
-	 * convert list
+	 * convert to vo list
 	 * @param attachmentList
 	 * @return attachment vo list
 	 */
-	List<AttachmentVO> convertList(List<Attachment> list);
+	List<AttachmentVO> convert2VOList(List<Attachment> list);
 
 }

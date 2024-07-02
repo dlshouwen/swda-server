@@ -57,5 +57,5 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
 		setFieldValByName(UPDATER, SecurityUser.getUserId(), metaObject);
 		setFieldValByName(UPDATE_TIME, LocalDateTime.now(), metaObject);
 	}
-
+	
 }

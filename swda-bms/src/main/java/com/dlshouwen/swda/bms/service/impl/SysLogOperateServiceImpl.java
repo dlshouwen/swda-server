@@ -14,7 +14,7 @@ import com.dlshouwen.swda.core.constant.Constant;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.log.OperationLog;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysLogOperateConvert;
+import com.dlshouwen.swda.bms.convert.OperationLogConvert;
 import com.dlshouwen.swda.bms.mapper.SysLogOperateDao;
 import com.dlshouwen.swda.bms.entity.OperationLog;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
@@ -47,7 +47,7 @@ public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, 
 //		select page
 		IPage<OperationLog> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
-		return new PageResult<>(SysLogOperateConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(OperationLogConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**

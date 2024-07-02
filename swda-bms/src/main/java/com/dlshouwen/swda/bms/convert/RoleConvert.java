@@ -13,17 +13,10 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysRoleConvert {
+public interface RoleConvert {
 	
 	/** instance */
-	SysRoleConvert INSTANCE = Mappers.getMapper(SysRoleConvert.class);
-
-	/**
-	 * convert
-	 * @param role
-	 * @return role vo
-	 */
-	RoleVO convert(Role entity);
+	RoleConvert INSTANCE = Mappers.getMapper(RoleConvert.class);
 
 	/**
 	 * convert
@@ -33,10 +26,17 @@ public interface SysRoleConvert {
 	Role convert(RoleVO vo);
 
 	/**
-	 * convert list
+	 * convert to vo
+	 * @param role
+	 * @return role vo
+	 */
+	RoleVO convert2VO(Role entity);
+
+	/**
+	 * convert to vo list
 	 * @param roleList
 	 * @return role vo list
 	 */
-	List<RoleVO> convertList(List<Role> list);
+	List<RoleVO> convert2VOList(List<Role> list);
 
 }

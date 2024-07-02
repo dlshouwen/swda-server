@@ -11,7 +11,7 @@ import lombok.SneakyThrows;
 import com.dlshouwen.swda.core.utils.*;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysLogLoginConvert;
+import com.dlshouwen.swda.bms.convert.LoginLogConvert;
 import com.dlshouwen.swda.bms.mapper.SysLogLoginDao;
 import com.dlshouwen.swda.bms.entity.LoginLog;
 import com.dlshouwen.swda.bms.query.SysLogLoginQuery;
@@ -45,7 +45,7 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, Logi
 //		select page
 		IPage<LoginLog> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
-		return new PageResult<>(SysLogLoginConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(LoginLogConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, Logi
 //		get login log list
 		List<LoginLog> list = list();
 //		convert to login log vo
-		List<LoginLogVO> sysLogLoginVOS = SysLogLoginConvert.INSTANCE.convertList(list);
+		List<LoginLogVO> sysLogLoginVOS = LoginLogConvert.INSTANCE.convertList(list);
 //		batch trans
 		transService.transBatch(sysLogLoginVOS);
 //		export excel

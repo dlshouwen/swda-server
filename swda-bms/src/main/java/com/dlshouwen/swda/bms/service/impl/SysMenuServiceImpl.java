@@ -8,7 +8,7 @@ import com.dlshouwen.swda.core.dict.ZeroOne;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysMenuConvert;
+import com.dlshouwen.swda.bms.convert.PermissionConvert;
 import com.dlshouwen.swda.bms.mapper.SysMenuDao;
 import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.service.SysMenuService;
@@ -42,7 +42,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 	@Transactional(rollbackFor = Exception.class)
 	public void save(PermissionVO vo) {
 //		convert to menu
-		Permission entity = SysMenuConvert.INSTANCE.convert(vo);
+		Permission entity = PermissionConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -55,7 +55,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 	@Transactional(rollbackFor = Exception.class)
 	public void update(PermissionVO vo) {
 //		convert to menu
-		Permission entity = SysMenuConvert.INSTANCE.convert(vo);
+		Permission entity = PermissionConvert.INSTANCE.convert(vo);
 //		if menu id equals pre menu id
 		if (entity.getId().equals(entity.getPid())) {
 //			throw exception
@@ -89,7 +89,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 //		get menu list
 		List<Permission> menuList = baseMapper.getMenuList(type);
 //		build menu tree for return
-		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
+		return TreeUtils.build(PermissionConvert.INSTANCE.convertList(menuList));
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> 
 			menuList = baseMapper.getUserMenuList(user.getUserId(), type);
 		}
 //		build menu tree for return
-		return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
+		return TreeUtils.build(PermissionConvert.INSTANCE.convertList(menuList));
 	}
 
 	/**

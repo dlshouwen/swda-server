@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysDictDataConvert;
+import com.dlshouwen.swda.bms.convert.DictConvert;
 import com.dlshouwen.swda.bms.mapper.SysDictDataDao;
 import com.dlshouwen.swda.bms.entity.Dict;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
@@ -39,7 +39,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, Dict
 //		select page
 		IPage<Dict> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
-		return new PageResult<>(SysDictDataConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(DictConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, Dict
 			throw new SwdaException("字典值重复!");
 		}
 //		convert to dict
-		Dict entity = SysDictDataConvert.INSTANCE.convert(vo);
+		Dict entity = DictConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -96,7 +96,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, Dict
 			throw new SwdaException("字典值重复!");
 		}
 //		convert to dict
-		Dict entity = SysDictDataConvert.INSTANCE.convert(vo);
+		Dict entity = DictConvert.INSTANCE.convert(vo);
 //		update
 		updateById(entity);
 	}

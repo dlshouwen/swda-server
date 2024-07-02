@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
-import com.dlshouwen.swda.bms.convert.SysRoleConvert;
+import com.dlshouwen.swda.bms.convert.RoleConvert;
 import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
@@ -90,7 +90,7 @@ public class SysRoleController {
 //		get role by id
 		Role entity = sysRoleService.getById(id);
 //		convert to role vo
-		RoleVO role = SysRoleConvert.INSTANCE.convert(entity);
+		RoleVO role = RoleConvert.INSTANCE.convert(entity);
 //		get menu id list set to role
 		List<Long> menuIdList = sysRoleMenuService.getMenuIdList(id);
 		role.setMenuIdList(menuIdList);

@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import com.dlshouwen.swda.bms.convert.SysMenuConvert;
+import com.dlshouwen.swda.bms.convert.PermissionConvert;
 import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.enums.MenuTypeEnum;
 import com.dlshouwen.swda.bms.service.SysMenuService;
@@ -93,7 +93,7 @@ public class SysMenuController {
 //		get menu by id
 		Permission entity = sysMenuService.getById(id);
 //		convert to menu vo
-		PermissionVO vo = SysMenuConvert.INSTANCE.convert(entity);
+		PermissionVO vo = PermissionConvert.INSTANCE.convert(entity);
 //		is has parent menu
 		if (entity.getPid() != null) {
 //			get parent menu

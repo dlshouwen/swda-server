@@ -13,10 +13,10 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysOrgConvert {
+public interface OrganConvert {
 	
 	/** instance */
-	SysOrgConvert INSTANCE = Mappers.getMapper(SysOrgConvert.class);
+	OrganConvert INSTANCE = Mappers.getMapper(OrganConvert.class);
 
 	/**
 	 * convert
@@ -26,17 +26,17 @@ public interface SysOrgConvert {
 	Organ convert(OrganVO vo);
 
 	/**
-	 * convert
+	 * convert to vo
 	 * @param organ
 	 * @return organ vo
 	 */
-	OrganVO convert(Organ entity);
+	OrganVO convert2VO(Organ entity);
 
 	/**
-	 * convert list
+	 * convert to vo list
 	 * @param organList
 	 * @return organ vo list
 	 */
-	List<OrganVO> convertList(List<Organ> list);
+	List<OrganVO> convert2VOList(List<Organ> list);
 
 }

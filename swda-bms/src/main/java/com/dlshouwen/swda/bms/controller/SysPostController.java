@@ -8,7 +8,7 @@ import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
-import com.dlshouwen.swda.bms.convert.SysPostConvert;
+import com.dlshouwen.swda.bms.convert.PostConvert;
 import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
@@ -73,7 +73,7 @@ public class SysPostController {
 //		get post by id
 		Post entity = sysPostService.getById(id);
 //		return
-		return R.ok(SysPostConvert.INSTANCE.convert(entity));
+		return R.ok(PostConvert.INSTANCE.convert(entity));
 	}
 
 	/**

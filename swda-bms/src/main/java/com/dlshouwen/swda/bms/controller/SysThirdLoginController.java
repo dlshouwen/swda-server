@@ -16,7 +16,7 @@ import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
 import com.dlshouwen.swda.bms.service.SysThirdLoginService;
 import com.dlshouwen.swda.bms.vo.AuthCallbackVO;
-import com.dlshouwen.swda.bms.vo.AuthLoginVO;
+import com.dlshouwen.swda.bms.vo.AuthVO;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,9 +48,9 @@ public class SysThirdLoginController {
 	 */
 	@GetMapping("list")
 	@Operation(name = "list")
-	public R<List<AuthLoginVO>> list() {
+	public R<List<AuthVO>> list() {
 //		list by user id
-		List<AuthLoginVO> list = sysThirdLoginService.listByUserId(SecurityUser.getUserId());
+		List<AuthVO> list = sysThirdLoginService.listByUserId(SecurityUser.getUserId());
 //		return
 		return R.ok(list);
 	}

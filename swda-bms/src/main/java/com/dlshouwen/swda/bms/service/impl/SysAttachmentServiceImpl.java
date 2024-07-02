@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.convert.SysAttachmentConvert;
+import com.dlshouwen.swda.bms.convert.AttachmentConvert;
 import com.dlshouwen.swda.bms.mapper.SysAttachmentDao;
 import com.dlshouwen.swda.bms.entity.Attachment;
 import com.dlshouwen.swda.bms.query.SysAttachmentQuery;
@@ -38,7 +38,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 //		select page
 		IPage<Attachment> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 //		return page result
-		return new PageResult<>(SysAttachmentConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+		return new PageResult<>(AttachmentConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	@Override
 	public void save(AttachmentVO vo) {
 //		convert to attachment
-		Attachment entity = SysAttachmentConvert.INSTANCE.convert(vo);
+		Attachment entity = AttachmentConvert.INSTANCE.convert(vo);
 //		insert
 		baseMapper.insert(entity);
 	}
@@ -76,7 +76,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
 	@Override
 	public void update(AttachmentVO vo) {
 //		convert to attachment
-		Attachment entity = SysAttachmentConvert.INSTANCE.convert(vo);
+		Attachment entity = AttachmentConvert.INSTANCE.convert(vo);
 //		update
 		updateById(entity);
 	}

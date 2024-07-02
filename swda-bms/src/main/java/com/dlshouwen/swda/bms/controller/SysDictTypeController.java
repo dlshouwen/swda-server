@@ -8,7 +8,7 @@ import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
-import com.dlshouwen.swda.bms.convert.SysDictTypeConvert;
+import com.dlshouwen.swda.bms.convert.DictCategoryConvert;
 import com.dlshouwen.swda.bms.entity.DictCategory;
 import com.dlshouwen.swda.bms.query.SysDictTypeQuery;
 import com.dlshouwen.swda.bms.service.SysDictTypeService;
@@ -76,7 +76,7 @@ public class SysDictTypeController {
 //		get dict type
 		DictCategory entity = sysDictTypeService.getById(id);
 //		return
-		return R.ok(SysDictTypeConvert.INSTANCE.convert(entity));
+		return R.ok(DictCategoryConvert.INSTANCE.convert(entity));
 	}
 
 	/**

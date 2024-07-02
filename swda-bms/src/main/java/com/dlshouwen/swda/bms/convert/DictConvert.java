@@ -8,22 +8,15 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * dict data convert
+ * dict convert
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysDictDataConvert {
+public interface DictConvert {
 	
 	/** instance */
-	SysDictDataConvert INSTANCE = Mappers.getMapper(SysDictDataConvert.class);
-
-	/**
-	 * convert
-	 * @param dict
-	 * @return dict vo
-	 */
-	DictVO convert(Dict entity);
+	DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
 
 	/**
 	 * convert
@@ -33,10 +26,17 @@ public interface SysDictDataConvert {
 	Dict convert(DictVO vo);
 
 	/**
-	 * convert list
+	 * convert to vo
+	 * @param dict
+	 * @return dict vo
+	 */
+	DictVO convert2VO(Dict entity);
+
+	/**
+	 * convert to vo list
 	 * @param dictList
 	 * @return dict vo list
 	 */
-	List<DictVO> convertList(List<Dict> list);
+	List<DictVO> convert2VOList(List<Dict> list);
 
 }

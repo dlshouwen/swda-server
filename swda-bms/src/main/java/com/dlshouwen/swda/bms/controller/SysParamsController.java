@@ -8,7 +8,7 @@ import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.enums.OperateType;
-import com.dlshouwen.swda.bms.convert.SysParamsConvert;
+import com.dlshouwen.swda.bms.convert.AttrConvert;
 import com.dlshouwen.swda.bms.entity.Attr;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
 import com.dlshouwen.swda.bms.service.SysParamsService;
@@ -60,7 +60,7 @@ public class SysParamsController {
 //		get params
 		Attr entity = sysParamsService.getById(id);
 //		return
-		return R.ok(SysParamsConvert.INSTANCE.convert(entity));
+		return R.ok(AttrConvert.INSTANCE.convert(entity));
 	}
 
 	/**
