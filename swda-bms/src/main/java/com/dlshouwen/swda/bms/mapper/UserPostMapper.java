@@ -3,24 +3,24 @@ package com.dlshouwen.swda.bms.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.dlshouwen.swda.bms.entity.UserRole;
+import com.dlshouwen.swda.bms.entity.UserPost;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 import java.util.List;
 
 /**
- * user role
+ * user post
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysUserRoleDao extends BaseMapper<UserRole> {
+public interface UserPostMapper extends BaseMapper<UserPost> {
 
 	/**
-	 * get role id list
+	 * get post id list
 	 * @param userId
-	 * @return role id list
+	 * @return post id list
 	 */
-	List<Long> getRoleIdList(@Param("userId") Long userId);
+	List<Long> getPostIdList(@Param("userId") Long userId);
 
 }

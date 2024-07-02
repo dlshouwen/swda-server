@@ -7,7 +7,7 @@ import me.zhyd.oauth.model.AuthUser;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.AuthConvert;
-import com.dlshouwen.swda.bms.mapper.SysThirdLoginDao;
+import com.dlshouwen.swda.bms.mapper.AuthMapper;
 import com.dlshouwen.swda.bms.entity.Auth;
 import com.dlshouwen.swda.bms.service.SysThirdLoginService;
 import com.dlshouwen.swda.bms.vo.AuthVO;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysThirdLoginServiceImpl extends BaseServiceImpl<SysThirdLoginDao, Auth> implements SysThirdLoginService {
+public class SysThirdLoginServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implements SysThirdLoginService {
 
 	/**
 	 * get third login vo list

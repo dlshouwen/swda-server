@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.mapper.SysUserPostDao;
+import com.dlshouwen.swda.bms.mapper.UserPostMapper;
 import com.dlshouwen.swda.bms.entity.UserPost;
 import com.dlshouwen.swda.bms.service.SysUserPostService;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 @Service
-public class SysUserPostServiceImpl extends BaseServiceImpl<SysUserPostDao, UserPost> implements SysUserPostService {
+public class SysUserPostServiceImpl extends BaseServiceImpl<UserPostMapper, UserPost> implements SysUserPostService {
 
 	/**
 	 * save or update

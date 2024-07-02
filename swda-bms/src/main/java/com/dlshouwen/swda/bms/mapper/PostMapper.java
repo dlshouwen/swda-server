@@ -2,15 +2,15 @@ package com.dlshouwen.swda.bms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.dlshouwen.swda.bms.entity.OperationLog;
+import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * operation log mapper
+ * post mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysLogOperateDao extends BaseMapper<OperationLog> {
+public interface PostMapper extends BaseMapper<Post> {
 
 }

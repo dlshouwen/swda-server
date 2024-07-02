@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.utils.*;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.LoginLogConvert;
-import com.dlshouwen.swda.bms.mapper.SysLogLoginDao;
+import com.dlshouwen.swda.bms.mapper.LoginLogMapper;
 import com.dlshouwen.swda.bms.entity.LoginLog;
 import com.dlshouwen.swda.bms.query.SysLogLoginQuery;
 import com.dlshouwen.swda.bms.service.SysLogLoginService;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, LoginLog> implements SysLogLoginService {
+public class SysLogLoginServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLog> implements SysLogLoginService {
 	
 	/** trans service */
 	private final TransService transService;

@@ -14,7 +14,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysRoleDao extends BaseMapper<Role> {
+public interface RoleMapper extends BaseMapper<Role> {
 
 	/**
 	 * get data scope by user id

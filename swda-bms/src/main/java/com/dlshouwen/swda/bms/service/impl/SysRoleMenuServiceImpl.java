@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.mapper.SysRoleMenuDao;
+import com.dlshouwen.swda.bms.mapper.RolePermissionMapper;
 import com.dlshouwen.swda.bms.entity.RolePermission;
 import com.dlshouwen.swda.bms.service.SysRoleMenuService;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 @Service
-public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, RolePermission> implements SysRoleMenuService {
+public class SysRoleMenuServiceImpl extends BaseServiceImpl<RolePermissionMapper, RolePermission> implements SysRoleMenuService {
 
 	/**
 	 * save or update

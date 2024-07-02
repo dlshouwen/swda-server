@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.PostConvert;
-import com.dlshouwen.swda.bms.mapper.SysPostDao;
+import com.dlshouwen.swda.bms.mapper.PostMapper;
 import com.dlshouwen.swda.bms.entity.Post;
 import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.service.SysPostService;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysPostServiceImpl extends BaseServiceImpl<SysPostDao, Post> implements SysPostService {
+public class SysPostServiceImpl extends BaseServiceImpl<PostMapper, Post> implements SysPostService {
 	
 	/** user post service */
 	private final SysUserPostService sysUserPostService;

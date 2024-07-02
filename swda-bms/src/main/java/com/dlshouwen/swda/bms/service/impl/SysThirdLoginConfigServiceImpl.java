@@ -13,7 +13,7 @@ import com.dlshouwen.swda.core.query.Query;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.auth.enums.ThirdLoginEnum;
 import com.dlshouwen.swda.bms.convert.AuthPlatformConvert;
-import com.dlshouwen.swda.bms.mapper.SysThirdLoginConfigDao;
+import com.dlshouwen.swda.bms.mapper.AuthPlatformMapper;
 import com.dlshouwen.swda.bms.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.service.SysThirdLoginConfigService;
 import com.dlshouwen.swda.bms.vo.AuthPlatformVO;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<SysThirdLoginConfigDao, AuthPlatform> implements SysThirdLoginConfigService {
+public class SysThirdLoginConfigServiceImpl extends BaseServiceImpl<AuthPlatformMapper, AuthPlatform> implements SysThirdLoginConfigService {
 
 	/**
 	 * page

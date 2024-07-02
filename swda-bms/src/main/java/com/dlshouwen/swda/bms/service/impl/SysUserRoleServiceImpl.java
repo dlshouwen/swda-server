@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.mapper.SysUserRoleDao;
+import com.dlshouwen.swda.bms.mapper.UserRoleMapper;
 import com.dlshouwen.swda.bms.entity.UserRole;
 import com.dlshouwen.swda.bms.service.SysUserRoleService;
 import com.dlshouwen.swda.bms.service.SysUserTokenService;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, UserRole> implements SysUserRoleService {
+public class SysUserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRole> implements SysUserRoleService {
 	
 	/** user token service */
 	private final SysUserTokenService sysUserTokenService;

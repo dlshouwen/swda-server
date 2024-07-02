@@ -16,26 +16,26 @@ import java.util.Map;
  * @since 1.0.0
  */
 @Mapper
-public interface SysUserDao extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<User> {
 
 	/**
 	 * get user list
 	 * @param params
 	 * @return user list
 	 */
-	List<User> getList(Map<String, Object> params);
+	List<User> getUserList(Map<String, Object> params);
 
 	/**
 	 * get user by id
-	 * @param id
+	 * @param userId
 	 * @return user
 	 */
-	User getById(@Param("id") Long id);
+	User getUserById(@Param("userId") Long userId);
 
 	/**
 	 * get role user list
 	 * @param params
-	 * @return user
+	 * @return user list
 	 */
 	List<User> getRoleUserList(Map<String, Object> params);
 

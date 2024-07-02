@@ -3,8 +3,8 @@ package com.dlshouwen.swda.bms.service.impl;
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.auth.enums.DataScopeEnum;
-import com.dlshouwen.swda.bms.mapper.SysRoleDao;
-import com.dlshouwen.swda.bms.mapper.SysRoleDataScopeDao;
+import com.dlshouwen.swda.bms.mapper.RoleMapper;
+import com.dlshouwen.swda.bms.mapper.RoleOrganMapper;
 import com.dlshouwen.swda.bms.service.SysMenuService;
 import com.dlshouwen.swda.bms.service.SysOrgService;
 import com.dlshouwen.swda.bms.service.SysUserDetailsService;
@@ -34,10 +34,10 @@ public class SysUserDetailsServiceImpl implements SysUserDetailsService {
 	private final SysOrgService sysOrgService;
 	
 	/** role mapper */
-	private final SysRoleDao sysRoleDao;
+	private final RoleMapper sysRoleDao;
 	
 	/** role data scope mapper */
-	private final SysRoleDataScopeDao sysRoleDataScopeDao;
+	private final RoleOrganMapper sysRoleDataScopeDao;
 
 	/**
 	 * get user details

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dlshouwen.swda.bms.mapper.UserMapper">
+
+	<select id="getUserList" resultType="com.dlshouwen.swda.bms.entity.User">
+		select u.*
+		from bms_user u
+		where u.super_admin=0 and u.deleted=0
+		<if test="username != null and username.trim() != ''">
+			and u.user_code=#{username}
+		</if>
+		<if test="mobile != null and mobile.trim() != ''">
+			and u.mobile=#{mobile}
+		</if>
+		<if test="organList != null">
+			and u.organ_id in
+			<foreach collection="organList" item="organId" open="(" separator="," close=")">
+				#{organId}
+			</foreach>
+		</if>
+		<if test="gender != null">
+			and u.gender = #{gender}
+		</if>
+	</select>
+
+	<select id="getUserById" resultType="com.dlshouwen.swda.bms.entity.User">
+		select u.*, o.organ_name
+		from bms_user u
+		left join bms_organ o on u.organ_id=o.organ_id
+		where u.user_id=#{userId} and u.deleted=0
+	</select>
+
+	<select id="getRoleUserList" resultType="com.dlshouwen.swda.bms.entity.User">
+		select u.*
+		from bms_user u
+		left join bms_user_role ur on u.user_id=ur.user_id
+		where u.deleted=0 and ur.deleted=0 and ur.role_id=#{roleId}
+		<if test="username!=null and username.trim()!=''">
+			and u.user_code=#{username}
+		</if>
+		<if test="mobile!=null and mobile.trim()!=''">
+			and u.mobile=#{mobile}
+		</if>
+		<if test="gender!=null">
+			and u.gender=#{gender}
+		</if>
+	</select>
+
+</mapper>

@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.AttachmentConvert;
-import com.dlshouwen.swda.bms.mapper.SysAttachmentDao;
+import com.dlshouwen.swda.bms.mapper.AttachmentMapper;
 import com.dlshouwen.swda.bms.entity.Attachment;
 import com.dlshouwen.swda.bms.query.SysAttachmentQuery;
 import com.dlshouwen.swda.bms.service.SysAttachmentService;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, Attachment> implements SysAttachmentService {
+public class SysAttachmentServiceImpl extends BaseServiceImpl<AttachmentMapper, Attachment> implements SysAttachmentService {
 
 	/**
 	 * page

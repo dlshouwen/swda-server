@@ -15,22 +15,22 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysUserTokenDao extends BaseMapper<UserToken> {
+public interface UserTokenMapper extends BaseMapper<UserToken> {
 
 	/**
 	 * get online access token list by role id
 	 * @param roleId
-	 * @param time
+	 * @param expireTime
 	 * @return token list
 	 */
-	List<String> getOnlineAccessTokenListByRoleId(@Param("roleId") Long roleId, @Param("time") LocalDateTime time);
+	List<String> getOnlineAccessTokenListByRoleId(@Param("roleId") Long roleId, @Param("expireTime") LocalDateTime expireTime);
 
 	/**
 	 * get online access token list by user id
 	 * @param userId
-	 * @param time
+	 * @param expireTime
 	 * @return token list
 	 */
-	List<String> getOnlineAccessTokenListByUserId(@Param("userId") Long userId, @Param("time") LocalDateTime time);
+	List<String> getOnlineAccessTokenListByUserId(@Param("userId") Long userId, @Param("expireTime") LocalDateTime expireTime);
 
 }

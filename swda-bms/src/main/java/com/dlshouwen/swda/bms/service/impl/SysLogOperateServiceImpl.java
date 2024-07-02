@@ -15,7 +15,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.entity.log.OperationLog;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.OperationLogConvert;
-import com.dlshouwen.swda.bms.mapper.SysLogOperateDao;
+import com.dlshouwen.swda.bms.mapper.OperationLogMapper;
 import com.dlshouwen.swda.bms.entity.OperationLog;
 import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
 import com.dlshouwen.swda.bms.service.SysLogOperateService;
@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @AllArgsConstructor
-public class SysLogOperateServiceImpl extends BaseServiceImpl<SysLogOperateDao, OperationLog> implements SysLogOperateService {
+public class SysLogOperateServiceImpl extends BaseServiceImpl<OperationLogMapper, OperationLog> implements SysLogOperateService {
 	
 	/** redis cache */
 	private final RedisCache redisCache;

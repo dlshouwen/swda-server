@@ -9,27 +9,27 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * menu mapper
+ * permission mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysMenuDao extends BaseMapper<Permission> {
+public interface PermissionMapper extends BaseMapper<Permission> {
 
 	/**
-	 * get menu list
-	 * @param type
-	 * @return menu list
+	 * get permission list
+	 * @param permissionType
+	 * @return permission list
 	 */
-	List<Permission> getMenuList(@Param("type") Integer type);
+	List<Permission> getPermissionList(@Param("permissionType") Integer permissionType);
 
 	/**
-	 * get user menu list
+	 * get user permission list
 	 * @param userId
-	 * @param type
-	 * @return menu list
+	 * @param permissionType
+	 * @return permission list
 	 */
-	List<Permission> getUserMenuList(@Param("userId") Long userId, @Param("type") Integer type);
+	List<Permission> getUserPermissionList(@Param("userId") Long userId, @Param("permissionType") Integer permissionType);
 
 	/**
 	 * user authority list

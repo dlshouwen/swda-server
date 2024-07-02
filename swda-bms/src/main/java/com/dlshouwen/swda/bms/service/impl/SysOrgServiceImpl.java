@@ -8,8 +8,8 @@ import com.dlshouwen.swda.core.constant.Constant;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.OrganConvert;
-import com.dlshouwen.swda.bms.mapper.SysOrgDao;
-import com.dlshouwen.swda.bms.mapper.SysUserDao;
+import com.dlshouwen.swda.bms.mapper.OrganMapper;
+import com.dlshouwen.swda.bms.mapper.UserMapper;
 import com.dlshouwen.swda.bms.entity.Organ;
 import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.service.SysOrgService;
@@ -29,10 +29,10 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgDao, Organ> implements SysOrgService {
+public class SysOrgServiceImpl extends BaseServiceImpl<OrganMapper, Organ> implements SysOrgService {
 	
 	/** user mapper */
-	private final SysUserDao sysUserDao;
+	private final UserMapper sysUserDao;
 
 	/**
 	 * get list

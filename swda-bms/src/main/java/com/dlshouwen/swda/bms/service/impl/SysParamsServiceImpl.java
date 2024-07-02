@@ -11,7 +11,7 @@ import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.cache.AttrCache;
 import com.dlshouwen.swda.bms.convert.AttrConvert;
-import com.dlshouwen.swda.bms.mapper.SysParamsDao;
+import com.dlshouwen.swda.bms.mapper.AttrMapper;
 import com.dlshouwen.swda.bms.entity.Attr;
 import com.dlshouwen.swda.bms.query.SysParamsQuery;
 import com.dlshouwen.swda.bms.service.SysParamsService;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, Attr> implements SysParamsService {
+public class SysParamsServiceImpl extends BaseServiceImpl<AttrMapper, Attr> implements SysParamsService {
 	
 	/** params cache */
 	private final AttrCache sysParamsCache;

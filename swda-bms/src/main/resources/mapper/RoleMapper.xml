@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dlshouwen.swda.bms.mapper.RoleMapper">
+
+	<select id="getDataScopeByUserId" resultType="integer">
+		select min(r.data_scope)
+		from bms_user_role ur
+		left join bms_role r on ur.role_id=r.role_id
+		where ur.user_id=#{userId} and ur.deleted=0 and r.deleted=0
+	</select>
+
+	<select id="geRoleCodeByUserId" resultType="string">
+		select r.role_code
+		from bms_user_role ur
+		left join bms_role r on ur.role_id=r.role_id
+		where ur.user_id=#{userId} and ur.deleted=0 and r.deleted=0
+	</select>
+
+</mapper>

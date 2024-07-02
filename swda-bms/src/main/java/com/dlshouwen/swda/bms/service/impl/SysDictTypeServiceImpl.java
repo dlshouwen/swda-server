@@ -13,8 +13,8 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.DictCategoryConvert;
-import com.dlshouwen.swda.bms.mapper.SysDictDataDao;
-import com.dlshouwen.swda.bms.mapper.SysDictTypeDao;
+import com.dlshouwen.swda.bms.mapper.DictMapper;
+import com.dlshouwen.swda.bms.mapper.DictCategoryMapper;
 import com.dlshouwen.swda.bms.entity.Dict;
 import com.dlshouwen.swda.bms.entity.DictCategory;
 import com.dlshouwen.swda.bms.enums.DictSourceEnum;
@@ -39,10 +39,10 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, DictCategory> implements SysDictTypeService, InitializingBean {
+public class SysDictTypeServiceImpl extends BaseServiceImpl<DictCategoryMapper, DictCategory> implements SysDictTypeService, InitializingBean {
 	
 	/** dict mapper */
-	private final SysDictDataDao sysDictDataDao;
+	private final DictMapper sysDictDataDao;
 	
 	/** dict trans service */
 	private final DictionaryTransService dictionaryTransService;

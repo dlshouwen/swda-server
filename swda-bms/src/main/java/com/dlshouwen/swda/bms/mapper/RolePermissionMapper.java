@@ -9,18 +9,18 @@ import com.dlshouwen.swda.core.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * role menu mapper
+ * role permission mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysRoleMenuDao extends BaseMapper<RolePermission> {
+public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
 	/**
-	 * get menu id list
+	 * get permission id list
 	 * @param roleId
-	 * @return menu id list
+	 * @return permission id list
 	 */
-	List<Long> getMenuIdList(@Param("roleId") Long roleId);
+	List<Long> getPermissionIdList(@Param("roleId") Long roleId);
 
 }

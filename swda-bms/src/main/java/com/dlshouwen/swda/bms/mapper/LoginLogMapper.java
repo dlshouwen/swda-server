@@ -2,15 +2,15 @@ package com.dlshouwen.swda.bms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.dlshouwen.swda.bms.entity.Auth;
+import com.dlshouwen.swda.bms.entity.LoginLog;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * third login mapper
+ * login log mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Mapper
-public interface SysThirdLoginDao extends BaseMapper<Auth> {
+public interface LoginLogMapper extends BaseMapper<LoginLog> {
 
 }

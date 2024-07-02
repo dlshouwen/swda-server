@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.mapper.SysRoleDataScopeDao;
+import com.dlshouwen.swda.bms.mapper.RoleOrganMapper;
 import com.dlshouwen.swda.bms.entity.RoleOrgan;
 import com.dlshouwen.swda.bms.service.SysRoleDataScopeService;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 @Service
-public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<SysRoleDataScopeDao, RoleOrgan> implements SysRoleDataScopeService {
+public class SysRoleDataScopeServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleOrgan> implements SysRoleDataScopeService {
 
 	/**
 	 * save or update

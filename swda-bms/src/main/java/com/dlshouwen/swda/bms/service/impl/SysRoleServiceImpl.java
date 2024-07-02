@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.auth.enums.DataScopeEnum;
 import com.dlshouwen.swda.bms.convert.RoleConvert;
-import com.dlshouwen.swda.bms.mapper.SysRoleDao;
+import com.dlshouwen.swda.bms.mapper.RoleMapper;
 import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.service.*;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, Role> implements SysRoleService {
+public class SysRoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implements SysRoleService {
 	
 	/** role menu service */
 	private final SysRoleMenuService sysRoleMenuService;

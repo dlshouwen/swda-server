@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.PermissionConvert;
-import com.dlshouwen.swda.bms.mapper.SysMenuDao;
+import com.dlshouwen.swda.bms.mapper.PermissionMapper;
 import com.dlshouwen.swda.bms.entity.Permission;
 import com.dlshouwen.swda.bms.service.SysMenuService;
 import com.dlshouwen.swda.bms.service.SysRoleMenuService;
@@ -29,7 +29,7 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, Permission> implements SysMenuService {
+public class SysMenuServiceImpl extends BaseServiceImpl<PermissionMapper, Permission> implements SysMenuService {
 	
 	/** role menu service */
 	private final SysRoleMenuService sysRoleMenuService;

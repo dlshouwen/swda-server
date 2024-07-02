@@ -14,8 +14,8 @@ import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.utils.TokenUtils;
 import com.dlshouwen.swda.bms.convert.UserConvert;
 import com.dlshouwen.swda.bms.convert.UserTokenConvert;
-import com.dlshouwen.swda.bms.mapper.SysUserDao;
-import com.dlshouwen.swda.bms.mapper.SysUserTokenDao;
+import com.dlshouwen.swda.bms.mapper.UserMapper;
+import com.dlshouwen.swda.bms.mapper.UserTokenMapper;
 import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.entity.UserToken;
 import com.dlshouwen.swda.bms.service.SysUserDetailsService;
@@ -36,7 +36,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, UserToken> implements SysUserTokenService {
+public class SysUserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserToken> implements SysUserTokenService {
 	
 	/** token store cache */
 	private final TokenCache tokenStoreCache;
@@ -48,7 +48,7 @@ public class SysUserTokenServiceImpl extends BaseServiceImpl<SysUserTokenDao, Us
 	private final TokenProperties securityProperties;
 	
 	/** user mapper */
-	private final SysUserDao sysUserDao;
+	private final UserMapper sysUserDao;
 
 	/**
 	 * create token

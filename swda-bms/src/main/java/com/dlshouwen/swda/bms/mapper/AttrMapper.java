@@ -12,24 +12,24 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 1.0.0
  */
 @Mapper
-public interface SysParamsDao extends BaseMapper<Attr> {
+public interface AttrMapper extends BaseMapper<Attr> {
 
 	/**
 	 * is exist
-	 * @param paramKey
+	 * @param attrId
 	 * @return is exist
 	 */
-	default boolean isExist(String paramKey) {
-		return this.exists(new QueryWrapper<Attr>().eq("param_key", paramKey));
+	default boolean isExist(String attrId) {
+		return this.exists(new QueryWrapper<Attr>().eq("attr_id", attrId));
 	}
 
 	/**
 	 * get
-	 * @param paramKey
+	 * @param attrId
 	 * @return params
 	 */
-	default Attr get(String paramKey) {
-		return this.selectOne(new QueryWrapper<Attr>().eq("param_key", paramKey));
+	default Attr get(String attrId) {
+		return this.selectOne(new QueryWrapper<Attr>().eq("attrId", attrId));
 	}
 
 }

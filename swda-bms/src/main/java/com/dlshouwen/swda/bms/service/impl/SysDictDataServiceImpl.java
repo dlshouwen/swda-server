@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.entity.base.PageResult;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.DictConvert;
-import com.dlshouwen.swda.bms.mapper.SysDictDataDao;
+import com.dlshouwen.swda.bms.mapper.DictMapper;
 import com.dlshouwen.swda.bms.entity.Dict;
 import com.dlshouwen.swda.bms.query.SysDictDataQuery;
 import com.dlshouwen.swda.bms.service.SysDictDataService;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, Dict> implements SysDictDataService {
+public class SysDictDataServiceImpl extends BaseServiceImpl<DictMapper, Dict> implements SysDictDataService {
 
 	/**
 	 * page

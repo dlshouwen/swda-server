@@ -14,14 +14,14 @@ import java.util.List;
  * @since 1.0.0
  */
 @Mapper
-public interface SysRoleDataScopeDao extends BaseMapper<RoleOrgan> {
+public interface RoleOrganMapper extends BaseMapper<RoleOrgan> {
 
 	/**
 	 * get organ id list
 	 * @param roleId
 	 * @return organ id list
 	 */
-	List<Long> getOrgIdList(@Param("roleId") Long roleId);
+	List<Long> getOrganIdList(@Param("roleId") Long roleId);
 
 	/**
 	 * get data scope list

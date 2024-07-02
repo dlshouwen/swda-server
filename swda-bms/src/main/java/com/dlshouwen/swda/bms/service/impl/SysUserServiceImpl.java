@@ -17,7 +17,7 @@ import com.dlshouwen.swda.core.excel.ExcelFinishCallBack;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.UserConvert;
-import com.dlshouwen.swda.bms.mapper.SysUserDao;
+import com.dlshouwen.swda.bms.mapper.UserMapper;
 import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
 import com.dlshouwen.swda.bms.query.SysUserQuery;
@@ -42,7 +42,7 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, User> implements SysUserService {
+public class SysUserServiceImpl extends BaseServiceImpl<UserMapper, User> implements SysUserService {
 	
 	/** user role service */
 	private final SysUserRoleService sysUserRoleService;

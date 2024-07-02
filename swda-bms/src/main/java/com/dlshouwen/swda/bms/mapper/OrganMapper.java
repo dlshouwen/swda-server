@@ -14,14 +14,14 @@ import java.util.Map;
  * @since 1.0.0
  */
 @Mapper
-public interface SysOrgDao extends BaseMapper<Organ> {
+public interface OrganMapper extends BaseMapper<Organ> {
 
 	/**
-	 * get list
+	 * get organ list
 	 * @param params
 	 * @return organ list
 	 */
-	List<Organ> getList(Map<String, Object> params);
+	List<Organ> getOrganList(Map<String, Object> params);
 
 	/**
 	 * get id and pid list
