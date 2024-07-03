@@ -20,26 +20,35 @@ public class AuthVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "id")
-	private Long id;
+	@Schema(description = "auth id")
+	private Long authId;
+	
+	@Schema(description = "auth platform id")
+	private Long authPlatformId;
+	
+	@Schema(description = "auth platform code")
+	private String authPlatformCode;
+	
+	@Schema(description = "auth platform name")
+	private String authPlatformName;
 
-	@Schema(description = "open type")
-	private String openType;
-
-	@Schema(description = "open id")
-	private String openId;
-
-	@Schema(description = "username")
-	private String username;
+	@Schema(description = "auth platform type")
+	private Integer authPlatformType;
+	
+	@Schema(description = "auth platform uuid")
+	private String authPlatformUuid;
 
 	@Schema(description = "user id")
 	private Long userId;
 
+	@Schema(description = "user name")
+	private String userName;
+
 	@Schema(description = "tenant id")
 	private Long tenantId;
-
-	@Schema(description = "create time")
+	
+	@Schema(description = "auth time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private LocalDateTime createTime;
+	private LocalDateTime authTime;
 
 }

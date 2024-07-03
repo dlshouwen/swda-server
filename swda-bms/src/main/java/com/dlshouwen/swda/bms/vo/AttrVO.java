@@ -22,7 +22,7 @@ public class AttrVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "attr id")
-	private Long attrId;
+	private String attrId;
 
 	@Schema(description = "attr name")
 	private String attrName;

@@ -6,7 +6,7 @@ import com.dlshouwen.swda.bms.entity.Auth;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**
- * third login mapper
+ * auth mapper
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */

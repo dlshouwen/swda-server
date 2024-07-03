@@ -21,6 +21,8 @@ public class AuthPlatform {
 	
 	private String authPlatformName;
 	
+	private Integer authPlatformType;
+	
 	private String clientId;
 	
 	private String clientSecret;

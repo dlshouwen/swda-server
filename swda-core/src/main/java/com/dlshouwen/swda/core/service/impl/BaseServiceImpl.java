@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dlshouwen.swda.core.entity.auth.SecurityUser;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.entity.base.DataScope;
-import com.dlshouwen.swda.core.query.Query;
 import com.dlshouwen.swda.core.dict.ZeroOne;
 import com.dlshouwen.swda.core.service.BaseService;
 
@@ -33,27 +32,6 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
 		if (dataScope != null) {
 			queryWrapper.apply(dataScope.getSqlFilter());
 		}
-	}
-
-	/**
-	 * get pager
-	 * @param query
-	 * @return
-	 */
-	protected IPage<T> getPage(Query query) {
-//		create page
-		Page<T> page = new Page<>(query.getPage(), query.getLimit());
-//		if has order
-		if (StringUtils.isNotBlank(query.getOrder())) {
-//			set order
-			if (query.isAsc()) {
-				return page.addOrder(OrderItem.asc(query.getOrder()));
-			} else {
-				return page.addOrder(OrderItem.desc(query.getOrder()));
-			}
-		}
-//		return page
-		return page;
 	}
 
 	/**

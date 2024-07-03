@@ -23,7 +23,13 @@ public class Auth {
 	
 	private String authPlatformName;
 	
-	private String nickName;
+	private Integer authPlatformType;
+	
+	private String authPlatformUuid;
+	
+	private Long userId;
+	
+	private String userName;
 
 	private Long tenantId;
 	

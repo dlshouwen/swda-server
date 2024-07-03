@@ -26,6 +26,13 @@ public interface AttrConvert {
 	Attr convert(AttrVO vo);
 
 	/**
+	 * convert list
+	 * @param attrList
+	 * @return attr vo list
+	 */
+	List<Attr> convertList(List<AttrVO> list);
+
+	/**
 	 * convert to vo
 	 * @param attr
 	 * @return attr vo

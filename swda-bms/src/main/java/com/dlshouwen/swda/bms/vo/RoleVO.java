@@ -39,8 +39,8 @@ public class RoleVO implements Serializable {
 	@Schema(description = "data scope")
 	private Integer dataScope;
 
-	@Schema(description = "menu id list")
-	private List<Long> menuIdList;
+	@Schema(description = "permission id list")
+	private List<Long> permissionIdList;
 
 	@Schema(description = "organ id list")
 	private List<Long> organIdList;
