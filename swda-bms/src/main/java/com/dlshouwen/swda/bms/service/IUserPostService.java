@@ -20,16 +20,16 @@ public interface IUserPostService extends BaseService<UserPost> {
 	void saveOrUpdate(Long userId, List<Long> postIdList);
 
 	/**
-	 * delete by post id list
+	 * delete user post by post id list
 	 * @param postIdList
 	 */
-	void deleteByPostIdList(List<Long> postIdList);
+	void deleteUserPostByPostIdList(List<Long> postIdList);
 
 	/**
-	 * delete by user id list
+	 * delete user post by user id list
 	 * @param userIdList
 	 */
-	void deleteByUserIdList(List<Long> userIdList);
+	void deleteUserPostByUserIdList(List<Long> userIdList);
 
 	/**
 	 * get post id list

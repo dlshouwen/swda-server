@@ -2,22 +2,19 @@ package com.dlshouwen.swda.bms.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.utils.ExceptionUtils;
+import com.dlshouwen.swda.core.utils.GridUtils;
 import com.dlshouwen.swda.core.cache.RedisCache;
 import com.dlshouwen.swda.core.constant.Constant;
-import com.dlshouwen.swda.core.entity.base.PageResult;
-import com.dlshouwen.swda.core.entity.log.OperationLog;
+import com.dlshouwen.swda.core.entity.grid.PageResult;
+import com.dlshouwen.swda.core.entity.grid.Query;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.OperationLogConvert;
-import com.dlshouwen.swda.bms.mapper.OperationLogMapper;
 import com.dlshouwen.swda.bms.entity.OperationLog;
-import com.dlshouwen.swda.bms.query.SysLogOperateQuery;
+import com.dlshouwen.swda.bms.mapper.OperationLogMapper;
 import com.dlshouwen.swda.bms.service.IOperationLogService;
 import com.dlshouwen.swda.bms.vo.OperationLogVO;
 import org.springframework.stereotype.Service;
@@ -38,41 +35,23 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper,
 	private final RedisCache redisCache;
 
 	/**
-	 * page
+	 * get operation log list
 	 * @param query
-	 * @return page result
+	 * @return operation log list
 	 */
 	@Override
-	public PageResult<OperationLogVO> page(SysLogOperateQuery query) {
-//		select page
-		IPage<OperationLog> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-//		return page result
-		return new PageResult<>(OperationLogConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
-	}
-
-	/**
-	 * get wrapper
-	 * @param query
-	 * @return wrapper
-	 */
-	private LambdaQueryWrapper<OperationLog> getWrapper(SysLogOperateQuery query) {
-//		defined wrapper
-		LambdaQueryWrapper<OperationLog> wrapper = Wrappers.lambdaQuery();
-//		set condition
-		wrapper.eq(query.getStatus() != null, OperationLog::getStatus, query.getStatus());
-		wrapper.like(StrUtil.isNotBlank(query.getRealName()), OperationLog::getRealName, query.getRealName());
-		wrapper.like(StrUtil.isNotBlank(query.getModule()), OperationLog::getModule, query.getModule());
-		wrapper.like(StrUtil.isNotBlank(query.getReqUri()), OperationLog::getReqUri, query.getReqUri());
-		wrapper.orderByDesc(OperationLog::getId);
-//		return wrapper
-		return wrapper;
+	public PageResult<OperationLogVO> getOperationLogList(Query<OperationLog> query) {
+//		query page
+		IPage<OperationLog> page = GridUtils.query(baseMapper, query);
+//		convert to vo for return
+		return new PageResult<>(OperationLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
 
 	/**
 	 * save log
 	 */
 	@PostConstruct
-	public void saveLog() {
+	public void saveOperationLog() {
 //		create schedule executor
 		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
 //		delay
@@ -88,9 +67,9 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper,
 						return;
 					}
 //					convert to operation log
-					OperationLog entity = BeanUtil.copyProperties(log, OperationLog.class);
+					OperationLog operationLog = BeanUtil.copyProperties(log, OperationLog.class);
 //					insert
-					baseMapper.insert(entity);
+					baseMapper.insert(operationLog);
 				}
 			} catch (Exception e) {
 //				log error

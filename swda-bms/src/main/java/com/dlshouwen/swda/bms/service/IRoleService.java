@@ -53,7 +53,7 @@ public interface IRoleService extends BaseService<Role> {
 	 * set role data scope
 	 * @param roleDataScopeVO
 	 */
-	void setRoleDataScope(RoleDataScopeVO vo);
+	void setRoleDataScope(RoleDataScopeVO roleDataScopeVO);
 
 	/**
 	 * delete role

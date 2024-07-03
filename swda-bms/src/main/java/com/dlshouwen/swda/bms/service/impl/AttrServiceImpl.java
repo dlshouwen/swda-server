@@ -49,5 +49,18 @@ public class AttrServiceImpl extends BaseServiceImpl<AttrMapper, Attr> implement
 			attrCache.save(attr.getAttrId(), attr.getContent());
 		}
 	}
+	
+	/**
+	 * get value
+	 * @param attrId
+	 * @return value
+	 */
+	@Override
+	public String getValue(String attrId) {
+//		get attr
+		Attr attr = this.getById(attrId);
+//		return content
+		return attr.getContent();
+	}
 
 }

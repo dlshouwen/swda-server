@@ -30,6 +30,9 @@ public class OrganVO extends TreeNode<OrganVO> {
 	@Schema(description = "pre organ id")
 	private Long preOrganId;
 	
+	@Schema(description = "pre organ name")
+	private String preOrganName;
+	
 	@Schema(description = "organ code")
 	private String organCode;
 	

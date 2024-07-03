@@ -24,7 +24,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 /**
- * auth service impl
+ * login service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -33,22 +33,22 @@ import org.springframework.stereotype.Service;
 public class LoginServiceImpl implements ILoginService {
 	
 	/** captcha service */
-	private final ICaptchaService sysCaptchaService;
+	private final ICaptchaService captchaService;
 	
 	/** token store cache */
-	private final TokenCache tokenStoreCache;
+	private final TokenCache tokenCache;
 	
 	/** authentication manager */
 	private final AuthenticationManager authenticationManager;
 	
 	/** login log service */
-	private final ILoginLogService sysLogLoginService;
+	private final ILoginLogService loginLogService;
 	
 	/** user service */
-	private final IUserService sysUserService;
+	private final IUserService userService;
 	
 	/** user token service */
-	private final IUserTokenService sysUserTokenService;
+	private final IUserTokenService userTokenService;
 	
 	/** sms api */
 	private final SmsApi smsApi;
@@ -61,11 +61,12 @@ public class LoginServiceImpl implements ILoginService {
 	@Override
 	public UserTokenVO loginByAccount(UserLoginVO login) {
 //		validate captcha
-		boolean flag = sysCaptchaService.validate(login.getKey(), login.getCaptcha());
+		boolean valid = captchaService.validate(login.getKey(), login.getCaptcha());
 //		if error
-		if (!flag) {
+		if (!valid) {
+//			TODO SAVE LOGIN LOG
 //			save login log
-			sysLogLoginService.save(login.getUsername(), CallResult.FAILURE, LoginOperationEnum.CAPTCHA_FAIL.getValue());
+//			loginLogService.saveLoginLog(login.getUsername(), CallResult.FAILURE, LoginOperationEnum.CAPTCHA_FAIL.getValue());
 //			throw exception
 			throw new SwdaException("验证码错误");
 		}
@@ -82,9 +83,9 @@ public class LoginServiceImpl implements ILoginService {
 //		get principal
 		UserDetail user = (UserDetail) authentication.getPrincipal();
 //		create token
-		UserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		UserTokenVO userTokenVO = userTokenService.createToken(user.getUserId());
 //		save user
-		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
+		tokenCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
 		return userTokenVO;
 	}
@@ -109,9 +110,9 @@ public class LoginServiceImpl implements ILoginService {
 //		get principal
 		UserDetail user = (UserDetail) authentication.getPrincipal();
 //		create token
-		UserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		UserTokenVO userTokenVO = userTokenService.createToken(user.getUserId());
 //		save user
-		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
+		tokenCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
 		return userTokenVO;
 	}
@@ -137,9 +138,9 @@ public class LoginServiceImpl implements ILoginService {
 //		get principal
 		UserDetail user = (UserDetail) authentication.getPrincipal();
 //		create token
-		UserTokenVO userTokenVO = sysUserTokenService.createToken(user.getUserId());
+		UserTokenVO userTokenVO = userTokenService.createToken(user.getUserId());
 //		save user
-		tokenStoreCache.saveUser(userTokenVO.getAccessToken(), user);
+		tokenCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
 		return userTokenVO;
 	}
@@ -154,7 +155,7 @@ public class LoginServiceImpl implements ILoginService {
 //		generate code
 		String code = RandomUtil.randomNumbers(6);
 //		get user
-		UserVO user = sysUserService.getByMobile(mobile);
+		UserVO user = userService.getUserByMobile(mobile);
 //		if user is empty
 		if (user == null) {
 //			throw exception
@@ -172,7 +173,7 @@ public class LoginServiceImpl implements ILoginService {
 	@Override
 	public AccessTokenVO getAccessToken(String refreshToken) {
 //		get user token
-		UserTokenVO token = sysUserTokenService.refreshToken(refreshToken);
+		UserTokenVO token = userTokenService.refreshToken(refreshToken);
 //		create access token
 		AccessTokenVO accessToken = new AccessTokenVO();
 //		set access token, access token expire
@@ -189,13 +190,13 @@ public class LoginServiceImpl implements ILoginService {
 	@Override
 	public void logout(String accessToken) {
 //		get user
-		UserDetail user = tokenStoreCache.getUser(accessToken);
+		UserDetail user = tokenCache.getUser(accessToken);
 //		delete user
-		tokenStoreCache.deleteUser(accessToken);
+		tokenCache.deleteUser(accessToken);
 //		expire token
-		sysUserTokenService.expireToken(user.getUserId());
+		userTokenService.expireToken(user.getUserId());
 //		save login log
-		sysLogLoginService.save(user.getUsername(), CallResult.SUCCESS, LoginOperationEnum.LOGOUT_SUCCESS.getValue());
+		loginLogService.saveLoginLog(user.getUsername(), CallResult.SUCCESS, LoginOperationEnum.LOGOUT_SUCCESS.getValue());
 	}
 
 }

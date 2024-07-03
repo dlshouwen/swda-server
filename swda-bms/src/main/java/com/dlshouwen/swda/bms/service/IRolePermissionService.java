@@ -30,12 +30,12 @@ public interface IRolePermissionService extends BaseService<RolePermission> {
 	 * delete by role id list
 	 * @param roleIdList
 	 */
-	void deleteByRoleIdList(List<Long> roleIdList);
+	void deleteRolePermissionByRoleIdList(List<Long> roleIdList);
 
 	/**
 	 * delete by menu id
 	 * @param menuId
 	 */
-	void deleteByMenuId(Long menuId);
+	void deleteRolePermissionByPermissionId(Long menuId);
 
 }

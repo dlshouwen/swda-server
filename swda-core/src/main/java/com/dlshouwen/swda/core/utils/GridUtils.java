@@ -1,18 +1,13 @@
 package com.dlshouwen.swda.core.utils;
 
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.URLEncoder;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -22,18 +17,13 @@ import com.dlshouwen.swda.core.dict.SortLogic;
 import com.dlshouwen.swda.core.entity.grid.Condition;
 import com.dlshouwen.swda.core.entity.grid.Query;
 import com.dlshouwen.swda.core.entity.grid.Sort;
+import com.dlshouwen.swda.core.handler.ClassRowMapper;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 /**
- * <p>
- * 表格工具类
- * </p>
- * 
- * @author 大连首闻科技有限公司
- * @since 0.0.1-SNAPSHOT
+ * grid utils
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 public class GridUtils {
 	
@@ -222,55 +212,52 @@ public class GridUtils {
 	}
 
 	/**
-	 * <p>
-	 * 查询
-	 * </p>
-	 * 
-	 * @param _class   类对象
-	 * @param pager    分页对象
-	 * @param template 数据源
-	 * @param sql      查询SQL
-	 * @param args     其他参数
-	 * @param <T>      泛型对象
+	 * query
+	 * @param _class
+	 * @param pager
+	 * @param template
+	 * @param sql
+	 * @param args
+	 * @param <T>
 	 */
-	public static <T> void query(Class _class, Pager<T> pager, JdbcTemplate template, String sql, Object... args) {
-		// 如果查询器未创建则创建新的查询器
-		if (pager.getQueryWrapper() == null)
-			pager.setQueryWrapper(new QueryWrapper<>());
-		// 构建查询器
-		pager.constructQueryWrapper();
-		// 封装执行SQL
-		String executeSQL = "select * from (" + sql + ") _swda_query_table_alisa_ where "
-				+ pager.getQueryWrapper().getTargetSql();
-		// 处理执行参数
+	@SuppressWarnings("unchecked")
+	public static <T> IPage<T> query(Class<T> _class, Query<T> query, JdbcTemplate template, String sql, Object... args) {
+//		construct query wrapper
+		QueryWrapper<T> wrapper = constructQueryWrapper(query);
+//		set execute sql
+		String executeSQL = "select * from (" + sql + ") _swda_query_table_alisa_ where "+wrapper.getTargetSql();
+//		defined execute args
 		List<Object> executeArgs = new ArrayList<>();
+//		add args
 		for (Object arg : args) {
 			executeArgs.add(arg);
 		}
-		for (String key : pager.getQueryWrapper().getParamNameValuePairs().keySet()) {
-			executeArgs.add(pager.getQueryWrapper().getParamNameValuePairs().get(key));
+//		add wrapper args
+		for (String key : wrapper.getParamNameValuePairs().keySet()) {
+			executeArgs.add(wrapper.getParamNameValuePairs().get(key));
 		}
-		// 统计数据并设置到对象中
+//		count sql
 		String countSQL = "select count(*) from (" + executeSQL + ") _swda_query_count_table_alisa_ ";
-		int total = template.queryForObject(countSQL, Integer.class, executeArgs.toArray());
-		pager.getPage().setTotal(total);
-		// 处理分页及参数
+//		get total
+		Long total = template.queryForObject(countSQL, Long.class, executeArgs.toArray());
+//		set total
+		query.getPage().setTotal(total);
+//		set limit
 		executeSQL += " limit ?, ?";
-		executeArgs.add(pager.getPage().getCurrent());
-		executeArgs.add(pager.getPage().getSize());
-		// 设置页码参数
-		pager.getPage().setPages((total + pager.getPage().getSize() - 1) / pager.getPage().getSize());
-		// 查询数据并写入到分页对象中
+		executeArgs.add(query.getPage().getCurrent());
+		executeArgs.add(query.getPage().getSize());
+//		set pages
+		query.getPage().setPages((total + query.getPage().getSize() - 1) / query.getPage().getSize());
+//		get record
 		if (_class == Map.class) {
 			List<Map<String, Object>> records = template.queryForList(executeSQL, executeArgs.toArray());
-			pager.getPage().setRecords((List<T>) records);
+			query.getPage().setRecords((List<T>) records);
 		} else {
 			List<T> records = template.query(executeSQL, new ClassRowMapper<T>(_class), executeArgs.toArray());
-			pager.getPage().setRecords(records);
+			query.getPage().setRecords(records);
 		}
-		// 设置上一页下一页
-		pager.setHasPrevious(pager.getPage().hasPrevious());
-		pager.setHasNext(pager.getPage().hasPrevious());
+//		return page
+		return query.getPage();
 	}
 
 }

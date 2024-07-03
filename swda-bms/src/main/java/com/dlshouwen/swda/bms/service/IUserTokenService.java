@@ -35,12 +35,12 @@ public interface IUserTokenService extends BaseService<UserToken> {
 	 * update cache auth by role id
 	 * @param roleId
 	 */
-	void updateCacheAuthByRoleId(Long roleId);
+	void updateUserCacheByRoleId(Long roleId);
 
 	/**
 	 * update cache auth by user id
 	 * @param userId
 	 */
-	void updateCacheAuthByUserId(Long userId);
+	void updateUserCacheByUserId(Long userId);
 
 }

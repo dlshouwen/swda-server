@@ -125,15 +125,15 @@ public class DictCategoryController {
 	}
 
 	/**
-	 * refresh trans cache
+	 * refresh dict trans cache
 	 * @return result
 	 */
 	@GetMapping("/cache/refresh")
-	@Operation(name = "refresh trans cache")
+	@Operation(name = "refresh dict trans cache")
 	@PreAuthorize("hasAuthority('sys:dict_category:cache:refresh')")
-	public R<String> refreshTransCache() {
-//		refresh trans cache
-		dictCategoryService.refreshTransCache();
+	public R<String> refreshDictTransCache() {
+//		refresh dict trans cache
+		dictCategoryService.refreshDictTransCache();
 //		result
 		return R.ok();
 	}

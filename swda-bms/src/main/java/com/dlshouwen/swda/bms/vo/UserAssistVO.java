@@ -20,6 +20,8 @@ public class UserAssistVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 	
+	private Long userId;
+	
 	@Schema(description = "user name")
 	@NotBlank(message = "姓名不能为空")
 	private String userName;

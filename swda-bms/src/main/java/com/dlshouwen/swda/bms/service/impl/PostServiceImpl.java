@@ -1,17 +1,15 @@
 package com.dlshouwen.swda.bms.service.impl;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.entity.base.PageResult;
+import com.dlshouwen.swda.core.entity.grid.PageResult;
+import com.dlshouwen.swda.core.entity.grid.Query;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
+import com.dlshouwen.swda.core.utils.GridUtils;
 import com.dlshouwen.swda.bms.convert.PostConvert;
 import com.dlshouwen.swda.bms.mapper.PostMapper;
 import com.dlshouwen.swda.bms.entity.Post;
-import com.dlshouwen.swda.bms.query.SysPostQuery;
 import com.dlshouwen.swda.bms.service.IPostService;
 import com.dlshouwen.swda.bms.service.IUserPostService;
 import com.dlshouwen.swda.bms.vo.PostVO;
@@ -30,19 +28,19 @@ import java.util.List;
 public class PostServiceImpl extends BaseServiceImpl<PostMapper, Post> implements IPostService {
 	
 	/** user post service */
-	private final IUserPostService sysUserPostService;
+	private final IUserPostService userPostService;
 
 	/**
-	 * page
+	 * get post list
 	 * @param query
-	 * @return page result
+	 * @return post list
 	 */
 	@Override
-	public PageResult<PostVO> page(SysPostQuery query) {
-//		select page
-		IPage<Post> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-//		return page result
-		return new PageResult<>(PostConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+	public PageResult<PostVO> getPostList(Query<Post> query) {
+//		query page
+		IPage<Post> page = GridUtils.query(baseMapper, query);
+//		convert to vo for return
+		return new PageResult<>(PostConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -50,85 +48,76 @@ public class PostServiceImpl extends BaseServiceImpl<PostMapper, Post> implement
 	 * @return post vo list
 	 */
 	@Override
-	public List<PostVO> getList() {
-//		create post query
-		SysPostQuery query = new SysPostQuery();
-//		set status
-		query.setStatus(1);
+	public List<PostVO> getPostList() {
 //		get post list
-		List<Post> entityList = baseMapper.selectList(getWrapper(query));
+		List<Post> postList = this.list();
 //		convert to post vo for return
-		return PostConvert.INSTANCE.convertList(entityList);
+		return PostConvert.INSTANCE.convert2VOList(postList);
 	}
-
+	
 	/**
-	 * get name list
-	 * @param idList
-	 * @return name list
+	 * get post data
+	 * @param postId
+	 * @return post data
 	 */
 	@Override
-	public List<String> getNameList(List<Long> idList) {
-//		if post id list is empty then return null
-		if (idList.isEmpty()) {
-			return null;
-		}
-//		get post name list for return
-		return baseMapper.selectBatchIds(idList).stream().map(Post::getPostName).toList();
+	public PostVO getPostData(Long postId) {
+//		get post data
+		Post post = this.getById(postId);
+//		convert to vo for return
+		return PostConvert.INSTANCE.convert2VO(post);
 	}
 
 	/**
-	 * get wrapper
-	 * @param query
-	 * @return wrapper
-	 */
-	private Wrapper<Post> getWrapper(SysPostQuery query) {
-//		create wrapper
-		LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
-//		set condition
-		wrapper.like(StrUtil.isNotBlank(query.getPostCode()), Post::getPostCode, query.getPostCode());
-		wrapper.like(StrUtil.isNotBlank(query.getPostName()), Post::getPostName, query.getPostName());
-		wrapper.eq(query.getStatus() != null, Post::getStatus, query.getStatus());
-//		set sort
-		wrapper.orderByAsc(Post::getSort);
-//		return wrapper
-		return wrapper;
-	}
-
-	/**
-	 * save
+	 * add post
 	 * @param postVO
 	 */
 	@Override
-	public void save(PostVO vo) {
+	public void addPost(PostVO postVO) {
 //		convert to post
-		Post entity = PostConvert.INSTANCE.convert(vo);
+		Post post = PostConvert.INSTANCE.convert(postVO);
 //		insert post
-		baseMapper.insert(entity);
+		this.save(post);
 	}
 
 	/**
-	 * update
+	 * update post
 	 * @param postVO
 	 */
 	@Override
-	public void update(PostVO vo) {
+	public void updatePost(PostVO postVO) {
 //		convert to post
-		Post entity = PostConvert.INSTANCE.convert(vo);
+		Post post = PostConvert.INSTANCE.convert(postVO);
 //		update post
-		updateById(entity);
+		this.updateById(post);
 	}
 
 	/**
-	 * delete
-	 * @param idList
+	 * delete post
+	 * @param postIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void delete(List<Long> idList) {
+	public void deletePost(List<Long> postIdList) {
 //		delete post
-		removeByIds(idList);
+		this.removeByIds(postIdList);
 //		delete user post
-		sysUserPostService.deleteByPostIdList(idList);
+		userPostService.deleteUserPostByPostIdList(postIdList);
+	}
+
+	/**
+	 * get post name list
+	 * @param postIdList
+	 * @return post name list
+	 */
+	@Override
+	public List<String> getPostNameList(List<Long> postIdList) {
+//		if post id list is empty then return null
+		if (postIdList.isEmpty()) {
+			return null;
+		}
+//		get post name list for return
+		return this.listByIds(postIdList).stream().map(Post::getPostName).toList();
 	}
 
 }

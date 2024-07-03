@@ -28,19 +28,19 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void saveOrUpdate(Long roleId, List<Long> orgIdList) {
+	public void saveOrUpdate(Long roleId, List<Long> organIdList) {
 //		get organ id list
-		List<Long> dbOrgIdList = getOrgIdList(roleId);
+		List<Long> dbOrganIdList = this.getOrganIdList(roleId);
 //		get insert organ id list
-		Collection<Long> insertOrgIdList = CollUtil.subtract(orgIdList, dbOrgIdList);
+		Collection<Long> insertOrganIdList = CollUtil.subtract(organIdList, dbOrganIdList);
 //		if has insert datas
-		if (CollUtil.isNotEmpty(insertOrgIdList)) {
+		if (CollUtil.isNotEmpty(insertOrganIdList)) {
 //			construct role data scope list by organ id list
-			List<RoleOrgan> orgList = insertOrgIdList.stream().map(orgId -> {
+			List<RoleOrgan> orgList = insertOrganIdList.stream().map(organId -> {
 //				create role data scope
 				RoleOrgan entity = new RoleOrgan();
 //				set organ id, role id
-				entity.setOrgId(orgId);
+				entity.setOrganId(organId);
 				entity.setRoleId(roleId);
 //				return role data scope
 				return entity;
@@ -49,14 +49,14 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 			saveBatch(orgList);
 		}
 //		get delete organ id list
-		Collection<Long> deleteOrgIdList = CollUtil.subtract(dbOrgIdList, orgIdList);
+		Collection<Long> deleteOrganIdList = CollUtil.subtract(dbOrganIdList, organIdList);
 //		if has delete datas
-		if (CollUtil.isNotEmpty(deleteOrgIdList)) {
+		if (CollUtil.isNotEmpty(deleteOrganIdList)) {
 //			get wrapper
 			LambdaQueryWrapper<RoleOrgan> queryWrapper = new LambdaQueryWrapper<>();
 //			set condition
 			queryWrapper.eq(RoleOrgan::getRoleId, roleId);
-			queryWrapper.in(RoleOrgan::getOrgId, deleteOrgIdList);
+			queryWrapper.in(RoleOrgan::getOrganId, deleteOrganIdList);
 //			delete role data scope
 			remove(queryWrapper);
 		}
@@ -68,18 +68,18 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 	 * @return organ id list
 	 */
 	@Override
-	public List<Long> getOrgIdList(Long roleId) {
+	public List<Long> getOrganIdList(Long roleId) {
 //		get organ id list
-		return baseMapper.getOrgIdList(roleId);
+		return baseMapper.getOrganIdList(roleId);
 	}
 
 	/**
-	 * delete by role id list
+	 * delete role organ by role id list
 	 * @param roleIdList
 	 */
 	@Override
-	public void deleteByRoleIdList(List<Long> roleIdList) {
-//		delete role data scope
+	public void deleteRoleOrganByRoleIdList(List<Long> roleIdList) {
+//		delete role organ by role id list
 		remove(new LambdaQueryWrapper<RoleOrgan>().in(RoleOrgan::getRoleId, roleIdList));
 	}
 

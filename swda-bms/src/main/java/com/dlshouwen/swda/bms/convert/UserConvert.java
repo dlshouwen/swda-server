@@ -2,6 +2,7 @@ package com.dlshouwen.swda.bms.convert;
 
 import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.vo.UserAssistVO;
+import com.dlshouwen.swda.bms.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.vo.UserVO;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 
@@ -62,5 +63,13 @@ public interface UserConvert {
 	 * @return user vo list
 	 */
 	List<UserVO> convert2VOList(List<User> list);
+
+
+	/**
+	 * convert to list
+	 * @param userList
+	 * @return user vo list
+	 */
+	List<User> convertList(List<UserExcelVO> list);
 
 }

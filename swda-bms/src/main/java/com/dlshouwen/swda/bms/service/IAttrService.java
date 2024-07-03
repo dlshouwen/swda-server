@@ -24,5 +24,12 @@ public interface IAttrService extends BaseService<Attr> {
 	 * @param attrList
 	 */
 	void saveAttrList(List<AttrVO> attrList);
+	
+	/**
+	 * get value
+	 * @param attrId
+	 * @return value
+	 */
+	String getValue(String attrId);
 
 }

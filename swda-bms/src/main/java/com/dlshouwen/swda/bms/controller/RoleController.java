@@ -199,8 +199,8 @@ public class RoleController {
 	@Operation(name = "delete role user", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('sys:role:update')")
 	public R<String> deleteRoleUser(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {
-//		delete role user
-		userRoleService.deleteRoleUser(roleId, userIdList);
+//		delete user role
+		userRoleService.deleteUserRole(roleId, userIdList);
 //		return
 		return R.ok();
 	}
@@ -215,8 +215,8 @@ public class RoleController {
 	@Operation(name = "add role user", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('sys:role:update')")
 	public R<String> addRoleUser(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {
-//		add role user
-		userRoleService.addRoleUser(roleId, userIdList);
+//		add user role
+		userRoleService.deleteUserRole(roleId, userIdList);
 //		return
 		return R.ok();
 	}

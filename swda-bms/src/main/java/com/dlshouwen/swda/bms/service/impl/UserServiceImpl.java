@@ -1,39 +1,31 @@
 package com.dlshouwen.swda.bms.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.fhs.trans.service.impl.TransService;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
-import com.dlshouwen.swda.core.utils.DateUtils;
 import com.dlshouwen.swda.core.utils.ExcelUtils;
+import com.dlshouwen.swda.core.utils.GridUtils;
 import com.dlshouwen.swda.core.utils.TokenUtils;
 import com.dlshouwen.swda.core.cache.TokenCache;
-import com.dlshouwen.swda.core.constant.Constant;
 import com.dlshouwen.swda.core.dict.ZeroOne;
 import com.dlshouwen.swda.core.entity.auth.SecurityUser;
-import com.dlshouwen.swda.core.entity.base.PageResult;
+import com.dlshouwen.swda.core.entity.grid.PageResult;
+import com.dlshouwen.swda.core.entity.grid.Query;
 import com.dlshouwen.swda.core.excel.ExcelFinishCallBack;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.UserConvert;
 import com.dlshouwen.swda.bms.mapper.UserMapper;
 import com.dlshouwen.swda.bms.entity.User;
-import com.dlshouwen.swda.bms.query.SysRoleUserQuery;
-import com.dlshouwen.swda.bms.query.SysUserQuery;
 import com.dlshouwen.swda.bms.service.*;
 import com.dlshouwen.swda.bms.vo.UserAvatarVO;
+import com.dlshouwen.swda.bms.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.vo.UserAssistVO;
-import com.dlshouwen.swda.bms.vo.SysUserExcelVO;
 import com.dlshouwen.swda.bms.vo.UserVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * user service impl
@@ -45,152 +37,129 @@ import java.util.Map;
 public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implements IUserService {
 	
 	/** user role service */
-	private final IUserRoleService sysUserRoleService;
+	private final IUserRoleService userRoleService;
 	
 	/** user post service */
-	private final IUserPostService sysUserPostService;
+	private final IUserPostService userPostService;
 	
 	/** user token service */
-	private final IUserTokenService sysUserTokenService;
-	
-	/** organ service */
-	private final IOrganService sysOrgService;
+	private final IUserTokenService userTokenService;
 	
 	/** token store cache */
-	private final TokenCache tokenStoreCache;
+	private final TokenCache tokenCache;
 	
-	/** trans service */
-	private final TransService transService;
-
 	/**
-	 * page
+	 * get user list
 	 * @param query
-	 * @return page result
+	 * @return user list
 	 */
 	@Override
-	public PageResult<UserVO> page(SysUserQuery query) {
-//		get params
-		Map<String, Object> params = getParams(query);
-//		get page
-		IPage<User> page = getPage(query);
-		params.put(Constant.PAGE, page);
-//		get list
-		List<User> list = baseMapper.getList(params);
-//		return page result
-		return new PageResult<>(UserConvert.INSTANCE.convertList(list), page.getTotal());
+	public PageResult<UserVO> getUserList(Query<User> query) {
+//		query page
+		IPage<User> page = GridUtils.query(baseMapper, query);
+//		convert to vo for return
+		return new PageResult<>(UserConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
-
+	
 	/**
-	 * get params
-	 * @param query
-	 * @return params
+	 * get user data
+	 * @param userId
+	 * @return user data
 	 */
-	private Map<String, Object> getParams(SysUserQuery query) {
-//		create params
-		Map<String, Object> params = new HashMap<>();
-//		put username, mobile, gender
-		params.put("username", query.getUsername());
-		params.put("mobile", query.getMobile());
-		params.put("gender", query.getGender());
-//		set data scope
-		params.put(Constant.DATA_SCOPE, getDataScope("t1", null));
-//		if has organ id
-		if (query.getOrgId() != null) {
-//			get sub organ id list
-			List<Long> orgList = sysOrgService.getSubOrgIdList(query.getOrgId());
-//			set organ id list
-			params.put("orgList", orgList);
-		}
-//		return params
-		return params;
+	@Override
+	public UserVO getUserData(Long userId) {
+//		get user
+		User user = this.getById(userId);
+//		convert to vo for return
+		return UserConvert.INSTANCE.convert2VO(user);
 	}
 
 	/**
-	 * save
+	 * add user
 	 * @param userVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(UserVO vo) {
-//		convert to user
-		User entity = UserConvert.INSTANCE.convert(vo);
-//		set super admin
-		entity.setSuperAdmin(ZeroOne.NO);
+	public void addUser(UserVO userVO) {
 //		get user from username
-		User user = baseMapper.getByUsername(entity.getUsername());
+		User user = baseMapper.getUserByUsername(userVO.getUserCode());
 //		if user is not null
 		if (user != null) {
 //			throw exception
 			throw new SwdaException("用户名已经存在");
 		}
 //		get user from mobile
-		user = baseMapper.getByMobile(entity.getMobile());
+		user = baseMapper.getUserByMobile(userVO.getMobile());
 //		if user is not null
 		if (user != null) {
 //			throw exception
 			throw new SwdaException("手机号已经存在");
 		}
+//		convert to user
+		user = UserConvert.INSTANCE.convert(userVO);
+//		set super admin
+		user.setSuperAdmin(ZeroOne.NO);
 //		insert user
-		baseMapper.insert(entity);
+		this.save(user);
 //		set role list
-		sysUserRoleService.saveOrUpdate(entity.getId(), vo.getRoleIdList());
+		userRoleService.saveOrUpdate(user.getUserId(), userVO.getRoleIdList());
 //		set post list
-		sysUserPostService.saveOrUpdate(entity.getId(), vo.getPostIdList());
+		userPostService.saveOrUpdate(user.getUserId(), userVO.getPostIdList());
 	}
 
 	/**
-	 * update
+	 * update user
 	 * @param userVO
 	 */
 	@Override
-	public void update(UserVO vo) {
-//		convert to user
-		User entity = UserConvert.INSTANCE.convert(vo);
+	public void updateUser(UserVO userVO) {
 //		get user from username
-		User user = baseMapper.getByUsername(entity.getUsername());
+		User user = baseMapper.getUserByUsername(userVO.getUserName());
 //		if user is not null
 		if (user != null) {
 //			throw exception
 			throw new SwdaException("用户名已经存在");
 		}
 //		get user from mobile
-		user = baseMapper.getByMobile(entity.getMobile());
+		user = baseMapper.getUserByMobile(userVO.getMobile());
 //		if user is not null
 		if (user != null) {
 //			throw exception
 			throw new SwdaException("手机号已经存在");
 		}
+//		convert to user
+		user = UserConvert.INSTANCE.convert(userVO);
 //		update user
-		updateById(entity);
+		this.updateById(user);
 //		update role list
-		sysUserRoleService.saveOrUpdate(entity.getId(), vo.getRoleIdList());
+		userRoleService.saveOrUpdate(user.getUserId(), userVO.getRoleIdList());
 //		update post list
-		sysUserPostService.saveOrUpdate(entity.getId(), vo.getPostIdList());
-//		update cache auth
-		sysUserTokenService.updateCacheAuthByUserId(entity.getId());
+		userPostService.saveOrUpdate(user.getUserId(), userVO.getPostIdList());
+//		update user cache
+		userTokenService.updateUserCacheByUserId(user.getUserId());
 	}
 
 	/**
-	 * update login info
-	 * @param userBaseVO
+	 * update login user
+	 * @param userAssistVO
 	 */
 	@Override
-	public void updateLoginInfo(UserAssistVO vo) {
-//		convert to user
-		User entity = UserConvert.INSTANCE.convert(vo);
-//		set user id
-		entity.setId(SecurityUser.getUserId());
+	public void updateLoginUser(UserAssistVO userAssistVO) {
 //		get user from mobile
-		User user = baseMapper.getByMobile(entity.getMobile());
+		User user = baseMapper.getUserByMobile(userAssistVO.getMobile());
 //		if user is not null
-		if (user != null && !user.getId().equals(entity.getId())) {
+		if (user != null && !user.getUserId().equals(userAssistVO.getUserId())) {
 //			throw exception
 			throw new SwdaException("手机号已经存在");
 		}
+//		convert to user
+		user = UserConvert.INSTANCE.convert(userAssistVO);
+//		set user id
+		user.setUserId(SecurityUser.getUserId());
 //		update user
-		updateById(entity);
+		this.updateById(user);
 //		delete user cache
-		tokenStoreCache.deleteUser(TokenUtils.getAccessToken());
+		tokenCache.deleteUser(TokenUtils.getAccessToken());
 	}
 
 	/**
@@ -198,112 +167,105 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	 * @param userAvatarVO
 	 */
 	@Override
-	public void updateAvatar(UserAvatarVO avatar) {
+	public void updateAvatar(UserAvatarVO userAvatarVO) {
 //		create user
-		User entity = new User();
+		User user = new User();
 //		set user id, avatar
-		entity.setId(SecurityUser.getUserId());
-		entity.setAvatar(avatar.getAvatar());
+		user.setUserId(SecurityUser.getUserId());
+		user.setAvatar(userAvatarVO.getAvatar());
 //		update user
-		updateById(entity);
+		this.updateById(user);
 //		delete user cache
-		tokenStoreCache.deleteUser(TokenUtils.getAccessToken());
+		tokenCache.deleteUser(TokenUtils.getAccessToken());
 	}
 
 	/**
-	 * delete
-	 * @param idList
+	 * delete user
+	 * @param userIdList
 	 */
 	@Override
-	public void delete(List<Long> idList) {
+	public void deleteUser(List<Long> userIdList) {
 //		delete user
-		removeByIds(idList);
+		this.removeByIds(userIdList);
 //		delete role list
-		sysUserRoleService.deleteByUserIdList(idList);
+		userRoleService.deleteUserRoleByUserIdList(userIdList);
 //		delete post list
-		sysUserPostService.deleteByUserIdList(idList);
+		userPostService.deleteUserPostByUserIdList(userIdList);
 	}
 
 	/**
-	 * get real name list
-	 * @param idList
+	 * get user name list
+	 * @param userIdList
 	 * @return name list
 	 */
 	@Override
-	public List<String> getRealNameList(List<Long> idList) {
+	public List<String> getUserNameList(List<Long> userIdList) {
 //		if id list is empty then return null
-		if (idList.isEmpty()) {
+		if (userIdList.isEmpty()) {
 			return null;
 		}
 //		select names to list from return
-		return baseMapper.selectBatchIds(idList).stream().map(User::getRealName).toList();
+		return this.listByIds(userIdList).stream().map(User::getRealName).toList();
 	}
 
 	/**
-	 * get by mobile
+	 * get user by mobile
 	 * @param mobile
 	 * @return userVO
 	 */
 	@Override
-	public UserVO getByMobile(String mobile) {
+	public UserVO getUserByMobile(String mobile) {
 //		get user by mobile
-		User user = baseMapper.getByMobile(mobile);
+		User user = baseMapper.getUserByMobile(mobile);
 //		convert to user vo
-		return UserConvert.INSTANCE.convert(user);
+		return UserConvert.INSTANCE.convert2VO(user);
 	}
 
 	/**
 	 * update password
 	 * @param id
-	 * @param newPassword
+	 * @param password
 	 */
 	@Override
-	public void updatePassword(Long id, String newPassword) {
+	public void updatePassword(Long id, String password) {
 //		get user
 		User user = getById(id);
 //		set password
-		user.setPassword(newPassword);
+		user.setPassword(password);
 //		update user
-		updateById(user);
+		this.updateById(user);
 	}
 
 	/**
-	 * role user page
+	 * get role user list
 	 * @param query
 	 * @return page result
 	 */
 	@Override
-	public PageResult<UserVO> roleUserPage(SysRoleUserQuery query) {
-//		get params
-		Map<String, Object> params = getParams(query);
-//		set role id
-		params.put("roleId", query.getRoleId());
+	public PageResult<UserVO> getRoleUserList(Query<User> query) {
 //		get page
-		IPage<User> page = getPage(query);
-		params.put(Constant.PAGE, page);
-//		get role user list
-		List<User> list = baseMapper.getRoleUserList(params);
+		IPage<User> page = GridUtils.query(baseMapper, query);
 //		return page result
-		return new PageResult<>(UserConvert.INSTANCE.convertList(list), page.getTotal());
+		return new PageResult<>(UserConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
 
 	/**
-	 * import by excel
+	 * import user
 	 * @param file
 	 * @param password
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void importByExcel(MultipartFile file, String password) {
+	public void importUser(MultipartFile file, String password) {
 //		analysis
-		ExcelUtils.readAnalysis(file, SysUserExcelVO.class, new ExcelFinishCallBack<SysUserExcelVO>() {
+		ExcelUtils.readAnalysis(file, UserExcelVO.class, new ExcelFinishCallBack<UserExcelVO>() {
 			
 			/**
 			 * do after all analysed
 			 * @param result
 			 */
 			@Override
-			public void doAfterAllAnalysed(List<SysUserExcelVO> result) {
+			public void doAfterAllAnalysed(List<UserExcelVO> result) {
 //				save user
 				saveUser(result);
 			}
@@ -313,7 +275,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 			 * @param result
 			 */
 			@Override
-			public void doSaveBatch(List<SysUserExcelVO> result) {
+			public void doSaveBatch(List<UserExcelVO> result) {
 //				save user
 				saveUser(result);
 			}
@@ -322,35 +284,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 			 * save user
 			 * @param result
 			 */
-			private void saveUser(List<SysUserExcelVO> result) {
+			private void saveUser(List<UserExcelVO> result) {
 //				parse dict
 				ExcelUtils.parseDict(result);
 //				convert to user list
-				List<User> sysUserEntities = UserConvert.INSTANCE.convertListEntity(result);
+				List<User> userList = UserConvert.INSTANCE.convertList(result);
 //				set password
-				sysUserEntities.forEach(user -> user.setPassword(password));
+				userList.forEach(user -> user.setPassword(password));
 //				batch save user
-				saveBatch(sysUserEntities);
+				saveBatch(userList);
 			}
 
 		});
 
-	}
-
-	/**
-	 * export
-	 */
-	@Override
-	@SneakyThrows
-	public void export() {
-//		get user list
-		List<User> list = list(Wrappers.lambdaQuery(User.class).eq(User::getSuperAdmin, ZeroOne.NO));
-//		convert to user excel vo
-		List<SysUserExcelVO> userExcelVOS = UserConvert.INSTANCE.convert2List(list);
-//		trans batch
-		transService.transBatch(userExcelVOS);
-//		export excel
-		ExcelUtils.excelExport(SysUserExcelVO.class, "system_user_excel" + DateUtils.format(new Date()), null, userExcelVOS);
 	}
 
 }

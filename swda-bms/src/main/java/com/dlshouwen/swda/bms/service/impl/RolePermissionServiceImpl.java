@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * role menu service impl
+ * role permission service impl
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
@@ -22,73 +22,73 @@ import java.util.stream.Collectors;
 public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMapper, RolePermission> implements IRolePermissionService {
 
 	/**
+	 * get permission id list
+	 * @param roleId
+	 * @return permission id list
+	 */
+	@Override
+	public List<Long> getPermissionIdList(Long roleId) {
+		return baseMapper.getPermissionIdList(roleId);
+	}
+	
+	/**
 	 * save or update
 	 * @param roleId
-	 * @parammenuIdList
+	 * @param permissionIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void saveOrUpdate(Long roleId, List<Long> menuIdList) {
-//		get menu id list
-		List<Long> dbMenuIdList = getMenuIdList(roleId);
-//		get insert menu datas
-		Collection<Long> insertMenuIdList = CollUtil.subtract(menuIdList, dbMenuIdList);
+	public void saveOrUpdate(Long roleId, List<Long> permissionIdList) {
+//		get permission id list
+		List<Long> dbPermissionIdList = this.getPermissionIdList(roleId);
+//		get insert permission datas
+		Collection<Long> insertPermissionIdList = CollUtil.subtract(permissionIdList, dbPermissionIdList);
 //		if has insert datas
-		if (CollUtil.isNotEmpty(insertMenuIdList)) {
-//			construct role menu list by menu id
-			List<RolePermission> menuList = insertMenuIdList.stream().map(menuId -> {
-//				create role menu
+		if (CollUtil.isNotEmpty(insertPermissionIdList)) {
+//			construct role permission list by permission id
+			List<RolePermission> permissionList = insertPermissionIdList.stream().map(permissionId -> {
+//				create role permission
 				RolePermission entity = new RolePermission();
-//				set menu id, role id
-				entity.setMenuId(menuId);
+//				set permission id, role id
+				entity.setPermissionId(permissionId);
 				entity.setRoleId(roleId);
-//				return role menu
+//				return role permission
 				return entity;
 			}).collect(Collectors.toList());
-//			batch insert role menu list
-			saveBatch(menuList);
+//			batch insert role permission list
+			saveBatch(permissionList);
 		}
-//		get delete menu id list
-		Collection<Long> deleteMenuIdList = CollUtil.subtract(dbMenuIdList, menuIdList);
+//		get delete permission id list
+		Collection<Long> deletePermissionIdList = CollUtil.subtract(dbPermissionIdList, permissionIdList);
 //		if has delete datas
-		if (CollUtil.isNotEmpty(deleteMenuIdList)) {
+		if (CollUtil.isNotEmpty(deletePermissionIdList)) {
 //			get wrapper
 			LambdaQueryWrapper<RolePermission> queryWrapper = new LambdaQueryWrapper<>();
-//			delete role menu list
-			remove(queryWrapper.eq(RolePermission::getRoleId, roleId).in(RolePermission::getMenuId, deleteMenuIdList));
+//			delete role permission list
+			remove(queryWrapper.eq(RolePermission::getRoleId, roleId).in(RolePermission::getPermissionId, deletePermissionIdList));
 		}
 	}
 
 	/**
-	 * get menu id list
-	 * @param roleId
-	 * @return menu id list
-	 */
-	@Override
-	public List<Long> getMenuIdList(Long roleId) {
-		return baseMapper.getMenuIdList(roleId);
-	}
-
-	/**
-	 * delete by role id list
+	 * delete role permission by role id list
 	 * @param roleIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void deleteByRoleIdList(List<Long> roleIdList) {
-//		delete role menu list
+	public void deleteRolePermissionByRoleIdList(List<Long> roleIdList) {
+//		delete role permission list
 		remove(new LambdaQueryWrapper<RolePermission>().in(RolePermission::getRoleId, roleIdList));
 	}
 
 	/**
-	 * delete by menu id
-	 * @param menuId
+	 * delete role permission by permission id
+	 * @param permissionId
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void deleteByMenuId(Long menuId) {
-//		delete role menu list
-		remove(new LambdaQueryWrapper<RolePermission>().eq(RolePermission::getMenuId, menuId));
+	public void deleteRolePermissionByPermissionId(Long permissionId) {
+//		delete role permission list
+		remove(new LambdaQueryWrapper<RolePermission>().eq(RolePermission::getPermissionId, permissionId));
 	}
 
 }

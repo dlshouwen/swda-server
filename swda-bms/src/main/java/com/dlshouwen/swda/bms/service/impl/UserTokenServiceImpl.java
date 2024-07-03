@@ -62,31 +62,31 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 //		generate refresh token
 		String refreshToken = TokenUtils.generator();
 //		create user token
-		UserToken entity = new UserToken();
+		UserToken userToken = new UserToken();
 //		set user id, access token , refresh token
-		entity.setUserId(userId);
-		entity.setAccessToken(accessToken);
-		entity.setRefreshToken(refreshToken);
+		userToken.setUserId(userId);
+		userToken.setAccessToken(accessToken);
+		userToken.setRefreshToken(refreshToken);
 //		get now date
 		Date now = new Date();
 //		set access token expire
-		entity.setAccessTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getAccessTokenExpire())));
+		userToken.setAccessTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getAccessTokenExpire())));
 //		set refresh token expire
-		entity.setRefreshTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getRefreshTokenExpire())));
+		userToken.setRefreshTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getRefreshTokenExpire())));
 //		get user token
-		UserToken tokenEntity = baseMapper.selectOne(new LambdaQueryWrapper<UserToken>().eq(UserToken::getUserId, userId));
+		UserToken dbUserToken = baseMapper.selectOne(new LambdaQueryWrapper<UserToken>().eq(UserToken::getUserId, userId));
 //		if token is null
-		if (tokenEntity == null) {
+		if (dbUserToken == null) {
 //			insert user
-			baseMapper.insert(entity);
+			baseMapper.insert(userToken);
 		} else {
 //			set token
-			entity.setId(tokenEntity.getId());
+			userToken.setRelationId(dbUserToken.getRelationId());
 //			update user
-			baseMapper.updateById(entity);
+			baseMapper.updateById(userToken);
 		}
 //		return user token
-		return UserTokenConvert.INSTANCE.convert(entity);
+		return UserTokenConvert.INSTANCE.convert2VO(userToken);
 	}
 
 	/**
@@ -121,13 +121,13 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 //		get user
 		User user = sysUserDao.selectById(entity.getUserId());
 //		convert to user detail
-		UserDetail userDetail = UserConvert.INSTANCE.convertDetail(user);
+		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
 //		get user details
 		sysUserDetailsService.getUserDetails(userDetail);
 //		save user cache
 		tokenStoreCache.saveUser(accessToken, userDetail);
 //		convert to user token for return
-		return UserTokenConvert.INSTANCE.convert(entity);
+		return UserTokenConvert.INSTANCE.convert2VO(entity);
 	}
 
 	/**
@@ -148,12 +148,12 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 	}
 
 	/**
-	 * update cache auth by role id
+	 * update user cache by role id
 	 * @param roleId
 	 */
 	@Async
 	@Override
-	public void updateCacheAuthByRoleId(Long roleId) {
+	public void updateUserCacheByRoleId(Long roleId) {
 //		get online access token list by role id
 		List<String> accessTokenList = baseMapper.getOnlineAccessTokenListByRoleId(roleId, LocalDateTime.now());
 //		update cache auth
@@ -161,12 +161,12 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 	}
 
 	/**
-	 * update cache auth by user id
+	 * update user cache by user id
 	 * @param userId
 	 */
 	@Async
 	@Override
-	public void updateCacheAuthByUserId(Long userId) {
+	public void updateUserCacheByUserId(Long userId) {
 //		get online access token list by user id
 		List<String> accessTokenList = baseMapper.getOnlineAccessTokenListByUserId(userId, LocalDateTime.now());
 //		update cache auth

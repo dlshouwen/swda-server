@@ -27,9 +27,9 @@ public interface IRoleOrganService extends BaseService<RoleOrgan> {
 	List<Long> getOrganIdList(Long roleId);
 
 	/**
-	 * delete by role id list
+	 * delete role organ by role id list
 	 * @param roleIdList
 	 */
-	void deleteByRoleIdList(List<Long> roleIdList);
+	void deleteRoleOrganByRoleIdList(List<Long> roleIdList);
 
 }

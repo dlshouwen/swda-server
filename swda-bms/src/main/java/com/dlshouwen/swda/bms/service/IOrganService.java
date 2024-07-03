@@ -49,7 +49,7 @@ public interface IOrganService extends BaseService<Organ> {
 	 * @param organId
 	 * @return sub organ id list
 	 */
-	List<Long> getSubOrgIdList(Long organId);
+	List<Long> getSubOrganIdList(Long organId);
 
 	/**
 	 * get organ name list

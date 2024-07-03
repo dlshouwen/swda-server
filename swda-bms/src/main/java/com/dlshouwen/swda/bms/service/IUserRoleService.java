@@ -23,27 +23,27 @@ public interface IUserRoleService extends BaseService<UserRole> {
 	 * delete by role id list
 	 * @param roleIdList
 	 */
-	void deleteByRoleIdList(List<Long> roleIdList);
+	void deleteUserRoleByRoleIdList(List<Long> roleIdList);
 
 	/**
 	 * delete by user id list
 	 * @param userIdList
 	 */
-	void deleteByUserIdList(List<Long> userIdList);
+	void deleteUserRoleByUserIdList(List<Long> userIdList);
 
 	/**
 	 * delete role user
 	 * @param roleId
 	 * @param userIdList
 	 */
-	void deleteRoleUser(Long roleId, List<Long> userIdList);
+	void deleteUserRole(Long roleId, List<Long> userIdList);
 
 	/**
-	 * add role user
+	 * add user role
 	 * @param roleId
 	 * @param userIdList
 	 */
-	void addRoleUser(Long roleId, List<Long> userIdList);
+	void addUserRole(Long roleId, List<Long> userIdList);
 
 	/**
 	 * get role id list

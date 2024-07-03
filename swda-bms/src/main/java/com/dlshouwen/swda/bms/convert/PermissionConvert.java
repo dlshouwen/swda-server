@@ -30,7 +30,7 @@ public interface PermissionConvert {
 	 * @param permission
 	 * @return permission vo
 	 */
-	PermissionVO convert(Permission entity);
+	PermissionVO convert2VO(Permission entity);
 
 	/**
 	 * convert to vo list

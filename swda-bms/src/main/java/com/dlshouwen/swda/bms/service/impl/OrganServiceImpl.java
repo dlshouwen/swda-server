@@ -32,134 +32,155 @@ import java.util.Map;
 public class OrganServiceImpl extends BaseServiceImpl<OrganMapper, Organ> implements IOrganService {
 	
 	/** user mapper */
-	private final UserMapper sysUserDao;
+	private final UserMapper userMapper;
 
 	/**
-	 * get list
+	 * get organ list
 	 * @return organ list
 	 */
 	@Override
-	public List<OrganVO> getList() {
+	public List<OrganVO> getOrganList() {
 //		defined params
 		Map<String, Object> params = new HashMap<>();
 //		put data scope
-		params.put(Constant.DATA_SCOPE, getDataScope("t1", "id"));
+		params.put(Constant.DATA_SCOPE, getDataScope("o", "organ_id"));
 //		get organ list
-		List<Organ> entityList = baseMapper.getList(params);
+		List<Organ> organList = baseMapper.getOrganList(params);
 //		build organ tree for return
-		return TreeUtils.build(OrganConvert.INSTANCE.convertList(entityList));
+		return TreeUtils.build(OrganConvert.INSTANCE.convert2VOList(organList));
+	}
+	
+	/**
+	 * get organ data
+	 * @param organId
+	 * @return organ data
+	 */
+	@Override
+	public OrganVO getOrganData(Long organId) {
+//		get organ
+		Organ organ = this.getById(organId);
+//		convert organ to vo
+		OrganVO organVO = OrganConvert.INSTANCE.convert2VO(organ);
+//		if has parent organ
+		if(organ.getPreOrganId()!=null) {
+//			get parent organ
+			Organ parent = this.getById(organ.getPreOrganId());
+//			set parent name
+			organVO.setPreOrganName(parent.getOrganName());
+		}
+//		return organ
+		return organVO;
 	}
 
 	/**
-	 * save
+	 * add organ
 	 * @param organVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(OrganVO vo) {
+	public void addOrgan(OrganVO organVO) {
 //		convert organ vo to organ
-		Organ entity = OrganConvert.INSTANCE.convert(vo);
+		Organ organ = OrganConvert.INSTANCE.convert(organVO);
 //		insert
-		baseMapper.insert(entity);
+		this.save(organ);
 	}
 
 	/**
-	 * update
+	 * update organ
 	 * @param organVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(OrganVO vo) {
+	public void updateOrgan(OrganVO organVO) {
 //		convert to organ
-		Organ entity = OrganConvert.INSTANCE.convert(vo);
+		Organ organ = OrganConvert.INSTANCE.convert(organVO);
 //		if organ id equals pre organ id
-		if (entity.getId().equals(entity.getPid())) {
+		if (organ.getOrganId().equals(organ.getPreOrganId())) {
 //			throw exception
 			throw new SwdaException("上级机构不能为自身");
 		}
 //		get sub organ list
-		List<Long> subOrgList = getSubOrgIdList(entity.getId());
+		List<Long> subOrganList = this.getSubOrganIdList(organ.getOrganId());
 //		if change to upper organ
-		if (subOrgList.contains(entity.getPid())) {
+		if (subOrganList.contains(organ.getPreOrganId())) {
 //			throw exception
 			throw new SwdaException("上级机构不能为下级");
 		}
 //		update
-		updateById(entity);
+		this.updateById(organ);
 	}
 
 	/**
-	 * delete
-	 * @param id
+	 * delete organ
+	 * @param organId
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void delete(Long id) {
+	public void deleteOrgan(Long organId) {
 //		get sub organ count
-		long orgCount = count(new QueryWrapper<Organ>().eq("pid", id));
+		long organCount = this.count(new QueryWrapper<Organ>().eq("pre_organ_id", organId));
 //		if has sub count
-		if (orgCount > 0) {
+		if (organCount > 0) {
 //			throw exception
 			throw new SwdaException("请先删除子机构");
 		}
 //		get organ user count
-		long userCount = sysUserDao.selectCount(new QueryWrapper<User>().eq("org_id", id));
+		long userCount = userMapper.selectCount(new QueryWrapper<User>().eq("organ_id", organId));
 //		if has user
 		if (userCount > 0) {
 //			throw exception
 			throw new SwdaException("机构下面有用户，不能删除");
 		}
 //		delete
-		removeById(id);
+		this.removeById(organId);
 	}
 
 	/**
 	 * get sub organ id list
-	 * @param id
+	 * @param organId
 	 * @return sub organ id list
 	 */
 	@Override
-	public List<Long> getSubOrgIdList(Long id) {
+	public List<Long> getSubOrganIdList(Long organId) {
 //		get organ list
-		List<Organ> orgList = baseMapper.getIdAndPidList();
-//		defined sub id list
-		List<Long> subIdList = new ArrayList<>();
-//		get sub id list
-		getTree(id, orgList, subIdList);
+		List<Organ> organList = baseMapper.getIdAndPidList();
+//		defined sub organ id list
+		List<Long> subOrganIdList = new ArrayList<>();
+//		get sub organ id list
+		getTree(organId, organList, subOrganIdList);
 //		add self
-		subIdList.add(id);
-//		return sub id list
-		return subIdList;
+		subOrganIdList.add(organId);
+//		return sub organ id list
+		return subOrganIdList;
 	}
 
 	/**
-	 * get name list
-	 * @param id list
-	 * @return name list
+	 * get organ name list
+	 * @param organIdList
+	 * @return organ name list
 	 */
 	@Override
-	public List<String> getNameList(List<Long> idList) {
-//		if id list is empty
-		if (idList.isEmpty()) {
+	public List<String> getOrganNameList(List<Long> organIdList) {
+//		if organ id list is empty
+		if (organIdList.isEmpty()) {
 //			return null
 			return null;
 		}
-//		get name list for return
-		return baseMapper.selectBatchIds(idList).stream().map(Organ::getName).toList();
+//		get organ name list for return
+		return baseMapper.selectBatchIds(organIdList).stream().map(Organ::getOrganName).toList();
 	}
 
 	/**
 	 * get tree
-	 * @param id
-	 * @param orgList
-	 * @param subIdList
+	 * @param organId
+	 * @param organList
+	 * @param subOrganIdList
 	 */
-	private void getTree(Long id, List<Organ> orgList, List<Long> subIdList) {
-		for (Organ org : orgList) {
-			if (ObjectUtil.equals(org.getPid(), id)) {
-				getTree(org.getId(), orgList, subIdList);
-
-				subIdList.add(org.getId());
+	private void getTree(Long organId, List<Organ> organList, List<Long> subOrganIdList) {
+		for (Organ organ : organList) {
+			if (ObjectUtil.equals(organ.getPreOrganId(), organId)) {
+				getTree(organ.getOrganId(), organList, subOrganIdList);
+				subOrganIdList.add(organ.getOrganId());
 			}
 		}
 	}

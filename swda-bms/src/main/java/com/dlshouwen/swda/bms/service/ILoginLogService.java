@@ -21,11 +21,11 @@ public interface ILoginLogService extends BaseService<LoginLog> {
 	PageResult<LoginLogVO> getLoginLogList(Query<LoginLog> query);
 
 	/**
-	 * save
+	 * save login log
 	 * @param username
 	 * @param status
 	 * @param operation
 	 */
-	void save(String username, Integer status, Integer operation);
+	void saveLoginLog(String username, Integer status, Integer operation);
 
 }

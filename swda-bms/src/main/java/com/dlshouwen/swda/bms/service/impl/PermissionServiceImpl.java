@@ -32,105 +32,37 @@ import java.util.Set;
 public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 	
 	/** role menu service */
-	private final IRolePermissionService sysRoleMenuService;
-
-	/**
-	 * save
-	 * @param menuVO
-	 */
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void save(PermissionVO vo) {
-//		convert to menu
-		Permission entity = PermissionConvert.INSTANCE.convert(vo);
-//		insert
-		baseMapper.insert(entity);
-	}
-
-	/**
-	 * update
-	 * @param menuVO
-	 */
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void update(PermissionVO vo) {
-//		convert to menu
-		Permission entity = PermissionConvert.INSTANCE.convert(vo);
-//		if menu id equals pre menu id
-		if (entity.getId().equals(entity.getPid())) {
-//			throw exception
-			throw new SwdaException("上级菜单不能为自己");
-		}
-//		update
-		updateById(entity);
-	}
-
-	/**
-	 * delete
-	 * @param id
-	 */
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void delete(Long id) {
-//		delete menu
-		removeById(id);
-//		delete role menu
-		// 删除角色菜单关系
-		sysRoleMenuService.deleteByMenuId(id);
-	}
-
-	/**
-	 * get menu list
-	 * @param type
-	 * @return menu list
-	 */
-	@Override
-	public List<PermissionVO> getMenuList(Integer type) {
-//		get menu list
-		List<Permission> menuList = baseMapper.getMenuList(type);
-//		build menu tree for return
-		return TreeUtils.build(PermissionConvert.INSTANCE.convertList(menuList));
-	}
+	private final IRolePermissionService rolePermissionService;
 
 	/**
 	 * get user menu list
 	 * @param user
-	 * @param type
-	 * @return menu vo list
+	 * @param permissionType
+	 * @return permission vo list
 	 */
 	@Override
-	public List<PermissionVO> getUserMenuList(UserDetail user, Integer type) {
-//		defined menu list
-		List<Permission> menuList;
+	public List<PermissionVO> getUserMenuList(UserDetail user, Integer permissionType) {
+//		defined permission list
+		List<Permission> permissionList;
 //		if user is super admin
 		if (user.getSuperAdmin().equals(ZeroOne.YES)) {
-//			get menu list
-			menuList = baseMapper.getMenuList(type);
+//			get permission list
+			permissionList = baseMapper.getPermissionList(permissionType);
 		} else {
-//			get user menu list
-			menuList = baseMapper.getUserMenuList(user.getUserId(), type);
+//			get user permission list
+			permissionList = baseMapper.getUserPermissionList(user.getUserId(), permissionType);
 		}
-//		build menu tree for return
-		return TreeUtils.build(PermissionConvert.INSTANCE.convertList(menuList));
+//		build permission tree for return
+		return TreeUtils.build(PermissionConvert.INSTANCE.convert2VOList(permissionList));
 	}
 
 	/**
-	 * get sub menu count
-	 * @param pid
-	 * @return sub menu count
-	 */
-	@Override
-	public Long getSubMenuCount(Long pid) {
-		return count(new LambdaQueryWrapper<Permission>().eq(Permission::getPid, pid));
-	}
-
-	/**
-	 * get user authority
+	 * get user authority list
 	 * @param user
-	 * @return user authority
+	 * @return user authority list
 	 */
 	@Override
-	public Set<String> getUserAuthority(UserDetail user) {
+	public Set<String> getUserAuthorityList(UserDetail user) {
 //		defined authority list
 		List<String> authorityList;
 //		if user is super admin
@@ -154,6 +86,86 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 		}
 //		return permission set
 		return permsSet;
+	}
+
+	/**
+	 * get permission list
+	 * @param permissionType
+	 * @return permission list
+	 */
+	@Override
+	public List<PermissionVO> getPermissionList(Integer permissionType) {
+//		get permission list
+		List<Permission> permissionList = baseMapper.getPermissionList(permissionType);
+//		build permission tree for return
+		return TreeUtils.build(PermissionConvert.INSTANCE.convert2VOList(permissionList));
+	}
+	
+	/**
+	 * get permission data
+	 * @param permissionId
+	 * @return permission data
+	 */
+	@Override
+	public PermissionVO getPermissionData(Long permissionId) {
+//		get permission data
+		Permission permission = this.getById(permissionId);
+//		convert to vo for return
+		return PermissionConvert.INSTANCE.convert2VO(permission);
+	}
+
+	/**
+	 * add permission
+	 * @param permissionVO
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void addPermission(PermissionVO permissionVO) {
+//		convert to permission
+		Permission permission = PermissionConvert.INSTANCE.convert(permissionVO);
+//		insert permission
+		this.save(permission);
+	}
+
+	/**
+	 * update permission
+	 * @param permissionVO
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updatePermission(PermissionVO permissionVO) {
+//		convert to permission
+		Permission permission = PermissionConvert.INSTANCE.convert(permissionVO);
+//		if permission id equals pre permission id
+		if (permission.getPermissionId().equals(permission.getPrePermissionId())) {
+//			throw exception
+			throw new SwdaException("上级菜单不能为自己");
+		}
+//		update permission
+		this.updateById(permission);
+	}
+
+	/**
+	 * delete permission
+	 * @param permissionId
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deletePermission(Long permissionId) {
+//		delete permission
+		this.removeById(permissionId);
+//		delete role permission
+		rolePermissionService.deleteRolePermissionByPermissionId(permissionId);
+	}
+
+	/**
+	 * get sub permission count
+	 * @param prePermissionId
+	 * @return sub permission count
+	 */
+	@Override
+	public Long getSubPermissionCount(Long prePermissionId) {
+		return this.count(new LambdaQueryWrapper<Permission>().eq(Permission::getPrePermissionId, prePermissionId));
 	}
 
 }

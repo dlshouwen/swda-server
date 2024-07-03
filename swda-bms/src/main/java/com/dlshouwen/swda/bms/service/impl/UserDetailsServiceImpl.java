@@ -27,17 +27,17 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements IUserDetailsService {
 	
-	/** menu service */
-	private final IPermissionService sysMenuService;
+	/** permission service */
+	private final IPermissionService permissionService;
 	
 	/** organ service */
-	private final IOrganService sysOrgService;
+	private final IOrganService organService;
 	
 	/** role mapper */
-	private final RoleMapper sysRoleDao;
+	private final RoleMapper roleMapper;
 	
 	/** role data scope mapper */
-	private final RoleOrganMapper sysRoleDataScopeDao;
+	private final RoleOrganMapper roleOrganMapper;
 
 	/**
 	 * get user details
@@ -55,9 +55,9 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 		List<Long> dataScopeList = getDataScope(userDetail);
 		userDetail.setDataScopeList(dataScopeList);
 //		get user authority
-		Set<String> authoritySet = sysMenuService.getUserAuthority(userDetail);
+		Set<String> authoritySet = permissionService.getUserAuthorityList(userDetail);
 //		get role code by user id
-		List<String> roleCodeList = sysRoleDao.geRoleCodeByUserId(userDetail.getUserId());
+		List<String> roleCodeList = roleMapper.geRoleCodeByUserId(userDetail.getUserId());
 //		set role code to authority set
 		roleCodeList.forEach(roleCode -> authoritySet.add("ROLE_" + roleCode));
 //		set authority set
@@ -73,7 +73,7 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 	 */
 	private List<Long> getDataScope(UserDetail userDetail) {
 //		get data scope by user id
-		Integer dataScope = sysRoleDao.getDataScopeByUserId(userDetail.getUserId());
+		Integer dataScope = roleMapper.getDataScopeByUserId(userDetail.getUserId());
 //		if data scope is null
 		if (dataScope == null) {
 //			return empty list
@@ -85,9 +85,9 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 			return null;
 		} else if (dataScope.equals(DataScopeEnum.ORG_AND_CHILD.getValue())) {
 //			get sub organ id list
-			List<Long> dataScopeList = sysOrgService.getSubOrgIdList(userDetail.getOrganId());
+			List<Long> dataScopeList = organService.getSubOrganIdList(userDetail.getOrganId());
 //			add user data scope list
-			dataScopeList.addAll(sysRoleDataScopeDao.getDataScopeList(userDetail.getUserId()));
+			dataScopeList.addAll(roleOrganMapper.getDataScopeList(userDetail.getUserId()));
 //			return data scope list
 			return dataScopeList;
 		} else if (dataScope.equals(DataScopeEnum.ORG_ONLY.getValue())) {
@@ -96,12 +96,12 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 //			add self organ id
 			dataScopeList.add(userDetail.getOrganId());
 //			add user data scope list
-			dataScopeList.addAll(sysRoleDataScopeDao.getDataScopeList(userDetail.getUserId()));
+			dataScopeList.addAll(roleOrganMapper.getDataScopeList(userDetail.getUserId()));
 //			return data scope list
 			return dataScopeList;
 		} else if (dataScope.equals(DataScopeEnum.CUSTOM.getValue())) {
 //			add user data scope list
-			return sysRoleDataScopeDao.getDataScopeList(userDetail.getUserId());
+			return roleOrganMapper.getDataScopeList(userDetail.getUserId());
 		}
 //		return empty list
 		return new ArrayList<>();

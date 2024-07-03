@@ -4,7 +4,6 @@ import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.enums.SysParamsEnum;
 import com.dlshouwen.swda.bms.service.ICaptchaService;
 import com.dlshouwen.swda.bms.service.IAttrService;
 import com.dlshouwen.swda.bms.vo.CaptchaVO;
@@ -28,7 +27,7 @@ public class CaptchaServiceImpl implements ICaptchaService {
 	private final RedisCache redisCache;
 	
 	/** params service */
-	private final IAttrService sysParamsService;
+	private final IAttrService attrService;
 
 	/**
 	 * generate
@@ -81,7 +80,7 @@ public class CaptchaServiceImpl implements ICaptchaService {
 	 */
 	@Override
 	public boolean isCaptchaEnabled() {
-		return sysParamsService.getBoolean(SysParamsEnum.LOGIN_CAPTCHA.name());
+		return attrService.getValue("is_captcha").equals("1");
 	}
 
 	/**

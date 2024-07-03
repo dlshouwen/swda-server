@@ -58,21 +58,21 @@ public class UserPostServiceImpl extends BaseServiceImpl<UserPostMapper, UserPos
 	}
 
 	/**
-	 * delete by post id list
+	 * delete user post by post id list
 	 * @param postIdList
 	 */
 	@Override
-	public void deleteByPostIdList(List<Long> postIdList) {
+	public void deleteUserPostByPostIdList(List<Long> postIdList) {
 //		delete user post
 		remove(new LambdaQueryWrapper<UserPost>().in(UserPost::getPostId, postIdList));
 	}
 
 	/**
-	 * delete by user id list
+	 * delete user post by user id list
 	 * @param userIdList
 	 */
 	@Override
-	public void deleteByUserIdList(List<Long> userIdList) {
+	public void deleteUserPostByUserIdList(List<Long> userIdList) {
 //		delete user post
 		remove(new LambdaQueryWrapper<UserPost>().in(UserPost::getUserId, userIdList));
 	}

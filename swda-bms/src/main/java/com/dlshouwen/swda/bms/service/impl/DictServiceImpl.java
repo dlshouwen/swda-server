@@ -1,18 +1,17 @@
 package com.dlshouwen.swda.bms.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.entity.base.PageResult;
+import com.dlshouwen.swda.core.entity.grid.PageResult;
+import com.dlshouwen.swda.core.entity.grid.Query;
 import com.dlshouwen.swda.core.exception.SwdaException;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
+import com.dlshouwen.swda.core.utils.GridUtils;
 import com.dlshouwen.swda.bms.convert.DictConvert;
 import com.dlshouwen.swda.bms.mapper.DictMapper;
 import com.dlshouwen.swda.bms.entity.Dict;
-import com.dlshouwen.swda.bms.query.SysDictDataQuery;
 import com.dlshouwen.swda.bms.service.IDictService;
 import com.dlshouwen.swda.bms.vo.DictVO;
 import org.springframework.stereotype.Service;
@@ -30,86 +29,84 @@ import java.util.List;
 public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implements IDictService {
 
 	/**
-	 * page
+	 * get dict list
 	 * @param query
-	 * @return page result
+	 * @return dict list
 	 */
 	@Override
-	public PageResult<DictVO> page(SysDictDataQuery query) {
-//		select page
-		IPage<Dict> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-//		return page result
-		return new PageResult<>(DictConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+	public PageResult<DictVO> getDictList(Query<Dict> query) {
+//		query page
+		IPage<Dict> page = GridUtils.query(baseMapper, query);
+//		convert to vo list for return
+		return new PageResult<>(DictConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
-
+	
 	/**
-	 * get wrapper
-	 * @param query
-	 * @return wrapper
+	 * get dict data
+	 * @param dictCategoryId
+	 * @param dictId
+	 * @return dict
 	 */
-	private Wrapper<Dict> getWrapper(SysDictDataQuery query) {
-//		create wrapper
-		LambdaQueryWrapper<Dict> wrapper = new LambdaQueryWrapper<>();
-//		set condition
-		wrapper.eq(Dict::getDictTypeId, query.getDictTypeId());
-		wrapper.orderByAsc(Dict::getSort);
-//		return wrapper
-		return wrapper;
+	@Override
+	public DictVO getDictData(String dictCategoryId, String dictId) {
+//		get dict
+		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictCategoryId).eq(Dict::getDictId, dictId));
+//		convert to vo for return
+		return DictConvert.INSTANCE.convert2VO(dict);
 	}
 
 	/**
-	 * save
+	 * add dict
 	 * @param dictVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(DictVO vo) {
+	public void addDict(DictVO dictVO) {
 //		get dict
-		Dict sysDictData = getOne(
-				Wrappers.<Dict>lambdaQuery().eq(Dict::getDictTypeId, vo.getDictTypeId())
-						.eq(Dict::getDictValue, vo.getDictValue()));
+		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictVO.getDictCategoryId()).eq(Dict::getDictId, dictVO.getDictId()));
 //		if has dict
-		if (sysDictData != null) {
+		if (dict != null) {
 //			throw exception
 			throw new SwdaException("字典值重复!");
 		}
 //		convert to dict
-		Dict entity = DictConvert.INSTANCE.convert(vo);
-//		insert
-		baseMapper.insert(entity);
+		dict = DictConvert.INSTANCE.convert(dictVO);
+//		insert dict
+		this.save(dict);
 	}
 
 	/**
-	 * update
+	 * update dict
 	 * @param dictVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(DictVO vo) {
+	public void updateDict(DictVO dictVO) {
 //		get dict
-		Dict sysDictData = getOne(Wrappers.<Dict>lambdaQuery()
-				.eq(Dict::getDictTypeId, vo.getDictTypeId())
-				.eq(Dict::getDictValue, vo.getDictValue()).ne(Dict::getId, vo.getId()));
+		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictVO.getDictCategoryId()).eq(Dict::getDictId, dictVO.getDictId()));
 //		if has dict
-		if (sysDictData != null) {
+		if (dict != null) {
 //			throw exception
 			throw new SwdaException("字典值重复!");
 		}
 //		convert to dict
-		Dict entity = DictConvert.INSTANCE.convert(vo);
+		dict = DictConvert.INSTANCE.convert(dictVO);
 //		update
-		updateById(entity);
+		this.update(dict, Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictVO.getDictCategoryId()).eq(Dict::getDictId, dictVO.getDictId()));
 	}
 
 	/**
-	 * delete
-	 * @param idList
+	 * delete dict
+	 * @param dictCategoryId
+	 * @param dictIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void delete(List<Long> idList) {
-//		delete
-		removeByIds(idList);
+	public void deleteDict(String dictCategoryId, List<String> dictIdList) {
+//		delete dict
+		for(String dictId : dictIdList) {
+			this.remove(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictCategoryId).eq(Dict::getDictId, dictId));
+		}
 	}
 
 }

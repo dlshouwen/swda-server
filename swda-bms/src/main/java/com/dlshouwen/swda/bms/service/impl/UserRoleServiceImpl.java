@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
 	
 	/** user token service */
-	private final IUserTokenService sysUserTokenService;
+	private final IUserTokenService userTokenService;
 
 	/**
 	 * save or update
@@ -64,12 +64,12 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRol
 	}
 
 	/**
-	 * save user list
-	 * @param role
+	 * add user role
+	 * @param roleId
 	 * @param userIdList
 	 */
 	@Override
-	public void saveUserList(Long roleId, List<Long> userIdList) {
+	public void addUserRole(Long roleId, List<Long> userIdList) {
 //		for each user id list to construct user role list
 		List<UserRole> list = userIdList.stream().map(userId -> {
 //			create user role
@@ -83,42 +83,42 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRol
 //		batch insert user role
 		saveBatch(list);
 //		update cache auth by user id
-		userIdList.forEach(sysUserTokenService::updateCacheAuthByUserId);
+		userIdList.forEach(userTokenService::updateUserCacheByUserId);
 	}
 
 	/**
-	 * delete by role id list
-	 * @param roleIdList
-	 */
-	@Override
-	public void deleteByRoleIdList(List<Long> roleIdList) {
-//		delete user role
-		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getRoleId, roleIdList));
-	}
-
-	/**
-	 * delete by user id list
-	 * @param userIdList
-	 */
-	@Override
-	public void deleteByUserIdList(List<Long> userIdList) {
-//		delete user role
-		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getUserId, userIdList));
-	}
-
-	/**
-	 * delete by user id list
+	 * delete user role
 	 * @param roleId
 	 * @param userIdList
 	 */
 	@Override
-	public void deleteByUserIdList(Long roleId, List<Long> userIdList) {
+	public void deleteUserRole(Long roleId, List<Long> userIdList) {
 //		create wrapper
 		LambdaQueryWrapper<UserRole> queryWrapper = new LambdaQueryWrapper<>();
 //		delete user role
 		remove(queryWrapper.eq(UserRole::getRoleId, roleId).in(UserRole::getUserId, userIdList));
 //		update cache auth
-		userIdList.forEach(sysUserTokenService::updateCacheAuthByUserId);
+		userIdList.forEach(userTokenService::updateUserCacheByUserId);
+	}
+
+	/**
+	 * delete user role by role id list
+	 * @param roleIdList
+	 */
+	@Override
+	public void deleteUserRoleByRoleIdList(List<Long> roleIdList) {
+//		delete user role
+		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getRoleId, roleIdList));
+	}
+
+	/**
+	 * delete user role by user id list
+	 * @param userIdList
+	 */
+	@Override
+	public void deleteUserRoleByUserIdList(List<Long> userIdList) {
+//		delete user role
+		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getUserId, userIdList));
 	}
 
 	/**

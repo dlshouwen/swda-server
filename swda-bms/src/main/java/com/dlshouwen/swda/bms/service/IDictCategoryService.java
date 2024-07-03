@@ -56,8 +56,8 @@ public interface IDictCategoryService extends BaseService<DictCategory> {
 	List<DictVO> getSqlDictList(String dictCategoryId);
 
 	/**
-	 * refresh trans cache
+	 * refresh dict trans cache
 	 */
-	void refreshTransCache();
+	void refreshDictTransCache();
 
 }

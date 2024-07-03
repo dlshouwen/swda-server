@@ -28,6 +28,6 @@ public class RoleDataScopeVO implements Serializable {
 	private Integer dataScope;
 
 	@Schema(description = "organ id list")
-	private List<Long> orgIdList;
+	private List<Long> organIdList;
 
 }

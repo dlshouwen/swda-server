@@ -1,18 +1,16 @@
 package com.dlshouwen.swda.bms.service.impl;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.entity.base.PageResult;
+import com.dlshouwen.swda.core.entity.grid.PageResult;
+import com.dlshouwen.swda.core.entity.grid.Query;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
+import com.dlshouwen.swda.core.utils.GridUtils;
 import com.dlshouwen.swda.auth.enums.DataScopeEnum;
 import com.dlshouwen.swda.bms.convert.RoleConvert;
 import com.dlshouwen.swda.bms.mapper.RoleMapper;
 import com.dlshouwen.swda.bms.entity.Role;
-import com.dlshouwen.swda.bms.query.SysRoleQuery;
 import com.dlshouwen.swda.bms.service.*;
 import com.dlshouwen.swda.bms.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.vo.RoleVO;
@@ -31,151 +29,147 @@ import java.util.List;
 @AllArgsConstructor
 public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implements IRoleService {
 	
-	/** role menu service */
-	private final IRolePermissionService sysRoleMenuService;
+	/** role permission service */
+	private final IRolePermissionService rolePermissionService;
 	
-	/** role data scope service */
-	private final IRoleOrganService sysRoleDataScopeService;
+	/** role organ service */
+	private final IRoleOrganService roleOrganService;
 	
 	/** user role service */
-	private final IUserRoleService sysUserRoleService;
+	private final IUserRoleService userRoleService;
 	
 	/** user token service */
-	private final IUserTokenService sysUserTokenService;
-
-	/**
-	 * page
-	 * @param query
-	 * @return page result
-	 */
-	@Override
-	public PageResult<RoleVO> page(SysRoleQuery query) {
-//		select page
-		IPage<Role> page = baseMapper.selectPage(getPage(query), getWrapper(query));
-//		return page result
-		return new PageResult<>(RoleConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
-	}
+	private final IUserTokenService userTokenService;
 
 	/**
 	 * get role list
 	 * @param query
+	 * @return role list
+	 */
+	@Override
+	public PageResult<RoleVO> getRoleList(Query<Role> query) {
+//		query page
+		IPage<Role> page = GridUtils.query(baseMapper, query);
+//		convert to vo for return
+		return new PageResult<>(RoleConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
+	}
+
+	/**
+	 * get role list
 	 * @return role vo list
 	 */
 	@Override
-	public List<RoleVO> getList(SysRoleQuery query) {
+	public List<RoleVO> getRoleList() {
 //		get role list
-		List<Role> entityList = baseMapper.selectList(getWrapper(query));
+		List<Role> roleList = this.list();
 //		convert to role vo list for result
-		return RoleConvert.INSTANCE.convertList(entityList);
+		return RoleConvert.INSTANCE.convert2VOList(roleList);
 	}
-
+	
 	/**
-	 * get wrapper
-	 * @param query
-	 * @return wrapper
+	 * get role data
+	 * @param roleId
+	 * @return role data
 	 */
-	private Wrapper<Role> getWrapper(SysRoleQuery query) {
-//		create wrapper
-		LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<>();
-//		set condition
-		wrapper.like(StrUtil.isNotBlank(query.getName()), Role::getName, query.getName());
-//		handle data scope wrapper
-		dataScopeWrapper(wrapper);
-//		return wrapper
-		return wrapper;
+	@Override
+	public RoleVO getRoleData(Long roleId) {
+//		get role data
+		Role role = this.getById(roleId);
+//		convert to role vo for return
+		return RoleConvert.INSTANCE.convert2VO(role);
 	}
 
 	/**
-	 * save
+	 * add role
 	 * @param roleVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(RoleVO vo) {
+	public void addRole(RoleVO roleVO) {
 //		convert to role
-		Role entity = RoleConvert.INSTANCE.convert(vo);
+		Role role = RoleConvert.INSTANCE.convert(roleVO);
 //		set data scope
-		entity.setDataScope(DataScopeEnum.SELF.getValue());
+		role.setDataScope(DataScopeEnum.SELF.getValue());
 //		insert role
-		baseMapper.insert(entity);
-//		save role menu
-		sysRoleMenuService.saveOrUpdate(entity.getId(), vo.getMenuIdList());
+		this.save(role);
+//		save role permission
+		rolePermissionService.saveOrUpdate(roleVO.getRoleId(), roleVO.getPermissionIdList());
 	}
 
 	/**
-	 * update
+	 * update role
 	 * @param roleVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void update(RoleVO vo) {
+	public void updateRole(RoleVO roleVO) {
 //		convert to role
-		Role entity = RoleConvert.INSTANCE.convert(vo);
+		Role role = RoleConvert.INSTANCE.convert(roleVO);
 //		update role
-		updateById(entity);
-//		save role menu
-		sysRoleMenuService.saveOrUpdate(entity.getId(), vo.getMenuIdList());
-//		update auth cache
-		sysUserTokenService.updateCacheAuthByRoleId(entity.getId());
+		this.updateById(role);
+//		save role permission
+		rolePermissionService.saveOrUpdate(roleVO.getRoleId(), roleVO.getPermissionIdList());
+//		update user cache
+		userTokenService.updateUserCacheByRoleId(roleVO.getRoleId());
 	}
 
 	/**
-	 * data scope
+	 * set role data scope
 	 * @param roleDataScopeVO
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void dataScope(RoleDataScopeVO vo) {
+	public void setRoleDataScope(RoleDataScopeVO roleDataScopeVO) {
 //		get role
-		Role entity = getById(vo.getId());
+		Role role = getById(roleDataScopeVO.getRoleId());
 //		set data scope
-		entity.setDataScope(vo.getDataScope());
+		role.setDataScope(roleDataScopeVO.getDataScope());
 //		update role
-		updateById(entity);
+		updateById(role);
 //		if custom data scope
-		if (vo.getDataScope().equals(DataScopeEnum.CUSTOM.getValue())) {
+		if (roleDataScopeVO.getDataScope().equals(DataScopeEnum.CUSTOM.getValue())) {
 //			update role data scope
-			sysRoleDataScopeService.saveOrUpdate(entity.getId(), vo.getOrgIdList());
+			roleOrganService.saveOrUpdate(role.getRoleId(), roleDataScopeVO.getOrganIdList());
 		} else {
-//			delete role data scope
-			sysRoleDataScopeService.deleteByRoleIdList(Collections.singletonList(vo.getId()));
+//			delete role organ
+			roleOrganService.deleteRoleOrganByRoleIdList(Collections.singletonList(roleDataScopeVO.getRoleId()));
 		}
 //		update auth cache
-		sysUserTokenService.updateCacheAuthByRoleId(entity.getId());
+		userTokenService.updateUserCacheByRoleId(roleDataScopeVO.getRoleId());
 	}
 
 	/**
-	 * delete
-	 * @param idList
+	 * delete role
+	 * @param roleIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void delete(List<Long> idList) {
+	public void deleteRole(List<Long> roleIdList) {
 //		dlete role list
-		removeByIds(idList);
+		this.removeByIds(roleIdList);
 //		delete user role list
-		sysUserRoleService.deleteByRoleIdList(idList);
-//		delete role menu list
-		sysRoleMenuService.deleteByRoleIdList(idList);
-//		delete role data scope list
-		sysRoleDataScopeService.deleteByRoleIdList(idList);
+		userRoleService.deleteUserRoleByRoleIdList(roleIdList);
+//		delete role permission list
+		rolePermissionService.deleteRolePermissionByRoleIdList(roleIdList);
+//		delete role organ list
+		roleOrganService.deleteRoleOrganByRoleIdList(roleIdList);
 //		update auth cache
-		idList.forEach(sysUserTokenService::updateCacheAuthByRoleId);
+		roleIdList.forEach(userTokenService::updateUserCacheByRoleId);
 	}
 
 	/**
 	 * get role name list
-	 * @param idList
+	 * @param roleIdList
 	 * @return role name list
 	 */
 	@Override
-	public List<String> getNameList(List<Long> idList) {
+	public List<String> getRoleNameList(List<Long> roleIdList) {
 //		if id list is empty then return null
-		if (idList.isEmpty()) {
+		if (roleIdList.isEmpty()) {
 			return null;
 		}
 //		get role name list for return
-		return baseMapper.selectBatchIds(idList).stream().map(Role::getName).toList();
+		return this.listByIds(roleIdList).stream().map(Role::getRoleName).toList();
 	}
 
 }

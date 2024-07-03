@@ -44,7 +44,7 @@ public interface UserMapper extends BaseMapper<User> {
 	 * @param username
 	 * @return user
 	 */
-	default User getByUsername(String username) {
+	default User getUserByUsername(String username) {
 		return this.selectOne(new QueryWrapper<User>().eq("username", username));
 	}
 
@@ -53,7 +53,7 @@ public interface UserMapper extends BaseMapper<User> {
 	 * @param mobile
 	 * @return user
 	 */
-	default User getByMobile(String mobile) {
+	default User getUserByMobile(String mobile) {
 		return this.selectOne(new QueryWrapper<User>().eq("mobile", mobile));
 	}
 
