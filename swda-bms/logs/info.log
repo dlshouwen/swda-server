@@ -1,0 +1,58 @@
+2024-07-09 08:19:16.686 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-07-09 08:19:16.734 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - Starting BmsApplication using Java 17.0.10 with PID 8912 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms\target\classes started by Milo in D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms)
+2024-07-09 08:19:16.735 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-07-09 08:19:18.137 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 08:19:18.142 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-07-09 08:19:18.162 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2024-07-09 08:19:18.171 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 08:19:18.171 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-07-09 08:19:18.182 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2024-07-09 08:19:18.419 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=5ea25c7c-97c4-3070-8418-2bf54693a3e5
+2024-07-09 08:19:19.585 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2024-07-09 08:19:19.600 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2024-07-09 08:19:19.605 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-07-09 08:19:19.605 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-07-09 08:19:19.723 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-07-09 08:19:19.723 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2947 ms
+2024-07-09 08:19:20.565 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2024-07-09 08:19:20.785 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@73dd3a46
+2024-07-09 08:19:20.787 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2024-07-09 08:19:20.787 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2024-07-09 08:19:20.788 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2024-07-09 08:19:22.376 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource start closing ....
+2024-07-09 08:19:22.376 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
+2024-07-09 08:19:22.385 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
+2024-07-09 08:19:22.385 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
+2024-07-09 08:19:22.413 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2024-07-09 08:19:22.434 [main] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-07-09 08:20:16.139 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-07-09 08:20:16.182 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - Starting BmsApplication using Java 17.0.10 with PID 11596 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms\target\classes started by Milo in D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms)
+2024-07-09 08:20:16.183 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-07-09 08:20:17.639 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 08:20:17.641 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-07-09 08:20:17.665 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 JDBC repository interfaces.
+2024-07-09 08:20:17.676 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 08:20:17.677 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-07-09 08:20:17.690 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2024-07-09 08:20:17.932 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=5ea25c7c-97c4-3070-8418-2bf54693a3e5
+2024-07-09 08:20:18.979 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2024-07-09 08:20:18.998 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2024-07-09 08:20:19.002 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-07-09 08:20:19.002 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-07-09 08:20:19.125 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-07-09 08:20:19.126 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2907 ms
+2024-07-09 08:20:19.950 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2024-07-09 08:20:20.174 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d01f2e5
+2024-07-09 08:20:20.176 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2024-07-09 08:20:20.176 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2024-07-09 08:20:20.176 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2024-07-09 08:20:21.701 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource start closing ....
+2024-07-09 08:20:21.702 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
+2024-07-09 08:20:21.709 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
+2024-07-09 08:20:21.710 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
+2024-07-09 08:20:21.732 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2024-07-09 08:20:21.753 [main] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.

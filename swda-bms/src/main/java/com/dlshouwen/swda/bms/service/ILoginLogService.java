@@ -2,8 +2,8 @@ package com.dlshouwen.swda.bms.service;
 
 import com.dlshouwen.swda.core.entity.grid.PageResult;
 import com.dlshouwen.swda.core.entity.grid.Query;
+import com.dlshouwen.swda.core.entity.log.LoginLog;
 import com.dlshouwen.swda.core.service.BaseService;
-import com.dlshouwen.swda.bms.entity.LoginLog;
 import com.dlshouwen.swda.bms.vo.LoginLogVO;
 
 /**

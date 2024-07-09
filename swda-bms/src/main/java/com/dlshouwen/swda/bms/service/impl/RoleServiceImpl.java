@@ -7,8 +7,8 @@ import com.dlshouwen.swda.core.entity.grid.PageResult;
 import com.dlshouwen.swda.core.entity.grid.Query;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.utils.GridUtils;
-import com.dlshouwen.swda.auth.enums.DataScopeEnum;
 import com.dlshouwen.swda.bms.convert.RoleConvert;
+import com.dlshouwen.swda.bms.dict.DataScopeType;
 import com.dlshouwen.swda.bms.mapper.RoleMapper;
 import com.dlshouwen.swda.bms.entity.Role;
 import com.dlshouwen.swda.bms.service.*;
@@ -89,7 +89,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 //		convert to role
 		Role role = RoleConvert.INSTANCE.convert(roleVO);
 //		set data scope
-		role.setDataScope(DataScopeEnum.SELF.getValue());
+		role.setDataScope(DataScopeType.SELF);
 //		insert role
 		this.save(role);
 //		save role permission
@@ -127,7 +127,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 //		update role
 		updateById(role);
 //		if custom data scope
-		if (roleDataScopeVO.getDataScope().equals(DataScopeEnum.CUSTOM.getValue())) {
+		if (roleDataScopeVO.getDataScope().equals(DataScopeType.CUSTOM)) {
 //			update role data scope
 			roleOrganService.saveOrUpdate(role.getRoleId(), roleDataScopeVO.getOrganIdList());
 		} else {

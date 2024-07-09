@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.service.impl;
 
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.auth.enums.DataScopeEnum;
+import com.dlshouwen.swda.bms.dict.DataScopeType;
 import com.dlshouwen.swda.bms.mapper.RoleMapper;
 import com.dlshouwen.swda.bms.mapper.RoleOrganMapper;
 import com.dlshouwen.swda.bms.service.IPermissionService;
@@ -80,17 +80,17 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 			return new ArrayList<>();
 		}
 //		if all premission
-		if (dataScope.equals(DataScopeEnum.ALL.getValue())) {
+		if (dataScope.equals(DataScopeType.ALL)) {
 //			return null
 			return null;
-		} else if (dataScope.equals(DataScopeEnum.ORG_AND_CHILD.getValue())) {
+		} else if (dataScope.equals(DataScopeType.ORGAN_AND_CHILDREN)) {
 //			get sub organ id list
 			List<Long> dataScopeList = organService.getSubOrganIdList(userDetail.getOrganId());
 //			add user data scope list
 			dataScopeList.addAll(roleOrganMapper.getDataScopeList(userDetail.getUserId()));
 //			return data scope list
 			return dataScopeList;
-		} else if (dataScope.equals(DataScopeEnum.ORG_ONLY.getValue())) {
+		} else if (dataScope.equals(DataScopeType.ORGAN_ONLY)) {
 //			create data scope list
 			List<Long> dataScopeList = new ArrayList<>();
 //			add self organ id
@@ -99,7 +99,7 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 			dataScopeList.addAll(roleOrganMapper.getDataScopeList(userDetail.getUserId()));
 //			return data scope list
 			return dataScopeList;
-		} else if (dataScope.equals(DataScopeEnum.CUSTOM.getValue())) {
+		} else if (dataScope.equals(DataScopeType.CUSTOM)) {
 //			add user data scope list
 			return roleOrganMapper.getDataScopeList(userDetail.getUserId());
 		}

@@ -33,7 +33,7 @@ public class OrganController {
 	 * @return result
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get organ list")
+	@Operation(name = "get organ list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:organ:list')")
 	public R<List<OrganVO>> getOrganList() {
 //		get organ list
@@ -48,7 +48,7 @@ public class OrganController {
 	 * @return organ
 	 */
 	@GetMapping("/data/{organId}")
-	@Operation(name = "get organ data")
+	@Operation(name = "get organ data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:organ:data')")
 	public R<OrganVO> getOrganData(@PathVariable("organId") Long organId) {
 //		get organ data
@@ -108,7 +108,7 @@ public class OrganController {
 	 * @return result
 	 */
 	@PostMapping("/name/list")
-	@Operation(name = "get organ name list")
+	@Operation(name = "get organ name list", type = OperateType.SEARCH)
 	public R<List<String>> getOrganNameList(@RequestBody List<Long> organIdList) {
 //		get organ name list
 		List<String> list = organService.getOrganNameList(organIdList);

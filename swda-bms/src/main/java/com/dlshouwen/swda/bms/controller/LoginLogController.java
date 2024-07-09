@@ -8,7 +8,8 @@ import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.entity.grid.PageResult;
 import com.dlshouwen.swda.core.entity.grid.Query;
-import com.dlshouwen.swda.bms.entity.LoginLog;
+import com.dlshouwen.swda.core.entity.log.LoginLog;
+import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.service.ILoginLogService;
 import com.dlshouwen.swda.bms.vo.LoginLogVO;
 import org.springdoc.core.annotations.ParameterObject;
@@ -37,7 +38,7 @@ public class LoginLogController {
 	 * @return login log list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "page")
+	@Operation(name = "get login log list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:login_log:list')")
 	public R<PageResult<LoginLogVO>> getLoginLogList(@ParameterObject @Valid Query<LoginLog> query) {
 //		get login log list

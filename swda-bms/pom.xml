@@ -40,7 +40,6 @@
              <artifactId>swda-oss</artifactId>
 		</dependency>
 		
-		
 		<dependency>
 			<groupId>com.github.whvcse</groupId>
 			<artifactId>easy-captcha</artifactId>

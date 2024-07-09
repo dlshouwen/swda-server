@@ -40,7 +40,7 @@ public class DictCategoryController {
 	 * @return dict category list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get dict category list")
+	@Operation(name = "get dict category list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:dict_category:list')")
 	public R<PageResult<DictCategoryVO>> getDictCategoryList(@ParameterObject @Valid Query<DictCategory> query) {
 //		get dict category list
@@ -55,7 +55,7 @@ public class DictCategoryController {
 	 * @return result
 	 */
 	@GetMapping("/data/{dictCategoryId}")
-	@Operation(name = "get dict category data")
+	@Operation(name = "get dict category data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:dict_category:data')")
 	public R<DictCategoryVO> getDictCategoryData(@PathVariable("dictCategoryId") String dictCategoryId) {
 //		get dict category data
@@ -115,7 +115,7 @@ public class DictCategoryController {
 	 * @return sql dict list
 	 */
 	@GetMapping("/sql/dict/list")
-	@Operation(name = "get sql dict list")
+	@Operation(name = "get sql dict list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:dict_category:sql:dict:list')")
 	public R<List<DictVO>> getSqlDictList(String dictCategoryId) {
 //		get dict list
@@ -129,7 +129,7 @@ public class DictCategoryController {
 	 * @return result
 	 */
 	@GetMapping("/cache/refresh")
-	@Operation(name = "refresh dict trans cache")
+	@Operation(name = "refresh dict trans cache", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('sys:dict_category:cache:refresh')")
 	public R<String> refreshDictTransCache() {
 //		refresh dict trans cache

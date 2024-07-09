@@ -11,6 +11,7 @@ import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.entity.grid.PageResult;
 import com.dlshouwen.swda.core.entity.grid.Query;
+import com.dlshouwen.swda.core.enums.OperateType;
 
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,7 +39,7 @@ public class AuthPlatformController {
 	 * @return auth platform list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get auth platform list")
+	@Operation(name = "get auth platform list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:auth_platform:list')")
 	public R<PageResult<AuthPlatformVO>> getAuthPlatformList(@ParameterObject @Valid Query<AuthPlatform> query) {
 //		get auth platform list
@@ -53,7 +54,7 @@ public class AuthPlatformController {
 	 * @return auth platform
 	 */
 	@GetMapping("/data/{authPlatformId}")
-	@Operation(name = "get auth platform data")
+	@Operation(name = "get auth platform data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:auth_platform:data')")
 	public R<AuthPlatformVO> getAuthPlatformData(@PathVariable("authPlatformId") Long authPlatformId) {
 //		get auth platform data
@@ -68,7 +69,7 @@ public class AuthPlatformController {
 	 * @return result
 	 */
 	@PostMapping("/add")
-	@Operation(name = "add auth platform")
+	@Operation(name = "add auth platform", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('bms:auth_platform:add')")
 	public R<String> addAuthPlatform(@RequestBody AuthPlatformVO authPlatformVO) {
 //		add auth platform
@@ -83,7 +84,7 @@ public class AuthPlatformController {
 	 * @return result
 	 */
 	@PutMapping("/update")
-	@Operation(name = "update auth platform")
+	@Operation(name = "update auth platform", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:auth_platform:update')")
 	public R<String> updateAuthPlatform(@RequestBody @Valid AuthPlatformVO authPlatformVO) {
 //		update auth platform
@@ -98,7 +99,7 @@ public class AuthPlatformController {
 	 * @return result
 	 */
 	@DeleteMapping("/delete")
-	@Operation(name = "delete auth platform")
+	@Operation(name = "delete auth platform", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:auth_platform:delete')")
 	public R<String> deleteAuthPlatform(@RequestBody List<Long> authPlatformIdList) {
 //		delete auth platform

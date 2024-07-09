@@ -62,7 +62,7 @@ public class UserController {
 	 * @return user list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get user list")
+	@Operation(name = "get user list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:user:list')")
 	public R<PageResult<UserVO>> getUserList(@ParameterObject @Valid Query<User> query) {
 //		get user list
@@ -77,7 +77,7 @@ public class UserController {
 	 * @return user data
 	 */
 	@GetMapping("/data/{userId}")
-	@Operation(name = "get user data")
+	@Operation(name = "get user data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:user:data')")
 	public R<UserVO> getUserData(@PathVariable("id") Long userId) {
 //		get user data
@@ -97,7 +97,7 @@ public class UserController {
 	 * @return result
 	 */
 	@GetMapping("/login/data")
-	@Operation(name = "get login user data")
+	@Operation(name = "get login user data", type = OperateType.SEARCH)
 	public R<UserVO> getLoginUserData() {
 //		convert user to user vo
 		UserVO user = UserConvert.INSTANCE.convert2VO(SecurityUser.getUser());
@@ -233,7 +233,7 @@ public class UserController {
 	 * @return user name list
 	 */
 	@PostMapping("/name/list")
-	@Operation(name = "get user name list")
+	@Operation(name = "get user name list", type = OperateType.SEARCH)
 	public R<List<String>> getUserNameList(@RequestBody List<Long> userIdList) {
 //		get user name list
 		List<String> userNameList = userService.getUserNameList(userIdList);

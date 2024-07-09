@@ -8,6 +8,7 @@ import com.dlshouwen.swda.bms.service.ICaptchaService;
 import com.dlshouwen.swda.bms.vo.*;
 import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.R;
+import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.core.utils.TokenUtils;
 
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@GetMapping("captcha")
-	@Operation(name = "captcha")
+	@Operation(name = "captcha", type = OperateType.SEARCH)
 	public R<CaptchaVO> captcha() {
 //		generate captcha vo
 		CaptchaVO captchaVO = sysCaptchaService.generate();
@@ -47,7 +48,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@GetMapping("captcha/enabled")
-	@Operation(name = "is enabled captcha")
+	@Operation(name = "is enabled captcha", type = OperateType.SEARCH)
 	public R<Boolean> captchaEnabled() {
 //		is captcha enbaled
 		boolean enabled = sysCaptchaService.isCaptchaEnabled();
@@ -61,7 +62,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@PostMapping("login")
-	@Operation(name = "login")
+	@Operation(name = "login", type = OperateType.LOGIN)
 	public R<UserTokenVO> login(@RequestBody UserLoginVO login) {
 //		login by account
 		UserTokenVO token = sysAuthService.loginByAccount(login);
@@ -75,7 +76,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@PostMapping("send/code")
-	@Operation(name = "send code")
+	@Operation(name = "send code", type = OperateType.SEARCH)
 	public R<String> sendCode(String mobile) {
 //		send code
 		boolean flag = sysAuthService.sendCode(mobile);
@@ -94,7 +95,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@PostMapping("mobile")
-	@Operation(name = "mobile")
+	@Operation(name = "mobile", type = OperateType.LOGIN)
 	public R<UserTokenVO> mobile(@RequestBody MobileLoginVO login) {
 //		login by mobile
 		UserTokenVO token = sysAuthService.loginByMobile(login);
@@ -108,7 +109,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@PostMapping("third")
-	@Operation(name = "third login")
+	@Operation(name = "third login", type = OperateType.LOGIN)
 	public R<UserTokenVO> third(@RequestBody AuthCallbackVO login) {
 //		login by third
 		UserTokenVO token = sysAuthService.loginByThird(login);
@@ -122,7 +123,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@PostMapping("token")
-	@Operation(name = "get access token")
+	@Operation(name = "get access token", type = OperateType.SEARCH)
 	public R<AccessTokenVO> token(String refreshToken) {
 //		get access token
 		AccessTokenVO token = sysAuthService.getAccessToken(refreshToken);
@@ -136,7 +137,7 @@ public class LoginController {
 	 * @return result
 	 */
 	@PostMapping("logout")
-	@Operation(name = "logout")
+	@Operation(name = "logout", type = OperateType.LOGOUT)
 	public R<String> logout(HttpServletRequest request) {
 //		logout
 		sysAuthService.logout(TokenUtils.getAccessToken(request));

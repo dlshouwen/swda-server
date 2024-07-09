@@ -54,7 +54,7 @@ public class RoleController {
 	 * @return role list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get role list")
+	@Operation(name = "get role list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:role:list')")
 	public R<PageResult<RoleVO>> getRoleList(@ParameterObject @Valid Query<Role> query) {
 //		get role list
@@ -68,7 +68,7 @@ public class RoleController {
 	 * @return role list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get role list")
+	@Operation(name = "get role list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:role:list')")
 	public R<List<RoleVO>> getRoleList() {
 //		get role list
@@ -83,7 +83,7 @@ public class RoleController {
 	 * @return role data
 	 */
 	@GetMapping("/data/{roleId}")
-	@Operation(name = "get role data")
+	@Operation(name = "get role data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:role:data')")
 	public R<RoleVO> getRoleData(@PathVariable("roleId") Long roleId) {
 //		get role data
@@ -163,7 +163,7 @@ public class RoleController {
 	 * @return result
 	 */
 	@GetMapping("/user/permission/list")
-	@Operation(name = "get user permission list")
+	@Operation(name = "get user permission list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:role:user:permission:list')")
 	public R<List<PermissionVO>> menu() {
 //		get login user
@@ -180,7 +180,7 @@ public class RoleController {
 	 * @return result
 	 */
 	@GetMapping("/user/list")
-	@Operation(name = "get user list")
+	@Operation(name = "get user list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:role:update')")
 	public R<PageResult<UserVO>> getUserList(@Valid Query<User> query) {
 //		get user list
@@ -227,7 +227,7 @@ public class RoleController {
 	 * @return role name list
 	 */
 	@PostMapping("/name/list")
-	@Operation(name = "get role name list")
+	@Operation(name = "get role name list", type = OperateType.SEARCH)
 	public R<List<String>> getRoleNameList(@RequestBody List<Long> roleIdList) {
 //		get role name list
 		List<String> roleNameList = roleService.getRoleNameList(roleIdList);

@@ -18,7 +18,6 @@ import com.dlshouwen.swda.core.utils.JsonUtils;
 
 import cn.hutool.core.map.MapUtil;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -40,6 +39,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 
 import org.apache.ibatis.type.TypeHandlerRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -53,7 +53,6 @@ import org.springframework.stereotype.Component;
 	@Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class }) 
 })
 @Component
-@AllArgsConstructor
 public class MyBatisLogInterceptor implements Interceptor {
 
 	/** is write log */
@@ -63,7 +62,8 @@ public class MyBatisLogInterceptor implements Interceptor {
 	private DataLog dataLog = new DataLog();
 
 	/** redis cache */
-	private final RedisCache redisCache;
+	@Autowired
+	private RedisCache redisCache;
 
 	/**
 	 * intercept

@@ -8,7 +8,8 @@ import com.dlshouwen.swda.core.annotation.Operation;
 import com.dlshouwen.swda.core.entity.base.R;
 import com.dlshouwen.swda.core.entity.grid.PageResult;
 import com.dlshouwen.swda.core.entity.grid.Query;
-import com.dlshouwen.swda.bms.entity.OperationLog;
+import com.dlshouwen.swda.core.entity.log.OperationLog;
+import com.dlshouwen.swda.core.enums.OperateType;
 import com.dlshouwen.swda.bms.service.IOperationLogService;
 import com.dlshouwen.swda.bms.vo.OperationLogVO;
 import org.springdoc.core.annotations.ParameterObject;
@@ -37,7 +38,7 @@ public class OperateLogController {
 	 * @return operation log list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get operation log list")
+	@Operation(name = "get operation log list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:operate:list')")
 	public R<PageResult<OperationLogVO>> getOperationLogList(@ParameterObject @Valid Query<OperationLog> query) {
 //		get operation log list

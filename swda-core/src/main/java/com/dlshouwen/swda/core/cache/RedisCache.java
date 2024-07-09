@@ -1,9 +1,10 @@
 package com.dlshouwen.swda.core.cache;
 
-import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+
+import jakarta.annotation.Resource;
 
 import java.util.Collection;
 import java.util.Date;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisCache {
 	
 	/** redis template */
-	@Resource
+    @Resource
 	private RedisTemplate<String, Object> redisTemplate;
 
 	/** default expire */

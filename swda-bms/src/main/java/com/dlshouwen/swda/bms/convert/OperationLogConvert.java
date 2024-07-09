@@ -1,7 +1,8 @@
 package com.dlshouwen.swda.bms.convert;
 
-import com.dlshouwen.swda.bms.entity.OperationLog;
 import com.dlshouwen.swda.bms.vo.OperationLogVO;
+import com.dlshouwen.swda.core.entity.log.OperationLog;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -57,7 +57,7 @@ public class OperationLogAspect {
 	 * @return
 	 * @throws Throwable
 	 */
-	@Around("@annotation(operateLog)")
+	@Around("@annotation(operation)")
 	public Object around(ProceedingJoinPoint joinPoint, Operation operation) throws Throwable {
 //		defined start time
 		LocalDateTime startTime = LocalDateTime.now();

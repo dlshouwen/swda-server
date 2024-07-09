@@ -38,7 +38,7 @@ public class PostController {
 	 * @return post list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get post list")
+	@Operation(name = "get post list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:post:list')")
 	public R<PageResult<PostVO>> getPostList(@ParameterObject @Valid Query<Post> query) {
 //		get post list
@@ -52,7 +52,7 @@ public class PostController {
 	 * @return post list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get post list")
+	@Operation(name = "get post list", type = OperateType.SEARCH)
 	public R<List<PostVO>> getPostList() {
 //		get post list
 		List<PostVO> postList = postService.getPostList();
@@ -66,7 +66,7 @@ public class PostController {
 	 * @return post data
 	 */
 	@GetMapping("/data/{postId}")
-	@Operation(name = "get post data")
+	@Operation(name = "get post data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:post:data')")
 	public R<PostVO> getPostData(@PathVariable("postId") Long postId) {
 //		get post data
@@ -126,7 +126,7 @@ public class PostController {
 	 * @return post name list
 	 */
 	@PostMapping("/name/list")
-	@Operation(name = "get post name list")
+	@Operation(name = "get post name list", type = OperateType.SEARCH)
 	public R<List<String>> getPostNameList(@RequestBody List<Long> postIdList) {
 //		get post name list
 		List<String> postNameList = postService.getPostNameList(postIdList);

@@ -2,7 +2,7 @@ package com.dlshouwen.swda.bms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.dlshouwen.swda.bms.entity.LoginLog;
+import com.dlshouwen.swda.core.entity.log.LoginLog;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 
 /**

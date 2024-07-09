@@ -38,7 +38,7 @@ public class DictController {
 	 * @return result
 	 */
 	@GetMapping("/list/{dictCategoryId}")
-	@Operation(name = "get dict list")
+	@Operation(name = "get dict list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:dict:list')")
 	public R<PageResult<DictVO>> getDictList(@ParameterObject @Valid Query<Dict> query) {
 //		get dict list
@@ -54,7 +54,7 @@ public class DictController {
 	 * @return dict
 	 */
 	@GetMapping("/data/{dictCategoryId}/{dictId}")
-	@Operation(name = "get dict data")
+	@Operation(name = "get dict data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:dict:data')")
 	public R<DictVO> getDictData(@PathVariable("dictCategoryId") String dictCategoryId, @PathVariable("dictId") String dictId) {
 //		get dict data

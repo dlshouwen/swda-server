@@ -2,12 +2,12 @@ package com.dlshouwen.swda.core.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dlshouwen.swda.core.entity.auth.SecurityUser;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 import com.dlshouwen.swda.core.entity.base.DataScope;
+import com.dlshouwen.swda.core.mapper.BaseMapper;
 import com.dlshouwen.swda.core.dict.ZeroOne;
 import com.dlshouwen.swda.core.service.BaseService;
 

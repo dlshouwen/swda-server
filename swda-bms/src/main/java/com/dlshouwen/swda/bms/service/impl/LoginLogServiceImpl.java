@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.utils.*;
 import com.dlshouwen.swda.core.entity.grid.PageResult;
 import com.dlshouwen.swda.core.entity.grid.Query;
+import com.dlshouwen.swda.core.entity.log.LoginLog;
 import com.dlshouwen.swda.core.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.convert.LoginLogConvert;
 import com.dlshouwen.swda.bms.mapper.LoginLogMapper;
-import com.dlshouwen.swda.bms.entity.LoginLog;
 import com.dlshouwen.swda.bms.service.ILoginLogService;
 import com.dlshouwen.swda.bms.vo.LoginLogVO;
 import org.springframework.http.HttpHeaders;
@@ -17,15 +17,17 @@ import org.springframework.stereotype.Service;
 
 /**
  * login log service impl
+ * 
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Service
 @AllArgsConstructor
 public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLog> implements ILoginLogService {
-	
+
 	/**
 	 * get login log list
+	 * 
 	 * @param query
 	 * @return login log list
 	 */
@@ -39,6 +41,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 
 	/**
 	 * save
+	 * 
 	 * @param username
 	 * @param status
 	 * @param operation

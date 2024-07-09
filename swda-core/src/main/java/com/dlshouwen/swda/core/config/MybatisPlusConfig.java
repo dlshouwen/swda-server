@@ -34,7 +34,7 @@ public class MybatisPlusConfig {
 		mybatisPlusInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
 //		set block attack interceptor
 		mybatisPlusInterceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
-
+//		return interceptor
 		return mybatisPlusInterceptor;
 	}
 

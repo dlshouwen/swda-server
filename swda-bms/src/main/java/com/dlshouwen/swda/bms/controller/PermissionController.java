@@ -37,7 +37,7 @@ public class PermissionController {
 	 * @return user menu list
 	 */
 	@GetMapping("/user/menu/list")
-	@Operation(name = "get user menu list")
+	@Operation(name = "get user menu list", type = OperateType.SEARCH)
 	public R<List<PermissionVO>> getUserMenuList() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
@@ -52,7 +52,7 @@ public class PermissionController {
 	 * @return user authority list
 	 */
 	@GetMapping("/user/authority/list")
-	@Operation(name = "get user authority list")
+	@Operation(name = "get user authority list", type = OperateType.SEARCH)
 	public R<Set<String>> getUserAuthorityList() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
@@ -68,7 +68,7 @@ public class PermissionController {
 	 * @return permission list
 	 */
 	@GetMapping("/list")
-	@Operation(name = "get permission list")
+	@Operation(name = "get permission list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:permission:list')")
 	public R<List<PermissionVO>> getPermissionList(Integer permissionType) {
 //		get permission list
@@ -83,7 +83,7 @@ public class PermissionController {
 	 * @return permission
 	 */
 	@GetMapping("/data/{permissionId}")
-	@Operation(name = "get permission data")
+	@Operation(name = "get permission data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:permission:data')")
 	public R<PermissionVO> getPermissionData(@PathVariable("permissionId") Long permissionId) {
 //		get permission data
