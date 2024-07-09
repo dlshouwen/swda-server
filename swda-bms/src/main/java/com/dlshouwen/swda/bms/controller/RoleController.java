@@ -53,7 +53,7 @@ public class RoleController {
 	 * @param query
 	 * @return role list
 	 */
-	@GetMapping("/list")
+	@GetMapping("/datas")
 	@Operation(name = "get role list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:role:list')")
 	public R<PageResult<RoleVO>> getRoleList(@ParameterObject @Valid Query<Role> query) {

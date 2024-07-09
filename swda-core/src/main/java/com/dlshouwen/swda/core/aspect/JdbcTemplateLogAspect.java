@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.dict.CallResult;
 import com.dlshouwen.swda.core.dict.CallType;
 import com.dlshouwen.swda.core.dict.ExecuteType;
 import com.dlshouwen.swda.core.dict.OperationType;
-import com.dlshouwen.swda.core.entity.log.DataLog;
+import com.dlshouwen.swda.core.dto.DataLogDTO;
 import com.dlshouwen.swda.core.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.utils.HttpContextUtils;
 import com.dlshouwen.swda.core.utils.IpUtils;
@@ -19,13 +19,13 @@ import com.dlshouwen.swda.core.utils.JsonUtils;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.map.MapUtil;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -40,17 +40,17 @@ import java.util.*;
 @Slf4j
 @Aspect
 @Component
-@AllArgsConstructor
 public class JdbcTemplateLogAspect {
 
 	/** is write log */
 	private boolean isWriteLog = false;
 	
 	/** data log */
-	private DataLog dataLog = new DataLog();
+	private DataLogDTO dataLog = new DataLogDTO();
 
 	/** redis cache */
-	private final RedisCache redisCache;
+	@Autowired
+	private RedisCache redisCache;
 
 	/**
 	 * jdbc template log

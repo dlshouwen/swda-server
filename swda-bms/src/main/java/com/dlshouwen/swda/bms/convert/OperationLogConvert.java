@@ -25,7 +25,7 @@ public interface OperationLogConvert {
 	 * @return operation log
 	 */
 	OperationLog convert(OperationLogVO vo);
-
+	
 	/**
 	 * convert to vo
 	 * @param operationLog

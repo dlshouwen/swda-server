@@ -1,66 +1,61 @@
-package com.dlshouwen.swda.core.entity.log;
+package com.dlshouwen.swda.core.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.dlshouwen.swda.core.entity.BaseEntity;
-
+import com.dlshouwen.swda.core.utils.DateUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 /**
- * operation log
+ * operation log dto
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@TableName("bms_operation_log")
-public class OperationLog extends BaseEntity {
+public class OperationLogDTO {
 
-	@TableId(value = "log_id", type = IdType.AUTO)
 	private Long logId;
-	
+
 	private String userAgent;
 
 	private String operationModule;
 
 	private String operationName;
 
-	private int operationType;
-	
+	private Integer operationType;
+
 	private String requestUri;
 
 	private String requestMethod;
-	
+
 	private String requestParams;
 
 	private String responseResult;
 
 	private String callSource;
+
+	private Integer lineNo;
 	
-	private int lineNo;
-	
-	private int callResult;
-	
+	private Integer callResult;
+
 	private String errorReason;
 
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime startTime;
 
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime endTime;
 
-	private int cost;
-	
+	private Integer cost;
+
 	private Long tenantId;
-
+	
 	private Long userId;
-
+	
 	private String userName;
-
+	
 	private Long organId;
-
+	
 	private String organName;
 
 	private String ip;

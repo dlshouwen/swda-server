@@ -48,7 +48,7 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 	private final TokenProperties securityProperties;
 	
 	/** user mapper */
-	private final UserMapper sysUserDao;
+	private final UserMapper userMapper;
 
 	/**
 	 * create token
@@ -119,7 +119,7 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 //		update user token
 		baseMapper.updateById(entity);
 //		get user
-		User user = sysUserDao.selectById(entity.getUserId());
+		User user = userMapper.selectById(entity.getUserId());
 //		convert to user detail
 		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
 //		get user details

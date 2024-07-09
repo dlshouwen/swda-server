@@ -10,7 +10,7 @@ import com.dlshouwen.swda.core.dict.CallResult;
 import com.dlshouwen.swda.core.dict.CallType;
 import com.dlshouwen.swda.core.dict.ExecuteType;
 import com.dlshouwen.swda.core.dict.OperationType;
-import com.dlshouwen.swda.core.entity.log.DataLog;
+import com.dlshouwen.swda.core.dto.DataLogDTO;
 import com.dlshouwen.swda.core.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.utils.HttpContextUtils;
 import com.dlshouwen.swda.core.utils.IpUtils;
@@ -59,7 +59,7 @@ public class MyBatisLogInterceptor implements Interceptor {
 	private boolean isWriteLog = false;
 	
 	/** data log */
-	private DataLog dataLog = new DataLog();
+	private DataLogDTO dataLog = new DataLogDTO();
 
 	/** redis cache */
 	@Autowired

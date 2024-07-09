@@ -37,7 +37,7 @@ public class PostController {
 	 * @param query
 	 * @return post list
 	 */
-	@GetMapping("/list")
+	@GetMapping("/datas")
 	@Operation(name = "get post list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:post:list')")
 	public R<PageResult<PostVO>> getPostList(@ParameterObject @Valid Query<Post> query) {

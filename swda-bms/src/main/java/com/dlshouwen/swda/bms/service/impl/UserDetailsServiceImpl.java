@@ -2,9 +2,12 @@ package com.dlshouwen.swda.bms.service.impl;
 
 import lombok.AllArgsConstructor;
 
+import com.dlshouwen.swda.bms.convert.UserConvert;
 import com.dlshouwen.swda.bms.dict.DataScopeType;
+import com.dlshouwen.swda.bms.entity.User;
 import com.dlshouwen.swda.bms.mapper.RoleMapper;
 import com.dlshouwen.swda.bms.mapper.RoleOrganMapper;
+import com.dlshouwen.swda.bms.mapper.UserMapper;
 import com.dlshouwen.swda.bms.service.IPermissionService;
 import com.dlshouwen.swda.bms.service.IOrganService;
 import com.dlshouwen.swda.bms.service.IUserDetailsService;
@@ -12,6 +15,8 @@ import com.dlshouwen.swda.core.dict.OpenClose;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +30,7 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class UserDetailsServiceImpl implements IUserDetailsService {
+public class UserDetailsServiceImpl implements IUserDetailsService, UserDetailsService {
 	
 	/** permission service */
 	private final IPermissionService permissionService;
@@ -38,6 +43,27 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 	
 	/** role data scope mapper */
 	private final RoleOrganMapper roleOrganMapper;
+	
+	/** user mapper */
+	private final UserMapper userMapper;
+	
+	/**
+	 * load user by username
+	 * @param username
+	 * @return user details
+	 */
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		get user by username
+		User user = userMapper.getUserByUsername(username);
+//		if user is empty
+		if (user == null) {
+//			throw exception
+			throw new UsernameNotFoundException("用户名或密码错误");
+		}
+//		convert user to user detail and get user details for return
+		return this.getUserDetails(UserConvert.INSTANCE.convert2Detail(user));
+	}
 
 	/**
 	 * get user details

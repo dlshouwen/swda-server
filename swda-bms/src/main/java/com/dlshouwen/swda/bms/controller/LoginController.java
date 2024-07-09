@@ -14,21 +14,21 @@ import com.dlshouwen.swda.core.utils.TokenUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * auth
+ * login
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("sys/auth")
-@Tag(name = "auth")
+@RequestMapping("login")
+@Tag(name = "login")
 @AllArgsConstructor
 public class LoginController {
 	
 	/** captcha service */
-	private final ICaptchaService sysCaptchaService;
+	private final ICaptchaService captchaService;
 	
-	/** auth service */
-	private final ILoginService sysAuthService;
+	/** login service */
+	private final ILoginService loginService;
 
 	/**
 	 * captcha
@@ -38,7 +38,7 @@ public class LoginController {
 	@Operation(name = "captcha", type = OperateType.SEARCH)
 	public R<CaptchaVO> captcha() {
 //		generate captcha vo
-		CaptchaVO captchaVO = sysCaptchaService.generate();
+		CaptchaVO captchaVO = captchaService.generate();
 //		return
 		return R.ok(captchaVO);
 	}
@@ -51,7 +51,7 @@ public class LoginController {
 	@Operation(name = "is enabled captcha", type = OperateType.SEARCH)
 	public R<Boolean> captchaEnabled() {
 //		is captcha enbaled
-		boolean enabled = sysCaptchaService.isCaptchaEnabled();
+		boolean enabled = captchaService.isCaptchaEnabled();
 //		return
 		return R.ok(enabled);
 	}
@@ -65,7 +65,7 @@ public class LoginController {
 	@Operation(name = "login", type = OperateType.LOGIN)
 	public R<UserTokenVO> login(@RequestBody UserLoginVO login) {
 //		login by account
-		UserTokenVO token = sysAuthService.loginByAccount(login);
+		UserTokenVO token = loginService.loginByAccount(login);
 //		return
 		return R.ok(token);
 	}
@@ -79,7 +79,7 @@ public class LoginController {
 	@Operation(name = "send code", type = OperateType.SEARCH)
 	public R<String> sendCode(String mobile) {
 //		send code
-		boolean flag = sysAuthService.sendCode(mobile);
+		boolean flag = loginService.sendCode(mobile);
 //		if not success
 		if (!flag) {
 //			return
@@ -98,7 +98,7 @@ public class LoginController {
 	@Operation(name = "mobile", type = OperateType.LOGIN)
 	public R<UserTokenVO> mobile(@RequestBody MobileLoginVO login) {
 //		login by mobile
-		UserTokenVO token = sysAuthService.loginByMobile(login);
+		UserTokenVO token = loginService.loginByMobile(login);
 //		return
 		return R.ok(token);
 	}
@@ -112,7 +112,7 @@ public class LoginController {
 	@Operation(name = "third login", type = OperateType.LOGIN)
 	public R<UserTokenVO> third(@RequestBody AuthCallbackVO login) {
 //		login by third
-		UserTokenVO token = sysAuthService.loginByThird(login);
+		UserTokenVO token = loginService.loginByThird(login);
 //		return
 		return R.ok(token);
 	}
@@ -126,7 +126,7 @@ public class LoginController {
 	@Operation(name = "get access token", type = OperateType.SEARCH)
 	public R<AccessTokenVO> token(String refreshToken) {
 //		get access token
-		AccessTokenVO token = sysAuthService.getAccessToken(refreshToken);
+		AccessTokenVO token = loginService.getAccessToken(refreshToken);
 //		return
 		return R.ok(token);
 	}
@@ -140,7 +140,7 @@ public class LoginController {
 	@Operation(name = "logout", type = OperateType.LOGOUT)
 	public R<String> logout(HttpServletRequest request) {
 //		logout
-		sysAuthService.logout(TokenUtils.getAccessToken(request));
+		loginService.logout(TokenUtils.getAccessToken(request));
 //		return
 		return R.ok();
 	}

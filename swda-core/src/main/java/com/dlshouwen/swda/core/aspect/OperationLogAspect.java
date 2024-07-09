@@ -23,8 +23,8 @@ import com.dlshouwen.swda.core.cache.RedisCache;
 import com.dlshouwen.swda.core.constant.Constant;
 import com.dlshouwen.swda.core.entity.auth.SecurityUser;
 import com.dlshouwen.swda.core.entity.auth.UserDetail;
-import com.dlshouwen.swda.core.entity.log.OperationLog;
 import com.dlshouwen.swda.core.dict.CallResult;
+import com.dlshouwen.swda.core.dto.OperationLogDTO;
 import com.dlshouwen.swda.core.utils.HttpContextUtils;
 import com.dlshouwen.swda.core.utils.IpUtils;
 import com.dlshouwen.swda.core.utils.JsonUtils;
@@ -87,7 +87,7 @@ public class OperationLogAspect {
 	private void saveOperationLog(ProceedingJoinPoint joinPoint, Operation operation, LocalDateTime startTime,
 			Integer callResult) {
 //		defined operation log
-		OperationLog operationLog = new OperationLog();
+		OperationLogDTO operationLog = new OperationLogDTO();
 //		set end time, cost
 		operationLog.setEndTime(LocalDateTime.now());
 		operationLog.setCost((int) LocalDateTimeUtil.between(startTime, operationLog.getEndTime()).toMillis());
@@ -150,7 +150,7 @@ public class OperationLogAspect {
 //			set ip, user agent, request url, request method
 			operationLog.setIp(IpUtils.getIp(request));
 			operationLog.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
-			operationLog.setReqeustUri(request.getRequestURI());
+			operationLog.setRequestUri(request.getRequestURI());
 			operationLog.setRequestMethod(request.getMethod());
 		}
 //		set request params, call result

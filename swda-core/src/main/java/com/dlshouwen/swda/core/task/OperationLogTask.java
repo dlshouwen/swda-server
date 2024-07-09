@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.core.cache.RedisCache;
 import com.dlshouwen.swda.core.constant.Constant;
+import com.dlshouwen.swda.core.convert.OperationLogConvert;
+import com.dlshouwen.swda.core.dto.OperationLogDTO;
 import com.dlshouwen.swda.core.entity.log.OperationLog;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 import com.dlshouwen.swda.core.service.BaseService;
@@ -42,13 +44,13 @@ public class OperationLogTask extends BaseServiceImpl<BaseMapper<OperationLog>, 
 //				for each pop 10
 				for (int i=0; i<10; i++) {
 //					get data log
-					OperationLog operationLog = (OperationLog) redisCache.rightPop(Constant.OPERATION_LOG_KEY);
+					OperationLogDTO operationLog = (OperationLogDTO) redisCache.rightPop(Constant.OPERATION_LOG_KEY);
 //					if operation log is null then return
 					if (operationLog == null) {
 						return;
 					}
 //					insert operation log
-					baseMapper.insert(operationLog);
+					baseMapper.insert(OperationLogConvert.INSTANCE.convert(operationLog));
 				}
 			} catch (Exception e) {
 //				has error

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.core.cache.RedisCache;
 import com.dlshouwen.swda.core.constant.Constant;
+import com.dlshouwen.swda.core.convert.DataLogConvert;
+import com.dlshouwen.swda.core.dto.DataLogDTO;
 import com.dlshouwen.swda.core.entity.log.DataLog;
 import com.dlshouwen.swda.core.mapper.BaseMapper;
 import com.dlshouwen.swda.core.service.BaseService;
@@ -42,13 +44,13 @@ public class DataLogTask extends BaseServiceImpl<BaseMapper<DataLog>, DataLog> i
 //				for each pop 10
 				for (int i=0; i<10; i++) {
 //					get data log
-					DataLog dataLog = (DataLog) redisCache.rightPop(Constant.DATA_LOG_KEY);
+					DataLogDTO dataLog = (DataLogDTO) redisCache.rightPop(Constant.DATA_LOG_KEY);
 //					if data log is null then return
 					if (dataLog == null) {
 						return;
 					}
 //					insert data log
-					baseMapper.insert(dataLog);
+					baseMapper.insert(DataLogConvert.INSTANCE.convert(dataLog));
 				}
 			} catch (Exception e) {
 //				has error

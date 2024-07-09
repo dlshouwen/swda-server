@@ -17,6 +17,6 @@ public interface ThirdUserDetailsService {
 	 * @return user details
 	 * @throws UsernameNotFoundException
 	 */
-	UserDetails loadUserByOpenTypeAndOpenId(String openType, String openId) throws UsernameNotFoundException;
+	UserDetails loadUserByOpenTypeAndOpenId(Integer openType, String openId) throws UsernameNotFoundException;
 
 }
