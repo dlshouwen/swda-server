@@ -106,7 +106,7 @@ public class MyBatisLogInterceptor implements Interceptor {
 			UserDetail user = SecurityUser.getUser();
 			if(user!=null) {
 				dataLog.setUserId(user.getUserId());
-				dataLog.setUserName(user.getUsername());
+				dataLog.setRealName(user.getRealName());
 				dataLog.setOrganId(user.getOrganId());
 				dataLog.setOrganName(user.getOrganName());
 				dataLog.setTenantId(user.getTenantId());

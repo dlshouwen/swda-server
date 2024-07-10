@@ -1,19 +1,19 @@
-package com.dlshouwen.swda.bms.dict;
+package com.dlshouwen.swda.core.dict;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * dict permission type
+ * dict function_type
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Schema(description = "permission type")
+@Schema(description = "功能类型")
 public interface PermissionType {
 
-	@Schema(description = "menu")
+	@Schema(description = "菜单")
 	int MENU = 1;
 
-	@Schema(description = "button")
+	@Schema(description = "按钮")
 	int BUTTON = 2;
 
 }

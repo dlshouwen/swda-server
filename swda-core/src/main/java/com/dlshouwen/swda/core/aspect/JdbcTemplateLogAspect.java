@@ -180,7 +180,7 @@ public class JdbcTemplateLogAspect {
 //				set tenant id, user id, user name, organ id, organ name
 				dataLog.setTenantId(user.getTenantId());
 				dataLog.setUserId(user.getUserId());
-				dataLog.setUserName(user.getUsername());
+				dataLog.setRealName(user.getRealName());
 				dataLog.setOrganId(user.getOrganId());
 				dataLog.setOrganName(user.getOrganName());
 			}

@@ -116,7 +116,7 @@ public class OperationLogAspect {
 //			set tenant id, user id, user name, organ id, organ name
 			operationLog.setTenantId(user.getTenantId());
 			operationLog.setUserId(user.getUserId());
-			operationLog.setUserName(user.getUsername());
+			operationLog.setRealName(user.getRealName());
 			operationLog.setOrganId(user.getOrganId());
 			operationLog.setOrganName(user.getOrganName());
 		}

@@ -36,7 +36,7 @@ public class Permission extends BaseEntity {
 	
 	private Integer permissionType;
 	
-	private String permissionValue;
+	private String authority;
 	
 	private String path;
 	

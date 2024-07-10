@@ -55,7 +55,7 @@ public class DataLog extends BaseEntity {
 
 	private Long userId;
 	
-	private String userName;
+	private String realName;
 
 	private Long organId;
 

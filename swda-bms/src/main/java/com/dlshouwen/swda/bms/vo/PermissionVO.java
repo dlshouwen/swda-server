@@ -31,6 +31,10 @@ public class PermissionVO extends TreeNode<PermissionVO> {
 	@Schema(description = "parent permission id")
 	private Long prePermissionId;
 
+	@Schema(description = "permission code")
+	@NotBlank(message = "权限编码不能为空")
+	private String permissionCode;
+
 	@Schema(description = "permission name")
 	@NotBlank(message = "权限名称不能为空")
 	private String permissionName;
@@ -39,8 +43,8 @@ public class PermissionVO extends TreeNode<PermissionVO> {
 	@Range(min = 0, max = 2, message = "类型不正确")
 	private Integer permissionType;
 
-	@Schema(description = "permission value")
-	private String permissionValue;
+	@Schema(description = "authority")
+	private String authority;
 
 	@Schema(description = "path")
 	private String path;
@@ -50,9 +54,6 @@ public class PermissionVO extends TreeNode<PermissionVO> {
 
 	@Schema(description = "icon")
 	private String icon;
-
-	@Schema(description = "authority")
-	private String authority;
 
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")

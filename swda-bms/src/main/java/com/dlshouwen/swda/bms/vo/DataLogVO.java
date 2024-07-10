@@ -69,8 +69,8 @@ public class DataLogVO implements Serializable {
 	@Schema(description = "user id")
 	private Long userId;
 
-	@Schema(description = "user name")
-	private String userName;
+	@Schema(description = "real name")
+	private String realName;
 
 	@Schema(description = "organ id")
 	private Long organId;
