@@ -118,17 +118,17 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	/**
-	 * login by third
-	 * @param thirdCallbackVO
+	 * login by auth
+	 * @param callback
 	 * @return user token vo
 	 */
 	@Override
-	public UserTokenVO loginByThird(AuthCallbackVO login) {
+	public UserTokenVO loginByAuth(AuthCallbackVO callback) {
 //		defined authentication
 		Authentication authentication;
 		try {
 //			convert to third login
-			ThirdLogin thirdLogin = BeanUtil.copyProperties(login, ThirdLogin.class);
+			ThirdLogin thirdLogin = BeanUtil.copyProperties(callback, ThirdLogin.class);
 //			authenticate
 			authentication = authenticationManager.authenticate(new ThirdAuthenticationToken(thirdLogin));
 		} catch (BadCredentialsException e) {

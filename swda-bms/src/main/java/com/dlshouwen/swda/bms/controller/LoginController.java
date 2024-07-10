@@ -57,13 +57,13 @@ public class LoginController {
 	}
 
 	/**
-	 * login
+	 * login by account
 	 * @param loginVO
 	 * @return result
 	 */
-	@PostMapping("login")
-	@Operation(name = "login", type = OperateType.LOGIN)
-	public R<UserTokenVO> login(@RequestBody UserLoginVO login) {
+	@PostMapping("account")
+	@Operation(name = "account", type = OperateType.LOGIN)
+	public R<UserTokenVO> loginByAccount(@RequestBody UserLoginVO login) {
 //		login by account
 		UserTokenVO token = loginService.loginByAccount(login);
 //		return
@@ -95,8 +95,8 @@ public class LoginController {
 	 * @return result
 	 */
 	@PostMapping("mobile")
-	@Operation(name = "mobile", type = OperateType.LOGIN)
-	public R<UserTokenVO> mobile(@RequestBody MobileLoginVO login) {
+	@Operation(name = "login by mobile", type = OperateType.LOGIN)
+	public R<UserTokenVO> loginByMobile(@RequestBody MobileLoginVO login) {
 //		login by mobile
 		UserTokenVO token = loginService.loginByMobile(login);
 //		return
@@ -104,15 +104,15 @@ public class LoginController {
 	}
 
 	/**
-	 * third
+	 * auth
 	 * @param thirdLoginVO
 	 * @return result
 	 */
-	@PostMapping("third")
-	@Operation(name = "third login", type = OperateType.LOGIN)
-	public R<UserTokenVO> third(@RequestBody AuthCallbackVO login) {
-//		login by third
-		UserTokenVO token = loginService.loginByThird(login);
+	@PostMapping("auth")
+	@Operation(name = "login by auth", type = OperateType.LOGIN)
+	public R<UserTokenVO> loginByAuth(@RequestBody AuthCallbackVO callback) {
+//		login by auth
+		UserTokenVO token = loginService.loginByAuth(callback);
 //		return
 		return R.ok(token);
 	}

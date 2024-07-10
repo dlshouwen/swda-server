@@ -527,3 +527,69 @@ Error starting ApplicationContext. To display the condition evaluation report re
 2024-07-09 13:00:38.478 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
 2024-07-09 13:00:38.488 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
 2024-07-09 13:00:38.608 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - Started BmsApplication in 8.717 seconds (process running for 9.247)
+2024-07-09 13:14:12.705 [http-nio-8081-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-09 13:14:12.706 [http-nio-8081-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-07-09 13:14:12.708 [http-nio-8081-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-07-09 13:15:33.238 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-07-09 13:15:33.290 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - Starting BmsApplication using Java 17.0.10 with PID 32712 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms\target\classes started by Milo in D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms)
+2024-07-09 13:15:33.291 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-07-09 13:15:34.975 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 13:15:34.977 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-07-09 13:15:35.006 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 0 JDBC repository interfaces.
+2024-07-09 13:15:35.018 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 13:15:35.019 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-07-09 13:15:35.035 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2024-07-09 13:15:35.328 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=cd8756d3-4965-3796-8c70-ef15a841185d
+2024-07-09 13:15:36.523 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2024-07-09 13:15:36.541 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2024-07-09 13:15:36.545 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-07-09 13:15:36.545 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-07-09 13:15:36.689 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-07-09 13:15:36.690 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3361 ms
+2024-07-09 13:15:37.668 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2024-07-09 13:15:37.932 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@6406b84d
+2024-07-09 13:15:37.936 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2024-07-09 13:15:37.937 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2024-07-09 13:15:37.937 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2024-07-09 13:15:41.079 [main] INFO  c.alibaba.cloud.sentinel.SentinelWebMvcConfigurer - [Sentinel Starter] register SentinelWebInterceptor with urlPatterns: [/**].
+2024-07-09 13:15:41.686 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 16 endpoint(s) beneath base path '/actuator'
+2024-07-09 13:15:41.811 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@14cd8dfa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5a438c0a, org.springframework.security.web.context.SecurityContextHolderFilter@3397c8c0, org.springframework.security.web.header.HeaderWriterFilter@7ee0dbd1, org.springframework.web.filter.CorsFilter@72ce8a9b, org.springframework.security.web.authentication.logout.LogoutFilter@81f9b01, com.dlshouwen.swda.core.filter.AuthenticationTokenFilter@236a3e4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6edd80fe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e7935f1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@174da9a0, org.springframework.security.web.session.SessionManagementFilter@14997cb9, org.springframework.security.web.access.ExceptionTranslationFilter@2823bd30, org.springframework.security.web.access.intercept.AuthorizationFilter@796687de]
+2024-07-09 13:15:42.147 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2024-07-09 13:15:43.261 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2024-07-09 13:15:43.280 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2024-07-09 13:15:43.441 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - Started BmsApplication in 10.678 seconds (process running for 11.553)
+2024-07-09 13:15:43.639 [http-nio-8081-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-09 13:15:43.639 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-07-09 13:15:43.640 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-07-09 13:16:38.234 [http-nio-8081-exec-6] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1066 ms
+2024-07-09 13:38:44.927 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-07-09 13:38:44.988 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - Starting BmsApplication using Java 17.0.10 with PID 35340 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms\target\classes started by Milo in D:\Workspace\eclipse\dlshouwen\swda-server\swda-bms)
+2024-07-09 13:38:44.989 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-07-09 13:38:46.906 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 13:38:46.908 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-07-09 13:38:46.938 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 0 JDBC repository interfaces.
+2024-07-09 13:38:46.951 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-09 13:38:46.953 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-07-09 13:38:46.971 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2024-07-09 13:38:47.267 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=cd8756d3-4965-3796-8c70-ef15a841185d
+2024-07-09 13:38:48.495 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2024-07-09 13:38:48.513 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2024-07-09 13:38:48.515 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-07-09 13:38:48.515 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-07-09 13:38:48.639 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-07-09 13:38:48.640 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3604 ms
+2024-07-09 13:38:49.652 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2024-07-09 13:38:49.923 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@3e4ead73
+2024-07-09 13:38:49.925 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2024-07-09 13:38:49.927 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2024-07-09 13:38:49.927 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2024-07-09 13:38:53.013 [main] INFO  c.alibaba.cloud.sentinel.SentinelWebMvcConfigurer - [Sentinel Starter] register SentinelWebInterceptor with urlPatterns: [/**].
+2024-07-09 13:38:53.561 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 16 endpoint(s) beneath base path '/actuator'
+2024-07-09 13:38:53.675 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4eb43d2f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@453961d7, org.springframework.security.web.context.SecurityContextHolderFilter@14941b06, org.springframework.security.web.header.HeaderWriterFilter@5b9ed77b, org.springframework.web.filter.CorsFilter@54b35809, org.springframework.security.web.authentication.logout.LogoutFilter@3e7935f1, com.dlshouwen.swda.core.filter.AuthenticationTokenFilter@59aba3c3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2823bd30, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@18d963be, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@505f6511, org.springframework.security.web.session.SessionManagementFilter@6e98fd10, org.springframework.security.web.access.ExceptionTranslationFilter@5896899d, org.springframework.security.web.access.intercept.AuthorizationFilter@27b9d5b7]
+2024-07-09 13:38:53.965 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2024-07-09 13:38:54.910 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2024-07-09 13:38:54.924 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2024-07-09 13:38:55.082 [main] INFO  com.dlshouwen.swda.bms.BmsApplication - Started BmsApplication in 10.761 seconds (process running for 11.484)
+2024-07-09 13:38:58.773 [http-nio-8081-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-09 13:38:58.773 [http-nio-8081-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-07-09 13:38:58.775 [http-nio-8081-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms

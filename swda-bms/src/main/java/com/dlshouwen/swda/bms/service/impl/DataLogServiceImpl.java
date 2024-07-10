@@ -61,7 +61,7 @@ public class DataLogServiceImpl extends BaseServiceImpl<DataLogMapper, DataLog> 
 //				per 10
 				for (int i = 0; i < 10; i++) {
 //					get log
-					DataLog log = (DataLog) redisCache.rightPop(Constant.OPERATION_LOG_KEY);
+					DataLog log = (DataLog) redisCache.rightPop(Constant.DATA_LOG_KEY);
 //					if log is null
 					if (log == null) {
 						return;

@@ -24,11 +24,11 @@ public interface ILoginService {
 	UserTokenVO loginByMobile(MobileLoginVO login);
 
 	/**
-	 * login by third
-	 * @param login
+	 * login by auth
+	 * @param callback
 	 * @return user token vo
 	 */
-	UserTokenVO loginByThird(AuthCallbackVO login);
+	UserTokenVO loginByAuth(AuthCallbackVO callback);
 
 	/**
 	 * send code

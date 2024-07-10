@@ -1,12 +1,12 @@
 auth:
   ignore_urls:
-    - /sys/auth/captcha
-    - /sys/auth/captcha/enabled
-    - /sys/auth/login
-    - /sys/auth/token
-    - /sys/auth/send/code
-    - /sys/auth/mobile
-    - /sys/auth/third
+    - /login/captcha
+    - /login/captcha/enabled
+    - /login/login
+    - /login/token
+    - /login/send/code
+    - /login/mobile
+    - /login/third
     - /sys/third/callback/**
     - /sys/third/render/**
     - /upload/**
