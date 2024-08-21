@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.dlshouwen</groupId>
 		<artifactId>swda-server</artifactId>
-		<version>1.0.0</version>
+		<version>${revision}</version>
 	</parent>
 
 	<!-- info -->

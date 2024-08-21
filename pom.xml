@@ -9,37 +9,37 @@
     <!-- info -->
     <groupId>com.dlshouwen</groupId>
     <artifactId>swda-server</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>swda-server</name>
     <description>DaLian ShouWen Detach Architecture</description>
+    <url>https://core.dlshouwen.com/swda</url>
     
     <!-- parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>3.3.1</version>
     </parent>
 
     <!-- modules -->
     <modules>
         <module>swda-core</module>
-        <module>swda-auth</module>
         <module>swda-bms</module>
         <module>swda-api</module>
-        <module>swda-sms</module>
-        <module>swda-oss</module>
+        <module>swda-app</module>
     </modules>
     
 	<!-- properties -->
     <properties>
+		<!-- swda revision -->
+        <revision>1.0.0</revision>
 		<!-- maven compile -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 		<!-- source encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- swda common -->
-        <swda.version>1.0.0</swda.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- spring cloud -->
         <spring.cloud.version>2023.0.1</spring.cloud.version>
 		<!-- spring cloud alibaba -->
@@ -70,9 +70,6 @@
         <zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
 		<!-- ip2region -->
         <ip2region.version>2.7.0</ip2region.version>
-        <aliyun.dysmsapi.version>2.0.23</aliyun.dysmsapi.version>
-        <tencentcloud.sdk.version>3.1.574</tencentcloud.sdk.version>
-        <qiniu.version>7.12.1</qiniu.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <justauth.version>1.16.6</justauth.version>
         
@@ -138,22 +135,27 @@
 			<dependency>
 			    <groupId>com.dlshouwen</groupId>
 			    <artifactId>swda-core</artifactId>
-			    <version>${swda.version}</version>
+			    <version>${revision}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.dlshouwen</groupId>
 				<artifactId>swda-api</artifactId>
-			    <version>${swda.version}</version>
+			    <version>${revision}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.dlshouwen</groupId>
 				<artifactId>swda-auth</artifactId>
-			    <version>${swda.version}</version>
+			    <version>${revision}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.dlshouwen</groupId>
 				<artifactId>swda-oss</artifactId>
-			    <version>${swda.version}</version>
+			    <version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.dlshouwen</groupId>
+				<artifactId>swda-bms</artifactId>
+			    <version>${revision}</version>
 			</dependency>
 			<!-- mybatis plus -->
             <dependency>
@@ -257,22 +259,6 @@
                 <artifactId>ip2region</artifactId>
                 <version>${ip2region.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>dysmsapi20170525</artifactId>
-                <version>${aliyun.dysmsapi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.tencentcloudapi</groupId>
-                <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>${tencentcloud.sdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.qiniu</groupId>
-                <artifactId>qiniu-java-sdk</artifactId>
-                <version>${qiniu.version}</version>
-            </dependency>
-            
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
