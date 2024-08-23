@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import com.dlshouwen.swda.api.module.SmsApi;
-import com.dlshouwen.swda.sms.cache.SmsCache;
-import com.dlshouwen.swda.sms.service.SmsService;
+import com.dlshouwen.swda.bms.sms.cache.SmsCache;
+import com.dlshouwen.swda.bms.sms.service.SmsService;
 
 import java.util.HashMap;
 import java.util.Map;

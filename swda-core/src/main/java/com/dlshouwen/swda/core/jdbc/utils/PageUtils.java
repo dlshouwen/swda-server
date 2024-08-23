@@ -1,4 +1,4 @@
-package com.htz.core.utils;
+package com.dlshouwen.swda.core.jdbc.utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,12 +11,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.dlshouwen.swda.core.common.dict.ConditionLogic;
-import com.dlshouwen.swda.core.common.dict.ConditionType;
-import com.dlshouwen.swda.core.common.dict.SortLogic;
-import com.dlshouwen.swda.core.grid.entity.Condition;
-import com.dlshouwen.swda.core.grid.entity.Query;
-import com.dlshouwen.swda.core.grid.entity.Sort;
+import com.dlshouwen.swda.core.grid.dict.ConditionLogic;
+import com.dlshouwen.swda.core.grid.dict.ConditionType;
+import com.dlshouwen.swda.core.grid.dict.SortLogic;
+import com.dlshouwen.swda.core.grid.dto.Condition;
+import com.dlshouwen.swda.core.grid.dto.Query;
+import com.dlshouwen.swda.core.grid.dto.Sort;
 import com.dlshouwen.swda.core.jdbc.mapper.ClassRowMapper;
 import com.dlshouwen.swda.core.jdbc.utils.SqlUtils;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;

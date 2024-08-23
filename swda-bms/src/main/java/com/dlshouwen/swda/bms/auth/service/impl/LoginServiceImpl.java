@@ -5,9 +5,6 @@ import cn.hutool.core.util.RandomUtil;
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.api.module.SmsApi;
-import com.dlshouwen.swda.auth.mobile.MobileAuthenticationToken;
-import com.dlshouwen.swda.auth.third.ThirdAuthenticationToken;
-import com.dlshouwen.swda.auth.third.ThirdLogin;
 import com.dlshouwen.swda.bms.auth.enums.LoginOperationEnum;
 import com.dlshouwen.swda.bms.auth.service.ICaptchaService;
 import com.dlshouwen.swda.bms.auth.service.ILoginService;
@@ -18,14 +15,15 @@ import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.log.service.ILoginLogService;
-import com.dlshouwen.swda.bms.service.*;
 import com.dlshouwen.swda.bms.system.service.IUserService;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
-import com.dlshouwen.swda.bms.vo.*;
 import com.dlshouwen.swda.core.common.dict.CallResult;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.crypto.Sm2Utils;
+import com.dlshouwen.swda.core.security.mobile.MobileAuthenticationToken;
+import com.dlshouwen.swda.core.security.third.ThirdAuthenticationToken;
+import com.dlshouwen.swda.core.security.third.ThirdLogin;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 
 import org.springframework.security.authentication.AuthenticationManager;

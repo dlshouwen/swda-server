@@ -1,11 +1,14 @@
 package com.dlshouwen.swda.core.common.loader;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import com.dlshouwen.swda.core.common.entity.Data;
 import com.dlshouwen.swda.core.unique.properties.UniqueProperties;
 
 import cn.hutool.core.map.MapUtil;
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,21 +20,30 @@ import java.util.Map;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
+@Component
+@AllArgsConstructor
 public class DataLoader {
+	
+	/** unique properties */
+	private final UniqueProperties uniqueProperties;
+	
+	/** jdbc template */
+	private final JdbcTemplate template;
 
 	/**
 	 * load
 	 * @param uniqueProperties
 	 * @param template
 	 */
-	public static void load(UniqueProperties uniqueProperties, JdbcTemplate template) {
+	@PostConstruct
+	public void load() {
 		/*
 		 * 1. get attr
 		 */
 //		defined attr
 		Map<String, String> attr = new HashMap<>();
 //		get attr list
-		List<Map<String, Object>> attrList = template .queryForList("select attr_id, content from bms_attr order by sort");
+		List<Map<String, Object>> attrList = template.queryForList("select attr_id, content from bms_attr order by sort");
 //		set attrs to  map
 		for (Map<String, Object> _attr : attrList) {
 			attr.put(MapUtil.getStr(_attr, "attr_id"), MapUtil.getStr(_attr, "content"));
@@ -46,7 +58,7 @@ public class DataLoader {
 //		defined dict
 		Map<String, Map<Integer, String>> dict = new HashMap<String, Map<Integer, String>>();
 //		get dict list
-		List<Map<String, Object>> dictList = template .queryForList("select * from bms_dict order by dict_category_id, sort");
+		List<Map<String, Object>> dictList = template.queryForList("select * from bms_dict order by dict_category_id, sort");
 //		set dicts to dict
 		Map<Integer, String> dictCategoryMap = null;
 		String dictCategoryId;

@@ -14,12 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.dlshouwen.swda.auth.mobile.MobileAuthenticationProvider;
-import com.dlshouwen.swda.auth.service.MobileUserDetailsService;
-import com.dlshouwen.swda.auth.service.MobileVerifyCodeService;
-import com.dlshouwen.swda.auth.third.ThirdAuthenticationProvider;
-import com.dlshouwen.swda.auth.third.ThirdOpenIdService;
-import com.dlshouwen.swda.auth.third.ThirdUserDetailsService;
+import com.dlshouwen.swda.core.security.mobile.MobileAuthenticationProvider;
+import com.dlshouwen.swda.core.security.mobile.MobileUserDetailsService;
+import com.dlshouwen.swda.core.security.mobile.MobileVerifyCodeService;
+import com.dlshouwen.swda.core.security.third.ThirdAuthenticationProvider;
+import com.dlshouwen.swda.core.security.third.ThirdOpenIdService;
+import com.dlshouwen.swda.core.security.third.ThirdUserDetailsService;
 
 import java.util.ArrayList;
 import java.util.List;

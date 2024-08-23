@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dlshouwen.swda.api.feign.SmsFeign;
 import com.dlshouwen.swda.bms.sms.cache.SmsCache;
-import com.dlshouwen.swda.sms.service.SmsService;
+import com.dlshouwen.swda.bms.sms.service.SmsService;
 
 import java.util.HashMap;
 import java.util.Map;

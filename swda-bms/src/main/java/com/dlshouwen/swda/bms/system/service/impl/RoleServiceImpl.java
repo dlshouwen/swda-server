@@ -3,12 +3,11 @@ package com.dlshouwen.swda.bms.system.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.grid.entity.PageResult;
-import com.dlshouwen.swda.core.grid.entity.Query;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.auth.service.IUserTokenService;
-import com.dlshouwen.swda.bms.service.*;
 import com.dlshouwen.swda.bms.system.convert.RoleConvert;
 import com.dlshouwen.swda.bms.system.dict.DataScopeType;
 import com.dlshouwen.swda.bms.system.entity.Role;

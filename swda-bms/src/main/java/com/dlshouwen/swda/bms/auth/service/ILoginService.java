@@ -5,7 +5,6 @@ import com.dlshouwen.swda.bms.auth.vo.AuthCallbackVO;
 import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
-import com.dlshouwen.swda.bms.vo.*;
 
 /**
  * auth service

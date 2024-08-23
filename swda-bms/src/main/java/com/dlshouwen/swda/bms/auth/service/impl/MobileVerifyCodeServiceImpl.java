@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.api.module.SmsApi;
-import com.dlshouwen.swda.auth.service.MobileVerifyCodeService;
+import com.dlshouwen.swda.core.security.mobile.MobileVerifyCodeService;
 
 /**
  * mobile verify code service impl

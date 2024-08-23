@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.oss.service;
 
-import com.dlshouwen.swda.core.grid.entity.PageResult;
-import com.dlshouwen.swda.core.grid.entity.Query;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 import com.dlshouwen.swda.bms.oss.entity.Attachment;
 import com.dlshouwen.swda.bms.oss.vo.AttachmentVO;

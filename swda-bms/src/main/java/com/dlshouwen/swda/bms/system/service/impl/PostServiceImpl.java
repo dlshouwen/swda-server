@@ -3,8 +3,8 @@ package com.dlshouwen.swda.bms.system.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.grid.entity.PageResult;
-import com.dlshouwen.swda.core.grid.entity.Query;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.system.convert.PostConvert;

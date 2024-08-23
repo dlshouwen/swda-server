@@ -1,8 +1,8 @@
 package com.dlshouwen.swda.bms.log.service;
 
 import com.dlshouwen.swda.bms.log.vo.OperationLogVO;
-import com.dlshouwen.swda.core.grid.entity.PageResult;
-import com.dlshouwen.swda.core.grid.entity.Query;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.entity.OperationLog;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 

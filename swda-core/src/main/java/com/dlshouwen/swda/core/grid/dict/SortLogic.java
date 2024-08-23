@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.core.common.dict;
+package com.dlshouwen.swda.core.grid.dict;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

@@ -12,7 +12,6 @@ import com.dlshouwen.swda.bms.auth.vo.CaptchaVO;
 import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
-import com.dlshouwen.swda.bms.vo.*;
 import com.dlshouwen.swda.core.common.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;

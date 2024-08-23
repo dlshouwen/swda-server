@@ -5,8 +5,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.common.entity.R;
-import com.dlshouwen.swda.core.grid.entity.PageResult;
-import com.dlshouwen.swda.core.grid.entity.Query;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.entity.LoginLog;
 import com.dlshouwen.swda.core.log.enums.OperateType;

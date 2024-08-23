@@ -1,63 +1,56 @@
-package com.htz.core.extra.unique.controller;
+package com.dlshouwen.swda.core.unique.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
-import org.apache.commons.collections.MapUtils;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.htz.core.config.CONFIG;
-import com.htz.core.utils.ObjectMapperUtils;
-import com.htz.core.utils.SpringUtils;
+import com.dlshouwen.swda.core.common.entity.Data;
+import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.jdbc.dao.BaseDao;
+import com.dlshouwen.swda.core.unique.entity.ValidParam;
+
+import cn.hutool.core.map.MapUtil;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 
 /**
- * 验证唯一
+ * unique
  * @author liujingcheng@live.cn
- * @since hygea 6.0
+ * @since 1.0.0
  */
-@Controller
-@RequestMapping("/core/extra/unique")
-@SuppressWarnings({"deprecation", "unchecked"})
+@RestController
+@RequestMapping("/unique")
+@AllArgsConstructor
+@Tag(name = "unique")
 public class UniqueController {
 	
+	/** dao */
+	private final BaseDao dao;
+	
 	/**
-	 * 执行唯一校验
-	 * @param request 请求对象
-	 * @param response 响应对象
-	 * @return 验证结果，成功为true 失败为false
-	 * @throws Exception 抛出全部异常
+	 * unique
+	 * @param validParam
+	 * @return result
 	 */
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void unique(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		获取参数
-		String validParams = request.getParameter("validParams");
-		Map<String, Object> validParamsInfo = ObjectMapperUtils.getInstance().readValue(validParams, Map.class);
-		String sqlCode = MapUtils.getString(validParamsInfo, "sqlCode");
-		String key = MapUtils.getString(validParamsInfo, "key");
-		List<Object> attrs = (List<Object>)MapUtils.getObject(validParamsInfo, "attrs");
-//		获取sql
-		String sql = MapUtils.getString(CONFIG.UNIQUE, sqlCode);
-//		执行查询结果集，结果集应该是一个数值
-		JdbcTemplate template = new JdbcTemplate((DataSource)SpringUtils.getBean(CONFIG.DEFAULT_DATA_SOURCE));
-//		获取参数列表
-		int count;
-		if(attrs==null||attrs.size()==0){
-			count = template.queryForInt(sql, key);
+	@PostMapping(value="")
+	public R<Boolean> unique(@RequestBody ValidParam validParam) {
+//		get sql
+		String sql = MapUtil.getStr(Data.unique, validParam.getCode());
+//		defined count
+		int count = 0;
+//		attrs is empty
+		if(validParam.getAttrs()==null||validParam.getAttrs().size()==0){
+//			query count
+			count = dao.queryForObject(sql, Integer.class, validParam.getKey());
 		}else{
-			attrs.add(0, key);
-			count = template.queryForObject(sql, attrs.toArray(), Integer.class);
+//			add to key
+			validParam.getAttrs().add(0, validParam.getKey());
+//			query count
+			count = dao.queryForObject(sql, Integer.class, validParam.getAttrs().toArray());
 		}
-//		回写数据
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().write(String.valueOf(count==0?true:false));
+//		return
+		return R.ok(count==0);
 	}
 
 }

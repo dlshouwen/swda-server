@@ -3,8 +3,8 @@ package com.dlshouwen.swda.bms.sms.cache;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import com.dlshouwen.swda.bms.sms.entity.SmsPlatform;
 import com.dlshouwen.swda.core.common.cache.RedisCache;
-import com.dlshouwen.swda.sms.entity.SmsPlatform;
 
 import java.util.List;
 

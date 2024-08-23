@@ -35,7 +35,7 @@ public class UserVO implements Serializable, TransPojo {
 
 	@Schema(description = "organ id")
 	@NotNull(message = "机构ID不能为空")
-	@Trans(type = TransType.SIMPLE, target = Organ.class, fields = "name", ref = "orgName")
+	@Trans(type = TransType.SIMPLE, target = Organ.class, fields = "name", ref = "organName")
 	private Long organId;
 
 	@Schema(description = "user code")

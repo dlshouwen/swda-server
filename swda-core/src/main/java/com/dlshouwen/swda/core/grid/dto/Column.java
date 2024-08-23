@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.core.grid.entity;
+package com.dlshouwen.swda.core.grid.dto;
 
 import lombok.Data;
 

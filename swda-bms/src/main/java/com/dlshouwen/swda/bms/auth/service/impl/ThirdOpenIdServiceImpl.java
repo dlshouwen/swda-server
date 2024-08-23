@@ -7,10 +7,10 @@ import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import org.springframework.stereotype.Service;
 
-import com.dlshouwen.swda.auth.third.ThirdLogin;
-import com.dlshouwen.swda.auth.third.ThirdOpenIdService;
 import com.dlshouwen.swda.bms.auth.service.IAuthPlatformService;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.security.third.ThirdLogin;
+import com.dlshouwen.swda.core.security.third.ThirdOpenIdService;
 
 /**
  * third open id service impl

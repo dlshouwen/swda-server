@@ -2,8 +2,8 @@ package com.dlshouwen.swda.bms.auth.service;
 
 import me.zhyd.oauth.request.AuthRequest;
 
-import com.dlshouwen.swda.core.grid.entity.PageResult;
-import com.dlshouwen.swda.core.grid.entity.Query;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 import com.dlshouwen.swda.bms.auth.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.auth.vo.AuthPlatformVO;

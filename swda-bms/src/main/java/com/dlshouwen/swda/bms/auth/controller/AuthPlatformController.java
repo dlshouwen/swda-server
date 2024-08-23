@@ -8,8 +8,8 @@ import com.dlshouwen.swda.bms.auth.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.auth.service.IAuthPlatformService;
 import com.dlshouwen.swda.bms.auth.vo.AuthPlatformVO;
 import com.dlshouwen.swda.core.common.entity.R;
-import com.dlshouwen.swda.core.grid.entity.PageResult;
-import com.dlshouwen.swda.core.grid.entity.Query;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 

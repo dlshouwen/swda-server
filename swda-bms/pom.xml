@@ -24,26 +24,57 @@
 			 <groupId>com.dlshouwen</groupId>
              <artifactId>swda-core</artifactId>
 		</dependency>
-        <!-- swda common -->
-		<dependency>
-			 <groupId>com.dlshouwen</groupId>
-             <artifactId>swda-auth</artifactId>
-		</dependency>
         <!-- swda api -->
 		<dependency>
 			 <groupId>com.dlshouwen</groupId>
              <artifactId>swda-api</artifactId>
-		</dependency>
-        <!-- swda api -->
-		<dependency>
-			 <groupId>com.dlshouwen</groupId>
-             <artifactId>swda-oss</artifactId>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.github.whvcse</groupId>
 			<artifactId>easy-captcha</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>dysmsapi20170525</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tencentcloudapi</groupId>
+			<artifactId>tencentcloud-sdk-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>cos_api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.huaweicloud</groupId>
+			<artifactId>esdk-obs-java-bundle</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>me.zhyd.oauth</groupId>
+			<artifactId>JustAuth</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 </project>
