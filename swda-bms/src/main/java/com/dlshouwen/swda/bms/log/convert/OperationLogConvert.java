@@ -1,6 +1,7 @@
 package com.dlshouwen.swda.bms.log.convert;
 
 import com.dlshouwen.swda.bms.log.vo.OperationLogVO;
+import com.dlshouwen.swda.core.log.dto.OperationLogDTO;
 import com.dlshouwen.swda.core.log.entity.OperationLog;
 
 import org.mapstruct.Mapper;
@@ -18,6 +19,13 @@ public interface OperationLogConvert {
 	
 	/** instance */
 	OperationLogConvert INSTANCE = Mappers.getMapper(OperationLogConvert.class);
+
+	/**
+	 * convert
+	 * @param operationLogDTO
+	 * @return operation log
+	 */
+	OperationLog convert(OperationLogDTO dto);
 
 	/**
 	 * convert

@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.bms.log.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.annotation.PostConstruct;
@@ -70,7 +69,7 @@ public class DataLogServiceImpl extends BaseServiceImpl<DataLogMapper, DataLog> 
 						return;
 					}
 //					convert to data log
-					DataLog dataLog = BeanUtil.copyProperties(log, DataLog.class);
+					DataLog dataLog = DataLogConvert.INSTANCE.convert(log);
 //					insert
 					baseMapper.insert(dataLog);
 				}

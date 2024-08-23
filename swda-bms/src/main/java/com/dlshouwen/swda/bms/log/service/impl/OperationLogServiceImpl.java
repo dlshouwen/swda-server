@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.bms.log.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.annotation.PostConstruct;
@@ -70,7 +69,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper,
 						return;
 					}
 //					convert to operation log
-					OperationLog operationLog = BeanUtil.copyProperties(log, OperationLog.class);
+					OperationLog operationLog = OperationLogConvert.INSTANCE.convert(log);
 //					insert
 					baseMapper.insert(operationLog);
 				}

@@ -12,31 +12,39 @@ import com.dlshouwen.swda.core.common.dict.LoginStatus;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 
 /**
- * 认证事件处理
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * authentication events
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @Component
 @AllArgsConstructor
 public class AuthenticationEvents {
-    private final ILoginLogService loginLogService;
 
-    @EventListener
-    public void onSuccess(AuthenticationSuccessEvent event) {
-        // 用户信息
-        UserDetail user = (UserDetail) event.getAuthentication().getPrincipal();
+	/** login log service */
+	private final ILoginLogService loginLogService;
 
-        // 保存登录日志
-        loginLogService.saveLoginLog(user.getUsername(), CallResult.SUCCESS, LoginStatus.SUCCESS);
-    }
+	/**
+	 * on success
+	 * @param event
+	 */
+	@EventListener
+	public void onSuccess(AuthenticationSuccessEvent event) {
+//		get user detail
+		UserDetail user = (UserDetail) event.getAuthentication().getPrincipal();
+//		save login log
+		loginLogService.saveLoginLog(user.getUsername(), CallResult.SUCCESS, LoginStatus.SUCCESS);
+	}
 
-    @EventListener
-    public void onFailure(AbstractAuthenticationFailureEvent event) {
-        // 用户名
-        String username = (String) event.getAuthentication().getPrincipal();
-        // 保存登录日志
-        loginLogService.saveLoginLog(username, CallResult.FAILURE, LoginStatus.PASSWORD_ERROR);
-    }
+	/**
+	 * on failure
+	 * @param event
+	 */
+	@EventListener
+	public void onFailure(AbstractAuthenticationFailureEvent event) {
+//		get user name
+		String username = (String) event.getAuthentication().getPrincipal();
+//		save login log
+		loginLogService.saveLoginLog(username, CallResult.FAILURE, LoginStatus.PASSWORD_ERROR);
+	}
 
 }

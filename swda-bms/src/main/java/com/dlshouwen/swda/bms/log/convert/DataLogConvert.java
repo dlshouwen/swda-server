@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import com.dlshouwen.swda.bms.log.vo.DataLogVO;
+import com.dlshouwen.swda.core.log.dto.DataLogDTO;
 import com.dlshouwen.swda.core.log.entity.DataLog;
 
 import java.util.List;
@@ -18,6 +19,13 @@ public interface DataLogConvert {
 	
 	/** instance */
 	DataLogConvert INSTANCE = Mappers.getMapper(DataLogConvert.class);
+	
+	/**
+	 * convert
+	 * @param dataLogDTO
+	 * @return data log
+	 */
+	DataLog convert(DataLogDTO dto);
 
 	/**
 	 * convert
