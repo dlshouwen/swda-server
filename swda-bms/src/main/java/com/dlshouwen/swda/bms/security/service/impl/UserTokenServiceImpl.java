@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.common.enums.ResultCode;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
+import com.dlshouwen.swda.core.security.account.UserDetailsService;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.properties.TokenProperties;
 import com.dlshouwen.swda.core.security.user.UserDetail;
@@ -16,7 +17,6 @@ import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.security.convert.UserTokenConvert;
 import com.dlshouwen.swda.bms.security.entity.UserToken;
 import com.dlshouwen.swda.bms.security.mapper.UserTokenMapper;
-import com.dlshouwen.swda.bms.security.service.IUserDetailsService;
 import com.dlshouwen.swda.bms.security.service.IUserTokenService;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
@@ -42,7 +42,7 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 	private final TokenCache tokenStoreCache;
 	
 	/** user details service */
-	private final IUserDetailsService sysUserDetailsService;
+	private final UserDetailsService userDetailsService;
 	
 	/** token properties */
 	private final TokenProperties securityProperties;
@@ -123,7 +123,7 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 //		convert to user detail
 		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
 //		get user details
-		sysUserDetailsService.getUserDetails(userDetail);
+		userDetailsService.getUserDetails(userDetail);
 //		save user cache
 		tokenStoreCache.saveUser(accessToken, userDetail);
 //		convert to user token for return
@@ -191,7 +191,7 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 			return;
 		}
 //		get user details
-		sysUserDetailsService.getUserDetails(user);
+		userDetailsService.getUserDetails(user);
 //		save user
 		tokenStoreCache.saveUser(accessToken, user, expire);
 	}

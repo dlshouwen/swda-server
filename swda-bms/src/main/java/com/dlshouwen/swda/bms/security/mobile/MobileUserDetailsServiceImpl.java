@@ -1,14 +1,14 @@
-package com.dlshouwen.swda.bms.security.service.impl;
+package com.dlshouwen.swda.bms.security.mobile;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.dlshouwen.swda.bms.security.service.IUserDetailsService;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;
+import com.dlshouwen.swda.core.security.account.UserDetailsService;
 import com.dlshouwen.swda.core.security.mobile.MobileUserDetailsService;
 
 /**
@@ -21,7 +21,7 @@ import com.dlshouwen.swda.core.security.mobile.MobileUserDetailsService;
 public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
 
 	/** user details service */
-	private final IUserDetailsService userDetailsService;
+	private final UserDetailsService userDetailsService;
 
 	/** user mapper */
 	private final UserMapper userMapper;

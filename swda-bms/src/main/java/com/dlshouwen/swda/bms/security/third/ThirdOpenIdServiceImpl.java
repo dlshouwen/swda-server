@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.security.service.impl;
+package com.dlshouwen.swda.bms.security.third;
 
 import lombok.AllArgsConstructor;
 import me.zhyd.oauth.model.AuthCallback;

@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.security.service;
+package com.dlshouwen.swda.core.security.account;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.security.user.UserDetail;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-public interface IUserDetailsService {
+public interface UserDetailsService {
 
 	/**
 	 * get user details

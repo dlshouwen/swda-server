@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.security.service.impl;
+package com.dlshouwen.swda.bms.security.mobile;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

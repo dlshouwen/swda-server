@@ -11,7 +11,6 @@ import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.log.service.ILoginLogService;
-import com.dlshouwen.swda.bms.security.enums.LoginOperationEnum;
 import com.dlshouwen.swda.bms.security.service.ICaptchaService;
 import com.dlshouwen.swda.bms.security.service.ILoginService;
 import com.dlshouwen.swda.bms.security.service.IUserTokenService;
@@ -19,6 +18,7 @@ import com.dlshouwen.swda.bms.system.service.IUserService;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.log.dict.CallResult;
+import com.dlshouwen.swda.core.log.dict.LogoutType;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.crypto.Sm2Utils;
 import com.dlshouwen.swda.core.security.mobile.MobileAuthenticationToken;
@@ -202,7 +202,7 @@ public class LoginServiceImpl implements ILoginService {
 //		expire token
 		userTokenService.expireToken(user.getUserId());
 //		save login log
-		loginLogService.saveLoginLog(user.getUsername(), CallResult.SUCCESS, LoginOperationEnum.LOGOUT_SUCCESS.getValue());
+		loginLogService.saveLoginLog(user.getUsername(), CallResult.SUCCESS, LogoutType.NORMAL);
 	}
 
 }

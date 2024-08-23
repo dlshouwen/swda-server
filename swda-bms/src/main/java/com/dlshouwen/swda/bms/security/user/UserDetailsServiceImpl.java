@@ -1,8 +1,7 @@
-package com.dlshouwen.swda.bms.security.service.impl;
+package com.dlshouwen.swda.bms.security.user;
 
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.security.service.IUserDetailsService;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.dict.DataScopeType;
 import com.dlshouwen.swda.bms.system.entity.User;
@@ -30,7 +29,7 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class UserDetailsServiceImpl implements IUserDetailsService, UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen.swda.core.security.account.UserDetailsService {
 	
 	/** permission service */
 	private final IPermissionService permissionService;
