@@ -7,6 +7,7 @@ import com.dlshouwen.swda.core.common.entity.Data;
 import com.dlshouwen.swda.core.unique.properties.UniqueProperties;
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.thread.ThreadUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 
@@ -14,6 +15,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * data loader
@@ -31,12 +34,25 @@ public class DataLoader {
 	private final JdbcTemplate template;
 
 	/**
+	 * run
+	 */
+	@PostConstruct
+	public void run() {
+//		create schedule executor
+		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
+//		delay
+		scheduledService.scheduleWithFixedDelay(() -> {
+//			load
+			load(uniqueProperties, template);
+		}, 1, 10, TimeUnit.MINUTES);
+	}
+
+	/**
 	 * load
 	 * @param uniqueProperties
 	 * @param template
 	 */
-	@PostConstruct
-	public void load() {
+	public static void load(UniqueProperties uniqueProperties, JdbcTemplate template) {
 		/*
 		 * 1. get attr
 		 */

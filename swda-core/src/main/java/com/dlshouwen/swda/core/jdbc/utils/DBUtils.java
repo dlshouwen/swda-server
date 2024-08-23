@@ -16,21 +16,19 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.zaxxer.hikari.HikariDataSource;
 
 /**
- * 数据库工具类
+ * db utils
  * @author liujingcheng@live.cn
- * @since hygea 6.0
+ * @since 1.0.0
  */
 public class DBUtils {
-	
+
 	/**
-	 * 获取数据源
-	 * <p>根据驱动类地址、链接地址、用户名及密码获取数据源信息，使用C3P0数据连接池
-	 * @param driverClass 驱动类地址
-	 * @param jdbcUrl 链接地址
-	 * @param username 用户名
-	 * @param password 密码
-	 * @return 数据源对象
-	 * @throws Exception 抛出全部异常
+	 * get data source
+	 * @param driverClass
+	 * @param jdbc
+	 * @param username
+	 * @param password
+	 * @return data source
 	 */
 	public static DataSource getDataSource(String driverClass, String jdbcUrl, 
 			String username, String password) throws Exception {
@@ -43,13 +41,13 @@ public class DBUtils {
 	}
 	
 	/**
-	 * 调用带返回值的存储过程
-	 * @param template 数据连接对象
-	 * @param sql sql语句
-	 * @param args 参数
-	 * @param returns 返回值位置
-	 * @param types 返回值类型
-	 * @return 返回值
+	 * call
+	 * @param template
+	 * @param sql
+	 * @param args
+	 * @param returns
+	 * @param types
+	 * @return result
 	 */
 	public static Object[] call(JdbcTemplate template, String sql, Object[] args, int[] returns, int[] types) {
 		Object[] result = (Object[]) template.execute(new CallableStatementCreator() {

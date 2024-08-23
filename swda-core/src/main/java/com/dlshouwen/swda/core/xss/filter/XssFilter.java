@@ -16,33 +16,46 @@ import com.dlshouwen.swda.core.xss.wrapper.XssRequestWrapper;
 import java.io.IOException;
 
 /**
- * Xss 过滤器
- *
- * @author 阿沐 babamu@126.com <a href="https://maku.net">MAKU</a>
+ * xss filter
+ * @author liujingcheng@live.cn
+ * @since 1.0.0
  */
 @AllArgsConstructor
 public class XssFilter extends OncePerRequestFilter {
+	
+	/** properties */
 	private final XssProperties properties;
+	
+	/** path matcher */
 	private final PathMatcher pathMatcher;
 
+	/**
+	 * do filter internal
+	 * @param request
+	 * @param response
+	 * @param filterChain
+	 * @throws IOException, ServletException
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 		filterChain.doFilter(new XssRequestWrapper(request), response);
 	}
 
+	/**
+	 * should not filter
+	 * @param request
+	 */
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) {
-		// 如果是json数据，则不处理
+//		get content type
 		String contentType = request.getContentType();
-		if (StrUtil.isBlank(contentType)
-				|| StrUtil.startWithIgnoreCase(contentType, MediaType.APPLICATION_JSON_VALUE)) {
+//		if content type is blank or json then return
+		if (StrUtil.isBlank(contentType) || StrUtil.startWithIgnoreCase(contentType, MediaType.APPLICATION_JSON_VALUE)) {
 			return true;
 		}
-
-		// 放行不过滤的URL
-		return properties.getExcludeUrls().stream()
-				.anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, request.getRequestURI()));
+//		pass exclude urils
+		return properties.getExcludeUrls().stream().anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, request.getRequestURI()));
 	}
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
  * @since 1.0.0
  */
 public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements BaseService<T> {
-
+	
 	/**
 	 * data scope wrapper
 	 * @param queryWrapper

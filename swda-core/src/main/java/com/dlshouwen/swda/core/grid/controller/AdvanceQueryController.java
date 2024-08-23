@@ -54,7 +54,7 @@ public class AdvanceQueryController {
 	 */
 	@GetMapping(value="/list/{functionCode}")
 	@Operation(name = "get advance query list", type = OperateType.SEARCH)
-	public R<List<AdvanceQueryVO>> getAdvanceQuery(@PathVariable("functionCode") String functionCode) throws Exception {
+	public R<List<AdvanceQueryVO>> getAdvanceQuery(@PathVariable("functionCode") String functionCode) {
 //		get user detail
 		UserDetail user = SecurityUser.getUser();
 //		if no user
@@ -96,7 +96,7 @@ public class AdvanceQueryController {
 	 */
 	@PostMapping(value="/add")
 	@Operation(name = "add advance query", type = OperateType.INSERT)
-	public R<String> addAdvanceQuery(@RequestBody @Valid AdvanceQueryVO advanceQuery) throws Exception {
+	public R<String> addAdvanceQuery(@RequestBody @Valid AdvanceQueryVO advanceQuery) {
 //		add advance query
 		Long advanceQueryId = advanceQueryService.addAdvanceQuery(advanceQuery);
 //		get advance query condition list
@@ -146,7 +146,7 @@ public class AdvanceQueryController {
 	 */
 	@PutMapping(value="/update")
 	@Operation(name = "update advance query", type = OperateType.UPDATE)
-	public R<String> updateAdvanceQuery(@RequestBody @Valid AdvanceQueryVO advanceQuery) throws Exception {
+	public R<String> updateAdvanceQuery(@RequestBody @Valid AdvanceQueryVO advanceQuery) {
 //		update advance query
 		advanceQueryService.updateAdvanceQuery(advanceQuery);
 //		get advance query id
@@ -202,7 +202,7 @@ public class AdvanceQueryController {
 	 */
 	@DeleteMapping(value="/delete")
 	@Operation(name = "delete advance query", type = OperateType.DELETE)
-	public R<String> deleteAdvanceQuery(Long advanceQueryId) throws Exception {
+	public R<String> deleteAdvanceQuery(Long advanceQueryId) {
 //		delete advance query
 		advanceQueryService.deleteAdvanceQuery(advanceQueryId);
 //		delete advance query condition list
@@ -220,7 +220,7 @@ public class AdvanceQueryController {
 	 */
 	@PutMapping(value="/copy")
 	@Operation(name = "copy advance query", type = OperateType.INSERT)
-	public R<String> copyAdvanceQuery(Long advanceQueryId) throws Exception {
+	public R<String> copyAdvanceQuery(Long advanceQueryId) {
 //		get advance query
 		AdvanceQueryVO advanceQuery = advanceQueryService.getAdvanceQueryData(advanceQueryId);
 //		get advance query condition list
