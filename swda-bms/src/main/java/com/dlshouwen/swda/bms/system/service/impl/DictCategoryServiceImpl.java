@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.system.convert.DictCategoryConvert;
 import com.dlshouwen.swda.bms.system.convert.DictConvert;
@@ -52,7 +51,7 @@ public class DictCategoryServiceImpl extends BaseServiceImpl<DictCategoryMapper,
 	@Override
 	public PageResult<DictCategoryVO> getDictCategoryList(Query<DictCategory> query) {
 //		query page
-		IPage<DictCategory> page = GridUtils.query(baseMapper, query);
+		IPage<DictCategory> page = this.page(query);
 //		return page result
 		return new PageResult<>(DictCategoryConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

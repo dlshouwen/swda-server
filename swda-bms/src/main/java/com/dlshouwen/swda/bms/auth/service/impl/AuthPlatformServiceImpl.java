@@ -9,7 +9,6 @@ import me.zhyd.oauth.request.*;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.auth.convert.AuthPlatformConvert;
 import com.dlshouwen.swda.bms.auth.dict.AuthPlatformType;
@@ -40,7 +39,7 @@ public class AuthPlatformServiceImpl extends BaseServiceImpl<AuthPlatformMapper,
 	@Override
 	public PageResult<AuthPlatformVO> getAuthPlatformList(Query<AuthPlatform> query) {
 //		query page
-		IPage<AuthPlatform> page = GridUtils.query(baseMapper, query);
+		IPage<AuthPlatform> page = this.page(query);
 //		convert to vo list for page return
 		return new PageResult<>(AuthPlatformConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

@@ -19,7 +19,6 @@ import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.grid.dto.Sort;
 import com.dlshouwen.swda.core.jdbc.mapper.ClassRowMapper;
 import com.dlshouwen.swda.core.jdbc.utils.SqlUtils;
-import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
 /**
  * grid utils
@@ -27,21 +26,6 @@ import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
  * @since 1.0.0
  */
 public class GridUtils {
-	
-	/**
-	 * query
-	 * @param baseMapper
-	 * @param pager
-	 * @param <T>
-	 */
-	public static <T> IPage<T> query(BaseMapper<T> baseMapper, Query<T> query) {
-//		construct wrapper
-		QueryWrapper<T> wrapper = GridUtils.constructQueryWrapper(query);
-//		select page
-		IPage<T> page = baseMapper.selectPage(query.getPage(), wrapper);
-//		return page
-		return page;
-	}
 	
 	/**
 	 * construct query wrapper

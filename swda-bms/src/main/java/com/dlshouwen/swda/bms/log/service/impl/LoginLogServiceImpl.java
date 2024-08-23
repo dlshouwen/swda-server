@@ -7,7 +7,6 @@ import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
 import com.dlshouwen.swda.core.common.utils.IpUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.log.entity.LoginLog;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.log.convert.LoginLogConvert;
@@ -37,7 +36,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	@Override
 	public PageResult<LoginLogVO> getLoginLogList(Query<LoginLog> query) {
 //		query page
-		IPage<LoginLog> page = GridUtils.query(baseMapper, query);
+		IPage<LoginLog> page = this.page(query);
 //		convert to vo for return 
 		return new PageResult<>(LoginLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

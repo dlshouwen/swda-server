@@ -1,6 +1,7 @@
 package com.dlshouwen.swda.bms.system.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
@@ -54,7 +55,7 @@ public interface UserMapper extends BaseMapper<User> {
 	 * @return user
 	 */
 	default User getUserByMobile(String mobile) {
-		return this.selectOne(new QueryWrapper<User>().eq("mobile", mobile));
+		return this.selectOne(Wrappers.<User>lambdaQuery().eq(User::getMobile, mobile));
 	}
 
 }

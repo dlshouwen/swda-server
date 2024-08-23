@@ -10,7 +10,6 @@ import com.dlshouwen.swda.core.common.constant.Constant;
 import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.log.dto.OperationLogDTO;
 import com.dlshouwen.swda.core.log.entity.OperationLog;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
@@ -44,7 +43,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper,
 	@Override
 	public PageResult<OperationLogVO> getOperationLogList(Query<OperationLog> query) {
 //		query page
-		IPage<OperationLog> page = GridUtils.query(baseMapper, query);
+		IPage<OperationLog> page = this.page(query);
 //		convert to vo for return
 		return new PageResult<>(OperationLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

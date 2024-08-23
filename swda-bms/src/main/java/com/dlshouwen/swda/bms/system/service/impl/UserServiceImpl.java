@@ -9,7 +9,6 @@ import com.dlshouwen.swda.core.excel.callback.ExcelFinishCallBack;
 import com.dlshouwen.swda.core.excel.utils.ExcelUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
@@ -61,7 +60,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	@Override
 	public PageResult<UserVO> getUserList(Query<User> query) {
 //		query page
-		IPage<User> page = GridUtils.query(baseMapper, query);
+		IPage<User> page = this.page(query);
 //		convert to vo for return
 		return new PageResult<>(UserConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
@@ -249,7 +248,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	@Override
 	public PageResult<UserVO> getRoleUserList(Query<User> query) {
 //		get page
-		IPage<User> page = GridUtils.query(baseMapper, query);
+		IPage<User> page = this.page(query);
 //		return page result
 		return new PageResult<>(UserConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

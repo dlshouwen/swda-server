@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dlshouwen.swda.bms.oss.convert.AttachmentConvert;
@@ -35,7 +34,7 @@ public class AttachmentServiceImpl extends BaseServiceImpl<AttachmentMapper, Att
 	@Override
 	public PageResult<AttachmentVO> getAttachmentList(Query<Attachment> query) {
 //		query page
-		IPage<Attachment> page = GridUtils.query(baseMapper, query);
+		IPage<Attachment> page = this.page(query);
 //		convert to vo list for page return
 		return new PageResult<>(AttachmentConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

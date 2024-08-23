@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.system.convert.PostConvert;
 import com.dlshouwen.swda.bms.system.entity.Post;
@@ -39,7 +38,7 @@ public class PostServiceImpl extends BaseServiceImpl<PostMapper, Post> implement
 	@Override
 	public PageResult<PostVO> getPostList(Query<Post> query) {
 //		query page
-		IPage<Post> page = GridUtils.query(baseMapper, query);
+		IPage<Post> page = this.page(query);
 //		convert to vo for return
 		return new PageResult<>(PostConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

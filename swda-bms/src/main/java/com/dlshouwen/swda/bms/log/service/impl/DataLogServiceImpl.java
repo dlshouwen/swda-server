@@ -10,7 +10,6 @@ import com.dlshouwen.swda.core.common.constant.Constant;
 import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.log.dto.DataLogDTO;
 import com.dlshouwen.swda.core.log.entity.DataLog;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
@@ -44,7 +43,7 @@ public class DataLogServiceImpl extends BaseServiceImpl<DataLogMapper, DataLog> 
 	@Override
 	public PageResult<DataLogVO> getDataLogList(Query<DataLog> query) {
 //		query page
-		IPage<DataLog> page = GridUtils.query(baseMapper, query);
+		IPage<DataLog> page = this.page(query);
 //		convert to vo for return
 		return new PageResult<>(DataLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

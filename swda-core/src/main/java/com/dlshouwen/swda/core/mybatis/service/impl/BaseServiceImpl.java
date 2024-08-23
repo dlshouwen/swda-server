@@ -2,9 +2,13 @@ package com.dlshouwen.swda.core.mybatis.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dlshouwen.swda.core.common.dict.ZeroOne;
+import com.dlshouwen.swda.core.grid.dto.Query;
+import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.interceptor.DataScope;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
@@ -19,6 +23,20 @@ import java.util.List;
  * @since 1.0.0
  */
 public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements BaseService<T> {
+	
+	/**
+	 * page
+	 * @param query
+	 * @return ipage
+	 */
+	protected IPage<T> page(Query<T> query) {
+//		construct wrapper
+		QueryWrapper<T> wrapper = GridUtils.constructQueryWrapper(query);
+//		select page
+		IPage<T> page = baseMapper.selectPage(query.getPage(), wrapper);
+//		return page
+		return page;
+	}
 	
 	/**
 	 * data scope wrapper

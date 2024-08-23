@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.security.service.IUserTokenService;
 import com.dlshouwen.swda.bms.system.convert.RoleConvert;
@@ -54,7 +53,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 	@Override
 	public PageResult<RoleVO> getRoleList(Query<Role> query) {
 //		query page
-		IPage<Role> page = GridUtils.query(baseMapper, query);
+		IPage<Role> page = this.page(query);
 //		convert to vo for return
 		return new PageResult<>(RoleConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

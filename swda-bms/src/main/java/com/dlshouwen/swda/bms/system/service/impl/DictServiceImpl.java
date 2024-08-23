@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
-import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.system.convert.DictConvert;
 import com.dlshouwen.swda.bms.system.entity.Dict;
@@ -37,7 +36,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 	@Override
 	public PageResult<DictVO> getDictList(Query<Dict> query) {
 //		query page
-		IPage<Dict> page = GridUtils.query(baseMapper, query);
+		IPage<Dict> page = this.page(query);
 //		convert to vo list for return
 		return new PageResult<>(DictConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
