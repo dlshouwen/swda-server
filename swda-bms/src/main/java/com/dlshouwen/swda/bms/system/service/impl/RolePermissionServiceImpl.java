@@ -2,6 +2,7 @@ package com.dlshouwen.swda.bms.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.bms.system.entity.RolePermission;
 import com.dlshouwen.swda.bms.system.mapper.RolePermissionMapper;
 import com.dlshouwen.swda.bms.system.service.IRolePermissionService;
@@ -64,7 +65,7 @@ public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMap
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deletePermissionIdList)) {
 //			get wrapper
-			LambdaQueryWrapper<RolePermission> queryWrapper = new LambdaQueryWrapper<>();
+			LambdaQueryWrapper<RolePermission> queryWrapper = Wrappers.lambdaQuery();
 //			delete role permission list
 			remove(queryWrapper.eq(RolePermission::getRoleId, roleId).in(RolePermission::getPermissionId, deletePermissionIdList));
 		}
@@ -78,7 +79,7 @@ public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMap
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteRolePermissionByRoleIdList(List<Long> roleIdList) {
 //		delete role permission list
-		remove(new LambdaQueryWrapper<RolePermission>().in(RolePermission::getRoleId, roleIdList));
+		remove(Wrappers.<RolePermission>lambdaQuery().in(RolePermission::getRoleId, roleIdList));
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMap
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteRolePermissionByPermissionId(Long permissionId) {
 //		delete role permission list
-		remove(new LambdaQueryWrapper<RolePermission>().eq(RolePermission::getPermissionId, permissionId));
+		remove(Wrappers.<RolePermission>lambdaQuery().eq(RolePermission::getPermissionId, permissionId));
 	}
 
 }

@@ -1,7 +1,8 @@
 package com.dlshouwen.swda.bms.system.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.common.constant.Constant;
@@ -120,14 +121,14 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganMapper, Organ> implem
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteOrgan(Long organId) {
 //		get sub organ count
-		long organCount = this.count(new QueryWrapper<Organ>().eq("pre_organ_id", organId));
+		long organCount = this.count(Wrappers.<Organ>lambdaQuery().eq(Organ::getPreOrganId, organId));
 //		if has sub count
 		if (organCount > 0) {
 //			throw exception
 			throw new SwdaException("请先删除子机构");
 		}
 //		get organ user count
-		long userCount = userMapper.selectCount(new QueryWrapper<User>().eq("organ_id", organId));
+		long userCount = userMapper.selectCount(Wrappers.<User>lambdaQuery().eq(User::getOrganId, organId));
 //		if has user
 		if (userCount > 0) {
 //			throw exception

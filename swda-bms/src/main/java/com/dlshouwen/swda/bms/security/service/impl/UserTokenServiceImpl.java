@@ -74,7 +74,7 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 //		set refresh token expire
 		userToken.setRefreshTokenExpire(DateUtil.toLocalDateTime(DateUtil.offsetSecond(now, securityProperties.getRefreshTokenExpire())));
 //		get user token
-		UserToken dbUserToken = baseMapper.selectOne(new LambdaQueryWrapper<UserToken>().eq(UserToken::getUserId, userId));
+		UserToken dbUserToken = baseMapper.selectOne(Wrappers.<UserToken>lambdaQuery().eq(UserToken::getUserId, userId));
 //		if token is null
 		if (dbUserToken == null) {
 //			insert user
@@ -144,7 +144,7 @@ public class UserTokenServiceImpl extends BaseServiceImpl<UserTokenMapper, UserT
 		entity.setAccessTokenExpire(now);
 		entity.setRefreshTokenExpire(now);
 //		update user token
-		baseMapper.update(entity, new LambdaQueryWrapper<UserToken>().eq(UserToken::getUserId, userId));
+		baseMapper.update(entity, Wrappers.<UserToken>lambdaQuery().eq(UserToken::getUserId, userId));
 	}
 
 	/**

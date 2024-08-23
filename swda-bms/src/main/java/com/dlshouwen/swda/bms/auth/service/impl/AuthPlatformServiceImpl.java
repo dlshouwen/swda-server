@@ -1,7 +1,8 @@
 package com.dlshouwen.swda.bms.auth.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+
 import lombok.AllArgsConstructor;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.request.*;
@@ -100,7 +101,7 @@ public class AuthPlatformServiceImpl extends BaseServiceImpl<AuthPlatformMapper,
 	@Override
 	public AuthRequest getAuthRequest(Integer authPlatformType) {
 //		get auth platform
-		AuthPlatform authPlatform = baseMapper.selectOne(new LambdaQueryWrapper<AuthPlatform>().eq(AuthPlatform::getAuthPlatformType, authPlatformType));
+		AuthPlatform authPlatform = baseMapper.selectOne(Wrappers.<AuthPlatform>lambdaQuery().eq(AuthPlatform::getAuthPlatformType, authPlatformType));
 //		if auth platform is null
 		if (authPlatform == null) {
 //			throw exception

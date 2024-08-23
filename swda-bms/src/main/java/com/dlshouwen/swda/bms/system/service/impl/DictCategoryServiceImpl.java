@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fhs.trans.service.impl.DictionaryTransService;
 import lombok.AllArgsConstructor;
 
@@ -143,7 +143,7 @@ public class DictCategoryServiceImpl extends BaseServiceImpl<DictCategoryMapper,
 //		async
 		CompletableFuture.supplyAsync(() -> {
 //			get dict list
-			List<Dict> dataList = dictMapper.selectList(new LambdaQueryWrapper<>());
+			List<Dict> dataList = dictMapper.selectList(Wrappers.emptyWrapper());
 //			group by dict category
 			Map<String, List<Dict>> dictCategoryInfo = dataList.stream().collect(Collectors.groupingBy(Dict::getDictCategoryId));
 //			get dict category list

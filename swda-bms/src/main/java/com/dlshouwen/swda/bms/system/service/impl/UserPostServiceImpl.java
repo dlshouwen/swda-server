@@ -2,6 +2,7 @@ package com.dlshouwen.swda.bms.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.bms.system.entity.UserPost;
 import com.dlshouwen.swda.bms.system.mapper.UserPostMapper;
 import com.dlshouwen.swda.bms.system.service.IUserPostService;
@@ -52,7 +53,7 @@ public class UserPostServiceImpl extends BaseServiceImpl<UserPostMapper, UserPos
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deletePostIdList)) {
 //			get wrapper
-			LambdaQueryWrapper<UserPost> queryWrapper = new LambdaQueryWrapper<>();
+			LambdaQueryWrapper<UserPost> queryWrapper = Wrappers.lambdaQuery();
 //			delete user post
 			remove(queryWrapper.eq(UserPost::getUserId, userId).in(UserPost::getPostId, deletePostIdList));
 		}
@@ -65,7 +66,7 @@ public class UserPostServiceImpl extends BaseServiceImpl<UserPostMapper, UserPos
 	@Override
 	public void deleteUserPostByPostIdList(List<Long> postIdList) {
 //		delete user post
-		remove(new LambdaQueryWrapper<UserPost>().in(UserPost::getPostId, postIdList));
+		remove(Wrappers.<UserPost>lambdaQuery().in(UserPost::getPostId, postIdList));
 	}
 
 	/**
@@ -75,7 +76,7 @@ public class UserPostServiceImpl extends BaseServiceImpl<UserPostMapper, UserPos
 	@Override
 	public void deleteUserPostByUserIdList(List<Long> userIdList) {
 //		delete user post
-		remove(new LambdaQueryWrapper<UserPost>().in(UserPost::getUserId, userIdList));
+		remove(Wrappers.<UserPost>lambdaQuery().in(UserPost::getUserId, userIdList));
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.sms.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.bms.sms.cache.SmsCache;
 import com.dlshouwen.swda.bms.sms.entity.SmsPlatform;
 import com.dlshouwen.swda.bms.sms.mapper.SmsPlatformMapper;
@@ -36,7 +36,7 @@ public class SmsPlatformServiceImpl extends BaseServiceImpl<SmsPlatformMapper, S
 //		if null
 		if (platformList == null) {
 //			get platform list from db
-			platformList = this.list(new LambdaQueryWrapper<SmsPlatform>().in(SmsPlatform::getStatus, OpenClose.OPEN));
+			platformList = this.list(Wrappers.<SmsPlatform>lambdaQuery().in(SmsPlatform::getStatus, OpenClose.OPEN));
 //			save to cache
 			smsCache.savePlatformList(platformList);
 		}

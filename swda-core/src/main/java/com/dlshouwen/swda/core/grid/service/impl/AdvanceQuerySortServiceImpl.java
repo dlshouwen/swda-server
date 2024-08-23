@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.core.grid.convert.AdvanceQuerySortConvert;
 import com.dlshouwen.swda.core.grid.entity.AdvanceQuerySort;
 import com.dlshouwen.swda.core.grid.mapper.AdvanceQuerySortMapper;
@@ -31,9 +32,9 @@ public class AdvanceQuerySortServiceImpl extends BaseServiceImpl<AdvanceQuerySor
 	@Override
 	public List<AdvanceQuerySortVO> getAdvanceQuerySortList(Long advanceQueryId) {
 //		get wrapper: search by advance query id, order by sort asc
-		QueryWrapper<AdvanceQuerySort> wrapper = new QueryWrapper<AdvanceQuerySort>();
-		wrapper.eq("advanceQueryId", advanceQueryId);
-		wrapper.orderByAsc("sort");
+		LambdaQueryWrapper<AdvanceQuerySort> wrapper = Wrappers.lambdaQuery();
+		wrapper.eq(AdvanceQuerySort::getAdvance_query_id, advanceQueryId);
+		wrapper.orderByAsc(AdvanceQuerySort::getSort);
 //		get advance query sort list
 		List<AdvanceQuerySort> sortList = this.list(wrapper);
 //		convert to vo list for return
@@ -58,11 +59,8 @@ public class AdvanceQuerySortServiceImpl extends BaseServiceImpl<AdvanceQuerySor
 	 */
 	@Override
 	public void deleteAdvanceQuerySortList(Long advanceQueryId) {
-//		get wrapper: search by advance query id
-		QueryWrapper<AdvanceQuerySort> wrapper = new QueryWrapper<AdvanceQuerySort>();
-		wrapper.eq("advanceQueryId", advanceQueryId);
 //		delete advance query sort list
-		this.remove(wrapper);
+		this.remove(Wrappers.<AdvanceQuerySort>lambdaQuery().eq(AdvanceQuerySort::getAdvance_query_id, advanceQueryId));
 	}
 	
 

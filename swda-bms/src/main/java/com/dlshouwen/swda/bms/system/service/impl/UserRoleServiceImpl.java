@@ -1,7 +1,8 @@
 package com.dlshouwen.swda.bms.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.bms.security.service.IUserTokenService;
@@ -58,10 +59,8 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRol
 		Collection<Long> deleteRoleIdList = CollUtil.subtract(dbRoleIdList, roleIdList);
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deleteRoleIdList)) {
-//			create query wrapper
-			LambdaQueryWrapper<UserRole> queryWrapper = new LambdaQueryWrapper<>();
 //			delete user role
-			remove(queryWrapper.eq(UserRole::getUserId, userId).in(UserRole::getRoleId, deleteRoleIdList));
+			remove(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getUserId, userId).in(UserRole::getRoleId, deleteRoleIdList));
 		}
 	}
 
@@ -95,10 +94,8 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRol
 	 */
 	@Override
 	public void deleteUserRole(Long roleId, List<Long> userIdList) {
-//		create wrapper
-		LambdaQueryWrapper<UserRole> queryWrapper = new LambdaQueryWrapper<>();
 //		delete user role
-		remove(queryWrapper.eq(UserRole::getRoleId, roleId).in(UserRole::getUserId, userIdList));
+		remove(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getRoleId, roleId).in(UserRole::getUserId, userIdList));
 //		update cache auth
 		userIdList.forEach(userTokenService::updateUserCacheByUserId);
 	}
@@ -110,7 +107,7 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRol
 	@Override
 	public void deleteUserRoleByRoleIdList(List<Long> roleIdList) {
 //		delete user role
-		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getRoleId, roleIdList));
+		remove(Wrappers.<UserRole>lambdaQuery().in(UserRole::getRoleId, roleIdList));
 	}
 
 	/**
@@ -120,7 +117,7 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRol
 	@Override
 	public void deleteUserRoleByUserIdList(List<Long> userIdList) {
 //		delete user role
-		remove(new LambdaQueryWrapper<UserRole>().in(UserRole::getUserId, userIdList));
+		remove(Wrappers.<UserRole>lambdaQuery().in(UserRole::getUserId, userIdList));
 	}
 
 	/**

@@ -1,7 +1,8 @@
 package com.dlshouwen.swda.bms.system.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.common.dict.ZeroOne;
@@ -167,7 +168,7 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 	 */
 	@Override
 	public Long getSubPermissionCount(Long prePermissionId) {
-		return this.count(new LambdaQueryWrapper<Permission>().eq(Permission::getPrePermissionId, prePermissionId));
+		return this.count(Wrappers.<Permission>lambdaQuery().eq(Permission::getPrePermissionId, prePermissionId));
 	}
 
 }

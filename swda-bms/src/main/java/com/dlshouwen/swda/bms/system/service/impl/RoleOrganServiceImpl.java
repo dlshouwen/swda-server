@@ -1,7 +1,9 @@
 package com.dlshouwen.swda.bms.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.bms.system.entity.RoleOrgan;
 import com.dlshouwen.swda.bms.system.mapper.RoleOrganMapper;
 import com.dlshouwen.swda.bms.system.service.IRoleOrganService;
@@ -54,7 +56,7 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 //		if has delete datas
 		if (CollUtil.isNotEmpty(deleteOrganIdList)) {
 //			get wrapper
-			LambdaQueryWrapper<RoleOrgan> queryWrapper = new LambdaQueryWrapper<>();
+			LambdaQueryWrapper<RoleOrgan> queryWrapper = Wrappers.<RoleOrgan>lambdaQuery();
 //			set condition
 			queryWrapper.eq(RoleOrgan::getRoleId, roleId);
 			queryWrapper.in(RoleOrgan::getOrganId, deleteOrganIdList);
@@ -81,7 +83,7 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 	@Override
 	public void deleteRoleOrganByRoleIdList(List<Long> roleIdList) {
 //		delete role organ by role id list
-		remove(new LambdaQueryWrapper<RoleOrgan>().in(RoleOrgan::getRoleId, roleIdList));
+		remove(Wrappers.<RoleOrgan>lambdaQuery().in(RoleOrgan::getRoleId, roleIdList));
 	}
 
 }

@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.core.common.dict.ZeroOne;
 import com.dlshouwen.swda.core.common.entity.Data;
 import com.dlshouwen.swda.core.grid.convert.AdvanceQueryConvert;
@@ -45,15 +46,15 @@ public class AdvanceQueryServiceImpl extends BaseServiceImpl<AdvanceQueryMapper,
 //		get attr: advance_query_is_filter_user
 		String advance_query_is_filter_user = Data.attr.get("advance_query_is_filter_user");
 //		get query wrapper
-		QueryWrapper<AdvanceQuery> wrapper = new QueryWrapper<AdvanceQuery>();
+		LambdaQueryWrapper<AdvanceQuery> wrapper = Wrappers.lambdaQuery();
 //		filter function code
-		wrapper.eq("functionCode", functionCode);
+		wrapper.eq(AdvanceQuery::getFunctionCode, functionCode);
 //		filter user
 		if(String.valueOf(ZeroOne.YES).equals(advance_query_is_filter_user)) {
-			wrapper.eq("creator", user.getUserId());
+			wrapper.eq(AdvanceQuery::getCreator, user.getUserId());
 		}
 //		sort by edit time desc
-		wrapper.orderByDesc("edit_time");
+		wrapper.orderByDesc(AdvanceQuery::getUpdateTime);
 //		get advance query list
 		List<AdvanceQuery> advanceQueryList = this.list(wrapper);
 //		convert to vo list for return
