@@ -16,7 +16,7 @@ import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;
 import com.dlshouwen.swda.bms.assist.vo.UserAssistVO;
 import com.dlshouwen.swda.bms.assist.vo.UserAvatarVO;
-import com.dlshouwen.swda.bms.auth.service.IUserTokenService;
+import com.dlshouwen.swda.bms.security.service.IUserTokenService;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;

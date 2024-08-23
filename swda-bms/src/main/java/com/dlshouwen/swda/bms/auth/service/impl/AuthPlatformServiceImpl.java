@@ -6,13 +6,13 @@ import lombok.AllArgsConstructor;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.request.*;
 
-import com.dlshouwen.swda.core.common.dict.AuthPlatformType;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.auth.convert.AuthPlatformConvert;
+import com.dlshouwen.swda.bms.auth.dict.AuthPlatformType;
 import com.dlshouwen.swda.bms.auth.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.auth.mapper.AuthPlatformMapper;
 import com.dlshouwen.swda.bms.auth.service.IAuthPlatformService;

@@ -9,10 +9,10 @@ import com.dlshouwen.swda.bms.sms.cache.SmsCache;
 import com.dlshouwen.swda.bms.sms.context.SmsContext;
 import com.dlshouwen.swda.bms.sms.entity.SmsLog;
 import com.dlshouwen.swda.bms.sms.entity.SmsPlatform;
-import com.dlshouwen.swda.core.common.dict.CallResult;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.common.utils.JsonUtils;
+import com.dlshouwen.swda.core.log.dict.CallResult;
 
 import java.time.LocalDateTime;
 import java.util.List;

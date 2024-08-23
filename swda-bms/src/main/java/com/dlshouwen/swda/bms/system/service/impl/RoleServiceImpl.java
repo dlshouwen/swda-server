@@ -7,7 +7,7 @@ import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.grid.utils.GridUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.auth.service.IUserTokenService;
+import com.dlshouwen.swda.bms.security.service.IUserTokenService;
 import com.dlshouwen.swda.bms.system.convert.RoleConvert;
 import com.dlshouwen.swda.bms.system.dict.DataScopeType;
 import com.dlshouwen.swda.bms.system.entity.Role;

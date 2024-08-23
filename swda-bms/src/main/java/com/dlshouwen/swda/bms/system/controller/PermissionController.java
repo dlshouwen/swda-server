@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
+import com.dlshouwen.swda.bms.system.dict.PermissionType;
 import com.dlshouwen.swda.bms.system.service.IPermissionService;
 import com.dlshouwen.swda.bms.system.vo.PermissionVO;
-import com.dlshouwen.swda.core.common.dict.PermissionType;
 import com.dlshouwen.swda.core.common.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;

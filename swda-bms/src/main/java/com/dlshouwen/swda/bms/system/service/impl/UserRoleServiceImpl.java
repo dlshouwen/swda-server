@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.auth.service.IUserTokenService;
+import com.dlshouwen.swda.bms.security.service.IUserTokenService;
 import com.dlshouwen.swda.bms.system.entity.UserRole;
 import com.dlshouwen.swda.bms.system.mapper.UserRoleMapper;
 import com.dlshouwen.swda.bms.system.service.IUserRoleService;
