@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("bms/log/login_login")
+@RequestMapping("/bms/log/login_login")
 @Tag(name = "login log")
 @AllArgsConstructor
 public class LoginLogController {

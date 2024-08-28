@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("storage")
+@RequestMapping("/storage")
 @Tag(name = "storage")
 @AllArgsConstructor
 public class StorageController {
@@ -36,7 +36,7 @@ public class StorageController {
 	 * @return result
 	 * @throws Exception
 	 */
-	@PostMapping("upload")
+	@PostMapping("/upload")
 	@Operation(name = "upload", type = OperateType.INSERT)
 	public R<FileUploadVO> upload(@RequestParam("file") MultipartFile file) throws Exception {
 //		file is empty
@@ -65,7 +65,7 @@ public class StorageController {
 	 * @return result
 	 * @throws Exception
 	 */
-	@PostMapping("uploads")
+	@PostMapping("/uploads")
 	@Operation(name = "uploads", type = OperateType.INSERT)
 	public FileUploadVO uploads(@RequestParam("file") MultipartFile file) throws Exception {
 //		file is empty

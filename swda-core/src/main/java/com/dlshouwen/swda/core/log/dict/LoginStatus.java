@@ -12,7 +12,7 @@ public interface LoginStatus {
 
 	@Schema(description = "登录成功")
 	int SUCCESS = 1;
-
+	
 	@Schema(description = "用户不存在")
 	int USER_NOT_EXIST = 2;
 	

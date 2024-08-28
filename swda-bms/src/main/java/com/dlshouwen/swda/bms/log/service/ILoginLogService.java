@@ -22,10 +22,13 @@ public interface ILoginLogService extends BaseService<LoginLog> {
 
 	/**
 	 * save login log
+	 * @param loginType
+	 * @param loginStatus
 	 * @param username
-	 * @param status
-	 * @param operation
+	 * @param mobile
+	 * @param authPlatformId
+	 * @return log id
 	 */
-	void saveLoginLog(String username, Integer status, Integer operation);
+	Long saveLoginLog(Integer loginType, Integer loginStatus, String username, String mobile, Long authPlatformId);
 
 }

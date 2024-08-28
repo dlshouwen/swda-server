@@ -25,7 +25,7 @@ import java.util.Set;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("permission")
+@RequestMapping("/permission")
 @Tag(name = "permission")
 @AllArgsConstructor
 public class PermissionController {

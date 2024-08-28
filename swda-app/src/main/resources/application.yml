@@ -29,6 +29,9 @@ swda:
     access-token-expire: 7200
     # 14天过期
     refresh-token-expire: 1209600
+  log:
+    path: logs
+    level: INFO
 
 #easy trans 数据翻译组件
 easy-trans:
@@ -40,7 +43,7 @@ easy-trans:
   is-enable-tile: true    
   
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/*.xml
+  mapper-locations: classpath*:/mapper/*/*.xml
   # 实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.dlshouwen.swda.*.entity
   global-config:

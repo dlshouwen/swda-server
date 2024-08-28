@@ -21,7 +21,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("organ")
+@RequestMapping("/organ")
 @Tag(name = "organ")
 @AllArgsConstructor
 public class OrganController {

@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.dlshouwen.swda.bms.security.exception.MobileUserNotFoundException;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;
@@ -37,8 +38,8 @@ public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
 		User user = userMapper.getUserByMobile(mobile);
 //		if user is empty
 		if (user == null) {
-//			throw username not found exception
-			throw new UsernameNotFoundException("手机号或验证码错误");
+//			throw mobile user not found exception
+			throw new MobileUserNotFoundException("手机号或验证码错误");
 		}
 //		get user details and return
 		return userDetailsService.getUserDetails(UserConvert.INSTANCE.convert2Detail(user));

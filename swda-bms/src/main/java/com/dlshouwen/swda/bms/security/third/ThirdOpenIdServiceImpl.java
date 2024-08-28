@@ -8,7 +8,7 @@ import me.zhyd.oauth.request.AuthRequest;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.bms.auth.service.IAuthPlatformService;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.bms.security.exception.ThirdLoginException;
 import com.dlshouwen.swda.core.security.third.ThirdLogin;
 import com.dlshouwen.swda.core.security.third.ThirdOpenIdService;
 
@@ -41,7 +41,7 @@ public class ThirdOpenIdServiceImpl implements ThirdOpenIdService {
 //		if not success
 		if (!response.ok()) {
 //			throw exception
-			throw new SwdaException("第三方登录失败");
+			throw new ThirdLoginException(response.getMsg());
 		}
 //		get open id to renturn
 		return response.getData().getUuid();

@@ -25,7 +25,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("post")
+@RequestMapping("/post")
 @Tag(name = "post")
 @AllArgsConstructor
 public class PostController {

@@ -25,7 +25,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("dict")
+@RequestMapping("/dict")
 @Tag(name = "dict")
 @AllArgsConstructor
 public class DictController {

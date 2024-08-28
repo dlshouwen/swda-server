@@ -25,14 +25,14 @@ public class UserDetail implements UserDetails {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 	
+	/** login id */
+	private Long loginId;
+	
 	/** user id */
 	private Long userId;
 	
-	/** user code */
-	private String userCode;
-	
 	/** user name */
-	private String userName;
+	private String username;
 	
 	/** real name */
 	private String realName;
@@ -131,15 +131,6 @@ public class UserDetail implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return this.isEnabled;
-	}
-
-	/**
-	 * get user name
-	 * @return user name
-	 */
-	@Override
-	public String getUsername() {
-		return this.userName;
 	}
 
 }

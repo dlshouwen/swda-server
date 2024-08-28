@@ -25,7 +25,15 @@ public class LoginLog extends BaseEntity {
 	
 	private String userAgent;
 	
-	private String token;
+	private Integer loginType;
+	
+	private Integer loginStatus;
+	
+	private String username;
+	
+	private String mobile;
+	
+	private Long authPlatformId;
 	
 	private Long tenantId;
 
@@ -41,11 +49,9 @@ public class LoginLog extends BaseEntity {
 
 	private String ip;
 
-	private String loginStatus;
+	private Integer isLogout;
 
-	private String isLogout;
-
-	private String logoutType;
+	private Integer logoutType;
 
 	private LocalDateTime logoutTime;
 

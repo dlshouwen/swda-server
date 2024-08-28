@@ -32,7 +32,7 @@ import java.util.Map;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 @Tag(name = "auth")
 @AllArgsConstructor
 public class AuthController {
@@ -96,7 +96,7 @@ public class AuthController {
 	 * @return result
 	 */
 	@SuppressWarnings("unchecked")
-	@PostMapping("bind")
+	@PostMapping("/bind")
 	@Operation(name = "bind", type = OperateType.INSERT)
 	public R<String> bind(@RequestBody AuthCallbackVO authCallbackVO) {
 //		get auth request
@@ -121,7 +121,7 @@ public class AuthController {
 	 * @param authPlatformType
 	 * @return result
 	 */
-	@PutMapping("unbind/{authPlatformType}")
+	@PutMapping("/unbind/{authPlatformType}")
 	@Operation(name = "unbind", type = OperateType.UPDATE)
 	public R<String> unBind(@PathVariable("authPlatformType") Integer authPlatformType) {
 //		unbind

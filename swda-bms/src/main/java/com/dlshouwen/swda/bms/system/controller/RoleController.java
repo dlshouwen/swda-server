@@ -36,7 +36,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("role")
+@RequestMapping("/role")
 @Tag(name = "role")
 @AllArgsConstructor
 public class RoleController {

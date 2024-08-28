@@ -25,7 +25,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("auth_platform")
+@RequestMapping("/auth_platform")
 @Tag(name = "auth platform")
 @AllArgsConstructor
 public class AuthPlatformController {

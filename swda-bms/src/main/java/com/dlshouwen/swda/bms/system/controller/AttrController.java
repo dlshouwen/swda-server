@@ -20,7 +20,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("attr")
+@RequestMapping("/attr")
 @Tag(name = "attr")
 @AllArgsConstructor
 public class AttrController {

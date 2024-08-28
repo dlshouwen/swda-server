@@ -24,7 +24,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("attachment")
+@RequestMapping("/attachment")
 @Tag(name = "attachment")
 @AllArgsConstructor
 public class AttachmentController {
@@ -97,7 +97,7 @@ public class AttachmentController {
 	 * @param attachmentIdList
 	 * @return result
 	 */
-	@DeleteMapping
+	@DeleteMapping("/delete")
 	@Operation(name = "delete attachment", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:attachment:delete')")
 	public R<String> delete(@RequestBody List<Long> attachmentIdList) {

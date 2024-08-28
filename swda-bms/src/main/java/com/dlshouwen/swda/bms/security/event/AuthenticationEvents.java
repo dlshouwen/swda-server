@@ -32,7 +32,7 @@ public class AuthenticationEvents {
 //		get user detail
 		UserDetail user = (UserDetail) event.getAuthentication().getPrincipal();
 //		save login log
-		loginLogService.saveLoginLog(user.getUsername(), CallResult.SUCCESS, LoginStatus.SUCCESS);
+//		loginLogService.saveLoginLog(user.getUsername(), CallResult.SUCCESS, LoginStatus.SUCCESS);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class AuthenticationEvents {
 //		get user name
 		String username = (String) event.getAuthentication().getPrincipal();
 //		save login log
-		loginLogService.saveLoginLog(username, CallResult.FAILURE, LoginStatus.PASSWORD_ERROR);
+//		loginLogService.saveLoginLog(username, CallResult.FAILURE, LoginStatus.PASSWORD_ERROR);
 	}
 
 }

@@ -37,7 +37,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 @AllArgsConstructor
 @Tag(name = "user")
 public class UserController {
@@ -145,7 +145,7 @@ public class UserController {
 	 * @param userPasswordVO
 	 * @return result
 	 */
-	@PutMapping("password")
+	@PutMapping("/password")
 	@Operation(name = "password", type = OperateType.UPDATE)
 	public R<String> password(@RequestBody @Valid UserPasswordVO vo) {
 //		get user detail

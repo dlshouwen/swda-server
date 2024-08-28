@@ -54,7 +54,7 @@ public class LoginController {
 	 * @param loginVO
 	 * @return result
 	 */
-	@PostMapping("account")
+	@PostMapping("/account")
 	@Operation(name = "account", type = OperateType.LOGIN)
 	public R<UserTokenVO> loginByAccount(@RequestBody UserLoginVO login) {
 //		login by account
@@ -68,7 +68,7 @@ public class LoginController {
 	 * @param mobile
 	 * @return result
 	 */
-	@PostMapping("send/code")
+	@PostMapping("/send/code")
 	@Operation(name = "send code", type = OperateType.SEARCH)
 	public R<String> sendCode(String mobile) {
 //		send code
@@ -87,7 +87,7 @@ public class LoginController {
 	 * @param mobileLoginVO
 	 * @return result
 	 */
-	@PostMapping("mobile")
+	@PostMapping("/mobile")
 	@Operation(name = "login by mobile", type = OperateType.LOGIN)
 	public R<UserTokenVO> loginByMobile(@RequestBody MobileLoginVO login) {
 //		login by mobile
@@ -101,7 +101,7 @@ public class LoginController {
 	 * @param thirdLoginVO
 	 * @return result
 	 */
-	@PostMapping("auth")
+	@PostMapping("/auth")
 	@Operation(name = "login by auth", type = OperateType.LOGIN)
 	public R<UserTokenVO> loginByAuth(@RequestBody AuthCallbackVO callback) {
 //		login by auth
@@ -115,7 +115,7 @@ public class LoginController {
 	 * @param refreshToken
 	 * @return result
 	 */
-	@PostMapping("token")
+	@PostMapping("/token")
 	@Operation(name = "get access token", type = OperateType.SEARCH)
 	public R<AccessTokenVO> token(String refreshToken) {
 //		get access token
@@ -129,7 +129,7 @@ public class LoginController {
 	 * @param request
 	 * @return result
 	 */
-	@PostMapping("logout")
+	@PostMapping("/logout")
 	@Operation(name = "logout", type = OperateType.LOGOUT)
 	public R<String> logout(HttpServletRequest request) {
 //		logout
