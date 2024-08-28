@@ -40,7 +40,7 @@ public class LoginController {
 	 * captcha
 	 * @return result
 	 */
-	@GetMapping("captcha")
+	@GetMapping("/captcha")
 	@Operation(name = "captcha", type = OperateType.SEARCH)
 	public R<CaptchaVO> captcha() {
 //		generate captcha vo
