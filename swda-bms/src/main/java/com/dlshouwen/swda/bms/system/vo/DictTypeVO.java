@@ -16,16 +16,19 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "dict type")
-public class DictCategoryVO implements Serializable {
+public class DictTypeVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "dict category id")
-	private String dictCategoryId;
+	@Schema(description = "dict type id")
+	private Long dictTypeId;
 	
-	@Schema(description = "dict category name")
-	private String dictCategoryName;
+	@Schema(description = "dict type name")
+	private String dictTypeName;
+	
+	@Schema(description = "dict type")
+	private String dictType;
 
 	@Schema(description = "source type")
 	private String sourceType;

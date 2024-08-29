@@ -9,8 +9,10 @@ import com.dlshouwen.swda.bms.security.exception.MobileUserNotFoundException;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;
+import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.account.UserDetailsService;
 import com.dlshouwen.swda.core.security.mobile.MobileUserDetailsService;
+import com.dlshouwen.swda.core.security.user.UserDetail;
 
 /**
  * mobile user details service impl
@@ -41,8 +43,12 @@ public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
 //			throw mobile user not found exception
 			throw new MobileUserNotFoundException("手机号或验证码错误");
 		}
+//		convert to user detail
+		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
+//		set login type
+		userDetail.setLoginType(LoginType.MOBILE);
 //		get user details and return
-		return userDetailsService.getUserDetails(UserConvert.INSTANCE.convert2Detail(user));
+		return userDetailsService.getUserDetails(userDetail);
 	}
 
 }

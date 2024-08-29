@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dlshouwen.swda.core.common.dict.ZeroOne;
 import com.dlshouwen.swda.core.grid.dto.Query;
@@ -23,6 +24,26 @@ import java.util.List;
  * @since 1.0.0
  */
 public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements BaseService<T> {
+	
+	/**
+	 * wrapper
+	 * @param query
+	 * @return ipage
+	 */
+	protected QueryWrapper<T> wrapper(Query<T> query) {
+//		construct and return wrapper
+		return GridUtils.constructQueryWrapper(query);
+	}
+	
+	/**
+	 * page
+	 * @param query
+	 * @return ipage
+	 */
+	protected IPage<T> page(QueryWrapper<T> wrapper, Page<T> page) {
+//		select page for return
+		return baseMapper.selectPage(page, wrapper);
+	}
 	
 	/**
 	 * page

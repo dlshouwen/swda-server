@@ -35,31 +35,31 @@ public class DictController {
 
 	/**
 	 * get dict list
+	 * @param dictType
 	 * @param query
 	 * @return result
 	 */
-	@GetMapping("/list/{dictCategoryId}")
+	@GetMapping("/list/{dictType}")
 	@Operation(name = "get dict list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:dict:list')")
-	public R<PageResult<DictVO>> getDictList(@ParameterObject @Valid Query<Dict> query) {
+	public R<PageResult<DictVO>> getDictList(@PathVariable(name = "dictType") String dictType, @ParameterObject @Valid Query<Dict> query) {
 //		get dict list
-		PageResult<DictVO> pageResult = dictService.getDictList(query);
+		PageResult<DictVO> pageResult = dictService.getDictList(dictType, query);
 //		return page result
 		return R.ok(pageResult);
 	}
 
 	/**
 	 * get dict data
-	 * @param dictCategoryId
 	 * @param dictId
 	 * @return dict
 	 */
-	@GetMapping("/data/{dictCategoryId}/{dictId}")
+	@GetMapping("/data/{dictId}")
 	@Operation(name = "get dict data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:dict:data')")
-	public R<DictVO> getDictData(@PathVariable("dictCategoryId") String dictCategoryId, @PathVariable("dictId") String dictId) {
+	public R<DictVO> getDictData(@PathVariable("dictId") Long dictId) {
 //		get dict data
-		DictVO dict = dictService.getDictData(dictCategoryId, dictId);
+		DictVO dict = dictService.getDictData(dictId);
 //		return dict
 		return R.ok(dict);
 	}
@@ -96,16 +96,15 @@ public class DictController {
 
 	/**
 	 * delete dict
-	 * @param dictCategoryId
 	 * @param dictIdList
 	 * @return result
 	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete dict", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:dict:delete')")
-	public R<String> deleteDict(String dictCategoryId, @RequestBody List<String> dictIdList) {
+	public R<String> deleteDict(@RequestBody List<Long> dictIdList) {
 //		delete dict
-		dictService.deleteDict(dictCategoryId, dictIdList);
+		dictService.deleteDict(dictIdList);
 //		return
 		return R.ok();
 	}

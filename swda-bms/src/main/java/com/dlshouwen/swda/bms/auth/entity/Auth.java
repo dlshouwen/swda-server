@@ -17,20 +17,14 @@ public class Auth {
 	@TableId
 	private Long authId;
 	
-	private Long authPlatformId;
-
-	private String authPlatformCode;
+	private Integer openType;
 	
-	private String authPlatformName;
+	private String openId;
 	
-	private Integer authPlatformType;
-	
-	private String authPlatformUuid;
+	private String username;
 	
 	private Long userId;
 	
-	private String userName;
-
 	private Long tenantId;
 	
 	@Version

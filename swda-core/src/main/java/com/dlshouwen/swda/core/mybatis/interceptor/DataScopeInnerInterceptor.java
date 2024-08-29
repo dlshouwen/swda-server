@@ -89,7 +89,7 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
 //			parse select sql
 			Select select = (Select) CCJSqlParserUtil.parse(buildSql);
 //			get select body
-			PlainSelect plainSelect = (PlainSelect) select.getSelectBody();
+			PlainSelect plainSelect = (PlainSelect) select.getPlainSelect();
 //			get where
 			Expression expression = plainSelect.getWhere();
 //			if null

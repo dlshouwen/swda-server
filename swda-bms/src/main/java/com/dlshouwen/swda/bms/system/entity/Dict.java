@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
@@ -21,10 +22,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("bms_dict")
 public class Dict extends BaseEntity {
+	
+	@TableId
+	private Long dictId;
+	
+	private String dictName;
 
-	private String dictCategoryId;
-
-	private String dictId;
+	private String dictType;
 
 	private String dictKey;
 

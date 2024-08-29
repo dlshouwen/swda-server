@@ -2,14 +2,11 @@ package com.dlshouwen.swda.api.module;
 
 import java.util.Map;
 
-import org.springframework.cloud.openfeign.FeignClient;
-
 /**
  * sms api
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@FeignClient(name = "", contextId = "sms")
 public interface SmsApi {
 
 	/**

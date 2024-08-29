@@ -17,11 +17,7 @@ public class AuthPlatform {
 	@TableId
 	private Long authPlatformId;
 
-	private String authPlatformCode;
-	
-	private String authPlatformName;
-	
-	private Integer authPlatformType;
+	private Integer openType;
 	
 	private String clientId;
 	

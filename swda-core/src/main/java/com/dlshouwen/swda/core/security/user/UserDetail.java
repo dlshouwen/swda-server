@@ -1,5 +1,6 @@
 package com.dlshouwen.swda.core.security.user;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.dlshouwen.swda.core.common.dict.OpenClose;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -25,8 +27,17 @@ public class UserDetail implements UserDetails {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 	
-	/** login id */
-	private Long loginId;
+	/** login log id */
+	private Long loginLogId;
+	
+	/** login type */
+	private Integer loginType;
+	
+	/** open type */
+	private Integer openType;
+	
+	/** open id */
+	private String openId;
 	
 	/** user id */
 	private Long userId;
@@ -39,6 +50,9 @@ public class UserDetail implements UserDetails {
 	
 	/** password */
 	private String password;
+	
+	/** password expire time */
+	private LocalDateTime passwordExpireTime;
 	
 	/** avatar */
 	private String avatar;
@@ -73,18 +87,6 @@ public class UserDetail implements UserDetails {
 	/** data scope list */
 	private List<Long> dataScopeList;
 	
-	/** is account non expired */
-	private boolean isAccountNonExpired = true;
-	
-	/** is account non locked */
-	private boolean isAccountNonLocked = true;
-	
-	/** is credentials non expired */
-	private boolean isCredentialsNonExpired = true;
-	
-	/** is enabled */
-	private boolean isEnabled = true;
-	
 	/** authority set */
 	private Set<String> authoritySet;
 
@@ -103,7 +105,7 @@ public class UserDetail implements UserDetails {
 	 */
 	@Override
 	public boolean isAccountNonExpired() {
-		return this.isAccountNonExpired;
+		return true;
 	}
 
 	/**
@@ -112,7 +114,7 @@ public class UserDetail implements UserDetails {
 	 */
 	@Override
 	public boolean isAccountNonLocked() {
-		return this.isAccountNonLocked;
+		return true;
 	}
 
 	/**
@@ -121,7 +123,12 @@ public class UserDetail implements UserDetails {
 	 */
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return this.isCredentialsNonExpired;
+//		1900 then expired
+		if(this.getPasswordExpireTime().getYear()==1900){
+            return true;
+        }
+//		return is expired
+        return Duration.between(LocalDateTime.now(), this.getPasswordExpireTime()).toDays()>=0;
 	}
 
 	/**
@@ -130,7 +137,7 @@ public class UserDetail implements UserDetails {
 	 */
 	@Override
 	public boolean isEnabled() {
-		return this.isEnabled;
+		return this.getStatus() == OpenClose.OPEN;
 	}
 
 }

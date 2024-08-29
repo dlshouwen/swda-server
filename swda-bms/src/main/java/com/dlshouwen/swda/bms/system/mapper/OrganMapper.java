@@ -1,7 +1,5 @@
 package com.dlshouwen.swda.bms.system.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.dlshouwen.swda.bms.system.entity.Organ;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
@@ -13,7 +11,6 @@ import java.util.Map;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
 public interface OrganMapper extends BaseMapper<Organ> {
 
 	/**

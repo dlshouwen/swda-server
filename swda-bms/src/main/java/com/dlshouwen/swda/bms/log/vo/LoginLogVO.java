@@ -26,10 +26,35 @@ public class LoginLogVO implements Serializable, TransPojo {
 
 	@Schema(description = "user agent")
 	private String userAgent;
-	
-	@Schema(description = "token")
-	private String token;
 
+	@Schema(description = "ip")
+	private String ip;
+	
+	@Schema(description = "login type")
+	private Integer loginType;
+
+	@Schema(description = "login status")
+	private Integer loginStatus;
+	
+	@Schema(description = "error reason")
+	private String errorReason;
+
+	@Schema(description = "login time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime loginTime;
+	
+	@Schema(description = "username")
+	private String username;
+	
+	@Schema(description = "mobile")
+	private String mobile;
+	
+	@Schema(description = "open type")
+	private Integer openType;
+	
+	@Schema(description = "open id")
+	private String openId;
+	
 	@Schema(description = "tenant id")
 	private Long tenantId;
 	
@@ -44,16 +69,6 @@ public class LoginLogVO implements Serializable, TransPojo {
 	
 	@Schema(description = "organ name")
 	private String organName;
-
-	@Schema(description = "login time")
-	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private LocalDateTime loginTime;
-
-	@Schema(description = "ip")
-	private String ip;
-
-	@Schema(description = "login status")
-	private Integer loginStatus;
 
 	@Schema(description = "is logout")
 	private Integer isLogout;

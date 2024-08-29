@@ -4,6 +4,7 @@ import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.security.entity.UserToken;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -11,7 +12,7 @@ import org.mapstruct.factory.Mappers;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserTokenConvert {
 	
 	/** instance */

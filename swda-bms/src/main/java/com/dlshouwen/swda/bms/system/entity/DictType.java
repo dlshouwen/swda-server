@@ -20,17 +20,19 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bms_dict_category")
-public class DictCategory extends BaseEntity {
+@TableName("bms_dict_type")
+public class DictType extends BaseEntity {
 
 	@TableId
-	private String dictCategoryId;
+	private Long dictTypeId;
 
-	private String dictCategoryName;
-
-	private Integer dictSourceType;
+	private String dictTypeName;
 	
-	private String dictSourceSql;
+	private String dictType;
+
+	private Integer sourceType;
+	
+	private String sourceSql;
 
 	private Integer sort;
 	

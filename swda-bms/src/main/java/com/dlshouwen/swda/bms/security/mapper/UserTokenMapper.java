@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.bms.security.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.dlshouwen.swda.bms.security.entity.UserToken;
@@ -14,7 +13,6 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
 public interface UserTokenMapper extends BaseMapper<UserToken> {
 
 	/**

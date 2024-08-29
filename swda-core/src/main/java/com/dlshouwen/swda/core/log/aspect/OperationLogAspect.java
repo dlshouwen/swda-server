@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dlshouwen.swda.core.common.cache.RedisCache;
 import com.dlshouwen.swda.core.common.constant.Constant;
+import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
 import com.dlshouwen.swda.core.common.utils.IpUtils;
 import com.dlshouwen.swda.core.common.utils.JsonUtils;
@@ -66,12 +67,12 @@ public class OperationLogAspect {
 //			proceed
 			Object result = joinPoint.proceed();
 //			save operation log
-			saveOperationLog(joinPoint, operation, startTime, CallResult.SUCCESS);
+			saveOperationLog(joinPoint, operation, startTime, CallResult.SUCCESS, JsonUtils.toJsonString(result));
 //			return result
 			return result;
 		} catch (Exception e) {
 //			save operation log
-			saveOperationLog(joinPoint, operation, startTime, CallResult.FAILURE);
+			saveOperationLog(joinPoint, operation, startTime, CallResult.FAILURE, ExceptionUtils.toString(e));
 //			throw e
 			throw e;
 		}
@@ -82,13 +83,16 @@ public class OperationLogAspect {
 	 * @param joinPoint
 	 * @param operation
 	 * @param startTime
+	 * @param callResult
+	 * @param result
 	 * @param status
 	 */
 	private void saveOperationLog(ProceedingJoinPoint joinPoint, Operation operation, LocalDateTime startTime,
-			Integer callResult) {
+			Integer callResult, String result) {
 //		defined operation log
 		OperationLogDTO operationLog = new OperationLogDTO();
-//		set end time, cost
+//		set start time, end time, cost
+		operationLog.setStartTime(startTime);
 		operationLog.setEndTime(LocalDateTime.now());
 		operationLog.setCost((int) LocalDateTimeUtil.between(startTime, operationLog.getEndTime()).toMillis());
 //      get method
@@ -156,6 +160,16 @@ public class OperationLogAspect {
 //		set request params, call result
 		operationLog.setRequestParams(getMethodParams(joinPoint));
 		operationLog.setCallResult(callResult);
+//		if success
+		if(callResult == CallResult.SUCCESS) {
+//			set response result
+			operationLog.setResponseResult(result);
+		}else {
+//			set response result
+			operationLog.setResponseResult("[error]");
+//			set error reason
+			operationLog.setErrorReason(result);
+		}
 //		save log
 		redisCache.leftPush(Constant.OPERATION_LOG_KEY, operationLog, RedisCache.NOT_EXPIRE);
 	}

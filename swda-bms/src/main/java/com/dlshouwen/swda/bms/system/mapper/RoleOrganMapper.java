@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.bms.system.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.dlshouwen.swda.bms.system.entity.RoleOrgan;
@@ -13,7 +12,6 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
 public interface RoleOrganMapper extends BaseMapper<RoleOrgan> {
 
 	/**

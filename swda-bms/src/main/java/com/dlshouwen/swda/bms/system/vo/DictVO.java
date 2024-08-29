@@ -23,11 +23,14 @@ public class DictVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 	
-	@Schema(description = "dict category id")
-	private String dictCategoryId;
-
 	@Schema(description = "dict id")
-	private String dictId;
+	private Long dictId;
+	
+	@Schema(description = "dict name")
+	private String dictName;
+
+	@Schema(description = "dict type")
+	private String dictType;
 
 	@Schema(description = "dict key")
 	@NotNull(message = "字典键不能为空")

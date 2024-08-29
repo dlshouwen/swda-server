@@ -23,26 +23,17 @@ public class AuthVO implements Serializable {
 	@Schema(description = "auth id")
 	private Long authId;
 	
-	@Schema(description = "auth platform id")
-	private Long authPlatformId;
+	@Schema(description = "open type")
+	private Integer openType;
 	
-	@Schema(description = "auth platform code")
-	private String authPlatformCode;
-	
-	@Schema(description = "auth platform name")
-	private String authPlatformName;
-
-	@Schema(description = "auth platform type")
-	private Integer authPlatformType;
-	
-	@Schema(description = "auth platform uuid")
-	private String authPlatformUuid;
-
-	@Schema(description = "user id")
-	private Long userId;
+	@Schema(description = "open id")
+	private String openId;
 
 	@Schema(description = "user name")
-	private String userName;
+	private String username;
+	
+	@Schema(description = "user id")
+	private Long userId;
 
 	@Schema(description = "tenant id")
 	private Long tenantId;

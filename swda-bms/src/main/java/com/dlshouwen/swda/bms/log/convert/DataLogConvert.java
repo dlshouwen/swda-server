@@ -1,6 +1,7 @@
 package com.dlshouwen.swda.bms.log.convert;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import com.dlshouwen.swda.bms.log.vo.DataLogVO;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DataLogConvert {
 	
 	/** instance */

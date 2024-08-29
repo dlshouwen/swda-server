@@ -1,8 +1,7 @@
 auth:
   ignore_urls:
     - /login/captcha
-    - /login/captcha/enabled
-    - /login/login
+    - /login/account
     - /login/token
     - /login/send/code
     - /login/mobile

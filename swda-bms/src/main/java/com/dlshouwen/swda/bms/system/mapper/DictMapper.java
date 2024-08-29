@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.bms.system.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
 public interface DictMapper extends BaseMapper<Dict> {
 
 	/**

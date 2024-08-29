@@ -25,24 +25,24 @@ public interface IAuthService extends BaseService<Auth> {
 	/**
 	 * bind
 	 * @param userId
-	 * @param authPlatformType
+	 * @param openType
 	 * @param authUser
 	 */
-	void bind(Long userId, Integer authPlatformType, AuthUser authUser);
+	void bind(Long userId, Integer openType, AuthUser authUser);
 
 	/**
 	 * unbind
 	 * @param userId
-	 * @param authPlatformType
+	 * @param openType
 	 */
-	void unBind(Long userId, Integer authPlatformType);
+	void unBind(Long userId, Integer openType);
 
 	/**
 	 * get user id by open type and open id
-	 * @param authPlatformType
+	 * @param openType
 	 * @param openId
 	 * @return user id
 	 */
-	Long getUserIdByOpenTypeAndOpenId(Integer authPlatformType, String openId);
+	Long getUserIdByOpenTypeAndOpenId(Integer openType, String openId);
 
 }

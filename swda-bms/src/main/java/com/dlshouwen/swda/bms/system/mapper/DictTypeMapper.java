@@ -1,8 +1,6 @@
 package com.dlshouwen.swda.bms.system.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
-import com.dlshouwen.swda.bms.system.entity.DictCategory;
+import com.dlshouwen.swda.bms.system.entity.DictType;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
 /**
@@ -10,7 +8,6 @@ import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
-public interface DictCategoryMapper extends BaseMapper<DictCategory> {
+public interface DictTypeMapper extends BaseMapper<DictType> {
 
 }

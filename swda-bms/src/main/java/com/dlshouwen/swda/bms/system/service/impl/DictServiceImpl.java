@@ -1,5 +1,6 @@
 package com.dlshouwen.swda.bms.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
@@ -30,27 +31,31 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 
 	/**
 	 * get dict list
+	 * @param dictType
 	 * @param query
 	 * @return dict list
 	 */
 	@Override
-	public PageResult<DictVO> getDictList(Query<Dict> query) {
+	public PageResult<DictVO> getDictList(String dictType, Query<Dict> query) {
+//		get wrapper
+		QueryWrapper<Dict> wrapper = this.wrapper(query);
+//		set dict type
+		wrapper.eq("dict_type", dictType);
 //		query page
-		IPage<Dict> page = this.page(query);
+		IPage<Dict> page = this.page(query.getPage(), wrapper);
 //		convert to vo list for return
 		return new PageResult<>(DictConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
 	
 	/**
 	 * get dict data
-	 * @param dictCategoryId
 	 * @param dictId
 	 * @return dict
 	 */
 	@Override
-	public DictVO getDictData(String dictCategoryId, String dictId) {
+	public DictVO getDictData(Long dictId) {
 //		get dict
-		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictCategoryId).eq(Dict::getDictId, dictId));
+		Dict dict = this.getById(dictId);
 //		convert to vo for return
 		return DictConvert.INSTANCE.convert2VO(dict);
 	}
@@ -63,7 +68,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 	@Transactional(rollbackFor = Exception.class)
 	public void addDict(DictVO dictVO) {
 //		get dict
-		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictVO.getDictCategoryId()).eq(Dict::getDictId, dictVO.getDictId()));
+		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictType, dictVO.getDictType()).eq(Dict::getDictKey, dictVO.getDictKey()));
 //		if has dict
 		if (dict != null) {
 //			throw exception
@@ -83,7 +88,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 	@Transactional(rollbackFor = Exception.class)
 	public void updateDict(DictVO dictVO) {
 //		get dict
-		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictVO.getDictCategoryId()).eq(Dict::getDictId, dictVO.getDictId()));
+		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().notIn(Dict::getDictId, dictVO.getDictId()).eq(Dict::getDictType, dictVO.getDictType()).eq(Dict::getDictKey, dictVO.getDictKey()));
 //		if has dict
 		if (dict != null) {
 //			throw exception
@@ -92,21 +97,18 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 //		convert to dict
 		dict = DictConvert.INSTANCE.convert(dictVO);
 //		update
-		this.update(dict, Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictVO.getDictCategoryId()).eq(Dict::getDictId, dictVO.getDictId()));
+		this.save(dict);
 	}
 
 	/**
 	 * delete dict
-	 * @param dictCategoryId
 	 * @param dictIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void deleteDict(String dictCategoryId, List<String> dictIdList) {
+	public void deleteDict(List<Long> dictIdList) {
 //		delete dict
-		for(String dictId : dictIdList) {
-			this.remove(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCategoryId, dictCategoryId).eq(Dict::getDictId, dictId));
-		}
+		this.removeByIds(dictIdList);
 	}
 
 }

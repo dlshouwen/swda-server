@@ -1,11 +1,14 @@
 package com.dlshouwen.swda.bms.sms.api;
 
 import lombok.AllArgsConstructor;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.dlshouwen.swda.api.module.SmsApi;
 import com.dlshouwen.swda.bms.sms.cache.SmsCache;
 import com.dlshouwen.swda.bms.sms.service.SmsService;
+import com.dlshouwen.swda.core.common.exception.SwdaException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +48,13 @@ public class SmsApiImpl implements SmsApi {
 	 */
 	@Override
 	public boolean sendCode(String mobile, String key, String value) {
+//		get code
+		String code = smsCache.getCode(mobile);
+//		if has code
+		if(!StringUtils.isEmpty(code)) {
+//			error
+			throw new SwdaException("发送太频繁，请稍后再试。");
+		}
 //		set params
 		Map<String, String> params = new HashMap<>();
 		params.put(key, value);

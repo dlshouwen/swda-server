@@ -17,18 +17,18 @@ public interface IDictService extends BaseService<Dict> {
 
 	/**
 	 * get dict list
+	 * @param dictType
 	 * @param query
 	 * @return dict list
 	 */
-	PageResult<DictVO> getDictList(Query<Dict> query);
+	PageResult<DictVO> getDictList(String dictType, Query<Dict> query);
 	
 	/**
 	 * get dict data
-	 * @param dictCategoryId
 	 * @param dictId
 	 * @return dict
 	 */
-	DictVO getDictData(String dictCategoryId, String dictId);
+	DictVO getDictData(Long dictId);
 
 	/**
 	 * add dict
@@ -44,9 +44,8 @@ public interface IDictService extends BaseService<Dict> {
 
 	/**
 	 * delete Dict
-	 * @param dictCategoryId
 	 * @param dictIdList
 	 */
-	void deleteDict(String dictCategoryId, List<String> dictIdList);
+	void deleteDict(List<Long> dictIdList);
 
 }

@@ -7,24 +7,22 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.api.module.SmsApi;
 import com.dlshouwen.swda.bms.auth.vo.AccessTokenVO;
 import com.dlshouwen.swda.bms.auth.vo.AuthCallbackVO;
-import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
-import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.log.service.ILoginLogService;
-import com.dlshouwen.swda.bms.security.exception.MobileValidCodeException;
-import com.dlshouwen.swda.bms.security.exception.ValidCodeException;
 import com.dlshouwen.swda.bms.security.service.ICaptchaService;
 import com.dlshouwen.swda.bms.security.service.ILoginService;
 import com.dlshouwen.swda.bms.security.service.IUserTokenService;
+import com.dlshouwen.swda.bms.security.vo.MobileLoginVO;
+import com.dlshouwen.swda.bms.security.vo.SendCodeVO;
+import com.dlshouwen.swda.bms.security.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.system.service.IUserService;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
+import com.dlshouwen.swda.core.common.dict.ZeroOne;
+import com.dlshouwen.swda.core.common.entity.Data;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
-import com.dlshouwen.swda.core.log.dict.CallResult;
 import com.dlshouwen.swda.core.log.dict.LoginStatus;
 import com.dlshouwen.swda.core.log.dict.LoginType;
-import com.dlshouwen.swda.core.log.dict.LogoutType;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
-import com.dlshouwen.swda.core.security.crypto.Sm2Utils;
 import com.dlshouwen.swda.core.security.mobile.MobileAuthenticationToken;
 import com.dlshouwen.swda.core.security.third.ThirdAuthenticationToken;
 import com.dlshouwen.swda.core.security.third.ThirdLogin;
@@ -73,21 +71,25 @@ public class LoginServiceImpl implements ILoginService {
 	 */
 	@Override
 	public UserTokenVO loginByAccount(UserLoginVO login) {
-//		validate captcha
-		boolean valid = captchaService.validate(login.getKey(), login.getCaptcha());
-//		if error
-		if (!valid) {
-//			save login log
-			loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.CAPTCHA_ERROR, login.getUsername(), null, null);
-//			throw exception
-			throw new SwdaException("验证码错误");
+//		if captcha enabled
+		if (String.valueOf(ZeroOne.YES).equals(Data.attr.get("account_login_captcha_enable"))) {
+//			validate captcha
+			boolean valid = captchaService.validate(login.getKey(), login.getCaptcha());
+//			if error
+			if (!valid) {
+//				save login log
+				loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.FAILURE, "验证码错误", login.getUsername(), null, null, null);
+//				throw exception
+				throw new SwdaException("验证码错误");
+			}
 		}
 //		defined authentication
 		Authentication authentication;
 //		try catch
 		try {
 //			authenticate
-			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Utils.decrypt(login.getPassword())));
+//			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Utils.decrypt(login.getPassword())));
+			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword()));
 		} catch (BadCredentialsException e) {
 //			throw exception
 			throw new SwdaException("用户名或密码错误");
@@ -100,6 +102,40 @@ public class LoginServiceImpl implements ILoginService {
 		tokenCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
 		return userTokenVO;
+	}
+
+	/**
+	 * send code
+	 * @param sendCode
+	 * @return is success
+	 */
+	@Override
+	public boolean sendCode(SendCodeVO sendCode) {
+//		if captcha enabled
+		if (String.valueOf(ZeroOne.YES).equals(Data.attr.get("sms_send_code_captcha_enable"))) {
+//			validate captcha
+			boolean valid = captchaService.validate(sendCode.getKey(), sendCode.getCaptcha());
+//			if error
+			if (!valid) {
+//				save login log
+				loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.FAILURE, "验证码错误", null, sendCode.getMobile(), null, null);
+//				throw exception
+				throw new SwdaException("验证码错误");
+			}
+		}
+//		get user
+		UserVO user = userService.getUserByMobile(sendCode.getMobile());
+//		if user is empty
+		if (user == null) {
+//			save login log
+			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.FAILURE, "手机号未注册", null, sendCode.getMobile(), null, null);
+//			throw exception
+			throw new SwdaException("手机号未注册");
+		}
+//		generate code
+		String code = RandomUtil.randomNumbers(6);
+//		send code
+		return smsApi.sendCode(sendCode.getMobile(), "code", code);
 	}
 
 	/**
@@ -155,26 +191,6 @@ public class LoginServiceImpl implements ILoginService {
 		tokenCache.saveUser(userTokenVO.getAccessToken(), user);
 //		return user token vo
 		return userTokenVO;
-	}
-
-	/**
-	 * send code
-	 * @param mobile
-	 * @return is success
-	 */
-	@Override
-	public boolean sendCode(String mobile) {
-//		get user
-		UserVO user = userService.getUserByMobile(mobile);
-//		if user is empty
-		if (user == null) {
-//			throw exception
-			throw new SwdaException("手机号未注册");
-		}
-//		generate code
-		String code = RandomUtil.randomNumbers(6);
-//		send code
-		return smsApi.sendCode(mobile, "code", code);
 	}
 
 	/**

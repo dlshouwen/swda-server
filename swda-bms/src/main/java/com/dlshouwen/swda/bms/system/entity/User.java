@@ -28,9 +28,7 @@ public class User extends BaseEntity {
 	
 	private Long organId;
 
-	private String userCode;
-	
-	private String userName;
+	private String username;
 	
 	private String realName;
 	
@@ -44,7 +42,7 @@ public class User extends BaseEntity {
 	
 	private Integer status;
 	
-	private Integer gander;
+	private Integer gender;
 	
 	private String cardId;
 	

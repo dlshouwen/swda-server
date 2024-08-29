@@ -4,6 +4,7 @@ import com.dlshouwen.swda.bms.log.vo.LoginLogVO;
 import com.dlshouwen.swda.core.log.entity.LoginLog;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface LoginLogConvert {
 	
 	/** instance */

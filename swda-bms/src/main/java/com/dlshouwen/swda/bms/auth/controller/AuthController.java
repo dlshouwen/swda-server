@@ -58,14 +58,14 @@ public class AuthController {
 
 	/**
 	 * render auth
-	 * @param authPlatformType
+	 * @param openType
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping("/render/{authPlatformType}")
-	public void renderAuth(@PathVariable("authPlatformType") Integer authPlatformType, HttpServletResponse response) throws IOException {
+	@RequestMapping("/render/{openType}")
+	public void renderAuth(@PathVariable("openType") Integer openType, HttpServletResponse response) throws IOException {
 //		get auth request
-		AuthRequest authRequest = authPlatformService.getAuthRequest(authPlatformType);
+		AuthRequest authRequest = authPlatformService.getAuthRequest(openType);
 //		get authorize url
 		String authorizeUrl = authRequest.authorize(AuthStateUtils.createState());
 //		redirect
@@ -74,16 +74,16 @@ public class AuthController {
 
 	/**
 	 * login
-	 * @param authPlatformType
+	 * @param openType
 	 * @param callback
 	 * @return result
 	 */
-	@RequestMapping("/callback/{authPlatformType}")
-	public ModelAndView login(@PathVariable("authPlatformType") Integer authPlatformType, AuthCallback callback) {
+	@RequestMapping("/callback/{openType}")
+	public ModelAndView login(@PathVariable("openType") Integer openType, AuthCallback callback) {
 //		create data
 		Map<String, Object> data = new HashMap<>();
 //		set open type, state, code
-		data.put("authPlatformType", authPlatformType);
+		data.put("openType", openType);
 		data.put("state", callback.getState());
 		data.put("code", callback.getCode());
 //		return model and view
@@ -118,14 +118,14 @@ public class AuthController {
 
 	/**
 	 * unbind
-	 * @param authPlatformType
+	 * @param openType
 	 * @return result
 	 */
-	@PutMapping("/unbind/{authPlatformType}")
+	@PutMapping("/unbind/{openType}")
 	@Operation(name = "unbind", type = OperateType.UPDATE)
-	public R<String> unBind(@PathVariable("authPlatformType") Integer authPlatformType) {
+	public R<String> unBind(@PathVariable("openType") Integer openType) {
 //		unbind
-		authService.unBind(SecurityUser.getUserId(), authPlatformType);
+		authService.unBind(SecurityUser.getUserId(), openType);
 //		return
 		return R.ok();
 	}

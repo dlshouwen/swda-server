@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.auth.vo;
+package com.dlshouwen.swda.bms.security.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

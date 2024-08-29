@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.auth.convert.AuthPlatformConvert;
-import com.dlshouwen.swda.bms.auth.dict.AuthPlatformType;
+import com.dlshouwen.swda.bms.auth.dict.OpenType;
 import com.dlshouwen.swda.bms.auth.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.auth.mapper.AuthPlatformMapper;
 import com.dlshouwen.swda.bms.auth.service.IAuthPlatformService;
@@ -95,30 +95,30 @@ public class AuthPlatformServiceImpl extends BaseServiceImpl<AuthPlatformMapper,
 
 	/**
 	 * get auth request
-	 * @param authPlatformType
+	 * @param openType
 	 * @return auth request
 	 */
 	@Override
-	public AuthRequest getAuthRequest(Integer authPlatformType) {
+	public AuthRequest getAuthRequest(Integer openType) {
 //		get auth platform
-		AuthPlatform authPlatform = baseMapper.selectOne(Wrappers.<AuthPlatform>lambdaQuery().eq(AuthPlatform::getAuthPlatformType, authPlatformType));
+		AuthPlatform authPlatform = baseMapper.selectOne(Wrappers.<AuthPlatform>lambdaQuery().eq(AuthPlatform::getOpenType, openType));
 //		if auth platform is null
 		if (authPlatform == null) {
 //			throw exception
 			throw new SwdaException("未配置第三方登录，请配置后再尝试");
 		}
 //		get auth request
-		AuthRequest authRequest = switch (authPlatformType) {
-			case AuthPlatformType.WECHAT_OPEN -> new AuthWeChatOpenRequest(
+		AuthRequest authRequest = switch (openType) {
+			case OpenType.WECHAT_OPEN -> new AuthWeChatOpenRequest(
 					AuthConfig.builder().clientId(authPlatform.getClientId())
 					.clientSecret(authPlatform.getClientSecret()).redirectUri(authPlatform.getRedirectUri()).build());
-			case AuthPlatformType.WECHAT_WORK -> new AuthWeChatEnterpriseQrcodeRequest(
+			case OpenType.WECHAT_WORK -> new AuthWeChatEnterpriseQrcodeRequest(
 					AuthConfig.builder().clientId(authPlatform.getClientId()).clientSecret(authPlatform.getClientSecret())
 						.redirectUri(authPlatform.getRedirectUri()).agentId(authPlatform.getAgentId()).build());
-			case AuthPlatformType.DING_TALK -> new AuthDingTalkRequest(
+			case OpenType.DING_TALK -> new AuthDingTalkRequest(
 					AuthConfig.builder().clientId(authPlatform.getClientId())
 						.clientSecret(authPlatform.getClientSecret()).redirectUri(authPlatform.getRedirectUri()).build());
-			case AuthPlatformType.FEI_SHU -> new AuthFeishuRequest(
+			case OpenType.FEI_SHU -> new AuthFeishuRequest(
 					AuthConfig.builder().clientId(authPlatform.getClientId())
 						.clientSecret(authPlatform.getClientSecret()).redirectUri(authPlatform.getRedirectUri()).build());
 			default -> null;

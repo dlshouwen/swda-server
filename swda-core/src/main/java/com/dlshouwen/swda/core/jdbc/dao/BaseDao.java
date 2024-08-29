@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 /**
  * base dao
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
+@Component
 public class BaseDao extends JdbcTemplate {
 
 	/**

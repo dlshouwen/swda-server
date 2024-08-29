@@ -8,8 +8,6 @@ import com.dlshouwen.swda.bms.auth.vo.CaptchaVO;
 import com.dlshouwen.swda.bms.security.service.ICaptchaService;
 import com.dlshouwen.swda.core.common.cache.RedisCache;
 import com.dlshouwen.swda.core.common.constant.Constant;
-import com.dlshouwen.swda.core.common.dict.ZeroOne;
-import com.dlshouwen.swda.core.common.entity.Data;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 
@@ -58,10 +56,6 @@ public class CaptchaServiceImpl implements ICaptchaService {
 	 */
 	@Override
 	public boolean validate(String key, String code) {
-//		if captcha enabled close then return true
-		if (!String.valueOf(ZeroOne.YES).equals(Data.attr.get("login_need_valid_code"))) {
-			return true;
-		}
 //		if key or code is empty then return false
 		if (StrUtil.isBlank(key) || StrUtil.isBlank(code)) {
 			return false;

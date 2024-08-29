@@ -7,11 +7,12 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.auth.vo.AccessTokenVO;
 import com.dlshouwen.swda.bms.auth.vo.AuthCallbackVO;
 import com.dlshouwen.swda.bms.auth.vo.CaptchaVO;
-import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
-import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.security.service.ICaptchaService;
 import com.dlshouwen.swda.bms.security.service.ILoginService;
+import com.dlshouwen.swda.bms.security.vo.MobileLoginVO;
+import com.dlshouwen.swda.bms.security.vo.SendCodeVO;
+import com.dlshouwen.swda.bms.security.vo.UserLoginVO;
 import com.dlshouwen.swda.core.common.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
@@ -70,11 +71,11 @@ public class LoginController {
 	 */
 	@PostMapping("/send/code")
 	@Operation(name = "send code", type = OperateType.SEARCH)
-	public R<String> sendCode(String mobile) {
+	public R<String> sendCode(@RequestBody SendCodeVO sendCode) {
 //		send code
-		boolean flag = loginService.sendCode(mobile);
+		boolean result = loginService.sendCode(sendCode);
 //		if not success
-		if (!flag) {
+		if (!result) {
 //			return
 			return R.error("短信发送失败！");
 		}

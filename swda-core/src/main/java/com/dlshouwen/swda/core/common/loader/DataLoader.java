@@ -40,6 +40,8 @@ public class DataLoader {
 	public void run() {
 //		create schedule executor
 		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
+//		load
+		load(uniqueProperties, template);
 //		delay
 		scheduledService.scheduleWithFixedDelay(() -> {
 //			load
@@ -74,12 +76,12 @@ public class DataLoader {
 //		defined dict
 		Map<String, Map<Integer, String>> dict = new HashMap<String, Map<Integer, String>>();
 //		get dict list
-		List<Map<String, Object>> dictList = template.queryForList("select * from bms_dict order by dict_category_id, sort");
+		List<Map<String, Object>> dictList = template.queryForList("select * from bms_dict order by dict_type, sort");
 //		set dicts to dict
 		Map<Integer, String> dictCategoryMap = null;
 		String dictCategoryId;
 		for (Map<String, Object> nowDict : dictList) {
-			dictCategoryId = MapUtil.getStr(nowDict, "dict_category_id");
+			dictCategoryId = MapUtil.getStr(nowDict, "dict_type");
 			if (dict.containsKey(dictCategoryId)) {
 				dictCategoryMap = dict.get(dictCategoryId);
 				dictCategoryMap.put(MapUtil.getInt(nowDict, "dict_key"), MapUtil.getStr(nowDict, "dict_value"));

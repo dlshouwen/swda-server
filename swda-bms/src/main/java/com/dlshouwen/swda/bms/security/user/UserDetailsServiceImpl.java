@@ -2,6 +2,7 @@ package com.dlshouwen.swda.bms.security.user;
 
 import lombok.AllArgsConstructor;
 
+import com.dlshouwen.swda.bms.security.exception.AccountUserNotFoundException;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.dict.DataScopeType;
 import com.dlshouwen.swda.bms.system.entity.User;
@@ -10,7 +11,7 @@ import com.dlshouwen.swda.bms.system.mapper.RoleOrganMapper;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;
 import com.dlshouwen.swda.bms.system.service.IOrganService;
 import com.dlshouwen.swda.bms.system.service.IPermissionService;
-import com.dlshouwen.swda.core.common.dict.OpenClose;
+import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -58,10 +59,14 @@ public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen
 //		if user is empty
 		if (user == null) {
 //			throw exception
-			throw new UsernameNotFoundException("用户名或密码错误");
+			throw new AccountUserNotFoundException("用户名或密码错误");
 		}
+//		convert to user detail
+		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
+//		set login type
+		userDetail.setLoginType(LoginType.ACCOUNT);
 //		convert user to user detail and get user details for return
-		return this.getUserDetails(UserConvert.INSTANCE.convert2Detail(user));
+		return this.getUserDetails(userDetail);
 	}
 
 	/**
@@ -71,11 +76,6 @@ public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen
 	 */
 	@Override
 	public UserDetails getUserDetails(UserDetail userDetail) {
-//		if user disabled
-		if (userDetail.getStatus() == OpenClose.CLOSE) {
-//			set enabled false
-			userDetail.setEnabled(false);
-		}
 //		get data scope set to user detail
 		List<Long> dataScopeList = getDataScope(userDetail);
 		userDetail.setDataScopeList(dataScopeList);

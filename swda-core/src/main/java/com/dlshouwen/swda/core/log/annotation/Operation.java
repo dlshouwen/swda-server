@@ -5,9 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.dlshouwen.swda.core.log.enums.OperateType;
+import org.springframework.core.annotation.AliasFor;
 
-import cn.hutool.core.annotation.AliasFor;
+import com.dlshouwen.swda.core.log.enums.OperateType;
 
 /**
  * operation

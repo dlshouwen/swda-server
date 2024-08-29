@@ -3,12 +3,12 @@ package com.dlshouwen.swda.bms.auth.dict;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * dict auth platform type
+ * dict open type
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Schema(description = "auth platform type")
-public interface AuthPlatformType {
+@Schema(description = "open type")
+public interface OpenType {
 
 	@Schema(description = "wechat open")
 	int WECHAT_OPEN = 1;

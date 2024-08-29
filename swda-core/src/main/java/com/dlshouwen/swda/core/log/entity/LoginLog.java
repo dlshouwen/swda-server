@@ -29,11 +29,15 @@ public class LoginLog extends BaseEntity {
 	
 	private Integer loginStatus;
 	
+	private String errorReason;
+	
 	private String username;
 	
 	private String mobile;
 	
-	private Long authPlatformId;
+	private Integer openType;
+	
+	private String openId;
 	
 	private Long tenantId;
 

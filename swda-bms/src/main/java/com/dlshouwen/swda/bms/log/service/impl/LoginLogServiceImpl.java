@@ -51,13 +51,15 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	 * save
 	 * @param loginType
 	 * @param loginStatus
+	 * @param errorReason
 	 * @param username
 	 * @param mobile
-	 * @param authPlatformId
+	 * @param openType
+	 * @param openId
 	 * @param operation
 	 */
 	@Override
-	public Long saveLoginLog(Integer loginType, Integer loginStatus, String username, String mobile, Long authPlatformId) {
+	public Long saveLoginLog(Integer loginType, Integer loginStatus, String errorReason, String username, String mobile, Integer openType, String openId) {
 //		get request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 //		assert
@@ -70,14 +72,16 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 //		set user agent, ip
 		loginLog.setUserAgent(userAgent);
 		loginLog.setIp(ip);
-//		set login type, login status, login time
+//		set login type, login status, error reason, login time
 		loginLog.setLoginType(loginType);
 		loginLog.setLoginStatus(loginStatus);
+		loginLog.setErrorReason(errorReason);
 		loginLog.setLoginTime(LocalDateTime.now());
-//		set username, mobile, auth platform id
+//		set username, mobile, open type, open id
 		loginLog.setUsername(username);
 		loginLog.setMobile(mobile);
-		loginLog.setAuthPlatformId(authPlatformId);
+		loginLog.setOpenType(openType);
+		loginLog.setOpenId(openId);
 //		get user
 		UserDetail user = SecurityUser.getUser();
 //		set tenent id, user id, real name, organ id, organ name

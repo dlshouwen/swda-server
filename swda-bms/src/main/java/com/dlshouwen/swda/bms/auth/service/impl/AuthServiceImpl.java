@@ -41,18 +41,18 @@ public class AuthServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implement
 	/**
 	 * bind
 	 * @param userId
-	 * @param authPlatformType
+	 * @param openType
 	 * @param authUser
 	 */
 	@Override
-	public void bind(Long userId, Integer authPlatformType, AuthUser authUser) {
+	public void bind(Long userId, Integer openType, AuthUser authUser) {
 //		create auth
 		Auth auth = new Auth();
-//		set user id, opentype, open id, username
+//		set open type, open id, username, user id, real name
+		auth.setOpenType(openType);
+		auth.setOpenId(authUser.getUuid());
+		auth.setUsername(authUser.getUsername());
 		auth.setUserId(userId);
-		auth.setUserName(authUser.getUsername());
-		auth.setAuthPlatformType(authPlatformType);
-		auth.setAuthPlatformUuid(authUser.getUuid());
 //		insert third login
 		baseMapper.insert(auth);
 	}
@@ -60,31 +60,31 @@ public class AuthServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implement
 	/**
 	 * unbind
 	 * @param userId
-	 * @param authPlatformType
+	 * @param openType
 	 */
 	@Override
-	public void unBind(Long userId, Integer authPlatformType) {
+	public void unBind(Long userId, Integer openType) {
 //		delete bind info
-		baseMapper.delete(Wrappers.<Auth>lambdaQuery().eq(Auth::getUserId, userId).eq(Auth::getAuthPlatformType, authPlatformType));
+		baseMapper.delete(Wrappers.<Auth>lambdaQuery().eq(Auth::getUserId, userId).eq(Auth::getOpenType, openType));
 	}
 
 	/**
 	 * get user id by open type and open id
-	 * @param authPlatformType
+	 * @param openType
 	 * @param openId
 	 * @return user id
 	 */
 	@Override
-	public Long getUserIdByOpenTypeAndOpenId(Integer authPlatformType, String openId) {
-//		get third login
-		Auth entity = baseMapper.selectOne(Wrappers.<Auth>lambdaQuery().eq(Auth::getAuthPlatformType, authPlatformType).eq(Auth::getAuthPlatformUuid, openId));
-//		if third login empty
-		if (entity == null) {
+	public Long getUserIdByOpenTypeAndOpenId(Integer openType, String openId) {
+//		get auth
+		Auth auth = baseMapper.selectOne(Wrappers.<Auth>lambdaQuery().eq(Auth::getOpenType, openType).eq(Auth::getOpenId, openId));
+//		if auth empty
+		if (auth == null) {
 //			throw exception
 			throw new SwdaException("还未绑定用户，请先绑定用户");
 		}
 //		return user id
-		return entity.getUserId();
+		return auth.getUserId();
 	}
 
 }

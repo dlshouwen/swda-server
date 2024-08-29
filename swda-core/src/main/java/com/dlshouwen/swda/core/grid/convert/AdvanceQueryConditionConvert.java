@@ -3,6 +3,7 @@ package com.dlshouwen.swda.core.grid.convert;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import com.dlshouwen.swda.core.grid.entity.AdvanceQueryCondition;
@@ -13,7 +14,7 @@ import com.dlshouwen.swda.core.grid.vo.AdvanceQueryConditionVO;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AdvanceQueryConditionConvert {
 	
 	/** instance */

@@ -1,345 +1,322 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- model version -->
-    <modelVersion>4.0.0</modelVersion>
+	<!-- model version -->
+	<modelVersion>4.0.0</modelVersion>
 
-    <!-- info -->
-    <groupId>com.dlshouwen</groupId>
-    <artifactId>swda-server</artifactId>
-    <version>${revision}</version>
-    <packaging>pom</packaging>
-    <name>swda-server</name>
-    <description>DaLian ShouWen Detach Architecture</description>
-    <url>https://core.dlshouwen.com/swda</url>
-    
-    <!-- parent -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.1</version>
-    </parent>
+	<!-- info -->
+	<groupId>com.dlshouwen</groupId>
+	<artifactId>swda-server</artifactId>
+	<version>${revision}</version>
+	<packaging>pom</packaging>
+	<name>swda-server</name>
+	<description>DaLian ShouWen Detach Architecture</description>
+	<url>https://core.dlshouwen.com/swda</url>
 
-    <!-- modules -->
-    <modules>
-        <module>swda-core</module>
-        <module>swda-bms</module>
-        <module>swda-api</module>
-        <module>swda-app</module>
-    </modules>
-    
+	<!-- parent -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.1</version>
+	</parent>
+
+	<!-- modules -->
+	<modules>
+		<module>swda-core</module>
+		<module>swda-bms</module>
+		<module>swda-api</module>
+		<module>swda-app</module>
+	</modules>
+
 	<!-- properties -->
-    <properties>
+	<properties>
+
 		<!-- swda revision -->
-        <revision>1.0.0</revision>
+		<revision>1.0.0</revision>
+
 		<!-- maven compile -->
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+
 		<!-- source encoding -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<!-- spring cloud -->
-        <spring.cloud.version>2023.0.1</spring.cloud.version>
-		<!-- spring cloud alibaba -->
-        <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
-        <dynamic-datasource.version>4.1.3</dynamic-datasource.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<mybatis.spring.version>3.0.3</mybatis.spring.version>
 		<!-- mybatis plus -->
-        <mybatis-plus.version>3.5.5</mybatis-plus.version>
-		<!-- druid -->
-        <druid.version>1.1.20</druid.version>
+		<mybatis-plus.version>3.5.7</mybatis-plus.version>
+		<!-- mybatis plus dynamic datasource -->
+		<dynamic-datasource.version>4.1.3</dynamic-datasource.version>
+		<!-- redisson -->
+		<redisson.version>3.21.3</redisson.version>
+		<lock4j.version>2.2.7</lock4j.version>
+
+
 		<!-- persistence api -->
-        <persistence-api.version>1.0.2</persistence-api.version>
+		<persistence-api.version>1.0.2</persistence-api.version>
 		<!-- fastjson2 -->
-        <fastjson2.version>2.0.40</fastjson2.version>
+		<fastjson2.version>2.0.40</fastjson2.version>
 		<!-- swagger3 -->
-        <swagger3.version>2.2.0</swagger3.version>
+		<swagger3.version>2.2.0</swagger3.version>
 		<!-- jsoup -->
-        <jsoup.version>1.16.1</jsoup.version>
+		<jsoup.version>1.16.1</jsoup.version>
 		<!-- hutool -->
-        <hutool.version>5.8.22</hutool.version>
-		<!-- lombok -->
-        <lombok.version>1.18.26</lombok.version>
+		<hutool.version>5.8.22</hutool.version>
 		<!-- micrometer -->
-        <micrometer-tracing.version>1.2.0</micrometer-tracing.version>
-        <micrometer-observation.version>1.12.0</micrometer-observation.version>
+		<micrometer-tracing.version>1.2.0</micrometer-tracing.version>
+		<micrometer-observation.version>1.12.0</micrometer-observation.version>
 		<!-- feign micrometer -->
-        <feign-micrometer.version>12.5</feign-micrometer.version>
+		<feign-micrometer.version>12.5</feign-micrometer.version>
 		<!-- zipkin reporter brave -->
-        <zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
+		<zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
 		<!-- ip2region -->
-        <ip2region.version>2.7.0</ip2region.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <justauth.version>1.16.6</justauth.version>
-        
-        <aliyun.oss.version>3.15.2</aliyun.oss.version>
-        <aliyun.dysmsapi.version>2.0.23</aliyun.dysmsapi.version>
-        <tencentcloud.sdk.version>3.1.574</tencentcloud.sdk.version>
-        <qiniu.version>7.12.1</qiniu.version>
-        <minio.version>8.5.1</minio.version>
-        <qcloud.cos.version>5.6.97</qcloud.cos.version>
-        <huaweicloud.obs.version>3.22.3</huaweicloud.obs.version>
-        
-        <easytrans.version>3.0.0</easytrans.version>
-        
-        <easyexcel.version>3.3.2</easyexcel.version>
-        
-        <captcha.version>1.6.2</captcha.version>
-    </properties>
-    
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-jdk8</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-    </dependencies>
+		<ip2region.version>2.7.0</ip2region.version>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<justauth.version>1.16.6</justauth.version>
+
+		<bouncycastle.version>1.69</bouncycastle.version>
+
+		<aliyun.oss.version>3.15.2</aliyun.oss.version>
+		<aliyun.dysmsapi.version>2.0.23</aliyun.dysmsapi.version>
+		<tencentcloud.sdk.version>3.1.574</tencentcloud.sdk.version>
+		<qiniu.version>7.12.1</qiniu.version>
+		<minio.version>8.5.1</minio.version>
+		<qcloud.cos.version>5.6.97</qcloud.cos.version>
+		<huaweicloud.obs.version>3.22.3</huaweicloud.obs.version>
+
+		<easytrans.version>3.0.0</easytrans.version>
+
+		<easyexcel.version>3.3.2</easyexcel.version>
+
+		<captcha.version>1.6.2</captcha.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+		</dependency>
+	</dependencies>
 
 	<!-- dependency management -->
-    <dependencyManagement>
-        <dependencies>
-			<!-- spring cloud -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-			<!-- spring cloud alibaba -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring.cloud.alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-			<!-- swda core -->
+	<dependencyManagement>
+		<dependencies>
 			<dependency>
-			    <groupId>com.dlshouwen</groupId>
-			    <artifactId>swda-core</artifactId>
-			    <version>${revision}</version>
+				<groupId>com.dlshouwen</groupId>
+				<artifactId>swda-core</artifactId>
+				<version>${revision}</version>
 			</dependency>
+			<!-- swda api -->
 			<dependency>
 				<groupId>com.dlshouwen</groupId>
 				<artifactId>swda-api</artifactId>
-			    <version>${revision}</version>
+				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.dlshouwen</groupId>
-				<artifactId>swda-auth</artifactId>
-			    <version>${revision}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.dlshouwen</groupId>
-				<artifactId>swda-oss</artifactId>
-			    <version>${revision}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.dlshouwen</groupId>
-				<artifactId>swda-bms</artifactId>
-			    <version>${revision}</version>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis.spring.version}</version>
 			</dependency>
 			<!-- mybatis plus -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
-                <version>${dynamic-datasource.version}</version>
-            </dependency>
-			<!-- druid -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+				<version>${dynamic-datasource.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson-spring-boot-starter</artifactId>
+				<version>${redisson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>lock4j-redisson-spring-boot-starter</artifactId>
+				<version>${lock4j.version}</version>
+			</dependency>
+
+
 			<!-- jsoup -->
 			<dependency>
 				<groupId>org.jsoup</groupId>
 				<artifactId>jsoup</artifactId>
-                <version>${jsoup.version}</version>
-            </dependency>
+				<version>${jsoup.version}</version>
+			</dependency>
 			<!-- persistence -->
-            <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>${persistence-api.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>${persistence-api.version}</version>
+			</dependency>
 			<!-- fastjson2 -->
-            <dependency>
-                <groupId>com.alibaba.fastjson2</groupId>
-                <artifactId>fastjson2</artifactId>
-                <version>${fastjson2.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>com.alibaba.fastjson2</groupId>
+				<artifactId>fastjson2</artifactId>
+				<version>${fastjson2.version}</version>
+			</dependency>
 			<!-- swagger3 -->
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${swagger3.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>${swagger3.version}</version>
+			</dependency>
 			<!-- hutool -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-			<!-- lombok -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-                <optional>true</optional>
-            </dependency>
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>${hutool.version}</version>
+			</dependency>
 			<!-- spring boot starter test -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring.boot.test.version}</version>
-                <scope>test</scope>
-            </dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring.boot.test.version}</version>
+				<scope>test</scope>
+			</dependency>
 			<!-- micrometer-->
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-tracing-bom</artifactId>
-                <version>${micrometer-tracing.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-tracing</artifactId>
-                <version>${micrometer-tracing.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-tracing-bridge-brave</artifactId>
-                <version>${micrometer-tracing.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-observation</artifactId>
-                <version>${micrometer-observation.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>micrometer-tracing-bom</artifactId>
+				<version>${micrometer-tracing.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>micrometer-tracing</artifactId>
+				<version>${micrometer-tracing.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>micrometer-tracing-bridge-brave</artifactId>
+				<version>${micrometer-tracing.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>micrometer-observation</artifactId>
+				<version>${micrometer-observation.version}</version>
+			</dependency>
 			<!-- feign micrometer -->
-            <dependency>
-                <groupId>io.github.openfeign</groupId>
-                <artifactId>feign-micrometer</artifactId>
-                <version>${feign-micrometer.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>io.github.openfeign</groupId>
+				<artifactId>feign-micrometer</artifactId>
+				<version>${feign-micrometer.version}</version>
+			</dependency>
 			<!-- zipkin reporter brave -->
-            <dependency>
-                <groupId>io.zipkin.reporter2</groupId>
-                <artifactId>zipkin-reporter-brave</artifactId>
-                <version>${zipkin-reporter-brave.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>io.zipkin.reporter2</groupId>
+				<artifactId>zipkin-reporter-brave</artifactId>
+				<version>${zipkin-reporter-brave.version}</version>
+			</dependency>
 			<!-- ip2region -->
-            <dependency>
-                <groupId>org.lionsoul</groupId>
-                <artifactId>ip2region</artifactId>
-                <version>${ip2region.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-jdk8</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.zhyd.oauth</groupId>
-                <artifactId>JustAuth</artifactId>
-                <version>${justauth.version}</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun.oss.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>dysmsapi20170525</artifactId>
-                <version>${aliyun.dysmsapi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.tencentcloudapi</groupId>
-                <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>${tencentcloud.sdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.qiniu</groupId>
-                <artifactId>qiniu-java-sdk</artifactId>
-                <version>${qiniu.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.minio</groupId>
-                <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.qcloud</groupId>
-                <artifactId>cos_api</artifactId>
-                <version>${qcloud.cos.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.huaweicloud</groupId>
-                <artifactId>esdk-obs-java-bundle</artifactId>
-                <version>${huaweicloud.obs.version}</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>com.fhs-opensource</groupId>
-                <artifactId>easy-trans-spring-boot-starter</artifactId>
-                <version>${easytrans.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fhs-opensource</groupId>
-                <artifactId>easy-trans-mybatis-plus-extend</artifactId>
-                <version>${easytrans.version}</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>easyexcel</artifactId>
-                <version>${easyexcel.version}</version>
-            </dependency>
-            
-            
-            <dependency>
-                <groupId>com.github.whvcse</groupId>
-                <artifactId>easy-captcha</artifactId>
-                <version>${captcha.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+			<dependency>
+				<groupId>org.lionsoul</groupId>
+				<artifactId>ip2region</artifactId>
+				<version>${ip2region.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk15to18</artifactId>
+				<version>${bouncycastle.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${mapstruct.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct-processor</artifactId>
+				<version>${mapstruct.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>me.zhyd.oauth</groupId>
+				<artifactId>JustAuth</artifactId>
+				<version>${justauth.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.aliyun.oss</groupId>
+				<artifactId>aliyun-sdk-oss</artifactId>
+				<version>${aliyun.oss.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aliyun</groupId>
+				<artifactId>dysmsapi20170525</artifactId>
+				<version>${aliyun.dysmsapi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tencentcloudapi</groupId>
+				<artifactId>tencentcloud-sdk-java</artifactId>
+				<version>${tencentcloud.sdk.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.qiniu</groupId>
+				<artifactId>qiniu-java-sdk</artifactId>
+				<version>${qiniu.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.minio</groupId>
+				<artifactId>minio</artifactId>
+				<version>${minio.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.qcloud</groupId>
+				<artifactId>cos_api</artifactId>
+				<version>${qcloud.cos.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.huaweicloud</groupId>
+				<artifactId>esdk-obs-java-bundle</artifactId>
+				<version>${huaweicloud.obs.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fhs-opensource</groupId>
+				<artifactId>easy-trans-spring-boot-starter</artifactId>
+				<version>${easytrans.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fhs-opensource</groupId>
+				<artifactId>easy-trans-mybatis-plus-extend</artifactId>
+				<version>${easytrans.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>easyexcel</artifactId>
+				<version>${easyexcel.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.github.whvcse</groupId>
+				<artifactId>easy-captcha</artifactId>
+				<version>${captcha.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

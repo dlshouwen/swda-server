@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Map;
  * @author liujingcheng@live.cn
  * @since 1.0.0
  */
-@Mapper
 public interface UserMapper extends BaseMapper<User> {
 
 	/**
@@ -45,7 +43,7 @@ public interface UserMapper extends BaseMapper<User> {
 	 * @return user
 	 */
 	default User getUserByUsername(String username) {
-		return this.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUserName, username));
+		return this.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUsername, username));
 	}
 
 	/**
