@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * role permission service impl
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Service
 public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMapper, RolePermission> implements IRolePermissionService {

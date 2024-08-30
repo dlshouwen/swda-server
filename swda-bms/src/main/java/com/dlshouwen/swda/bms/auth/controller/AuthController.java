@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * auth
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/auth")
@@ -100,7 +100,7 @@ public class AuthController {
 	@Operation(name = "bind", type = OperateType.INSERT)
 	public R<String> bind(@RequestBody AuthCallbackVO authCallbackVO) {
 //		get auth request
-		AuthRequest authRequest = authPlatformService.getAuthRequest(authCallbackVO.getAuthPlatformType());
+		AuthRequest authRequest = authPlatformService.getAuthRequest(authCallbackVO.getOpenType());
 //		get auth callback
 		AuthCallback callback = AuthCallback.builder().code(authCallbackVO.getCode()).state(authCallbackVO.getState()).build();
 //		do login
@@ -111,7 +111,7 @@ public class AuthController {
 			throw new RuntimeException("第三方登录失败");
 		}
 //		bind user
-		authService.bind(SecurityUser.getUserId(), authCallbackVO.getAuthPlatformType(), response.getData());
+		authService.bind(SecurityUser.getUserId(), authCallbackVO.getOpenType(), response.getData());
 //		return
 		return R.ok();
 	}

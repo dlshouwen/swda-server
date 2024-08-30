@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * dict type
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IDictTypeService extends BaseService<DictType> {
 

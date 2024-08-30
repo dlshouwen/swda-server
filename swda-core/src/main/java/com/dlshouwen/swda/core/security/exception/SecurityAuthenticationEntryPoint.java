@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * security authentication entry point
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

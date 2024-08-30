@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * operation log
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/operation_log")

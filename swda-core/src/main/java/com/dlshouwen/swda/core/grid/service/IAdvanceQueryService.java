@@ -11,7 +11,7 @@ import jakarta.validation.Valid;
 /**
  * advance query service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IAdvanceQueryService extends BaseService<AdvanceQuery> {
 

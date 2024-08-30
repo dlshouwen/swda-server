@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * user post service impl
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Service
 public class UserPostServiceImpl extends BaseServiceImpl<UserPostMapper, UserPost> implements IUserPostService {

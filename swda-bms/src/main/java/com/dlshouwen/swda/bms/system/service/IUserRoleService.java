@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * user role service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IUserRoleService extends BaseService<UserRole> {
 

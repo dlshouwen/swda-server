@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * base dao
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Component
 public class BaseDao extends JdbcTemplate {

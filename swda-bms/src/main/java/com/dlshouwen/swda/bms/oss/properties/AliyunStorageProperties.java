@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * aliyun storage properties
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Data
 public class AliyunStorageProperties {

@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.log.enums.OperateType;
 /**
  * operation
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * organ service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IOrganService extends BaseService<Organ> {
 

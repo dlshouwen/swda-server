@@ -13,7 +13,7 @@ import com.dlshouwen.swda.bms.oss.properties.StorageProperties;
 /**
  * local resource configuration
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Configuration
 @ConditionalOnProperty(prefix = "storage", value = "enabled")

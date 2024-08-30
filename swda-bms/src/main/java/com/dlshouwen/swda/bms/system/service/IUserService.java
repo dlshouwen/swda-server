@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * user service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IUserService extends BaseService<User> {
 

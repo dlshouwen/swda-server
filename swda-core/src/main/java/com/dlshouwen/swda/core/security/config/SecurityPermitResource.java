@@ -16,7 +16,7 @@ import java.util.Properties;
 /**
  * security permit resource
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Component
 public class SecurityPermitResource {

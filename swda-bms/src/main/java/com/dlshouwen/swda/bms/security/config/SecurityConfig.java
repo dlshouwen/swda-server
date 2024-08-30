@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * security config
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Configuration
 @AllArgsConstructor
@@ -61,6 +61,8 @@ public class SecurityConfig {
 	DaoAuthenticationProvider daoAuthenticationProvider() {
 //		create dao authentication provider
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//		set hide user not found exceptions false
+		daoAuthenticationProvider.setHideUserNotFoundExceptions(false);
 //		set password encoder, user details service
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
 		daoAuthenticationProvider.setUserDetailsService(userDetailsService);

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * auth vo
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Data
 @Schema(description = "auth")

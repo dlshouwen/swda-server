@@ -23,6 +23,7 @@ import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.log.dict.LoginStatus;
 import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
+import com.dlshouwen.swda.core.security.crypto.Sm2Utils;
 import com.dlshouwen.swda.core.security.mobile.MobileAuthenticationToken;
 import com.dlshouwen.swda.core.security.third.ThirdAuthenticationToken;
 import com.dlshouwen.swda.core.security.third.ThirdLogin;
@@ -30,14 +31,17 @@ import com.dlshouwen.swda.core.security.user.UserDetail;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
  * login service impl
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Service
 @AllArgsConstructor
@@ -78,7 +82,7 @@ public class LoginServiceImpl implements ILoginService {
 //			if error
 			if (!valid) {
 //				save login log
-				loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.FAILURE, "验证码错误", login.getUsername(), null, null, null);
+				loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.CAPTCHA_ERROR, login.getUsername(), "验证码错误");
 //				throw exception
 				throw new SwdaException("验证码错误");
 			}
@@ -88,11 +92,16 @@ public class LoginServiceImpl implements ILoginService {
 //		try catch
 		try {
 //			authenticate
-//			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Utils.decrypt(login.getPassword())));
-			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword()));
-		} catch (BadCredentialsException e) {
+			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Utils.decrypt(login.getPassword())));
+		} catch (BadCredentialsException | UsernameNotFoundException e) {
 //			throw exception
 			throw new SwdaException("用户名或密码错误");
+		} catch (CredentialsExpiredException e) {
+//			throw exception
+			throw new SwdaException("您的认证信息已过期");			
+		} catch (DisabledException e) {
+//			throw exception
+			throw new SwdaException("您的账号已被禁用");
 		}
 //		get principal
 		UserDetail user = (UserDetail) authentication.getPrincipal();
@@ -118,7 +127,7 @@ public class LoginServiceImpl implements ILoginService {
 //			if error
 			if (!valid) {
 //				save login log
-				loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.FAILURE, "验证码错误", null, sendCode.getMobile(), null, null);
+				loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.CAPTCHA_ERROR, sendCode.getMobile(), "验证码错误");
 //				throw exception
 				throw new SwdaException("验证码错误");
 			}
@@ -128,7 +137,7 @@ public class LoginServiceImpl implements ILoginService {
 //		if user is empty
 		if (user == null) {
 //			save login log
-			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.FAILURE, "手机号未注册", null, sendCode.getMobile(), null, null);
+			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.USER_NOR_FOUND, sendCode.getMobile(), "手机号未注册");
 //			throw exception
 			throw new SwdaException("手机号未注册");
 		}

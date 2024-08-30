@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * role data scope service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IRoleOrganService extends BaseService<RoleOrgan> {
 

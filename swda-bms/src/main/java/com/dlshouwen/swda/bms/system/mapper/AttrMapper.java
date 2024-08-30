@@ -6,7 +6,7 @@ import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 /**
  * attr mapper
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface AttrMapper extends BaseMapper<Attr> {
 

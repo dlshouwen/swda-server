@@ -3,7 +3,7 @@ package com.dlshouwen.swda.core.security.mobile;
 /**
  * mobile verify code service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface MobileVerifyCodeService {
 

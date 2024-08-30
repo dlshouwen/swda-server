@@ -12,7 +12,7 @@ import io.swagger.v3.oas.models.info.License;
 /**
  * swagger config
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Configuration
 public class SwaggerConfig {

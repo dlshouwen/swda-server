@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.xss.utils.XssUtils;
 /**
  * xss request wrapper
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class XssRequestWrapper extends HttpServletRequestWrapper {
 

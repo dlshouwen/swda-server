@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.mybatis.service.BaseService;
 /**
  * operation log service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IOperationLogService extends BaseService<OperationLog> {
 

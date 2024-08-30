@@ -2,7 +2,6 @@ package com.dlshouwen.swda.bms.security.user;
 
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.security.exception.AccountUserNotFoundException;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.dict.DataScopeType;
 import com.dlshouwen.swda.bms.system.entity.User;
@@ -26,7 +25,7 @@ import java.util.Set;
 /**
  * user details service impl
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Service
 @AllArgsConstructor
@@ -59,7 +58,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen
 //		if user is empty
 		if (user == null) {
 //			throw exception
-			throw new AccountUserNotFoundException("用户名或密码错误");
+			throw new UsernameNotFoundException("用户名或密码错误");
 		}
 //		convert to user detail
 		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);

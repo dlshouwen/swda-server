@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * attachment service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IAttachmentService extends BaseService<Attachment> {
 

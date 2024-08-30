@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * role data scope service impl
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Service
 public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleOrgan> implements IRoleOrganService {

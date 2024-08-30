@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * data loader
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Component
 @AllArgsConstructor

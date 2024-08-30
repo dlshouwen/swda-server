@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
 /**
  * third authentication provider
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class ThirdAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 	

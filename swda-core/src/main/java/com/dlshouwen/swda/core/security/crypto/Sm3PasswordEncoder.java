@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * sm3 password encoder
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class Sm3PasswordEncoder implements PasswordEncoder {
 	

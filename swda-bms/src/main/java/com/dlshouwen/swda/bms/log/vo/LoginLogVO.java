@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 /**
  * login log vo
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Data
 @Schema(description = "login log")
@@ -36,24 +36,15 @@ public class LoginLogVO implements Serializable, TransPojo {
 	@Schema(description = "login status")
 	private Integer loginStatus;
 	
-	@Schema(description = "error reason")
-	private String errorReason;
-
 	@Schema(description = "login time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime loginTime;
 	
-	@Schema(description = "username")
-	private String username;
+	@Schema(description = "login info")
+	private String loginInfo;
 	
-	@Schema(description = "mobile")
-	private String mobile;
-	
-	@Schema(description = "open type")
-	private Integer openType;
-	
-	@Schema(description = "open id")
-	private String openId;
+	@Schema(description = "login message")
+	private String loginMessage;
 	
 	@Schema(description = "tenant id")
 	private Long tenantId;

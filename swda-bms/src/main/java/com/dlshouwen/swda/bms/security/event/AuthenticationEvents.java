@@ -3,23 +3,27 @@ package com.dlshouwen.swda.bms.security.event;
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.event.AbstractAuthenticationFailureEvent;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.dlshouwen.swda.bms.log.service.ILoginLogService;
-import com.dlshouwen.swda.bms.security.exception.AccountUserNotFoundException;
-import com.dlshouwen.swda.bms.security.exception.MobileUserNotFoundException;
-import com.dlshouwen.swda.bms.security.exception.ThirdUnbindException;
-import com.dlshouwen.swda.bms.security.exception.ThirdUserNotFoundException;
 import com.dlshouwen.swda.core.log.dict.LoginStatus;
 import com.dlshouwen.swda.core.log.dict.LoginType;
+import com.dlshouwen.swda.core.security.mobile.MobileAuthenticationToken;
+import com.dlshouwen.swda.core.security.third.ThirdAuthenticationToken;
 import com.dlshouwen.swda.core.security.user.UserDetail;
+
+import cn.hutool.json.JSONUtil;
 
 /**
  * authentication events
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Component
 @AllArgsConstructor
@@ -37,7 +41,7 @@ public class AuthenticationEvents {
 //		get user detail
 		UserDetail user = (UserDetail) event.getAuthentication().getPrincipal();
 //		save login log
-		Long loginLogId = loginLogService.saveLoginLog(user.getLoginType(), LoginStatus.SUCCESS, "", user.getUsername(), user.getMobile(), user.getOpenType(), user.getOpenId());
+		Long loginLogId = loginLogService.saveLoginLog(user.getLoginType(), LoginStatus.SUCCESS, JSONUtil.toJsonStr(user), "success");
 //		set login log id
 		user.setLoginLogId(loginLogId);
 	}
@@ -48,33 +52,28 @@ public class AuthenticationEvents {
 	 */
 	@EventListener
 	public void onFailure(AbstractAuthenticationFailureEvent event) {
-//		get principal
-		String principal = (String) event.getAuthentication().getPrincipal();
-//		account user not found exception
-		if(event.getException() instanceof AccountUserNotFoundException) {
-//			save login log
-			loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.FAILURE, "用户不存在", principal, null, null, null);
-		}
-//		account bad credentials exception
-		if(event.getException() instanceof BadCredentialsException) {
-//			save login log
-			loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.FAILURE, "密码错误", principal, null, null, null);
-		}
-//		mobile user not found exception
-		if(event.getException() instanceof MobileUserNotFoundException) {
-//			save login log
-			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.FAILURE, "用户不存在", principal, null, null, null);
-		}
-//		third unbind exception
-		if(event.getException() instanceof ThirdUnbindException) {
-//			save login log
-			loginLogService.saveLoginLog(LoginType.THIRD, LoginStatus.FAILURE, "未绑定用户", principal, null, null, null);
-		}
-//		third user not found exception
-		if(event.getException() instanceof ThirdUserNotFoundException) {
-//			save login log
-			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.FAILURE, "绑定的用户不存在", principal, null, null, null);
-		}
+//		defined login status
+		Integer loginStatus = LoginStatus.SUCCESS;
+//		set login status
+		if(event.getException() instanceof UsernameNotFoundException)
+			loginStatus = LoginStatus.USER_NOR_FOUND;
+		if(event.getException() instanceof BadCredentialsException)
+			loginStatus = LoginStatus.BAD_CREDENTIALS;
+		if(event.getException() instanceof CredentialsExpiredException)
+			loginStatus = LoginStatus.CREDENTIALS_EXPIRED;
+		if(event.getException() instanceof DisabledException)
+			loginStatus = LoginStatus.USER_DISABLED;
+//		defined login type
+		Integer loginType = LoginType.ACCOUNT;
+//		set login type
+		if(event.getAuthentication().getClass() == UsernamePasswordAuthenticationToken.class)
+			loginType = LoginType.ACCOUNT;
+		if(event.getAuthentication().getClass() == MobileAuthenticationToken.class)
+			loginType = LoginType.MOBILE;
+		if(event.getAuthentication().getClass() == ThirdAuthenticationToken.class)
+			loginType = LoginType.THIRD;
+//		save login log
+		loginLogService.saveLoginLog(loginType, loginStatus, JSONUtil.toJsonStr(event.getAuthentication().getPrincipal()), event.getException().getMessage());
 	}
 
 }

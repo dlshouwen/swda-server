@@ -13,7 +13,7 @@ import com.dlshouwen.swda.core.mybatis.interceptor.DataScopeInnerInterceptor;
 /**
  * mybatis plus config
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Configuration
 public class MybatisPlusConfig {

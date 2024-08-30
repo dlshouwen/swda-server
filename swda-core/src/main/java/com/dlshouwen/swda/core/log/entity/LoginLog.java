@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * login log
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -29,15 +29,9 @@ public class LoginLog extends BaseEntity {
 	
 	private Integer loginStatus;
 	
-	private String errorReason;
+	private String loginInfo;
 	
-	private String username;
-	
-	private String mobile;
-	
-	private Integer openType;
-	
-	private String openId;
+	private String loginMessage;
 	
 	private Long tenantId;
 

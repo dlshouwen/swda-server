@@ -9,7 +9,7 @@ import com.dlshouwen.swda.core.mybatis.service.BaseService;
 /**
  * login log service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface ILoginLogService extends BaseService<LoginLog> {
 
@@ -24,13 +24,10 @@ public interface ILoginLogService extends BaseService<LoginLog> {
 	 * save login log
 	 * @param loginType
 	 * @param loginStatus
-	 * @param errorReason
-	 * @param username
-	 * @param mobile
-	 * @param openType
-	 * @param openId
+	 * @param loginInfo
+	 * @param loginMessage
 	 * @return log id
 	 */
-	Long saveLoginLog(Integer loginType, Integer loginStatus, String errorReason, String username, String mobile, Integer openType, String openId);
+	Long saveLoginLog(Integer loginType, Integer loginStatus, String loginInfo, String loginMessage);
 
 }

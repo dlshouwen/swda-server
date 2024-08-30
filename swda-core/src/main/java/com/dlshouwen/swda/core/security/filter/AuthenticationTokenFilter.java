@@ -22,7 +22,7 @@ import java.io.IOException;
 /**
  * authentication token filter
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Component
 @AllArgsConstructor

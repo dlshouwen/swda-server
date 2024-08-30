@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * user mapper
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface UserMapper extends BaseMapper<User> {
 

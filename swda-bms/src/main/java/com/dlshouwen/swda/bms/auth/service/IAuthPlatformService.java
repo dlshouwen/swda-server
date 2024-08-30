@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * auth platform service
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface IAuthPlatformService extends BaseService<AuthPlatform> {
 

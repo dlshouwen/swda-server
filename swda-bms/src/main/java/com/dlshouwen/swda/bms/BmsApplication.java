@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * bms application
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @EnableDiscoveryClient
 @SpringBootApplication

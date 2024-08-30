@@ -6,7 +6,7 @@ import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 /**
  * attachment mapper
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface AttachmentMapper extends BaseMapper<Attachment> {
 

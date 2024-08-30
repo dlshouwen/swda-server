@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * permission mapper
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 

@@ -11,7 +11,7 @@ import com.dlshouwen.swda.core.security.user.UserDetail;
 /**
  * field meta object handler
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class FieldMetaObjectHandler implements MetaObjectHandler {
 

@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * aliyun sms strategy
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class TencentSmsStrategy implements SmsStrategy {
 	

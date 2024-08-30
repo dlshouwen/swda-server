@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * user post
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface UserPostMapper extends BaseMapper<UserPost> {
 

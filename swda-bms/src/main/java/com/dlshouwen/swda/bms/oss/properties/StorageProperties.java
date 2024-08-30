@@ -9,7 +9,7 @@ import com.dlshouwen.swda.bms.oss.enums.StorageTypeEnum;
 /**
  * storage properties
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Data
 @ConfigurationProperties(prefix = "storage")
@@ -42,7 +42,7 @@ public class StorageProperties {
 	/**
 	 * storage config
 	 * @author liujingcheng@live.cn
-	 * @since 1.0.0
+	 * @version 1.0.0
 	 */
 	@Data
 	public static class StorageConfig {

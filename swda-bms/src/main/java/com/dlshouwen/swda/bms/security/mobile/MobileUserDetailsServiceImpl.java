@@ -17,7 +17,7 @@ import com.dlshouwen.swda.core.security.user.UserDetail;
 /**
  * mobile user details service impl
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Service
 @AllArgsConstructor

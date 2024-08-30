@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * login log service impl
  * 
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Service
 @AllArgsConstructor
@@ -51,15 +51,12 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	 * save
 	 * @param loginType
 	 * @param loginStatus
-	 * @param errorReason
-	 * @param username
-	 * @param mobile
-	 * @param openType
-	 * @param openId
+	 * @param loginInfo
+	 * @param loginMessage
 	 * @param operation
 	 */
 	@Override
-	public Long saveLoginLog(Integer loginType, Integer loginStatus, String errorReason, String username, String mobile, Integer openType, String openId) {
+	public Long saveLoginLog(Integer loginType, Integer loginStatus, String loginInfo, String loginMessage) {
 //		get request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 //		assert
@@ -72,16 +69,13 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 //		set user agent, ip
 		loginLog.setUserAgent(userAgent);
 		loginLog.setIp(ip);
-//		set login type, login status, error reason, login time
+//		set login type, login status, login time
 		loginLog.setLoginType(loginType);
 		loginLog.setLoginStatus(loginStatus);
-		loginLog.setErrorReason(errorReason);
 		loginLog.setLoginTime(LocalDateTime.now());
-//		set username, mobile, open type, open id
-		loginLog.setUsername(username);
-		loginLog.setMobile(mobile);
-		loginLog.setOpenType(openType);
-		loginLog.setOpenId(openId);
+//		set login info, login message
+		loginLog.setLoginInfo(loginInfo);
+		loginLog.setLoginMessage(loginMessage);
 //		get user
 		UserDetail user = SecurityUser.getUser();
 //		set tenent id, user id, real name, organ id, organ name

@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * global exception handler
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Slf4j
 @RestControllerAdvice

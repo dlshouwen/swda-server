@@ -45,7 +45,7 @@ import org.springframework.stereotype.Component;
 /**
  * mybatis log interceptor
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Intercepts({
 	@Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }),

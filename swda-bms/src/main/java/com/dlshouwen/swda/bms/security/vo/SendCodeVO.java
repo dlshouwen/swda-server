@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * send code vo
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @Data
 @Schema(description = "send code")

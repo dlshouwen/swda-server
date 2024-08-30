@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * security user
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class SecurityUser {
 	

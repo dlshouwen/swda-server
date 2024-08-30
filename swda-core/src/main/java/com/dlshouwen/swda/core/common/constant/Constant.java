@@ -3,7 +3,7 @@ package com.dlshouwen.swda.core.common.constant;
 /**
  * constant
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 public class Constant {
 	

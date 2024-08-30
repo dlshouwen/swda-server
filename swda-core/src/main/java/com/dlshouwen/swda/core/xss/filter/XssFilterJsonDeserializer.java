@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * xss filter json deserializer
  * @author liujingcheng@live.cn
- * @since 1.0.0
+ * @version 1.0.0
  */
 @AllArgsConstructor
 public class XssFilterJsonDeserializer extends JsonDeserializer<String> {
