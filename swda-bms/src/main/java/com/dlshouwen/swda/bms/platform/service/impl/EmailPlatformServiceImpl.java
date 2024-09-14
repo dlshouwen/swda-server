@@ -3,89 +3,118 @@ package com.dlshouwen.swda.bms.platform.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.dlshouwen.swda.bms.core.email.cache.EmailCache;
+import com.dlshouwen.swda.bms.platform.convert.EmailPlatformConvert;
+import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
+import com.dlshouwen.swda.bms.platform.mapper.EmailPlatformMapper;
+import com.dlshouwen.swda.bms.platform.service.IEmailPlatformService;
+import com.dlshouwen.swda.bms.platform.vo.EmailPlatformVO;
+import com.dlshouwen.swda.core.common.dict.OpenClose;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
+import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
+
 import lombok.AllArgsConstructor;
-import net.maku.email.config.EmailConfig;
-import net.maku.framework.common.constant.Constant;
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.mybatis.service.impl.BaseServiceImpl;
-import net.maku.system.cache.EmailConfigCache;
-import net.maku.system.convert.SysMailConfigConvert;
-import net.maku.system.dao.SysMailConfigDao;
-import net.maku.system.entity.SysMailConfigEntity;
-import net.maku.system.query.SysMailConfigQuery;
-import net.maku.system.service.SysMailConfigService;
-import net.maku.system.vo.SysMailConfigVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * 邮件配置
- *
- * @author 阿沐 babamu@126.com
+ * email platform service impl
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @Service
 @AllArgsConstructor
-public class EmailPlatformServiceImpl extends BaseServiceImpl<EmailPlatformMapper, SysMailConfigEntity> implements IEmailPlatformService {
-    private final EmailCache emailConfigCache;
+public class EmailPlatformServiceImpl extends BaseServiceImpl<EmailPlatformMapper, EmailPlatform>
+		implements IEmailPlatformService {
+	
+	/** email cache */
+	private final EmailCache emailCache;
 
-    @Override
-    public PageResult<EmailPlatformVO> page(SysMailConfigQuery query) {
-        IPage<SysMailConfigEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+	/**
+	 * get email platform page result
+	 * @param query
+	 * @return email platform page result
+	 */
+	@Override
+	public PageResult<EmailPlatformVO> getEmailPlatformPageResult(Query<EmailPlatform> query) {
+//		query page
+		IPage<EmailPlatform> page = this.page(query);
+//		convert to vo list for page return
+		return new PageResult<>(EmailPlatformConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
+	}
 
-        return new PageResult<>(EmailPlatformConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
-    }
+	/**
+	 * get email platform list
+	 * @param emailPlatformType
+	 * @return email platform list
+	 */
+	@Override
+	public List<EmailPlatformVO> getEmailPlatformList(Integer emailPlatformType) {
+//		defined wrapper
+		LambdaQueryWrapper<EmailPlatform> wrapper = Wrappers.lambdaQuery();
+//		eq: email platform type
+		wrapper.eq(emailPlatformType!=null, EmailPlatform::getEmailPlatformType, emailPlatformType);
+//		get email platform list
+		List<EmailPlatform> emailPlatformList = baseMapper.selectList(wrapper);
+//		convert to vo list for return
+		return EmailPlatformConvert.INSTANCE.convert2VOList(emailPlatformList);
+	}
 
-    @Override
-    public List<EmailPlatformVO> list(Integer platform) {
-        LambdaQueryWrapper<SysMailConfigEntity> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(platform != null, SysMailConfigEntity::getPlatform, platform);
+	/**
+	 * get enable email platform list
+	 * @return enable email platform list
+	 */
+	@Override
+	public List<EmailPlatform> getEnableEmailPlatformList() {
+//		get email platform list from cache
+		List<EmailPlatform> emailPlatformList = emailCache.getEmailPlatformList();
+//		if no email platform exists
+		if (emailPlatformList == null) {
+//			get enable email platform list
+			emailPlatformList = this.list(new LambdaQueryWrapper<EmailPlatform>().in(EmailPlatform::getStatus, OpenClose.OPEN));
+//			save cache
+			emailCache.saveEmailPlatform(emailPlatformList);
+		}
+//		return email platform list
+		return emailPlatformList;
+	}
 
-        List<SysMailConfigEntity> list = baseMapper.selectList(wrapper);
-        return EmailPlatformConvert.INSTANCE.convertList(list);
-    }
+	/**
+	 * add email platform
+	 * @param emailPlatformVO
+	 */
+	@Override
+	public void addEmailPlatform(EmailPlatformVO emailPlatformVO) {
+//		convert email platform vo to entity
+		EmailPlatform emailPlatform = EmailPlatformConvert.INSTANCE.convert(emailPlatformVO);
+//		insert email platform
+		this.save(emailPlatform);
+	}
 
-    @Override
-    public List<EmailPlatform> listByEnable() {
-        // 从缓存读取
-        List<EmailPlatform> cacheList = emailConfigCache.list();
+	/**
+	 * update email platform
+	 * @param emailPlatformVO
+	 */
+	@Override
+	public void updateEmailPlatform(EmailPlatformVO emailPlatformVO) {
+//		convert email platform vo to entity
+		EmailPlatform emailPlatform = EmailPlatformConvert.INSTANCE.convert(emailPlatformVO);
+//		update email platform
+		this.updateById(emailPlatform);
+	}
 
-        // 如果缓存没有，则从DB读取，然后保存到缓存里
-        if (cacheList == null) {
-            List<SysMailConfigEntity> list = this.list(new LambdaQueryWrapper<SysMailConfigEntity>().in(SysMailConfigEntity::getStatus, Constant.ENABLE));
-
-            cacheList = EmailPlatformConvert.INSTANCE.convertList2(list);
-            emailConfigCache.save(cacheList);
-        }
-
-        return cacheList;
-    }
-
-    private LambdaQueryWrapper<SysMailConfigEntity> getWrapper(SysMailConfigQuery query) {
-        LambdaQueryWrapper<SysMailConfigEntity> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(query.getPlatform() != null, SysMailConfigEntity::getPlatform, query.getPlatform());
-        return wrapper;
-    }
-
-    @Override
-    public void save(EmailPlatformVO vo) {
-        SysMailConfigEntity entity = EmailPlatformConvert.INSTANCE.convert(vo);
-
-        baseMapper.insert(entity);
-    }
-
-    @Override
-    public void update(EmailPlatformVO vo) {
-        SysMailConfigEntity entity = EmailPlatformConvert.INSTANCE.convert(vo);
-
-        updateById(entity);
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void delete(List<Long> idList) {
-        removeByIds(idList);
-    }
+	/**
+	 * delete email platform
+	 * @param emailPlatformIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteEmailPlatform(List<Long> emailPlatformIdList) {
+//		remove by ids
+		this.removeByIds(emailPlatformIdList);
+	}
 
 }

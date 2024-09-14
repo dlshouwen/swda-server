@@ -9,51 +9,58 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 短信配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * sms platform vo
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @Data
-@Schema(description = "短信配置")
+@Schema(description = "sms platform")
 public class SmsPlatformVO implements Serializable {
-    private static final long serialVersionUID = 1L;
+	
+	/** serial version uid */
+	private static final long serialVersionUID = 1L;
 
-    @Schema(description = "id")
-    private Long id;
+	@Schema(description = "sms platform id")
+	private Long smsPlatformId;
+	
+	@Schema(description = "sms platform code")
+	private String smsPlatformCode;
+	
+	@Schema(description = "sms platform name")
+	private String smsPlatformName;
 
-    @Schema(description = "平台类型")
-    private Integer platform;
+	@Schema(description = "sms platform type")
+	private Integer smsPlatformType;
 
-    @Schema(description = "分组名称，发送短信时，可指定分组")
-    private String groupName;
+	@Schema(description = "status")
+	private Integer status;
 
-    @Schema(description = "短信签名")
-    private String signName;
+	@Schema(description = "group name")
+	private String groupName;
 
-    @Schema(description = "短信模板")
-    private String templateId;
+	@Schema(description = "sign name")
+	private String signName;
 
-    @Schema(description = "短信应用的ID，如：腾讯云等")
-    private String appId;
+	@Schema(description = "template id")
+	private String templateId;
 
-    @Schema(description = "腾讯云国际短信、华为云等需要")
-    private String senderId;
+	@Schema(description = "app id")
+	private String appId;
 
-    @Schema(description = "接入地址，如：华为云")
-    private String url;
+	@Schema(description = "sender id")
+	private String senderId;
 
-    @Schema(description = "AccessKey")
-    private String accessKey;
+	@Schema(description = "url")
+	private String url;
 
-    @Schema(description = "SecretKey")
-    private String secretKey;
+	@Schema(description = "access key")
+	private String accessKey;
 
-    @Schema(description = "状态  0：禁用   1：启用")
-    private Integer status;
+	@Schema(description = "secret key")
+	private String secretKey;
 
-    @Schema(description = "创建时间")
-    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private LocalDateTime createTime;
+	@Schema(description = "create time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime createTime;
 
 }

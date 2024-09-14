@@ -1,15 +1,16 @@
 package com.dlshouwen.swda.bms.platform.mapper;
 
-import net.maku.framework.mybatis.dao.BaseDao;
-import net.maku.system.entity.SysMailConfigEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
+import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
+
 /**
- * 邮件配置
- *
- * @author 阿沐 babamu@126.com
+ * email platform mapper
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @Mapper
-public interface EmailPlatformMapper extends BaseDao<SysMailConfigEntity> {
+public interface EmailPlatformMapper extends BaseMapper<EmailPlatform> {
 
 }

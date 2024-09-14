@@ -38,26 +38,26 @@ public class SmsCache {
 	}
 
 	/**
-	 * get platform list
+	 * get sms platform list
 	 * @return platform list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<SmsPlatform> getPlatformlist() {
+	public List<SmsPlatform> getSmsPlatformlist() {
 		return (List<SmsPlatform>) redisCache.get(SMS_PLATFORM_KEY);
 	}
 
 	/**
-	 * save platform list
+	 * save sms platform
 	 * @param platformList
 	 */
-	public void savePlatformList(List<SmsPlatform> platformList) {
-		redisCache.set(SMS_PLATFORM_KEY, platformList);
+	public void saveSmsPlatform(List<SmsPlatform> smsPlatformList) {
+		redisCache.set(SMS_PLATFORM_KEY, smsPlatformList);
 	}
 
 	/**
-	 * delete all plat form
+	 * delete all sms platform
 	 */
-	public void deleteAllPlatform() {
+	public void deleteAllSmsPlatform() {
 		redisCache.delete(SMS_PLATFORM_KEY);
 	}
 

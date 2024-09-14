@@ -9,70 +9,77 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 邮件配置
- *
- * @author 阿沐 babamu@126.com
+ * email platform vo
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @Data
-@Schema(description = "邮件配置")
+@Schema(description = "email platform")
 public class EmailPlatformVO implements Serializable {
-    private static final long serialVersionUID = 1L;
+	
+	/** serial version uid */
+	private static final long serialVersionUID = 1L;
 
-    @Schema(description = "id")
-    private Long id;
+	@Schema(description = "email platform id")
+	private Long emailPlatformId;
+	
+	@Schema(description = "email platform code")
+	private String emailPlatformCode;
+	
+	@Schema(description = "email platform name")
+	private String emailPlatformName;
 
-    @Schema(description = "平台类型")
-    private Integer platform;
+	@Schema(description = "email platform type")
+	private Integer emailPlatformType;
 
-    @Schema(description = "分组名称，发送邮件时，可指定分组")
-    private String groupName;
+	@Schema(description = "status")
+	private Integer status;
 
-    @Schema(description = "SMTP服务器")
-    private String mailHost;
+	@Schema(description = "group name")
+	private String groupName;
 
-    @Schema(description = "SMTP端口")
-    private Integer mailPort;
+	@Schema(description = "mail host")
+	private String mailHost;
 
-    @Schema(description = "发件人邮箱")
-    private String mailFrom;
+	@Schema(description = "mail port")
+	private Integer mailPort;
 
-    @Schema(description = "发件人密码")
-    private String mailPass;
+	@Schema(description = "mail from")
+	private String mailFrom;
 
-    @Schema(description = "regionId")
-    private String regionId;
+	@Schema(description = "mail pass")
+	private String mailPass;
 
-    @Schema(description = "阿里云 endpoint")
-    private String endpoint;
+	@Schema(description = "region id")
+	private String regionId;
 
-    @Schema(description = "AccessKey")
-    private String accessKey;
+	@Schema(description = "endpoint")
+	private String endpoint;
 
-    @Schema(description = "SecretKey")
-    private String secretKey;
+	@Schema(description = "access key")
+	private String accessKey;
 
-    @Schema(description = "状态  0：禁用   1：启用")
-    private Integer status;
+	@Schema(description = "secret key")
+	private String secretKey;
 
-    @Schema(description = "版本号")
-    private Integer version;
+	@Schema(description = "version")
+	private Integer version;
 
-    @Schema(description = "删除标识")
-    private Integer deleted;
+	@Schema(description = "creator")
+	private Long creator;
 
-    @Schema(description = "创建者")
-    private Long creator;
+	@Schema(description = "create time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private Date createTime;
 
-    @Schema(description = "创建时间")
-    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private Date createTime;
+	@Schema(description = "updater")
+	private Long updater;
 
-    @Schema(description = "更新者")
-    private Long updater;
+	@Schema(description = "update time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private Date updateTime;
 
-    @Schema(description = "更新时间")
-    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private Date updateTime;
-
+	@Schema(description = "deleted")
+	private Integer deleted;
 
 }

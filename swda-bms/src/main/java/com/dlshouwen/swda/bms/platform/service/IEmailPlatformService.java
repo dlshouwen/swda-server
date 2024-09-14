@@ -3,27 +3,54 @@ package com.dlshouwen.swda.bms.platform.service;
 import java.util.List;
 
 import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
+import com.dlshouwen.swda.bms.platform.vo.EmailPlatformVO;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 
 /**
- * 邮件平台
- *
- * @author 阿沐 babamu@126.com
+ * email platform service
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 public interface IEmailPlatformService extends BaseService<EmailPlatform> {
 
-    PageResult<EmailPlatformVO> page(SysMailConfigQuery query);
+	/**
+	 * get email platform page result
+	 * @param query
+	 * @return email platform page result
+	 */
+	PageResult<EmailPlatformVO> getEmailPlatformPageResult(Query<EmailPlatform> query);
 
-    List<EmailPlatformVO> list(Integer platform);
+	/**
+	 * get email platform list
+	 * @param emailPlatformType
+	 * @return email platform list
+	 */
+	List<EmailPlatformVO> getEmailPlatformList(Integer emailPlatformType);
 
-    /**
-     * 启用的邮件平台列表
-     */
-    List<EmailPlatform> listByEnable();
+	/**
+	 * get enable email platform list
+	 * @return enable email platform list
+	 */
+	List<EmailPlatform> getEnableEmailPlatformList();
 
-    void save(EmailPlatformVO vo);
+	/**
+	 * add email platform
+	 * @param emailPlatformVO
+	 */
+	void addEmailPlatform(EmailPlatformVO emailPlatformVO);
 
-    void update(EmailPlatformVO vo);
+	/**
+	 * update email platform
+	 * @param emailPlatformVO
+	 */
+	void updateEmailPlatform(EmailPlatformVO emailPlatformVO);
 
-    void delete(List<Long> idList);
+	/**
+	 * delete email platform
+	 * @param emailPlatformIdList
+	 */
+	void deleteEmailPlatform(List<Long> emailPlatformIdList);
+
 }

@@ -48,7 +48,7 @@ public class EmailCache {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<EmailPlatform> list() {
+	public List<EmailPlatform> getEmailPlatformList() {
 		return (List<EmailPlatform>) redisCache.get(MAIL_PLATFORM_KEY);
 	}
 
@@ -56,14 +56,14 @@ public class EmailCache {
 	 * save email platform
 	 * @param list
 	 */
-	public void save(List<EmailPlatform> list) {
+	public void saveEmailPlatform(List<EmailPlatform> list) {
 		redisCache.set(MAIL_PLATFORM_KEY, list);
 	}
 
 	/**
 	 * delete email platform
 	 */
-	public void delete() {
+	public void deleteAllEmailPlatform() {
 		redisCache.delete(MAIL_PLATFORM_KEY);
 	}
 

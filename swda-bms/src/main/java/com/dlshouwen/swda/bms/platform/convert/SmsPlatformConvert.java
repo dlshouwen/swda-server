@@ -1,30 +1,44 @@
 package com.dlshouwen.swda.bms.platform.convert;
 
-import net.maku.sms.config.SmsConfig;
-import net.maku.system.entity.SysSmsConfigEntity;
-import net.maku.system.vo.SysSmsConfigVO;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+
+import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
+import com.dlshouwen.swda.bms.platform.vo.SmsPlatformVO;
 
 import java.util.List;
 
 /**
- * 短信配置
- *
- * @author 阿沐 babamu@126.com
+ * sms platform convert
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SmsPlatformConvert {
-    SmsPlatformConvert INSTANCE = Mappers.getMapper(SmsPlatformConvert.class);
 
-    SysSmsConfigEntity convert(SmsPlatformVO vo);
+	/** instance */
+	SmsPlatformConvert INSTANCE = Mappers.getMapper(SmsPlatformConvert.class);
 
-    SmsPlatformVO convert(SysSmsConfigEntity entity);
+	/**
+	 * convert
+	 * @param smsPlatformVO
+	 * @return sms platform
+	 */
+	SmsPlatform convert(SmsPlatformVO vo);
 
-    List<SmsPlatformVO> convertList(List<SysSmsConfigEntity> list);
+	/**
+	 * convert to vo
+	 * @param smsPlatform
+	 * @return sms platform vo
+	 */
+	SmsPlatformVO convert(SmsPlatform entity);
 
-    SmsConfig convert2(SysSmsConfigEntity entity);
-
-    List<SmsConfig> convertList2(List<SysSmsConfigEntity> list);
+	/**
+	 * convert to vo list
+	 * @param smsPlatformList
+	 * @return sms platform vo list
+	 */
+	List<SmsPlatformVO> convert2VOList(List<SmsPlatform> list);
 
 }

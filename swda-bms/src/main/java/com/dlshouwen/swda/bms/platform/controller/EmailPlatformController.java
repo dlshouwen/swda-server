@@ -1,146 +1,196 @@
 package com.dlshouwen.swda.bms.platform.controller;
 
-import cn.hutool.core.util.StrUtil;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.maku.email.config.EmailConfig;
-import net.maku.email.param.EmailAliyunBatchSendParam;
-import net.maku.email.param.EmailAliyunSendParam;
-import net.maku.email.param.EmailLocalSendParam;
-import net.maku.email.service.EmailService;
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.common.utils.Result;
-import net.maku.framework.operatelog.annotations.OperateLog;
-import net.maku.framework.operatelog.enums.OperateTypeEnum;
-import net.maku.system.convert.SysMailConfigConvert;
-import net.maku.system.entity.SysMailConfigEntity;
-import net.maku.system.enums.MailFormatEnum;
-import net.maku.system.enums.MailPlatformEnum;
-import net.maku.system.query.SysMailConfigQuery;
-import net.maku.system.service.SysMailConfigService;
-import net.maku.system.vo.SysMailConfigVO;
-import net.maku.system.vo.SysMailSendVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.dlshouwen.swda.bms.core.email.param.AliyunEmailBatchSendParam;
+import com.dlshouwen.swda.bms.core.email.param.AliyunEmailSendParam;
+import com.dlshouwen.swda.bms.core.email.param.LocalEmailSendParam;
+import com.dlshouwen.swda.bms.core.email.service.EmailService;
+import com.dlshouwen.swda.bms.platform.convert.EmailPlatformConvert;
+import com.dlshouwen.swda.bms.platform.dict.EmailFormatType;
+import com.dlshouwen.swda.bms.platform.dict.EmailPlatformType;
+import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
+import com.dlshouwen.swda.bms.platform.service.IEmailPlatformService;
+import com.dlshouwen.swda.bms.platform.vo.EmailPlatformVO;
+import com.dlshouwen.swda.bms.platform.vo.MailSendVO;
+import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
+import com.dlshouwen.swda.core.log.annotation.Operation;
+import com.dlshouwen.swda.core.log.enums.OperateType;
+
 import java.util.List;
 
 /**
- * 邮件配置
- *
- * @author 阿沐 babamu@126.com
+ * email platform
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @RestController
-@RequestMapping("sys/mail/config")
-@Tag(name = "邮件配置")
+@RequestMapping("/bms/platform/mail_platform")
+@Tag(name = "email platform")
 @AllArgsConstructor
 public class EmailPlatformController {
-    private final IEmailPlatformService sysMailConfigService;
-    private final EmailService emailService;
+	
+	/** email platform service */
+	private final IEmailPlatformService emailPlatformService;
+	
+	/** email service */
+	private final EmailService emailService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:mail:config')")
-    public Result<PageResult<EmailPlatformVO>> page(@ParameterObject @Valid SysMailConfigQuery query) {
-        PageResult<EmailPlatformVO> page = sysMailConfigService.page(query);
+	/**
+	 * get email platform page result
+	 * @param query
+	 * @return email platform page result
+	 */
+	@GetMapping("/page")
+	@Operation(name = "get email platform page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:platform:email_platform')")
+	public R<PageResult<EmailPlatformVO>> getEmailPlatformPageResult(@ParameterObject @Valid Query<EmailPlatform> query) {
+//		get email platform page result
+		PageResult<EmailPlatformVO> pageResult = emailPlatformService.getEmailPlatformPageResult(query);
+//		return email platform page result
+		return R.ok(pageResult);
+	}
 
-        return Result.ok(page);
-    }
+	/**
+	 * get email platform list
+	 * @param emailPlatformType
+	 * @return email platform list
+	 */
+	@GetMapping("/list")
+	@Operation(name = "get email platform list", type = OperateType.SEARCH)
+	public R<List<EmailPlatformVO>> getEmailPlatformList(Integer emailPlatformType) {
+//		get email platform list
+		List<EmailPlatformVO> emailPlatformList = emailPlatformService.getEmailPlatformList(emailPlatformType);
+//		return email platform list
+		return R.ok(emailPlatformList);
+	}
 
-    @GetMapping("list")
-    @Operation(summary = "列表")
-    public Result<List<EmailPlatformVO>> list(Integer platform) {
-        List<EmailPlatformVO> list = sysMailConfigService.list(platform);
+	/**
+	 * get email platform data
+	 * @param emailPlatformId
+	 * @return email platform data
+	 */
+	@GetMapping("/data/{emailPlatformId}")
+	@Operation(name = "get email platform data", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:platform:email_platform')")
+	public R<EmailPlatformVO> getEmailPlatformData(@PathVariable("emailPlatformId") Long emailPlatformId) {
+//		get email platform
+		EmailPlatform emailPlatform = emailPlatformService.getById(emailPlatformId);
+//		convert to vo for return
+		return R.ok(EmailPlatformConvert.INSTANCE.convert2VO(emailPlatform));
+	}
 
-        return Result.ok(list);
-    }
+	/**
+	 * add email platform
+	 * @param emailPlatformVO
+	 * @return result
+	 */
+	@PostMapping("/add")
+	@Operation(name = "add email platform", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('bms:platform:email_platform:add')")
+	public R<String> addEmailPlatform(@RequestBody EmailPlatformVO emailPlatformVO) {
+//		add email platform
+		emailPlatformService.addEmailPlatform(emailPlatformVO);
+//		return
+		return R.ok();
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:mail:config')")
-    public Result<EmailPlatformVO> get(@PathVariable("id") Long id) {
-        SysMailConfigEntity entity = sysMailConfigService.getById(id);
+	/**
+	 * update email platform
+	 * @param emailPlatformVO
+	 * @return result
+	 */
+	@PutMapping("/update")
+	@Operation(name = "update email platform", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('bms:platform:email_platform:update')")
+	public R<String> updateEmailPlatform(@RequestBody @Valid EmailPlatformVO emailPlatformVO) {
+//		update email platform
+		emailPlatformService.updateEmailPlatform(emailPlatformVO);
+//		return
+		return R.ok();
+	}
 
-        return Result.ok(EmailPlatformConvert.INSTANCE.convert(entity));
-    }
+	/**
+	 * delete email platform
+	 * @param emailPlatformIdList
+	 * @return result
+	 */
+	@DeleteMapping("/delete")
+	@Operation(name = "delete email platform", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('bms:platform:email_platform:delete')")
+	public R<String> deleteEmailPlatform(@RequestBody List<Long> emailPlatformIdList) {
+//		delete email platform
+		emailPlatformService.deleteEmailPlatform(emailPlatformIdList);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存")
-    @PreAuthorize("hasAuthority('sys:mail:config')")
-    public Result<String> save(@RequestBody EmailPlatformVO vo) {
-        sysMailConfigService.save(vo);
+	/**
+	 * send email
+	 * @param mailSend
+	 * @return result
+	 */
+	@PostMapping("/send")
+	@Operation(name = "send email", type = OperateType.OTHER)
+	public R<String> sendEmail(@RequestBody MailSendVO mailSendVO) {
+//		get email platform
+		EmailPlatform emailPlatform = emailPlatformService.getById(mailSendVO.getEmailPlatformId());
+//		local email
+		if (mailSendVO.getEmailPlatformType() == EmailPlatformType.LOCAL) {
+//			create local email send param
+			LocalEmailSendParam param = new LocalEmailSendParam();
+//			set tos, subject, content, html
+			param.setTos(mailSendVO.getMailTos());
+			param.setSubject(mailSendVO.getSubject());
+			param.setContent(mailSendVO.getContent());
+			param.setHtml(mailSendVO.getEmailFormatType()==EmailFormatType.HTML);
+//			send local
+			boolean result = emailService.sendLocal(param, emailPlatform);
+//			return
+			return result?R.ok():R.error("send mail error");
+		}
+//		aliyun email
+		if (mailSendVO.getEmailPlatformType() == EmailPlatformType.ALIYUN) {
+//			normal
+			if(mailSendVO.getEmailFormatType()!=EmailFormatType.TEMPLATE) {
+//				create aliyun email send param
+				AliyunEmailSendParam param = new AliyunEmailSendParam();
+//				set from, from alias, tos, subject, content, html
+				param.setFrom(mailSendVO.getMailFrom());
+				param.setFormAlias(mailSendVO.getFormAlias());
+				param.setTos(mailSendVO.getMailTos());
+				param.setSubject(mailSendVO.getSubject());
+				param.setContent(mailSendVO.getContent());
+				param.setHtml(mailSendVO.getEmailFormatType()==EmailFormatType.HTML);
+//				send aliyun
+				boolean result = emailService.sendAliyun(param, emailPlatform);
+//				return
+				return result?R.ok():R.error("send mail error");
+			}
+//			template
+			if(mailSendVO.getEmailFormatType()==EmailFormatType.TEMPLATE) {
+//				create aliyun email batch send param
+				AliyunEmailBatchSendParam param = new AliyunEmailBatchSendParam();
+//				set from, receivers name, tag name, template name
+				param.setFrom(mailSendVO.getMailFrom());
+				param.setReceiversName(mailSendVO.getReceiversName());
+				param.setTagName(mailSendVO.getTagName());
+				param.setTemplateName(mailSendVO.getTemplateName());
+//				batch send aliyun
+				boolean result = emailService.batchSendAliyun(param, emailPlatform);
+//				return
+				return result?R.ok():R.error("send mail error");
+			}
+		}
+//		return
+		return R.error("no support");
+	}
 
-        return Result.ok();
-    }
-
-    @PostMapping("send")
-    @Operation(summary = "发送邮件")
-    @OperateLog(type = OperateTypeEnum.OTHER)
-    public Result<String> send(@RequestBody SysMailSendVO vo) {
-        SysMailConfigEntity entity = sysMailConfigService.getById(vo.getId());
-        EmailPlatform config = EmailPlatformConvert.INSTANCE.convert2(entity);
-
-        // 发送本地邮件
-        if (vo.getPlatform() == MailPlatformEnum.LOCAL.getValue()) {
-            LocalEmailSendParam local = new LocalEmailSendParam();
-            local.setTos(vo.getMailTos());
-            local.setSubject(vo.getSubject());
-            local.setContent(vo.getContent());
-            local.setHtml(StrUtil.equalsIgnoreCase(vo.getMailFormat(), MailFormatEnum.HTML.name()));
-            boolean flag = emailService.sendLocal(local, config);
-
-            return flag ? Result.ok() : Result.error("发送失败");
-        }
-
-
-        // 发送阿里云模板邮件
-        if (vo.getPlatform() == MailPlatformEnum.ALIYUN.getValue()
-                && StrUtil.equalsIgnoreCase(vo.getMailFormat(), MailFormatEnum.TEMPLATE.name())) {
-            AliyunEmailBatchSendParam aliyun = new AliyunEmailBatchSendParam();
-            aliyun.setFrom(vo.getMailFrom());
-            aliyun.setReceiversName(vo.getReceiversName());
-            aliyun.setTagName(vo.getTagName());
-            aliyun.setTemplateName(vo.getTemplateName());
-            boolean flag = emailService.batchSendAliyun(aliyun, config);
-
-            return flag ? Result.ok() : Result.error("发送失败");
-        }
-
-        // 发送阿里云邮件
-        if (vo.getPlatform() == MailPlatformEnum.ALIYUN.getValue()) {
-            AliyunEmailSendParam aliyun = new AliyunEmailSendParam();
-            aliyun.setFrom(vo.getMailFrom());
-            aliyun.setFormAlias(vo.getFormAlias());
-            aliyun.setTos(vo.getMailTos());
-            aliyun.setSubject(vo.getSubject());
-            aliyun.setContent(vo.getContent());
-            aliyun.setHtml(StrUtil.equalsIgnoreCase(vo.getMailFormat(), MailFormatEnum.HTML.name()));
-            boolean flag = emailService.sendAliyun(aliyun, config);
-
-            return flag ? Result.ok() : Result.error("发送失败");
-        }
-
-        return Result.error("不支持的邮件平台或邮件格式");
-    }
-
-    @PutMapping
-    @Operation(summary = "修改")
-    @PreAuthorize("hasAuthority('sys:mail:config')")
-    public Result<String> update(@RequestBody @Valid EmailPlatformVO vo) {
-        sysMailConfigService.update(vo);
-
-        return Result.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除")
-    @PreAuthorize("hasAuthority('sys:mail:config')")
-    public Result<String> delete(@RequestBody List<Long> idList) {
-        sysMailConfigService.delete(idList);
-
-        return Result.ok();
-    }
 }

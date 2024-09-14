@@ -1,129 +1,134 @@
 package com.dlshouwen.swda.bms.platform.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.maku.framework.common.utils.ExceptionUtils;
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.common.utils.Result;
-import net.maku.framework.operatelog.annotations.OperateLog;
-import net.maku.framework.operatelog.enums.OperateTypeEnum;
-import net.maku.sms.SmsContext;
-import net.maku.sms.config.SmsConfig;
-import net.maku.sms.service.SmsService;
-import net.maku.system.convert.SysSmsConfigConvert;
-import net.maku.system.entity.SysSmsConfigEntity;
-import net.maku.system.query.SysSmsConfigQuery;
-import net.maku.system.service.SysSmsConfigService;
-import net.maku.system.vo.SysSmsConfigVO;
-import net.maku.system.vo.SysSmsSendVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import com.dlshouwen.swda.bms.core.sms.context.SmsContext;
+import com.dlshouwen.swda.bms.core.sms.service.SmsService;
+import com.dlshouwen.swda.bms.platform.convert.SmsPlatformConvert;
+import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
+import com.dlshouwen.swda.bms.platform.service.ISmsPlatformService;
+import com.dlshouwen.swda.bms.platform.vo.SmsPlatformVO;
+import com.dlshouwen.swda.bms.platform.vo.SmsSendVO;
+import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
+import com.dlshouwen.swda.core.grid.dto.PageResult;
+import com.dlshouwen.swda.core.grid.dto.Query;
+import com.dlshouwen.swda.core.log.annotation.Operation;
+import com.dlshouwen.swda.core.log.enums.OperateType;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 短信配置
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
+ * sms platform
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @RestController
-@RequestMapping("sys/sms/config")
-@Tag(name = "短信配置")
+@RequestMapping("/bms/platform/sms_platform")
+@Tag(name = "sms platform")
 @AllArgsConstructor
 public class SmsPlatformController {
-    private final SysSmsConfigService sysSmsConfigService;
-    private final SmsService smsService;
+	
+	/** sms platform service */
+	private final ISmsPlatformService smsPlatformService;
+	
+	/** sms service */
+	private final SmsService smsService;
 
-    @GetMapping("page")
-    @Operation(summary = "分页")
-    @PreAuthorize("hasAuthority('sys:sms:config')")
-    public Result<PageResult<SmsPlatformVO>> page(@ParameterObject @Valid SysSmsConfigQuery query) {
-        PageResult<SmsPlatformVO> page = sysSmsConfigService.page(query);
+	@GetMapping("/page")
+	@Operation(name = "get sms platform page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:platform:sms_platform')")
+	public R<PageResult<SmsPlatformVO>> getSmsPlatformPageResult(@ParameterObject @Valid Query<SmsPlatform> query) {
+//		get sms platform page result
+		PageResult<SmsPlatformVO> pageResult = smsPlatformService.getSmsPlatformPageResult(query);
+//		return sms platform page result
+		return R.ok(pageResult);
+	}
 
-        return Result.ok(page);
-    }
+	@GetMapping("/list")
+	@Operation(name = "get sms platform list", type = OperateType.SEARCH)
+	public R<List<SmsPlatformVO>> getSmsPlatformList(Integer smsPlatformType) {
+//		get sms platform list
+		List<SmsPlatformVO> smsPlatformList = smsPlatformService.getSmsPlatformList(smsPlatformType);
+//		return sms platform list
+		return R.ok(smsPlatformList);
+	}
 
-    @GetMapping("list")
-    @Operation(summary = "列表")
-    public Result<List<SmsPlatformVO>> list(Integer platform) {
-        List<SmsPlatformVO> list = sysSmsConfigService.list(platform);
+	@GetMapping("/data/{smsPlatformId}")
+	@Operation(name = "get sms platform data", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:platform:sms_platform')")
+	public R<SmsPlatformVO> get(@PathVariable("smsPlatformId") Long smsPlatformId) {
+//		get sms platform
+		SmsPlatform smsPlatform = smsPlatformService.getById(smsPlatformId);
+//		convert to sms platform vo for return
+		return R.ok(SmsPlatformConvert.INSTANCE.convert(smsPlatform));
+	}
 
-        return Result.ok(list);
-    }
+	@PostMapping("/add")
+	@Operation(name = "add sms platform", type = OperateType.INSERT)
+	@PreAuthorize("hasAuthority('bms:platform:sms_platform:add')")
+	public R<String> addSmsPlatform(@RequestBody SmsPlatformVO smsPlatformVO) {
+//		add sms platform
+		smsPlatformService.addSmsPlatform(smsPlatformVO);
+//		return
+		return R.ok();
+	}
 
-    @GetMapping("{id}")
-    @Operation(summary = "信息")
-    @PreAuthorize("hasAuthority('sys:sms:config')")
-    public Result<SmsPlatformVO> get(@PathVariable("id") Long id) {
-        SysSmsConfigEntity entity = sysSmsConfigService.getById(id);
+	@PutMapping("/update")
+	@Operation(name = "update sms platform", type = OperateType.UPDATE)
+	@PreAuthorize("hasAuthority('bms:platform:sms_platform:update')")
+	public R<String> updateSmsPlatform(@RequestBody @Valid SmsPlatformVO smsPlatformVO) {
+//		update sms platform
+		smsPlatformService.updateSmsPlatform(smsPlatformVO);
+//		return
+		return R.ok();
+	}
 
-        return Result.ok(SmsPlatformConvert.INSTANCE.convert(entity));
-    }
+	@DeleteMapping("/delete")
+	@Operation(name = "delete sms platform", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('bms:platform:sms_platform:delete')")
+	public R<String> deleteSmsPlatform(@RequestBody List<Long> smsPlatformIdList) {
+//		delete sms platform
+		smsPlatformService.deleteSmsPlatform(smsPlatformIdList);
+//		return
+		return R.ok();
+	}
 
-    @PostMapping
-    @Operation(summary = "保存")
-    @OperateLog(type = OperateTypeEnum.INSERT)
-    @PreAuthorize("hasAuthority('sys:sms:config')")
-    public Result<String> save(@RequestBody SmsPlatformVO vo) {
-        sysSmsConfigService.save(vo);
+	@PostMapping("/send")
+	@Operation(name = "send sms", type = OperateType.OTHER)
+	@PreAuthorize("hasAuthority('bms:platform:sms_platform:send')")
+	public R<String> sendSms(@RequestBody SmsSendVO smsSendVO) {
+//		get sms platform
+		SmsPlatform smsPlatform = smsPlatformService.getById(smsSendVO.getSmsPlatformId());
+//		create params
+		Map<String, String> params = new LinkedHashMap<>();
+//		if has param
+		if (StringUtils.isNotBlank(smsSendVO.getParamValue())) {
+//			set param value to params
+			params.put(smsSendVO.getParamKey(), smsSendVO.getParamValue());
+		}
+//		try catch
+		try {
+//			send message
+			new SmsContext(smsPlatform).send(smsSendVO.getMobile(), params);
+//			save log
+			smsService.saveLog(smsPlatform, smsSendVO.getMobile(), params, null);
+//			return
+			return R.ok();
+		} catch (Exception e) {
+//			save log
+			smsService.saveLog(smsPlatform, smsSendVO.getMobile(), params, e);
+//			return
+			return R.error(ExceptionUtils.toString(e));
+		}
+	}
 
-        return Result.ok();
-    }
-
-    @PostMapping("send")
-    @Operation(summary = "发送短信")
-    @OperateLog(type = OperateTypeEnum.OTHER)
-    @PreAuthorize("hasAuthority('sys:sms:config')")
-    public Result<String> send(@RequestBody SysSmsSendVO vo) {
-        SysSmsConfigEntity entity = sysSmsConfigService.getById(vo.getId());
-        SmsConfig config = SmsPlatformConvert.INSTANCE.convert2(entity);
-
-        // 短信参数
-        Map<String, String> params = new LinkedHashMap<>();
-        if (StringUtils.isNotBlank(vo.getParamValue())) {
-            params.put(vo.getParamKey(), vo.getParamValue());
-        }
-
-        try {
-            // 发送短信
-            new SmsContext(config).send(vo.getMobile(), params);
-
-            // 保存日志
-            smsService.saveLog(config, vo.getMobile(), params, null);
-
-            return Result.ok();
-        } catch (Exception e) {
-            // 保存日志
-            smsService.saveLog(config, vo.getMobile(), params, e);
-
-            return Result.error(ExceptionUtils.getExceptionMessage(e));
-        }
-    }
-
-    @PutMapping
-    @Operation(summary = "修改")
-    @OperateLog(type = OperateTypeEnum.UPDATE)
-    @PreAuthorize("hasAuthority('sys:sms:config')")
-    public Result<String> update(@RequestBody @Valid SmsPlatformVO vo) {
-        sysSmsConfigService.update(vo);
-
-        return Result.ok();
-    }
-
-    @DeleteMapping
-    @Operation(summary = "删除")
-    @OperateLog(type = OperateTypeEnum.DELETE)
-    @PreAuthorize("hasAuthority('sys:sms:config')")
-    public Result<String> delete(@RequestBody List<Long> idList) {
-        sysSmsConfigService.delete(idList);
-
-        return Result.ok();
-    }
 }
