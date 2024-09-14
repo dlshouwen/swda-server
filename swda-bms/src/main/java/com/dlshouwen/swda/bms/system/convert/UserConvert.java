@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.system.convert;
 
-import com.dlshouwen.swda.bms.assist.vo.UserAssistVO;
 import com.dlshouwen.swda.bms.system.entity.User;
+import com.dlshouwen.swda.bms.system.vo.LoginUserVO;
 import com.dlshouwen.swda.bms.system.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
 import com.dlshouwen.swda.core.security.user.UserDetail;
@@ -42,7 +42,7 @@ public interface UserConvert {
 	 * @param userAssistVO
 	 * @return user
 	 */
-	User convert(UserAssistVO vo);
+	User convert(LoginUserVO vo);
 
 	/**
 	 * convert to vo

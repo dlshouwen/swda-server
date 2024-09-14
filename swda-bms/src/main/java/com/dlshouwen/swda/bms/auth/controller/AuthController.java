@@ -13,10 +13,10 @@ import com.dlshouwen.swda.core.common.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
-import com.dlshouwen.swda.bms.auth.service.IAuthPlatformService;
 import com.dlshouwen.swda.bms.auth.service.IAuthService;
 import com.dlshouwen.swda.bms.auth.vo.AuthCallbackVO;
 import com.dlshouwen.swda.bms.auth.vo.AuthVO;
+import com.dlshouwen.swda.bms.platform.service.IAuthPlatformService;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

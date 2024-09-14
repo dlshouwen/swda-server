@@ -12,8 +12,6 @@ import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.user.UserDetail;
-import com.dlshouwen.swda.bms.assist.vo.UserAssistVO;
-import com.dlshouwen.swda.bms.assist.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.auth.vo.UserPasswordVO;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
@@ -21,6 +19,8 @@ import com.dlshouwen.swda.bms.system.service.IPostService;
 import com.dlshouwen.swda.bms.system.service.IUserPostService;
 import com.dlshouwen.swda.bms.system.service.IUserRoleService;
 import com.dlshouwen.swda.bms.system.service.IUserService;
+import com.dlshouwen.swda.bms.system.vo.LoginUserVO;
+import com.dlshouwen.swda.bms.system.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
 
 import org.springdoc.core.annotations.ParameterObject;
@@ -114,14 +114,14 @@ public class UserController {
 
 	/**
 	 * update login user
-	 * @param userAssistVO
+	 * @param loginUserVO
 	 * @return result
 	 */
 	@PutMapping("/login/update")
 	@Operation(name = "update login user", type = OperateType.UPDATE)
-	public R<String> updateLoginUser(@RequestBody @Valid UserAssistVO userAssistVO) {
+	public R<String> updateLoginUser(@RequestBody @Valid LoginUserVO loginUserVO) {
 //		update login user
-		userService.updateLoginUser(userAssistVO);
+		userService.updateLoginUser(loginUserVO);
 //		return
 		return R.ok();
 	}

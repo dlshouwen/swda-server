@@ -3,9 +3,9 @@ package com.dlshouwen.swda.bms.system.service;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
-import com.dlshouwen.swda.bms.assist.vo.UserAssistVO;
-import com.dlshouwen.swda.bms.assist.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.system.entity.User;
+import com.dlshouwen.swda.bms.system.vo.LoginUserVO;
+import com.dlshouwen.swda.bms.system.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -47,9 +47,9 @@ public interface IUserService extends BaseService<User> {
 
 	/**
 	 * update login user
-	 * @param userAssistVO
+	 * @param loginUserVO
 	 */
-	void updateLoginUser(UserAssistVO vo);
+	void updateLoginUser(LoginUserVO vo);
 
 	/**
 	 * update avatar

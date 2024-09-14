@@ -13,15 +13,15 @@ import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;
-import com.dlshouwen.swda.bms.assist.vo.UserAssistVO;
-import com.dlshouwen.swda.bms.assist.vo.UserAvatarVO;
-import com.dlshouwen.swda.bms.security.service.IUserTokenService;
+import com.dlshouwen.swda.bms.auth.service.IUserTokenService;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;
 import com.dlshouwen.swda.bms.system.service.IUserPostService;
 import com.dlshouwen.swda.bms.system.service.IUserRoleService;
 import com.dlshouwen.swda.bms.system.service.IUserService;
+import com.dlshouwen.swda.bms.system.vo.LoginUserVO;
+import com.dlshouwen.swda.bms.system.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.system.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
 
@@ -145,19 +145,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 
 	/**
 	 * update login user
-	 * @param userAssistVO
+	 * @param loginUserVO
 	 */
 	@Override
-	public void updateLoginUser(UserAssistVO userAssistVO) {
+	public void updateLoginUser(LoginUserVO loginUserVO) {
 //		get user from mobile
-		User user = baseMapper.getUserByMobile(userAssistVO.getMobile());
+		User user = baseMapper.getUserByMobile(loginUserVO.getMobile());
 //		if user is not null
-		if (user != null && !user.getUserId().equals(userAssistVO.getUserId())) {
+		if (user != null && !user.getUserId().equals(loginUserVO.getUserId())) {
 //			throw exception
 			throw new SwdaException("手机号已经存在");
 		}
 //		convert to user
-		user = UserConvert.INSTANCE.convert(userAssistVO);
+		user = UserConvert.INSTANCE.convert(loginUserVO);
 //		set user id
 		user.setUserId(SecurityUser.getUserId());
 //		update user

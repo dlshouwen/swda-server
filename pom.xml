@@ -85,6 +85,7 @@
 		<minio.version>8.5.1</minio.version>
 		<qcloud.cos.version>5.6.97</qcloud.cos.version>
 		<huaweicloud.obs.version>3.22.3</huaweicloud.obs.version>
+        <aliyun.dm.version>1.0.6</aliyun.dm.version>
 
 		<easytrans.version>3.0.0</easytrans.version>
 
@@ -309,6 +310,11 @@
 				<artifactId>easyexcel</artifactId>
 				<version>${easyexcel.version}</version>
 			</dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>dm20151123</artifactId>
+                <version>${aliyun.dm.version}</version>
+            </dependency>
 
 
 			<dependency>
