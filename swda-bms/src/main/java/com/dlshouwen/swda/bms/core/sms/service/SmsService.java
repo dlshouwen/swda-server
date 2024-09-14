@@ -46,30 +46,54 @@ public class SmsService {
 	 * @return send result
 	 */
 	public boolean send(String mobile, Map<String, String> params) {
-//		get enabled platform list
-		List<SmsPlatform> platformList = smsPlatformService.getEnabledPlatformList();
-//		if none then throw exception
-		if (platformList == null || platformList.size() <= 0) {
-			throw new SwdaException("无可用的短信服务平台");
-		}
-//		get round platform
-		SmsPlatform platform = platformList.get((int) (smsCache.getRoundValue() % platformList.size()));
+//		get round sms platform
+		SmsPlatform smsPlatform = this.roundSmsPlatform();
+//		send
+		return this.send(smsPlatform, mobile, params);
+	}
+	
+	/**
+	 * send
+	 * @param smsPlatform
+	 * @param mobile
+	 * @param params
+	 * @return send result
+	 */
+	public boolean send(SmsPlatform smsPlatform, String mobile, Map<String, String> params) {
 //		send message
 		try {
 //			new content & send message
-			new SmsContext(platform).send(mobile, params);
+			new SmsContext(smsPlatform).send(mobile, params);
 //			save log
-			saveLog(platform, mobile, params, null);
+			this.saveSmsLog(smsPlatform, mobile, params, null);
 //			success
 			return true;
 		} catch (Exception e) {
 //			log
 			log.error("send message error, mobile: {}", mobile, e);
 //			save log
-			saveLog(platform, mobile, params, e);
+			this.saveSmsLog(smsPlatform, mobile, params, e);
 //			failure
 			return false;
 		}
+	}
+
+	/**
+	 * round sms platform
+	 * @return sms platform
+	 */
+	private SmsPlatform roundSmsPlatform() {
+//		get enable sms platform list
+		List<SmsPlatform> smsPlatformList = smsPlatformService.getEnableSmsPlatformList();
+//		if sms platform list is empty
+		if (smsPlatformList.isEmpty()) {
+//			throw new exception
+			throw new SwdaException("no avaliable sms platform");
+		}
+//		get round
+		long round = smsCache.getRoundValue();
+//		get round sms platform
+		return smsPlatformList.get((int) round % smsPlatformList.size());
 	}
 
 	/**
@@ -79,7 +103,7 @@ public class SmsService {
 	 * @param params
 	 * @param e
 	 */
-	public void saveLog(SmsPlatform platform, String mobile, Map<String, String> params, Exception e) {
+	public void saveSmsLog(SmsPlatform platform, String mobile, Map<String, String> params, Exception e) {
 //		set log
 		SmsLog log = new SmsLog();
 		log.setSmsPlatformId(platform.getSmsPlatformId());

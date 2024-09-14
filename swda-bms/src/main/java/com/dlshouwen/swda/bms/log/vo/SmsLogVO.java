@@ -1,46 +1,51 @@
 package com.dlshouwen.swda.bms.log.vo;
 
+import com.dlshouwen.swda.core.common.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import net.maku.framework.common.utils.DateUtils;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 短信日志
- *
- * @author 阿沐 babamu@126.com
+ * sms log
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @Data
-@Schema(description = "短信日志")
+@Schema(description = "sms log")
 public class SmsLogVO implements Serializable {
+
+	/** serial version uid */
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "id")
-    private Long id;
+    @Schema(description = "sms log id")
+    private Long smsLogId;
 
-    @Schema(description = "平台ID")
-    private Long platformId;
+    @Schema(description = "sms platform id")
+    private Long smsPlatformId;
+    
+    @Schema(description = "sms platform name")
+    private String smsPlatformName;
 
-    @Schema(description = "平台类型")
-    private Integer platform;
+    @Schema(description = "sms platform type")
+    private Integer smsPlatformType;
 
-    @Schema(description = "手机号")
+    @Schema(description = "mobile")
     private String mobile;
-
-    @Schema(description = "状态  0：失败   1：成功")
-    private Integer status;
-
-    @Schema(description = "参数")
+    
+    @Schema(description = "params")
     private String params;
 
-    @Schema(description = "异常信息")
+    @Schema(description = "call result")
+    private Integer callResult;
+
+    @Schema(description = "error reason")
     private String error;
 
-    @Schema(description = "创建时间")
+    @Schema(description = "send time")
     @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-    private LocalDateTime createTime;
+    private LocalDateTime sendTime;
 
 }

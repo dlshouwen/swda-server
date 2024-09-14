@@ -13,8 +13,8 @@ import com.dlshouwen.swda.bms.core.email.param.AliyunEmailSendParam;
 import com.dlshouwen.swda.bms.core.email.param.LocalEmailSendParam;
 import com.dlshouwen.swda.bms.core.email.utils.AliyunEmailUtils;
 import com.dlshouwen.swda.bms.core.email.utils.LocalEmailUtils;
-import com.dlshouwen.swda.bms.log.entity.MailLog;
-import com.dlshouwen.swda.bms.log.service.IMailLogService;
+import com.dlshouwen.swda.bms.log.entity.EmailLog;
+import com.dlshouwen.swda.bms.log.service.IEmailLogService;
 import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
 import com.dlshouwen.swda.bms.platform.service.IEmailPlatformService;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
@@ -41,7 +41,7 @@ public class EmailService {
 	private final EmailCache emailCache;
 	
 	/** mail log service */
-	private final IMailLogService mailLogService;
+	private final IEmailLogService mailLogService;
 
 	/**
 	 * send local
@@ -67,16 +67,16 @@ public class EmailService {
 			new LocalEmailUtils(emailPlatform).sendEmail(param.getTos(), param.getSubject(), param.getContent(),
 					param.isHtml(), ArrayUtil.toArray(param.getFiles(), File.class));
 //			save mail log
-			this.saveMailLog(emailPlatform.getId(), emailPlatform.getPlatform(), emailPlatform.getMailFrom(), param.getTos(), param.getSubject(),
-					param.getContent(), null);
+			this.saveMailLog(emailPlatform.getEmailPlatformId(), emailPlatform.getEmailPlatformName(), emailPlatform.getEmailPlatformType(), 
+					emailPlatform.getMailFrom(), param.getTos(), param.getSubject(), param.getContent(), null);
 //			return true
 			return true;
 		} catch (Exception e) {
 //			log error
 			log.error("local mail send error: ", e);
 //			save mail log
-			this.saveMailLog(emailPlatform.getId(), emailPlatform.getPlatform(), emailPlatform.getMailFrom(), param.getTos(), param.getSubject(),
-					param.getContent(), e);
+			this.saveMailLog(emailPlatform.getEmailPlatformId(), emailPlatform.getEmailPlatformName(), emailPlatform.getEmailPlatformType(), 
+					emailPlatform.getMailFrom(), param.getTos(), param.getSubject(), param.getContent(), e);
 //			return false
 			return false;
 		}
@@ -106,16 +106,16 @@ public class EmailService {
 			new AliyunEmailUtils(emailPlatform).sendEmail(param.getFrom(), param.getFormAlias(), param.getTos(),
 					param.getSubject(), param.getContent(), param.isHtml());
 //			save mail log
-			this.saveMailLog(emailPlatform.getId(), emailPlatform.getPlatform(), param.getFrom(), param.getTos(), param.getSubject(),
-					param.getContent(), null);
+			this.saveMailLog(emailPlatform.getEmailPlatformId(), emailPlatform.getEmailPlatformName(), emailPlatform.getEmailPlatformType(), 
+					param.getFrom(), param.getTos(), param.getSubject(), param.getContent(), null);
 //			return true
 			return true;
 		} catch (Exception e) {
 //			log error
 			log.error("aliyun mail send error: ", e);
 //			save mail log
-			this.saveMailLog(emailPlatform.getId(), emailPlatform.getPlatform(), param.getFrom(), param.getTos(), param.getSubject(),
-					param.getContent(), e);
+			this.saveMailLog(emailPlatform.getEmailPlatformId(), emailPlatform.getEmailPlatformName(), emailPlatform.getEmailPlatformType(), 
+					param.getFrom(), param.getTos(), param.getSubject(), param.getContent(), e);
 //			return false
 			return false;
 		}
@@ -145,54 +145,19 @@ public class EmailService {
 			new AliyunEmailUtils(emailPlatform).batchSendEmail(param.getFrom(), param.getReceiversName(),
 					param.getTemplateName(), param.getTagName());
 //			save mail log
-			this.saveMailLog(emailPlatform.getId(), emailPlatform.getPlatform(), param.getFrom(), param.getReceiversName(), null,
-					param.getTemplateName(), null);
+			this.saveMailLog(emailPlatform.getEmailPlatformId(), emailPlatform.getEmailPlatformName(), emailPlatform.getEmailPlatformType(), 
+					param.getFrom(), param.getReceiversName(), null, param.getTemplateName(), null);
 //			return true
 			return true;
 		} catch (Exception e) {
 //			log error
 			log.error("aliyun mail batch send error: ", e);
 //			save mail log
-			this.saveMailLog(emailPlatform.getId(), emailPlatform.getPlatform(), param.getFrom(), param.getReceiversName(), null,
-					param.getTemplateName(), e);
+			this.saveMailLog(emailPlatform.getEmailPlatformId(), emailPlatform.getEmailPlatformName(), emailPlatform.getEmailPlatformType(), 
+					param.getFrom(), param.getReceiversName(), null, param.getTemplateName(), e);
 //			return false
 			return false;
 		}
-	}
-
-	/**
-	 * save mail log
-	 * @param platformId
-	 * @param platform
-	 * @param mailFrom
-	 * @param mailTos
-	 * @param subject
-	 * @param content
-	 * @param e
-	 */
-	public void saveMailLog(Long platformId, Integer platform, String mailFrom, String mailTos, String subject, String content, Exception e) {
-//		create mail log
-		MailLog mailLog = new MailLog();
-//		set platform id, platform, mail from, mail tos, subject, content
-		mailLog.setPlatformId(platformId);
-		mailLog.setPlatform(platform);
-		mailLog.setMailFrom(mailFrom);
-		mailLog.setMailTos(mailTos);
-		mailLog.setSubject(subject);
-		mailLog.setContent(content);
-//		if has exception
-		if (e != null) {
-//			get message
-			String message = StringUtils.substring(ExceptionUtils.toString(e), 0, 2000);
-//			set status, error message
-			mailLog.setStatus(CallResult.FAILURE);
-			mailLog.setError(message);
-		} else {
-//			set status
-			mailLog.setStatus(CallResult.SUCCESS);
-		}
-//		save mail log
-		mailLogService.save(mailLog);
 	}
 
 	/**
@@ -202,11 +167,11 @@ public class EmailService {
 	 */
 	private EmailPlatform roundEmailPlatform(String groupName) {
 //		get enable email platform list
-		List<EmailPlatform> emailPlatformList = emailPlatformService.listByEnable();
+		List<EmailPlatform> emailPlatformList = emailPlatformService.getEnableEmailPlatformList();
 //		if email platform list is empty
 		if (emailPlatformList.isEmpty()) {
 //			throw new exception
-			throw new SwdaException("no email platform");
+			throw new SwdaException("no avaliable email platform");
 		}
 //		if group name is blank
 		if (StrUtil.isBlank(groupName)) {
@@ -220,12 +185,49 @@ public class EmailService {
 //		if group email platform list is empty
 		if (groupEmailPlatformList.isEmpty()) {
 //			throw new exception
-			throw new SwdaException("no group email platform");
+			throw new SwdaException("no avaliable group email platform");
 		}
 //		get round
 		long round = emailCache.getRoundValue(groupName);
 //		get round email platform
 		return groupEmailPlatformList.get((int) round % groupEmailPlatformList.size());
+	}
+
+	/**
+	 * save mail log
+	 * @param emailPlatformId
+	 * @param emailPlatformName
+	 * @param emailPlatformType
+	 * @param mailFrom
+	 * @param mailTos
+	 * @param subject
+	 * @param content
+	 * @param e
+	 */
+	public void saveMailLog(Long emailPlatformId, String emailPlatformName, Integer emailPlatformType, String mailFrom, String mailTos, String subject, String content, Exception e) {
+//		create mail log
+		EmailLog mailLog = new EmailLog();
+//		set email platform id, email platform name, email platform type, mail from, mail tos, subject, content
+		mailLog.setEmailPlatformId(emailPlatformId);
+		mailLog.setEmailPlatformName(emailPlatformName);
+		mailLog.setEmailPlatformType(emailPlatformType);
+		mailLog.setMailFrom(mailFrom);
+		mailLog.setMailTos(mailTos);
+		mailLog.setSubject(subject);
+		mailLog.setContent(content);
+//		if has exception
+		if (e != null) {
+//			get message
+			String message = StringUtils.substring(ExceptionUtils.toString(e), 0, 2000);
+//			set call result, error reason
+			mailLog.setCallResult(CallResult.FAILURE);
+			mailLog.setErrorReason(message);
+		} else {
+//			set status
+			mailLog.setCallResult(CallResult.SUCCESS);
+		}
+//		save mail log
+		mailLogService.save(mailLog);
 	}
 
 }

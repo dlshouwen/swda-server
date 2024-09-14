@@ -17,7 +17,7 @@ import com.dlshouwen.swda.bms.platform.dict.EmailPlatformType;
 import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
 import com.dlshouwen.swda.bms.platform.service.IEmailPlatformService;
 import com.dlshouwen.swda.bms.platform.vo.EmailPlatformVO;
-import com.dlshouwen.swda.bms.platform.vo.MailSendVO;
+import com.dlshouwen.swda.bms.platform.vo.EmailSendVO;
 import com.dlshouwen.swda.core.common.entity.R;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
@@ -139,50 +139,50 @@ public class EmailPlatformController {
 	 */
 	@PostMapping("/send")
 	@Operation(name = "send email", type = OperateType.OTHER)
-	public R<String> sendEmail(@RequestBody MailSendVO mailSendVO) {
+	public R<String> sendEmail(@RequestBody EmailSendVO emailSendVO) {
 //		get email platform
-		EmailPlatform emailPlatform = emailPlatformService.getById(mailSendVO.getEmailPlatformId());
+		EmailPlatform emailPlatform = emailPlatformService.getById(emailSendVO.getEmailPlatformId());
 //		local email
-		if (mailSendVO.getEmailPlatformType() == EmailPlatformType.LOCAL) {
+		if (emailSendVO.getEmailPlatformType() == EmailPlatformType.LOCAL) {
 //			create local email send param
 			LocalEmailSendParam param = new LocalEmailSendParam();
 //			set tos, subject, content, html
-			param.setTos(mailSendVO.getMailTos());
-			param.setSubject(mailSendVO.getSubject());
-			param.setContent(mailSendVO.getContent());
-			param.setHtml(mailSendVO.getEmailFormatType()==EmailFormatType.HTML);
+			param.setTos(emailSendVO.getMailTos());
+			param.setSubject(emailSendVO.getSubject());
+			param.setContent(emailSendVO.getContent());
+			param.setHtml(emailSendVO.getEmailFormatType()==EmailFormatType.HTML);
 //			send local
 			boolean result = emailService.sendLocal(param, emailPlatform);
 //			return
 			return result?R.ok():R.error("send mail error");
 		}
 //		aliyun email
-		if (mailSendVO.getEmailPlatformType() == EmailPlatformType.ALIYUN) {
+		if (emailSendVO.getEmailPlatformType() == EmailPlatformType.ALIYUN) {
 //			normal
-			if(mailSendVO.getEmailFormatType()!=EmailFormatType.TEMPLATE) {
+			if(emailSendVO.getEmailFormatType()!=EmailFormatType.TEMPLATE) {
 //				create aliyun email send param
 				AliyunEmailSendParam param = new AliyunEmailSendParam();
 //				set from, from alias, tos, subject, content, html
-				param.setFrom(mailSendVO.getMailFrom());
-				param.setFormAlias(mailSendVO.getFormAlias());
-				param.setTos(mailSendVO.getMailTos());
-				param.setSubject(mailSendVO.getSubject());
-				param.setContent(mailSendVO.getContent());
-				param.setHtml(mailSendVO.getEmailFormatType()==EmailFormatType.HTML);
+				param.setFrom(emailSendVO.getMailFrom());
+				param.setFormAlias(emailSendVO.getFormAlias());
+				param.setTos(emailSendVO.getMailTos());
+				param.setSubject(emailSendVO.getSubject());
+				param.setContent(emailSendVO.getContent());
+				param.setHtml(emailSendVO.getEmailFormatType()==EmailFormatType.HTML);
 //				send aliyun
 				boolean result = emailService.sendAliyun(param, emailPlatform);
 //				return
 				return result?R.ok():R.error("send mail error");
 			}
 //			template
-			if(mailSendVO.getEmailFormatType()==EmailFormatType.TEMPLATE) {
+			if(emailSendVO.getEmailFormatType()==EmailFormatType.TEMPLATE) {
 //				create aliyun email batch send param
 				AliyunEmailBatchSendParam param = new AliyunEmailBatchSendParam();
 //				set from, receivers name, tag name, template name
-				param.setFrom(mailSendVO.getMailFrom());
-				param.setReceiversName(mailSendVO.getReceiversName());
-				param.setTagName(mailSendVO.getTagName());
-				param.setTemplateName(mailSendVO.getTemplateName());
+				param.setFrom(emailSendVO.getMailFrom());
+				param.setReceiversName(emailSendVO.getReceiversName());
+				param.setTagName(emailSendVO.getTagName());
+				param.setTemplateName(emailSendVO.getTemplateName());
 //				batch send aliyun
 				boolean result = emailService.batchSendAliyun(param, emailPlatform);
 //				return

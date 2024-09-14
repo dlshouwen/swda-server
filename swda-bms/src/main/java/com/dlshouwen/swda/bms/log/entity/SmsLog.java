@@ -21,8 +21,8 @@ import java.time.LocalDateTime;
 public class SmsLog {
 
 	@TableId
-	@Schema(description = "log id")
-	private Long logId;
+	@Schema(description = "sms log id")
+	private Long smsLogId;
 
 	@Schema(description = "sms platform id")
 	private Long smsPlatformId;

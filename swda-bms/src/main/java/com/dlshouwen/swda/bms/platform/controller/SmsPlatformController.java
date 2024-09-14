@@ -8,7 +8,6 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.dlshouwen.swda.bms.core.sms.context.SmsContext;
 import com.dlshouwen.swda.bms.core.sms.service.SmsService;
 import com.dlshouwen.swda.bms.platform.convert.SmsPlatformConvert;
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
@@ -16,7 +15,6 @@ import com.dlshouwen.swda.bms.platform.service.ISmsPlatformService;
 import com.dlshouwen.swda.bms.platform.vo.SmsPlatformVO;
 import com.dlshouwen.swda.bms.platform.vo.SmsSendVO;
 import com.dlshouwen.swda.core.common.entity.R;
-import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
@@ -115,20 +113,10 @@ public class SmsPlatformController {
 //			set param value to params
 			params.put(smsSendVO.getParamKey(), smsSendVO.getParamValue());
 		}
-//		try catch
-		try {
-//			send message
-			new SmsContext(smsPlatform).send(smsSendVO.getMobile(), params);
-//			save log
-			smsService.saveLog(smsPlatform, smsSendVO.getMobile(), params, null);
-//			return
-			return R.ok();
-		} catch (Exception e) {
-//			save log
-			smsService.saveLog(smsPlatform, smsSendVO.getMobile(), params, e);
-//			return
-			return R.error(ExceptionUtils.toString(e));
-		}
+//		send message
+		boolean result = smsService.send(smsPlatform, smsSendVO.getMobile(), params);
+//		return
+		return result?R.ok():R.error("send message error");
 	}
 
 }
