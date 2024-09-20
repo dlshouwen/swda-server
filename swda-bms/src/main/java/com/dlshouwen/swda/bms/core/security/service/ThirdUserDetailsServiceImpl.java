@@ -6,8 +6,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.bms.auth.service.IAuthService;
-import com.dlshouwen.swda.bms.core.security.exception.ThirdUnbindException;
-import com.dlshouwen.swda.bms.core.security.exception.ThirdUserNotFoundException;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;
@@ -51,14 +49,14 @@ public class ThirdUserDetailsServiceImpl implements ThirdUserDetailsService {
 			userId = authService.getUserIdByOpenTypeAndOpenId(openType, openId);
 		}catch(SwdaException e) {
 //			throw exception
-			throw new ThirdUnbindException("未绑定用户");
+			throw new UsernameNotFoundException("未绑定用户");
 		}
 //		get user
 		User user = userMapper.getUserById(userId);
 //		if user is empty
 		if (user == null) {
 //			throw exception
-			throw new ThirdUserNotFoundException("绑定的系统用户不存在");
+			throw new UsernameNotFoundException("绑定的系统用户不存在");
 		}
 //		convert to user detail
 		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);

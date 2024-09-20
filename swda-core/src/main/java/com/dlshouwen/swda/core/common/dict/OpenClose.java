@@ -7,13 +7,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "开启关闭")
+@Schema(description = "open close")
 public interface OpenClose {
 
-	@Schema(description = "启用")
+	@Schema(description = "open")
 	int OPEN = 1;
 
-	@Schema(description = "禁用")
+	@Schema(description = "close")
 	int CLOSE = 0;
 
 }

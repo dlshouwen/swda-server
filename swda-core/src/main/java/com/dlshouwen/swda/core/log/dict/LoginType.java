@@ -7,16 +7,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "登录类型")
+@Schema(description = "login type")
 public interface LoginType {
 
-	@Schema(description = "账户登录")
+	@Schema(description = "account")
 	int ACCOUNT = 1;
 	
-	@Schema(description = "短信登录")
+	@Schema(description = "mobile")
 	int MOBILE = 2;
 	
-	@Schema(description = "第三方平台授权登录")
+	@Schema(description = "third")
 	int THIRD = 3;
 
 }

@@ -5,9 +5,10 @@ import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
+
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.dlshouwen.swda.bms.core.security.exception.ThirdLoginException;
 import com.dlshouwen.swda.bms.platform.service.IAuthPlatformService;
 import com.dlshouwen.swda.core.security.third.ThirdLogin;
 import com.dlshouwen.swda.core.security.third.ThirdOpenIdService;
@@ -41,7 +42,7 @@ public class ThirdOpenIdServiceImpl implements ThirdOpenIdService {
 //		if not success
 		if (!response.ok()) {
 //			throw exception
-			throw new ThirdLoginException(response.getMsg());
+			throw new UsernameNotFoundException(response.getMsg());
 		}
 //		get open id to renturn
 		return response.getData().getUuid();

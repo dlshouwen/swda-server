@@ -7,22 +7,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "操作结果")
+@Schema(description = "operation result")
 public interface OperationResult {
 
-	@Schema(description = "访问成功")
+	@Schema(description = "success")
 	int SUCCESS = 1;
 
-	@Schema(description = "TOKEN超时")
+	@Schema(description = "token invalid")
 	int TOKEN_INVALID = 2;
 
-	@Schema(description = "无权访问")
+	@Schema(description = "no limit")
 	int NO_LIMIT = 3;
 
-	@Schema(description = "响应错误")
+	@Schema(description = "response error")
 	int RESPONSE_ERROR = 4;
 
-	@Schema(description = "强制下线")
+	@Schema(description = "force outline")
 	int FORCE_OUTLINE = 5;
 
 }

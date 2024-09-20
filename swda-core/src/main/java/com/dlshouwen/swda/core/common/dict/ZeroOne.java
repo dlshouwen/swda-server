@@ -10,10 +10,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "zero one")
 public interface ZeroOne {
 
-	@Schema(description = "是")
+	@Schema(description = "yes")
 	int YES = 1;
 
-	@Schema(description = "否")
+	@Schema(description = "no")
 	int NO = 0;
 
 }

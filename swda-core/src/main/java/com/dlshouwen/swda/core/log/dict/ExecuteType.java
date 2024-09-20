@@ -7,22 +7,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "执行类型")
+@Schema(description = "execute type")
 public interface ExecuteType {
 
-	@Schema(description = "未知")
+	@Schema(description = "unknow")
 	int UNKNOWN = 0;
 
-	@Schema(description = "查询")
+	@Schema(description = "select")
 	int SELECT = 1;
 
-	@Schema(description = "新增")
+	@Schema(description = "insert")
 	int INSERT = 2;
 
-	@Schema(description = "更新")
+	@Schema(description = "update")
 	int UPDATE = 3;
 
-	@Schema(description = "删除")
+	@Schema(description = "delete")
 	int DELETE = 4;
 
 }

@@ -7,25 +7,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "登录状态")
+@Schema(description = "login status")
 public interface LoginStatus {
 
-	@Schema(description = "登录成功")
+	@Schema(description = "success")
 	int SUCCESS = 1;
 	
-	@Schema(description = "验证码错误")
+	@Schema(description = "captcha error")
 	int CAPTCHA_ERROR = 2;
 	
-	@Schema(description = "用户不存在")
+	@Schema(description = "user not found")
 	int USER_NOR_FOUND = 3;
 	
-	@Schema(description = "认证错误")
+	@Schema(description = "bad credentials")
 	int BAD_CREDENTIALS = 4;
 	
-	@Schema(description = "认证已过期")
+	@Schema(description = "credentials expired")
 	int CREDENTIALS_EXPIRED = 5;
 	
-	@Schema(description = "用户已禁用")
+	@Schema(description = "user disabled")
 	int USER_DISABLED = 6;
 
 }

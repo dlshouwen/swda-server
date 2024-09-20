@@ -7,13 +7,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "排序逻辑")
+@Schema(description = "sort logic")
 public interface SortLogic {
 
-	@Schema(description = "正序")
+	@Schema(description = "asc")
 	int ASC = 1;
 
-	@Schema(description = "倒序")
+	@Schema(description = "desc")
 	int DESC = 2;
 
 }

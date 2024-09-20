@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "调用类型")
+@Schema(description = "call type")
 public interface CallType {
 
 	@Schema(description = "JDBC Template")

@@ -7,13 +7,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "响应结果")
+@Schema(description = "call result")
 public interface CallResult {
 
-	@Schema(description = "失败")
+	@Schema(description = "failure")
 	int FAILURE = 0;
 
-	@Schema(description = "成功")
+	@Schema(description = "success")
 	int SUCCESS = 1;
 
 }

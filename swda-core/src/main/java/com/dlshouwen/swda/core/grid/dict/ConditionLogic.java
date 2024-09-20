@@ -7,13 +7,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "条件逻辑")
+@Schema(description = "condition logic")
 public interface ConditionLogic {
 
-	@Schema(description = "并且")
+	@Schema(description = "and")
 	int AND = 1;
 
-	@Schema(description = "或者")
+	@Schema(description = "or")
 	int OR = 2;
 
 }

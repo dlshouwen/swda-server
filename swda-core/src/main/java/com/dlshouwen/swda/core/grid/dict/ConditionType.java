@@ -7,46 +7,46 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "条件类型")
+@Schema(description = "condition type")
 public interface ConditionType {
 
-	@Schema(description = "等于")
+	@Schema(description = "equals")
 	int EQUALS = 0;
 
-	@Schema(description = "不等于")
+	@Schema(description = "not equals")
 	int NOT_EQUALS = 1;
 
-	@Schema(description = "匹配")
+	@Schema(description = "like")
 	int LIKE = 2;
 	
-	@Schema(description = "匹配")
+	@Schema(description = "right like")
 	int RIGHT_LIKE = 3;
 	
-	@Schema(description = "匹配")
+	@Schema(description = "left like")
 	int LEFT_LIKE = 4;
 
-	@Schema(description = "开始于")
+	@Schema(description = "start with")
 	int START_WITH = 5;
 
-	@Schema(description = "结束于")
+	@Schema(description = "end with")
 	int END_WITH = 6;
 
-	@Schema(description = "大于")
+	@Schema(description = "greater than")
 	int GREATER_THAN = 7;
 
-	@Schema(description = "大于等于")
+	@Schema(description = "greater than equals")
 	int GREATER_THAN_EQUALS = 9;
 
-	@Schema(description = "小于")
+	@Schema(description = "less than")
 	int LESS_THAN = 9;
 
-	@Schema(description = "小于等于")
+	@Schema(description = "less than equals")
 	int LESS_THAN_EQUALS = 10;
 
-	@Schema(description = "为空")
+	@Schema(description = "null")
 	int NULL = 11;
 
-	@Schema(description = "不为空")
+	@Schema(description = "not null")
 	int NOT_NULL = 12;
 
 }

@@ -52,4 +52,5 @@ public class QiniuSmsStrategy implements SmsStrategy {
 			throw new SwdaException(e.getMessage());
 		}
 	}
+
 }

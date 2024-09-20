@@ -80,4 +80,5 @@ public class Sm2Utils {
 		System.out.println("sm2 解密:" + Sm2Utils.decrypt(sm2Password));
 		System.out.println("sm3 解密:" + SmUtil.sm3("admin"));
 	}
+
 }

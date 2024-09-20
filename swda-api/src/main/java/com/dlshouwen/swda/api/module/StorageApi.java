@@ -10,43 +10,39 @@ import java.io.InputStream;
 public interface StorageApi {
 
 	/**
-	 * 根据文件名，生成带时间戳的新文件名
-	 *
-	 * @param fileName 文件名
-	 * @return 返回带时间戳的文件名
+	 * get new file name
+	 * @param fileName
+	 * @return new file name
 	 */
 	String getNewFileName(String fileName);
 
 	/**
-	 * 生成路径，不包含文件名
-	 *
-	 * @return 返回生成的路径
+	 * get path
+	 * @return path
 	 */
 	String getPath();
 
 	/**
-	 * 根据文件名，生成路径
-	 *
-	 * @param fileName 文件名
-	 * @return 生成文件路径
+	 * get path
+	 * @param fileName
+	 * @return path
 	 */
 	String getPath(String fileName);
 
 	/**
-	 * 文件上传
-	 *
-	 * @param data 文件字节数组
-	 * @param path 文件路径，包含文件名
-	 * @return 返回http地址
+	 * upload
+	 * @param data
+	 * @param path
+	 * @return url
 	 */
 	String upload(byte[] data, String path);
 
 	/**
-	 * 文件上传
-	 *
-	 * @param inputStream 字节流
-	 * @param path        文件路径，包含文件名
-	 * @return 返回http地址
+	 * upload
+	 * @param inputStream
+	 * @param path
+	 * @return url
 	 */
 	String upload(InputStream inputStream, String path);
+
 }

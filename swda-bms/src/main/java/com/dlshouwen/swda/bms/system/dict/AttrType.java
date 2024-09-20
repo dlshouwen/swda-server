@@ -7,22 +7,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "参数类型")
+@Schema(description = "attr type")
 public interface AttrType {
 
-	@Schema(description = "系统参数")
+	@Schema(description = "system")
 	int SYSTEM = 1;
 
-	@Schema(description = "页面参数")
+	@Schema(description = "page")
 	int PAGE = 2;
 
-	@Schema(description = "基础参数")
+	@Schema(description = "base")
 	int BASE = 3;
 
-	@Schema(description = "日志参数")
+	@Schema(description = "log")
 	int LOG = 4;
 
-	@Schema(description = "接口参数")
+	@Schema(description = "interface")
 	int INTERFACE = 5;
 
 }

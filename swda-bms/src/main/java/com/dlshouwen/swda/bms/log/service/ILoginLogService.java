@@ -29,5 +29,11 @@ public interface ILoginLogService extends BaseService<LoginLog> {
 	 * @return log id
 	 */
 	Long saveLoginLog(Integer loginType, Integer loginStatus, String loginInfo, String loginMessage);
+	
+	/**
+	 * save logout log
+	 * @param logoutType
+	 */
+	void saveLogoutLog(Integer logoutType);
 
 }

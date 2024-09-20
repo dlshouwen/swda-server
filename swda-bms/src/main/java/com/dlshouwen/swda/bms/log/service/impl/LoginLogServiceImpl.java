@@ -48,12 +48,13 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	}
 
 	/**
-	 * save
+	 * save login log
 	 * @param loginType
 	 * @param loginStatus
 	 * @param loginInfo
 	 * @param loginMessage
 	 * @param operation
+	 * @return loginLogId
 	 */
 	@Override
 	public Long saveLoginLog(Integer loginType, Integer loginStatus, String loginInfo, String loginMessage) {
@@ -92,6 +93,27 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 		this.save(loginLog);
 //		return log id
 		return loginLog.getLogId();
+	}
+	
+	/**
+	 * save logout log
+	 * @param logoutType
+	 */
+	@Override
+	public void saveLogoutLog(Integer logoutType) {
+//		get user
+		UserDetail user = SecurityUser.getUser();
+//		if has user
+		if(user!=null) {
+//			get login log
+			LoginLog loginLog = this.getById(user.getLoginLogId());
+//			set is logout, logout type, logout time
+			loginLog.setIsLogout(ZeroOne.YES);
+			loginLog.setLogoutType(logoutType);
+			loginLog.setLogoutTime(LocalDateTime.now());
+//			save login log
+			this.save(loginLog);
+		}
 	}
 
 }

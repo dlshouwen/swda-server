@@ -7,19 +7,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "短信平台类型")
+@Schema(description = "sms platform type")
 public interface SmsPlatformType {
 
-	@Schema(description= "阿里云")
+	@Schema(description= "aliyun")
 	Integer ALIYUN = 1;
 
-	@Schema(description= "腾讯云")
+	@Schema(description= "tencent")
 	Integer TENCENT = 2;
 	
-	@Schema(description= "七牛云")
+	@Schema(description= "qiniu")
 	Integer QINIU = 3;
 	
-	@Schema(description= "华为云")
+	@Schema(description= "huawei")
 	Integer HUAWEI = 4;
 
 }

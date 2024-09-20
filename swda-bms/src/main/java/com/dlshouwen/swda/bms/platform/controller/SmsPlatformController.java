@@ -41,6 +41,11 @@ public class SmsPlatformController {
 	/** sms service */
 	private final SmsService smsService;
 
+	/**
+	 * get sms platform page result
+	 * @param query
+	 * @return sms platform page result
+	 */
 	@GetMapping("/page")
 	@Operation(name = "get sms platform page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform')")
@@ -51,6 +56,11 @@ public class SmsPlatformController {
 		return R.ok(pageResult);
 	}
 
+	/**
+	 * get sms platform list
+	 * @param smsPlatformType
+	 * @return sms platform list
+	 */
 	@GetMapping("/list")
 	@Operation(name = "get sms platform list", type = OperateType.SEARCH)
 	public R<List<SmsPlatformVO>> getSmsPlatformList(Integer smsPlatformType) {
@@ -60,6 +70,11 @@ public class SmsPlatformController {
 		return R.ok(smsPlatformList);
 	}
 
+	/**
+	 * get sms platform data
+	 * @param smsPlatformId
+	 * @return sms platform data
+	 */
 	@GetMapping("/data/{smsPlatformId}")
 	@Operation(name = "get sms platform data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform')")
@@ -70,6 +85,11 @@ public class SmsPlatformController {
 		return R.ok(SmsPlatformConvert.INSTANCE.convert(smsPlatform));
 	}
 
+	/**
+	 * add sms platform
+	 * @param smsPlatformVO
+	 * @return result
+	 */
 	@PostMapping("/add")
 	@Operation(name = "add sms platform", type = OperateType.INSERT)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:add')")
@@ -80,6 +100,11 @@ public class SmsPlatformController {
 		return R.ok();
 	}
 
+	/**
+	 * update sms platform
+	 * @param smsPlatformVO
+	 * @return result
+	 */
 	@PutMapping("/update")
 	@Operation(name = "update sms platform", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:update')")
@@ -90,6 +115,11 @@ public class SmsPlatformController {
 		return R.ok();
 	}
 
+	/**
+	 * delete sms platform
+	 * @param smsPlatformIdList
+	 * @return result
+	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete sms platform", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:delete')")
@@ -100,6 +130,11 @@ public class SmsPlatformController {
 		return R.ok();
 	}
 
+	/**
+	 * send msms
+	 * @param smsSendVO
+	 * @return result
+	 */
 	@PostMapping("/send")
 	@Operation(name = "send sms", type = OperateType.OTHER)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:send')")

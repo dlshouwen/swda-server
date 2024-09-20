@@ -7,16 +7,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "登出类型")
+@Schema(description = "logout type")
 public interface LogoutType {
 
-	@Schema(description = "正常退出")
+	@Schema(description = "normal")
 	int NORMAL = 1;
 
-	@Schema(description = "TOKEN失效退出")
+	@Schema(description = "token invalid")
 	int TOKEN_INVALID = 2;
 
-	@Schema(description = "强制下线")
+	@Schema(description = "force outline")
 	int FORCE_OUTLINE = 3;
 
 }
