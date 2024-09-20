@@ -1,13 +1,13 @@
-package com.dlshouwen.swda.core.unique.controller;
+package com.dlshouwen.swda.bms.core.unique.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dlshouwen.swda.bms.core.unique.entity.ValidParam;
 import com.dlshouwen.swda.core.common.entity.Data;
 import com.dlshouwen.swda.core.common.entity.R;
 import com.dlshouwen.swda.core.jdbc.dao.BaseDao;
-import com.dlshouwen.swda.core.unique.entity.ValidParam;
 
 import cn.hutool.core.map.MapUtil;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;

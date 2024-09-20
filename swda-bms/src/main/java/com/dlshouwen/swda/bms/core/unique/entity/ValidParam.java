@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.core.unique.entity;
+package com.dlshouwen.swda.bms.core.unique.entity;
 
 import java.util.List;
 
