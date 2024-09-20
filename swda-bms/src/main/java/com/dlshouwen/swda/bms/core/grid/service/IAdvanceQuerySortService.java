@@ -1,9 +1,9 @@
-package com.dlshouwen.swda.core.grid.service;
+package com.dlshouwen.swda.bms.core.grid.service;
 
 import java.util.List;
 
-import com.dlshouwen.swda.core.grid.entity.AdvanceQuerySort;
-import com.dlshouwen.swda.core.grid.vo.AdvanceQuerySortVO;
+import com.dlshouwen.swda.bms.core.grid.entity.AdvanceQuerySort;
+import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQuerySortVO;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 
 /**

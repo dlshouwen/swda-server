@@ -1,9 +1,9 @@
-package com.dlshouwen.swda.core.grid.service;
+package com.dlshouwen.swda.bms.core.grid.service;
 
 import java.util.List;
 
-import com.dlshouwen.swda.core.grid.entity.AdvanceQueryCondition;
-import com.dlshouwen.swda.core.grid.vo.AdvanceQueryConditionVO;
+import com.dlshouwen.swda.bms.core.grid.entity.AdvanceQueryCondition;
+import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQueryConditionVO;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 
 /**

@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.core.grid.entity;
+package com.dlshouwen.swda.bms.core.grid.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

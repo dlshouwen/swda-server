@@ -1,9 +1,9 @@
-package com.dlshouwen.swda.core.grid.service;
+package com.dlshouwen.swda.bms.core.grid.service;
 
 import java.util.List;
 
-import com.dlshouwen.swda.core.grid.entity.AdvanceQuery;
-import com.dlshouwen.swda.core.grid.vo.AdvanceQueryVO;
+import com.dlshouwen.swda.bms.core.grid.entity.AdvanceQuery;
+import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQueryVO;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.core.grid.service.impl;
+package com.dlshouwen.swda.bms.core.grid.service.impl;
 
 import java.util.List;
 
@@ -8,11 +8,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dlshouwen.swda.core.common.dict.ZeroOne;
 import com.dlshouwen.swda.core.common.entity.Data;
-import com.dlshouwen.swda.core.grid.convert.AdvanceQueryConvert;
-import com.dlshouwen.swda.core.grid.entity.AdvanceQuery;
-import com.dlshouwen.swda.core.grid.mapper.AdvanceQueryMapper;
-import com.dlshouwen.swda.core.grid.service.IAdvanceQueryService;
-import com.dlshouwen.swda.core.grid.vo.AdvanceQueryVO;
+import com.dlshouwen.swda.bms.core.grid.convert.AdvanceQueryConvert;
+import com.dlshouwen.swda.bms.core.grid.entity.AdvanceQuery;
+import com.dlshouwen.swda.bms.core.grid.mapper.AdvanceQueryMapper;
+import com.dlshouwen.swda.bms.core.grid.service.IAdvanceQueryService;
+import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQueryVO;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.user.UserDetail;

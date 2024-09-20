@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.core.grid.service.impl;
+package com.dlshouwen.swda.bms.core.grid.service.impl;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.dlshouwen.swda.core.grid.convert.AdvanceQueryConditionConvert;
-import com.dlshouwen.swda.core.grid.entity.AdvanceQueryCondition;
-import com.dlshouwen.swda.core.grid.mapper.AdvanceQueryConditionMapper;
-import com.dlshouwen.swda.core.grid.service.IAdvanceQueryConditionService;
-import com.dlshouwen.swda.core.grid.vo.AdvanceQueryConditionVO;
+import com.dlshouwen.swda.bms.core.grid.convert.AdvanceQueryConditionConvert;
+import com.dlshouwen.swda.bms.core.grid.entity.AdvanceQueryCondition;
+import com.dlshouwen.swda.bms.core.grid.mapper.AdvanceQueryConditionMapper;
+import com.dlshouwen.swda.bms.core.grid.service.IAdvanceQueryConditionService;
+import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQueryConditionVO;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 
 import lombok.AllArgsConstructor;
