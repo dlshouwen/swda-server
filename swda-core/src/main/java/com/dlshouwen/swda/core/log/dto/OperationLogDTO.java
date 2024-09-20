@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Data
 public class OperationLogDTO {
 
-	private Long logId;
+	private Long operationLogId;
 
 	private String userAgent;
 

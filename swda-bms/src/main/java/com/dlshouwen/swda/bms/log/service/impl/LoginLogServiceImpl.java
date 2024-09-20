@@ -19,9 +19,11 @@ import com.dlshouwen.swda.bms.log.service.ILoginLogService;
 import com.dlshouwen.swda.bms.log.vo.LoginLogVO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * login log service impl
@@ -34,17 +36,26 @@ import org.springframework.stereotype.Service;
 public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLog> implements ILoginLogService {
 
 	/**
-	 * get login log list
-	 * 
+	 * get login log page result
 	 * @param query
-	 * @return login log list
+	 * @return login log page result
 	 */
 	@Override
-	public PageResult<LoginLogVO> getLoginLogList(Query<LoginLog> query) {
+	public PageResult<LoginLogVO> getLoginLogPageResult(Query<LoginLog> query) {
 //		query page
 		IPage<LoginLog> page = this.page(query);
 //		convert to vo for return 
 		return new PageResult<>(LoginLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
+	}
+
+	/**
+	 * delete login log
+	 * @param loginLogIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteLoginLog(List<Long> loginLogIdList) {
+		this.removeByIds(loginLogIdList);
 	}
 
 	/**
@@ -54,7 +65,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	 * @param loginInfo
 	 * @param loginMessage
 	 * @param operation
-	 * @return loginLogId
+	 * @return login log id
 	 */
 	@Override
 	public Long saveLoginLog(Integer loginType, Integer loginStatus, String loginInfo, String loginMessage) {
@@ -91,8 +102,8 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 		loginLog.setIsLogout(ZeroOne.NO);
 //		insert
 		this.save(loginLog);
-//		return log id
-		return loginLog.getLogId();
+//		return login log id
+		return loginLog.getLoginLogId();
 	}
 	
 	/**

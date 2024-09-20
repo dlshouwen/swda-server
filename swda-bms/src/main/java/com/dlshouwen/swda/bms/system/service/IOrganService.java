@@ -15,7 +15,7 @@ public interface IOrganService extends BaseService<Organ> {
 
 	/**
 	 * get organ list
-	 * @return organ vo list
+	 * @return organ list
 	 */
 	List<OrganVO> getOrganList();
 	

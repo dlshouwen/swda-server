@@ -30,13 +30,13 @@ import java.util.List;
 public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implements IDictService {
 
 	/**
-	 * get dict list
+	 * get dict page result
 	 * @param dictType
 	 * @param query
-	 * @return dict list
+	 * @return dict page result
 	 */
 	@Override
-	public PageResult<DictVO> getDictList(String dictType, Query<Dict> query) {
+	public PageResult<DictVO> getDictPageResult(String dictType, Query<Dict> query) {
 //		get wrapper
 		QueryWrapper<Dict> wrapper = this.wrapper(query);
 //		set dict type

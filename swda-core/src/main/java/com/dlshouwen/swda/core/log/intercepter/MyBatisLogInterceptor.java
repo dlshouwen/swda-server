@@ -174,10 +174,10 @@ public class MyBatisLogInterceptor implements Interceptor {
 		} finally {
 //			is write log
 			if (isWriteLog) {
-//				set end time, cost, log id
+//				set end time, cost, data log id
 				dataLog.setEndTime(LocalDateTime.now());
 				dataLog.setCost((int) Duration.between(dataLog.getStartTime(), dataLog.getEndTime()).toMillis());
-				dataLog.setLogId(IdWorker.getId());
+				dataLog.setDataLogId(IdWorker.getId());
 //				save log
 				redisCache.leftPush(Constant.DATA_LOG_KEY, dataLog, RedisCache.NOT_EXPIRE);
 			}

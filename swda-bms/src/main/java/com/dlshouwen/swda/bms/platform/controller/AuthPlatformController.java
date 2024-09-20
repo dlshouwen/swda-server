@@ -34,16 +34,16 @@ public class AuthPlatformController {
 	private final IAuthPlatformService authPlatformService;
 
 	/**
-	 * get auth platform list
+	 * get auth platform page result
 	 * @param query
-	 * @return auth platform list
+	 * @return auth platform page result
 	 */
-	@GetMapping("/list")
-	@Operation(name = "get auth platform list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:auth_platform:list')")
-	public R<PageResult<AuthPlatformVO>> getAuthPlatformList(@ParameterObject @Valid Query<AuthPlatform> query) {
-//		get auth platform list
-		PageResult<AuthPlatformVO> pageResult = authPlatformService.getAuthPlatformList(query);
+	@GetMapping("/page")
+	@Operation(name = "get auth platform page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:platform:auth_platform:page')")
+	public R<PageResult<AuthPlatformVO>> getAuthPlatformPageResult(@ParameterObject @Valid Query<AuthPlatform> query) {
+//		get auth platform page result
+		PageResult<AuthPlatformVO> pageResult = authPlatformService.getAuthPlatformPageResult(query);
 //		return auth platform list
 		return R.ok(pageResult);
 	}
@@ -55,7 +55,7 @@ public class AuthPlatformController {
 	 */
 	@GetMapping("/data/{authPlatformId}")
 	@Operation(name = "get auth platform data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:auth_platform:data')")
+	@PreAuthorize("hasAuthority('bms:platform:auth_platform:data')")
 	public R<AuthPlatformVO> getAuthPlatformData(@PathVariable("authPlatformId") Long authPlatformId) {
 //		get auth platform data
 		AuthPlatformVO authPlatform = authPlatformService.getAuthPlatformData(authPlatformId);
@@ -70,7 +70,7 @@ public class AuthPlatformController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add auth platform", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:auth_platform:add')")
+	@PreAuthorize("hasAuthority('bms:platform:auth_platform:add')")
 	public R<String> addAuthPlatform(@RequestBody AuthPlatformVO authPlatformVO) {
 //		add auth platform
 		authPlatformService.addAuthPlatform(authPlatformVO);
@@ -85,7 +85,7 @@ public class AuthPlatformController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update auth platform", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:auth_platform:update')")
+	@PreAuthorize("hasAuthority('bms:platform:auth_platform:update')")
 	public R<String> updateAuthPlatform(@RequestBody @Valid AuthPlatformVO authPlatformVO) {
 //		update auth platform
 		authPlatformService.updateAuthPlatform(authPlatformVO);
@@ -100,7 +100,7 @@ public class AuthPlatformController {
 	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete auth platform", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:auth_platform:delete')")
+	@PreAuthorize("hasAuthority('bms:platform:auth_platform:delete')")
 	public R<String> deleteAuthPlatform(@RequestBody List<Long> authPlatformIdList) {
 //		delete auth platform
 		authPlatformService.deleteAuthPlatform(authPlatformIdList);

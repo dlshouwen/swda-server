@@ -11,7 +11,7 @@ import com.dlshouwen.swda.bms.auth.service.IUserTokenService;
 import com.dlshouwen.swda.bms.auth.vo.AccessTokenVO;
 import com.dlshouwen.swda.bms.auth.vo.AuthCallbackVO;
 import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
-import com.dlshouwen.swda.bms.auth.vo.SendCodeVO;
+import com.dlshouwen.swda.bms.auth.vo.MobileSendCodeVO;
 import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.log.service.ILoginLogService;
@@ -115,37 +115,37 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	/**
-	 * send code
-	 * @param sendCode
+	 * mobile send code
+	 * @param mobileSendCode
 	 * @return is success
 	 */
 	@Override
-	public boolean sendCode(SendCodeVO sendCode) {
+	public boolean mobileSendCode(MobileSendCodeVO mobileSendCode) {
 //		if captcha enabled
 		if (String.valueOf(ZeroOne.YES).equals(Data.attr.get("sms_send_code_captcha_enable"))) {
 //			validate captcha
-			boolean valid = captchaService.validate(sendCode.getKey(), sendCode.getCaptcha());
+			boolean valid = captchaService.validate(mobileSendCode.getKey(), mobileSendCode.getCaptcha());
 //			if error
 			if (!valid) {
 //				save login log
-				loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.CAPTCHA_ERROR, sendCode.getMobile(), "验证码错误");
+				loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.CAPTCHA_ERROR, mobileSendCode.getMobile(), "验证码错误");
 //				throw exception
 				throw new SwdaException("验证码错误");
 			}
 		}
 //		get user
-		UserVO user = userService.getUserByMobile(sendCode.getMobile());
+		UserVO user = userService.getUserByMobile(mobileSendCode.getMobile());
 //		if user is empty
 		if (user == null) {
 //			save login log
-			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.USER_NOR_FOUND, sendCode.getMobile(), "手机号未注册");
+			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.USER_NOR_FOUND, mobileSendCode.getMobile(), "手机号未注册");
 //			throw exception
 			throw new SwdaException("手机号未注册");
 		}
 //		generate code
 		String code = RandomUtil.randomNumbers(6);
 //		send code
-		return smsApi.sendCode(sendCode.getMobile(), "code", code);
+		return smsApi.sendCode(mobileSendCode.getMobile(), "code", code);
 	}
 
 	/**

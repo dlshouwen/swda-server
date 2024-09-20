@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @TableName("bms_operation_log")
 public class OperationLog extends BaseEntity {
 
-	@TableId(value = "log_id", type = IdType.AUTO)
-	private Long logId;
+	@TableId(value = "operation_log_id", type = IdType.AUTO)
+	private Long operationLogId;
 	
 	private String userAgent;
 

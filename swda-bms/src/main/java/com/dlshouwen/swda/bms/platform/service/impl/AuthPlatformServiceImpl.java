@@ -33,12 +33,12 @@ import java.util.List;
 public class AuthPlatformServiceImpl extends BaseServiceImpl<AuthPlatformMapper, AuthPlatform> implements IAuthPlatformService {
 
 	/**
-	 * get auth platform list
+	 * get auth platform page result
 	 * @param query
-	 * @return page result
+	 * @return auth platform page result
 	 */
 	@Override
-	public PageResult<AuthPlatformVO> getAuthPlatformList(Query<AuthPlatform> query) {
+	public PageResult<AuthPlatformVO> getAuthPlatformPageResult(Query<AuthPlatform> query) {
 //		query page
 		IPage<AuthPlatform> page = this.page(query);
 //		convert to vo list for page return

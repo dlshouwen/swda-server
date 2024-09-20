@@ -27,12 +27,12 @@ import java.util.List;
 public class AttachmentServiceImpl extends BaseServiceImpl<AttachmentMapper, Attachment> implements IAttachmentService {
 
 	/**
-	 * get attachment list
+	 * get attachment page result
 	 * @param query
-	 * @return page result
+	 * @return attachment page result
 	 */
 	@Override
-	public PageResult<AttachmentVO> getAttachmentList(Query<Attachment> query) {
+	public PageResult<AttachmentVO> getAttachmentPageResult(Query<Attachment> query) {
 //		query page
 		IPage<Attachment> page = this.page(query);
 //		convert to vo list for page return

@@ -3,7 +3,7 @@ package com.dlshouwen.swda.bms.auth.service;
 import com.dlshouwen.swda.bms.auth.vo.AccessTokenVO;
 import com.dlshouwen.swda.bms.auth.vo.AuthCallbackVO;
 import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
-import com.dlshouwen.swda.bms.auth.vo.SendCodeVO;
+import com.dlshouwen.swda.bms.auth.vo.MobileSendCodeVO;
 import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 
@@ -22,11 +22,11 @@ public interface ILoginService {
 	UserTokenVO loginByAccount(UserLoginVO login);
 
 	/**
-	 * send code
-	 * @param sendCode
+	 * mobile send code
+	 * @param mobileSendCode
 	 * @return is success
 	 */
-	boolean sendCode(SendCodeVO sendCode);
+	boolean mobileSendCode(MobileSendCodeVO mobileSendCode);
 
 	/**
 	 * login by mobile

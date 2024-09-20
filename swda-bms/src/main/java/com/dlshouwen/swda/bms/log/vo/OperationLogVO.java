@@ -20,8 +20,8 @@ public class OperationLogVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "log id")
-	private Long logId;
+	@Schema(description = "operation log id")
+	private Long operationLogId;
 
 	@Schema(description = "user agent")
 	private String userAgent;

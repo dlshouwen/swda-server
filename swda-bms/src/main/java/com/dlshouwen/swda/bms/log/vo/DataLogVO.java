@@ -18,8 +18,8 @@ public class DataLogVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "log id")
-	private Long logId;
+	@Schema(description = "operation log id")
+	private Long operationLogId;
 
 	@Schema(description = "execute type")
 	private Integer executeType;

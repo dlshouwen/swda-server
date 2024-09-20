@@ -25,7 +25,7 @@ import java.util.Set;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/permission")
+@RequestMapping("/bms/system/permission")
 @Tag(name = "permission")
 @AllArgsConstructor
 public class PermissionController {
@@ -70,7 +70,7 @@ public class PermissionController {
 	 */
 	@GetMapping("/list")
 	@Operation(name = "get permission list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:permission:list')")
+	@PreAuthorize("hasAuthority('bms:system:permission:list')")
 	public R<List<PermissionVO>> getPermissionList(Integer permissionType) {
 //		get permission list
 		List<PermissionVO> permissionList = permissionService.getPermissionList(permissionType);
@@ -85,7 +85,7 @@ public class PermissionController {
 	 */
 	@GetMapping("/data/{permissionId}")
 	@Operation(name = "get permission data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:permission:data')")
+	@PreAuthorize("hasAuthority('bms:system:permission:data')")
 	public R<PermissionVO> getPermissionData(@PathVariable("permissionId") Long permissionId) {
 //		get permission data
 		PermissionVO permission = permissionService.getPermissionData(permissionId);
@@ -100,7 +100,7 @@ public class PermissionController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add permission", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:permission:add')")
+	@PreAuthorize("hasAuthority('bms:system:permission:add')")
 	public R<String> addPermission(@RequestBody @Valid PermissionVO permissionVO) {
 //		add permission
 		permissionService.addPermission(permissionVO);
@@ -115,7 +115,7 @@ public class PermissionController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update permission", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:permission:update')")
+	@PreAuthorize("hasAuthority('bms:system:permission:update')")
 	public R<String> updatePermission(@RequestBody @Valid PermissionVO permissionVO) {
 //		update permission
 		permissionService.updatePermission(permissionVO);
@@ -130,7 +130,7 @@ public class PermissionController {
 	 */
 	@DeleteMapping("/permission/{permissionId}")
 	@Operation(name = "delete permission", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:permission:delete')")
+	@PreAuthorize("hasAuthority('bms:system:permission:delete')")
 	public R<String> deletePermission(@PathVariable("permissionId") Long permissionId) {
 //		get sub menu count
 		Long count = permissionService.getSubPermissionCount(permissionId);

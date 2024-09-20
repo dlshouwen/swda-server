@@ -24,7 +24,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/attachment")
+@RequestMapping("/bms/system/attachment")
 @Tag(name = "attachment")
 @AllArgsConstructor
 public class AttachmentController {
@@ -33,17 +33,17 @@ public class AttachmentController {
 	private final IAttachmentService attachmentService;
 
 	/**
-	 * get attachment list
+	 * get attachment page result
 	 * @param query
-	 * @return attachment list
+	 * @return attachment page result
 	 */
-	@GetMapping("/list")
-	@Operation(name = "get attachment list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:attachment:list')")
-	public R<PageResult<AttachmentVO>> getAttachmentList(Query<Attachment> query) {
-//		get attachment list
-		PageResult<AttachmentVO> pageResult = attachmentService.getAttachmentList(query);
-//		return page result
+	@GetMapping("/page")
+	@Operation(name = "get attachment page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:attachment:page')")
+	public R<PageResult<AttachmentVO>> getAttachmentPageResult(Query<Attachment> query) {
+//		get attachment page result
+		PageResult<AttachmentVO> pageResult = attachmentService.getAttachmentPageResult(query);
+//		return attachment page result
 		return R.ok(pageResult);
 	}
 	
@@ -54,7 +54,7 @@ public class AttachmentController {
 	 */
 	@GetMapping("/data")
 	@Operation(name = "get attachment data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:attachment:data')")
+	@PreAuthorize("hasAuthority('bms:system:attachment:data')")
 	public R<AttachmentVO> getAttachmentData(Long attachmentId) {
 //		get attachment data
 		AttachmentVO attachment = attachmentService.getAttachmentData(attachmentId);
@@ -69,7 +69,7 @@ public class AttachmentController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add attachment", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:attachment:add')")
+	@PreAuthorize("hasAuthority('bms:system:attachment:add')")
 	public R<String> addAttachment(@RequestBody @Valid AttachmentVO attachmentVO) {
 //		save
 		attachmentService.addAttachment(attachmentVO);
@@ -84,7 +84,7 @@ public class AttachmentController {
 	 */
 	@PostMapping("/update")
 	@Operation(name = "update attachment", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:attachment:update')")
+	@PreAuthorize("hasAuthority('bms:system:attachment:update')")
 	public R<String> updateAttachment(@RequestBody @Valid AttachmentVO attachmentVO) {
 //		save
 		attachmentService.updateAttachment(attachmentVO);
@@ -99,7 +99,7 @@ public class AttachmentController {
 	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete attachment", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:attachment:delete')")
+	@PreAuthorize("hasAuthority('bms:system:attachment:delete')")
 	public R<String> delete(@RequestBody List<Long> attachmentIdList) {
 //		delete
 		attachmentService.deleteAttachment(attachmentIdList);

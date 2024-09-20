@@ -16,12 +16,12 @@ import java.util.List;
 public interface IDictService extends BaseService<Dict> {
 
 	/**
-	 * get dict list
+	 * get dict page result
 	 * @param dictType
 	 * @param query
-	 * @return dict list
+	 * @return dict page result
 	 */
-	PageResult<DictVO> getDictList(String dictType, Query<Dict> query);
+	PageResult<DictVO> getDictPageResult(String dictType, Query<Dict> query);
 	
 	/**
 	 * get dict data

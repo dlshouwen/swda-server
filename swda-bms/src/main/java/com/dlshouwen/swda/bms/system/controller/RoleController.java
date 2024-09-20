@@ -36,7 +36,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/bms/system/role")
 @Tag(name = "role")
 @AllArgsConstructor
 public class RoleController {
@@ -55,18 +55,18 @@ public class RoleController {
 	private final IUserRoleService userRoleService;
 
 	/**
-	 * get role list
+	 * get role page result
 	 * @param query
-	 * @return role list
+	 * @return role page result
 	 */
-	@GetMapping("/datas")
-	@Operation(name = "get role list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:role:list')")
-	public R<PageResult<RoleVO>> getRoleList(@ParameterObject @Valid Query<Role> query) {
-//		get role list
-		PageResult<RoleVO> roleList = roleService.getRoleList(query);
+	@GetMapping("/page")
+	@Operation(name = "get role page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:role:page')")
+	public R<PageResult<RoleVO>> getRolePageResult(@ParameterObject @Valid Query<Role> query) {
+//		get role page result
+		PageResult<RoleVO> pageResult = roleService.getRolePageResult(query);
 //		return
-		return R.ok(roleList);
+		return R.ok(pageResult);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class RoleController {
 	 */
 	@GetMapping("/list")
 	@Operation(name = "get role list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:role:list')")
+	@PreAuthorize("hasAuthority('bms:system:role:list')")
 	public R<List<RoleVO>> getRoleList() {
 //		get role list
 		List<RoleVO> roleList = roleService.getRoleList();
@@ -90,7 +90,7 @@ public class RoleController {
 	 */
 	@GetMapping("/data/{roleId}")
 	@Operation(name = "get role data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:role:data')")
+	@PreAuthorize("hasAuthority('bms:system:role:data')")
 	public R<RoleVO> getRoleData(@PathVariable("roleId") Long roleId) {
 //		get role data
 		RoleVO role = roleService.getRoleData(roleId);
@@ -111,7 +111,7 @@ public class RoleController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add role", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:role:add')")
+	@PreAuthorize("hasAuthority('bms:system:role:add')")
 	public R<String> addRole(@RequestBody @Valid RoleVO roleVO) {
 //		add role
 		roleService.addRole(roleVO);
@@ -126,7 +126,7 @@ public class RoleController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update role", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:role:update')")
+	@PreAuthorize("hasAuthority('bms:system:role:update')")
 	public R<String> updateRole(@RequestBody @Valid RoleVO roleVO) {
 //		update role
 		roleService.updateRole(roleVO);
@@ -141,7 +141,7 @@ public class RoleController {
 	 */
 	@PutMapping("/data_scope/set")
 	@Operation(name = "set role data scope", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:role:data_scope/set')")
+	@PreAuthorize("hasAuthority('bms:system:role:data_scope/set')")
 	public R<String> setRoleDataScope(@RequestBody @Valid RoleDataScopeVO roleDataScopeVO) {
 //		set role data scope
 		roleService.setRoleDataScope(roleDataScopeVO);
@@ -156,7 +156,7 @@ public class RoleController {
 	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete role", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:role:delete')")
+	@PreAuthorize("hasAuthority('bms:system:role:delete')")
 	public R<String> deleteRole(@RequestBody List<Long> roleIdList) {
 //		delete role
 		roleService.deleteRole(roleIdList);
@@ -170,7 +170,7 @@ public class RoleController {
 	 */
 	@GetMapping("/user/permission/list")
 	@Operation(name = "get user permission list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:role:user:permission:list')")
+	@PreAuthorize("hasAuthority('bms:system:role:user:permission:list')")
 	public R<List<PermissionVO>> menu() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
@@ -187,7 +187,7 @@ public class RoleController {
 	 */
 	@GetMapping("/user/list")
 	@Operation(name = "get user list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:role:update')")
+	@PreAuthorize("hasAuthority('bms:system:role:update')")
 	public R<PageResult<UserVO>> getUserList(@Valid Query<User> query) {
 //		get user list
 		PageResult<UserVO> pageResult = userService.getRoleUserList(query);

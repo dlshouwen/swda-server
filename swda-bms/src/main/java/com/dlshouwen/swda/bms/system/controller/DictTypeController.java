@@ -26,7 +26,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/dict_type")
+@RequestMapping("/bms/system/dict_type")
 @Tag(name = "dict type")
 @AllArgsConstructor
 public class DictTypeController {
@@ -35,17 +35,17 @@ public class DictTypeController {
 	private final IDictTypeService dictTypeService;
 
 	/**
-	 * get dict type list
+	 * get dict type page result
 	 * @param query
-	 * @return dict type list
+	 * @return dict type page result
 	 */
-	@GetMapping("/list")
-	@Operation(name = "get dict type list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:dict_type:list')")
-	public R<PageResult<DictTypeVO>> getDictTypeList(@ParameterObject @Valid Query<DictType> query) {
-//		get dict type list
-		PageResult<DictTypeVO> pageResult = dictTypeService.getDictTypeList(query);
-//		return
+	@GetMapping("/page")
+	@Operation(name = "get dict type page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:dict_type:page')")
+	public R<PageResult<DictTypeVO>> getDictTypePageResult(@ParameterObject @Valid Query<DictType> query) {
+//		get dict type page result
+		PageResult<DictTypeVO> pageResult = dictTypeService.getDictTypePageResult(query);
+//		return dict type page result
 		return R.ok(pageResult);
 	}
 
@@ -56,7 +56,7 @@ public class DictTypeController {
 	 */
 	@GetMapping("/data/{dictTypeId}")
 	@Operation(name = "get dict type data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:dict_type:data')")
+	@PreAuthorize("hasAuthority('bms:system:dict_type:data')")
 	public R<DictTypeVO> getDictTypeData(@PathVariable("dictTypeId") Long dictTypeId) {
 //		get dict type data
 		DictTypeVO dictType = dictTypeService.getDictTypeData(dictTypeId);
@@ -71,7 +71,7 @@ public class DictTypeController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add dict type", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:dict_type:add')")
+	@PreAuthorize("hasAuthority('bms:system:dict_type:add')")
 	public R<String> addDictType(@RequestBody @Valid DictTypeVO dictTypeVO) {
 //		add dict type
 		dictTypeService.addDictType(dictTypeVO);
@@ -86,7 +86,7 @@ public class DictTypeController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update dict type", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:dict_type:update')")
+	@PreAuthorize("hasAuthority('bms:system:dict_type:update')")
 	public R<String> updateDictType(@RequestBody @Valid DictTypeVO dictTypeVO) {
 //		update dict type
 		dictTypeService.updateDictType(dictTypeVO);
@@ -101,7 +101,7 @@ public class DictTypeController {
 	 */
 	@DeleteMapping
 	@Operation(name = "delete dict type", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:dict_type:delete')")
+	@PreAuthorize("hasAuthority('bms:system:dict_type:delete')")
 	public R<String> deleteDictType(@RequestBody List<Long> dictTypeIdList) {
 //		delete dict type
 		dictTypeService.deleteDictType(dictTypeIdList);
@@ -116,7 +116,7 @@ public class DictTypeController {
 	 */
 	@GetMapping("/sql/dict/list")
 	@Operation(name = "get sql dict list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:dict_type:sql:dict:list')")
+	@PreAuthorize("hasAuthority('bms:system:dict_type:sql:dict:list')")
 	public R<List<DictVO>> getSqlDictList(Long dictTypeId) {
 //		get dict list
 		List<DictVO> dictList = dictTypeService.getSqlDictList(dictTypeId);

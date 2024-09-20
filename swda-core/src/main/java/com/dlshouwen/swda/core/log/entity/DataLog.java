@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @TableName("bms_data_log")
 public class DataLog extends BaseEntity {
 
-	@TableId(value = "log_id", type = IdType.AUTO)
-	private Long logId;
+	@TableId(value = "data_log_id", type = IdType.AUTO)
+	private Long dataLogId;
 
 	private Integer executeType;
 	

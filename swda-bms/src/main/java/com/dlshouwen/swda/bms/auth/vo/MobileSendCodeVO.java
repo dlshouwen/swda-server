@@ -6,13 +6,13 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * send code vo
+ * mobile send code vo
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
 @Data
-@Schema(description = "send code")
-public class SendCodeVO implements Serializable {
+@Schema(description = "mobile send code")
+public class MobileSendCodeVO implements Serializable {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

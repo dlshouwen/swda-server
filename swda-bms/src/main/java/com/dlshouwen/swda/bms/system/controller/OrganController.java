@@ -21,7 +21,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/organ")
+@RequestMapping("/bms/system/organ")
 @Tag(name = "organ")
 @AllArgsConstructor
 public class OrganController {
@@ -31,11 +31,11 @@ public class OrganController {
 
 	/**
 	 * get organ list
-	 * @return result
+	 * @return organ list
 	 */
 	@GetMapping("/list")
 	@Operation(name = "get organ list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:organ:list')")
+	@PreAuthorize("hasAuthority('bms:system:organ:list')")
 	public R<List<OrganVO>> getOrganList() {
 //		get organ list
 		List<OrganVO> organList = organService.getOrganList();
@@ -50,7 +50,7 @@ public class OrganController {
 	 */
 	@GetMapping("/data/{organId}")
 	@Operation(name = "get organ data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:organ:data')")
+	@PreAuthorize("hasAuthority('bms:system:organ:data')")
 	public R<OrganVO> getOrganData(@PathVariable("organId") Long organId) {
 //		get organ data
 		OrganVO organ = organService.getOrganData(organId);
@@ -65,7 +65,7 @@ public class OrganController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add organ", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:organ:add')")
+	@PreAuthorize("hasAuthority('bms:system:organ:add')")
 	public R<String> addOrgan(@RequestBody @Valid OrganVO organVO) {
 //		add organ
 		organService.addOrgan(organVO);
@@ -80,7 +80,7 @@ public class OrganController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update organ", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:organ:update')")
+	@PreAuthorize("hasAuthority('bms:system:organ:update')")
 	public R<String> updateOrgan(@RequestBody @Valid OrganVO organVO) {
 //		update organ
 		organService.updateOrgan(organVO);
@@ -95,7 +95,7 @@ public class OrganController {
 	 */
 	@DeleteMapping("/delete/{organId}")
 	@Operation(name = "delete organ", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:organ:delete')")
+	@PreAuthorize("hasAuthority('bms:system:organ:delete')")
 	public R<String> deleteOrgan(@PathVariable("organId") Long organId) {
 //		delete organ
 		organService.deleteOrgan(organId);

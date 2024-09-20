@@ -25,7 +25,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/dict")
+@RequestMapping("/bms/system/dict")
 @Tag(name = "dict")
 @AllArgsConstructor
 public class DictController {
@@ -34,18 +34,18 @@ public class DictController {
 	private final IDictService dictService;
 
 	/**
-	 * get dict list
+	 * get dict page result
 	 * @param dictType
 	 * @param query
-	 * @return result
+	 * @return dict page result
 	 */
-	@GetMapping("/list/{dictType}")
-	@Operation(name = "get dict list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:dict:list')")
-	public R<PageResult<DictVO>> getDictList(@PathVariable(name = "dictType") String dictType, @ParameterObject @Valid Query<Dict> query) {
-//		get dict list
-		PageResult<DictVO> pageResult = dictService.getDictList(dictType, query);
-//		return page result
+	@GetMapping("/page/{dictType}")
+	@Operation(name = "get dict page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:dict:page')")
+	public R<PageResult<DictVO>> getDictPageResult(@PathVariable(name = "dictType") String dictType, @ParameterObject @Valid Query<Dict> query) {
+//		get dict page result
+		PageResult<DictVO> pageResult = dictService.getDictPageResult(dictType, query);
+//		return dict page result
 		return R.ok(pageResult);
 	}
 
@@ -56,7 +56,7 @@ public class DictController {
 	 */
 	@GetMapping("/data/{dictId}")
 	@Operation(name = "get dict data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:dict:data')")
+	@PreAuthorize("hasAuthority('bms:system:dict:data')")
 	public R<DictVO> getDictData(@PathVariable("dictId") Long dictId) {
 //		get dict data
 		DictVO dict = dictService.getDictData(dictId);
@@ -71,7 +71,7 @@ public class DictController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add dict", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:dict:add')")
+	@PreAuthorize("hasAuthority('bms:system:dict:add')")
 	public R<String> addDict(@RequestBody @Valid DictVO dictVO) {
 //		add dict
 		dictService.addDict(dictVO);
@@ -86,7 +86,7 @@ public class DictController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update dict", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:dict:update')")
+	@PreAuthorize("hasAuthority('bms:system:dict:update')")
 	public R<String> updateDict(@RequestBody @Valid DictVO dictVO) {
 //		update dict
 		dictService.updateDict(dictVO);
@@ -101,7 +101,7 @@ public class DictController {
 	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete dict", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:dict:delete')")
+	@PreAuthorize("hasAuthority('bms:system:dict:delete')")
 	public R<String> deleteDict(@RequestBody List<Long> dictIdList) {
 //		delete dict
 		dictService.deleteDict(dictIdList);

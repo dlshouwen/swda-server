@@ -25,7 +25,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/bms/system/post")
 @Tag(name = "post")
 @AllArgsConstructor
 public class PostController {
@@ -34,16 +34,16 @@ public class PostController {
 	private final IPostService postService;
 
 	/**
-	 * get post list
+	 * get post page result
 	 * @param query
-	 * @return post list
+	 * @return post page result
 	 */
-	@GetMapping("/datas")
-	@Operation(name = "get post list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:post:list')")
-	public R<PageResult<PostVO>> getPostList(@ParameterObject @Valid Query<Post> query) {
-//		get post list
-		PageResult<PostVO> pageResult = postService.getPostList(query);
+	@GetMapping("/page")
+	@Operation(name = "get post page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:post:page')")
+	public R<PageResult<PostVO>> getPostPageResult(@ParameterObject @Valid Query<Post> query) {
+//		get post page result
+		PageResult<PostVO> pageResult = postService.getPostPageResult(query);
 //		return page result
 		return R.ok(pageResult);
 	}
@@ -54,6 +54,7 @@ public class PostController {
 	 */
 	@GetMapping("/list")
 	@Operation(name = "get post list", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:post:list')")
 	public R<List<PostVO>> getPostList() {
 //		get post list
 		List<PostVO> postList = postService.getPostList();
@@ -68,7 +69,7 @@ public class PostController {
 	 */
 	@GetMapping("/data/{postId}")
 	@Operation(name = "get post data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:post:data')")
+	@PreAuthorize("hasAuthority('bms:system:post:data')")
 	public R<PostVO> getPostData(@PathVariable("postId") Long postId) {
 //		get post data
 		PostVO post = postService.getPostData(postId);
@@ -83,7 +84,7 @@ public class PostController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add post", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:post:add')")
+	@PreAuthorize("hasAuthority('bms:system:post:add')")
 	public R<String> addPost(@RequestBody PostVO postVO) {
 //		add post
 		postService.addPost(postVO);
@@ -98,7 +99,7 @@ public class PostController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update post", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:post:update')")
+	@PreAuthorize("hasAuthority('bms:system:post:update')")
 	public R<String> updatePost(@RequestBody @Valid PostVO postVO) {
 //		update post
 		postService.updatePost(postVO);
@@ -113,7 +114,7 @@ public class PostController {
 	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete post", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:post:delete')")
+	@PreAuthorize("hasAuthority('bms:system:post:delete')")
 	public R<String> delete(@RequestBody List<Long> postIdList) {
 //		delete post
 		postService.deletePost(postIdList);

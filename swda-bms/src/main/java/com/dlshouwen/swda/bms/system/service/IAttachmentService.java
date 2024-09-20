@@ -16,11 +16,11 @@ import java.util.List;
 public interface IAttachmentService extends BaseService<Attachment> {
 
 	/**
-	 * get attachment list
+	 * get attachment page result
 	 * @param query
-	 * @return page result
+	 * @return attachment page result
 	 */
-	PageResult<AttachmentVO> getAttachmentList(Query<Attachment> query);
+	PageResult<AttachmentVO> getAttachmentPageResult(Query<Attachment> query);
 	
 	/**
 	 * get attachment data

@@ -46,12 +46,12 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 	private final IUserTokenService userTokenService;
 
 	/**
-	 * get role list
+	 * get role page result
 	 * @param query
-	 * @return role list
+	 * @return role page result
 	 */
 	@Override
-	public PageResult<RoleVO> getRoleList(Query<Role> query) {
+	public PageResult<RoleVO> getRolePageResult(Query<Role> query) {
 //		query page
 		IPage<Role> page = this.page(query);
 //		convert to vo for return

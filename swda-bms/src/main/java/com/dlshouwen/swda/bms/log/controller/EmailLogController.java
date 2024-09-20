@@ -38,9 +38,9 @@ public class EmailLogController {
 	 * @param query
 	 * @return mail log page result
 	 */
-	@GetMapping("page")
+	@GetMapping("/page")
 	@Operation(name = "get email log page result", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:log:email_log')")
+	@PreAuthorize("hasAuthority('bms:log:email_log:page')")
 	public R<PageResult<EmailLogVO>> getEmailLogPageResult(@ParameterObject @Valid Query<EmailLog> query) {
 //		get email log page result
 		PageResult<EmailLogVO> pageResult = emailLogService.getEmailLogPageResult(query);
@@ -51,11 +51,11 @@ public class EmailLogController {
 	/**
 	 * get email log data
 	 * @param emailLogId
-	 * @return mail log data
+	 * @return email log data
 	 */
 	@GetMapping("/data/{id}")
 	@Operation(name = "get email log data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:log:email_log')")
+	@PreAuthorize("hasAuthority('bms:log:email_log:data')")
 	public R<EmailLogVO> getEmailLogData(@PathVariable("emailLogId") Long emailLogId) {
 //		get email log
 		EmailLog emailLog = emailLogService.getById(emailLogId);
@@ -68,7 +68,7 @@ public class EmailLogController {
 	 * @param emailLogIdList
 	 * @return result
 	 */
-	@DeleteMapping
+	@DeleteMapping("/delete")
 	@Operation(name = "delete email log", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:log:email_log:delete')")
 	public R<String> deleteEmailLog(@RequestBody List<Long> emailLogIdList) {

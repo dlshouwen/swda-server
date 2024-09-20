@@ -20,11 +20,11 @@ import java.util.List;
 public interface IUserService extends BaseService<User> {
 
 	/**
-	 * get user list
+	 * get user page result
 	 * @param query
-	 * @return page result
+	 * @return user page result
 	 */
-	PageResult<UserVO> getUserList(Query<User> query);
+	PageResult<UserVO> getUserPageResult(Query<User> query);
 	
 	/**
 	 * get user data

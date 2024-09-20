@@ -19,7 +19,9 @@ import com.dlshouwen.swda.bms.log.service.IOperationLogService;
 import com.dlshouwen.swda.bms.log.vo.OperationLogVO;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -36,16 +38,26 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper,
 	private final RedisCache redisCache;
 
 	/**
-	 * get operation log list
+	 * get operation log page result
 	 * @param query
-	 * @return operation log list
+	 * @return operation log page result
 	 */
 	@Override
-	public PageResult<OperationLogVO> getOperationLogList(Query<OperationLog> query) {
+	public PageResult<OperationLogVO> getOperationLogPageResult(Query<OperationLog> query) {
 //		query page
 		IPage<OperationLog> page = this.page(query);
 //		convert to vo for return
 		return new PageResult<>(OperationLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
+	}
+
+	/**
+	 * delete operation log
+	 * @param operationLogIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteOperationLog(List<Long> operationLogIdList) {
+		this.removeByIds(operationLogIdList);
 	}
 
 	/**

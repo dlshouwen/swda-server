@@ -44,12 +44,12 @@ public class DictTypeServiceImpl extends BaseServiceImpl<DictTypeMapper, DictTyp
 	private final DictionaryTransService dictionaryTransService;
 
 	/**
-	 * get dict type list
+	 * get dict type page result
 	 * @param query
-	 * @return page result
+	 * @return dict type page result
 	 */
 	@Override
-	public PageResult<DictTypeVO> getDictTypeList(Query<DictType> query) {
+	public PageResult<DictTypeVO> getDictTypePageResult(Query<DictType> query) {
 //		query page
 		IPage<DictType> page = this.page(query);
 //		return page result

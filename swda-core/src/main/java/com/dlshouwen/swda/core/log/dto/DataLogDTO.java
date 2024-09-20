@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 public class DataLogDTO {
 
-	private Long logId;
+	private Long dataLogId;
 
 	private Integer executeType;
 

@@ -16,11 +16,11 @@ import java.util.List;
 public interface IPostService extends BaseService<Post> {
 
 	/**
-	 * get post list
+	 * get post page result
 	 * @param query
-	 * @return page result
+	 * @return post page result
 	 */
-	PageResult<PostVO> getPostList(Query<Post> query);
+	PageResult<PostVO> getPostPageResult(Query<Post> query);
 
 	/**
 	 * get post list

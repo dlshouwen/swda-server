@@ -31,12 +31,12 @@ public class PostServiceImpl extends BaseServiceImpl<PostMapper, Post> implement
 	private final IUserPostService userPostService;
 
 	/**
-	 * get post list
+	 * get post page result
 	 * @param query
-	 * @return post list
+	 * @return post page result
 	 */
 	@Override
-	public PageResult<PostVO> getPostList(Query<Post> query) {
+	public PageResult<PostVO> getPostPageResult(Query<Post> query) {
 //		query page
 		IPage<Post> page = this.page(query);
 //		convert to vo for return

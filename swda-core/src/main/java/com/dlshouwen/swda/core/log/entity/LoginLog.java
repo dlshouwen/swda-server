@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @TableName("bms_login_log")
 public class LoginLog extends BaseEntity {
 
-	@TableId(value = "log_id", type = IdType.AUTO)
-	private Long logId;
+	@TableId(value = "login_log_id", type = IdType.AUTO)
+	private Long loginLogId;
 	
 	private String userAgent;
 	

@@ -41,7 +41,7 @@ public class SmsLogController {
 	 */
 	@GetMapping("/page")
 	@Operation(name = "get sms log page result", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:log:sms_log')")
+	@PreAuthorize("hasAuthority('bms:log:sms_log:page')")
 	public R<PageResult<SmsLogVO>> getSmsLogPageResult(@ParameterObject @Valid Query<SmsLog> query) {
 //		get sms log page result
 		PageResult<SmsLogVO> pageResult = smsLogService.getSmsLogPageResult(query);
@@ -56,7 +56,7 @@ public class SmsLogController {
 	 */
 	@GetMapping("/data/{smsLogId}")
 	@Operation(name = "get sms log data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:log:sms_log')")
+	@PreAuthorize("hasAuthority('bms:log:sms_log:data')")
 	public R<SmsLogVO> getSmsLogData(@PathVariable("smsLogId") Long smsLogId) {
 //		get sms log
 		SmsLog smsLog = smsLogService.getById(smsLogId);

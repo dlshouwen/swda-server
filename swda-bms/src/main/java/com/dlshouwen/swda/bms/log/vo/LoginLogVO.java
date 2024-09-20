@@ -21,8 +21,8 @@ public class LoginLogVO implements Serializable, TransPojo {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "log id")
-	private Long logId;
+	@Schema(description = "login log id")
+	private Long loginLogId;
 
 	@Schema(description = "user agent")
 	private String userAgent;

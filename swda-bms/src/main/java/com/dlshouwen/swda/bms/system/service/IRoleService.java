@@ -17,11 +17,11 @@ import java.util.List;
 public interface IRoleService extends BaseService<Role> {
 
 	/**
-	 * get role list
+	 * get role page result
 	 * @param query
-	 * @return page result
+	 * @return role page result
 	 */
-	PageResult<RoleVO> getRoleList(Query<Role> query);
+	PageResult<RoleVO> getRolePageResult(Query<Role> query);
 
 	/**
 	 * get role list

@@ -10,7 +10,7 @@ import com.dlshouwen.swda.bms.auth.vo.AccessTokenVO;
 import com.dlshouwen.swda.bms.auth.vo.AuthCallbackVO;
 import com.dlshouwen.swda.bms.auth.vo.CaptchaVO;
 import com.dlshouwen.swda.bms.auth.vo.MobileLoginVO;
-import com.dlshouwen.swda.bms.auth.vo.SendCodeVO;
+import com.dlshouwen.swda.bms.auth.vo.MobileSendCodeVO;
 import com.dlshouwen.swda.bms.auth.vo.UserLoginVO;
 import com.dlshouwen.swda.bms.auth.vo.UserTokenVO;
 import com.dlshouwen.swda.core.common.entity.R;
@@ -65,15 +65,15 @@ public class LoginController {
 	}
 
 	/**
-	 * send code
-	 * @param mobile
+	 * mobile send code
+	 * @param mobileSendCode
 	 * @return result
 	 */
-	@PostMapping("/send/code")
-	@Operation(name = "send code", type = OperateType.SEARCH)
-	public R<String> sendCode(@RequestBody SendCodeVO sendCode) {
-//		send code
-		boolean result = loginService.sendCode(sendCode);
+	@PostMapping("/mobile/send/code")
+	@Operation(name = "mobile send code", type = OperateType.SEARCH)
+	public R<String> mobileSendCode(@RequestBody MobileSendCodeVO mobileSendCode) {
+//		mobile send code
+		boolean result = loginService.mobileSendCode(mobileSendCode);
 //		if not success
 		if (!result) {
 //			return

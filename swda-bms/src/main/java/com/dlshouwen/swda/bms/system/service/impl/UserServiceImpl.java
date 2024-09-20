@@ -53,12 +53,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	private final TokenCache tokenCache;
 	
 	/**
-	 * get user list
+	 * get user page result
 	 * @param query
-	 * @return user list
+	 * @return user page result
 	 */
 	@Override
-	public PageResult<UserVO> getUserList(Query<User> query) {
+	public PageResult<UserVO> getUserPageResult(Query<User> query) {
 //		query page
 		IPage<User> page = this.page(query);
 //		convert to vo for return

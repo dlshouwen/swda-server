@@ -130,8 +130,8 @@ public class JdbcTemplateLogAspect {
 		} finally {
 //			if need write
 			if (isWriteLog) {
-//				set log id
-				dataLog.setLogId(IdWorker.getId());
+//				set data log id
+				dataLog.setDataLogId(IdWorker.getId());
 //				save log
 				redisCache.leftPush(Constant.DATA_LOG_KEY, dataLog, RedisCache.NOT_EXPIRE);
 			}

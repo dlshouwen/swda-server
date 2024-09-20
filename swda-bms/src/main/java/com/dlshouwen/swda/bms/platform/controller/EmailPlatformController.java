@@ -50,7 +50,7 @@ public class EmailPlatformController {
 	 */
 	@GetMapping("/page")
 	@Operation(name = "get email platform page result", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:platform:email_platform')")
+	@PreAuthorize("hasAuthority('bms:platform:email_platform:page')")
 	public R<PageResult<EmailPlatformVO>> getEmailPlatformPageResult(@ParameterObject @Valid Query<EmailPlatform> query) {
 //		get email platform page result
 		PageResult<EmailPlatformVO> pageResult = emailPlatformService.getEmailPlatformPageResult(query);
@@ -65,6 +65,7 @@ public class EmailPlatformController {
 	 */
 	@GetMapping("/list")
 	@Operation(name = "get email platform list", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:platform:email_platform:list')")
 	public R<List<EmailPlatformVO>> getEmailPlatformList(Integer emailPlatformType) {
 //		get email platform list
 		List<EmailPlatformVO> emailPlatformList = emailPlatformService.getEmailPlatformList(emailPlatformType);
@@ -79,7 +80,7 @@ public class EmailPlatformController {
 	 */
 	@GetMapping("/data/{emailPlatformId}")
 	@Operation(name = "get email platform data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:platform:email_platform')")
+	@PreAuthorize("hasAuthority('bms:platform:email_platform:data')")
 	public R<EmailPlatformVO> getEmailPlatformData(@PathVariable("emailPlatformId") Long emailPlatformId) {
 //		get email platform
 		EmailPlatform emailPlatform = emailPlatformService.getById(emailPlatformId);

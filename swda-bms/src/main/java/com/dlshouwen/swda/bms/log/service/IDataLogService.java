@@ -1,5 +1,7 @@
 package com.dlshouwen.swda.bms.log.service;
 
+import java.util.List;
+
 import com.dlshouwen.swda.bms.log.vo.DataLogVO;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
@@ -14,10 +16,16 @@ import com.dlshouwen.swda.core.mybatis.service.BaseService;
 public interface IDataLogService extends BaseService<DataLog> {
 
 	/**
-	 * get data log list
+	 * get data log page result
 	 * @param query
-	 * @return page result
+	 * @return data log page result
 	 */
-	PageResult<DataLogVO> getDataLogList(Query<DataLog> query);
+	PageResult<DataLogVO> getDataLogPageResult(Query<DataLog> query);
+
+	/**
+	 * delete data log
+	 * @param dataLogIdList
+	 */
+	void deleteDataLog(List<Long> dataLogIdList);
 
 }

@@ -18,11 +18,11 @@ import java.util.List;
 public interface IAuthPlatformService extends BaseService<AuthPlatform> {
 
 	/**
-	 * get auth platform list
+	 * get auth platform page result
 	 * @param query
-	 * @return auth platform list
+	 * @return auth platform page result
 	 */
-	PageResult<AuthPlatformVO> getAuthPlatformList(Query<AuthPlatform> query);
+	PageResult<AuthPlatformVO> getAuthPlatformPageResult(Query<AuthPlatform> query);
 
 	/**
 	 * get auth platform data

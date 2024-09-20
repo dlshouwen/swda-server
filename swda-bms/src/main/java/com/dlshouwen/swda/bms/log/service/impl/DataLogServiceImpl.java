@@ -19,7 +19,9 @@ import com.dlshouwen.swda.bms.log.service.IDataLogService;
 import com.dlshouwen.swda.bms.log.vo.DataLogVO;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -36,16 +38,26 @@ public class DataLogServiceImpl extends BaseServiceImpl<DataLogMapper, DataLog> 
 	private final RedisCache redisCache;
 
 	/**
-	 * get data log list
+	 * get data log page result
 	 * @param query
-	 * @return data log list
+	 * @return data log page result
 	 */
 	@Override
-	public PageResult<DataLogVO> getDataLogList(Query<DataLog> query) {
+	public PageResult<DataLogVO> getDataLogPageResult(Query<DataLog> query) {
 //		query page
 		IPage<DataLog> page = this.page(query);
 //		convert to vo for return
 		return new PageResult<>(DataLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
+	}
+
+	/**
+	 * delete data log
+	 * @param dataLogIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteDataLog(List<Long> dataLogIdList) {
+		this.removeByIds(dataLogIdList);
 	}
 
 	/**

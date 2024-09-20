@@ -20,7 +20,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/attr")
+@RequestMapping("/bms/system/attr")
 @Tag(name = "attr")
 @AllArgsConstructor
 public class AttrController {
@@ -34,7 +34,7 @@ public class AttrController {
 	 */
 	@GetMapping("/list")
 	@Operation(name = "get attr list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:attr:list')")
+	@PreAuthorize("hasAuthority('bms:system:attr:list')")
 	public R<List<AttrVO>> getAttrList() {
 //		get attr list
 		List<AttrVO> attrList = attrService.getAttrList();
@@ -49,7 +49,7 @@ public class AttrController {
 	 */
 	@PostMapping("/save")
 	@Operation(name = "save attr list", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:attr:save')")
+	@PreAuthorize("hasAuthority('bms:system:attr:save')")
 	public R<String> saveAttrList(@RequestBody List<AttrVO> attrList) {
 //		save attr list
 		attrService.saveAttrList(attrList);

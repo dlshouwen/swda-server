@@ -37,7 +37,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/bms/system/user")
 @AllArgsConstructor
 @Tag(name = "user")
 public class UserController {
@@ -58,16 +58,16 @@ public class UserController {
 	private final PasswordEncoder passwordEncoder;
 
 	/**
-	 * get user list
+	 * get user page result
 	 * @param query
-	 * @return user list
+	 * @return user page result
 	 */
-	@GetMapping("/list")
-	@Operation(name = "get user list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:user:list')")
-	public R<PageResult<UserVO>> getUserList(@ParameterObject @Valid Query<User> query) {
-//		get user list
-		PageResult<UserVO> pageResult = userService.getUserList(query);
+	@GetMapping("/page")
+	@Operation(name = "get user page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:user:list')")
+	public R<PageResult<UserVO>> getUserPageResult(@ParameterObject @Valid Query<User> query) {
+//		get user page result
+		PageResult<UserVO> pageResult = userService.getUserPageResult(query);
 //		return
 		return R.ok(pageResult);
 	}
@@ -79,7 +79,7 @@ public class UserController {
 	 */
 	@GetMapping("/data/{userId}")
 	@Operation(name = "get user data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:user:data')")
+	@PreAuthorize("hasAuthority('bms:system:user:data')")
 	public R<UserVO> getUserData(@PathVariable("id") Long userId) {
 //		get user data
 		UserVO user = userService.getUserData(userId);
@@ -168,7 +168,7 @@ public class UserController {
 	 */
 	@PostMapping("/add")
 	@Operation(name = "add user", type = OperateType.INSERT)
-	@PreAuthorize("hasAuthority('bms:user:add')")
+	@PreAuthorize("hasAuthority('bms:system:user:add')")
 	public R<String> addUser(@RequestBody @Valid UserVO userVO) {
 //		password is not null
 		if (StrUtil.isBlank(userVO.getPassword())) {
@@ -190,7 +190,7 @@ public class UserController {
 	 */
 	@PutMapping("/update")
 	@Operation(name = "update user", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:user:update')")
+	@PreAuthorize("hasAuthority('bms:system:user:update')")
 	public R<String> updateUser(@RequestBody @Valid UserVO userVO) {
 //		if user is blank
 		if (StrUtil.isBlank(userVO.getPassword())) {
@@ -213,7 +213,7 @@ public class UserController {
 	 */
 	@DeleteMapping("/delete")
 	@Operation(name = "delete user", type = OperateType.DELETE)
-	@PreAuthorize("hasAuthority('bms:user:delete')")
+	@PreAuthorize("hasAuthority('bms:system:user:delete')")
 	public R<String> deleteUser(@RequestBody List<Long> userIdList) {
 //		get login user id
 		Long userId = SecurityUser.getUserId();
@@ -249,7 +249,7 @@ public class UserController {
 	 */
 	@PostMapping("/import")
 	@Operation(name = "import excel", type = OperateType.IMPORT)
-	@PreAuthorize("hasAuthority('bms:user:import')")
+	@PreAuthorize("hasAuthority('bms:system:user:import')")
 	public R<String> importUser(@RequestParam("file") MultipartFile file) {
 //		if file is empty
 		if (file.isEmpty()) {
