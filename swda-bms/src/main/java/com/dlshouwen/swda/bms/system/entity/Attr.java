@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * params
+ * attr
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
