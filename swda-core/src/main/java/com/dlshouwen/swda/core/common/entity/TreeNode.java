@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.core.common.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,15 +18,12 @@ public class TreeNode<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/** id */
-	@Schema(description = "id")
 	private Long id;
 	
 	/** pid */
-	@Schema(description = "parent id")
 	private Long pid;
 	
 	/** name */
-	@Schema(description = "name")
 	private String name;
 	
 	/** children */

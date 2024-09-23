@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.dlshouwen.swda.core.common.enums.ResultCode;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -14,16 +13,12 @@ import lombok.Data;
  * @version 1.0.0
  */
 @Data
-@Schema(description = "Result")
 public class R<T> {
 
-	@Schema(description = "code")
 	private int code = 200;
 
-	@Schema(description = "message")
 	private String message = "success";
 
-	@Schema(description = "data")
 	private T data;
 
 	/**
