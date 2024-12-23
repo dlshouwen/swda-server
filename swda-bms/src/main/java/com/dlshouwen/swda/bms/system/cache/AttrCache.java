@@ -28,11 +28,11 @@ public class AttrCache {
 	}
 
 	/**
-	 * save
+	 * set
 	 * @param key
 	 * @param value
 	 */
-	public void save(String key, String value) {
+	public void set(String key, String value) {
 		redisCache.hSet(Constant.ATTR_KEY, key, value, RedisCache.NOT_EXPIRE);
 	}
 

@@ -9,8 +9,13 @@ import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
+import com.dlshouwen.swda.bms.system.convert.DictConvert;
+import com.dlshouwen.swda.bms.system.convert.DictTypeConvert;
 import com.dlshouwen.swda.bms.system.entity.Dict;
+import com.dlshouwen.swda.bms.system.entity.DictType;
 import com.dlshouwen.swda.bms.system.service.IDictService;
+import com.dlshouwen.swda.bms.system.service.IDictTypeService;
+import com.dlshouwen.swda.bms.system.vo.DictTypeVO;
 import com.dlshouwen.swda.bms.system.vo.DictVO;
 
 import org.springdoc.core.annotations.ParameterObject;
@@ -32,6 +37,27 @@ public class DictController {
 	
 	/** dict service */
 	private final IDictService dictService;
+	
+	/** dict type service */
+	private final IDictTypeService dictTypeService;
+
+	/**
+	 * get dict data for app
+	 * @return dict data
+	 */
+	@GetMapping("/app")
+	@Operation(name = "get dict data for app", type = OperateType.SEARCH)
+	public R<Object> getDictDataForApp() {
+//		get dict type list
+		List<DictType> dictTypeList = dictTypeService.list();
+//		get dict list
+		List<Dict> dictList = dictService.list();
+//		convert to vo list
+		List<DictTypeVO> dictTypeVoList = DictTypeConvert.INSTANCE.convert2VOList(dictTypeList);
+		List<DictVO> dictVoList = DictConvert.INSTANCE.convert2VOList(dictList);
+//		return dict data
+		return R.ok().data("dictTypeList", dictTypeVoList).data("dictList", dictVoList);
+	}
 
 	/**
 	 * get dict page result

@@ -86,7 +86,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper,
 				}
 			} catch (Exception e) {
 //				log error
-				log.error("OperateLogServiceImpl.saveLog Error：" + ExceptionUtils.toString(e));
+				log.error("save operation log error: " + ExceptionUtils.toString(e));
 			}
 		}, 1, 10, TimeUnit.SECONDS);
 	}

@@ -13,7 +13,7 @@ import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;
-import com.dlshouwen.swda.bms.auth.service.IUserTokenService;
+import com.dlshouwen.swda.bms.app.service.IUserTokenService;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.mapper.UserMapper;

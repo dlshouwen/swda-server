@@ -12,7 +12,7 @@ import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.user.UserDetail;
-import com.dlshouwen.swda.bms.auth.vo.UserPasswordVO;
+import com.dlshouwen.swda.bms.app.vo.UserPasswordVO;
 import com.dlshouwen.swda.bms.system.convert.UserConvert;
 import com.dlshouwen.swda.bms.system.entity.User;
 import com.dlshouwen.swda.bms.system.service.IPostService;

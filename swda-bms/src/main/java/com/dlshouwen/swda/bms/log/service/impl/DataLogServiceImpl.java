@@ -86,7 +86,7 @@ public class DataLogServiceImpl extends BaseServiceImpl<DataLogMapper, DataLog> 
 				}
 			} catch (Exception e) {
 //				log error
-				log.error("DataLogServiceImpl.saveLog Error：" + ExceptionUtils.toString(e));
+				log.error("save data log error: " + ExceptionUtils.toString(e));
 			}
 		}, 1, 10, TimeUnit.SECONDS);
 	}

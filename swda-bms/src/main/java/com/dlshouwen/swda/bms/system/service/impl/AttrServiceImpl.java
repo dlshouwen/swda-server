@@ -10,6 +10,8 @@ import com.dlshouwen.swda.bms.system.service.IAttrService;
 import com.dlshouwen.swda.bms.system.vo.AttrVO;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 
+import jakarta.annotation.PostConstruct;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,8 +50,21 @@ public class AttrServiceImpl extends BaseServiceImpl<AttrMapper, Attr> implement
 		this.updateBatchById(AttrConvert.INSTANCE.convertList(attrList));
 //		for each attr
 		for(AttrVO attr : attrList) {
-			attrCache.save(attr.getAttrId(), attr.getContent());
+			attrCache.set(attr.getAttrId(), attr.getContent());
 		}
 	}
-	
+
+	/**
+	 * init attr cache
+	 */
+	@PostConstruct
+	public void initAttrCache() {
+//		get attr list
+		List<Attr> attrList = this.list();
+//		for each attr
+		for(Attr attr : attrList) {
+			attrCache.set(attr.getAttrId(), attr.getContent());
+		}
+	}
+
 }
