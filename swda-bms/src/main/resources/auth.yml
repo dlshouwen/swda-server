@@ -1,7 +1,7 @@
 auth:
   ignore_urls:
-    - /bms/system/attr/app
-    - /bms/system/dict/app
+    - /app/attr
+    - /app/dict
     - /login/captcha
     - /login/account
     - /login/token

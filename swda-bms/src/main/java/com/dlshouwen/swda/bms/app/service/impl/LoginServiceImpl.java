@@ -77,7 +77,7 @@ public class LoginServiceImpl implements ILoginService {
 	@Override
 	public UserTokenVO loginByAccount(UserLoginVO login) {
 //		if captcha enabled
-		if (String.valueOf(ZeroOne.YES).equals(Data.attr.get("account_login_captcha_enable"))) {
+		if (String.valueOf(ZeroOne.YES).equals(Data.attr.get("login_account_captcha_enabled"))) {
 //			validate captcha
 			boolean valid = captchaService.validate(login.getKey(), login.getCaptcha());
 //			if error
@@ -122,7 +122,7 @@ public class LoginServiceImpl implements ILoginService {
 	@Override
 	public boolean mobileSendCode(MobileSendCodeVO mobileSendCode) {
 //		if captcha enabled
-		if (String.valueOf(ZeroOne.YES).equals(Data.attr.get("sms_send_code_captcha_enable"))) {
+		if (String.valueOf(ZeroOne.YES).equals(Data.attr.get("login_mobile_sms_send_code_captcha_enabled"))) {
 //			validate captcha
 			boolean valid = captchaService.validate(mobileSendCode.getKey(), mobileSendCode.getCaptcha());
 //			if error

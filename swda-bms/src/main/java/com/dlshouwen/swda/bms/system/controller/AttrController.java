@@ -29,19 +29,6 @@ public class AttrController {
 	private final IAttrService attrService;
 
 	/**
-	 * get attr data for app
-	 * @return attr data
-	 */
-	@GetMapping("/app")
-	@Operation(name = "get attr data for app", type = OperateType.SEARCH)
-	public R<List<AttrVO>> getAttrDataForApp() {
-//		get attr list
-		List<AttrVO> attrList = attrService.getAttrList();
-//		return attr list
-		return R.ok(attrList);
-	}
-
-	/**
 	 * get attr list
 	 * @return attr list
 	 */
