@@ -37,7 +37,7 @@ public class AttachmentController {
 	 * @param query
 	 * @return attachment page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get attachment page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:attachment:page')")
 	public R<PageResult<AttachmentVO>> getAttachmentPageResult(Query<Attachment> query) {
@@ -52,10 +52,10 @@ public class AttachmentController {
 	 * @param attachmentId
 	 * @return attachment data
 	 */
-	@GetMapping("/data")
+	@GetMapping("/{attachmentId}/data")
 	@Operation(name = "get attachment data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:attachment:data')")
-	public R<AttachmentVO> getAttachmentData(Long attachmentId) {
+	public R<AttachmentVO> getAttachmentData(@PathVariable(name="attachmentId") Long attachmentId) {
 //		get attachment data
 		AttachmentVO attachment = attachmentService.getAttachmentData(attachmentId);
 //		return attachment
@@ -100,7 +100,7 @@ public class AttachmentController {
 	@DeleteMapping("/delete")
 	@Operation(name = "delete attachment", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:system:attachment:delete')")
-	public R<String> delete(@RequestBody List<Long> attachmentIdList) {
+	public R<String> deleteAttachment(@RequestBody List<Long> attachmentIdList) {
 //		delete
 		attachmentService.deleteAttachment(attachmentIdList);
 //		return

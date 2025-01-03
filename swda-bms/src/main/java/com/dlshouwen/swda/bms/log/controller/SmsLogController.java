@@ -3,10 +3,16 @@ package com.dlshouwen.swda.bms.log.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
+
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +45,7 @@ public class SmsLogController {
 	 * @param query
 	 * @return sms log page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get sms log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:sms_log:page')")
 	public R<PageResult<SmsLogVO>> getSmsLogPageResult(@ParameterObject @Valid Query<SmsLog> query) {
@@ -54,7 +60,7 @@ public class SmsLogController {
 	 * @param smsLogId
 	 * @return sms log data
 	 */
-	@GetMapping("/data/{smsLogId}")
+	@GetMapping("/{smsLogId}/data")
 	@Operation(name = "get sms log data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:sms_log:data')")
 	public R<SmsLogVO> getSmsLogData(@PathVariable("smsLogId") Long smsLogId) {
@@ -62,6 +68,21 @@ public class SmsLogController {
 		SmsLog smsLog = smsLogService.getById(smsLogId);
 //		convert sms log to vo for return
 		return R.ok(SmsLogConvert.INSTANCE.convert2VO(smsLog));
+	}
+
+	/**
+	 * delete sms log
+	 * @param smsLogIdList
+	 * @return result
+	 */
+	@DeleteMapping("/delete")
+	@Operation(name = "delete sms log", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('bms:log:sms_log:delete')")
+	public R<String> deleteSmsLog(@RequestBody List<Long> smsLogIdList) {
+//		delete sms log
+		smsLogService.deleteSmsLog(smsLogIdList);
+//		return
+		return R.ok();
 	}
 
 }

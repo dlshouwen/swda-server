@@ -32,7 +32,7 @@ public class AttrController {
 	 * get attr list
 	 * @return attr list
 	 */
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@Operation(name = "get attr list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:attr:list')")
 	public R<List<AttrVO>> getAttrList() {

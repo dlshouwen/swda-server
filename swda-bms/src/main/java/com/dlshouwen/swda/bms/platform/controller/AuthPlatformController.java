@@ -25,7 +25,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/auth_platform")
+@RequestMapping("/bms/platform/auth_platform")
 @Tag(name = "auth platform")
 @AllArgsConstructor
 public class AuthPlatformController {
@@ -38,7 +38,7 @@ public class AuthPlatformController {
 	 * @param query
 	 * @return auth platform page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get auth platform page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:auth_platform:page')")
 	public R<PageResult<AuthPlatformVO>> getAuthPlatformPageResult(@ParameterObject @Valid Query<AuthPlatform> query) {
@@ -53,7 +53,7 @@ public class AuthPlatformController {
 	 * @param authPlatformId
 	 * @return auth platform
 	 */
-	@GetMapping("/data/{authPlatformId}")
+	@GetMapping("/{authPlatformId}/data")
 	@Operation(name = "get auth platform data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:auth_platform:data')")
 	public R<AuthPlatformVO> getAuthPlatformData(@PathVariable("authPlatformId") Long authPlatformId) {

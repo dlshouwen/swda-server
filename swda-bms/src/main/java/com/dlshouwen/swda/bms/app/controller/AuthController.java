@@ -73,13 +73,13 @@ public class AuthController {
 	}
 
 	/**
-	 * login
+	 * callback auth
 	 * @param openType
 	 * @param callback
 	 * @return result
 	 */
 	@RequestMapping("/callback/{openType}")
-	public ModelAndView login(@PathVariable("openType") Integer openType, AuthCallback callback) {
+	public ModelAndView callbackAuth(@PathVariable("openType") Integer openType, AuthCallback callback) {
 //		create data
 		Map<String, Object> data = new HashMap<>();
 //		set open type, state, code
@@ -91,14 +91,14 @@ public class AuthController {
 	}
 
 	/**
-	 * bind
+	 * bind auth
 	 * @param thirdCallbackVO
 	 * @return result
 	 */
 	@SuppressWarnings("unchecked")
 	@PostMapping("/bind")
 	@Operation(name = "bind", type = OperateType.INSERT)
-	public R<String> bind(@RequestBody AuthCallbackVO authCallbackVO) {
+	public R<String> bindAuth(@RequestBody AuthCallbackVO authCallbackVO) {
 //		get auth request
 		AuthRequest authRequest = authPlatformService.getAuthRequest(authCallbackVO.getOpenType());
 //		get auth callback
@@ -110,22 +110,22 @@ public class AuthController {
 //			throw exception
 			throw new RuntimeException("第三方登录失败");
 		}
-//		bind user
-		authService.bind(SecurityUser.getUserId(), authCallbackVO.getOpenType(), response.getData());
+//		bind auth
+		authService.bindAuth(SecurityUser.getUserId(), authCallbackVO.getOpenType(), response.getData());
 //		return
 		return R.ok();
 	}
 
 	/**
-	 * unbind
+	 * unbind auth
 	 * @param openType
 	 * @return result
 	 */
 	@PutMapping("/unbind/{openType}")
 	@Operation(name = "unbind", type = OperateType.UPDATE)
-	public R<String> unBind(@PathVariable("openType") Integer openType) {
+	public R<String> unbindAuth(@PathVariable("openType") Integer openType) {
 //		unbind
-		authService.unBind(SecurityUser.getUserId(), openType);
+		authService.unbindAuth(SecurityUser.getUserId(), openType);
 //		return
 		return R.ok();
 	}

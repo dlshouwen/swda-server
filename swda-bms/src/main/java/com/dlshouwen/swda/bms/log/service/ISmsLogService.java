@@ -1,5 +1,7 @@
 package com.dlshouwen.swda.bms.log.service;
 
+import java.util.List;
+
 import com.dlshouwen.swda.bms.log.entity.SmsLog;
 import com.dlshouwen.swda.bms.log.vo.SmsLogVO;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
@@ -19,5 +21,11 @@ public interface ISmsLogService extends BaseService<SmsLog> {
 	 * @return sms log page result
 	 */
 	PageResult<SmsLogVO> getSmsLogPageResult(Query<SmsLog> query);
+
+	/**
+	 * delete sms log
+	 * @param smsLogIdList
+	 */
+	void deleteSmsLog(List<Long> smsLogIdList);
 	
 }

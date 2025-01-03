@@ -9,17 +9,13 @@ import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
-import com.dlshouwen.swda.core.security.user.SecurityUser;
-import com.dlshouwen.swda.core.security.user.UserDetail;
 import com.dlshouwen.swda.bms.system.entity.Role;
 import com.dlshouwen.swda.bms.system.entity.User;
-import com.dlshouwen.swda.bms.system.service.IPermissionService;
 import com.dlshouwen.swda.bms.system.service.IRoleOrganService;
 import com.dlshouwen.swda.bms.system.service.IRolePermissionService;
 import com.dlshouwen.swda.bms.system.service.IRoleService;
 import com.dlshouwen.swda.bms.system.service.IUserRoleService;
 import com.dlshouwen.swda.bms.system.service.IUserService;
-import com.dlshouwen.swda.bms.system.vo.PermissionVO;
 import com.dlshouwen.swda.bms.system.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.system.vo.RoleVO;
 import com.dlshouwen.swda.bms.system.vo.UserVO;
@@ -49,8 +45,6 @@ public class RoleController {
 	private final IRolePermissionService rolePermissionService;
 	/** role data scope service */
 	private final IRoleOrganService roleOrganService;
-	/** menu service */
-	private final IPermissionService permissionService;
 	/** user role service */
 	private final IUserRoleService userRoleService;
 
@@ -59,7 +53,7 @@ public class RoleController {
 	 * @param query
 	 * @return role page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get role page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:role:page')")
 	public R<PageResult<RoleVO>> getRolePageResult(@ParameterObject @Valid Query<Role> query) {
@@ -73,7 +67,7 @@ public class RoleController {
 	 * get role list
 	 * @return role list
 	 */
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@Operation(name = "get role list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:role:list')")
 	public R<List<RoleVO>> getRoleList() {
@@ -88,7 +82,7 @@ public class RoleController {
 	 * @param roleId
 	 * @return role data
 	 */
-	@GetMapping("/data/{roleId}")
+	@GetMapping("/{roleId}/data")
 	@Operation(name = "get role data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:role:data')")
 	public R<RoleVO> getRoleData(@PathVariable("roleId") Long roleId) {
@@ -165,31 +159,15 @@ public class RoleController {
 	}
 
 	/**
-	 * get user permission list
-	 * @return result
-	 */
-	@GetMapping("/user/permission/list")
-	@Operation(name = "get user permission list", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:system:role:user:permission:list')")
-	public R<List<PermissionVO>> menu() {
-//		get login user
-		UserDetail user = SecurityUser.getUser();
-//		get user permission list
-		List<PermissionVO> permissionList = permissionService.getUserMenuList(user, null);
-//		return
-		return R.ok(permissionList);
-	}
-
-	/**
-	 * get user list
+	 * get role user page result
 	 * @param query
 	 * @return result
 	 */
-	@GetMapping("/user/list")
-	@Operation(name = "get user list", type = OperateType.SEARCH)
+	@GetMapping("/user/page")
+	@Operation(name = "get role user page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:role:update')")
-	public R<PageResult<UserVO>> getUserList(@Valid Query<User> query) {
-//		get user list
+	public R<PageResult<UserVO>> getRoleUserPageResult(@Valid Query<User> query) {
+//		get role user list
 		PageResult<UserVO> pageResult = userService.getRoleUserList(query);
 //		return page result
 		return R.ok(pageResult);
@@ -222,7 +200,7 @@ public class RoleController {
 	@PreAuthorize("hasAuthority('sys:role:update')")
 	public R<String> addRoleUser(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {
 //		add user role
-		userRoleService.deleteUserRole(roleId, userIdList);
+		userRoleService.addUserRole(roleId, userIdList);
 //		return
 		return R.ok();
 	}

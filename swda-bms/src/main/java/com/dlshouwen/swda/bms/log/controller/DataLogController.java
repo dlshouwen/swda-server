@@ -21,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,7 +45,7 @@ public class DataLogController {
 	 * @param query
 	 * @return data log page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get data log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:data_log:page')")
 	public R<PageResult<DataLogVO>> getDataLogPageResult(@ParameterObject @Valid Query<DataLog> query) {
@@ -59,7 +60,7 @@ public class DataLogController {
 	 * @param dataLogId
 	 * @return data log data
 	 */
-	@GetMapping("/data/{id}")
+	@GetMapping("/{dataLogId}/data")
 	@Operation(name = "get data log data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:data_log:data')")
 	public R<DataLogVO> getDataLogData(@PathVariable("dataLogId") Long dataLogId) {

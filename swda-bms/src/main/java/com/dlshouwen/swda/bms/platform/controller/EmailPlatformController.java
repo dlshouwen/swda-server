@@ -32,7 +32,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/bms/platform/mail_platform")
+@RequestMapping("/bms/platform/email_platform")
 @Tag(name = "email platform")
 @AllArgsConstructor
 public class EmailPlatformController {
@@ -48,7 +48,7 @@ public class EmailPlatformController {
 	 * @param query
 	 * @return email platform page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get email platform page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:email_platform:page')")
 	public R<PageResult<EmailPlatformVO>> getEmailPlatformPageResult(@ParameterObject @Valid Query<EmailPlatform> query) {
@@ -63,7 +63,7 @@ public class EmailPlatformController {
 	 * @param emailPlatformType
 	 * @return email platform list
 	 */
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@Operation(name = "get email platform list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:email_platform:list')")
 	public R<List<EmailPlatformVO>> getEmailPlatformList(Integer emailPlatformType) {
@@ -78,7 +78,7 @@ public class EmailPlatformController {
 	 * @param emailPlatformId
 	 * @return email platform data
 	 */
-	@GetMapping("/data/{emailPlatformId}")
+	@GetMapping("/{emailPlatformId}/data")
 	@Operation(name = "get email platform data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:email_platform:data')")
 	public R<EmailPlatformVO> getEmailPlatformData(@PathVariable("emailPlatformId") Long emailPlatformId) {

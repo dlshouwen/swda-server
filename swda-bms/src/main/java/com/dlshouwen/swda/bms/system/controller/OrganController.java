@@ -33,7 +33,7 @@ public class OrganController {
 	 * get organ list
 	 * @return organ list
 	 */
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@Operation(name = "get organ list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:organ:list')")
 	public R<List<OrganVO>> getOrganList() {
@@ -48,7 +48,7 @@ public class OrganController {
 	 * @param organId
 	 * @return organ
 	 */
-	@GetMapping("/data/{organId}")
+	@GetMapping("/{organId}/data")
 	@Operation(name = "get organ data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:organ:data')")
 	public R<OrganVO> getOrganData(@PathVariable("organId") Long organId) {
@@ -93,10 +93,10 @@ public class OrganController {
 	 * @param organId
 	 * @return result
 	 */
-	@DeleteMapping("/delete/{organId}")
+	@DeleteMapping("/delete")
 	@Operation(name = "delete organ", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:system:organ:delete')")
-	public R<String> deleteOrgan(@PathVariable("organId") Long organId) {
+	public R<String> deleteOrgan(Long organId) {
 //		delete organ
 		organService.deleteOrgan(organId);
 //		return

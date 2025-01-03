@@ -21,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,7 +45,7 @@ public class LoginLogController {
 	 * @param query
 	 * @return login log page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get login log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:login_log:page')")
 	public R<PageResult<LoginLogVO>> getLoginLogPageResult(@ParameterObject @Valid Query<LoginLog> query) {
@@ -59,7 +60,7 @@ public class LoginLogController {
 	 * @param loginLogId
 	 * @return login log data
 	 */
-	@GetMapping("/data/{id}")
+	@GetMapping("/{loginLogId}/data")
 	@Operation(name = "get login log data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:login_log:data')")
 	public R<LoginLogVO> getLoginLogData(@PathVariable("loginLogId") Long loginLogId) {

@@ -62,7 +62,7 @@ public class UserController {
 	 * @param query
 	 * @return user page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get user page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:user:list')")
 	public R<PageResult<UserVO>> getUserPageResult(@ParameterObject @Valid Query<User> query) {
@@ -77,7 +77,7 @@ public class UserController {
 	 * @param userId
 	 * @return user data
 	 */
-	@GetMapping("/data/{userId}")
+	@GetMapping("/{userId}/data")
 	@Operation(name = "get user data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:user:data')")
 	public R<UserVO> getUserData(@PathVariable("id") Long userId) {
@@ -145,18 +145,18 @@ public class UserController {
 	 * @param userPasswordVO
 	 * @return result
 	 */
-	@PutMapping("/password")
-	@Operation(name = "password", type = OperateType.UPDATE)
-	public R<String> password(@RequestBody @Valid UserPasswordVO vo) {
+	@PutMapping("/password/update")
+	@Operation(name = "update password", type = OperateType.UPDATE)
+	public R<String> updatePassword(@RequestBody @Valid UserPasswordVO userPasswordVO) {
 //		get user detail
 		UserDetail user = SecurityUser.getUser();
 //		if password not equals
-		if (!passwordEncoder.matches(vo.getPassword(), user.getPassword())) {
+		if (!passwordEncoder.matches(userPasswordVO.getPassword(), user.getPassword())) {
 //			return
 			return R.error("原密码不正确");
 		}
 //		update password
-		userService.updatePassword(user.getUserId(), passwordEncoder.encode(vo.getNewPassword()));
+		userService.updatePassword(user.getUserId(), passwordEncoder.encode(userPasswordVO.getNewPassword()));
 //		return
 		return R.ok();
 	}

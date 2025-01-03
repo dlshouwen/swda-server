@@ -11,7 +11,11 @@ import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 
 import lombok.AllArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * sms log service impl
@@ -33,6 +37,16 @@ public class SmsLogServiceImpl extends BaseServiceImpl<SmsLogMapper, SmsLog> imp
 		IPage<SmsLog> page = this.page(query);
 //		convert to vo list for return 
 		return new PageResult<>(SmsLogConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
+	}
+
+	/**
+	 * delete sms log
+	 * @param smsLogIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteSmsLog(List<Long> smsLogIdList) {
+		this.removeByIds(smsLogIdList);
 	}
 
 }

@@ -39,13 +39,13 @@ public class AuthServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implement
 	}
 
 	/**
-	 * bind
+	 * bind auth
 	 * @param userId
 	 * @param openType
 	 * @param authUser
 	 */
 	@Override
-	public void bind(Long userId, Integer openType, AuthUser authUser) {
+	public void bindAuth(Long userId, Integer openType, AuthUser authUser) {
 //		create auth
 		Auth auth = new Auth();
 //		set open type, open id, username, user id, real name
@@ -58,12 +58,12 @@ public class AuthServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implement
 	}
 
 	/**
-	 * unbind
+	 * unbind auth
 	 * @param userId
 	 * @param openType
 	 */
 	@Override
-	public void unBind(Long userId, Integer openType) {
+	public void unbindAuth(Long userId, Integer openType) {
 //		delete bind info
 		baseMapper.delete(Wrappers.<Auth>lambdaQuery().eq(Auth::getUserId, userId).eq(Auth::getOpenType, openType));
 	}

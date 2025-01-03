@@ -39,7 +39,7 @@ public class DictController {
 	 * @param query
 	 * @return dict page result
 	 */
-	@GetMapping("/page/{dictType}")
+	@PostMapping("/page/{dictType}")
 	@Operation(name = "get dict page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:dict:page')")
 	public R<PageResult<DictVO>> getDictPageResult(@PathVariable(name = "dictType") String dictType, @ParameterObject @Valid Query<Dict> query) {
@@ -54,7 +54,7 @@ public class DictController {
 	 * @param dictId
 	 * @return dict
 	 */
-	@GetMapping("/data/{dictId}")
+	@GetMapping("/{dictId}/data")
 	@Operation(name = "get dict data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:dict:data')")
 	public R<DictVO> getDictData(@PathVariable("dictId") Long dictId) {

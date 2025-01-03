@@ -46,7 +46,7 @@ public class SmsPlatformController {
 	 * @param query
 	 * @return sms platform page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get sms platform page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:page')")
 	public R<PageResult<SmsPlatformVO>> getSmsPlatformPageResult(@ParameterObject @Valid Query<SmsPlatform> query) {
@@ -61,7 +61,7 @@ public class SmsPlatformController {
 	 * @param smsPlatformType
 	 * @return sms platform list
 	 */
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@Operation(name = "get sms platform list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:list')")
 	public R<List<SmsPlatformVO>> getSmsPlatformList(Integer smsPlatformType) {
@@ -76,10 +76,10 @@ public class SmsPlatformController {
 	 * @param smsPlatformId
 	 * @return sms platform data
 	 */
-	@GetMapping("/data/{smsPlatformId}")
+	@GetMapping("/{smsPlatformId}/data")
 	@Operation(name = "get sms platform data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:data')")
-	public R<SmsPlatformVO> get(@PathVariable("smsPlatformId") Long smsPlatformId) {
+	public R<SmsPlatformVO> getSmsPlatformData(@PathVariable("smsPlatformId") Long smsPlatformId) {
 //		get sms platform
 		SmsPlatform smsPlatform = smsPlatformService.getById(smsPlatformId);
 //		convert to sms platform vo for return
@@ -132,7 +132,7 @@ public class SmsPlatformController {
 	}
 
 	/**
-	 * send msms
+	 * send sms
 	 * @param smsSendVO
 	 * @return result
 	 */

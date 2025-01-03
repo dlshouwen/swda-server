@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
+import com.dlshouwen.swda.bms.system.cache.AttrCache;
 import com.dlshouwen.swda.core.common.cache.RedisCache;
 
 import java.util.List;
@@ -19,6 +20,9 @@ public class SmsCache {
 
 	/** redis cache */
 	private final RedisCache redisCache;
+	
+	/** attr cache */
+	private final AttrCache attrCache;
 
 	/** sms round key */
 	private final String SMS_ROUND_KEY = "sms:round";
@@ -67,7 +71,7 @@ public class SmsCache {
 	 * @param code
 	 */
 	public void saveCode(String mobile, String code) {
-		redisCache.set(SMS_CODE_KEY+mobile, code, 10 * 60);
+		redisCache.set(SMS_CODE_KEY+mobile, code, Integer.parseInt(attrCache.get("sms_send_code_valid_time")));
 	}
 
 	/**

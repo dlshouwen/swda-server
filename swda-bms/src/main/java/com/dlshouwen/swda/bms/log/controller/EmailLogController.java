@@ -38,7 +38,7 @@ public class EmailLogController {
 	 * @param query
 	 * @return mail log page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get email log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:email_log:page')")
 	public R<PageResult<EmailLogVO>> getEmailLogPageResult(@ParameterObject @Valid Query<EmailLog> query) {
@@ -53,7 +53,7 @@ public class EmailLogController {
 	 * @param emailLogId
 	 * @return email log data
 	 */
-	@GetMapping("/data/{id}")
+	@GetMapping("/{emailLogId}/data")
 	@Operation(name = "get email log data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:email_log:data')")
 	public R<EmailLogVO> getEmailLogData(@PathVariable("emailLogId") Long emailLogId) {

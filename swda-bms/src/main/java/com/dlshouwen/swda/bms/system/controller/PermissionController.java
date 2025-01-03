@@ -37,7 +37,7 @@ public class PermissionController {
 	 * get user menu list
 	 * @return user menu list
 	 */
-	@GetMapping("/user/menu/list")
+	@PostMapping("/user/menu/list")
 	@Operation(name = "get user menu list", type = OperateType.SEARCH)
 	public R<List<PermissionVO>> getUserMenuList() {
 //		get login user
@@ -52,7 +52,7 @@ public class PermissionController {
 	 * get user authority list
 	 * @return user authority list
 	 */
-	@GetMapping("/user/authority/list")
+	@PostMapping("/user/authority/list")
 	@Operation(name = "get user authority list", type = OperateType.SEARCH)
 	public R<Set<String>> getUserAuthorityList() {
 //		get login user
@@ -68,7 +68,7 @@ public class PermissionController {
 	 * @param permissionType
 	 * @return permission list
 	 */
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@Operation(name = "get permission list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:permission:list')")
 	public R<List<PermissionVO>> getPermissionList(Integer permissionType) {
@@ -83,7 +83,7 @@ public class PermissionController {
 	 * @param permissionId
 	 * @return permission
 	 */
-	@GetMapping("/data/{permissionId}")
+	@GetMapping("/{permissionId}/data")
 	@Operation(name = "get permission data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:permission:data')")
 	public R<PermissionVO> getPermissionData(@PathVariable("permissionId") Long permissionId) {
@@ -128,10 +128,10 @@ public class PermissionController {
 	 * @param permissionId
 	 * @return result
 	 */
-	@DeleteMapping("/permission/{permissionId}")
+	@DeleteMapping("/delete")
 	@Operation(name = "delete permission", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:system:permission:delete')")
-	public R<String> deletePermission(@PathVariable("permissionId") Long permissionId) {
+	public R<String> deletePermission(Long permissionId) {
 //		get sub menu count
 		Long count = permissionService.getSubPermissionCount(permissionId);
 //		if has sub menu

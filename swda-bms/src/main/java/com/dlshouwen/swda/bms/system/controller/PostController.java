@@ -38,7 +38,7 @@ public class PostController {
 	 * @param query
 	 * @return post page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get post page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:post:page')")
 	public R<PageResult<PostVO>> getPostPageResult(@ParameterObject @Valid Query<Post> query) {
@@ -52,7 +52,7 @@ public class PostController {
 	 * get post list
 	 * @return post list
 	 */
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@Operation(name = "get post list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:post:list')")
 	public R<List<PostVO>> getPostList() {
@@ -67,7 +67,7 @@ public class PostController {
 	 * @param postId
 	 * @return post data
 	 */
-	@GetMapping("/data/{postId}")
+	@GetMapping("/{postId}/data")
 	@Operation(name = "get post data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:post:data')")
 	public R<PostVO> getPostData(@PathVariable("postId") Long postId) {

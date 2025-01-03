@@ -39,7 +39,7 @@ public class DictTypeController {
 	 * @param query
 	 * @return dict type page result
 	 */
-	@GetMapping("/page")
+	@PostMapping("/page")
 	@Operation(name = "get dict type page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:dict_type:page')")
 	public R<PageResult<DictTypeVO>> getDictTypePageResult(@ParameterObject @Valid Query<DictType> query) {
@@ -54,7 +54,7 @@ public class DictTypeController {
 	 * @param dictTypeId
 	 * @return result
 	 */
-	@GetMapping("/data/{dictTypeId}")
+	@GetMapping("/{dictTypeId}/data")
 	@Operation(name = "get dict type data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:dict_type:data')")
 	public R<DictTypeVO> getDictTypeData(@PathVariable("dictTypeId") Long dictTypeId) {
@@ -114,10 +114,10 @@ public class DictTypeController {
 	 * @param dictTypeId
 	 * @return sql dict list
 	 */
-	@GetMapping("/sql/dict/list")
+	@GetMapping("/{dictTypeId}/sql/dict/list")
 	@Operation(name = "get sql dict list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:dict_type:sql:dict:list')")
-	public R<List<DictVO>> getSqlDictList(Long dictTypeId) {
+	public R<List<DictVO>> getSqlDictList(@PathVariable(name="dictTypeId") Long dictTypeId) {
 //		get dict list
 		List<DictVO> dictList = dictTypeService.getSqlDictList(dictTypeId);
 //		return

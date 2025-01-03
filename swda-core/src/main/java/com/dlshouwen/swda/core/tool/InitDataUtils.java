@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.core.common.utils;
+package com.dlshouwen.swda.core.tool;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,6 +35,19 @@ public class InitDataUtils {
 	
 	/** logger */
 	private static Logger logger = LoggerFactory.getLogger(InitDataUtils.class);
+
+	/** db */
+	private static String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+	private static String JDBC_URL = "jdbc:mysql://localhost:3306/swda?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true";
+	private static String USERNAME = "root";
+	private static String PASSWORD = "root";
+	
+	/** tables */
+	private static String[] TABLES = new String[] {};
+	
+	/** pager */
+	private static boolean PAGER = true;
+	
 	
 	/**
 	 * main
@@ -43,55 +56,19 @@ public class InitDataUtils {
 	 */
 	@SuppressWarnings("resource")
 	public static void main(String[] _args) throws Exception {
-//		const create
-		boolean create = true;
-//		const pager
-		boolean pager = true;
-//		const tables
-		String[] tables = new String[] {};
-//		const db info
-		String driverClass = "com.mysql.cj.jdbc.Driver";
-		String jdbcUrl = "jdbc:mysql://localhost:3306/swda?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true";
-		String username = "root";
-		String password = "root";
 //		get path
 		String path = System.getProperty("user.dir")+"/../swda-source/db";
-//		get db type
-		String dbType = "";
-		if(driverClass.toLowerCase().contains("mysql")) {
-			dbType = "mysql";
-		}
 //		defined s, e
 		long s = System.currentTimeMillis();
 		long e = System.currentTimeMillis();
 //		defined: now
 		Date now = new Date();
 //		get data souce
-		DataSource dataSource = DBUtils.getDataSource(driverClass, jdbcUrl, username, password);
+		DataSource dataSource = DBUtils.getDataSource(DRIVER_CLASS, JDBC_URL, USERNAME, PASSWORD);
 //		get template
 		JdbcTemplate template = new JdbcTemplate(dataSource);
-//		get host, schema
-		String host = jdbcUrl.substring(jdbcUrl.lastIndexOf("//")+1, jdbcUrl.lastIndexOf("/"));
-		String schema = jdbcUrl.substring(jdbcUrl.lastIndexOf("=")+1);
 //		logger
 		e=System.currentTimeMillis();logger.info("init databse completed in "+(e-s)+" ms.");s=e;
-//		need create
-		if(create) {
-//			get command
-			String command = "";
-//			command: mysql
-			if(dbType.equals("mysql")) {
-				command = "sqlcmd -s "+host+" -U "+username+" -P "+password+" -d "+schema+" -i \""+path+"/init/mysql.sql\"";
-			}
-//			execute
-			Process process = Runtime.getRuntime().exec(command);
-//			await
-			while(process.isAlive()) {
-				Thread.sleep(1000);
-			}
-//			log
-			e=System.currentTimeMillis();logger.info("create tables views index functions complete in "+(e-s)+" ms.");s=e;
-		}
 //		defined table list
 		List<Map<String, Object>> tableList = new ArrayList<Map<String, Object>>();
 //		get workbook
@@ -110,7 +87,7 @@ public class InitDataUtils {
 			table.put("pre_execute_sql", PoiUtils.getString(row.getCell(3)));
 			table.put("next_execute_sql", PoiUtils.getString(row.getCell(4)));
 //			tables
-			if(tables.length>0&&Arrays.stream(tables).filter(_table->_table.equals(MapUtil.getStr(table, "table_code"))).count()==0) {
+			if(TABLES.length>0&&Arrays.stream(TABLES).filter(_table->_table.equals(MapUtil.getStr(table, "table_code"))).count()==0) {
 				continue;
 			}
 //			get sheet
@@ -196,7 +173,7 @@ public class InitDataUtils {
 			@SuppressWarnings("unchecked")
 			List<Object[]> args = (List<Object[]>)table.get("args");
 //			is pager
-			if(pager) {
+			if(PAGER) {
 //				batch update
 				PageUtils.batchUpdateArgs(template, MapUtil.getStr(table, "insert_sql"), args, 2000);
 			}else {

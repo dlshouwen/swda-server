@@ -23,19 +23,19 @@ public interface IAuthService extends BaseService<Auth> {
 	List<AuthVO> getAuthList(Long userId);
 
 	/**
-	 * bind
+	 * bind auth
 	 * @param userId
 	 * @param openType
 	 * @param authUser
 	 */
-	void bind(Long userId, Integer openType, AuthUser authUser);
+	void bindAuth(Long userId, Integer openType, AuthUser authUser);
 
 	/**
-	 * unbind
+	 * unbind auth
 	 * @param userId
 	 * @param openType
 	 */
-	void unBind(Long userId, Integer openType);
+	void unbindAuth(Long userId, Integer openType);
 
 	/**
 	 * get user id by open type and open id
