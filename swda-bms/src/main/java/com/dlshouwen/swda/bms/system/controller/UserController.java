@@ -58,42 +58,6 @@ public class UserController {
 	private final PasswordEncoder passwordEncoder;
 
 	/**
-	 * get user page result
-	 * @param query
-	 * @return user page result
-	 */
-	@PostMapping("/page")
-	@Operation(name = "get user page result", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:system:user:list')")
-	public R<PageResult<UserVO>> getUserPageResult(@ParameterObject @Valid Query<User> query) {
-//		get user page result
-		PageResult<UserVO> pageResult = userService.getUserPageResult(query);
-//		return
-		return R.ok(pageResult);
-	}
-
-	/**
-	 * get user data
-	 * @param userId
-	 * @return user data
-	 */
-	@GetMapping("/{userId}/data")
-	@Operation(name = "get user data", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:system:user:data')")
-	public R<UserVO> getUserData(@PathVariable("id") Long userId) {
-//		get user data
-		UserVO user = userService.getUserData(userId);
-//		get role id list set to user
-		List<Long> roleIdList = userRoleService.getRoleIdList(userId);
-		user.setRoleIdList(roleIdList);
-//		get post id list set to user
-		List<Long> postIdList = userPostService.getPostIdList(userId);
-		user.setPostIdList(postIdList);
-//		return user
-		return R.ok(user);
-	}
-
-	/**
 	 * get login user data
 	 * @return result
 	 */
@@ -127,27 +91,27 @@ public class UserController {
 	}
 
 	/**
-	 * update avatar
+	 * update login user avatar
 	 * @param userAvatarVO
 	 * @return result
 	 */
-	@PutMapping("/avatar/update")
-	@Operation(name = "update avatar", type = OperateType.UPDATE)
-	public R<String> updateAvatar(@RequestBody UserAvatarVO userAvatarVO) {
-//		update avatar
-		userService.updateAvatar(userAvatarVO);
+	@PutMapping("/login/avatar/update")
+	@Operation(name = "update login user avatar", type = OperateType.UPDATE)
+	public R<String> updateLoginUserAvatar(@RequestBody UserAvatarVO userAvatarVO) {
+//		update login user avatar
+		userService.updateLoginUserAvatar(userAvatarVO);
 //		return
 		return R.ok();
 	}
 
 	/**
-	 * update password
+	 * update login user password
 	 * @param userPasswordVO
 	 * @return result
 	 */
-	@PutMapping("/password/update")
-	@Operation(name = "update password", type = OperateType.UPDATE)
-	public R<String> updatePassword(@RequestBody @Valid UserPasswordVO userPasswordVO) {
+	@PutMapping("/login/password/update")
+	@Operation(name = "update login user password", type = OperateType.UPDATE)
+	public R<String> updateLoginUserPassword(@RequestBody @Valid UserPasswordVO userPasswordVO) {
 //		get user detail
 		UserDetail user = SecurityUser.getUser();
 //		if password not equals
@@ -155,10 +119,46 @@ public class UserController {
 //			return
 			return R.error("原密码不正确");
 		}
-//		update password
-		userService.updatePassword(user.getUserId(), passwordEncoder.encode(userPasswordVO.getNewPassword()));
+//		update login user password
+		userService.updateLoginUserPassword(user.getUserId(), passwordEncoder.encode(userPasswordVO.getNewPassword()));
 //		return
 		return R.ok();
+	}
+
+	/**
+	 * get user page result
+	 * @param query
+	 * @return user page result
+	 */
+	@PostMapping("/page")
+	@Operation(name = "get user page result", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:user:list')")
+	public R<PageResult<UserVO>> getUserPageResult(@ParameterObject @Valid Query<User> query) {
+//		get user page result
+		PageResult<UserVO> pageResult = userService.getUserPageResult(query);
+//		return
+		return R.ok(pageResult);
+	}
+
+	/**
+	 * get user data
+	 * @param userId
+	 * @return user data
+	 */
+	@GetMapping("/{userId}/data")
+	@Operation(name = "get user data", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:user:data')")
+	public R<UserVO> getUserData(@PathVariable("id") Long userId) {
+//		get user data
+		UserVO user = userService.getUserData(userId);
+//		get role id list set to user
+		List<Long> roleIdList = userRoleService.getRoleIdList(userId);
+		user.setRoleIdList(roleIdList);
+//		get post id list set to user
+		List<Long> postIdList = userPostService.getPostIdList(userId);
+		user.setPostIdList(postIdList);
+//		return user
+		return R.ok(user);
 	}
 
 	/**

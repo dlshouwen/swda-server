@@ -51,6 +51,74 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	
 	/** token store cache */
 	private final TokenCache tokenCache;
+
+	/**
+	 * get user by mobile
+	 * @param mobile
+	 * @return userVO
+	 */
+	@Override
+	public UserVO getUserByMobile(String mobile) {
+//		get user by mobile
+		User user = baseMapper.getUserByMobile(mobile);
+//		convert to user vo
+		return UserConvert.INSTANCE.convert2VO(user);
+	}
+
+	/**
+	 * update login user
+	 * @param loginUserVO
+	 */
+	@Override
+	public void updateLoginUser(LoginUserVO loginUserVO) {
+//		get user from mobile
+		User user = baseMapper.getUserByMobile(loginUserVO.getMobile());
+//		if user is not null
+		if (user != null && !user.getUserId().equals(loginUserVO.getUserId())) {
+//			throw exception
+			throw new SwdaException("手机号已经存在");
+		}
+//		convert to user
+		user = UserConvert.INSTANCE.convert(loginUserVO);
+//		set user id
+		user.setUserId(SecurityUser.getUserId());
+//		update user
+		this.updateById(user);
+//		delete user cache
+		tokenCache.deleteUser(TokenUtils.getAccessToken());
+	}
+
+	/**
+	 * update login user avatar
+	 * @param userAvatarVO
+	 */
+	@Override
+	public void updateLoginUserAvatar(UserAvatarVO userAvatarVO) {
+//		create user
+		User user = new User();
+//		set user id, avatar
+		user.setUserId(SecurityUser.getUserId());
+		user.setAvatar(userAvatarVO.getAvatar());
+//		update user
+		this.updateById(user);
+//		delete user cache
+		tokenCache.deleteUser(TokenUtils.getAccessToken());
+	}
+
+	/**
+	 * update login user password
+	 * @param userId
+	 * @param password
+	 */
+	@Override
+	public void updateLoginUserPassword(Long userId, String password) {
+//		get user
+		User user = this.getById(userId);
+//		set password
+		user.setPassword(password);
+//		update user
+		this.updateById(user);
+	}
 	
 	/**
 	 * get user page result
@@ -144,46 +212,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	}
 
 	/**
-	 * update login user
-	 * @param loginUserVO
-	 */
-	@Override
-	public void updateLoginUser(LoginUserVO loginUserVO) {
-//		get user from mobile
-		User user = baseMapper.getUserByMobile(loginUserVO.getMobile());
-//		if user is not null
-		if (user != null && !user.getUserId().equals(loginUserVO.getUserId())) {
-//			throw exception
-			throw new SwdaException("手机号已经存在");
-		}
-//		convert to user
-		user = UserConvert.INSTANCE.convert(loginUserVO);
-//		set user id
-		user.setUserId(SecurityUser.getUserId());
-//		update user
-		this.updateById(user);
-//		delete user cache
-		tokenCache.deleteUser(TokenUtils.getAccessToken());
-	}
-
-	/**
-	 * update avatar
-	 * @param userAvatarVO
-	 */
-	@Override
-	public void updateAvatar(UserAvatarVO userAvatarVO) {
-//		create user
-		User user = new User();
-//		set user id, avatar
-		user.setUserId(SecurityUser.getUserId());
-		user.setAvatar(userAvatarVO.getAvatar());
-//		update user
-		this.updateById(user);
-//		delete user cache
-		tokenCache.deleteUser(TokenUtils.getAccessToken());
-	}
-
-	/**
 	 * delete user
 	 * @param userIdList
 	 */
@@ -210,47 +238,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		}
 //		select names to list from return
 		return this.listByIds(userIdList).stream().map(User::getRealName).toList();
-	}
-
-	/**
-	 * get user by mobile
-	 * @param mobile
-	 * @return userVO
-	 */
-	@Override
-	public UserVO getUserByMobile(String mobile) {
-//		get user by mobile
-		User user = baseMapper.getUserByMobile(mobile);
-//		convert to user vo
-		return UserConvert.INSTANCE.convert2VO(user);
-	}
-
-	/**
-	 * update password
-	 * @param id
-	 * @param password
-	 */
-	@Override
-	public void updatePassword(Long id, String password) {
-//		get user
-		User user = getById(id);
-//		set password
-		user.setPassword(password);
-//		update user
-		this.updateById(user);
-	}
-
-	/**
-	 * get role user list
-	 * @param query
-	 * @return page result
-	 */
-	@Override
-	public PageResult<UserVO> getRoleUserList(Query<User> query) {
-//		get page
-		IPage<User> page = this.page(query);
-//		return page result
-		return new PageResult<>(UserConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
 
 	/**
@@ -301,6 +288,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 
 		});
 
+	}
+
+	/**
+	 * get role user list
+	 * @param query
+	 * @return page result
+	 */
+	@Override
+	public PageResult<UserVO> getRoleUserList(Query<User> query) {
+//		get page
+		IPage<User> page = this.page(query);
+//		return page result
+		return new PageResult<>(UserConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
 
 }

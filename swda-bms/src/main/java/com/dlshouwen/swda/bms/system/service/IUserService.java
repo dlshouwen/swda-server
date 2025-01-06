@@ -20,6 +20,32 @@ import java.util.List;
 public interface IUserService extends BaseService<User> {
 
 	/**
+	 * get user by mobile
+	 * @param mobile
+	 * @return user
+	 */
+	UserVO getUserByMobile(String mobile);
+
+	/**
+	 * update login user
+	 * @param loginUserVO
+	 */
+	void updateLoginUser(LoginUserVO vo);
+
+	/**
+	 * update login user avatar
+	 * @param userAvatarVO
+	 */
+	void updateLoginUserAvatar(UserAvatarVO avatar);
+
+	/**
+	 * update login user password
+	 * @param userId
+	 * @param password
+	 */
+	void updateLoginUserPassword(Long userId, String newPassword);
+
+	/**
 	 * get user page result
 	 * @param query
 	 * @return user page result
@@ -46,18 +72,6 @@ public interface IUserService extends BaseService<User> {
 	void updateUser(UserVO vo);
 
 	/**
-	 * update login user
-	 * @param loginUserVO
-	 */
-	void updateLoginUser(LoginUserVO vo);
-
-	/**
-	 * update avatar
-	 * @param userAvatarVO
-	 */
-	void updateAvatar(UserAvatarVO avatar);
-
-	/**
 	 * delete user
 	 * @param userIdList
 	 */
@@ -71,18 +85,11 @@ public interface IUserService extends BaseService<User> {
 	List<String> getUserNameList(List<Long> userIdList);
 
 	/**
-	 * get user by mobile
-	 * @param mobile
-	 * @return user
-	 */
-	UserVO getUserByMobile(String mobile);
-
-	/**
-	 * update password
-	 * @param userId
+	 * import user
+	 * @param file
 	 * @param password
 	 */
-	void updatePassword(Long userId, String newPassword);
+	void importUser(MultipartFile file, String password);
 
 	/**
 	 * get role user list
@@ -90,12 +97,5 @@ public interface IUserService extends BaseService<User> {
 	 * @return page result
 	 */
 	PageResult<UserVO> getRoleUserList(Query<User> query);
-
-	/**
-	 * import user
-	 * @param file
-	 * @param password
-	 */
-	void importUser(MultipartFile file, String password);
 
 }
