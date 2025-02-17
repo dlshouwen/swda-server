@@ -17,11 +17,11 @@ import java.util.List;
 public interface ISystemService extends BaseService<System> {
 
 	/**
-	 * get user system list
+	 * get login user system list
 	 * @param user
-	 * @return system vo list
+	 * @return login user system list
 	 */
-	List<SystemVO> getUserSystemList(UserDetail user);
+	List<SystemVO> getLoginUserSystemList(UserDetail user);
 
 	/**
 	 * get system page result

@@ -78,8 +78,8 @@ public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen
 //		get data scope set to user detail
 		List<Long> dataScopeList = getDataScope(userDetail);
 		userDetail.setDataScopeList(dataScopeList);
-//		get user authority
-		Set<String> authoritySet = permissionService.getUserAuthorityList(userDetail);
+//		get login user authority
+		Set<String> authoritySet = permissionService.getLoginUserAuthorityList(userDetail);
 //		get role code by user id
 		List<String> roleCodeList = roleMapper.geRoleCodeByUserId(userDetail.getUserId());
 //		set role code to authority set

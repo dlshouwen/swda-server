@@ -34,33 +34,33 @@ public class PermissionController {
 	private final IPermissionService permissionService;
 
 	/**
-	 * get user menu list
-	 * @return user menu list
+	 * get login user menu list
+	 * @return login user menu list
 	 */
-	@PostMapping("/user/menu/list")
-	@Operation(name = "get user menu list", type = OperateType.SEARCH)
+	@PostMapping("/login/user/menu/list")
+	@Operation(name = "get login user menu list", type = OperateType.SEARCH)
 	public R<List<PermissionVO>> getUserMenuList() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
-//		get user menu list
-		List<PermissionVO> userMenuList = permissionService.getUserMenuList(user, PermissionType.MENU);
+//		get login user menu list
+		List<PermissionVO> loginUserMenuList = permissionService.getLoginUserMenuList(user, PermissionType.MENU);
 //		return
-		return R.ok(userMenuList);
+		return R.ok(loginUserMenuList);
 	}
 
 	/**
-	 * get user authority list
-	 * @return user authority list
+	 * get login user authority list
+	 * @return login user authority list
 	 */
-	@PostMapping("/user/authority/list")
-	@Operation(name = "get user authority list", type = OperateType.SEARCH)
-	public R<Set<String>> getUserAuthorityList() {
+	@PostMapping("/login/user/authority/list")
+	@Operation(name = "get login user authority list", type = OperateType.SEARCH)
+	public R<Set<String>> getLoginUserAuthorityList() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
-//		get user authority list
-		Set<String> userAuthorityList = permissionService.getUserAuthorityList(user);
+//		get login user authority list
+		Set<String> loginUserAuthorityList = permissionService.getLoginUserAuthorityList(user);
 //		return
-		return R.ok(userAuthorityList);
+		return R.ok(loginUserAuthorityList);
 	}
 
 	/**

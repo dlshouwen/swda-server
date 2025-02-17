@@ -15,10 +15,10 @@ import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 public interface SystemMapper extends BaseMapper<System> {
 
 	/**
-	 * get user system list
+	 * get login user system list
 	 * @param userId
-	 * @return system list
+	 * @return login user system list
 	 */
-	List<System> getUserSystemList(@Param("userId") Long userId);
+	List<System> getLoginUserSystemList(@Param("userId") Long userId);
 
 }

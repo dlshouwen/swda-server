@@ -30,12 +30,12 @@ import java.util.List;
 public class SystemServiceImpl extends BaseServiceImpl<SystemMapper, System> implements ISystemService {
 
 	/**
-	 * get user system list
+	 * get login user system list
 	 * @param user
-	 * @return system vo list
+	 * @return login user system list
 	 */
 	@Override
-	public List<SystemVO> getUserSystemList(UserDetail user) {
+	public List<SystemVO> getLoginUserSystemList(UserDetail user) {
 //		defined system list
 		List<System> systemList;
 //		if user is super admin
@@ -43,8 +43,8 @@ public class SystemServiceImpl extends BaseServiceImpl<SystemMapper, System> imp
 //			get system list
 			systemList = baseMapper.selectList(null);
 		} else {
-//			get user system list
-			systemList = baseMapper.getUserSystemList(user.getUserId());
+//			get login user system list
+			systemList = baseMapper.getLoginUserSystemList(user.getUserId());
 		}
 //		convert to system vo for return
 		return SystemConvert.INSTANCE.convert2VOList(systemList);

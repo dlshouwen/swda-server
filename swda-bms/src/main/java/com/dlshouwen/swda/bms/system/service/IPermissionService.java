@@ -16,19 +16,19 @@ import java.util.Set;
 public interface IPermissionService extends BaseService<Permission> {
 
 	/**
-	 * get user menu list
+	 * get login user menu list
 	 * @param user
 	 * @param permissionType
-	 * @return permission vo list
+	 * @return login user menu list
 	 */
-	List<PermissionVO> getUserMenuList(UserDetail user, Integer permissionType);
+	List<PermissionVO> getLoginUserMenuList(UserDetail user, Integer permissionType);
 	
 	/**
-	 * get user authority list
+	 * get login user authority list
 	 * @param user
-	 * @return user authority list
+	 * @return login user authority list
 	 */
-	Set<String> getUserAuthorityList(UserDetail user);
+	Set<String> getLoginUserAuthorityList(UserDetail user);
 
 	/**
 	 * get permission list

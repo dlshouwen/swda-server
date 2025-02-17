@@ -22,19 +22,19 @@ public interface PermissionMapper extends BaseMapper<Permission> {
 	List<Permission> getPermissionList(@Param("permissionType") Integer permissionType);
 
 	/**
-	 * get user permission list
+	 * get login user permission list
 	 * @param userId
 	 * @param permissionType
-	 * @return permission list
+	 * @return login user permission list
 	 */
-	List<Permission> getUserPermissionList(@Param("userId") Long userId, @Param("permissionType") Integer permissionType);
+	List<Permission> getLoginUserPermissionList(@Param("userId") Long userId, @Param("permissionType") Integer permissionType);
 
 	/**
 	 * user authority list
 	 * @param userId
 	 * @return authority list
 	 */
-	List<String> getUserAuthorityList(@Param("userId") Long userId);
+	List<String> getLoginUserAuthorityList(@Param("userId") Long userId);
 
 	/**
 	 * get authority list

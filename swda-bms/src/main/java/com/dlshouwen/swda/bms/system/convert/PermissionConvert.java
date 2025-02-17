@@ -4,6 +4,7 @@ import com.dlshouwen.swda.bms.system.entity.Permission;
 import com.dlshouwen.swda.bms.system.vo.PermissionVO;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -32,6 +33,9 @@ public interface PermissionConvert {
 	 * @param permission
 	 * @return permission vo
 	 */
+	@Mapping(source = "permissionId", target = "id")
+	@Mapping(source = "prePermissionId", target = "pid")
+	@Mapping(source = "permissionName", target = "name")
 	PermissionVO convert2VO(Permission entity);
 
 	/**

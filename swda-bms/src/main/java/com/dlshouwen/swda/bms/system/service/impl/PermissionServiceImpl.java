@@ -38,13 +38,13 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 	private final IRolePermissionService rolePermissionService;
 
 	/**
-	 * get user menu list
+	 * get login user menu list
 	 * @param user
 	 * @param permissionType
-	 * @return permission vo list
+	 * @return login user menu list
 	 */
 	@Override
-	public List<PermissionVO> getUserMenuList(UserDetail user, Integer permissionType) {
+	public List<PermissionVO> getLoginUserMenuList(UserDetail user, Integer permissionType) {
 //		defined permission list
 		List<Permission> permissionList;
 //		if user is super admin
@@ -52,20 +52,20 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 //			get permission list
 			permissionList = baseMapper.getPermissionList(permissionType);
 		} else {
-//			get user permission list
-			permissionList = baseMapper.getUserPermissionList(user.getUserId(), permissionType);
+//			get login user permission list
+			permissionList = baseMapper.getLoginUserPermissionList(user.getUserId(), permissionType);
 		}
 //		build permission tree for return
 		return TreeUtils.build(PermissionConvert.INSTANCE.convert2VOList(permissionList));
 	}
 
 	/**
-	 * get user authority list
+	 * get login user authority list
 	 * @param user
-	 * @return user authority list
+	 * @return login user authority list
 	 */
 	@Override
-	public Set<String> getUserAuthorityList(UserDetail user) {
+	public Set<String> getLoginUserAuthorityList(UserDetail user) {
 //		defined authority list
 		List<String> authorityList;
 //		if user is super admin
@@ -74,7 +74,7 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 			authorityList = baseMapper.getAuthorityList();
 		} else {
 //			get user authority list
-			authorityList = baseMapper.getUserAuthorityList(user.getUserId());
+			authorityList = baseMapper.getLoginUserAuthorityList(user.getUserId());
 		}
 //		defined perms set
 		Set<String> permsSet = new HashSet<>();

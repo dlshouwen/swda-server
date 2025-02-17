@@ -30,6 +30,9 @@ public class PermissionVO extends TreeNode<PermissionVO> {
 	
 	@Schema(description = "parent permission id")
 	private Long prePermissionId;
+	
+	@Schema(description = "system id")
+	private Long systemId;
 
 	@Schema(description = "permission code")
 	@NotBlank(message = "权限编码不能为空")

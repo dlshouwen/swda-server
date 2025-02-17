@@ -104,6 +104,7 @@ public class UserDetail implements UserDetails {
 	 * @return is account non expired
 	 */
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		return true;
 	}
@@ -113,6 +114,7 @@ public class UserDetail implements UserDetails {
 	 * @return is account non locked
 	 */
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		return true;
 	}
@@ -122,6 +124,7 @@ public class UserDetail implements UserDetails {
 	 * @return is credentials non expired
 	 */
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 //		1900 then expired
 		if(this.getPasswordExpireTime().getYear()==1900){
@@ -136,6 +139,7 @@ public class UserDetail implements UserDetails {
 	 * @return is enabled
 	 */
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		return this.getStatus() == OpenClose.OPEN;
 	}

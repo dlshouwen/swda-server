@@ -42,7 +42,7 @@ public class TokenUtils {
 	 */
 	public static String getAccessToken(HttpServletRequest request) {
 //		get and return access token
-		return request.getHeader("access_token");
+		return request.getHeader("Authorization");
 	}
 
 }

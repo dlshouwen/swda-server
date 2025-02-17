@@ -16,7 +16,9 @@ import org.hibernate.validator.constraints.Range;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * user vo
@@ -35,8 +37,10 @@ public class UserVO implements Serializable, TransPojo {
 
 	@Schema(description = "organ id")
 	@NotNull(message = "机构ID不能为空")
-	@Trans(type = TransType.SIMPLE, target = Organ.class, fields = "name", ref = "organName")
+	@Trans(type = TransType.SIMPLE, target = Organ.class, fields = "organName")
 	private Long organId;
+	
+	private String organName;
 
 	@Schema(description = "user code")
 	@NotBlank(message = "用户名不能为空")
@@ -66,12 +70,18 @@ public class UserVO implements Serializable, TransPojo {
 	private Integer superAdmin;
 	
 	@Schema(description = "status")
+	@Trans(type = TransType.DICTIONARY, key = "open_close", fields = "statusName")
 	@Range(min = 0, max = 1, message = "状态不正确")
 	private Integer status;
+	
+	private String statusName;
 
 	@Schema(description = "gender")
 	@Range(min = 0, max = 2, message = "性别不正确")
+	@Trans(type = TransType.DICTIONARY, key = "gender", fields = "genderName")
 	private Integer gender;
+	
+	private String genderName;
 
 	@Schema(description = "card id")
 	private String cardId;
@@ -99,8 +109,7 @@ public class UserVO implements Serializable, TransPojo {
 
 	@Schema(description = "post name list")
 	private List<String> postNameList;
-
-	@Schema(description = "organ name")
-	private String organName;
+	
+	Map<String, Object> transMap = new HashMap<String, Object>();
 
 }

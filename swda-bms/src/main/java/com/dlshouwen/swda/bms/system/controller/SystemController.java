@@ -36,18 +36,18 @@ public class SystemController {
 	private final ISystemService systemService;
 
 	/**
-	 * get user system list
-	 * @return user system list
+	 * get login user system list
+	 * @return login user system list
 	 */
-	@PostMapping("/user/system/list")
-	@Operation(name = "get user system list", type = OperateType.SEARCH)
-	public R<List<SystemVO>> getUserSystemList() {
+	@PostMapping("/login/user/system/list")
+	@Operation(name = "get login user system list", type = OperateType.SEARCH)
+	public R<List<SystemVO>> getLoginUserSystemList() {
 //		get login user
 		UserDetail user = SecurityUser.getUser();
-//		get user system list
-		List<SystemVO> userSystemList = systemService.getUserSystemList(user);
+//		get login user system list
+		List<SystemVO> loginUserSystemList = systemService.getLoginUserSystemList(user);
 //		return
-		return R.ok(userSystemList);
+		return R.ok(loginUserSystemList);
 	}
 
 	/**

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.dlshouwen.swda.bms.system.mapper.SystemMapper">
 
-	<select id="getUserSystemList" resultType="com.dlshouwen.swda.bms.system.entity.System">
+	<select id="getLoginUserSystemList" resultType="com.dlshouwen.swda.bms.system.entity.System">
 		select s.*
 		from bms_system s
 		left join bms_user_system us on s.system_id=us.system_id
