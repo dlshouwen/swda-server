@@ -18,9 +18,9 @@ import com.dlshouwen.swda.bms.app.entity.UserToken;
 import com.dlshouwen.swda.bms.app.mapper.UserTokenMapper;
 import com.dlshouwen.swda.bms.app.service.IUserTokenService;
 import com.dlshouwen.swda.bms.app.vo.UserTokenVO;
-import com.dlshouwen.swda.bms.system.convert.UserConvert;
-import com.dlshouwen.swda.bms.system.entity.User;
-import com.dlshouwen.swda.bms.system.mapper.UserMapper;
+import com.dlshouwen.swda.bms.permission.convert.UserConvert;
+import com.dlshouwen.swda.bms.permission.entity.User;
+import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

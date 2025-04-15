@@ -2,14 +2,14 @@ package com.dlshouwen.swda.bms.core.security.service;
 
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.system.convert.UserConvert;
-import com.dlshouwen.swda.bms.system.dict.DataScopeType;
-import com.dlshouwen.swda.bms.system.entity.User;
-import com.dlshouwen.swda.bms.system.mapper.RoleMapper;
-import com.dlshouwen.swda.bms.system.mapper.RoleOrganMapper;
-import com.dlshouwen.swda.bms.system.mapper.UserMapper;
-import com.dlshouwen.swda.bms.system.service.IOrganService;
-import com.dlshouwen.swda.bms.system.service.IPermissionService;
+import com.dlshouwen.swda.bms.permission.convert.UserConvert;
+import com.dlshouwen.swda.bms.permission.dict.DataScopeType;
+import com.dlshouwen.swda.bms.permission.entity.User;
+import com.dlshouwen.swda.bms.permission.mapper.RoleMapper;
+import com.dlshouwen.swda.bms.permission.mapper.RoleOrganMapper;
+import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
+import com.dlshouwen.swda.bms.permission.service.IOrganService;
+import com.dlshouwen.swda.bms.system.service.IMenuService;
 import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 
@@ -31,8 +31,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen.swda.core.security.account.UserDetailsService {
 	
-	/** permission service */
-	private final IPermissionService permissionService;
+	/** menu service */
+	private final IMenuService menuService;
 	
 	/** organ service */
 	private final IOrganService organService;
@@ -79,7 +79,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen
 		List<Long> dataScopeList = getDataScope(userDetail);
 		userDetail.setDataScopeList(dataScopeList);
 //		get login user authority
-		Set<String> authoritySet = permissionService.getLoginUserAuthorityList(userDetail);
+		Set<String> authoritySet = menuService.getLoginUserAuthorityList(userDetail);
 //		get role code by user id
 		List<String> roleCodeList = roleMapper.geRoleCodeByUserId(userDetail.getUserId());
 //		set role code to authority set

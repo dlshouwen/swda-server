@@ -165,7 +165,7 @@ Sub 处理初始化脚本()
         level3 = 1
         level4 = 1
         
-        If Sheet.Name = "bms_permission" Then
+        If Sheet.Name = "bms_menu" Then
         
             For j = 2 To RowCount
                 s = ""

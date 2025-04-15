@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.bms.app.service.IAuthService;
-import com.dlshouwen.swda.bms.system.convert.UserConvert;
-import com.dlshouwen.swda.bms.system.entity.User;
-import com.dlshouwen.swda.bms.system.mapper.UserMapper;
+import com.dlshouwen.swda.bms.permission.convert.UserConvert;
+import com.dlshouwen.swda.bms.permission.entity.User;
+import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
 import com.dlshouwen.swda.core.common.exception.SwdaException;
 import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.account.UserDetailsService;
