@@ -1,6 +1,6 @@
-package com.dlshouwen.swda.bms.app.vo;
+package com.dlshouwen.swda.core.base.vo;
 
-import com.dlshouwen.swda.core.common.utils.DateUtils;
+import com.dlshouwen.swda.core.base.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

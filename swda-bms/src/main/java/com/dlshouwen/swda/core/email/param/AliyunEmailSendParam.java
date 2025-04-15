@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.common.email.param;
+package com.dlshouwen.swda.core.email.param;
 
 import lombok.Data;
 

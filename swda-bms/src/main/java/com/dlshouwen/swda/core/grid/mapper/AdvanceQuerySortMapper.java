@@ -1,6 +1,6 @@
-package com.dlshouwen.swda.bms.core.grid.mapper;
+package com.dlshouwen.swda.core.grid.mapper;
 
-import com.dlshouwen.swda.bms.core.grid.entity.AdvanceQuerySort;
+import com.dlshouwen.swda.core.grid.entity.AdvanceQuerySort;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
 /**

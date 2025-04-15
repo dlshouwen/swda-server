@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.dict.ZeroOne;
-import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
-import com.dlshouwen.swda.core.common.utils.IpUtils;
+import com.dlshouwen.swda.core.base.dict.ZeroOne;
+import com.dlshouwen.swda.core.base.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.base.utils.IpUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.entity.LoginLog;

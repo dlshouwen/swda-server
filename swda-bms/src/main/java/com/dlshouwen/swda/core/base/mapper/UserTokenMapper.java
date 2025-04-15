@@ -1,8 +1,8 @@
-package com.dlshouwen.swda.bms.app.mapper;
+package com.dlshouwen.swda.core.base.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.dlshouwen.swda.bms.app.entity.UserToken;
+import com.dlshouwen.swda.core.base.entity.UserToken;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
 import java.time.LocalDateTime;

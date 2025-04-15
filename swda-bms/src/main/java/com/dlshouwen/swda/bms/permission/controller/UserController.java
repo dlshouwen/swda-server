@@ -5,14 +5,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.user.UserDetail;
-import com.dlshouwen.swda.bms.app.vo.UserPasswordVO;
+import com.dlshouwen.swda.core.base.vo.UserPasswordVO;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.service.IPostService;

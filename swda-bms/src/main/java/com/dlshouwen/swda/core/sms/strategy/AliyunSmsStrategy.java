@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.sms.strategy;
+package com.dlshouwen.swda.core.sms.strategy;
 
 import cn.hutool.core.map.MapUtil;
 import com.aliyun.dysmsapi20170525.Client;
@@ -6,8 +6,8 @@ import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.teaopenapi.models.Config;
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
-import com.dlshouwen.swda.core.common.utils.JsonUtils;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.utils.JsonUtils;
 
 import java.util.Map;
 

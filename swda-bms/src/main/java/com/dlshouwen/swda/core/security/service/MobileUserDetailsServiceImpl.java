@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.security.service;
+package com.dlshouwen.swda.core.security.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -3,8 +3,8 @@ package com.dlshouwen.swda.bms.system.cache;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.dlshouwen.swda.core.common.cache.RedisCache;
-import com.dlshouwen.swda.core.common.constant.Constant;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
+import com.dlshouwen.swda.core.base.constant.Constant;
 
 /**
  * attr cache

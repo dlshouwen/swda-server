@@ -1,23 +1,23 @@
-package com.dlshouwen.swda.bms.app.service.impl;
+package com.dlshouwen.swda.core.base.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.enums.ResultCode;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.enums.ResultCode;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.account.UserDetailsService;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.properties.TokenProperties;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;
-import com.dlshouwen.swda.bms.app.convert.UserTokenConvert;
-import com.dlshouwen.swda.bms.app.entity.UserToken;
-import com.dlshouwen.swda.bms.app.mapper.UserTokenMapper;
-import com.dlshouwen.swda.bms.app.service.IUserTokenService;
-import com.dlshouwen.swda.bms.app.vo.UserTokenVO;
+import com.dlshouwen.swda.core.base.convert.UserTokenConvert;
+import com.dlshouwen.swda.core.base.entity.UserToken;
+import com.dlshouwen.swda.core.base.mapper.UserTokenMapper;
+import com.dlshouwen.swda.core.base.service.IUserTokenService;
+import com.dlshouwen.swda.core.base.vo.UserTokenVO;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.mapper.UserMapper;

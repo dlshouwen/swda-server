@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.sms.strategy;
+package com.dlshouwen.swda.core.sms.strategy;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.map.MapUtil;
@@ -8,8 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
-import com.dlshouwen.swda.core.common.utils.JsonUtils;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.utils.JsonUtils;
 
 import javax.net.ssl.*;
 import java.io.UnsupportedEncodingException;

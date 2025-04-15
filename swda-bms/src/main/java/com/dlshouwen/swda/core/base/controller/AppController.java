@@ -1,9 +1,9 @@
-package com.dlshouwen.swda.bms.app.controller;
+package com.dlshouwen.swda.core.base.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.bms.system.convert.DictConvert;

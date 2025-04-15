@@ -1,19 +1,19 @@
-package com.dlshouwen.swda.bms.core.storage.config;
+package com.dlshouwen.swda.core.storage.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.dlshouwen.swda.bms.core.storage.enums.StorageTypeEnum;
-import com.dlshouwen.swda.bms.core.storage.properties.StorageProperties;
-import com.dlshouwen.swda.bms.core.storage.strategy.AliyunStorageStrategy;
-import com.dlshouwen.swda.bms.core.storage.strategy.HuaweiStorageStrategy;
-import com.dlshouwen.swda.bms.core.storage.strategy.LocalStorageStrategy;
-import com.dlshouwen.swda.bms.core.storage.strategy.MinioStorageStrategy;
-import com.dlshouwen.swda.bms.core.storage.strategy.QiniuStorageStrategy;
-import com.dlshouwen.swda.bms.core.storage.strategy.StorageStrategy;
-import com.dlshouwen.swda.bms.core.storage.strategy.TencentStorageStrategy;
+import com.dlshouwen.swda.core.storage.enums.StorageTypeEnum;
+import com.dlshouwen.swda.core.storage.properties.StorageProperties;
+import com.dlshouwen.swda.core.storage.strategy.AliyunStorageStrategy;
+import com.dlshouwen.swda.core.storage.strategy.HuaweiStorageStrategy;
+import com.dlshouwen.swda.core.storage.strategy.LocalStorageStrategy;
+import com.dlshouwen.swda.core.storage.strategy.MinioStorageStrategy;
+import com.dlshouwen.swda.core.storage.strategy.QiniuStorageStrategy;
+import com.dlshouwen.swda.core.storage.strategy.StorageStrategy;
+import com.dlshouwen.swda.core.storage.strategy.TencentStorageStrategy;
 
 /**
  * storage configuration

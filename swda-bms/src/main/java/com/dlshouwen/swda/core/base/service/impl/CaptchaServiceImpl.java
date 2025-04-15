@@ -1,13 +1,13 @@
-package com.dlshouwen.swda.bms.app.service.impl;
+package com.dlshouwen.swda.core.base.service.impl;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.app.service.ICaptchaService;
-import com.dlshouwen.swda.bms.app.vo.CaptchaVO;
-import com.dlshouwen.swda.core.common.cache.RedisCache;
-import com.dlshouwen.swda.core.common.constant.Constant;
+import com.dlshouwen.swda.core.base.service.ICaptchaService;
+import com.dlshouwen.swda.core.base.vo.CaptchaVO;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
+import com.dlshouwen.swda.core.base.constant.Constant;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 

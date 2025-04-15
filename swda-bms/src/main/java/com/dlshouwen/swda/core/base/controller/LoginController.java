@@ -1,19 +1,19 @@
-package com.dlshouwen.swda.bms.app.controller;
+package com.dlshouwen.swda.core.base.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.app.service.ICaptchaService;
-import com.dlshouwen.swda.bms.app.service.ILoginService;
-import com.dlshouwen.swda.bms.app.vo.AccessTokenVO;
-import com.dlshouwen.swda.bms.app.vo.AuthCallbackVO;
-import com.dlshouwen.swda.bms.app.vo.CaptchaVO;
-import com.dlshouwen.swda.bms.app.vo.MobileLoginVO;
-import com.dlshouwen.swda.bms.app.vo.MobileSendCodeVO;
-import com.dlshouwen.swda.bms.app.vo.UserLoginVO;
-import com.dlshouwen.swda.bms.app.vo.UserTokenVO;
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.service.ICaptchaService;
+import com.dlshouwen.swda.core.base.service.ILoginService;
+import com.dlshouwen.swda.core.base.vo.AccessTokenVO;
+import com.dlshouwen.swda.core.base.vo.AuthCallbackVO;
+import com.dlshouwen.swda.core.base.vo.CaptchaVO;
+import com.dlshouwen.swda.core.base.vo.MobileLoginVO;
+import com.dlshouwen.swda.core.base.vo.MobileSendCodeVO;
+import com.dlshouwen.swda.core.base.vo.UserLoginVO;
+import com.dlshouwen.swda.core.base.vo.UserTokenVO;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;

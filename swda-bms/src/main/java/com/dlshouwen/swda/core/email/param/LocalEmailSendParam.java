@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.common.email.param;
+package com.dlshouwen.swda.core.email.param;
 
 import cn.hutool.core.collection.CollectionUtil;
 import lombok.Data;

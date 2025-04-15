@@ -1,9 +1,9 @@
-package com.dlshouwen.swda.bms.core.storage.strategy;
+package com.dlshouwen.swda.core.storage.strategy;
 
 import org.springframework.util.FileCopyUtils;
 
-import com.dlshouwen.swda.bms.core.storage.properties.StorageProperties;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.storage.properties.StorageProperties;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

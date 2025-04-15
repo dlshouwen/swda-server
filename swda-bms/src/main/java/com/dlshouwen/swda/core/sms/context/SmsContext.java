@@ -1,15 +1,15 @@
-package com.dlshouwen.swda.bms.core.sms.context;
+package com.dlshouwen.swda.core.sms.context;
 
 import java.util.Map;
 
-import com.dlshouwen.swda.bms.core.sms.strategy.AliyunSmsStrategy;
-import com.dlshouwen.swda.bms.core.sms.strategy.HuaweiSmsStrategy;
-import com.dlshouwen.swda.bms.core.sms.strategy.QiniuSmsStrategy;
-import com.dlshouwen.swda.bms.core.sms.strategy.SmsStrategy;
-import com.dlshouwen.swda.bms.core.sms.strategy.TencentSmsStrategy;
+import com.dlshouwen.swda.core.sms.strategy.AliyunSmsStrategy;
+import com.dlshouwen.swda.core.sms.strategy.HuaweiSmsStrategy;
+import com.dlshouwen.swda.core.sms.strategy.QiniuSmsStrategy;
+import com.dlshouwen.swda.core.sms.strategy.SmsStrategy;
+import com.dlshouwen.swda.core.sms.strategy.TencentSmsStrategy;
 import com.dlshouwen.swda.bms.platform.dict.SmsPlatformType;
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 
 /**
  * sms context

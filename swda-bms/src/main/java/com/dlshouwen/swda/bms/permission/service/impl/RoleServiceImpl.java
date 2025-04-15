@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.app.service.IUserTokenService;
+import com.dlshouwen.swda.core.base.service.IUserTokenService;
 import com.dlshouwen.swda.bms.permission.convert.RoleConvert;
 import com.dlshouwen.swda.bms.permission.dict.DataScopeType;
 import com.dlshouwen.swda.bms.permission.entity.Role;

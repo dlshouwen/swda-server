@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.common.email.service;
+package com.dlshouwen.swda.core.email.service;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
@@ -7,18 +7,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.dlshouwen.swda.common.email.cache.EmailCache;
-import com.dlshouwen.swda.common.email.param.AliyunEmailBatchSendParam;
-import com.dlshouwen.swda.common.email.param.AliyunEmailSendParam;
-import com.dlshouwen.swda.common.email.param.LocalEmailSendParam;
-import com.dlshouwen.swda.common.email.utils.AliyunEmailUtils;
-import com.dlshouwen.swda.common.email.utils.LocalEmailUtils;
+import com.dlshouwen.swda.core.email.cache.EmailCache;
+import com.dlshouwen.swda.core.email.param.AliyunEmailBatchSendParam;
+import com.dlshouwen.swda.core.email.param.AliyunEmailSendParam;
+import com.dlshouwen.swda.core.email.param.LocalEmailSendParam;
+import com.dlshouwen.swda.core.email.utils.AliyunEmailUtils;
+import com.dlshouwen.swda.core.email.utils.LocalEmailUtils;
 import com.dlshouwen.swda.bms.log.entity.EmailLog;
 import com.dlshouwen.swda.bms.log.service.IEmailLogService;
 import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
 import com.dlshouwen.swda.bms.platform.service.IEmailPlatformService;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
-import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.log.dict.CallResult;
 
 import java.io.File;

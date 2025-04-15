@@ -1,12 +1,12 @@
-package com.dlshouwen.swda.bms.core.storage.controller;
+package com.dlshouwen.swda.core.storage.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.core.storage.strategy.StorageStrategy;
-import com.dlshouwen.swda.bms.core.storage.vo.FileUploadVO;
-import com.dlshouwen.swda.core.common.entity.R;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.storage.strategy.StorageStrategy;
+import com.dlshouwen.swda.core.storage.vo.FileUploadVO;
+import com.dlshouwen.swda.core.base.entity.R;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 

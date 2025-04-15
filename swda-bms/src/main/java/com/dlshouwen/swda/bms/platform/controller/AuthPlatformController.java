@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.platform.entity.AuthPlatform;
 import com.dlshouwen.swda.bms.platform.service.IAuthPlatformService;
 import com.dlshouwen.swda.bms.platform.vo.AuthPlatformVO;
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;

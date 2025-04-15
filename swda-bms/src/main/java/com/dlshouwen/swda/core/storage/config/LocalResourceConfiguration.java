@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.storage.config;
+package com.dlshouwen.swda.core.storage.config;
 
 import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.dlshouwen.swda.bms.core.storage.enums.StorageTypeEnum;
-import com.dlshouwen.swda.bms.core.storage.properties.LocalStorageProperties;
-import com.dlshouwen.swda.bms.core.storage.properties.StorageProperties;
+import com.dlshouwen.swda.core.storage.enums.StorageTypeEnum;
+import com.dlshouwen.swda.core.storage.properties.LocalStorageProperties;
+import com.dlshouwen.swda.core.storage.properties.StorageProperties;
 
 /**
  * local resource configuration

@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.constant.Constant;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
-import com.dlshouwen.swda.core.common.utils.TreeUtils;
+import com.dlshouwen.swda.core.base.constant.Constant;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.utils.TreeUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.permission.convert.OrganConvert;
 import com.dlshouwen.swda.bms.permission.entity.Organ;

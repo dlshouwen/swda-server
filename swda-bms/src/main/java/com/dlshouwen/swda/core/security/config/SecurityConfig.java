@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.security.config;
+package com.dlshouwen.swda.core.security.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;

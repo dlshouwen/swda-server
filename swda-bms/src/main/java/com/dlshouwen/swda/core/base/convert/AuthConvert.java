@@ -1,7 +1,7 @@
-package com.dlshouwen.swda.bms.app.convert;
+package com.dlshouwen.swda.core.base.convert;
 
-import com.dlshouwen.swda.bms.app.entity.Auth;
-import com.dlshouwen.swda.bms.app.vo.AuthVO;
+import com.dlshouwen.swda.core.base.entity.Auth;
+import com.dlshouwen.swda.core.base.vo.AuthVO;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

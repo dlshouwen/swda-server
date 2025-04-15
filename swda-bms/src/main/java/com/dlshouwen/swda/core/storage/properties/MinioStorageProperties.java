@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.storage.properties;
+package com.dlshouwen.swda.core.storage.properties;
 
 import lombok.Data;
 

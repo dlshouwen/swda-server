@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.app.entity;
+package com.dlshouwen.swda.core.base.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

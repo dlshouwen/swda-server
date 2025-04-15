@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.system.dict.MenuType;
 import com.dlshouwen.swda.bms.system.service.IMenuService;
 import com.dlshouwen.swda.bms.system.vo.MenuVO;
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;

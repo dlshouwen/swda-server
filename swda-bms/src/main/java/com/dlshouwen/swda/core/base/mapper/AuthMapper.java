@@ -1,6 +1,6 @@
-package com.dlshouwen.swda.bms.app.mapper;
+package com.dlshouwen.swda.core.base.mapper;
 
-import com.dlshouwen.swda.bms.app.entity.Auth;
+import com.dlshouwen.swda.core.base.entity.Auth;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
 /**

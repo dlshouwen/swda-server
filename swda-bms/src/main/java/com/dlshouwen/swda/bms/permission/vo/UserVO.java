@@ -1,7 +1,7 @@
 package com.dlshouwen.swda.bms.permission.vo;
 
 import com.dlshouwen.swda.bms.permission.entity.Organ;
-import com.dlshouwen.swda.core.common.utils.DateUtils;
+import com.dlshouwen.swda.core.base.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fhs.core.trans.anno.Trans;

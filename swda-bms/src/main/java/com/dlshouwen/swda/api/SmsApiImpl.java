@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.api;
+package com.dlshouwen.swda.api;
 
 import lombok.AllArgsConstructor;
 
@@ -6,9 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.dlshouwen.swda.api.module.SmsApi;
-import com.dlshouwen.swda.bms.core.sms.cache.SmsCache;
-import com.dlshouwen.swda.bms.core.sms.service.SmsService;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.sms.cache.SmsCache;
+import com.dlshouwen.swda.core.sms.service.SmsService;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 
 import java.util.HashMap;
 import java.util.Map;

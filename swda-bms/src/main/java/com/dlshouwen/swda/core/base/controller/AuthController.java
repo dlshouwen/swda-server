@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.app.controller;
+package com.dlshouwen.swda.core.base.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,13 +9,13 @@ import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
 
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
-import com.dlshouwen.swda.bms.app.service.IAuthService;
-import com.dlshouwen.swda.bms.app.vo.AuthCallbackVO;
-import com.dlshouwen.swda.bms.app.vo.AuthVO;
+import com.dlshouwen.swda.core.base.service.IAuthService;
+import com.dlshouwen.swda.core.base.vo.AuthCallbackVO;
+import com.dlshouwen.swda.core.base.vo.AuthVO;
 import com.dlshouwen.swda.bms.platform.service.IAuthPlatformService;
 
 import org.springframework.web.bind.annotation.*;

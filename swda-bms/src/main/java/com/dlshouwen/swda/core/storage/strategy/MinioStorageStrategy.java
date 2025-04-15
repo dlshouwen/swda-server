@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.storage.strategy;
+package com.dlshouwen.swda.core.storage.strategy;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
@@ -7,8 +7,8 @@ import io.minio.PutObjectArgs;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 
-import com.dlshouwen.swda.bms.core.storage.properties.StorageProperties;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.storage.properties.StorageProperties;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

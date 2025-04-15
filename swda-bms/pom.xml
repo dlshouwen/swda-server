@@ -22,7 +22,7 @@
 		<!-- swda common -->
 		<dependency>
 			<groupId>com.dlshouwen</groupId>
-			<artifactId>swda-common</artifactId>
+			<artifactId>swda-core</artifactId>
 		</dependency>
 		<!-- swda api -->
 		<dependency>

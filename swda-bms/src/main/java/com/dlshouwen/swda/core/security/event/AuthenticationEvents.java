@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.security.event;
+package com.dlshouwen.swda.core.security.event;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;

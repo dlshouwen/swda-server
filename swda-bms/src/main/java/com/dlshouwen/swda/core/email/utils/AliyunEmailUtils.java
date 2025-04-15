@@ -1,11 +1,11 @@
-package com.dlshouwen.swda.common.email.utils;
+package com.dlshouwen.swda.core.email.utils;
 
 import com.aliyun.dm20151123.Client;
 import com.aliyun.dm20151123.models.BatchSendMailRequest;
 import com.aliyun.dm20151123.models.SingleSendMailRequest;
 import com.aliyun.teaopenapi.models.Config;
-import com.dlshouwen.swda.common.base.exception.SwdaException;
-import com.dlshouwen.swda.common.email.entity.EmailPlatform;
+import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 
 import lombok.extern.slf4j.Slf4j;
 

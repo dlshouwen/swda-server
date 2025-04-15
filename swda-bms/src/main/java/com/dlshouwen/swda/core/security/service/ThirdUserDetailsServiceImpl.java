@@ -1,15 +1,15 @@
-package com.dlshouwen.swda.bms.core.security.service;
+package com.dlshouwen.swda.core.security.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.dlshouwen.swda.bms.app.service.IAuthService;
+import com.dlshouwen.swda.core.base.service.IAuthService;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.account.UserDetailsService;
 import com.dlshouwen.swda.core.security.third.ThirdUserDetailsService;

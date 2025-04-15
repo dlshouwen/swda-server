@@ -1,16 +1,16 @@
-package com.dlshouwen.swda.bms.app.service.impl;
+package com.dlshouwen.swda.core.base.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import me.zhyd.oauth.model.AuthUser;
 
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
-import com.dlshouwen.swda.bms.app.convert.AuthConvert;
-import com.dlshouwen.swda.bms.app.entity.Auth;
-import com.dlshouwen.swda.bms.app.mapper.AuthMapper;
-import com.dlshouwen.swda.bms.app.service.IAuthService;
-import com.dlshouwen.swda.bms.app.vo.AuthVO;
+import com.dlshouwen.swda.core.base.convert.AuthConvert;
+import com.dlshouwen.swda.core.base.entity.Auth;
+import com.dlshouwen.swda.core.base.mapper.AuthMapper;
+import com.dlshouwen.swda.core.base.service.IAuthService;
+import com.dlshouwen.swda.core.base.vo.AuthVO;
 
 import org.springframework.stereotype.Service;
 

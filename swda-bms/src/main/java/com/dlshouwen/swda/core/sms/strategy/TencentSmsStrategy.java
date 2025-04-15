@@ -1,9 +1,9 @@
-package com.dlshouwen.swda.bms.core.sms.strategy;
+package com.dlshouwen.swda.core.sms.strategy;
 
 import cn.hutool.core.map.MapUtil;
 
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;

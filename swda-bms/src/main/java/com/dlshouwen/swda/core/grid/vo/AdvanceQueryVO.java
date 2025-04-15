@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.grid.vo;
+package com.dlshouwen.swda.core.grid.vo;
 
 import java.io.Serializable;
 import java.util.List;

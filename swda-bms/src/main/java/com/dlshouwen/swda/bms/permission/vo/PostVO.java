@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.permission.vo;
 
-import com.dlshouwen.swda.core.common.utils.DateUtils;
+import com.dlshouwen.swda.core.base.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;

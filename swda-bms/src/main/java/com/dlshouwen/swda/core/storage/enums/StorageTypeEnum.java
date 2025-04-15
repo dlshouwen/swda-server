@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.storage.enums;
+package com.dlshouwen.swda.core.storage.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

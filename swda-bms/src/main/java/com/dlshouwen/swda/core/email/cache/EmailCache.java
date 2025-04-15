@@ -1,10 +1,10 @@
-package com.dlshouwen.swda.common.email.cache;
+package com.dlshouwen.swda.core.email.cache;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.dlshouwen.swda.common.base.cache.RedisCache;
-import com.dlshouwen.swda.common.email.entity.EmailPlatform;
+import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
 
 import java.util.List;
 

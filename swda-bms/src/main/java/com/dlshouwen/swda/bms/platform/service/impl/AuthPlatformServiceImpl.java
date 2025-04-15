@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.request.*;
 
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;

@@ -20,7 +20,7 @@ import com.dlshouwen.swda.bms.log.convert.SmsLogConvert;
 import com.dlshouwen.swda.bms.log.entity.SmsLog;
 import com.dlshouwen.swda.bms.log.service.ISmsLogService;
 import com.dlshouwen.swda.bms.log.vo.SmsLogVO;
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;

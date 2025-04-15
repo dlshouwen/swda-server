@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fhs.trans.service.impl.DictionaryTransService;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;

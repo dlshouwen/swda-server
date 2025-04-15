@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.dict.ZeroOne;
+import com.dlshouwen.swda.core.base.dict.ZeroOne;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;

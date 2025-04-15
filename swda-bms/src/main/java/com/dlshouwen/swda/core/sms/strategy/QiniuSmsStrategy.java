@@ -1,7 +1,7 @@
-package com.dlshouwen.swda.bms.core.sms.strategy;
+package com.dlshouwen.swda.core.sms.strategy;
 
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.qiniu.http.Response;
 import com.qiniu.sms.SmsManager;
 import com.qiniu.util.Auth;

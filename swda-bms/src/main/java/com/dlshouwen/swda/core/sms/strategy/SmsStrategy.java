@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.sms.strategy;
+package com.dlshouwen.swda.core.sms.strategy;
 
 import java.util.Map;
 

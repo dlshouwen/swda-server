@@ -8,13 +8,13 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.dlshouwen.swda.bms.core.sms.service.SmsService;
+import com.dlshouwen.swda.core.sms.service.SmsService;
 import com.dlshouwen.swda.bms.platform.convert.SmsPlatformConvert;
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
 import com.dlshouwen.swda.bms.platform.service.ISmsPlatformService;
 import com.dlshouwen.swda.bms.platform.vo.SmsPlatformVO;
 import com.dlshouwen.swda.bms.platform.vo.SmsSendVO;
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;

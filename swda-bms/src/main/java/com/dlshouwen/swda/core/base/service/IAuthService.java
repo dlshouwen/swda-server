@@ -1,9 +1,9 @@
-package com.dlshouwen.swda.bms.app.service;
+package com.dlshouwen.swda.core.base.service;
 
 import me.zhyd.oauth.model.AuthUser;
 
-import com.dlshouwen.swda.bms.app.entity.Auth;
-import com.dlshouwen.swda.bms.app.vo.AuthVO;
+import com.dlshouwen.swda.core.base.entity.Auth;
+import com.dlshouwen.swda.core.base.vo.AuthVO;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 
 import java.util.List;

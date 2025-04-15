@@ -1,11 +1,11 @@
-package com.dlshouwen.swda.bms.app.service;
+package com.dlshouwen.swda.core.base.service;
 
-import com.dlshouwen.swda.bms.app.vo.AccessTokenVO;
-import com.dlshouwen.swda.bms.app.vo.AuthCallbackVO;
-import com.dlshouwen.swda.bms.app.vo.MobileLoginVO;
-import com.dlshouwen.swda.bms.app.vo.MobileSendCodeVO;
-import com.dlshouwen.swda.bms.app.vo.UserLoginVO;
-import com.dlshouwen.swda.bms.app.vo.UserTokenVO;
+import com.dlshouwen.swda.core.base.vo.AccessTokenVO;
+import com.dlshouwen.swda.core.base.vo.AuthCallbackVO;
+import com.dlshouwen.swda.core.base.vo.MobileLoginVO;
+import com.dlshouwen.swda.core.base.vo.MobileSendCodeVO;
+import com.dlshouwen.swda.core.base.vo.UserLoginVO;
+import com.dlshouwen.swda.core.base.vo.UserTokenVO;
 
 /**
  * auth service

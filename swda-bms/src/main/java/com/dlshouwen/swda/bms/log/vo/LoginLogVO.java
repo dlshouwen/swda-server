@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.bms.log.vo;
 
-import com.dlshouwen.swda.core.common.utils.DateUtils;
+import com.dlshouwen.swda.core.base.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fhs.core.trans.vo.TransPojo;
 import io.swagger.v3.oas.annotations.media.Schema;

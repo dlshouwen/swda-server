@@ -1,7 +1,7 @@
-package com.dlshouwen.swda.bms.app.service;
+package com.dlshouwen.swda.core.base.service;
 
-import com.dlshouwen.swda.bms.app.entity.UserToken;
-import com.dlshouwen.swda.bms.app.vo.UserTokenVO;
+import com.dlshouwen.swda.core.base.entity.UserToken;
+import com.dlshouwen.swda.core.base.vo.UserTokenVO;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 
 /**

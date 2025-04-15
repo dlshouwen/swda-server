@@ -1,10 +1,10 @@
-package com.dlshouwen.swda.bms.core.storage.properties;
+package com.dlshouwen.swda.core.storage.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import com.dlshouwen.swda.bms.core.storage.enums.StorageTypeEnum;
+import com.dlshouwen.swda.core.storage.enums.StorageTypeEnum;
 
 /**
  * storage properties

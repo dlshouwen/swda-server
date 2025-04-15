@@ -11,9 +11,9 @@ import com.dlshouwen.swda.bms.system.entity.Menu;
 import com.dlshouwen.swda.bms.system.mapper.MenuMapper;
 import com.dlshouwen.swda.bms.system.service.IMenuService;
 import com.dlshouwen.swda.bms.system.vo.MenuVO;
-import com.dlshouwen.swda.core.common.dict.ZeroOne;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
-import com.dlshouwen.swda.core.common.utils.TreeUtils;
+import com.dlshouwen.swda.core.base.dict.ZeroOne;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.utils.TreeUtils;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 

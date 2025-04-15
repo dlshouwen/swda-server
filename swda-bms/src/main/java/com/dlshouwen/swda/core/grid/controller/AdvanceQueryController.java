@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.grid.controller;
+package com.dlshouwen.swda.core.grid.controller;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dlshouwen.swda.core.common.entity.R;
-import com.dlshouwen.swda.bms.core.grid.service.IAdvanceQueryConditionService;
-import com.dlshouwen.swda.bms.core.grid.service.IAdvanceQueryService;
-import com.dlshouwen.swda.bms.core.grid.service.IAdvanceQuerySortService;
-import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQueryConditionVO;
-import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQuerySortVO;
-import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQueryVO;
+import com.dlshouwen.swda.core.base.entity.R;
+import com.dlshouwen.swda.core.grid.service.IAdvanceQueryConditionService;
+import com.dlshouwen.swda.core.grid.service.IAdvanceQueryService;
+import com.dlshouwen.swda.core.grid.service.IAdvanceQuerySortService;
+import com.dlshouwen.swda.core.grid.vo.AdvanceQueryConditionVO;
+import com.dlshouwen.swda.core.grid.vo.AdvanceQuerySortVO;
+import com.dlshouwen.swda.core.grid.vo.AdvanceQueryVO;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;

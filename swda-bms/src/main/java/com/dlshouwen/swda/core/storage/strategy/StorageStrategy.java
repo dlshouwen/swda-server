@@ -1,10 +1,10 @@
-package com.dlshouwen.swda.bms.core.storage.strategy;
+package com.dlshouwen.swda.core.storage.strategy;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.file.FileNameUtil;
 import org.springframework.util.StringUtils;
 
-import com.dlshouwen.swda.bms.core.storage.properties.StorageProperties;
+import com.dlshouwen.swda.core.storage.properties.StorageProperties;
 
 import java.io.InputStream;
 import java.util.Date;

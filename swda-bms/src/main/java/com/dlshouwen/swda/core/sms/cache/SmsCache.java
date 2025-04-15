@@ -1,11 +1,11 @@
-package com.dlshouwen.swda.bms.core.sms.cache;
+package com.dlshouwen.swda.core.sms.cache;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.bms.platform.entity.SmsPlatform;
 import com.dlshouwen.swda.bms.system.cache.AttrCache;
-import com.dlshouwen.swda.core.common.cache.RedisCache;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
 
 import java.util.List;
 

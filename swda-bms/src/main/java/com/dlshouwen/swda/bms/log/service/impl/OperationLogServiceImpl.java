@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.core.common.cache.RedisCache;
-import com.dlshouwen.swda.core.common.constant.Constant;
-import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
+import com.dlshouwen.swda.core.base.constant.Constant;
+import com.dlshouwen.swda.core.base.utils.ExceptionUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.dto.OperationLogDTO;

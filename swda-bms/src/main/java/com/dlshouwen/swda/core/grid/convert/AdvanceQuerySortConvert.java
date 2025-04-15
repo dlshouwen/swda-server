@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.grid.convert;
+package com.dlshouwen.swda.core.grid.convert;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-import com.dlshouwen.swda.bms.core.grid.entity.AdvanceQuerySort;
-import com.dlshouwen.swda.bms.core.grid.vo.AdvanceQuerySortVO;
+import com.dlshouwen.swda.core.grid.entity.AdvanceQuerySort;
+import com.dlshouwen.swda.core.grid.vo.AdvanceQuerySortVO;
 
 /**
  * advance query sort convert

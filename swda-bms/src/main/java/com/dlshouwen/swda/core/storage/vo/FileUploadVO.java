@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.storage.vo;
+package com.dlshouwen.swda.core.storage.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

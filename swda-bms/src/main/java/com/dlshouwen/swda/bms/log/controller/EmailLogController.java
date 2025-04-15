@@ -11,7 +11,7 @@ import com.dlshouwen.swda.bms.log.convert.EmailLogConvert;
 import com.dlshouwen.swda.bms.log.entity.EmailLog;
 import com.dlshouwen.swda.bms.log.service.IEmailLogService;
 import com.dlshouwen.swda.bms.log.vo.EmailLogVO;
-import com.dlshouwen.swda.core.common.entity.R;
+import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;

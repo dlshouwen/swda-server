@@ -1,10 +1,10 @@
-package com.dlshouwen.swda.bms.api;
+package com.dlshouwen.swda.api;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import com.dlshouwen.swda.api.module.StorageApi;
-import com.dlshouwen.swda.bms.core.storage.strategy.StorageStrategy;
+import com.dlshouwen.swda.core.storage.strategy.StorageStrategy;
 
 import java.io.InputStream;
 

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 import lombok.AllArgsConstructor;
 
-import com.dlshouwen.swda.bms.app.service.IUserTokenService;
+import com.dlshouwen.swda.core.base.service.IUserTokenService;
 import com.dlshouwen.swda.bms.permission.entity.UserRole;
 import com.dlshouwen.swda.bms.permission.mapper.UserRoleMapper;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;

@@ -1,6 +1,6 @@
-package com.dlshouwen.swda.bms.app.service;
+package com.dlshouwen.swda.core.base.service;
 
-import com.dlshouwen.swda.bms.app.vo.CaptchaVO;
+import com.dlshouwen.swda.core.base.vo.CaptchaVO;
 
 /**
  * captcha service

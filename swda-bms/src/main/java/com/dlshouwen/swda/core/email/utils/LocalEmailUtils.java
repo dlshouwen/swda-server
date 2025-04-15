@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.core.email.utils;
+package com.dlshouwen.swda.core.email.utils;
 
 import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 
 import com.dlshouwen.swda.bms.platform.entity.EmailPlatform;
-import com.dlshouwen.swda.core.common.exception.SwdaException;
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 
 /**
  * local email utils
