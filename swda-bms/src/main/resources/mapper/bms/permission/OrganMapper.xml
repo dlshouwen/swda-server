@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dlshouwen.swda.bms.system.mapper.OrganMapper">
+<mapper namespace="com.dlshouwen.swda.bms.permission.mapper.OrganMapper">
 
-	<select id="getOrganList" resultType="com.dlshouwen.swda.bms.system.entity.Organ">
+	<select id="getOrganList" resultType="com.dlshouwen.swda.bms.permission.entity.Organ">
 		select o.*, p.organ_id pre_organ_name
 		from bms_organ o 
 		left join bms_organ p on o.pre_organ_id=p.organ_id
@@ -11,7 +11,7 @@
 		order by o.sort
 	</select>
 
-	<select id="getIdAndPidList" resultType="com.dlshouwen.swda.bms.system.entity.Organ">
+	<select id="getIdAndPidList" resultType="com.dlshouwen.swda.bms.permission.entity.Organ">
 		select o.organ_id, o.pre_organ_id from bms_organ where deleted=0
 	</select>
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dlshouwen.swda.bms.system.mapper.MenuMapper">
+
+	<select id="getMenuList" resultType="com.dlshouwen.swda.bms.system.entity.Menu">
+		select m.*
+		from bms_menu m
+		where m.deleted=0
+		<if test="menuType != null">
+			and m.menu_type=#{menuType}
+		</if>
+		order by m.sort
+	</select>
+
+	<select id="getLoginUserMenuList" resultType="com.dlshouwen.swda.bms.system.entity.Menu">
+		select m.*
+		from bms_menu m
+		left join bms_role_menu rm on m.menu_id=rm.menu_id
+		left join bms_user_role ur on ur.role_id=rm.role_id
+		where ur.user_id=#{userId} and m.deleted=0 and rm.deleted=0 and ur.deleted=0
+		<if test="menuType != null">
+			and m.menu_type=#{menuType}
+		</if>
+		order by m.sort
+	</select>
+
+	<select id="getLoginUserAuthorityList" resultType="string">
+		select m.authority
+		from bms_menu m
+		left join bms_role_menu rm on m.menu_id=rm.menu_id
+		left join bms_user_role ur on ur.role_id=rm.role_id
+		where ur.user_id=#{userId} and m.deleted=0 and rm.deleted=0 and ur.deleted=0
+		order by m.sort
+	</select>
+
+	<select id="getAuthorityList" resultType="string">
+		select authority from bms_menu where deleted=0
+	</select>
+	
+</mapper>
