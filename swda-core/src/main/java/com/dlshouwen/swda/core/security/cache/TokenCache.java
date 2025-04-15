@@ -4,8 +4,8 @@ import cn.hutool.core.collection.ListUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import com.dlshouwen.swda.core.common.cache.RedisCache;
-import com.dlshouwen.swda.core.common.constant.Constant;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
+import com.dlshouwen.swda.core.base.constant.Constant;
 import com.dlshouwen.swda.core.security.properties.TokenProperties;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 

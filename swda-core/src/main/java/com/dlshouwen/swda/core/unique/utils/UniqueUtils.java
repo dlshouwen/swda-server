@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.core.unique.utils;
 
-import com.dlshouwen.swda.core.common.entity.Data;
+import com.dlshouwen.swda.core.base.entity.Data;
 import com.dlshouwen.swda.core.jdbc.dao.BaseDao;
 
 /**

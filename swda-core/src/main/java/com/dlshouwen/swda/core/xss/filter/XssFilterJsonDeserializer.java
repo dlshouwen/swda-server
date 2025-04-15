@@ -2,7 +2,7 @@ package com.dlshouwen.swda.core.xss.filter;
 
 import cn.hutool.core.util.StrUtil;
 
-import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.base.utils.HttpContextUtils;
 import com.dlshouwen.swda.core.xss.properties.XssProperties;
 import com.dlshouwen.swda.core.xss.utils.XssUtils;
 import com.fasterxml.jackson.core.JsonParser;

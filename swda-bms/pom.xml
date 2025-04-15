@@ -19,10 +19,10 @@
 
 	<!-- dependencies -->
 	<dependencies>
-		<!-- swda core -->
+		<!-- swda common -->
 		<dependency>
 			<groupId>com.dlshouwen</groupId>
-			<artifactId>swda-core</artifactId>
+			<artifactId>swda-common</artifactId>
 		</dependency>
 		<!-- swda api -->
 		<dependency>

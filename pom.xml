@@ -28,6 +28,7 @@
 		<module>swda-bms</module>
 		<module>swda-api</module>
 		<module>swda-app</module>
+		<module>swda-common</module>
 	</modules>
 
 	<!-- properties -->

@@ -18,12 +18,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dlshouwen.swda.core.common.cache.RedisCache;
-import com.dlshouwen.swda.core.common.constant.Constant;
-import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
-import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
-import com.dlshouwen.swda.core.common.utils.IpUtils;
-import com.dlshouwen.swda.core.common.utils.JsonUtils;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
+import com.dlshouwen.swda.core.base.constant.Constant;
+import com.dlshouwen.swda.core.base.utils.ExceptionUtils;
+import com.dlshouwen.swda.core.base.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.base.utils.IpUtils;
+import com.dlshouwen.swda.core.base.utils.JsonUtils;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.dict.CallResult;
 import com.dlshouwen.swda.core.log.dto.OperationLogDTO;

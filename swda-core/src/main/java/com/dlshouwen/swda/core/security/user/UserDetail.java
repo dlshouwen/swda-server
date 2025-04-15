@@ -11,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.dlshouwen.swda.core.common.dict.OpenClose;
+import com.dlshouwen.swda.core.base.dict.OpenClose;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;

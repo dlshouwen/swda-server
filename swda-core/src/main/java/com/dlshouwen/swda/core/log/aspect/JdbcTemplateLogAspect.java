@@ -1,13 +1,13 @@
 package com.dlshouwen.swda.core.log.aspect;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.dlshouwen.swda.core.common.cache.RedisCache;
-import com.dlshouwen.swda.core.common.constant.Constant;
-import com.dlshouwen.swda.core.common.entity.Data;
-import com.dlshouwen.swda.core.common.utils.ExceptionUtils;
-import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
-import com.dlshouwen.swda.core.common.utils.IpUtils;
-import com.dlshouwen.swda.core.common.utils.JsonUtils;
+import com.dlshouwen.swda.core.base.cache.RedisCache;
+import com.dlshouwen.swda.core.base.constant.Constant;
+import com.dlshouwen.swda.core.base.entity.Data;
+import com.dlshouwen.swda.core.base.utils.ExceptionUtils;
+import com.dlshouwen.swda.core.base.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.base.utils.IpUtils;
+import com.dlshouwen.swda.core.base.utils.JsonUtils;
 import com.dlshouwen.swda.core.log.dict.CallResult;
 import com.dlshouwen.swda.core.log.dict.CallType;
 import com.dlshouwen.swda.core.log.dict.ExecuteType;

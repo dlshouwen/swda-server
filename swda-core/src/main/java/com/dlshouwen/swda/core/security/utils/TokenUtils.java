@@ -1,6 +1,6 @@
 package com.dlshouwen.swda.core.security.utils;
 
-import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.base.utils.HttpContextUtils;
 
 import cn.hutool.core.lang.UUID;
 import jakarta.servlet.http.HttpServletRequest;

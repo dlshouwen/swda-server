@@ -5,10 +5,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-import com.dlshouwen.swda.core.common.entity.R;
-import com.dlshouwen.swda.core.common.enums.ResultCode;
-import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
-import com.dlshouwen.swda.core.common.utils.JsonUtils;
+import com.dlshouwen.swda.core.base.entity.R;
+import com.dlshouwen.swda.core.base.enums.ResultCode;
+import com.dlshouwen.swda.core.base.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.base.utils.JsonUtils;
 
 import java.io.IOException;
 

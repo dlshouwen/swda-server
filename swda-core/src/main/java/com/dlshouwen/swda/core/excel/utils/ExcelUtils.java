@@ -8,7 +8,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.converters.longconverter.LongStringConverter;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.dlshouwen.swda.core.common.utils.HttpContextUtils;
+import com.dlshouwen.swda.core.base.utils.HttpContextUtils;
 import com.dlshouwen.swda.core.excel.callback.ExcelFinishCallBack;
 import com.dlshouwen.swda.core.excel.listener.ExcelDataListener;
 import com.fhs.common.utils.ConverterUtils;
