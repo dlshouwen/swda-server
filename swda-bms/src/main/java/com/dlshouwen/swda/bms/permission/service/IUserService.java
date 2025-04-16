@@ -1,11 +1,11 @@
 package com.dlshouwen.swda.bms.permission.service;
 
+import com.dlshouwen.swda.core.base.vo.UserAvatarVO;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
-import com.dlshouwen.swda.bms.permission.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 
 import org.springframework.web.multipart.MultipartFile;

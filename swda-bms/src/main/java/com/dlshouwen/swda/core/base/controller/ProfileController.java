@@ -2,6 +2,7 @@ package com.dlshouwen.swda.core.base.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
@@ -13,11 +14,17 @@ import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
+import com.dlshouwen.swda.core.security.user.UserDetail;
 import com.dlshouwen.swda.core.base.service.IAuthService;
 import com.dlshouwen.swda.core.base.vo.AuthCallbackVO;
 import com.dlshouwen.swda.core.base.vo.AuthVO;
+import com.dlshouwen.swda.core.base.vo.UserAvatarVO;
+import com.dlshouwen.swda.core.base.vo.UserPasswordVO;
+import com.dlshouwen.swda.bms.permission.service.IUserService;
+import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
 import com.dlshouwen.swda.bms.platform.service.IAuthPlatformService;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,21 +34,76 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * auth
+ * profile
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/auth")
-@Tag(name = "auth")
+@RequestMapping("/profile")
+@Tag(name = "profile")
 @AllArgsConstructor
-public class AuthController {
+public class ProfileController {
+	
+	/** user service */
+	private final IUserService userService;
+	
+	/** password encoder */
+	private final PasswordEncoder passwordEncoder;
 	
 	/** auth service */
 	private final IAuthService authService;
 	
 	/** auth platform service */
 	private final IAuthPlatformService authPlatformService;
+
+	/**
+	 * update login user
+	 * @param loginUserVO
+	 * @return result
+	 */
+	@PutMapping("/login/user/update")
+	@Operation(name = "update login user", type = OperateType.UPDATE)
+	public R<String> updateLoginUser(@RequestBody @Valid LoginUserVO loginUserVO) {
+//		update login user
+		userService.updateLoginUser(loginUserVO);
+//		return
+		return R.ok();
+	}
+
+	/**
+	 * update login user avatar
+	 * @param userAvatarVO
+	 * @return result
+	 */
+	@PutMapping("/login/user/avatar/update")
+	@Operation(name = "update login user avatar", type = OperateType.UPDATE)
+	public R<String> updateLoginUserAvatar(@RequestBody UserAvatarVO userAvatarVO) {
+//		update login user avatar
+		userService.updateLoginUserAvatar(userAvatarVO);
+//		return
+		return R.ok();
+	}
+
+	/**
+	 * update login user password
+	 * @param userPasswordVO
+	 * @return result
+	 */
+	@PutMapping("/login/user/password/update")
+	@Operation(name = "update login user password", type = OperateType.UPDATE)
+	public R<String> updateLoginUserPassword(@RequestBody @Valid UserPasswordVO userPasswordVO) {
+//		get user detail
+		UserDetail user = SecurityUser.getUser();
+//		if password not equals
+		if (!passwordEncoder.matches(userPasswordVO.getPassword(), user.getPassword())) {
+//			return
+			return R.error("原密码不正确");
+		}
+//		update login user password
+		userService.updateLoginUserPassword(user.getUserId(), passwordEncoder.encode(userPasswordVO.getNewPassword()));
+//		return
+		return R.ok();
+	}
 
 	/**
 	 * get auth list

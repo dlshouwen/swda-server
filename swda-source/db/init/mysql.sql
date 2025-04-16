@@ -28,11 +28,11 @@ drop table if exists bms_login_log;
 
 drop table if exists bms_mail_platform;
 
+drop table if exists bms_menu;
+
 drop table if exists bms_operation_log;
 
 drop table if exists bms_organ;
-
-drop table if exists bms_permission;
 
 drop table if exists bms_pinyin;
 
@@ -42,9 +42,9 @@ drop table if exists bms_region;
 
 drop table if exists bms_role;
 
-drop table if exists bms_role_organ;
+drop table if exists bms_role_menu;
 
-drop table if exists bms_role_permission;
+drop table if exists bms_role_organ;
 
 drop table if exists bms_sms_log;
 
@@ -54,10 +54,6 @@ drop table if exists bms_system;
 
 drop table if exists bms_task;
 
-drop table if exists bms_task_role;
-
-drop table if exists bms_task_user;
-
 drop table if exists bms_town;
 
 drop table if exists bms_user;
@@ -65,8 +61,6 @@ drop table if exists bms_user;
 drop table if exists bms_user_post;
 
 drop table if exists bms_user_role;
-
-drop table if exists bms_user_shortcut;
 
 drop table if exists bms_user_system;
 
@@ -88,7 +82,7 @@ create table bms_advance_query
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (advance_query_id)
@@ -103,12 +97,12 @@ create table bms_advance_query_condition
 (
    condition_id         bigint not null comment '条件编号',
    advance_query_id     bigint not null comment '查询方案编号',
-   left_parentheses     varchar(200) comment '左括号',
-   condition_field      varchar(200) not null comment '字段',
-   condition_type       tinyint not null default 0 comment '条件',
+   left_parentheses     varchar(10) comment '左括号',
+   condition_field      varchar(20) comment '字段',
+   condition_type       varchar(4) not null default '0' comment '条件',
    condition_value      varchar(400) comment '值',
-   right_parentheses    varchar(200) comment '右括号',
-   condition_logic      tinyint comment '逻辑',
+   right_parentheses    varchar(10) comment '右括号',
+   condition_logic      varchar(2) comment '逻辑',
    sort                 int not null default 0 comment '排序码',
    primary key (condition_id)
 );
@@ -122,8 +116,8 @@ create table bms_advance_query_sort
 (
    sort_id              bigint not null comment '排序编号',
    advance_query_id     bigint not null comment '查询方案编号',
-   sort_field           varchar(200) not null comment '字段',
-   sort_logic           tinyint not null default 1 comment '排序逻辑',
+   sort_field           varchar(20) not null comment '字段',
+   sort_logic           varchar(2) not null default '1' comment '排序逻辑',
    sort                 int not null default 0 comment '排序码',
    primary key (sort_id)
 );
@@ -147,7 +141,7 @@ create table bms_attachment
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (attachment_id)
@@ -168,7 +162,7 @@ create table bms_attr
    options              text comment '选项',
    valid                varchar(80) not null comment '验证脚本',
    content              text comment '参数内容',
-   is_special           tinyint not null default 0 comment '是否特殊',
+   is_special           varchar(2) not null default '0' comment '是否特殊',
    sort                 int not null default 0 comment '排序码',
    remark               varchar(200) comment '备注',
    tenant_id            bigint not null default 0 comment '租户编号',
@@ -177,7 +171,7 @@ create table bms_attr
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (attr_id)
@@ -224,7 +218,7 @@ create table bms_auth_platform
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (auth_platform_id)
@@ -282,7 +276,7 @@ create table bms_dict
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (dict_id)
@@ -308,7 +302,7 @@ create table bms_dict_type
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (dict_type_id)
@@ -355,8 +349,8 @@ create table bms_login_log
    real_name            varchar(400) comment '真实名称',
    organ_id             bigint comment '机构编号',
    organ_name           varchar(400) comment '机构名称',
-   is_logout            tinyint not null default 0 comment '是否登出',
-   logout_type          tinyint comment '登出状态',
+   is_logout            varchar(2) not null default '0' comment '是否登出',
+   logout_type          varchar(2) comment '登出状态',
    logout_time          datetime comment '登出时间',
    primary key (login_log_id)
 );
@@ -391,13 +385,45 @@ create table bms_mail_platform
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (email_platform_id)
 );
 
 alter table bms_mail_platform comment '邮件平台表';
+
+/*==============================================================*/
+/* Table: bms_menu                                              */
+/*==============================================================*/
+create table bms_menu
+(
+   menu_id              bigint not null comment '菜单编号',
+   pre_menu_id          bigint not null comment '上级菜单编号',
+   system_id            bigint not null comment '系统编号',
+   menu_code            varchar(200) not null comment '菜单编码',
+   menu_name            varchar(400) not null comment '菜单名称',
+   menu_type            varchar(2) not null default '1' comment '菜单类型',
+   authority            varchar(200) not null comment '权限值',
+   path                 varchar(800) comment '路径',
+   component            varchar(800) comment '组件',
+   icon                 varchar(40) not null comment '图标',
+   assist_search        varchar(400) comment '辅助查询',
+   sort                 int not null default 0 comment '排序码',
+   remark               varchar(200) comment '备注',
+   tenant_id            bigint not null default 0 comment '租户编号',
+   version              int not null comment '版本号',
+   creator              bigint not null comment '创建人',
+   create_time          datetime not null comment '创建时间',
+   updater              bigint not null comment '更新人',
+   update_time          datetime not null comment '更新时间',
+   deleted              varchar(2) not null default '0' comment '删除标识',
+   deleter              bigint comment '删除人',
+   delete_time          datetime comment '删除时间',
+   primary key (menu_id)
+);
+
+alter table bms_menu comment '菜单表';
 
 /*==============================================================*/
 /* Table: bms_operation_log                                     */
@@ -412,7 +438,7 @@ create table bms_operation_log
    request_uri          varchar(800) comment '请求地址',
    request_method       varchar(20) comment '请求方法',
    request_params       text comment '请求参数',
-   response_result      text not null comment '响应结果',
+   response_result      varchar(20) not null comment '响应结果',
    call_source          varchar(200) not null comment '调用来源',
    line_no              int not null comment '行号',
    call_result          tinyint not null comment '调用结果',
@@ -457,45 +483,13 @@ create table bms_organ
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (organ_id)
 );
 
 alter table bms_organ comment '机构表';
-
-/*==============================================================*/
-/* Table: bms_permission                                        */
-/*==============================================================*/
-create table bms_permission
-(
-   permission_id        bigint not null comment '权限编号',
-   pre_permission_id    bigint not null comment '上级权限编号',
-   system_id            bigint not null comment '系统编号',
-   permission_code      varchar(200) not null comment '权限编码',
-   permission_name      varchar(400) not null comment '权限名称',
-   permission_type      tinyint not null default 1 comment '权限类型',
-   authority            varchar(200) not null comment '权限值',
-   path                 varchar(800) comment '路径',
-   component            varchar(800) comment '组件',
-   icon                 varchar(40) not null comment '图标',
-   assist_search        varchar(400) comment '辅助查询',
-   sort                 int not null default 0 comment '排序码',
-   remark               varchar(200) comment '备注',
-   tenant_id            bigint not null default 0 comment '租户编号',
-   version              int not null comment '版本号',
-   creator              bigint not null comment '创建人',
-   create_time          datetime not null comment '创建时间',
-   updater              bigint not null comment '更新人',
-   update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
-   deleter              bigint comment '删除人',
-   delete_time          datetime comment '删除时间',
-   primary key (permission_id)
-);
-
-alter table bms_permission comment '权限表';
 
 /*==============================================================*/
 /* Table: bms_pinyin                                            */
@@ -527,7 +521,7 @@ create table bms_post
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (post_id)
@@ -542,14 +536,14 @@ create table bms_region
 (
    region_id            int not null comment '区域编号',
    pre_region_id        int not null comment '上级区域编号',
-   region_type          tinyint not null comment '区域类型',
+   region_type          varchar(2) not null comment '区域类型',
    region_name          varchar(200) not null comment '区域名称',
    region_full_name     varchar(400) not null comment '区域全名',
    region_name_pinyin   varchar(200) not null comment '区域名称拼音',
    region_name_full_pinyin varchar(400) not null comment '区域名称全拼',
    postal_code          varchar(6) not null comment '邮政编码',
-   is_open              tinyint not null default 1 comment '是否启用',
-   is_hot               tinyint not null default 0 comment '是否热门',
+   is_open              varchar(2) not null default '1' comment '是否启用',
+   is_hot               varchar(2) not null default '0' comment '是否热门',
    sort                 int not null default 0 comment '排序码',
    remark               varchar(200) comment '备注',
    tenant_id            bigint not null default 0 comment '租户编号',
@@ -558,7 +552,7 @@ create table bms_region
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (region_id)
@@ -586,13 +580,35 @@ create table bms_role
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (role_id)
 );
 
 alter table bms_role comment '角色表';
+
+/*==============================================================*/
+/* Table: bms_role_menu                                         */
+/*==============================================================*/
+create table bms_role_menu
+(
+   relation_id          bigint not null auto_increment comment '关系编号',
+   system_id            bigint not null comment '系统编号',
+   role_id              bigint not null comment '角色编号',
+   menu_id              bigint not null comment '菜单编号',
+   version              int not null comment '版本号',
+   creator              bigint not null comment '创建人',
+   create_time          datetime not null comment '创建时间',
+   updater              bigint not null comment '更新人',
+   update_time          datetime not null comment '更新时间',
+   deleted              varchar(2) not null default '0' comment '删除标识',
+   deleter              bigint comment '删除人',
+   delete_time          datetime comment '删除时间',
+   primary key (relation_id)
+);
+
+alter table bms_role_menu comment '角色菜单关系表';
 
 /*==============================================================*/
 /* Table: bms_role_organ                                        */
@@ -608,35 +624,13 @@ create table bms_role_organ
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (relation_id)
 );
 
 alter table bms_role_organ comment '角色机构关系表';
-
-/*==============================================================*/
-/* Table: bms_role_permission                                   */
-/*==============================================================*/
-create table bms_role_permission
-(
-   relation_id          bigint not null auto_increment comment '关系编号',
-   system_id            bigint not null comment '系统编号',
-   role_id              bigint not null comment '角色编号',
-   permission_id        bigint not null comment '权限编号',
-   version              int not null comment '版本号',
-   creator              bigint not null comment '创建人',
-   create_time          datetime not null comment '创建时间',
-   updater              bigint not null comment '更新人',
-   update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
-   deleter              bigint comment '删除人',
-   delete_time          datetime comment '删除时间',
-   primary key (relation_id)
-);
-
-alter table bms_role_permission comment '角色权限关系表';
 
 /*==============================================================*/
 /* Table: bms_sms_log                                           */
@@ -683,7 +677,7 @@ create table bms_sms_platform
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (sms_platform_id)
@@ -709,7 +703,7 @@ create table bms_system
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (system_id)
@@ -725,14 +719,13 @@ create table bms_task
    task_id              bigint not null comment '任务编号',
    task_code            varchar(200) not null comment '任务编码',
    task_name            varchar(400) not null comment '任务名称',
-   task_status          tinyint not null default 0 comment '任务状态',
-   is_never_overdue     tinyint not null default 0 comment '是否永不过期',
-   overdue_time         datetime comment '过期时间',
-   is_all_user          tinyint not null default 0 comment '是否所有用户启用',
-   iterator_time        int not null comment '迭代时间',
-   detonate_sql         varchar(400) not null comment '触发SQL',
-   alert_message        varchar(400) not null comment '提示信息',
-   permission_id        bigint not null comment '响应功能',
+   task_group           varchar(20) not null default '0' comment '任务分组',
+   task_status          varchar(2) not null default '0' comment '任务状态',
+   allow_concurrent     varchar(2) not null comment '允许并发',
+   bean_name            varchar(200) not null default '0' comment 'Bean名称',
+   method_name          varchar(200) not null comment '方法名称',
+   params               text comment '参数',
+   core_expression      varchar(40) not null comment 'Core表达式',
    assist_search        varchar(400) comment '辅助查询',
    sort                 int not null default 0 comment '排序码',
    remark               varchar(200) comment '备注',
@@ -742,37 +735,13 @@ create table bms_task
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (task_id)
 );
 
 alter table bms_task comment '任务表';
-
-/*==============================================================*/
-/* Table: bms_task_role                                         */
-/*==============================================================*/
-create table bms_task_role
-(
-   task_id              bigint not null comment '任务编号',
-   role_id              bigint not null comment '角色编号',
-   primary key (role_id, task_id)
-);
-
-alter table bms_task_role comment '任务角色关系表';
-
-/*==============================================================*/
-/* Table: bms_task_user                                         */
-/*==============================================================*/
-create table bms_task_user
-(
-   task_id              bigint not null comment '任务编号',
-   user_id              bigint not null comment '用户编号',
-   primary key (user_id, task_id)
-);
-
-alter table bms_task_user comment '任务用户关系表';
 
 /*==============================================================*/
 /* Table: bms_town                                              */
@@ -796,7 +765,7 @@ create table bms_town
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (town_id)
@@ -814,11 +783,11 @@ create table bms_user
    username             varchar(200) not null comment '用户名称',
    real_name            varchar(400) comment '真实名称',
    avatar               varchar(400) comment '头像',
-   password             varchar(400) not null comment '密码',
+   password             varchar(80) not null default '123456' comment '密码',
    password_expire_time datetime not null comment '密码过期时间',
    super_admin          tinyint not null comment '超级管理员',
    status               tinyint not null comment '状态',
-   gender               tinyint not null default 9 comment '性别',
+   gender               varchar(2) not null default '9' comment '性别',
    card_id              varchar(80) comment '证件号',
    mobile               varchar(20) comment '手机号码',
    email                varchar(200) comment '电子邮箱',
@@ -832,7 +801,7 @@ create table bms_user
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (user_id)
@@ -853,7 +822,7 @@ create table bms_user_post
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (relation_id)
@@ -874,34 +843,13 @@ create table bms_user_role
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (relation_id)
 );
 
 alter table bms_user_role comment '用户角色关系表';
-
-/*==============================================================*/
-/* Table: bms_user_shortcut                                     */
-/*==============================================================*/
-create table bms_user_shortcut
-(
-   relation_id          bigint not null auto_increment comment '关系编号',
-   user_id              bigint not null comment '用户编号',
-   permission_id        bigint not null comment '权限编号',
-   version              int not null comment '版本号',
-   creator              bigint not null comment '创建人',
-   create_time          datetime not null comment '创建时间',
-   updater              bigint not null comment '更新人',
-   update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
-   deleter              bigint comment '删除人',
-   delete_time          datetime comment '删除时间',
-   primary key (relation_id)
-);
-
-alter table bms_user_shortcut comment '用户快捷方式表';
 
 /*==============================================================*/
 /* Table: bms_user_system                                       */
@@ -916,7 +864,7 @@ create table bms_user_system
    create_time          datetime not null comment '创建时间',
    updater              bigint not null comment '更新人',
    update_time          datetime not null comment '更新时间',
-   deleted              tinyint not null default 0 comment '删除标识',
+   deleted              varchar(2) not null default '0' comment '删除标识',
    deleter              bigint comment '删除人',
    delete_time          datetime comment '删除时间',
    primary key (relation_id)

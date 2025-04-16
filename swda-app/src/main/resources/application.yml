@@ -43,7 +43,7 @@ easy-trans:
   is-enable-tile: true    
   
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/*/*.xml
+  mapper-locations: classpath*:/mapper/**/*.xml
   # 实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.dlshouwen.swda.*.entity
   global-config:

@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/login")
+@RequestMapping("")
 @Tag(name = "login")
 @AllArgsConstructor
 public class LoginController {
@@ -41,7 +41,7 @@ public class LoginController {
 	 * captcha
 	 * @return result
 	 */
-	@GetMapping("/captcha")
+	@GetMapping("/login/captcha")
 	@Operation(name = "captcha", type = OperateType.SEARCH)
 	public R<CaptchaVO> captcha() {
 //		generate captcha vo
@@ -55,7 +55,7 @@ public class LoginController {
 	 * @param loginVO
 	 * @return result
 	 */
-	@PostMapping("/account")
+	@PostMapping("/login/account")
 	@Operation(name = "account", type = OperateType.LOGIN)
 	public R<UserTokenVO> loginByAccount(@RequestBody UserLoginVO login) {
 //		login by account
@@ -69,7 +69,7 @@ public class LoginController {
 	 * @param mobileSendCode
 	 * @return result
 	 */
-	@PostMapping("/mobile/send/code")
+	@PostMapping("/login/mobile/send/code")
 	@Operation(name = "mobile send code", type = OperateType.SEARCH)
 	public R<String> mobileSendCode(@RequestBody MobileSendCodeVO mobileSendCode) {
 //		mobile send code
@@ -88,7 +88,7 @@ public class LoginController {
 	 * @param mobileLoginVO
 	 * @return result
 	 */
-	@PostMapping("/mobile")
+	@PostMapping("/login/mobile")
 	@Operation(name = "login by mobile", type = OperateType.LOGIN)
 	public R<UserTokenVO> loginByMobile(@RequestBody MobileLoginVO login) {
 //		login by mobile
@@ -102,7 +102,7 @@ public class LoginController {
 	 * @param thirdLoginVO
 	 * @return result
 	 */
-	@PostMapping("/auth")
+	@PostMapping("/login/auth")
 	@Operation(name = "login by auth", type = OperateType.LOGIN)
 	public R<UserTokenVO> loginByAuth(@RequestBody AuthCallbackVO callback) {
 //		login by auth
@@ -116,7 +116,7 @@ public class LoginController {
 	 * @param refreshToken
 	 * @return result
 	 */
-	@PostMapping("/token")
+	@PostMapping("/login/token")
 	@Operation(name = "get access token", type = OperateType.SEARCH)
 	public R<AccessTokenVO> token(String refreshToken) {
 //		get access token
@@ -130,7 +130,7 @@ public class LoginController {
 	 * @param request
 	 * @return result
 	 */
-	@PostMapping("/logout")
+	@PostMapping("/sign-out")
 	@Operation(name = "logout", type = OperateType.LOGOUT)
 	public R<String> logout(HttpServletRequest request) {
 //		logout

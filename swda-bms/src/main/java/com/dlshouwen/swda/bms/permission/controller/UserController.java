@@ -11,16 +11,12 @@ import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
-import com.dlshouwen.swda.core.security.user.UserDetail;
-import com.dlshouwen.swda.core.base.vo.UserPasswordVO;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.service.IPostService;
 import com.dlshouwen.swda.bms.permission.service.IUserPostService;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
-import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
-import com.dlshouwen.swda.bms.permission.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 
 import org.springdoc.core.annotations.ParameterObject;
@@ -74,55 +70,6 @@ public class UserController {
 		user.setPostNameList(postNameList);
 //		return
 		return R.ok(user);
-	}
-
-	/**
-	 * update login user
-	 * @param loginUserVO
-	 * @return result
-	 */
-	@PutMapping("/login/update")
-	@Operation(name = "update login user", type = OperateType.UPDATE)
-	public R<String> updateLoginUser(@RequestBody @Valid LoginUserVO loginUserVO) {
-//		update login user
-		userService.updateLoginUser(loginUserVO);
-//		return
-		return R.ok();
-	}
-
-	/**
-	 * update login user avatar
-	 * @param userAvatarVO
-	 * @return result
-	 */
-	@PutMapping("/login/avatar/update")
-	@Operation(name = "update login user avatar", type = OperateType.UPDATE)
-	public R<String> updateLoginUserAvatar(@RequestBody UserAvatarVO userAvatarVO) {
-//		update login user avatar
-		userService.updateLoginUserAvatar(userAvatarVO);
-//		return
-		return R.ok();
-	}
-
-	/**
-	 * update login user password
-	 * @param userPasswordVO
-	 * @return result
-	 */
-	@PutMapping("/login/password/update")
-	@Operation(name = "update login user password", type = OperateType.UPDATE)
-	public R<String> updateLoginUserPassword(@RequestBody @Valid UserPasswordVO userPasswordVO) {
-//		get user detail
-		UserDetail user = SecurityUser.getUser();
-//		if password not equals
-		if (!passwordEncoder.matches(userPasswordVO.getPassword(), user.getPassword())) {
-//			return
-			return R.error("原密码不正确");
-		}
-//		update login user password
-		userService.updateLoginUserPassword(user.getUserId(), passwordEncoder.encode(userPasswordVO.getNewPassword()));
-//		return
-		return R.ok();
 	}
 
 	/**

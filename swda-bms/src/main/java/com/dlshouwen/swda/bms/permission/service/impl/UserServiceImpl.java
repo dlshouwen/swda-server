@@ -14,6 +14,7 @@ import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;
 import com.dlshouwen.swda.core.base.service.IUserTokenService;
+import com.dlshouwen.swda.core.base.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
@@ -21,7 +22,6 @@ import com.dlshouwen.swda.bms.permission.service.IUserPostService;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
 import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
-import com.dlshouwen.swda.bms.permission.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.permission.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 

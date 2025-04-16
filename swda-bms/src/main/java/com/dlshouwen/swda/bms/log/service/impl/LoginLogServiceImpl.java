@@ -13,6 +13,7 @@ import com.dlshouwen.swda.core.log.entity.LoginLog;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.user.UserDetail;
+
 import com.dlshouwen.swda.bms.log.convert.LoginLogConvert;
 import com.dlshouwen.swda.bms.log.mapper.LoginLogMapper;
 import com.dlshouwen.swda.bms.log.service.ILoginLogService;
@@ -123,7 +124,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 			loginLog.setLogoutType(logoutType);
 			loginLog.setLogoutTime(LocalDateTime.now());
 //			save login log
-			this.save(loginLog);
+			this.saveOrUpdate(loginLog);
 		}
 	}
 
