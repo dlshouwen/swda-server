@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.base.dict.ZeroOne;
 import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.service.IUserTokenService;
 import com.dlshouwen.swda.core.excel.callback.ExcelFinishCallBack;
 import com.dlshouwen.swda.core.excel.utils.ExcelUtils;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
@@ -22,6 +23,7 @@ import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
 import com.dlshouwen.swda.bms.permission.service.IUserPostService;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
+import com.dlshouwen.swda.bms.permission.service.IUserSystemService;
 import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
 import com.dlshouwen.swda.bms.permission.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
@@ -44,8 +46,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	/** user role service */
 	private final IUserRoleService userRoleService;
 	
+	/** user system service */
+	private final IUserSystemService userSystemService;
+	
 	/** user post service */
 	private final IUserPostService userPostService;
+	
+	/** user token service */
+	private final IUserTokenService userTokenService;
 	
 	/** token store cache */
 	private final TokenCache tokenCache;
@@ -171,6 +179,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		user.setSuperAdmin(ZeroOne.NO);
 //		insert user
 		this.save(user);
+//		set system list
+		userSystemService.saveOrUpdate(user.getUserId(), userVO.getSystemIdList());
+//		set role list
+		userRoleService.saveOrUpdate(user.getUserId(), userVO.getRoleIdList());
+//		set post list
+		userPostService.saveOrUpdate(user.getUserId(), userVO.getPostIdList());
 	}
 
 	/**
@@ -197,6 +211,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		user = UserConvert.INSTANCE.convert(userVO);
 //		update user
 		this.updateById(user);
+//		set system list
+		userSystemService.saveOrUpdate(user.getUserId(), userVO.getSystemIdList());
+//		update role list
+		userRoleService.saveOrUpdate(user.getUserId(), userVO.getRoleIdList());
+//		update post list
+		userPostService.saveOrUpdate(user.getUserId(), userVO.getPostIdList());
+//		update user cache
+		userTokenService.updateUserCacheByUserId(user.getUserId());
 	}
 
 	/**

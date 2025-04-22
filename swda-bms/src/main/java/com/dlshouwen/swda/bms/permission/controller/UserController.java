@@ -140,7 +140,7 @@ public class UserController {
 	 * @param userVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update user", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:permission:user:update')")
 	public R<String> updateUser(@RequestBody @Valid UserVO userVO) {
@@ -167,7 +167,7 @@ public class UserController {
 	 * @param userIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete user", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:permission:user:delete')")
 	public R<String> deleteUser(@RequestBody List<Long> userIdList) {
@@ -177,6 +177,11 @@ public class UserController {
 		if (userIdList.contains(userId)) {
 //			return
 			return R.error("不能删除当前登录用户");
+		}
+//		if has system user
+		if (userIdList.contains(-1l)||userIdList.contains(0l)) {
+//			return
+			return R.error("不能删除系统用户");
 		}
 //		delete user
 		userService.deleteUser(userIdList);

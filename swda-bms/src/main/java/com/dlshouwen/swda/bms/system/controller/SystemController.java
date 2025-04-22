@@ -65,6 +65,20 @@ public class SystemController {
 	}
 
 	/**
+	 * get system list
+	 * @return post list
+	 */
+	@PostMapping("/list")
+	@Operation(name = "get system list", type = OperateType.SEARCH)
+	@PreAuthorize("hasAuthority('bms:system:system:list')")
+	public R<List<SystemVO>> getSystemList() {
+//		get system list
+		List<SystemVO> systemList = systemService.getSystemList();
+//		return
+		return R.ok(systemList);
+	}
+
+	/**
 	 * get system data
 	 * @param systemId
 	 * @return system data

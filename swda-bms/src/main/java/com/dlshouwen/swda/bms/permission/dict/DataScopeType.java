@@ -17,12 +17,12 @@ public interface DataScopeType {
 	String ORGAN_AND_CHILDREN = "1";
 	
 	@Schema(description = "organ only")
-	String ORGAN_ONLY = "1";
+	String ORGAN_ONLY = "2";
 	
 	@Schema(description = "self")
-	String SELF = "1";
+	String SELF = "3";
 
 	@Schema(description = "custom")
-	String CUSTOM = "2";
+	String CUSTOM = "4";
 
 }

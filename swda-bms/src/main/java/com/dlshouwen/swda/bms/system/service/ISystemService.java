@@ -29,6 +29,12 @@ public interface ISystemService extends BaseService<System> {
 	 * @return system page result
 	 */
 	PageResult<SystemVO> getSystemPageResult(Query<System> query);
+	
+	/**
+	 * get system list
+	 * @return system vo list
+	 */
+	List<SystemVO> getSystemList();
 
 	/**
 	 * get system data

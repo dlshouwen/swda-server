@@ -111,6 +111,9 @@ public class UserVO implements Serializable, TransPojo {
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 
+	@Schema(description = "system id list")
+	private List<Long> systemIdList;
+	
 	@Schema(description = "role id list")
 	private List<Long> roleIdList;
 
@@ -121,5 +124,5 @@ public class UserVO implements Serializable, TransPojo {
 	private List<String> postNameList;
 	
 	Map<String, Object> transMap = new HashMap<String, Object>();
-
+	
 }

@@ -62,6 +62,18 @@ public class SystemServiceImpl extends BaseServiceImpl<SystemMapper, System> imp
 //		convert to vo for return
 		return new PageResult<>(SystemConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}
+
+	/**
+	 * get system list
+	 * @return system vo list
+	 */
+	@Override
+	public List<SystemVO> getSystemList() {
+//		get system list
+		List<System> systemList = this.list();
+//		convert to system vo for return
+		return SystemConvert.INSTANCE.convert2VOList(systemList);
+	}
 	
 	/**
 	 * get system data
