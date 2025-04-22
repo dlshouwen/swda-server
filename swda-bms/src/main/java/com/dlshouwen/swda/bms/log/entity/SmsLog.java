@@ -25,13 +25,13 @@ public class SmsLog {
 	
 	private String smsPlatformName;
 
-	private Integer smsPlatformType;
+	private String smsPlatformType;
 
 	private String mobile;
 	
 	private String params;
 
-	private Integer callResult;
+	private String callResult;
 
 	private String errorReason;
 

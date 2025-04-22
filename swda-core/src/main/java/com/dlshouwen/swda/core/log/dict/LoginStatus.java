@@ -11,21 +11,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface LoginStatus {
 
 	@Schema(description = "success")
-	int SUCCESS = 1;
+	String SUCCESS = "1";
 	
 	@Schema(description = "captcha error")
-	int CAPTCHA_ERROR = 2;
+	String CAPTCHA_ERROR = "2";
 	
 	@Schema(description = "user not found")
-	int USER_NOR_FOUND = 3;
+	String USER_NOR_FOUND = "3";
 	
 	@Schema(description = "bad credentials")
-	int BAD_CREDENTIALS = 4;
+	String BAD_CREDENTIALS = "4";
 	
 	@Schema(description = "credentials expired")
-	int CREDENTIALS_EXPIRED = 5;
+	String CREDENTIALS_EXPIRED = "5";
 	
 	@Schema(description = "user disabled")
-	int USER_DISABLED = 6;
+	String USER_DISABLED = "6";
 
 }

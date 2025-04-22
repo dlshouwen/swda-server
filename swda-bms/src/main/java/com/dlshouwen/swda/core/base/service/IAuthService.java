@@ -28,14 +28,14 @@ public interface IAuthService extends BaseService<Auth> {
 	 * @param openType
 	 * @param authUser
 	 */
-	void bindAuth(Long userId, Integer openType, AuthUser authUser);
+	void bindAuth(Long userId, String openType, AuthUser authUser);
 
 	/**
 	 * unbind auth
 	 * @param userId
 	 * @param openType
 	 */
-	void unbindAuth(Long userId, Integer openType);
+	void unbindAuth(Long userId, String openType);
 
 	/**
 	 * get user id by open type and open id
@@ -43,6 +43,6 @@ public interface IAuthService extends BaseService<Auth> {
 	 * @param openId
 	 * @return user id
 	 */
-	Long getUserIdByOpenTypeAndOpenId(Integer openType, String openId);
+	Long getUserIdByOpenTypeAndOpenId(String openType, String openId);
 
 }

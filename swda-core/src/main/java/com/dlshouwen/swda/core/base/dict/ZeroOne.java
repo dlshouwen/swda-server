@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface ZeroOne {
 
 	@Schema(description = "yes")
-	int YES = 1;
+	String YES = "1";
 
 	@Schema(description = "no")
-	int NO = 0;
+	String NO = "0";
 
 }

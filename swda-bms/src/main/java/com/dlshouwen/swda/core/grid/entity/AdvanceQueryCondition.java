@@ -27,13 +27,13 @@ public class AdvanceQueryCondition extends BaseEntity {
 
 	private String conditionField;
 
-	private Integer conditionType = ConditionType.EQUALS;
+	private String conditionType = ConditionType.EQUALS;
 
 	private String conditionValue;
 
 	private String rightParentheses;
 
-	private Integer conditionLogic;
+	private String conditionLogic;
 
 	private Integer sort = 0;
 

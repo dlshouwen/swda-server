@@ -48,6 +48,6 @@ public class UserPost extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

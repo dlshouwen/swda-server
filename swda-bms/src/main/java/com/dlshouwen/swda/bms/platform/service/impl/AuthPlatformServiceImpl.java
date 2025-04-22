@@ -99,7 +99,7 @@ public class AuthPlatformServiceImpl extends BaseServiceImpl<AuthPlatformMapper,
 	 * @return auth request
 	 */
 	@Override
-	public AuthRequest getAuthRequest(Integer openType) {
+	public AuthRequest getAuthRequest(String openType) {
 //		get auth platform
 		AuthPlatform authPlatform = baseMapper.selectOne(Wrappers.<AuthPlatform>lambdaQuery().eq(AuthPlatform::getOpenType, openType));
 //		if auth platform is null

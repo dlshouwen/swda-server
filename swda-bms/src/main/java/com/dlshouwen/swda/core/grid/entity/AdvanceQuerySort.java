@@ -25,7 +25,7 @@ public class AdvanceQuerySort extends BaseEntity {
 
 	private String sort_field;
 
-	private Integer sort_logic = SortLogic.ASC;
+	private String sort_logic = SortLogic.ASC;
 
 	private Integer sort = 0;
 

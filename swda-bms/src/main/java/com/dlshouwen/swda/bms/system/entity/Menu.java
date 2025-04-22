@@ -34,7 +34,7 @@ public class Menu extends BaseEntity {
 	
 	private String menuName;
 	
-	private Integer menuType;
+	private String menuType;
 	
 	private String authority;
 	
@@ -70,6 +70,6 @@ public class Menu extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

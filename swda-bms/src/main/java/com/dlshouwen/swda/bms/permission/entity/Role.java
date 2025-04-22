@@ -32,7 +32,7 @@ public class Role extends BaseEntity {
 	
 	private String roleName;
 	
-	private Integer dataScope;
+	private String dataScope;
 	
 	private String assistSearch;
 	
@@ -60,6 +60,6 @@ public class Role extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

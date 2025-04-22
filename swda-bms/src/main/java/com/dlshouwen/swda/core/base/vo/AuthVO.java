@@ -24,7 +24,7 @@ public class AuthVO implements Serializable {
 	private Long authId;
 	
 	@Schema(description = "open type")
-	private Integer openType;
+	private String openType;
 	
 	@Schema(description = "open id")
 	private String openId;

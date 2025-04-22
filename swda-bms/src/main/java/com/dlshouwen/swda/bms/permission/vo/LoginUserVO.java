@@ -22,12 +22,12 @@ public class LoginUserVO implements Serializable {
 	
 	private Long userId;
 	
-	@Schema(description = "user name")
-	@NotBlank(message = "姓名不能为空")
-	private String userName;
+	@Schema(description = "username")
+	@NotBlank(message = "用户名不能为空")
+	private String username;
 
 	@Schema(description = "real name")
-	@NotBlank(message = "姓名不能为空")
+	@NotBlank(message = "真实姓名不能为空")
 	private String realName;
 
 	@Schema(description = "avatar")
@@ -35,7 +35,7 @@ public class LoginUserVO implements Serializable {
 
 	@Schema(description = "gender")
 	@Range(min = 0, max = 2, message = "性别不正确")
-	private Integer gender;
+	private String gender;
 
 	@Schema(description = "card id")
 	private String cardId;

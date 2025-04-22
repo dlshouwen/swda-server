@@ -88,7 +88,7 @@ public class OperationLogAspect {
 	 * @param status
 	 */
 	private void saveOperationLog(ProceedingJoinPoint joinPoint, Operation operation, LocalDateTime startTime,
-			Integer callResult, String result) {
+			String callResult, String result) {
 //		defined operation log
 		OperationLogDTO operationLog = new OperationLogDTO();
 //		set start time, end time, cost

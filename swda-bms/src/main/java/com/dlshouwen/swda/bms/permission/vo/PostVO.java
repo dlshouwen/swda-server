@@ -36,7 +36,7 @@ public class PostVO implements Serializable {
 
 	@Schema(description = "status")
 	@Range(min = 0, max = 1, message = "状态不正确")
-	private Integer status;
+	private String status;
 
 	@Schema(description = "assist search")
 	private String assistSearch;

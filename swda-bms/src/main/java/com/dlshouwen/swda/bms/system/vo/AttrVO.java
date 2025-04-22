@@ -28,10 +28,10 @@ public class AttrVO implements Serializable {
 	private String attrName;
 
 	@Schema(description = "attr type")
-	private Integer attrType;
+	private String attrType;
 
 	@Schema(description = "data type")
-	private Integer dataType;
+	private String dataType;
 
 	@Schema(description = "data format")
 	private String dataFormat;
@@ -55,27 +55,8 @@ public class AttrVO implements Serializable {
 	@Schema(description = "remark")
 	private String remark;
 	
-	@Schema(description = "tenant id")
-	private Long tenantId;
-
-	@Schema(description = "version")
-	private Integer version;
-
-	@Schema(description = "creator")
-	private Long creator;
-
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
-
-	@Schema(description = "updater")
-	private Long updater;
-
-	@Schema(description = "update time")
-	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private LocalDateTime updateTime;
-
-	@Schema(description = "deleted")
-	private Integer deleted;
 
 }

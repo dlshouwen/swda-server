@@ -31,10 +31,10 @@ public class LoginLogVO implements Serializable, TransPojo {
 	private String ip;
 	
 	@Schema(description = "login type")
-	private Integer loginType;
+	private String loginType;
 
 	@Schema(description = "login status")
-	private Integer loginStatus;
+	private String loginStatus;
 	
 	@Schema(description = "login time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
@@ -62,10 +62,10 @@ public class LoginLogVO implements Serializable, TransPojo {
 	private String organName;
 
 	@Schema(description = "is logout")
-	private Integer isLogout;
+	private String isLogout;
 
 	@Schema(description = "logout type")
-	private Integer logoutType;
+	private String logoutType;
 
 	@Schema(description = "logout time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

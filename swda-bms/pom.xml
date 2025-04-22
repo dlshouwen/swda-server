@@ -19,7 +19,7 @@
 
 	<!-- dependencies -->
 	<dependencies>
-		<!-- swda common -->
+		<!-- swda core -->
 		<dependency>
 			<groupId>com.dlshouwen</groupId>
 			<artifactId>swda-core</artifactId>

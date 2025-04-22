@@ -20,7 +20,7 @@ public class TreeUtils {
 	 * @param pid
 	 * @return
 	 */
-	public static <T extends TreeNode<T>> List<T> build(List<T> treeNodes, Long pid) {
+	public static <T extends TreeNode<T>> List<T> build(List<T> treeNodes, Object pid) {
 //		pid is not null
 		AssertUtils.isNull(pid, "pid");
 //		create tree list
@@ -64,7 +64,7 @@ public class TreeUtils {
 //		defined result
 		List<T> result = new ArrayList<>();
 //		convert to map
-		Map<Long, T> nodeMap = new LinkedHashMap<>(treeNodes.size());
+		Map<Object, T> nodeMap = new LinkedHashMap<>(treeNodes.size());
 		for (T treeNode : treeNodes) {
 			nodeMap.put(treeNode.getId(), treeNode);
 		}

@@ -11,18 +11,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface DataScopeType {
 	
 	@Schema(description = "all")
-	int ALL = 0;
+	String ALL = "0";
 
 	@Schema(description = "organ and children")
-	int ORGAN_AND_CHILDREN = 1;
+	String ORGAN_AND_CHILDREN = "1";
 	
 	@Schema(description = "organ only")
-	int ORGAN_ONLY = 1;
+	String ORGAN_ONLY = "1";
 	
 	@Schema(description = "self")
-	int SELF = 1;
+	String SELF = "1";
 
 	@Schema(description = "custom")
-	int CUSTOM = 2;
+	String CUSTOM = "2";
 
 }

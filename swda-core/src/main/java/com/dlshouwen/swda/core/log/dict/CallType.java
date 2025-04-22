@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface CallType {
 
 	@Schema(description = "JDBC Template")
-	int JDBC_TEMPLATE = 1;
+	String JDBC_TEMPLATE = "1";
 
 	@Schema(description = "MyBatis")
-	int MYBATIS = 2;
+	String MYBATIS = "2";
 
 }

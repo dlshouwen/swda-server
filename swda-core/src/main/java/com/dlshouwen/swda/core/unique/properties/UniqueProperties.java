@@ -16,7 +16,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "swda")
 public class UniqueProperties {
 
-	/** enabled */
+	/** uniques */
 	private Map<String, String> uniques;
 
 }

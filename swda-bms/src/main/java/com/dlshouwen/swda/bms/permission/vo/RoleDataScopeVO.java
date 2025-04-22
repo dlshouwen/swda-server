@@ -25,7 +25,7 @@ public class RoleDataScopeVO implements Serializable {
 
 	@Schema(description = "data scope")
 	@NotNull(message = "数据范围不能为空")
-	private Integer dataScope;
+	private String dataScope;
 
 	@Schema(description = "organ id list")
 	private List<Long> organIdList;

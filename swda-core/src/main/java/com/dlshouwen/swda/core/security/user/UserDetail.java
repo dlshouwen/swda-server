@@ -31,10 +31,10 @@ public class UserDetail implements UserDetails {
 	private Long loginLogId;
 	
 	/** login type */
-	private Integer loginType;
+	private String loginType;
 	
 	/** open type */
-	private Integer openType;
+	private String openType;
 	
 	/** open id */
 	private String openId;
@@ -58,7 +58,7 @@ public class UserDetail implements UserDetails {
 	private String avatar;
 	
 	/** gender */
-	private Integer gender;
+	private String gender;
 	
 	/** email */
 	private String email;
@@ -73,10 +73,10 @@ public class UserDetail implements UserDetails {
 	private String organName;
 	
 	/** status */
-	private Integer status;
+	private String status;
 	
 	/** super admin */
-	private Integer superAdmin;
+	private String superAdmin;
 
 	/** tanant id */
 	private Long tenantId;
@@ -141,7 +141,7 @@ public class UserDetail implements UserDetails {
 	@Override
 	@JsonIgnore
 	public boolean isEnabled() {
-		return this.getStatus() == OpenClose.OPEN;
+		return this.getStatus().equals(OpenClose.OPEN);
 	}
 
 }

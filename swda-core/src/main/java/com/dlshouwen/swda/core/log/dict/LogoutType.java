@@ -11,12 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface LogoutType {
 
 	@Schema(description = "normal")
-	int NORMAL = 1;
+	String NORMAL = "1";
 
 	@Schema(description = "token invalid")
-	int TOKEN_INVALID = 2;
+	String TOKEN_INVALID = "2";
 
 	@Schema(description = "force outline")
-	int FORCE_OUTLINE = 3;
+	String FORCE_OUTLINE = "3";
 
 }

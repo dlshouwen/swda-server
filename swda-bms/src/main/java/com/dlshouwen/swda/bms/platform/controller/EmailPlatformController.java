@@ -3,7 +3,6 @@ package com.dlshouwen.swda.bms.platform.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +50,7 @@ public class EmailPlatformController {
 	@PostMapping("/page")
 	@Operation(name = "get email platform page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:email_platform:page')")
-	public R<PageResult<EmailPlatformVO>> getEmailPlatformPageResult(@ParameterObject @Valid Query<EmailPlatform> query) {
+	public R<PageResult<EmailPlatformVO>> getEmailPlatformPageResult(@RequestBody @Valid Query<EmailPlatform> query) {
 //		get email platform page result
 		PageResult<EmailPlatformVO> pageResult = emailPlatformService.getEmailPlatformPageResult(query);
 //		return email platform page result
@@ -66,7 +65,7 @@ public class EmailPlatformController {
 	@PostMapping("/list")
 	@Operation(name = "get email platform list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:email_platform:list')")
-	public R<List<EmailPlatformVO>> getEmailPlatformList(Integer emailPlatformType) {
+	public R<List<EmailPlatformVO>> getEmailPlatformList(String emailPlatformType) {
 //		get email platform list
 		List<EmailPlatformVO> emailPlatformList = emailPlatformService.getEmailPlatformList(emailPlatformType);
 //		return email platform list

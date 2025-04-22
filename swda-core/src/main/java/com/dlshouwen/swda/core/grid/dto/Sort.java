@@ -14,6 +14,6 @@ public class Sort {
 	private String sortField;
 
 	/** logic */
-	private Integer sortLogic;
+	private String sortLogic;
 
 }

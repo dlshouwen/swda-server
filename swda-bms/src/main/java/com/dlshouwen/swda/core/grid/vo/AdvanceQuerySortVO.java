@@ -38,7 +38,7 @@ public class AdvanceQuerySortVO implements Serializable, TransPojo {
 
 	@Schema(description = "sort logic")
 	@NotNull(message="排序逻辑不能为空")
-	private Integer sortLogic = SortLogic.ASC;
+	private String sortLogic = SortLogic.ASC;
 
 	@Schema(description = "sort")
 	@NotNull(message="排序码不能为空")

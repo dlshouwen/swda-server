@@ -156,7 +156,7 @@ public class DictTypeServiceImpl extends BaseServiceImpl<DictTypeMapper, DictTyp
 					try {
 //						refresh cache
 						dictionaryTransService.refreshCache(dictType.getDictType(),
-								dictTypeInfo.get(dictType.getDictType()).stream().collect(Collectors.toMap(Dict::getDictValue, Dict::getDictKey)));
+								dictTypeInfo.get(dictType.getDictType()).stream().collect(Collectors.toMap(Dict::getDictLabel, Dict::getDictValue)));
 					} catch (Exception e) {
 //						log error
 						log.error("refresh dict trans cache error: "+dictType, e);

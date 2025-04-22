@@ -11,18 +11,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface AttrType {
 
 	@Schema(description = "system")
-	int SYSTEM = 1;
+	String SYSTEM = "1";
 
 	@Schema(description = "page")
-	int PAGE = 2;
+	String PAGE = "2";
 
 	@Schema(description = "base")
-	int BASE = 3;
+	String BASE = "3";
 
 	@Schema(description = "log")
-	int LOG = 4;
+	String LOG = "4";
 
 	@Schema(description = "interface")
-	int INTERFACE = 5;
+	String INTERFACE = "5";
 
 }

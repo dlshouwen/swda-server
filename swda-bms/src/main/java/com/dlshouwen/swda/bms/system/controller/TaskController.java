@@ -13,7 +13,6 @@ import com.dlshouwen.swda.bms.system.entity.Task;
 import com.dlshouwen.swda.bms.system.service.ITaskService;
 import com.dlshouwen.swda.bms.system.vo.TaskVO;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +40,7 @@ public class TaskController {
 	@PostMapping("/page")
 	@Operation(name = "get task page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:task:page')")
-	public R<PageResult<TaskVO>> getTaskPageResult(@ParameterObject @Valid Query<Task> query) {
+	public R<PageResult<TaskVO>> getTaskPageResult(@RequestBody @Valid Query<Task> query) {
 //		get task page result
 		PageResult<TaskVO> pageResult = taskService.getTaskPageResult(query);
 //		return

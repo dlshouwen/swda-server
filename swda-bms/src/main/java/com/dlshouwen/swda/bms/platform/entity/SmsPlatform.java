@@ -30,9 +30,9 @@ public class SmsPlatform extends BaseEntity {
 	
 	private String smsPlatformName;
 
-	private Integer smsPlatformType;
+	private String smsPlatformType;
 
-	private Integer status;
+	private String status;
 
 	private String signName;
 
@@ -54,6 +54,10 @@ public class SmsPlatform extends BaseEntity {
 	
 	private String remark;
 
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
+
     @TableField(fill = FieldFill.INSERT)
     private Long creator;
 
@@ -66,12 +70,8 @@ public class SmsPlatform extends BaseEntity {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
-    @Version
-    @TableField(fill = FieldFill.INSERT)
-    private Integer version;
-
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

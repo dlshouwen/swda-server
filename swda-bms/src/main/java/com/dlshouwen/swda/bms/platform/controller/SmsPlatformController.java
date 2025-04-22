@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +48,7 @@ public class SmsPlatformController {
 	@PostMapping("/page")
 	@Operation(name = "get sms platform page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:page')")
-	public R<PageResult<SmsPlatformVO>> getSmsPlatformPageResult(@ParameterObject @Valid Query<SmsPlatform> query) {
+	public R<PageResult<SmsPlatformVO>> getSmsPlatformPageResult(@RequestBody @Valid Query<SmsPlatform> query) {
 //		get sms platform page result
 		PageResult<SmsPlatformVO> pageResult = smsPlatformService.getSmsPlatformPageResult(query);
 //		return sms platform page result
@@ -64,7 +63,7 @@ public class SmsPlatformController {
 	@PostMapping("/list")
 	@Operation(name = "get sms platform list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:list')")
-	public R<List<SmsPlatformVO>> getSmsPlatformList(Integer smsPlatformType) {
+	public R<List<SmsPlatformVO>> getSmsPlatformList(String smsPlatformType) {
 //		get sms platform list
 		List<SmsPlatformVO> smsPlatformList = smsPlatformService.getSmsPlatformList(smsPlatformType);
 //		return sms platform list

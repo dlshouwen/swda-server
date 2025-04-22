@@ -13,7 +13,6 @@ import com.dlshouwen.swda.bms.system.entity.Dict;
 import com.dlshouwen.swda.bms.system.service.IDictService;
 import com.dlshouwen.swda.bms.system.vo.DictVO;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +41,7 @@ public class DictController {
 	@PostMapping("/page/{dictType}")
 	@Operation(name = "get dict page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:dict:page')")
-	public R<PageResult<DictVO>> getDictPageResult(@PathVariable(name = "dictType") String dictType, @ParameterObject @Valid Query<Dict> query) {
+	public R<PageResult<DictVO>> getDictPageResult(@PathVariable(name = "dictType") String dictType, @RequestBody @Valid Query<Dict> query) {
 //		get dict page result
 		PageResult<DictVO> pageResult = dictService.getDictPageResult(dictType, query);
 //		return dict page result

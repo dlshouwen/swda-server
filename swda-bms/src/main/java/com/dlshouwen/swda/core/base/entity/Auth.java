@@ -17,7 +17,7 @@ public class Auth {
 	@TableId
 	private Long authId;
 	
-	private Integer openType;
+	private String openType;
 	
 	private String openId;
 	
@@ -33,6 +33,6 @@ public class Auth {
 
 	private LocalDateTime authTime;
 	
-	private Integer status;
+	private String status;
 
 }

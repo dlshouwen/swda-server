@@ -12,18 +12,18 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StorageTypeEnum {
 
-	LOCAL(0),
+	LOCAL("local"),
 
-	ALIYUN(1),
+	ALIYUN("aliyun"),
 
-	TENCENT(2),
+	TENCENT("tencent"),
 
-	QINIU(3),
+	QINIU("qinue"),
 
-	HUAWEI(4),
+	HUAWEI("huawei"),
 
-	MINIO(5);
+	MINIO("minio");
 	
-	private final Integer value;
+	private final String value;
 
 }

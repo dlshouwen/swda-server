@@ -4,6 +4,8 @@ import com.dlshouwen.swda.bms.permission.entity.Organ;
 import com.dlshouwen.swda.bms.permission.vo.OrganVO;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -32,6 +34,13 @@ public interface OrganConvert {
 	 * @param organ
 	 * @return organ vo
 	 */
+	@Mappings({
+		@Mapping(source="organId", target="id"),
+		@Mapping(source="preOrganId", target="pid"),
+		@Mapping(source="organName", target="name"),
+		@Mapping(source="organName", target="label"),
+		@Mapping(source="organId", target="value")
+	})
 	OrganVO convert2VO(Organ entity);
 
 	/**
@@ -39,6 +48,13 @@ public interface OrganConvert {
 	 * @param organList
 	 * @return organ vo list
 	 */
+	@Mappings({
+		@Mapping(source="organId", target="id"),
+		@Mapping(source="preOrganId", target="pid"),
+		@Mapping(source="organName", target="name"),
+		@Mapping(source="organName", target="label"),
+		@Mapping(source="organId", target="value")
+	})
 	List<OrganVO> convert2VOList(List<Organ> list);
 
 }

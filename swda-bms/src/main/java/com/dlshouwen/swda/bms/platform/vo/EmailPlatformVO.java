@@ -30,10 +30,10 @@ public class EmailPlatformVO implements Serializable {
 	private String emailPlatformName;
 
 	@Schema(description = "email platform type")
-	private Integer emailPlatformType;
+	private String emailPlatformType;
 
 	@Schema(description = "status")
-	private Integer status;
+	private String status;
 
 	@Schema(description = "group name")
 	private String groupName;
@@ -62,24 +62,8 @@ public class EmailPlatformVO implements Serializable {
 	@Schema(description = "secret key")
 	private String secretKey;
 
-	@Schema(description = "version")
-	private Integer version;
-
-	@Schema(description = "creator")
-	private Long creator;
-
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private Date createTime;
-
-	@Schema(description = "updater")
-	private Long updater;
-
-	@Schema(description = "update time")
-	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private Date updateTime;
-
-	@Schema(description = "deleted")
-	private Integer deleted;
 
 }

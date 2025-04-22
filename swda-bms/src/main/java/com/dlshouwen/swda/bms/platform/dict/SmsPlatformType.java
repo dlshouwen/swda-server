@@ -11,15 +11,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface SmsPlatformType {
 
 	@Schema(description= "aliyun")
-	Integer ALIYUN = 1;
+	String ALIYUN = "1";
 
 	@Schema(description= "tencent")
-	Integer TENCENT = 2;
+	String TENCENT = "2";
 	
 	@Schema(description= "qiniu")
-	Integer QINIU = 3;
+	String QINIU = "3";
 	
 	@Schema(description= "huawei")
-	Integer HUAWEI = 4;
+	String HUAWEI = "4";
 
 }

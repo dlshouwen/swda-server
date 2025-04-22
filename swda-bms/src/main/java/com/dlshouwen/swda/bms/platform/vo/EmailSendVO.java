@@ -21,10 +21,10 @@ public class EmailSendVO implements Serializable {
     private Long emailPlatformId;
 
     @Schema(description = "email platform type")
-    private Integer emailPlatformType;
+    private String emailPlatformType;
 
     @Schema(description = "email format type")
-    private Integer emailFormatType;
+    private String emailFormatType;
 
     @Schema(description = "mail from")
     private String mailFrom;

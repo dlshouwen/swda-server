@@ -22,7 +22,7 @@ public class DataLogVO implements Serializable {
 	private Long operationLogId;
 
 	@Schema(description = "execute type")
-	private Integer executeType;
+	private String executeType;
 
 	@Schema(description = "execute sql")
 	private String executeSql;
@@ -49,7 +49,7 @@ public class DataLogVO implements Serializable {
 	private int lineNo;
 
 	@Schema(description = "call result")
-	private Integer callResult;
+	private String callResult;
 
 	@Schema(description = "error reason")
 	private String errorReason;

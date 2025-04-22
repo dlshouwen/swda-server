@@ -11,33 +11,33 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface OperationType {
 
 	@Schema(description = "unknow")
-	int UNKNOWN = 0;
+	String UNKNOWN = "0";
 
 	@Schema(description = "select")
-	int SELECT = 1;
+	String SELECT = "1";
 
 	@Schema(description = "insert")
-	int INSERT = 2;
+	String INSERT = "2";
 
 	@Schema(description = "update")
-	int UPDATE = 3;
+	String UPDATE = "3";
 
 	@Schema(description = "delete")
-	int DELETE = 4;
+	String DELETE = "4";
 
 	@Schema(description = "export")
-	int EXPORT = 5;
+	String EXPORT = "5";
 
 	@Schema(description = "import")
-	int IMPORT = 6;
+	String IMPORT = "6";
 	
 	@Schema(description = "login")
-	int LOGIN = 7;
+	String LOGIN = "7";
 	
 	@Schema(description = "logout")
-	int LOGOUT = 8;
+	String LOGOUT = "8";
 	
 	@Schema(description = "other")
-	int OTHER = 9;
+	String OTHER = "9";
 
 }

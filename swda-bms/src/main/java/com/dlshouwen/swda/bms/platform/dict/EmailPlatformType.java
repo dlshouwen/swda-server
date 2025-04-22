@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface EmailPlatformType {
 	
 	@Schema(description= "local")
-	Integer LOCAL = 0;
+	String LOCAL = "0";
 
 	@Schema(description= "aliyun")
-	Integer ALIYUN = 1;
+	String ALIYUN = "1";
 
 }

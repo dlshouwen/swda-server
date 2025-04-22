@@ -38,11 +38,11 @@ public class User extends BaseEntity {
 	
 	private LocalDateTime passwordExpireTime;
 	
-	private Integer superAdmin;
+	private String superAdmin;
 	
-	private Integer status;
+	private String status;
 	
-	private Integer gender;
+	private String gender;
 	
 	private String cardId;
 	
@@ -78,6 +78,6 @@ public class User extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

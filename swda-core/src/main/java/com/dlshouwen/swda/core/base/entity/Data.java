@@ -17,7 +17,7 @@ public class Data {
 	public static Map<String, String> attr = new HashMap<>();
 
 	/** dict */
-	public static Map<String, Map<Integer, String>> dict = new HashMap<String, Map<Integer, String>>();
+	public static Map<String, Map<String, String>> dict = new HashMap<String, Map<String, String>>();
 
 	/** unique */
 	public static Map<String, String> unique = new HashMap<String, String>();

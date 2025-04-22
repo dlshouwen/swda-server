@@ -204,7 +204,7 @@ public class EmailService {
 	 * @param content
 	 * @param e
 	 */
-	public void saveMailLog(Long emailPlatformId, String emailPlatformName, Integer emailPlatformType, String mailFrom, String mailTos, String subject, String content, Exception e) {
+	public void saveMailLog(Long emailPlatformId, String emailPlatformName, String emailPlatformType, String mailFrom, String mailTos, String subject, String content, Exception e) {
 //		create mail log
 		EmailLog mailLog = new EmailLog();
 //		set email platform id, email platform name, email platform type, mail from, mail tos, subject, content

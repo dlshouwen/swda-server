@@ -30,7 +30,7 @@ public class SmsLogVO implements Serializable {
     private String smsPlatformName;
 
     @Schema(description = "sms platform type")
-    private Integer smsPlatformType;
+    private String smsPlatformType;
 
     @Schema(description = "mobile")
     private String mobile;
@@ -39,7 +39,7 @@ public class SmsLogVO implements Serializable {
     private String params;
 
     @Schema(description = "call result")
-    private Integer callResult;
+    private String callResult;
 
     @Schema(description = "error reason")
     private String error;

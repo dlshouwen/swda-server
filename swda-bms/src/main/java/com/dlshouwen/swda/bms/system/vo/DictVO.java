@@ -32,16 +32,17 @@ public class DictVO implements Serializable {
 	@Schema(description = "dict type")
 	private String dictType;
 
-	@Schema(description = "dict key")
-	@NotNull(message = "字典键不能为空")
-	private Long dictKey;
+	@Schema(description = "dict label")
+	@NotNull(message = "字典标签不能为空")
+	private String dictLabel;
 
 	@Schema(description = "dict value")
 	@NotBlank(message = "字典值不能为空")
 	private String dictValue;
 
-	@Schema(description = "dict class")
-	private String dictClass;
+	@Schema(description = "dict style")
+	@NotBlank(message = "字典样式不能为空")
+	private String dictStyle;
 
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")

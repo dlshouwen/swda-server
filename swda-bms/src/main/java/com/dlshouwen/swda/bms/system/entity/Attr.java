@@ -30,9 +30,9 @@ public class Attr extends BaseEntity {
 
 	private String attrName;
 
-	private Integer attrType;
+	private String attrType;
 	
-	private Integer dataType;
+	private String dataType;
 
 	private String dataFormat;
 
@@ -68,7 +68,7 @@ public class Attr extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
     
     private transient Map<String, Object> transMap = new HashMap<>();
 

@@ -44,7 +44,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuMapper, Menu> implement
 	 * @return login user menu list
 	 */
 	@Override
-	public List<MenuVO> getLoginUserMenuList(UserDetail user, Integer menuType) {
+	public List<MenuVO> getLoginUserMenuList(UserDetail user, String menuType) {
 //		defined menu list
 		List<Menu> menuList;
 //		if user is super admin
@@ -97,7 +97,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuMapper, Menu> implement
 	 * @return menu list
 	 */
 	@Override
-	public List<MenuVO> getMenuList(Integer menuType) {
+	public List<MenuVO> getMenuList(String menuType) {
 //		get menu list
 		List<Menu> menuList = baseMapper.getMenuList(menuType);
 //		build menu tree for return

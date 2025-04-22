@@ -51,7 +51,7 @@ public class SmsPlatformServiceImpl extends BaseServiceImpl<SmsPlatformMapper, S
 	 * @return sms platform list
 	 */
 	@Override
-	public List<SmsPlatformVO> getSmsPlatformList(Integer smsPlatformType) {
+	public List<SmsPlatformVO> getSmsPlatformList(String smsPlatformType) {
 //		defined wrapper
 		LambdaQueryWrapper<SmsPlatform> wrapper = Wrappers.lambdaQuery();
 //		eq: sms platform type

@@ -20,7 +20,6 @@ import com.dlshouwen.swda.bms.permission.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.permission.vo.RoleVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,7 +55,7 @@ public class RoleController {
 	@PostMapping("/page")
 	@Operation(name = "get role page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:permission:role:page')")
-	public R<PageResult<RoleVO>> getRolePageResult(@ParameterObject @Valid Query<Role> query) {
+	public R<PageResult<RoleVO>> getRolePageResult(@RequestBody @Valid Query<Role> query) {
 //		get role page result
 		PageResult<RoleVO> pageResult = roleService.getRolePageResult(query);
 //		return

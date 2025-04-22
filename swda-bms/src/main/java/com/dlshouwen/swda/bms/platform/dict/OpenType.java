@@ -11,15 +11,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface OpenType {
 
 	@Schema(description = "wechat open")
-	int WECHAT_OPEN = 1;
+	String WECHAT_OPEN = "1";
 
 	@Schema(description = "wecha work")
-	int WECHAT_WORK = 2;
+	String WECHAT_WORK = "2";
 
 	@Schema(description = "ding talk")
-	int DING_TALK = 3;
+	String DING_TALK = "3";
 
 	@Schema(description = "fei shu")
-	int FEI_SHU = 4;
+	String FEI_SHU = "4";
 
 }

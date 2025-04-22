@@ -30,7 +30,7 @@ public class DictType extends BaseEntity {
 	
 	private String dictType;
 
-	private Integer sourceType;
+	private String sourceType;
 	
 	private String sourceSql;
 
@@ -58,6 +58,6 @@ public class DictType extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

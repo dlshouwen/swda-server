@@ -36,7 +36,7 @@ public interface UserMapper extends BaseMapper<User> {
 	 * @return user list
 	 */
 	List<User> getRoleUserList(Map<String, Object> params);
-
+	
 	/**
 	 * get by user name
 	 * @param username

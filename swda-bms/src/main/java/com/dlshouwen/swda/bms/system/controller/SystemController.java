@@ -15,7 +15,6 @@ import com.dlshouwen.swda.bms.system.entity.System;
 import com.dlshouwen.swda.bms.system.service.ISystemService;
 import com.dlshouwen.swda.bms.system.vo.SystemVO;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,7 +57,7 @@ public class SystemController {
 	@PostMapping("/page")
 	@Operation(name = "get system page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:system:page')")
-	public R<PageResult<SystemVO>> getSystemPageResult(@ParameterObject @Valid Query<System> query) {
+	public R<PageResult<SystemVO>> getSystemPageResult(@RequestBody @Valid Query<System> query) {
 //		get system page result
 		PageResult<SystemVO> pageResult = systemService.getSystemPageResult(query);
 //		return

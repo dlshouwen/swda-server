@@ -18,7 +18,7 @@ public class AuthCallbackVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "open type")
-	private Integer openType;
+	private String openType;
 
 	@Schema(description = "code")
 	private String code;

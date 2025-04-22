@@ -17,7 +17,7 @@ public class Condition {
 	private String conditionField;
 
 	/** condition type */
-	private Integer conditionType;
+	private String conditionType;
 
 	/** condition value */
 	private String conditionValue;
@@ -26,6 +26,6 @@ public class Condition {
 	private String rightParentheses;
 
 	/** condition logic */
-	private Integer conditionLogic;
+	private String conditionLogic;
 
 }

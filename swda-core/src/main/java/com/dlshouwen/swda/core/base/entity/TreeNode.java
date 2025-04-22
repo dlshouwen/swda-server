@@ -18,13 +18,19 @@ public class TreeNode<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/** id */
-	private Long id;
+	private Object id;
 	
 	/** pid */
-	private Long pid;
+	private Object pid;
 	
 	/** name */
 	private String name;
+	
+	/** label */
+	private String label;
+	
+	/** value */
+	private Object value;
 	
 	/** children */
 	private List<T> children = new ArrayList<>();

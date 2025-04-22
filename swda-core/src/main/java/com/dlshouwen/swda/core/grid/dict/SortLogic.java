@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface SortLogic {
 
 	@Schema(description = "asc")
-	int ASC = 1;
+	String ASC = "1";
 
 	@Schema(description = "desc")
-	int DESC = 2;
+	String DESC = "2";
 
 }

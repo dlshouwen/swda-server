@@ -11,12 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface Gender {
 
 	@Schema(description = "男")
-	int MALE = 1;
+	String MALE = "1";
 
 	@Schema(description = "女")
-	int FEMALE = 2;
+	String FEMALE = "2";
 
 	@Schema(description = "未知")
-	int UNKNOWN = 9;
+	String UNKNOWN = "9";
 
 }

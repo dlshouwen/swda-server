@@ -32,6 +32,9 @@ swda:
   log:
     path: logs
     level: INFO
+  uniques:
+    bms.permission.user.username.add: select count(*) from bms_user where username=?
+    bms.permission.user.username.update: select count(*) from bms_user where username=? and user_id<>?
 
 #easy trans 数据翻译组件
 easy-trans:

@@ -27,7 +27,7 @@ public interface IEmailPlatformService extends BaseService<EmailPlatform> {
 	 * @param emailPlatformType
 	 * @return email platform list
 	 */
-	List<EmailPlatformVO> getEmailPlatformList(Integer emailPlatformType);
+	List<EmailPlatformVO> getEmailPlatformList(String emailPlatformType);
 
 	/**
 	 * get enable email platform list

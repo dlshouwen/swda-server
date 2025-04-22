@@ -11,12 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface LoginType {
 
 	@Schema(description = "account")
-	int ACCOUNT = 1;
+	String ACCOUNT = "1";
 	
 	@Schema(description = "mobile")
-	int MOBILE = 2;
+	String MOBILE = "2";
 	
 	@Schema(description = "third")
-	int THIRD = 3;
+	String THIRD = "3";
 
 }

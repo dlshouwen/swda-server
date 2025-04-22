@@ -33,17 +33,17 @@ public class StorageConfiguration {
 	@Bean
 	public StorageStrategy storageService(StorageProperties properties) {
 //		regist storage service
-		if (properties.getConfig().getType() == StorageTypeEnum.LOCAL) {
+		if (properties.getConfig().getType().equals(StorageTypeEnum.LOCAL)) {
 			return new LocalStorageStrategy(properties);
-		} else if (properties.getConfig().getType() == StorageTypeEnum.ALIYUN) {
+		} else if (properties.getConfig().getType().equals(StorageTypeEnum.ALIYUN)) {
 			return new AliyunStorageStrategy(properties);
-		} else if (properties.getConfig().getType() == StorageTypeEnum.TENCENT) {
+		} else if (properties.getConfig().getType().equals(StorageTypeEnum.TENCENT)) {
 			return new TencentStorageStrategy(properties);
-		} else if (properties.getConfig().getType() == StorageTypeEnum.QINIU) {
+		} else if (properties.getConfig().getType().equals(StorageTypeEnum.QINIU)) {
 			return new QiniuStorageStrategy(properties);
-		} else if (properties.getConfig().getType() == StorageTypeEnum.HUAWEI) {
+		} else if (properties.getConfig().getType().equals(StorageTypeEnum.HUAWEI)) {
 			return new HuaweiStorageStrategy(properties);
-		} else if (properties.getConfig().getType() == StorageTypeEnum.MINIO) {
+		} else if (properties.getConfig().getType().equals(StorageTypeEnum.MINIO)) {
 			return new MinioStorageStrategy(properties);
 		}
 		return null;

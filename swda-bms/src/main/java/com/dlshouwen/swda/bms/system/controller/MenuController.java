@@ -71,7 +71,7 @@ public class MenuController {
 	@PostMapping("/list")
 	@Operation(name = "get menu list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:menu:list')")
-	public R<List<MenuVO>> getMenuList(Integer menuType) {
+	public R<List<MenuVO>> getMenuList(String menuType) {
 //		get menu list
 		List<MenuVO> menuList = menuService.getMenuList(menuType);
 //		return

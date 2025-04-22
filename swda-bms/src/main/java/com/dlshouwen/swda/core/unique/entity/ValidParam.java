@@ -14,8 +14,8 @@ public class ValidParam {
 	
 	private String code;
 	
-	private String key;
+	private String value;
 	
-	private List<Object> attrs;
+	private List<Object> args;
 
 }

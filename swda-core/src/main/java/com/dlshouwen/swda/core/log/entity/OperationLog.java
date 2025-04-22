@@ -29,7 +29,7 @@ public class OperationLog extends BaseEntity {
 
 	private String operationName;
 
-	private int operationType;
+	private String operationType;
 	
 	private String requestUri;
 
@@ -41,9 +41,9 @@ public class OperationLog extends BaseEntity {
 
 	private String callSource;
 	
-	private int lineNo;
+	private Integer lineNo;
 	
-	private int callResult;
+	private String callResult;
 	
 	private String errorReason;
 
@@ -51,7 +51,7 @@ public class OperationLog extends BaseEntity {
 
 	private LocalDateTime endTime;
 
-	private int cost;
+	private Integer cost;
 	
 	private Long tenantId;
 

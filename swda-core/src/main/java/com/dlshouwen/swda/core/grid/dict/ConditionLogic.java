@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface ConditionLogic {
 
 	@Schema(description = "and")
-	int AND = 1;
+	String AND = "1";
 
 	@Schema(description = "or")
-	int OR = 2;
+	String OR = "2";
 
 }

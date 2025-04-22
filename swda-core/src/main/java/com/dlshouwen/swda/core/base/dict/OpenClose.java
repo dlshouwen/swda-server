@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface OpenClose {
 
 	@Schema(description = "open")
-	int OPEN = 1;
+	String OPEN = "1";
 
 	@Schema(description = "close")
-	int CLOSE = 0;
+	String CLOSE = "0";
 
 }

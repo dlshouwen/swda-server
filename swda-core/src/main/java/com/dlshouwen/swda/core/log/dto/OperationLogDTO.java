@@ -22,7 +22,7 @@ public class OperationLogDTO {
 
 	private String operationName;
 
-	private Integer operationType;
+	private String operationType;
 
 	private String requestUri;
 
@@ -36,7 +36,7 @@ public class OperationLogDTO {
 
 	private Integer lineNo;
 	
-	private Integer callResult;
+	private String callResult;
 
 	private String errorReason;
 

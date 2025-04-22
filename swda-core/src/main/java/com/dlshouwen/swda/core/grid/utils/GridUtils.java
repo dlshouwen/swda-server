@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -19,6 +17,9 @@ import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.grid.dto.Sort;
 import com.dlshouwen.swda.core.jdbc.mapper.ClassRowMapper;
 import com.dlshouwen.swda.core.jdbc.utils.SqlUtils;
+
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * grid utils
@@ -44,9 +45,9 @@ public class GridUtils {
 //			for each params
 			for (String key : params.keySet()) {
 //				get value
-				String value = MapUtils.getString(params, key).trim();
+				String value = MapUtil.getStr(params, key, "").trim();
 //				value empty -> continue
-				if (StringUtils.isEmpty(value)) {
+				if (StrUtil.isEmpty(value)) {
 					continue;
 				}
 //				has _
@@ -122,56 +123,56 @@ public class GridUtils {
 //				append left parentheses
 				sql.append(" ").append(condition.getLeftParentheses()).append(" ");
 //				append condition
-				if (condition.getConditionType()==ConditionType.EQUALS) {
+				if (condition.getConditionType().equals(ConditionType.EQUALS)) {
 //					equals
 					sql.append(" ").append(condition.getConditionField()).append(" = ? ");
 					args.add(condition.getConditionValue());
-				} else if (condition.getConditionType()==ConditionType.NOT_EQUALS) {
+				} else if (condition.getConditionType().equals(ConditionType.NOT_EQUALS)) {
 //					not equals
 					sql.append(" ").append(condition.getConditionField()).append(" != ? ");
 					args.add(condition.getConditionValue());
-				} else if (condition.getConditionType()==ConditionType.LIKE) {
+				} else if (condition.getConditionType().equals(ConditionType.LIKE)) {
 //					like
 					sql.append(" ").append(condition.getConditionField()).append(" like ? escape '\' ");
 					args.add("%" + SqlUtils.escape(condition.getConditionValue()) + "%");
-				} else if (condition.getConditionType()==ConditionType.RIGHT_LIKE) {
+				} else if (condition.getConditionType().equals(ConditionType.RIGHT_LIKE)) {
 //					right like
 					sql.append(" ").append(condition.getConditionField()).append(" like ? escape '\' ");
 					args.add(SqlUtils.escape(condition.getConditionValue()) + "%");
-				} else if (condition.getConditionType()==ConditionType.LEFT_LIKE) {
+				} else if (condition.getConditionType().equals(ConditionType.LEFT_LIKE)) {
 //					left like
 					sql.append(" ").append(condition.getConditionField()).append(" like ? escape '\' ");
 					args.add("%" + SqlUtils.escape(condition.getConditionValue()));
-				} else if (condition.getConditionType()==ConditionType.GREATER_THAN) {
+				} else if (condition.getConditionType().equals(ConditionType.GREATER_THAN)) {
 //					greater than
 					sql.append(" ").append(condition.getConditionField()).append(" > ? ");
 					args.add(condition.getConditionValue());
-				} else if (condition.getConditionType()==ConditionType.GREATER_THAN_EQUALS) {
+				} else if (condition.getConditionType().equals(ConditionType.GREATER_THAN_EQUALS)) {
 //					greater than equals
 					sql.append(" ").append(condition.getConditionField()).append(" >= ? ");
 					args.add(condition.getConditionValue());
-				} else if (condition.getConditionType()==ConditionType.LESS_THAN) {
+				} else if (condition.getConditionType().equals(ConditionType.LESS_THAN)) {
 //					less than
 					sql.append(" ").append(condition.getConditionField()).append(" < ? ");
 					args.add(condition.getConditionValue());
-				} else if (condition.getConditionType()==ConditionType.LESS_THAN_EQUALS) {
+				} else if (condition.getConditionType().equals(ConditionType.LESS_THAN_EQUALS)) {
 //					less than equals
 					sql.append(" ").append(condition.getConditionField()).append(" <= ? ");
 					args.add(condition.getConditionValue());
-				} else if (condition.getConditionType()==ConditionType.NULL) {
+				} else if (condition.getConditionType().equals(ConditionType.NULL)) {
 //					null
 					sql.append(" ").append(condition.getConditionField()).append(" is null ");
-				} else if (condition.getConditionType()==ConditionType.NOT_NULL) {
+				} else if (condition.getConditionType().equals(ConditionType.NOT_NULL)) {
 //					not null
 					sql.append(" ").append(condition.getConditionField()).append(" is not null ");
 				}
 //				append right parentheses
 				sql.append(" ").append(condition.getRightParentheses()).append(" ");
 //				append condition logic
-				if(condition.getConditionLogic()==ConditionLogic.AND) {
+				if(condition.getConditionLogic().equals(ConditionLogic.AND)) {
 					sql.append(" and ");
 				}
-				if(condition.getConditionLogic()==ConditionLogic.OR) {
+				if(condition.getConditionLogic().equals(ConditionLogic.OR)) {
 					sql.append(" or ");
 				}
 			}
@@ -183,11 +184,11 @@ public class GridUtils {
 //			for each sort
 			for (Sort sort : query.getAdvanceQuerySorts()) {
 //				asc
-				if (sort.getSortLogic()==SortLogic.ASC) {
+				if (sort.getSortLogic().equals(SortLogic.ASC)) {
 					queryWrapper.orderByAsc(sort.getSortField());
 				}
 //				desc
-				if (sort.getSortLogic()==SortLogic.DESC) {
+				if (sort.getSortLogic().equals(SortLogic.DESC)) {
 					queryWrapper.orderByDesc(sort.getSortField());
 				}
 			}

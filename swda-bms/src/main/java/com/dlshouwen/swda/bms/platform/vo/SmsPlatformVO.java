@@ -30,10 +30,10 @@ public class SmsPlatformVO implements Serializable {
 	private String smsPlatformName;
 
 	@Schema(description = "sms platform type")
-	private Integer smsPlatformType;
+	private String smsPlatformType;
 
 	@Schema(description = "status")
-	private Integer status;
+	private String status;
 
 	@Schema(description = "group name")
 	private String groupName;

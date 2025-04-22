@@ -24,7 +24,7 @@ public class EmailLog {
 
     private String emailPlatformName;
     
-    private Integer emailPlatformType;
+    private String emailPlatformType;
 
     private String mailFrom;
 
@@ -34,7 +34,7 @@ public class EmailLog {
 
     private String content;
 
-    private Integer callResult;
+    private String callResult;
 
     private String errorReason;
 

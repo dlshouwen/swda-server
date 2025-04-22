@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface CallResult {
 
 	@Schema(description = "failure")
-	int FAILURE = 0;
+	String FAILURE = "0";
 
 	@Schema(description = "success")
-	int SUCCESS = 1;
+	String SUCCESS = "1";
 
 }

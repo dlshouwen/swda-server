@@ -30,7 +30,7 @@ public class Post extends BaseEntity {
 
 	private String postName;
 
-	private Integer status;
+	private String status;
 
 	private String assistSearch;
 	
@@ -58,6 +58,6 @@ public class Post extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

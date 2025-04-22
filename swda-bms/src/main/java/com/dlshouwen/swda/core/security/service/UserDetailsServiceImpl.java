@@ -97,7 +97,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen
 	 */
 	private List<Long> getDataScope(UserDetail userDetail) {
 //		get data scope by user id
-		Integer dataScope = roleMapper.getDataScopeByUserId(userDetail.getUserId());
+		String dataScope = roleMapper.getDataScopeByUserId(userDetail.getUserId());
 //		if data scope is null
 		if (dataScope == null) {
 //			return empty list

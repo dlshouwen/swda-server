@@ -44,7 +44,7 @@ public class MenuVO extends TreeNode<MenuVO> {
 
 	@Schema(description = "menu type")
 	@Range(min = 0, max = 2, message = "菜单类型不正确")
-	private Integer menuType;
+	private String menuType;
 
 	@Schema(description = "authority")
 	private String authority;

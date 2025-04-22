@@ -68,7 +68,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 	@Transactional(rollbackFor = Exception.class)
 	public void addDict(DictVO dictVO) {
 //		get dict
-		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictType, dictVO.getDictType()).eq(Dict::getDictKey, dictVO.getDictKey()));
+		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictType, dictVO.getDictType()).eq(Dict::getDictValue, dictVO.getDictValue()));
 //		if has dict
 		if (dict != null) {
 //			throw exception
@@ -88,7 +88,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 	@Transactional(rollbackFor = Exception.class)
 	public void updateDict(DictVO dictVO) {
 //		get dict
-		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().notIn(Dict::getDictId, dictVO.getDictId()).eq(Dict::getDictType, dictVO.getDictType()).eq(Dict::getDictKey, dictVO.getDictKey()));
+		Dict dict = this.getOne(Wrappers.<Dict>lambdaQuery().notIn(Dict::getDictId, dictVO.getDictId()).eq(Dict::getDictType, dictVO.getDictType()).eq(Dict::getDictValue, dictVO.getDictValue()));
 //		if has dict
 		if (dict != null) {
 //			throw exception

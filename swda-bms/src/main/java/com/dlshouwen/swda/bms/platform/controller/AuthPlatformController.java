@@ -13,7 +13,6 @@ import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +40,7 @@ public class AuthPlatformController {
 	@PostMapping("/page")
 	@Operation(name = "get auth platform page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:platform:auth_platform:page')")
-	public R<PageResult<AuthPlatformVO>> getAuthPlatformPageResult(@ParameterObject @Valid Query<AuthPlatform> query) {
+	public R<PageResult<AuthPlatformVO>> getAuthPlatformPageResult(@RequestBody @Valid Query<AuthPlatform> query) {
 //		get auth platform page result
 		PageResult<AuthPlatformVO> pageResult = authPlatformService.getAuthPlatformPageResult(query);
 //		return auth platform list

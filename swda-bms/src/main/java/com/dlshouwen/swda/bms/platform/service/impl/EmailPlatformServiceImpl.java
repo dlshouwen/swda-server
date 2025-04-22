@@ -52,7 +52,7 @@ public class EmailPlatformServiceImpl extends BaseServiceImpl<EmailPlatformMappe
 	 * @return email platform list
 	 */
 	@Override
-	public List<EmailPlatformVO> getEmailPlatformList(Integer emailPlatformType) {
+	public List<EmailPlatformVO> getEmailPlatformList(String emailPlatformType) {
 //		defined wrapper
 		LambdaQueryWrapper<EmailPlatform> wrapper = Wrappers.lambdaQuery();
 //		eq: email platform type

@@ -11,18 +11,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface OperationResult {
 
 	@Schema(description = "success")
-	int SUCCESS = 1;
+	String SUCCESS = "1";
 
 	@Schema(description = "token invalid")
-	int TOKEN_INVALID = 2;
+	String TOKEN_INVALID = "2";
 
 	@Schema(description = "no limit")
-	int NO_LIMIT = 3;
+	String NO_LIMIT = "3";
 
 	@Schema(description = "response error")
-	int RESPONSE_ERROR = 4;
+	String RESPONSE_ERROR = "4";
 
 	@Schema(description = "force outline")
-	int FORCE_OUTLINE = 5;
+	String FORCE_OUTLINE = "5";
 
 }

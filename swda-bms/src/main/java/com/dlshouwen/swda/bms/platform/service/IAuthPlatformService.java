@@ -54,6 +54,6 @@ public interface IAuthPlatformService extends BaseService<AuthPlatform> {
 	 * @param openType
 	 * @return auth request
 	 */
-	AuthRequest getAuthRequest(Integer openType);
+	AuthRequest getAuthRequest(String openType);
 
 }

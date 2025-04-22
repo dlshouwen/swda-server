@@ -21,7 +21,7 @@ public interface IMenuService extends BaseService<Menu> {
 	 * @param menuType
 	 * @return login user menu list
 	 */
-	List<MenuVO> getLoginUserMenuList(UserDetail user, Integer menuType);
+	List<MenuVO> getLoginUserMenuList(UserDetail user, String menuType);
 	
 	/**
 	 * get login user authority list
@@ -35,7 +35,7 @@ public interface IMenuService extends BaseService<Menu> {
 	 * @param menuType
 	 * @return menu vo list
 	 */
-	List<MenuVO> getMenuList(Integer menuType);
+	List<MenuVO> getMenuList(String menuType);
 	
 	/**
 	 * get menu data

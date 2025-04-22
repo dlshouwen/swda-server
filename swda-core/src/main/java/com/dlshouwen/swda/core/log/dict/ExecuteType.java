@@ -11,18 +11,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface ExecuteType {
 
 	@Schema(description = "unknow")
-	int UNKNOWN = 0;
+	String UNKNOWN = "0";
 
 	@Schema(description = "select")
-	int SELECT = 1;
+	String SELECT = "1";
 
 	@Schema(description = "insert")
-	int INSERT = 2;
+	String INSERT = "2";
 
 	@Schema(description = "update")
-	int UPDATE = 3;
+	String UPDATE = "3";
 
 	@Schema(description = "delete")
-	int DELETE = 4;
+	String DELETE = "4";
 
 }

@@ -36,7 +36,7 @@ public class UserExcelVO implements Serializable, TransPojo {
 
 	@ExcelIgnore
 	@Trans(type = TransType.DICTIONARY, key = "gender", ref = "genderName")
-	private Integer gender;
+	private String gender;
 
 	@ExcelProperty(value = "性别")
 	private String genderName;
@@ -51,18 +51,18 @@ public class UserExcelVO implements Serializable, TransPojo {
 	private Long organId;
 
 	@ExcelIgnore
-	@Trans(type = TransType.DICTIONARY, key = "user_status", ref = "statusLabel")
-	private Integer status;
+	@Trans(type = TransType.DICTIONARY, key = "open_close", ref = "statusName")
+	private String status;
 
 	@ExcelProperty(value = "状态")
-	private String statusLabel;
+	private String statusName;
 
 	@ExcelIgnore
-	@Trans(type = TransType.DICTIONARY, key = "user_super_admin", ref = "superAdminLabel")
-	private Integer superAdmin;
+	@Trans(type = TransType.DICTIONARY, key = "zero_one", ref = "superAdminName")
+	private String superAdmin;
 
 	@ExcelProperty(value = "超级管理员")
-	private String superAdminLabel;
+	private String superAdminName;
 
 	@ExcelProperty(value = "创建时间", converter = LocalDateTimeConverter.class)
 	private LocalDateTime createTime;

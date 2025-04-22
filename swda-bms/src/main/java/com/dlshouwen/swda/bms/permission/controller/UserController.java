@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
+import com.dlshouwen.swda.core.base.entity.Data;
 import com.dlshouwen.swda.core.base.entity.R;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
@@ -19,12 +20,12 @@ import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -79,8 +80,8 @@ public class UserController {
 	 */
 	@PostMapping("/page")
 	@Operation(name = "get user page result", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:permission:user:list')")
-	public R<PageResult<UserVO>> getUserPageResult(@ParameterObject @Valid Query<User> query) {
+	@PreAuthorize("hasAuthority('bms:permission:user:page')")
+	public R<PageResult<UserVO>> getUserPageResult(@RequestBody @Valid Query<User> query) {
 //		get user page result
 		PageResult<UserVO> pageResult = userService.getUserPageResult(query);
 //		return
@@ -95,7 +96,7 @@ public class UserController {
 	@GetMapping("/{userId}/data")
 	@Operation(name = "get user data", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:permission:user:data')")
-	public R<UserVO> getUserData(@PathVariable("id") Long userId) {
+	public R<UserVO> getUserData(@PathVariable("userId") Long userId) {
 //		get user data
 		UserVO user = userService.getUserData(userId);
 //		get role id list set to user
@@ -124,6 +125,10 @@ public class UserController {
 		}
 //		encode password
 		userVO.setPassword(passwordEncoder.encode(userVO.getPassword()));
+//		get attr: password_expire_days
+		int password_expire_days = Integer.parseInt(Data.attr.get("password_expire_days"));
+//		set password expire time
+		userVO.setPasswordExpireTime(LocalDateTime.now().plusDays(password_expire_days));
 //		add user
 		userService.addUser(userVO);
 //		return
@@ -146,6 +151,10 @@ public class UserController {
 		} else {
 //			encode password
 			userVO.setPassword(passwordEncoder.encode(userVO.getPassword()));
+//			get attr: password_expire_days
+			int password_expire_days = Integer.parseInt(Data.attr.get("password_expire_days"));
+//			set password expire time
+			userVO.setPasswordExpireTime(LocalDateTime.now().plusDays(password_expire_days));
 		}
 //		update user
 		userService.updateUser(userVO);

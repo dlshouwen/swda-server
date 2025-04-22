@@ -53,7 +53,7 @@ public class AuthenticationEvents {
 	@EventListener
 	public void onFailure(AbstractAuthenticationFailureEvent event) {
 //		defined login status
-		Integer loginStatus = LoginStatus.SUCCESS;
+		String loginStatus = LoginStatus.SUCCESS;
 //		set login status
 		if(event.getException() instanceof UsernameNotFoundException)
 			loginStatus = LoginStatus.USER_NOR_FOUND;
@@ -64,7 +64,7 @@ public class AuthenticationEvents {
 		if(event.getException() instanceof DisabledException)
 			loginStatus = LoginStatus.USER_DISABLED;
 //		defined login type
-		Integer loginType = LoginType.ACCOUNT;
+		String loginType = LoginType.ACCOUNT;
 //		set login type
 		if(event.getAuthentication().getClass() == UsernamePasswordAuthenticationToken.class)
 			loginType = LoginType.ACCOUNT;

@@ -12,27 +12,27 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum OperateType {
 
-	UNKNOW(0),
+	UNKNOW("0"),
 
-	SEARCH(1),
+	SEARCH("1"),
 
-	INSERT(2),
+	INSERT("2"),
 
-	UPDATE(3),
+	UPDATE("3"),
 
-	DELETE(4),
+	DELETE("4"),
 
-	EXPORT(5),
+	EXPORT("5"),
 
-	IMPORT(6),
+	IMPORT("6"),
 
-	LOGIN(7),
+	LOGIN("7"),
 
-	LOGOUT(8),
+	LOGOUT("8"),
 
-	OTHER(9);
+	OTHER("9");
 
 	/** value */
-	private final int value;
+	private final String value;
 
 }

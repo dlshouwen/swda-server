@@ -74,20 +74,20 @@ public class DataLoader {
 		 * 2. get dict
 		 */
 //		defined dict
-		Map<String, Map<Integer, String>> dict = new HashMap<String, Map<Integer, String>>();
+		Map<String, Map<String, String>> dict = new HashMap<String, Map<String, String>>();
 //		get dict list
-		List<Map<String, Object>> dictList = template.queryForList("select * from bms_dict order by dict_type, sort");
+		List<Map<String, Object>> dictList = template.queryForList("select dict_type, dict_value, dict_label from bms_dict order by dict_type, sort");
 //		set dicts to dict
-		Map<Integer, String> dictCategoryMap = null;
+		Map<String, String> dictCategoryMap = null;
 		String dictCategoryId;
 		for (Map<String, Object> nowDict : dictList) {
 			dictCategoryId = MapUtil.getStr(nowDict, "dict_type");
 			if (dict.containsKey(dictCategoryId)) {
 				dictCategoryMap = dict.get(dictCategoryId);
-				dictCategoryMap.put(MapUtil.getInt(nowDict, "dict_key"), MapUtil.getStr(nowDict, "dict_value"));
+				dictCategoryMap.put(MapUtil.getStr(nowDict, "dict_value"), MapUtil.getStr(nowDict, "dict_label"));
 			} else {
 				dictCategoryMap = new LinkedHashMap<>();
-				dictCategoryMap.put(MapUtil.getInt(nowDict, "dict_key"), MapUtil.getStr(nowDict, "dict_value"));
+				dictCategoryMap.put(MapUtil.getStr(nowDict, "dict_value"), MapUtil.getStr(nowDict, "dict_label"));
 				dict.put(dictCategoryId, dictCategoryMap);
 			}
 		}

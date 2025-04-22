@@ -42,7 +42,7 @@ public class AdvanceQueryConditionVO implements Serializable, TransPojo {
 
 	@Schema(description = "condition type")
 	@NotNull(message="条件不能为空")
-	private Integer conditionType = ConditionType.EQUALS;
+	private String conditionType = ConditionType.EQUALS;
 
 	@Schema(description = "condition value")
 	@Length(min=0, max=400, message="值长度必须在0-400之间")
@@ -53,7 +53,7 @@ public class AdvanceQueryConditionVO implements Serializable, TransPojo {
 	private String rightParentheses;
 
 	@Schema(description = "condition logic")
-	private Integer conditionLogic;
+	private String conditionLogic;
 
 	@Schema(description = "sort")
 	@NotNull(message="排序码不能为空")

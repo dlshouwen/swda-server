@@ -175,7 +175,17 @@ Sub 处理初始化脚本()
                 Sheet.Cells(j, 5) = s + Sheet.Cells(j, 6)
             Next
             
+            system = ""
+            
             For j = 2 To RowCount
+            
+            	If Sheet.Cells(j, 3) <> system Then
+            		system = Sheet.Cells(j, 3)
+            		level1 = 1
+            		level2 = 1
+            		level3 = 1
+            		level4 = 1
+            	End If
             
                 If Sheet.Cells(j, 7) = "1" Then
                     Sheet.Cells(j, 1) = Sheet.Cells(j, 3) + IIf(level1 < 10, ("0" + CStr(level1)), CStr(level1))

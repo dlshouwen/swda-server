@@ -40,7 +40,7 @@ public class ThirdUserDetailsServiceImpl implements ThirdUserDetailsService {
 	 * @return user details
 	 */
 	@Override
-	public UserDetails loadUserByOpenTypeAndOpenId(Integer openType, String openId) throws UsernameNotFoundException {
+	public UserDetails loadUserByOpenTypeAndOpenId(String openType, String openId) throws UsernameNotFoundException {
 //		defined user id
 		Long userId;
 //		try catch

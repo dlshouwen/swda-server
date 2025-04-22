@@ -44,7 +44,7 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
 		setFieldValByName(UPDATE_TIME, now, metaObject);
 //		set version, deleted
 		setFieldValByName(VERSION, 0, metaObject);
-		setFieldValByName(DELETED, 0, metaObject);
+		setFieldValByName(DELETED, "0", metaObject);
 	}
 
 	/**

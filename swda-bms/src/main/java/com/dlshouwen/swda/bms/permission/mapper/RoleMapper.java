@@ -19,7 +19,7 @@ public interface RoleMapper extends BaseMapper<Role> {
 	 * @param userId
 	 * @return data scope
 	 */
-	Integer getDataScopeByUserId(@Param("userId") Long userId);
+	String getDataScopeByUserId(@Param("userId") Long userId);
 
 	/**
 	 * get role code by user id

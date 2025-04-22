@@ -33,7 +33,7 @@ public class OperationLogVO implements Serializable {
 	private String operationName;
 
 	@Schema(description = "operation type")
-	private Integer operationType;
+	private String operationType;
 
 	@Schema(description = "request uri")
 	private String requestUri;
@@ -54,7 +54,7 @@ public class OperationLogVO implements Serializable {
 	private Integer lineNo;
 	
 	@Schema(description = "call result")
-	private Integer callResult;
+	private String callResult;
 
 	@Schema(description = "error reason")
 	private String errorReason;

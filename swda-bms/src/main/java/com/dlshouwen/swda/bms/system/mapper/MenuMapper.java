@@ -19,7 +19,7 @@ public interface MenuMapper extends BaseMapper<Menu> {
 	 * @param menuType
 	 * @return menu list
 	 */
-	List<Menu> getMenuList(@Param("menuType") Integer menuType);
+	List<Menu> getMenuList(@Param("menuType") String menuType);
 
 	/**
 	 * get login user menu list
@@ -27,7 +27,7 @@ public interface MenuMapper extends BaseMapper<Menu> {
 	 * @param menuType
 	 * @return login user menu list
 	 */
-	List<Menu> getLoginUserMenuList(@Param("userId") Long userId, @Param("menuType") Integer menuType);
+	List<Menu> getLoginUserMenuList(@Param("userId") Long userId, @Param("menuType") String menuType);
 
 	/**
 	 * user authority list

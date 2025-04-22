@@ -11,42 +11,42 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface ConditionType {
 
 	@Schema(description = "equals")
-	int EQUALS = 0;
+	String EQUALS = "0";
 
 	@Schema(description = "not equals")
-	int NOT_EQUALS = 1;
+	String NOT_EQUALS = "1";
 
 	@Schema(description = "like")
-	int LIKE = 2;
+	String LIKE = "2";
 	
 	@Schema(description = "right like")
-	int RIGHT_LIKE = 3;
+	String RIGHT_LIKE = "3";
 	
 	@Schema(description = "left like")
-	int LEFT_LIKE = 4;
+	String LEFT_LIKE = "4";
 
 	@Schema(description = "start with")
-	int START_WITH = 5;
+	String START_WITH = "5";
 
 	@Schema(description = "end with")
-	int END_WITH = 6;
+	String END_WITH = "6";
 
 	@Schema(description = "greater than")
-	int GREATER_THAN = 7;
+	String GREATER_THAN = "7";
 
 	@Schema(description = "greater than equals")
-	int GREATER_THAN_EQUALS = 9;
+	String GREATER_THAN_EQUALS = "9";
 
 	@Schema(description = "less than")
-	int LESS_THAN = 9;
+	String LESS_THAN = "9";
 
 	@Schema(description = "less than equals")
-	int LESS_THAN_EQUALS = 10;
+	String LESS_THAN_EQUALS = "10";
 
 	@Schema(description = "null")
-	int NULL = 11;
+	String NULL = "11";
 
 	@Schema(description = "not null")
-	int NOT_NULL = 12;
+	String NOT_NULL = "12";
 
 }

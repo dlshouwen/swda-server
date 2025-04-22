@@ -11,12 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface EmailFormatType {
 
 	@Schema(description= "text")
-	Integer TEXT = 1;
+	String TEXT = "1";
 
 	@Schema(description= "html")
-	Integer HTML = 2;
+	String HTML = "2";
 	
 	@Schema(description= "template")
-	Integer TEMPLATE = 3;
+	String TEMPLATE = "3";
 	
 }

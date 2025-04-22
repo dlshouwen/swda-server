@@ -30,7 +30,7 @@ public class EmailLogVO implements Serializable {
     private String emailPlatformName;
 
     @Schema(description = "email platform type")
-    private Integer emailPlatformType;
+    private String emailPlatformType;
 
     @Schema(description = "mail from")
     private String mailFrom;
@@ -45,7 +45,7 @@ public class EmailLogVO implements Serializable {
     private String content;
 
     @Schema(description = "call result")
-    private Integer callResult;
+    private String callResult;
 
     @Schema(description = "error reason")
     private String errorReason;

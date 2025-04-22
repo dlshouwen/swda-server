@@ -27,6 +27,6 @@ public class FileUploadVO implements Serializable {
 	private Long fileSize;
 
 	@Schema(description = "storage platform")
-	private Integer storagePlatform;
+	private String storagePlatform;
 
 }

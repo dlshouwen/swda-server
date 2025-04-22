@@ -45,7 +45,7 @@ public class AuthServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implement
 	 * @param authUser
 	 */
 	@Override
-	public void bindAuth(Long userId, Integer openType, AuthUser authUser) {
+	public void bindAuth(Long userId, String openType, AuthUser authUser) {
 //		create auth
 		Auth auth = new Auth();
 //		set open type, open id, username, user id, real name
@@ -63,7 +63,7 @@ public class AuthServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implement
 	 * @param openType
 	 */
 	@Override
-	public void unbindAuth(Long userId, Integer openType) {
+	public void unbindAuth(Long userId, String openType) {
 //		delete bind info
 		baseMapper.delete(Wrappers.<Auth>lambdaQuery().eq(Auth::getUserId, userId).eq(Auth::getOpenType, openType));
 	}
@@ -75,7 +75,7 @@ public class AuthServiceImpl extends BaseServiceImpl<AuthMapper, Auth> implement
 	 * @return user id
 	 */
 	@Override
-	public Long getUserIdByOpenTypeAndOpenId(Integer openType, String openId) {
+	public Long getUserIdByOpenTypeAndOpenId(String openType, String openId) {
 //		get auth
 		Auth auth = baseMapper.selectOne(Wrappers.<Auth>lambdaQuery().eq(Auth::getOpenType, openType).eq(Auth::getOpenId, openId));
 //		if auth empty

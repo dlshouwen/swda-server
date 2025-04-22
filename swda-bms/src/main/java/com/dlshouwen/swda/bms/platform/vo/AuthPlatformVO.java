@@ -24,7 +24,7 @@ public class AuthPlatformVO implements Serializable {
 	private Long authPlatformId;
 
 	@Schema(description = "open type")
-	private Integer openType;
+	private String openType;
 
 	@Schema(description = "client id")
 	private String clientId;

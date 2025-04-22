@@ -13,7 +13,6 @@ import com.dlshouwen.swda.bms.permission.entity.Post;
 import com.dlshouwen.swda.bms.permission.service.IPostService;
 import com.dlshouwen.swda.bms.permission.vo.PostVO;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +40,7 @@ public class PostController {
 	@PostMapping("/page")
 	@Operation(name = "get post page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:permission:post:page')")
-	public R<PageResult<PostVO>> getPostPageResult(@ParameterObject @Valid Query<Post> query) {
+	public R<PageResult<PostVO>> getPostPageResult(@RequestBody @Valid Query<Post> query) {
 //		get post page result
 		PageResult<PostVO> pageResult = postService.getPostPageResult(query);
 //		return page result

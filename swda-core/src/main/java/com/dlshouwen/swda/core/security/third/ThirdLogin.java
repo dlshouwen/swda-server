@@ -16,7 +16,7 @@ public class ThirdLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** open type */
-	private Integer openType;
+	private String openType;
 
 	/** code */
 	private String code;

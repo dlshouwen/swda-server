@@ -69,7 +69,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	 * @return login log id
 	 */
 	@Override
-	public Long saveLoginLog(Integer loginType, Integer loginStatus, String loginInfo, String loginMessage) {
+	public Long saveLoginLog(String loginType, String loginStatus, String loginInfo, String loginMessage) {
 //		get request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 //		assert
@@ -112,7 +112,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	 * @param logoutType
 	 */
 	@Override
-	public void saveLogoutLog(Integer logoutType) {
+	public void saveLogoutLog(String logoutType) {
 //		get user
 		UserDetail user = SecurityUser.getUser();
 //		if has user

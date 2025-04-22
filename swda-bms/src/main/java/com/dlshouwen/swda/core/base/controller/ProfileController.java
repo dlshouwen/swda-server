@@ -125,7 +125,7 @@ public class ProfileController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/render/{openType}")
-	public void renderAuth(@PathVariable("openType") Integer openType, HttpServletResponse response) throws IOException {
+	public void renderAuth(@PathVariable("openType") String openType, HttpServletResponse response) throws IOException {
 //		get auth request
 		AuthRequest authRequest = authPlatformService.getAuthRequest(openType);
 //		get authorize url
@@ -141,7 +141,7 @@ public class ProfileController {
 	 * @return result
 	 */
 	@RequestMapping("/callback/{openType}")
-	public ModelAndView callbackAuth(@PathVariable("openType") Integer openType, AuthCallback callback) {
+	public ModelAndView callbackAuth(@PathVariable("openType") String openType, AuthCallback callback) {
 //		create data
 		Map<String, Object> data = new HashMap<>();
 //		set open type, state, code
@@ -185,7 +185,7 @@ public class ProfileController {
 	 */
 	@PutMapping("/unbind/{openType}")
 	@Operation(name = "unbind", type = OperateType.UPDATE)
-	public R<String> unbindAuth(@PathVariable("openType") Integer openType) {
+	public R<String> unbindAuth(@PathVariable("openType") String openType) {
 //		unbind
 		authService.unbindAuth(SecurityUser.getUserId(), openType);
 //		return

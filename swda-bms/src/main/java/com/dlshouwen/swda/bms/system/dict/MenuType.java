@@ -11,9 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public interface MenuType {
 
 	@Schema(description = "菜单")
-	int MENU = 1;
+	String MENU = "1";
 
 	@Schema(description = "按钮")
-	int BUTTON = 2;
+	String BUTTON = "2";
 
 }

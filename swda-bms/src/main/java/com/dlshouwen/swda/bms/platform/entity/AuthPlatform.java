@@ -17,7 +17,7 @@ public class AuthPlatform {
 	@TableId
 	private Long authPlatformId;
 
-	private Integer openType;
+	private String openType;
 	
 	private String clientId;
 	
@@ -53,6 +53,6 @@ public class AuthPlatform {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

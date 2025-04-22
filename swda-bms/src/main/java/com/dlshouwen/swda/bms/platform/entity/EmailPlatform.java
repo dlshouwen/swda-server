@@ -29,9 +29,9 @@ public class EmailPlatform {
 
 	private String emailPlatformName;
 
-	private Integer emailPlatformType;
+	private String emailPlatformType;
 	
-	private Integer status;
+	private String status;
 
 	private String groupName;
 
@@ -57,6 +57,10 @@ public class EmailPlatform {
 	
 	private String remark;
 
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
+
     @TableField(fill = FieldFill.INSERT)
     private Long creator;
 
@@ -69,12 +73,8 @@ public class EmailPlatform {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
-    @Version
-    @TableField(fill = FieldFill.INSERT)
-    private Integer version;
-
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

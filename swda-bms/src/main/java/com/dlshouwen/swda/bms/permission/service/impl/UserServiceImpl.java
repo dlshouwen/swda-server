@@ -1,6 +1,8 @@
 package com.dlshouwen.swda.bms.permission.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.base.dict.ZeroOne;
@@ -13,7 +15,6 @@ import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;
-import com.dlshouwen.swda.core.base.service.IUserTokenService;
 import com.dlshouwen.swda.core.base.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.entity.User;
@@ -45,9 +46,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	
 	/** user post service */
 	private final IUserPostService userPostService;
-	
-	/** user token service */
-	private final IUserTokenService userTokenService;
 	
 	/** token store cache */
 	private final TokenCache tokenCache;
@@ -154,7 +152,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	@Transactional(rollbackFor = Exception.class)
 	public void addUser(UserVO userVO) {
 //		get user from username
-		User user = baseMapper.getUserByUsername(userVO.getUserCode());
+		User user = baseMapper.getUserByUsername(userVO.getUsername());
 //		if user is not null
 		if (user != null) {
 //			throw exception
@@ -173,10 +171,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		user.setSuperAdmin(ZeroOne.NO);
 //		insert user
 		this.save(user);
-//		set role list
-		userRoleService.saveOrUpdate(user.getUserId(), userVO.getRoleIdList());
-//		set post list
-		userPostService.saveOrUpdate(user.getUserId(), userVO.getPostIdList());
 	}
 
 	/**
@@ -186,14 +180,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 	@Override
 	public void updateUser(UserVO userVO) {
 //		get user from username
-		User user = baseMapper.getUserByUsername(userVO.getUserName());
+		User user = baseMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUsername, userVO.getUsername()).ne(User::getUserId, userVO.getUserId()));
 //		if user is not null
 		if (user != null) {
 //			throw exception
 			throw new SwdaException("用户名已经存在");
 		}
 //		get user from mobile
-		user = baseMapper.getUserByMobile(userVO.getMobile());
+		user = baseMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getMobile, userVO.getMobile()).ne(User::getUserId, userVO.getUserId()));
 //		if user is not null
 		if (user != null) {
 //			throw exception
@@ -203,12 +197,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		user = UserConvert.INSTANCE.convert(userVO);
 //		update user
 		this.updateById(user);
-//		update role list
-		userRoleService.saveOrUpdate(user.getUserId(), userVO.getRoleIdList());
-//		update post list
-		userPostService.saveOrUpdate(user.getUserId(), userVO.getPostIdList());
-//		update user cache
-		userTokenService.updateUserCacheByUserId(user.getUserId());
 	}
 
 	/**

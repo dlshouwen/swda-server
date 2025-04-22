@@ -30,11 +30,11 @@ public class Dict extends BaseEntity {
 
 	private String dictType;
 
-	private String dictKey;
-
+	private String dictLabel;
+	
 	private String dictValue;
 
-	private String dictClass;
+	private String dictStyle;
 
 	private Integer sort;
 	
@@ -60,6 +60,6 @@ public class Dict extends BaseEntity {
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleted;
+    private String deleted;
 
 }

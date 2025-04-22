@@ -27,7 +27,7 @@ public interface ISmsPlatformService extends BaseService<SmsPlatform> {
 	 * @param smsPlatformType
 	 * @return sms platform list
 	 */
-	List<SmsPlatformVO> getSmsPlatformList(Integer smsPlatformType);
+	List<SmsPlatformVO> getSmsPlatformList(String smsPlatformType);
 
 	/**
 	 * get enable sms platform list
