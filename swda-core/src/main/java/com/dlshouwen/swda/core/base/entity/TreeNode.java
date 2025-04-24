@@ -31,7 +31,7 @@ public class TreeNode<T> implements Serializable {
 	
 	/** value */
 	private Object value;
-	
+
 	/** children */
 	private List<T> children = new ArrayList<>();
 

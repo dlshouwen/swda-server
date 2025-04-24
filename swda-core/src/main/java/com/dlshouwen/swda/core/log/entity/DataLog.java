@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.core.log.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.dlshouwen.swda.core.mybatis.entity.BaseEntity;
@@ -20,7 +19,7 @@ import java.time.LocalDateTime;
 @TableName("bms_data_log")
 public class DataLog extends BaseEntity {
 
-	@TableId(value = "data_log_id", type = IdType.AUTO)
+	@TableId
 	private Long dataLogId;
 
 	private String executeType;

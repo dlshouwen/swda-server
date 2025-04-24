@@ -97,7 +97,7 @@ public class AttachmentController {
 	 * @param attachmentIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete attachment", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:tool:attachment:delete')")
 	public R<String> deleteAttachment(@RequestBody List<Long> attachmentIdList) {

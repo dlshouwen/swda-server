@@ -107,7 +107,7 @@ public class EmailPlatformController {
 	 * @param emailPlatformVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update email platform", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:platform:email_platform:update')")
 	public R<String> updateEmailPlatform(@RequestBody @Valid EmailPlatformVO emailPlatformVO) {
@@ -122,7 +122,7 @@ public class EmailPlatformController {
 	 * @param emailPlatformIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete email platform", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:platform:email_platform:delete')")
 	public R<String> deleteEmailPlatform(@RequestBody List<Long> emailPlatformIdList) {

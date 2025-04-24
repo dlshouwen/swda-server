@@ -113,7 +113,7 @@ public class MenuController {
 	 * @param menuVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update menu", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:system:menu:update')")
 	public R<String> updateMenu(@RequestBody @Valid MenuVO menuVO) {
@@ -128,10 +128,10 @@ public class MenuController {
 	 * @param menuId
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete menu", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:system:menu:delete')")
-	public R<String> deleteMenu(Long menuId) {
+	public R<String> deleteMenu(@RequestBody Long menuId) {
 //		get sub menu count
 		Long count = menuService.getSubMenuCount(menuId);
 //		if has sub menu

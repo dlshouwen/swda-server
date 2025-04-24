@@ -20,7 +20,7 @@ public interface UserSystemMapper extends BaseMapper<UserSystem> {
 	 * @param systemId
 	 * @return system id list
 	 */
-	@Select("select post_id from bms_user_system where user_id=#{userId} and deleted=0")
+	@Select("select system_id from bms_user_system where user_id=#{userId} and deleted=0")
 	List<Long> getSystemIdList(@Param("userId") Long userId);
 
 }

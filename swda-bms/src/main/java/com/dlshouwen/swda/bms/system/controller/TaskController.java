@@ -82,7 +82,7 @@ public class TaskController {
 	 * @param taskVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update task", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:system:task:update')")
 	public R<String> updateTask(@RequestBody @Valid TaskVO taskVO) {
@@ -97,7 +97,7 @@ public class TaskController {
 	 * @param taskIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete task", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:system:task:delete')")
 	public R<String> deleteTask(@RequestBody List<Long> taskIdList) {

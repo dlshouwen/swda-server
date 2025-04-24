@@ -113,7 +113,7 @@ public class SystemController {
 	 * @param systemVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update system", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:system:system:update')")
 	public R<String> updateSystem(@RequestBody @Valid SystemVO systemVO) {
@@ -128,7 +128,7 @@ public class SystemController {
 	 * @param systemIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete system", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:system:system:delete')")
 	public R<String> deleteSystem(@RequestBody List<Long> systemIdList) {

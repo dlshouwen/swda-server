@@ -83,7 +83,7 @@ public class DictController {
 	 * @param dictVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update dict", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:system:dict:update')")
 	public R<String> updateDict(@RequestBody @Valid DictVO dictVO) {
@@ -98,7 +98,7 @@ public class DictController {
 	 * @param dictIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete dict", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:system:dict:delete')")
 	public R<String> deleteDict(@RequestBody List<Long> dictIdList) {

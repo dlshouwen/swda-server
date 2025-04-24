@@ -117,7 +117,7 @@ public class RoleController {
 	 * @param roleVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update role", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:permission:role:update')")
 	public R<String> updateRole(@RequestBody @Valid RoleVO roleVO) {
@@ -132,7 +132,7 @@ public class RoleController {
 	 * @param roleDataScopeVO
 	 * @return result
 	 */
-	@PutMapping("/data_scope/set")
+	@PostMapping("/data_scope/set")
 	@Operation(name = "set role data scope", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:permission:role:data_scope/set')")
 	public R<String> setRoleDataScope(@RequestBody @Valid RoleDataScopeVO roleDataScopeVO) {
@@ -147,7 +147,7 @@ public class RoleController {
 	 * @param roleIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete role", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:permission:role:delete')")
 	public R<String> deleteRole(@RequestBody List<Long> roleIdList) {
@@ -178,7 +178,7 @@ public class RoleController {
 	 * @param userIdList
 	 * @return result
 	 */
-	@DeleteMapping("/{roleId}/user/delete")
+	@PostMapping("/{roleId}/user/delete")
 	@Operation(name = "delete role user", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('sys:role:update')")
 	public R<String> deleteRoleUser(@PathVariable("roleId") Long roleId, @RequestBody List<Long> userIdList) {

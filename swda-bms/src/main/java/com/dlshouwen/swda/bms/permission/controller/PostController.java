@@ -96,7 +96,7 @@ public class PostController {
 	 * @param postVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update post", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:permission:post:update')")
 	public R<String> updatePost(@RequestBody @Valid PostVO postVO) {
@@ -111,7 +111,7 @@ public class PostController {
 	 * @param postIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete post", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:permission:post:delete')")
 	public R<String> delete(@RequestBody List<Long> postIdList) {

@@ -7,13 +7,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-@Schema(description = "菜单类型")
+@Schema(description = "menu type")
 public interface MenuType {
 
-	@Schema(description = "菜单")
+	@Schema(description = "menu")
 	String MENU = "1";
 
-	@Schema(description = "按钮")
+	@Schema(description = "button")
 	String BUTTON = "2";
 
 }

@@ -78,7 +78,7 @@ public class OrganController {
 	 * @param organVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update organ", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:permission:organ:update')")
 	public R<String> updateOrgan(@RequestBody @Valid OrganVO organVO) {
@@ -93,7 +93,7 @@ public class OrganController {
 	 * @param organId
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete organ", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:permission:organ:delete')")
 	public R<String> deleteOrgan(Long organId) {

@@ -105,7 +105,7 @@ public class SmsPlatformController {
 	 * @param smsPlatformVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update sms platform", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:update')")
 	public R<String> updateSmsPlatform(@RequestBody @Valid SmsPlatformVO smsPlatformVO) {
@@ -120,7 +120,7 @@ public class SmsPlatformController {
 	 * @param smsPlatformIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete sms platform", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:platform:sms_platform:delete')")
 	public R<String> deleteSmsPlatform(@RequestBody List<Long> smsPlatformIdList) {

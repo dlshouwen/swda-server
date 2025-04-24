@@ -82,7 +82,7 @@ public class AuthPlatformController {
 	 * @param authPlatformVO
 	 * @return result
 	 */
-	@PutMapping("/update")
+	@PostMapping("/update")
 	@Operation(name = "update auth platform", type = OperateType.UPDATE)
 	@PreAuthorize("hasAuthority('bms:platform:auth_platform:update')")
 	public R<String> updateAuthPlatform(@RequestBody @Valid AuthPlatformVO authPlatformVO) {
@@ -97,7 +97,7 @@ public class AuthPlatformController {
 	 * @param authPlatformIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete auth platform", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:platform:auth_platform:delete')")
 	public R<String> deleteAuthPlatform(@RequestBody List<Long> authPlatformIdList) {

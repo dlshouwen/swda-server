@@ -68,7 +68,7 @@ public class EmailLogController {
 	 * @param emailLogIdList
 	 * @return result
 	 */
-	@DeleteMapping("/delete")
+	@GetMapping("/delete")
 	@Operation(name = "delete email log", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:log:email_log:delete')")
 	public R<String> deleteEmailLog(@RequestBody List<Long> emailLogIdList) {

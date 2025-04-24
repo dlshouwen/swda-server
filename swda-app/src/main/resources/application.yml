@@ -33,8 +33,42 @@ swda:
     path: logs
     level: INFO
   uniques:
+    # system - dict type
+    bms.system.dict_type.dict_type.add: select count(*) from bms_dict_type where dict_type=?
+    bms.system.dict_type.dict_type.update: select count(*) from bms_dict_type where dict_type=? and dict_type_id<>?
+    # system - dict
+    bms.system.dict.dict_value.add: select count(*) from bms_dict where dict_value=? and dict_type=?
+    bms.system.dict.dict_value.update: select count(*) from bms_dict where dict+valid=? and dict_type=? and dict_id<>?
+    # system - region
+    bms.system.region.region_id.add: select count(*) from bms_region where region_id=?
+    bms.system.region.region_id.update: select count(*) from bms_region where region_id=? and region_id<>?
+    # system - town
+    bms.system.town.town_id.add: select count(*) from bms_town where town_id=?
+    bms.system.town.town_id.update: select count(*) from bms_town where town_id=? and town_id<>?
+    # system - system
+    bms.system.system.system_code.add: select count(*) from bms_system where system_code=?
+    bms.system.system.system_code.update: select count(*) from bms_system where system_code=? and system_id<>?
+    # system - menu
+    bms.system.menu.menu_id.add: select count(*) from bms_menu where menu_id=?
+    bms.system.menu.menu_code.add: select count(*) from bms_menu where menu_code=?
+    bms.system.menu.menu_code.update: select count(*) from bms_menu where menu_code=? and menu_id<>?
+    # system - task
+    bms.system.task.task_code.add: select count(*) from bms_task where task_code=?
+    bms.system.task.task_code.update: select count(*) from bms_task where task_code=? and task_id<>?
+    # permission - user
     bms.permission.user.username.add: select count(*) from bms_user where username=?
     bms.permission.user.username.update: select count(*) from bms_user where username=? and user_id<>?
+    bms.permission.user.mobile.add: select count(*) from bms_user where mobile=?
+    bms.permission.user.mobile.update: select count(*) from bms_user where mobile=? and user_id<>?
+    # permission - organ
+    bms.permission.organ.organ_code.add: select count(*) from bms_organ where organ_code=?
+    bms.permission.organ.organ_code.update: select count(*) from bms_organ where organ_code=? and organ_id<>?
+    # permission - post
+    bms.permission.post.post_code.add: select count(*) from bms_post where post_code=?
+    bms.permission.post.post_code.update: select count(*) from bms_post where post_code=? and post_id<>?
+    # permission - role
+    bms.permission.role.role_code.add: select count(*) from bms_role where role_code=?
+    bms.permission.role.role_code.update: select count(*) from bms_role where role_code=? and role_id<>?
 
 #easy trans 数据翻译组件
 easy-trans:
