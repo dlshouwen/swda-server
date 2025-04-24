@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import lombok.AllArgsConstructor;
 
+import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.bms.system.convert.TaskConvert;
+import com.dlshouwen.swda.bms.system.dict.TaskStatus;
 import com.dlshouwen.swda.bms.system.entity.Task;
 import com.dlshouwen.swda.bms.system.mapper.TaskMapper;
 import com.dlshouwen.swda.bms.system.service.ITaskService;
@@ -78,6 +80,63 @@ public class TaskServiceImpl extends BaseServiceImpl<TaskMapper, Task> implement
 //		update task
 		this.updateById(task);
 	}
+	
+	/**
+	 * open task
+	 * @param taskIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void openTask(List<Long> taskIdList) {
+//		foe each task id
+		for(Long taskId : taskIdList) {
+//			get task
+			Task task = this.getById(taskId);
+//			if open
+			if(TaskStatus.RUNING.equals(task.getTaskStatus())) {
+//				throw exception
+				throw new SwdaException("编号为 ["+taskId+"] 的任务已开启，请确认。");
+			}
+//			set open
+			task.setTaskStatus(TaskStatus.RUNING);
+//			update task
+			this.updateById(task);
+		}
+	}
+	
+	/**
+	 * pause task
+	 * @param taskIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void pauseTask(List<Long> taskIdList) {
+//		foe each task id
+		for(Long taskId : taskIdList) {
+//			get task
+			Task task = this.getById(taskId);
+//			if open
+			if(TaskStatus.PAUSE.equals(task.getTaskStatus())) {
+//				throw exception
+				throw new SwdaException("编号为 ["+taskId+"] 的任务已暂停，请确认。");
+			}
+//			set open
+			task.setTaskStatus(TaskStatus.PAUSE);
+//			update task
+			this.updateById(task);
+		}
+	}
+	
+	/**
+	 * execute task
+	 * @param taskIdList
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void executeTask(List<Long> taskIdList) {
+//		execute task list
+		this.removeByIds(taskIdList);
+	}
 
 	/**
 	 * delete task
@@ -86,7 +145,7 @@ public class TaskServiceImpl extends BaseServiceImpl<TaskMapper, Task> implement
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteTask(List<Long> taskIdList) {
-//		dlete task list
+//		delete task list
 		this.removeByIds(taskIdList);
 	}
 

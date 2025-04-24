@@ -12,7 +12,7 @@
 	</select>
 
 	<select id="getIdAndPidList" resultType="com.dlshouwen.swda.bms.permission.entity.Organ">
-		select o.organ_id, o.pre_organ_id from bms_organ where deleted=0
+		select organ_id, pre_organ_id from bms_organ where deleted=0
 	</select>
 
 </mapper>

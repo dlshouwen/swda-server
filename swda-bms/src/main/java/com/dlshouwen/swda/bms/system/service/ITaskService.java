@@ -40,11 +40,29 @@ public interface ITaskService extends BaseService<Task> {
 	 * @param taskVO
 	 */
 	void updateTask(TaskVO vo);
-
+	
 	/**
 	 * delete task
 	 * @param taskIdList
 	 */
 	void deleteTask(List<Long> taskIdList);
+
+	/**
+	 * open task
+	 * @param taskIdList
+	 */
+	void openTask(List<Long> taskIdList);
+	
+	/**
+	 * pause task
+	 * @param taskIdList
+	 */
+	void pauseTask(List<Long> taskIdList);
+	
+	/**
+	 * execute task
+	 * @param taskIdList
+	 */
+	void executeTask(List<Long> taskIdList);
 
 }

@@ -27,7 +27,7 @@ public class RoleMenu extends BaseEntity {
 	private Long relationId;
 	
 	private Long systemId;
-
+	
 	private Long roleId;
 
 	private Long menuId;

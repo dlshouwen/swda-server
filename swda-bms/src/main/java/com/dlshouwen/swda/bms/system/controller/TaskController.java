@@ -91,6 +91,51 @@ public class TaskController {
 //		return
 		return R.ok();
 	}
+	
+	/**
+	 * open task
+	 * @param taskIdList
+	 * @return result
+	 */
+	@PostMapping("/open")
+	@Operation(name = "open task", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('bms:system:task:open')")
+	public R<String> openTask(@RequestBody List<Long> taskIdList) {
+//		open task
+		taskService.openTask(taskIdList);
+//		return
+		return R.ok();
+	}
+	
+	/**
+	 * pause task
+	 * @param taskIdList
+	 * @return result
+	 */
+	@PostMapping("/pause")
+	@Operation(name = "pause task", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('bms:system:task:pause')")
+	public R<String> pauseTask(@RequestBody List<Long> taskIdList) {
+//		pause task
+		taskService.pauseTask(taskIdList);
+//		return
+		return R.ok();
+	}
+
+	/**
+	 * execute task
+	 * @param taskIdList
+	 * @return result
+	 */
+	@PostMapping("/execute")
+	@Operation(name = "execute task", type = OperateType.DELETE)
+	@PreAuthorize("hasAuthority('bms:system:task:execute')")
+	public R<String> executeTask(@RequestBody List<Long> taskIdList) {
+//		execute task
+		taskService.executeTask(taskIdList);
+//		return
+		return R.ok();
+	}
 
 	/**
 	 * delete task

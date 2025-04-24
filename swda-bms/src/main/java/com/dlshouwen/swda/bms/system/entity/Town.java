@@ -50,6 +50,7 @@ public class Town extends BaseEntity {
 	private Long tenantId;
 
 	@Version
+	@TableField(fill=FieldFill.INSERT)
 	private Integer version;
 
 	@TableField(fill=FieldFill.INSERT)
@@ -58,10 +59,13 @@ public class Town extends BaseEntity {
 	@TableField(fill=FieldFill.INSERT)
 	private LocalDateTime createTime;
 
+	@TableField(fill=FieldFill.INSERT_UPDATE)
 	private Long updater;
 
+	@TableField(fill=FieldFill.INSERT_UPDATE)
 	private LocalDateTime updateTime;
 
+	@TableField(fill=FieldFill.INSERT)
 	private String deleted;
 
 	private Long deleter;

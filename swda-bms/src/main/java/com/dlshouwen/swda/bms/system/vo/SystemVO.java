@@ -37,6 +37,12 @@ public class SystemVO implements Serializable {
 
 	@Schema(description = "remark")
 	private String remark;
+	
+	@Schema(description = "assist_search")
+	private String assistSearch;
+	
+	@Schema(description = "sort")
+	private int sort;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

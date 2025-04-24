@@ -15,7 +15,6 @@ import com.dlshouwen.swda.bms.permission.service.IRoleOrganService;
 import com.dlshouwen.swda.bms.permission.service.IRoleMenuService;
 import com.dlshouwen.swda.bms.permission.service.IRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
-import com.dlshouwen.swda.bms.permission.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.permission.vo.RoleVO;
 
 import org.springframework.stereotype.Service;
@@ -92,12 +91,20 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 	public void addRole(RoleVO roleVO) {
 //		convert to role
 		Role role = RoleConvert.INSTANCE.convert(roleVO);
-//		set data scope
-		role.setDataScope(DataScopeType.SELF);
 //		insert role
-		this.save(role);
+		baseMapper.insert(role);
 //		save role menu
-		roleMenuService.saveOrUpdate(roleVO.getRoleId(), roleVO.getMenuIdList());
+		roleMenuService.saveOrUpdate(role.getSystemId(), role.getRoleId(), roleVO.getMenuIdList());
+//		if custom data scope
+		if (roleVO.getDataScope().equals(DataScopeType.CUSTOM)) {
+//			update role data scope
+			roleOrganService.saveOrUpdate(role.getSystemId(), role.getRoleId(), roleVO.getOrganIdList());
+		} else {
+//			delete role organ
+			roleOrganService.deleteRoleOrganByRoleIdList(Collections.singletonList(roleVO.getRoleId()));
+		}
+//		update auth cache
+		userTokenService.updateUserCacheByRoleId(roleVO.getRoleId());
 	}
 
 	/**
@@ -112,34 +119,17 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 //		update role
 		this.updateById(role);
 //		save role menu
-		roleMenuService.saveOrUpdate(roleVO.getRoleId(), roleVO.getMenuIdList());
-//		update user cache
-		userTokenService.updateUserCacheByRoleId(roleVO.getRoleId());
-	}
-
-	/**
-	 * set role data scope
-	 * @param roleDataScopeVO
-	 */
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void setRoleDataScope(RoleDataScopeVO roleDataScopeVO) {
-//		get role
-		Role role = getById(roleDataScopeVO.getRoleId());
-//		set data scope
-		role.setDataScope(roleDataScopeVO.getDataScope());
-//		update role
-		updateById(role);
+		roleMenuService.saveOrUpdate(role.getSystemId(), role.getRoleId(), roleVO.getMenuIdList());
 //		if custom data scope
-		if (roleDataScopeVO.getDataScope().equals(DataScopeType.CUSTOM)) {
+		if (roleVO.getDataScope().equals(DataScopeType.CUSTOM)) {
 //			update role data scope
-			roleOrganService.saveOrUpdate(role.getRoleId(), roleDataScopeVO.getOrganIdList());
+			roleOrganService.saveOrUpdate(role.getSystemId(), role.getRoleId(), roleVO.getOrganIdList());
 		} else {
 //			delete role organ
-			roleOrganService.deleteRoleOrganByRoleIdList(Collections.singletonList(roleDataScopeVO.getRoleId()));
+			roleOrganService.deleteRoleOrganByRoleIdList(Collections.singletonList(roleVO.getRoleId()));
 		}
-//		update auth cache
-		userTokenService.updateUserCacheByRoleId(roleDataScopeVO.getRoleId());
+//		update user cache
+		userTokenService.updateUserCacheByRoleId(roleVO.getRoleId());
 	}
 
 	/**

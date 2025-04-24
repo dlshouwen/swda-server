@@ -96,7 +96,7 @@ public class OrganController {
 	@PostMapping("/delete")
 	@Operation(name = "delete organ", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:permission:organ:delete')")
-	public R<String> deleteOrgan(Long organId) {
+	public R<String> deleteOrgan(@RequestBody Long organId) {
 //		delete organ
 		organService.deleteOrgan(organId);
 //		return

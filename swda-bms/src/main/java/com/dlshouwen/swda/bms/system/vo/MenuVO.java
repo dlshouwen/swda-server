@@ -3,6 +3,7 @@ package com.dlshouwen.swda.bms.system.vo;
 import com.dlshouwen.swda.core.base.entity.TreeNode;
 import com.dlshouwen.swda.core.base.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -33,7 +34,7 @@ public class MenuVO extends TreeNode<MenuVO> {
 	
 	@Schema(description = "system id")
 	private Long systemId;
-
+	
 	@Schema(description = "menu code")
 	@NotBlank(message = "菜单编码不能为空")
 	private String menuCode;

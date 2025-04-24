@@ -16,7 +16,6 @@ import com.dlshouwen.swda.bms.permission.service.IRoleMenuService;
 import com.dlshouwen.swda.bms.permission.service.IRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
-import com.dlshouwen.swda.bms.permission.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.permission.vo.RoleVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 
@@ -87,9 +86,9 @@ public class RoleController {
 	public R<RoleVO> getRoleData(@PathVariable("roleId") Long roleId) {
 //		get role data
 		RoleVO role = roleService.getRoleData(roleId);
-//		get permission id list set to role
-		List<Long> permissionIdList = roleMenuService.getMenuIdList(roleId);
-		role.setMenuIdList(permissionIdList);
+//		get menu id list set to role
+		List<Long> menuIdList = roleMenuService.getMenuIdList(roleId);
+		role.setMenuIdList(menuIdList);
 //		get organ id list set to role
 		List<Long> organIdList = roleOrganService.getOrganIdList(roleId);
 		role.setOrganIdList(organIdList);
@@ -123,21 +122,6 @@ public class RoleController {
 	public R<String> updateRole(@RequestBody @Valid RoleVO roleVO) {
 //		update role
 		roleService.updateRole(roleVO);
-//		return
-		return R.ok();
-	}
-
-	/**
-	 * set role data scope
-	 * @param roleDataScopeVO
-	 * @return result
-	 */
-	@PostMapping("/data_scope/set")
-	@Operation(name = "set role data scope", type = OperateType.UPDATE)
-	@PreAuthorize("hasAuthority('bms:permission:role:data_scope/set')")
-	public R<String> setRoleDataScope(@RequestBody @Valid RoleDataScopeVO roleDataScopeVO) {
-//		set role data scope
-		roleService.setRoleDataScope(roleDataScopeVO);
 //		return
 		return R.ok();
 	}

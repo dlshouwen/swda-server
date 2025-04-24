@@ -32,10 +32,10 @@ public interface IMenuService extends BaseService<Menu> {
 
 	/**
 	 * get menu list
-	 * @param menuType
+	 * @param systemId
 	 * @return menu vo list
 	 */
-	List<MenuVO> getMenuList(String menuType);
+	List<MenuVO> getMenuList(Long systemId);
 	
 	/**
 	 * get menu data

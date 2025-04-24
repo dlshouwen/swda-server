@@ -27,6 +27,8 @@ public class Role extends BaseEntity {
 	private Long roleId;
 	
 	private Long systemId;
+	
+	private Long organId;
 
 	private String roleCode;
 	

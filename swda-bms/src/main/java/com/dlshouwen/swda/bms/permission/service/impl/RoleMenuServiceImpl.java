@@ -35,12 +35,13 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenuMapper, RoleMen
 	
 	/**
 	 * save or update
+	 * @param systemId
 	 * @param roleId
 	 * @param menuIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void saveOrUpdate(Long roleId, List<Long> menuIdList) {
+	public void saveOrUpdate(Long systemId, Long roleId, List<Long> menuIdList) {
 //		get menu id list
 		List<Long> dbMenuIdList = this.getMenuIdList(roleId);
 //		get insert menu datas
@@ -51,14 +52,15 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenuMapper, RoleMen
 			List<RoleMenu> menuList = insertMenuIdList.stream().map(menuId -> {
 //				create role menu
 				RoleMenu entity = new RoleMenu();
-//				set menu id, role id
+//				set system id, menu id, role id
+				entity.setSystemId(systemId);
 				entity.setMenuId(menuId);
 				entity.setRoleId(roleId);
 //				return role menu
 				return entity;
 			}).collect(Collectors.toList());
 //			batch insert role menu list
-			saveBatch(menuList);
+			this.saveBatch(menuList);
 		}
 //		get delete menu id list
 		Collection<Long> deleteMenuIdList = CollUtil.subtract(dbMenuIdList, menuIdList);

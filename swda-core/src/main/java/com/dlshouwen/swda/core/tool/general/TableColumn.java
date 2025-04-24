@@ -27,7 +27,7 @@ public class TableColumn {
 	private static String PASSWORD = "root";
 	
 	/** table */
-	private static String TABLE = "bms_region";
+	private static String TABLE = "bms_role";
 	
 	
 	/**
@@ -83,7 +83,7 @@ public class TableColumn {
 //			width
 			{
 //				set width
-				String width = "LocalDateTime".equals(dataType)?"120":"90";
+				String width = "LocalDateTime".equals(dataType)?"180":"120";
 				columns.append("width=\"").append(width).append("\" ");
 			}
 //			default

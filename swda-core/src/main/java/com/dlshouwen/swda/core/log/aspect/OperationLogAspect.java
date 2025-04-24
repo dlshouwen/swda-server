@@ -201,6 +201,11 @@ public class OperationLogAspect {
 	 * @return is ignore
 	 */
 	private static boolean ignoreParams(Object object) {
+//		null
+		if(object==null) {
+//			return
+			return false;
+		}
 //		get class
 		Class<?> clazz = object.getClass();
 //		handle array

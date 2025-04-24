@@ -14,10 +14,11 @@ public interface IRoleOrganService extends BaseService<RoleOrgan> {
 
 	/**
 	 * save or update
+	 * @param systemId
 	 * @param roleId
 	 * @param orgIdList
 	 */
-	void saveOrUpdate(Long roleId, List<Long> orgIdList);
+	void saveOrUpdate(Long systemId, Long roleId, List<Long> orgIdList);
 
 	/**
 	 * get organ id list

@@ -93,13 +93,13 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuMapper, Menu> implement
 
 	/**
 	 * get menu list
-	 * @param menuType
+	 * @param systemId
 	 * @return menu list
 	 */
 	@Override
-	public List<MenuVO> getMenuList(String menuType) {
+	public List<MenuVO> getMenuList(Long systemId) {
 //		get menu list
-		List<Menu> menuList = baseMapper.getMenuList(menuType);
+		List<Menu> menuList = this.list(Wrappers.<Menu>lambdaQuery().eq(Menu::getSystemId, systemId).orderByAsc(Menu::getSort));
 //		build menu tree for return
 		return TreeUtils.build(MenuConvert.INSTANCE.convert2VOList(menuList));
 	}

@@ -4,7 +4,6 @@ import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
 import com.dlshouwen.swda.bms.permission.entity.Role;
-import com.dlshouwen.swda.bms.permission.vo.RoleDataScopeVO;
 import com.dlshouwen.swda.bms.permission.vo.RoleVO;
 
 import java.util.List;
@@ -48,12 +47,6 @@ public interface IRoleService extends BaseService<Role> {
 	 * @param roleVO
 	 */
 	void updateRole(RoleVO vo);
-
-	/**
-	 * set role data scope
-	 * @param roleDataScopeVO
-	 */
-	void setRoleDataScope(RoleDataScopeVO roleDataScopeVO);
 
 	/**
 	 * delete role

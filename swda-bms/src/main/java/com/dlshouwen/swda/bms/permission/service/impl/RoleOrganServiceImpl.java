@@ -26,12 +26,13 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 
 	/**
 	 * save or update
+	 * @param systemId
 	 * @param roleId
 	 * @param organIdList
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void saveOrUpdate(Long roleId, List<Long> organIdList) {
+	public void saveOrUpdate(Long systemId, Long roleId, List<Long> organIdList) {
 //		get organ id list
 		List<Long> dbOrganIdList = this.getOrganIdList(roleId);
 //		get insert organ id list
@@ -42,7 +43,8 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 			List<RoleOrgan> orgList = insertOrganIdList.stream().map(organId -> {
 //				create role data scope
 				RoleOrgan entity = new RoleOrgan();
-//				set organ id, role id
+//				set system id, organ id, role id
+				entity.setSystemId(systemId);
 				entity.setOrganId(organId);
 				entity.setRoleId(roleId);
 //				return role data scope
@@ -58,6 +60,7 @@ public class RoleOrganServiceImpl extends BaseServiceImpl<RoleOrganMapper, RoleO
 //			get wrapper
 			LambdaQueryWrapper<RoleOrgan> queryWrapper = Wrappers.<RoleOrgan>lambdaQuery();
 //			set condition
+			queryWrapper.eq(RoleOrgan::getSystemId, systemId);
 			queryWrapper.eq(RoleOrgan::getRoleId, roleId);
 			queryWrapper.in(RoleOrgan::getOrganId, deleteOrganIdList);
 //			delete role data scope

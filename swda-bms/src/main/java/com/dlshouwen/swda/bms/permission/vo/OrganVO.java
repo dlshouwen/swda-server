@@ -1,8 +1,13 @@
 package com.dlshouwen.swda.bms.permission.vo;
 
+import com.dlshouwen.swda.bms.system.entity.Region;
 import com.dlshouwen.swda.core.base.entity.TreeNode;
 import com.dlshouwen.swda.core.base.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fhs.core.trans.anno.Trans;
+import com.fhs.core.trans.constant.TransType;
+import com.fhs.core.trans.vo.TransPojo;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -19,7 +24,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "organ")
-public class OrganVO extends TreeNode<OrganVO> {
+public class OrganVO extends TreeNode<OrganVO> implements TransPojo {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
@@ -53,13 +58,22 @@ public class OrganVO extends TreeNode<OrganVO> {
 	private Double latitude;
 	
 	@Schema(description = "province id")
+	@Trans(type = TransType.SIMPLE, target = Region.class, fields="regionName", ref="provinceName")
 	private Integer provinceId;
 	
+	private String provinceName;
+	
 	@Schema(description = "city id")
+	@Trans(type = TransType.SIMPLE, target = Region.class, fields="regionName", ref="cityName")
 	private Integer cityId;
 	
+	private String cityName;
+	
 	@Schema(description = "county id")
+	@Trans(type = TransType.SIMPLE, target = Region.class, fields="regionName", ref="countyName")
 	private Integer countyId;
+	
+	private String countyName;
 	
 	@Schema(description = "address")
 	private String address;

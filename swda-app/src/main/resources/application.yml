@@ -31,7 +31,6 @@ swda:
     refresh-token-expire: 1209600
   log:
     path: logs
-    level: INFO
   uniques:
     # system - dict type
     bms.system.dict_type.dict_type.add: select count(*) from bms_dict_type where dict_type=?

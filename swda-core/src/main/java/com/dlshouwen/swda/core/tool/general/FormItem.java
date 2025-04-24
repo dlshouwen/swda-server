@@ -27,8 +27,8 @@ public class FormItem {
 	private static String PASSWORD = "root";
 	
 	/** table */
-	private static String TABLE = "bms_region";
-	private static String MODEL = "region";
+	private static String TABLE = "bms_role";
+	private static String MODEL = "role";
 	
 	
 	

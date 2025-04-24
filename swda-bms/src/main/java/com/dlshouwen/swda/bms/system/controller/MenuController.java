@@ -65,15 +65,15 @@ public class MenuController {
 
 	/**
 	 * get menu list
-	 * @param menuType
+	 * @param systemId
 	 * @return menu list
 	 */
 	@PostMapping("/list")
 	@Operation(name = "get menu list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:menu:list')")
-	public R<List<MenuVO>> getMenuList(String menuType) {
+	public R<List<MenuVO>> getMenuList(@RequestBody Long systemId) {
 //		get menu list
-		List<MenuVO> menuList = menuService.getMenuList(menuType);
+		List<MenuVO> menuList = menuService.getMenuList(systemId);
 //		return
 		return R.ok(menuList);
 	}

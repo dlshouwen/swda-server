@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import java.io.Serializable;
@@ -44,6 +46,10 @@ public class PostVO implements Serializable {
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
 	private Integer sort;
+
+	@Schema(description = "remark")
+	@Length(min = 0, max = 200, message = "备注长度在 0-200 之间")
+	private String remark;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

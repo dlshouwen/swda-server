@@ -21,10 +21,11 @@ public interface IRoleMenuService extends BaseService<RoleMenu> {
 
 	/**
 	 * save or update
+	 * @param systemId
 	 * @param roleId
 	 * @param menuIdList
 	 */
-	void saveOrUpdate(Long roleId, List<Long> menuIdList);
+	void saveOrUpdate(Long systemId, Long roleId, List<Long> menuIdList);
 
 	/**
 	 * delete by role id list
