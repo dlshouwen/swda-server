@@ -30,6 +30,8 @@ public class UserSystem extends BaseEntity {
 
 	private Long systemId;
 	
+	private Long tenantId;
+	
     @Version
     @TableField(fill = FieldFill.INSERT)
     private Integer version;

@@ -70,10 +70,6 @@ public class Region extends BaseEntity {
 	@TableField(fill=FieldFill.INSERT)
 	private String deleted;
 
-	private Long deleter;
-
-	private LocalDateTime deleteTime;
-
 	@TableField(exist=false)
 	private Boolean hasChildren;
 

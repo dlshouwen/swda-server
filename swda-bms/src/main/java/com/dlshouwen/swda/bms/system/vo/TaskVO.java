@@ -58,15 +58,15 @@ public class TaskVO implements Serializable {
 	@Schema(description = "core expression")
 	@NotBlank(message = "Core表达式不能为空")
 	private String coreExpression;
-
-	@Schema(description = "remark")
-	private String remark;
 	
 	@Schema(description = "assist_search")
 	private String assistSearch;
 	
 	@Schema(description = "sort")
 	private int sort;
+
+	@Schema(description = "remark")
+	private String remark;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

@@ -8,6 +8,9 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
 /**
  * email platform vo
  * @author liujingcheng@live.cn
@@ -61,6 +64,18 @@ public class EmailPlatformVO implements Serializable {
 
 	@Schema(description = "secret key")
 	private String secretKey;
+
+	@Schema(description = "assist search")
+	@Length(min = 0, max = 400, message = "辅助查询长度在 0-400 之间")
+	private String assistSearch;
+	
+	@Schema(description = "sort")
+	@Range(min = 0, message = "排序数据必须大于 0")
+	private Integer sort;
+
+	@Schema(description = "remark")
+	@Length(min = 0, max = 200, message = "备注长度在 0-200 之间")
+	private String remark;
 
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)

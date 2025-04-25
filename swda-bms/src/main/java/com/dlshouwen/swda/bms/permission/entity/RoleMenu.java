@@ -32,6 +32,8 @@ public class RoleMenu extends BaseEntity {
 
 	private Long menuId;
 	
+	private Long tenantId;
+	
     @Version
     @TableField(fill = FieldFill.INSERT)
     private Integer version;

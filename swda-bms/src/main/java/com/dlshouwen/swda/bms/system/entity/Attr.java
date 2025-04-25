@@ -1,8 +1,6 @@
 package com.dlshouwen.swda.bms.system.entity;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -70,6 +68,4 @@ public class Attr extends BaseEntity {
     @TableField(fill = FieldFill.INSERT)
     private String deleted;
     
-    private transient Map<String, Object> transMap = new HashMap<>();
-
 }

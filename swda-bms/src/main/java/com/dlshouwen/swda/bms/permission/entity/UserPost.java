@@ -30,6 +30,8 @@ public class UserPost extends BaseEntity {
 
 	private Long postId;
 	
+	private Long tenantId;
+	
     @Version
     @TableField(fill = FieldFill.INSERT)
     private Integer version;

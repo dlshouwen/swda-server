@@ -44,7 +44,9 @@ public class Task extends BaseEntity {
 	
 	private String coreExpression;
 
-	private String remark; Long tenantId;
+	private String remark;
+	
+	Long tenantId;
 
     @Version
     @TableField(fill = FieldFill.INSERT)

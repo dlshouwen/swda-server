@@ -55,8 +55,4 @@ public class DictVO implements Serializable {
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
 
-	@Schema(description = "update time")
-	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private LocalDateTime updateTime;
-
 }

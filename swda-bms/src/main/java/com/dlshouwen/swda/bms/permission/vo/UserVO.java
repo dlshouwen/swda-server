@@ -94,14 +94,14 @@ public class UserVO implements Serializable, TransPojo {
 
 	@Schema(description = "address")
 	private String address;
-	
-	@Schema(description = "sort")
-	@Range(min = 0, message = "排序数据必须大于 0")
-	private Integer sort;
 
 	@Schema(description = "assist search")
 	@Length(min = 0, max = 400, message = "辅助查询长度在 0-400 之间")
 	private String assistSearch;
+	
+	@Schema(description = "sort")
+	@Range(min = 0, message = "排序数据必须大于 0")
+	private Integer sort;
 
 	@Schema(description = "remark")
 	@Length(min = 0, max = 200, message = "备注长度在 0-200 之间")

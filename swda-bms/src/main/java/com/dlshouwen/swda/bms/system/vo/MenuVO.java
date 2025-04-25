@@ -31,7 +31,7 @@ public class MenuVO extends TreeNode<MenuVO> {
 	
 	@Schema(description = "parent menu id")
 	private Long preMenuId;
-	
+
 	@Schema(description = "system id")
 	private Long systemId;
 	
@@ -58,6 +58,9 @@ public class MenuVO extends TreeNode<MenuVO> {
 
 	@Schema(description = "icon")
 	private String icon;
+	
+	@Schema(description = "assist_search")
+	private String assistSearch;
 
 	@Schema(description = "sort")
 	@Min(value = 0, message = "排序值不能小于0")
@@ -66,8 +69,5 @@ public class MenuVO extends TreeNode<MenuVO> {
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
-
-	@Schema(description = "parent menu name")
-	private String preMenuName;
 
 }

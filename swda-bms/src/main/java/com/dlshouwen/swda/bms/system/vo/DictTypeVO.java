@@ -43,15 +43,8 @@ public class DictTypeVO implements Serializable {
 	@Schema(description = "remark")
 	private String remark;
 
-	@Schema(description = "tenant id")
-	private Long tenantId;
-
 	@Schema(description = "create time")
 	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
 	private LocalDateTime createTime;
-
-	@Schema(description = "update time")
-	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private LocalDateTime updateTime;
 
 }

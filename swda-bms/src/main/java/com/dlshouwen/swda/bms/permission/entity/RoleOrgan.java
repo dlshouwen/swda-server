@@ -32,6 +32,8 @@ public class RoleOrgan extends BaseEntity {
 
 	private Long organId;
 	
+	private Long tenantId;
+	
     @Version
     @TableField(fill = FieldFill.INSERT)
     private Integer version;

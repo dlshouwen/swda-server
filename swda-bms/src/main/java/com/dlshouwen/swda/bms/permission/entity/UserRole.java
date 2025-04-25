@@ -30,6 +30,8 @@ public class UserRole extends BaseEntity {
 
 	private Long roleId;
 	
+	private Long tenantId;
+	
     @Version
     @TableField(fill = FieldFill.INSERT)
     private Integer version;

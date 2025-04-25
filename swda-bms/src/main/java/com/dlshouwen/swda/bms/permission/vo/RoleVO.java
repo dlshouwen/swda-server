@@ -18,6 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
 /**
  * role vo
  * @author liujingcheng@live.cn
@@ -55,21 +58,29 @@ public class RoleVO implements Serializable, TransPojo {
 	@NotBlank(message = "角色名称不能为空")
 	private String roleName;
 
+	@Schema(description = "data scope")
+	private String dataScope;
+
+	@Schema(description = "assist search")
+	@Length(min = 0, max = 400, message = "辅助查询长度在 0-400 之间")
+	private String assistSearch;
+	
+	@Schema(description = "sort")
+	@Range(min = 0, message = "排序数据必须大于 0")
+	private Integer sort;
+
 	@Schema(description = "remark")
 	private String remark;
 
-	@Schema(description = "data scope")
-	private String dataScope;
+	@Schema(description = "create time")
+	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	private LocalDateTime createTime;
 
 	@Schema(description = "menu id list")
 	private List<Long> menuIdList;
 
 	@Schema(description = "organ id list")
 	private List<Long> organIdList;
-
-	@Schema(description = "create time")
-	@JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
-	private LocalDateTime createTime;
 	
 	Map<String, Object> transMap = new HashMap<String, Object>();
 

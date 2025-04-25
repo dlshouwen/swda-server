@@ -68,8 +68,4 @@ public class Town extends BaseEntity {
 	@TableField(fill=FieldFill.INSERT)
 	private String deleted;
 
-	private Long deleter;
-
-	private LocalDateTime deleteTime;
-
 }

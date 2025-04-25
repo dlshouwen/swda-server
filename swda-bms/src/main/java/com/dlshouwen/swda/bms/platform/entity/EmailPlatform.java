@@ -56,6 +56,8 @@ public class EmailPlatform {
 	private int sort;
 	
 	private String remark;
+	
+	private Long tenantId;
 
     @Version
     @TableField(fill = FieldFill.INSERT)
