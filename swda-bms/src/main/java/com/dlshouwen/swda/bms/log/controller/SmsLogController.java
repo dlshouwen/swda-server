@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +46,7 @@ public class SmsLogController {
 	@PostMapping("/page")
 	@Operation(name = "get sms log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:sms_log:page')")
-	public R<PageResult<SmsLogVO>> getSmsLogPageResult(@ParameterObject @Valid Query<SmsLog> query) {
+	public R<PageResult<SmsLogVO>> getSmsLogPageResult(@RequestBody @Valid Query<SmsLog> query) {
 //		get sms log page result
 		PageResult<SmsLogVO> pageResult = smsLogService.getSmsLogPageResult(query);
 //		return sms log page result
@@ -74,7 +73,7 @@ public class SmsLogController {
 	 * @param smsLogIdList
 	 * @return result
 	 */
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete sms log", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:log:sms_log:delete')")
 	public R<String> deleteSmsLog(@RequestBody List<Long> smsLogIdList) {

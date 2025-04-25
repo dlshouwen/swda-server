@@ -24,7 +24,7 @@ public class AliyunEmailUtils {
 //		defined config
 		Config config = new Config();
 //		set end point, region id, access key id, access key secret
-		config.setEndpoint(emailPlatform.getEndpoint());
+		config.setEndpoint(emailPlatform.getEndPoint());
 		config.setRegionId(emailPlatform.getRegionId());
 		config.setAccessKeyId(emailPlatform.getAccessKey());
 		config.setAccessKeySecret(emailPlatform.getSecretKey());

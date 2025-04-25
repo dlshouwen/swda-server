@@ -3,7 +3,6 @@ package com.dlshouwen.swda.bms.log.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +40,7 @@ public class EmailLogController {
 	@PostMapping("/page")
 	@Operation(name = "get email log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:email_log:page')")
-	public R<PageResult<EmailLogVO>> getEmailLogPageResult(@ParameterObject @Valid Query<EmailLog> query) {
+	public R<PageResult<EmailLogVO>> getEmailLogPageResult(@RequestBody @Valid Query<EmailLog> query) {
 //		get email log page result
 		PageResult<EmailLogVO> pageResult = emailLogService.getEmailLogPageResult(query);
 //		return email log page result
@@ -68,7 +67,7 @@ public class EmailLogController {
 	 * @param emailLogIdList
 	 * @return result
 	 */
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete email log", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:log:email_log:delete')")
 	public R<String> deleteEmailLog(@RequestBody List<Long> emailLogIdList) {

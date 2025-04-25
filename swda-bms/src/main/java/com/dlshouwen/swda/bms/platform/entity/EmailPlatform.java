@@ -45,7 +45,7 @@ public class EmailPlatform {
 
 	private String regionId;
 
-	private String endpoint;
+	private String endPoint;
 
 	private String accessKey;
 

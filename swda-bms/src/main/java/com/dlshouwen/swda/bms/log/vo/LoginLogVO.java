@@ -2,7 +2,6 @@ package com.dlshouwen.swda.bms.log.vo;
 
 import com.dlshouwen.swda.core.base.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fhs.core.trans.vo.TransPojo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "login log")
-public class LoginLogVO implements Serializable, TransPojo {
+public class LoginLogVO implements Serializable {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

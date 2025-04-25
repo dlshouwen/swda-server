@@ -16,7 +16,6 @@ import com.dlshouwen.swda.bms.log.vo.OperationLogVO;
 
 import java.util.List;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/operation_log")
+@RequestMapping("/bms/log/operation_log")
 @Tag(name = "operation log")
 @AllArgsConstructor
 public class OperateLogController {
@@ -46,8 +45,8 @@ public class OperateLogController {
 	 */
 	@PostMapping("/page")
 	@Operation(name = "get operation log page result", type = OperateType.SEARCH)
-	@PreAuthorize("hasAuthority('bms:log:operate_log:page')")
-	public R<PageResult<OperationLogVO>> getOperationLogPageResult(@ParameterObject @Valid Query<OperationLog> query) {
+	@PreAuthorize("hasAuthority('bms:log:operation_log:page')")
+	public R<PageResult<OperationLogVO>> getOperationLogPageResult(@RequestBody @Valid Query<OperationLog> query) {
 //		get operation log page result
 		PageResult<OperationLogVO> pageResult = operationLogService.getOperationLogPageResult(query);
 //		return page result
@@ -74,7 +73,7 @@ public class OperateLogController {
 	 * @param operationLogIdList
 	 * @return result
 	 */
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete operation log", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:log:operation_log:delete')")
 	public R<String> deleteOperationLog(@RequestBody List<Long> operationLogIdList) {

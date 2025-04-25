@@ -16,7 +16,6 @@ import com.dlshouwen.swda.bms.log.vo.LoginLogVO;
 
 import java.util.List;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +46,7 @@ public class LoginLogController {
 	@PostMapping("/page")
 	@Operation(name = "get login log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:login_log:page')")
-	public R<PageResult<LoginLogVO>> getLoginLogPageResult(@ParameterObject @Valid Query<LoginLog> query) {
+	public R<PageResult<LoginLogVO>> getLoginLogPageResult(@RequestBody @Valid Query<LoginLog> query) {
 //		get login log page result
 		PageResult<LoginLogVO> pageResult = loginLogService.getLoginLogPageResult(query);
 //		return page result
@@ -74,7 +73,7 @@ public class LoginLogController {
 	 * @param loginLogIdList
 	 * @return result
 	 */
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete login log", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:log:login_log:delete')")
 	public R<String> deleteLoginLog(@RequestBody List<Long> loginLogIdList) {

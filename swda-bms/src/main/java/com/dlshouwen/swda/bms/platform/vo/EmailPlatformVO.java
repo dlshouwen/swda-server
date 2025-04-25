@@ -53,8 +53,8 @@ public class EmailPlatformVO implements Serializable {
 	@Schema(description = "region id")
 	private String regionId;
 
-	@Schema(description = "endpoint")
-	private String endpoint;
+	@Schema(description = "end point")
+	private String endPoint;
 
 	@Schema(description = "access key")
 	private String accessKey;

@@ -16,7 +16,6 @@ import com.dlshouwen.swda.bms.log.vo.DataLogVO;
 
 import java.util.List;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +46,7 @@ public class DataLogController {
 	@PostMapping("/page")
 	@Operation(name = "get data log page result", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:log:data_log:page')")
-	public R<PageResult<DataLogVO>> getDataLogPageResult(@ParameterObject @Valid Query<DataLog> query) {
+	public R<PageResult<DataLogVO>> getDataLogPageResult(@RequestBody @Valid Query<DataLog> query) {
 //		get data log list
 		PageResult<DataLogVO> pageResult = dataLogService.getDataLogPageResult(query);
 //		return page result
@@ -74,7 +73,7 @@ public class DataLogController {
 	 * @param dataLogIdList
 	 * @return result
 	 */
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	@Operation(name = "delete data log", type = OperateType.DELETE)
 	@PreAuthorize("hasAuthority('bms:log:data_log:delete')")
 	public R<String> deleteDataLog(@RequestBody List<Long> dataLogIdList) {
