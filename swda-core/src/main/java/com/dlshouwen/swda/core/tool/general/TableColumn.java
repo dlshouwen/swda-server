@@ -27,7 +27,7 @@ public class TableColumn {
 	private static String PASSWORD = "root";
 	
 	/** table */
-	private static String TABLE = "bms_operation_log";
+	private static String TABLE = "bms_data_log";
 	
 	
 	/**

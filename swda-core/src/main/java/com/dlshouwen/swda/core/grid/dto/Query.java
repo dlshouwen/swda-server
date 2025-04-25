@@ -5,8 +5,6 @@ import lombok.Data;
 import java.util.List;
 import java.util.Map;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
 /**
  * pager
  * @author liujingcheng@live.cn
@@ -16,7 +14,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 public class Query<T> {
 	
 	/** page */
-	private Page<T> page;
+	private Page page;
 
 	/** parameters */
 	private Map<String, Object> parameters;

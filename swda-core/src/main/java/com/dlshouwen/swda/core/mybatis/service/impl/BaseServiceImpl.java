@@ -40,7 +40,9 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
 	 * @param query
 	 * @return ipage
 	 */
-	protected IPage<T> page(QueryWrapper<T> wrapper, Page<T> page) {
+	protected IPage<T> page(Query<T> query, QueryWrapper<T> wrapper) {
+//		set page
+		IPage<T> page = new Page<T>(query.getPage().getCurrent(), query.getPage().getSize());
 //		select page for return
 		return baseMapper.selectPage(page, wrapper);
 	}
@@ -53,10 +55,10 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
 	protected IPage<T> page(Query<T> query) {
 //		construct wrapper
 		QueryWrapper<T> wrapper = GridUtils.constructQueryWrapper(query);
-//		select page
-		IPage<T> page = baseMapper.selectPage(query.getPage(), wrapper);
-//		return page
-		return page;
+//		set page
+		IPage<T> page = new Page<T>(query.getPage().getCurrent(), query.getPage().getSize());
+//		select page for return
+		return baseMapper.selectPage(page, wrapper);
 	}
 	
 	/**

@@ -42,7 +42,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 //		set dict type
 		wrapper.eq("dict_type", dictType);
 //		query page
-		IPage<Dict> page = this.page(query.getPage(), wrapper);
+		IPage<Dict> page = this.page(query, wrapper);
 //		convert to vo list for return
 		return new PageResult<>(DictConvert.INSTANCE.convert2VOList(page.getRecords()), page.getTotal());
 	}

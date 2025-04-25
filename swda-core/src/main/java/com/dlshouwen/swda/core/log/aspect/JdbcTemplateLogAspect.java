@@ -100,7 +100,12 @@ public class JdbcTemplateLogAspect {
 //				set end time, cost, execute result
 				dataLog.setEndTime(LocalDateTime.now());
 				dataLog.setCost((int) LocalDateTimeUtil.between(dataLog.getStartTime(), dataLog.getEndTime()).toMillis());
-				dataLog.setExecuteResult(JsonUtils.toJsonString(result));
+//				set execute result: list
+				if(result instanceof List) {
+					dataLog.setExecuteResult("size: "+((List<?>)result).size());
+				}else {
+					dataLog.setExecuteResult(JsonUtils.toJsonString(result));
+				}
 //				if only store error
 				String data_log_only_store_error = MapUtil.getStr(Data.attr, "data_log_only_store_error");
 				if ("1".equals(data_log_only_store_error)) {

@@ -27,8 +27,8 @@ public class FormItem {
 	private static String PASSWORD = "root";
 	
 	/** table */
-	private static String TABLE = "bms_login_log";
-	private static String MODEL = "loginLog";
+	private static String TABLE = "bms_data_log";
+	private static String MODEL = "dataLog";
 	
 	
 	
@@ -50,6 +50,7 @@ public class FormItem {
 		StringBuffer items = new StringBuffer();
 		StringBuffer props = new StringBuffer();
 		StringBuffer rules = new StringBuffer();
+		StringBuffer descripts = new StringBuffer();
 //		for each column
 		for (Map<String, Object> columnInfo : columnList) {
 //			get field type isnull key comment length
@@ -92,37 +93,54 @@ public class FormItem {
 			valid += ("Long".equals(dataType)||"Double".equals(dataType))?(valid.length()>0?("|"+"double"):("double")):"";
 			valid += "Date".equals(dataType)?(valid.length()>0?("|"+"date"):("date")):"";
 			valid += length>0?(valid.length()>0?("|"+"l-le"+length):("l-le"+length)):"";
-//			start
-			items.append("<el-form-item prop=\"").append(StrUtil.toCamelCase(field)).append("\" label=\"").append(comment).append("\">\n");
-//			type: dict
-			if("String".equals(dataType)&&length>0&&length<=2) {
-				items.append("	<el-radio-group v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\">\n");
-				items.append("		<el-radio-button v-for=\"item in appStore.dict.").append(field).append(".datas\" :label=\"item.label\" :value=\"item.value\" />\n");
-				items.append("	</el-radio-group>\n");
+//			items
+			{
+//				start
+				items.append("<el-form-item prop=\"").append(StrUtil.toCamelCase(field)).append("\" label=\"").append(comment).append("\">\n");
+//				type: dict
+				if("String".equals(dataType)&&length>0&&length<=2) {
+					items.append("	<el-radio-group v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\">\n");
+					items.append("		<el-radio-button v-for=\"item in appStore.dict.").append(field).append(".datas\" :label=\"item.label\" :value=\"item.value\" />\n");
+					items.append("	</el-radio-group>\n");
+				}
+//				type: string
+				if("String".equals(dataType)&&(length<=0||length>2)) {
+					items.append("	<el-input v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\" placeholder=\"请输入").append(comment).append("\"></el-input>\n");
+				}
+//				type: double
+				if("Integer".equals(dataType)||"Long".equals(dataType)||"Double".equals(dataType)) {
+					items.append("	<el-input-number v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\" :min=\"0\" placeholder=\"请输入").append(comment).append("\"></el-input-number>\n");
+				}
+//				type: date
+				if("Date".equals(dataType)) {
+					items.append("	<el-date-picker v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\" type=\"datetime\" format=\"YYYY-MM-DD HH:mm:ss\" placeholder=\"请选择").append(comment).append("\" />\n");
+				}
+//				end
+				items.append("</el-form-item>\n");
 			}
-//			type: string
-			if("String".equals(dataType)&&(length<=0||length>2)) {
-				items.append("	<el-input v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\" placeholder=\"请输入").append(comment).append("\"></el-input>\n");
-			}
-//			type: double
-			if("Integer".equals(dataType)||"Long".equals(dataType)||"Double".equals(dataType)) {
-				items.append("	<el-input-number v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\" :min=\"0\" placeholder=\"请输入").append(comment).append("\"></el-input-number>\n");
-			}
-//			type: date
-			if("Date".equals(dataType)) {
-				items.append("	<el-date-picker v-model=\"").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("\" type=\"datetime\" format=\"YYYY-MM-DD HH:mm:ss\" placeholder=\"请选择").append(comment).append("\" />\n");
-			}
-//			end
-			items.append("</el-form-item>\n");
 //			props
 			props.append(StrUtil.toCamelCase(field)).append(": '").append("Integer".equals(dataType)||"Long".equals(dataType)||"Double".equals(dataType)?"0":"").append("',\n");
 //			rules
 			rules.append(StrUtil.toCamelCase(field)).append(": [{ label:'").append(comment).append("', valid:'").append(valid).append("', lang:t, validator:validator, trigger:'blur' }],\n");
+//			descripts
+			{
+//				start
+				descripts.append("<el-descriptions-item label=\"").append(comment).append("\">");
+//				type: dict
+				if("String".equals(dataType)&&length>0&&length<=2) {
+					descripts.append("\n	<el-tag :type=\"appStore.dict.").append(field).append("[").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("].style\">{{appStore.dict.").append(field).append("[").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("].label}}</el-tag>\n");
+				}else {
+					descripts.append("{{").append(MODEL).append(".").append(StrUtil.toCamelCase(field)).append("}}");
+				}
+//				end
+				descripts.append("</el-descriptions-item>\n");
+			}
 		}
 //		output
 		System.out.println(items);
 		System.out.println(props);
 		System.out.println(rules);
+		System.out.println(descripts);
 	}
 
 }

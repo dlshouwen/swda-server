@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dlshouwen.swda.core.grid.dict.ConditionLogic;
 import com.dlshouwen.swda.core.grid.dict.ConditionType;
 import com.dlshouwen.swda.core.grid.dict.SortLogic;
@@ -226,24 +227,26 @@ public class GridUtils {
 		String countSQL = "select count(*) from (" + executeSQL + ") _swda_query_count_table_alisa_ ";
 //		get total
 		Long total = template.queryForObject(countSQL, Long.class, executeArgs.toArray());
+//		new page
+		IPage<T> page = new Page<T>();
 //		set total
-		query.getPage().setTotal(total);
+		page.setTotal(total);
 //		set limit
 		executeSQL += " limit ?, ?";
 		executeArgs.add(query.getPage().getCurrent());
 		executeArgs.add(query.getPage().getSize());
 //		set pages
-		query.getPage().setPages((total + query.getPage().getSize() - 1) / query.getPage().getSize());
+		page.setPages((total + query.getPage().getSize() - 1) / query.getPage().getSize());
 //		get record
 		if (_class == Map.class) {
 			List<Map<String, Object>> records = template.queryForList(executeSQL, executeArgs.toArray());
-			query.getPage().setRecords((List<T>) records);
+			page.setRecords((List<T>) records);
 		} else {
 			List<T> records = template.query(executeSQL, new ClassRowMapper<T>(_class), executeArgs.toArray());
-			query.getPage().setRecords(records);
+			page.setRecords(records);
 		}
 //		return page
-		return query.getPage();
+		return page;
 	}
 
 }

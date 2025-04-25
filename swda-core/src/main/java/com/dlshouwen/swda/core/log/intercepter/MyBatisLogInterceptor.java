@@ -134,12 +134,12 @@ public class MyBatisLogInterceptor implements Interceptor {
 //			get bound sql
 			BoundSql boundSql = mappedStatement.getBoundSql(parameterObject);
 //			get paramter to json
-			String params = JsonUtils.toJsonString(boundSql.getParameterMappings());
+//			String params = JsonUtils.toJsonString(boundSql.getParameterObject());
 //			get return sql
 			String returnSQL = getSql(configuration, boundSql, mappedStatement.getId(), 0);
 //			set execute sql, execute params
 			dataLog.setExecuteSql(returnSQL);
-			dataLog.setExecuteParams(params);
+			dataLog.setExecuteParams("");
 		}
 //		defined result
 		Object result = null;
@@ -148,9 +148,14 @@ public class MyBatisLogInterceptor implements Interceptor {
 			result = invocation.proceed();
 //			is write log
 			if (isWriteLog) {
-//				set execute result, execute result type
-				dataLog.setExecuteResult(JsonUtils.toJsonString(result));
+//				set execute result class
 				dataLog.setExecuteResultClass(result.getClass().getName());
+//				set execute result: list
+				if(result instanceof List) {
+					dataLog.setExecuteResult("size: "+((List<?>)result).size());
+				}else {
+					dataLog.setExecuteResult(JsonUtils.toJsonString(result));
+				}
 //				if only store error
 				String data_log_only_store_error = MapUtil.getStr(Data.attr, "data_log_only_store_error");
 				if ("1".equals(data_log_only_store_error)) {
