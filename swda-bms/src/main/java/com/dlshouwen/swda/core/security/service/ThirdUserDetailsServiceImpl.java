@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.core.base.service.IAuthService;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
+import com.dlshouwen.swda.bms.permission.entity.Organ;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
+import com.dlshouwen.swda.bms.permission.service.IOrganService;
 import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.account.UserDetailsService;
@@ -26,6 +28,9 @@ public class ThirdUserDetailsServiceImpl implements ThirdUserDetailsService {
 
 	/** user details service */
 	private final UserDetailsService userDetailsService;
+	
+	/** organ service */
+	private final IOrganService organService;
 
 	/** third login service */
 	private final IAuthService authService;
@@ -60,6 +65,13 @@ public class ThirdUserDetailsServiceImpl implements ThirdUserDetailsService {
 		}
 //		convert to user detail
 		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
+//		get organ
+		Organ organ = organService.getById(user.getOrganId());
+//		if organ is not empty
+		if(organ != null) {
+//			set organ name
+			userDetail.setOrganName(organ.getOrganName());
+		}
 //		set login type, open type, open id
 		userDetail.setLoginType(LoginType.THIRD);
 		userDetail.setOpenType(openType);

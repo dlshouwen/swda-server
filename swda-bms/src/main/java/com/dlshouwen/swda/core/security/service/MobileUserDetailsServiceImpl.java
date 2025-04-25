@@ -6,8 +6,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
+import com.dlshouwen.swda.bms.permission.entity.Organ;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
+import com.dlshouwen.swda.bms.permission.service.IOrganService;
 import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.account.UserDetailsService;
 import com.dlshouwen.swda.core.security.mobile.MobileUserDetailsService;
@@ -24,6 +26,9 @@ public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
 
 	/** user details service */
 	private final UserDetailsService userDetailsService;
+	
+	/** organ service */
+	private final IOrganService organService;
 
 	/** user mapper */
 	private final UserMapper userMapper;
@@ -44,6 +49,13 @@ public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
 		}
 //		convert to user detail
 		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
+//		get organ
+		Organ organ = organService.getById(user.getOrganId());
+//		if organ is not empty
+		if(organ != null) {
+//			set organ name
+			userDetail.setOrganName(organ.getOrganName());
+		}
 //		set login type
 		userDetail.setLoginType(LoginType.MOBILE);
 //		get user details and return

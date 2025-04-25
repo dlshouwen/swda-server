@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.core.log.aspect;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.dlshouwen.swda.core.base.cache.RedisCache;
 import com.dlshouwen.swda.core.base.constant.Constant;
 import com.dlshouwen.swda.core.base.entity.Data;
@@ -135,8 +134,13 @@ public class JdbcTemplateLogAspect {
 		} finally {
 //			if need write
 			if (isWriteLog) {
-//				set data log id
-				dataLog.setDataLogId(IdWorker.getId());
+//				get request
+				HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+//				if has request
+				if (request != null) {
+//					set ip
+					dataLog.setIp(IpUtils.getIp(request));
+				}
 //				save log
 				redisCache.leftPush(Constant.DATA_LOG_KEY, dataLog, RedisCache.NOT_EXPIRE);
 			}

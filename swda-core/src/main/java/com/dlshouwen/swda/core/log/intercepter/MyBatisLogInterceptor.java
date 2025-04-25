@@ -1,6 +1,5 @@
 package com.dlshouwen.swda.core.log.intercepter;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.dlshouwen.swda.core.base.cache.RedisCache;
 import com.dlshouwen.swda.core.base.constant.Constant;
 import com.dlshouwen.swda.core.base.entity.Data;
@@ -13,6 +12,7 @@ import com.dlshouwen.swda.core.log.dict.CallType;
 import com.dlshouwen.swda.core.log.dict.ExecuteType;
 import com.dlshouwen.swda.core.log.dict.OperationType;
 import com.dlshouwen.swda.core.log.dto.DataLogDTO;
+import com.dlshouwen.swda.core.mybatis.entity.BaseEntity;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 
@@ -34,6 +34,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import java.text.DateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -150,11 +151,15 @@ public class MyBatisLogInterceptor implements Interceptor {
 			if (isWriteLog) {
 //				set execute result class
 				dataLog.setExecuteResultClass(result.getClass().getName());
-//				set execute result: list
+//				set execute result
 				if(result instanceof List) {
 					dataLog.setExecuteResult("size: "+((List<?>)result).size());
-				}else {
+				}else if (result instanceof String||result instanceof Boolean||result instanceof Integer||result instanceof Double
+						||result instanceof Long||result instanceof Map||result instanceof BaseEntity
+						||result instanceof LocalDateTime||result instanceof LocalDate){
 					dataLog.setExecuteResult(JsonUtils.toJsonString(result));
+				}else {
+					dataLog.setExecuteResult("[other type]");
 				}
 //				if only store error
 				String data_log_only_store_error = MapUtil.getStr(Data.attr, "data_log_only_store_error");
@@ -182,7 +187,13 @@ public class MyBatisLogInterceptor implements Interceptor {
 //				set end time, cost, data log id
 				dataLog.setEndTime(LocalDateTime.now());
 				dataLog.setCost((int) Duration.between(dataLog.getStartTime(), dataLog.getEndTime()).toMillis());
-				dataLog.setDataLogId(IdWorker.getId());
+//				get request
+				HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+//				if has request
+				if (request != null) {
+//					set ip
+					dataLog.setIp(IpUtils.getIp(request));
+				}
 //				save log
 				redisCache.leftPush(Constant.DATA_LOG_KEY, dataLog, RedisCache.NOT_EXPIRE);
 			}

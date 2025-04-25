@@ -46,6 +46,7 @@ public class UniqueController {
 		}else{
 //			add to key
 			validParam.getArgs().add(0, validParam.getValue());
+			System.out.println(validParam.getArgs());
 //			query count
 			count = dao.queryForObject(sql, Integer.class, validParam.getArgs().toArray());
 		}

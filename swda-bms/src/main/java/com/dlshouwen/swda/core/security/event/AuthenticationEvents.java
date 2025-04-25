@@ -41,7 +41,7 @@ public class AuthenticationEvents {
 //		get user detail
 		UserDetail user = (UserDetail) event.getAuthentication().getPrincipal();
 //		save login log
-		Long loginLogId = loginLogService.saveLoginLog(user.getLoginType(), LoginStatus.SUCCESS, JSONUtil.toJsonStr(user), "success");
+		Long loginLogId = loginLogService.saveLoginLog(user.getLoginType(), LoginStatus.SUCCESS, JSONUtil.toJsonStr(user), "success", user);
 //		set login log id
 		user.setLoginLogId(loginLogId);
 	}
@@ -73,7 +73,7 @@ public class AuthenticationEvents {
 		if(event.getAuthentication().getClass() == ThirdAuthenticationToken.class)
 			loginType = LoginType.THIRD;
 //		save login log
-		loginLogService.saveLoginLog(loginType, loginStatus, JSONUtil.toJsonStr(event.getAuthentication().getPrincipal()), event.getException().getMessage());
+		loginLogService.saveLoginLog(loginType, loginStatus, JSONUtil.toJsonStr(event.getAuthentication().getPrincipal()), event.getException().getMessage(), null);
 	}
 
 }

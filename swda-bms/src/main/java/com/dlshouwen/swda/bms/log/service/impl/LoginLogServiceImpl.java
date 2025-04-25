@@ -65,11 +65,11 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 	 * @param loginStatus
 	 * @param loginInfo
 	 * @param loginMessage
-	 * @param operation
+	 * @param user
 	 * @return login log id
 	 */
 	@Override
-	public Long saveLoginLog(String loginType, String loginStatus, String loginInfo, String loginMessage) {
+	public Long saveLoginLog(String loginType, String loginStatus, String loginInfo, String loginMessage, UserDetail user) {
 //		get request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 //		assert
@@ -89,8 +89,6 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLogMapper, LoginLo
 //		set login info, login message
 		loginLog.setLoginInfo(loginInfo);
 		loginLog.setLoginMessage(loginMessage);
-//		get user
-		UserDetail user = SecurityUser.getUser();
 //		set tenent id, user id, real name, organ id, organ name
 		if(user!=null) {
 			loginLog.setTenantId(user.getTenantId());

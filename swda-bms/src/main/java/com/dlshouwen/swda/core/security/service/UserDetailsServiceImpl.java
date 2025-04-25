@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.dict.DataScopeType;
+import com.dlshouwen.swda.bms.permission.entity.Organ;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.mapper.RoleMapper;
 import com.dlshouwen.swda.bms.permission.mapper.RoleOrganMapper;
@@ -62,6 +63,13 @@ public class UserDetailsServiceImpl implements UserDetailsService, com.dlshouwen
 		}
 //		convert to user detail
 		UserDetail userDetail = UserConvert.INSTANCE.convert2Detail(user);
+//		get organ
+		Organ organ = organService.getById(user.getOrganId());
+//		if organ is not empty
+		if(organ != null) {
+//			set organ name
+			userDetail.setOrganName(organ.getOrganName());
+		}
 //		set login type
 		userDetail.setLoginType(LoginType.ACCOUNT);
 //		convert user to user detail and get user details for return

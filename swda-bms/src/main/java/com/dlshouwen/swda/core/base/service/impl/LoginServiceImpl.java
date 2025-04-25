@@ -83,7 +83,7 @@ public class LoginServiceImpl implements ILoginService {
 //			if error
 			if (!valid) {
 //				save login log
-				loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.CAPTCHA_ERROR, login.getUsername(), "验证码错误");
+				loginLogService.saveLoginLog(LoginType.ACCOUNT, LoginStatus.CAPTCHA_ERROR, login.getUsername(), "验证码错误", null);
 //				throw exception
 				throw new SwdaException("验证码错误");
 			}
@@ -128,7 +128,7 @@ public class LoginServiceImpl implements ILoginService {
 //			if error
 			if (!valid) {
 //				save login log
-				loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.CAPTCHA_ERROR, mobileSendCode.getMobile(), "验证码错误");
+				loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.CAPTCHA_ERROR, mobileSendCode.getMobile(), "验证码错误", null);
 //				throw exception
 				throw new SwdaException("验证码错误");
 			}
@@ -138,7 +138,7 @@ public class LoginServiceImpl implements ILoginService {
 //		if user is empty
 		if (user == null) {
 //			save login log
-			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.USER_NOR_FOUND, mobileSendCode.getMobile(), "手机号未注册");
+			loginLogService.saveLoginLog(LoginType.MOBILE, LoginStatus.USER_NOR_FOUND, mobileSendCode.getMobile(), "手机号未注册", null);
 //			throw exception
 			throw new SwdaException("手机号未注册");
 		}

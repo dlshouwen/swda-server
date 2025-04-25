@@ -7,6 +7,7 @@ import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.log.entity.LoginLog;
 import com.dlshouwen.swda.core.mybatis.service.BaseService;
+import com.dlshouwen.swda.core.security.user.UserDetail;
 
 /**
  * login log service
@@ -34,9 +35,10 @@ public interface ILoginLogService extends BaseService<LoginLog> {
 	 * @param loginStatus
 	 * @param loginInfo
 	 * @param loginMessage
+	 * @param user
 	 * @return log id
 	 */
-	Long saveLoginLog(String loginType, String loginStatus, String loginInfo, String loginMessage);
+	Long saveLoginLog(String loginType, String loginStatus, String loginInfo, String loginMessage, UserDetail user);
 	
 	/**
 	 * save logout log
