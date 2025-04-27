@@ -1,4 +1,4 @@
-package com.dlshouwen.swda.bms.permission.vo;
+package com.dlshouwen.swda.core.base.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
@@ -21,17 +21,10 @@ public class LoginUserVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long userId;
-	
-	@Schema(description = "username")
-	@NotBlank(message = "用户名不能为空")
-	private String username;
 
 	@Schema(description = "real name")
 	@NotBlank(message = "真实姓名不能为空")
 	private String realName;
-
-	@Schema(description = "avatar")
-	private String avatar;
 
 	@Schema(description = "gender")
 	@Range(min = 0, max = 2, message = "性别不正确")

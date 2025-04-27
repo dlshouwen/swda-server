@@ -18,10 +18,10 @@ import com.dlshouwen.swda.core.security.user.UserDetail;
 import com.dlshouwen.swda.core.base.service.IAuthService;
 import com.dlshouwen.swda.core.base.vo.AuthCallbackVO;
 import com.dlshouwen.swda.core.base.vo.AuthVO;
+import com.dlshouwen.swda.core.base.vo.LoginUserVO;
 import com.dlshouwen.swda.core.base.vo.UserAvatarVO;
 import com.dlshouwen.swda.core.base.vo.UserPasswordVO;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
-import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
 import com.dlshouwen.swda.bms.platform.service.IAuthPlatformService;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,7 +61,7 @@ public class ProfileController {
 	 * @param loginUserVO
 	 * @return result
 	 */
-	@PutMapping("/login/user/update")
+	@PostMapping("/login/user/update")
 	@Operation(name = "update login user", type = OperateType.UPDATE)
 	public R<String> updateLoginUser(@RequestBody @Valid LoginUserVO loginUserVO) {
 //		update login user
@@ -75,7 +75,7 @@ public class ProfileController {
 	 * @param userAvatarVO
 	 * @return result
 	 */
-	@PutMapping("/login/user/avatar/update")
+	@PostMapping("/login/user/avatar/update")
 	@Operation(name = "update login user avatar", type = OperateType.UPDATE)
 	public R<String> updateLoginUserAvatar(@RequestBody UserAvatarVO userAvatarVO) {
 //		update login user avatar
@@ -89,7 +89,7 @@ public class ProfileController {
 	 * @param userPasswordVO
 	 * @return result
 	 */
-	@PutMapping("/login/user/password/update")
+	@PostMapping("/login/user/password/update")
 	@Operation(name = "update login user password", type = OperateType.UPDATE)
 	public R<String> updateLoginUserPassword(@RequestBody @Valid UserPasswordVO userPasswordVO) {
 //		get user detail
@@ -183,7 +183,7 @@ public class ProfileController {
 	 * @param openType
 	 * @return result
 	 */
-	@PutMapping("/unbind/{openType}")
+	@PostMapping("/unbind/{openType}")
 	@Operation(name = "unbind", type = OperateType.UPDATE)
 	public R<String> unbindAuth(@PathVariable("openType") String openType) {
 //		unbind

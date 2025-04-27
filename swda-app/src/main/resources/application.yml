@@ -108,6 +108,6 @@ storage:
   config:
     # 存储类型：local、aliyun、tencent、qiniu、huawei、minio
     type: local
-    domain: http://localhost:8080
+    domain: http://localhost:7000
   local:
-    path: D://upload
+    path: D:/Temp/upload

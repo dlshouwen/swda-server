@@ -8,6 +8,7 @@ import com.dlshouwen.swda.bms.system.entity.Attr;
 import com.dlshouwen.swda.bms.system.mapper.AttrMapper;
 import com.dlshouwen.swda.bms.system.service.IAttrService;
 import com.dlshouwen.swda.bms.system.vo.AttrVO;
+import com.dlshouwen.swda.core.base.loader.DataLoader;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 
 import jakarta.annotation.PostConstruct;
@@ -27,6 +28,9 @@ public class AttrServiceImpl extends BaseServiceImpl<AttrMapper, Attr> implement
 	
 	/** attr cache */
 	private final AttrCache attrCache;
+
+	/** data loader */
+	private final DataLoader loader;
 
 	/**
 	 * get attr list
@@ -65,6 +69,8 @@ public class AttrServiceImpl extends BaseServiceImpl<AttrMapper, Attr> implement
 		for(Attr attr : attrList) {
 			attrCache.set(attr.getAttrId(), attr.getContent());
 		}
+//		reload
+		loader.load();
 	}
 
 }

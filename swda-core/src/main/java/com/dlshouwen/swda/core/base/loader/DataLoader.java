@@ -41,20 +41,18 @@ public class DataLoader {
 //		create schedule executor
 		ScheduledExecutorService scheduledService = ThreadUtil.createScheduledExecutor(1);
 //		load
-		load(uniqueProperties, template);
+		load();
 //		delay
 		scheduledService.scheduleWithFixedDelay(() -> {
 //			load
-			load(uniqueProperties, template);
+			load();
 		}, 1, 10, TimeUnit.MINUTES);
 	}
 
 	/**
 	 * load
-	 * @param uniqueProperties
-	 * @param template
 	 */
-	public static void load(UniqueProperties uniqueProperties, JdbcTemplate template) {
+	public void load() {
 		/*
 		 * 1. get attr
 		 */

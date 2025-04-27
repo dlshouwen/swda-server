@@ -51,10 +51,10 @@ public class StorageController {
 //		create file upload vo
 		FileUploadVO fileUpload = new FileUploadVO();
 //		set user, size, name, platform
-		fileUpload.setFileUrl(url);
-		fileUpload.setFileSize(file.getSize());
-		fileUpload.setFileName(file.getOriginalFilename());
-		fileUpload.setStoragePlatform(storageService.properties.getConfig().getType().getValue());
+		fileUpload.setPlatform(storageService.properties.getConfig().getType().getValue());
+		fileUpload.setUrl(url);
+		fileUpload.setSize(file.getSize());
+		fileUpload.setName(file.getOriginalFilename());
 //		return
 		return R.ok(fileUpload);
 	}
@@ -80,8 +80,8 @@ public class StorageController {
 //		create file upload vo
 		FileUploadVO fileUpload = new FileUploadVO();
 //		set url, name
-		fileUpload.setFileUrl(url);
-		fileUpload.setFileName(file.getOriginalFilename());
+		fileUpload.setUrl(url);
+		fileUpload.setName(file.getOriginalFilename());
 //		return
 		return fileUpload;
 	}

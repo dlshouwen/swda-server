@@ -16,6 +16,7 @@ import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
 import com.dlshouwen.swda.core.security.cache.TokenCache;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.utils.TokenUtils;
+import com.dlshouwen.swda.core.base.vo.LoginUserVO;
 import com.dlshouwen.swda.core.base.vo.UserAvatarVO;
 import com.dlshouwen.swda.bms.permission.convert.UserConvert;
 import com.dlshouwen.swda.bms.permission.entity.User;
@@ -24,7 +25,6 @@ import com.dlshouwen.swda.bms.permission.service.IUserPostService;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
 import com.dlshouwen.swda.bms.permission.service.IUserSystemService;
-import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
 import com.dlshouwen.swda.bms.permission.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 
@@ -80,7 +80,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 //		get user from mobile
 		User user = baseMapper.getUserByMobile(loginUserVO.getMobile());
 //		if user is not null
-		if (user != null && !user.getUserId().equals(loginUserVO.getUserId())) {
+		if (user != null && user.getUserId()!=loginUserVO.getUserId()) {
 //			throw exception
 			throw new SwdaException("手机号已经存在");
 		}

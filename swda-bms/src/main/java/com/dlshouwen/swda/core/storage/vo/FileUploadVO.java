@@ -17,16 +17,16 @@ public class FileUploadVO implements Serializable {
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "file name")
-	private String fileName;
+	@Schema(description = "platform")
+	private String platform;
 
-	@Schema(description = "file url")
-	private String fileUrl;
+	@Schema(description = "name")
+	private String name;
 
-	@Schema(description = "file size")
-	private Long fileSize;
+	@Schema(description = "url")
+	private String url;
 
-	@Schema(description = "storage platform")
-	private String storagePlatform;
+	@Schema(description = "size")
+	private Long size;
 
 }

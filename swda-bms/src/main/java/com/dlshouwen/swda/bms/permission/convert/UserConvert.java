@@ -1,9 +1,9 @@
 package com.dlshouwen.swda.bms.permission.convert;
 
 import com.dlshouwen.swda.bms.permission.entity.User;
-import com.dlshouwen.swda.bms.permission.vo.LoginUserVO;
 import com.dlshouwen.swda.bms.permission.vo.UserExcelVO;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
+import com.dlshouwen.swda.core.base.vo.LoginUserVO;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 
 import org.mapstruct.Mapper;

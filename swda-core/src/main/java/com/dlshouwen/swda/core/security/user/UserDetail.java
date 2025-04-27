@@ -84,6 +84,12 @@ public class UserDetail implements UserDetails {
 	/** create time */
 	private LocalDateTime createTime;
 	
+	/** post id list */
+	private List<Long> postIdList;
+	
+	/** post name list */
+	private List<String> postNameList;
+	
 	/** data scope list */
 	private List<Long> dataScopeList;
 	

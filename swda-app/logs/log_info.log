@@ -1,675 +1,210 @@
-2025-04-25 07:10:42.986 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 07:10:43.033 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 35580 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 07:10:43.034 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 07:10:44.509 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 07:10:44.510 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 07:10:44.574 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59 ms. Found 0 JDBC repository interfaces.
-2025-04-25 07:10:44.587 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 07:10:44.589 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 07:10:44.617 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
-2025-04-25 07:10:45.642 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 07:10:45.654 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 07:10:45.656 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 07:10:45.656 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 07:10:45.746 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 07:10:45.748 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2670 ms
-2025-04-25 07:10:46.455 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 07:10:46.624 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@13346a64
-2025-04-25 07:10:46.626 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 07:10:46.627 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 07:10:46.627 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 07:10:49.752 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 07:10:49.753 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 07:10:50.140 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 07:10:50.399 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 07:10:50.890 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 07:10:50.900 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 07:10:50.914 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.447 seconds (process running for 9.113)
-2025-04-25 07:14:46.894 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 07:14:46.940 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 33144 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 07:14:46.941 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 07:14:48.526 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 07:14:48.528 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 07:14:48.595 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 64 ms. Found 0 JDBC repository interfaces.
-2025-04-25 07:14:48.606 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 07:14:48.607 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 07:14:48.638 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 0 Redis repository interfaces.
-2025-04-25 07:14:49.779 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 07:14:49.791 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 07:14:49.792 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 07:14:49.793 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 07:14:49.878 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 07:14:49.879 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2894 ms
-2025-04-25 07:14:50.584 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 07:14:50.757 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@1c571162
-2025-04-25 07:14:50.758 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 07:14:50.759 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 07:14:50.759 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 07:14:54.075 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 07:14:54.076 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 07:14:54.538 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 07:14:54.836 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 07:14:55.408 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 07:14:55.422 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 07:14:55.438 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.099 seconds (process running for 9.919)
-2025-04-25 07:21:30.147 [http-nio-7000-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 07:21:30.148 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 07:21:30.152 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
-2025-04-25 07:36:19.856 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 07:36:19.915 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 34996 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 07:36:19.917 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 07:36:22.100 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 07:36:22.102 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 07:36:22.205 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 96 ms. Found 0 JDBC repository interfaces.
-2025-04-25 07:36:22.223 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 07:36:22.225 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 07:36:22.276 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 0 Redis repository interfaces.
-2025-04-25 07:36:23.772 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 07:36:23.787 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 07:36:23.790 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 07:36:23.790 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 07:36:23.918 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 07:36:23.918 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3941 ms
-2025-04-25 07:36:24.814 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 07:36:25.040 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@2e96489b
-2025-04-25 07:36:25.042 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 07:36:25.043 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 07:36:25.043 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 07:36:29.189 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 07:36:29.192 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 07:36:29.812 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 07:36:30.205 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 07:36:30.929 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 07:36:30.945 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 07:36:30.967 [main] INFO  com.dlshouwen.swda.Application - Started Application in 11.868 seconds (process running for 12.806)
-2025-04-25 07:38:43.698 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 07:38:43.699 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 07:38:43.703 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
-2025-04-25 08:16:32.681 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 08:16:32.746 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 21380 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 08:16:32.747 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 08:16:34.917 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 08:16:34.919 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 08:16:35.016 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 92 ms. Found 0 JDBC repository interfaces.
-2025-04-25 08:16:35.034 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 08:16:35.035 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 08:16:35.081 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 0 Redis repository interfaces.
-2025-04-25 08:16:36.541 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 08:16:36.559 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 08:16:36.562 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 08:16:36.563 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 08:16:36.682 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 08:16:36.683 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3873 ms
-2025-04-25 08:16:37.757 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 08:16:38.018 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@1ac71b87
-2025-04-25 08:16:38.020 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 08:16:38.021 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 08:16:38.021 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 08:16:42.169 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 08:16:42.173 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 08:16:42.859 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 08:16:43.330 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 08:16:44.214 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 08:16:44.230 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 08:16:44.254 [main] INFO  com.dlshouwen.swda.Application - Started Application in 12.364 seconds (process running for 13.227)
-2025-04-25 08:16:57.245 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 08:16:57.245 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 08:16:57.248 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-2025-04-25 08:18:58.790 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 08:18:58.857 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 4616 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 08:18:58.859 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 08:19:01.148 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 08:19:01.150 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 08:19:01.239 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 82 ms. Found 0 JDBC repository interfaces.
-2025-04-25 08:19:01.255 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 08:19:01.257 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 08:19:01.299 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 31 ms. Found 0 Redis repository interfaces.
-2025-04-25 08:19:02.761 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 08:19:02.777 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 08:19:02.779 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 08:19:02.780 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 08:19:02.883 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 08:19:02.883 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3958 ms
-2025-04-25 08:19:03.851 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 08:19:04.092 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@2aa65672
-2025-04-25 08:19:04.094 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 08:19:04.095 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 08:19:04.095 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 08:19:08.085 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 08:19:08.088 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 08:19:08.742 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 08:19:09.257 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 08:19:10.051 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 08:19:10.068 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 08:19:10.090 [main] INFO  com.dlshouwen.swda.Application - Started Application in 12.151 seconds (process running for 13.143)
-2025-04-25 08:19:27.122 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 08:19:27.122 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 08:19:27.125 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2025-04-25 08:32:27.641 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 08:32:27.684 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 17036 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 08:32:27.686 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 08:32:29.201 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 08:32:29.203 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 08:32:29.264 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 57 ms. Found 0 JDBC repository interfaces.
-2025-04-25 08:32:29.276 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 08:32:29.277 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 08:32:29.308 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 0 Redis repository interfaces.
-2025-04-25 08:32:30.384 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 08:32:30.396 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 08:32:30.398 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 08:32:30.398 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 08:32:30.480 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 08:32:30.480 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2750 ms
-2025-04-25 08:32:31.138 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 08:32:31.303 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a22302c
-2025-04-25 08:32:31.305 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 08:32:31.306 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 08:32:31.306 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 08:32:34.531 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 08:32:34.532 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 08:32:35.056 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 08:32:35.355 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 08:32:36.041 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 08:32:36.054 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 08:32:36.075 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.957 seconds (process running for 9.657)
-2025-04-25 08:32:36.972 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 08:32:36.973 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 08:32:36.975 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2025-04-25 09:21:11.364 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 09:21:11.412 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 39776 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 09:21:11.414 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 09:21:12.986 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 09:21:12.987 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 09:21:13.061 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68 ms. Found 0 JDBC repository interfaces.
-2025-04-25 09:21:13.073 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 09:21:13.075 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 09:21:13.107 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25 ms. Found 0 Redis repository interfaces.
-2025-04-25 09:21:14.173 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 09:21:14.183 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 09:21:14.185 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 09:21:14.186 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 09:21:14.278 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 09:21:14.278 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2814 ms
-2025-04-25 09:21:14.929 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 09:21:15.115 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@33622388
-2025-04-25 09:21:15.116 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 09:21:15.117 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 09:21:15.117 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 09:21:18.203 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 09:21:18.205 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 09:21:18.652 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 09:21:18.930 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 09:21:19.442 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 09:21:19.453 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 09:21:19.466 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.632 seconds (process running for 9.343)
-2025-04-25 09:21:23.110 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 09:21:23.111 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 09:21:23.114 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-2025-04-25 09:31:55.996 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 09:31:56.040 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 9740 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 09:31:56.041 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 09:31:57.696 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 09:31:57.698 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 09:31:57.765 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 0 JDBC repository interfaces.
-2025-04-25 09:31:57.776 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 09:31:57.778 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 09:31:57.810 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
-2025-04-25 09:31:58.881 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 09:31:58.892 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 09:31:58.894 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 09:31:58.894 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 09:31:58.987 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 09:31:58.988 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2902 ms
-2025-04-25 09:31:59.766 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 09:31:59.944 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@13346a64
-2025-04-25 09:31:59.946 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 09:31:59.947 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 09:31:59.947 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 09:32:03.292 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 09:32:03.293 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 09:32:03.773 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 09:32:04.117 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 09:32:04.669 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 09:32:04.681 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 09:32:04.706 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.305 seconds (process running for 10.0)
-2025-04-25 09:32:15.717 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 09:32:15.718 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 09:32:15.721 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2025-04-25 09:33:04.379 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 09:33:04.424 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 12848 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 09:33:04.425 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 09:33:05.998 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 09:33:06.000 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 09:33:06.065 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 0 JDBC repository interfaces.
-2025-04-25 09:33:06.077 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 09:33:06.078 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 09:33:06.107 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
-2025-04-25 09:33:07.175 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 09:33:07.186 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 09:33:07.188 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 09:33:07.188 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 09:33:07.275 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 09:33:07.276 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2803 ms
-2025-04-25 09:33:07.943 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 09:33:08.162 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@3e0b1f03
-2025-04-25 09:33:08.165 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 09:33:08.165 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 09:33:08.165 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 09:33:11.618 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 09:33:11.619 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 09:33:12.041 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 09:33:12.313 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 09:33:12.883 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 09:33:12.896 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 09:33:12.912 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.037 seconds (process running for 9.708)
-2025-04-25 09:33:20.637 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 09:33:20.638 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 09:33:20.641 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2025-04-25 10:08:20.776 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 10:08:20.819 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 33916 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 10:08:20.821 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 10:08:22.313 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:08:22.315 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 10:08:22.379 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59 ms. Found 0 JDBC repository interfaces.
-2025-04-25 10:08:22.391 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:08:22.392 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 10:08:22.422 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 0 Redis repository interfaces.
-2025-04-25 10:08:23.436 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 10:08:23.448 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:08:23.449 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 10:08:23.449 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 10:08:23.534 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 10:08:23.534 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2674 ms
-2025-04-25 10:08:24.209 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 10:08:24.388 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@33622388
-2025-04-25 10:08:24.389 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 10:08:24.390 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 10:08:24.390 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 10:08:27.470 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 10:08:27.471 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 10:08:27.895 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 10:08:28.191 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 10:08:28.840 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:08:28.852 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 10:08:28.867 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.621 seconds (process running for 9.3)
-2025-04-25 10:08:56.755 [http-nio-7000-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 10:08:56.755 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 10:08:56.758 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2025-04-25 10:17:07.025 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 10:17:07.070 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 9020 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 10:17:07.071 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 10:17:08.587 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:17:08.588 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 10:17:08.652 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59 ms. Found 0 JDBC repository interfaces.
-2025-04-25 10:17:08.663 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:17:08.664 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 10:17:08.694 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
-2025-04-25 10:17:09.719 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 10:17:09.729 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:17:09.730 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 10:17:09.731 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 10:17:09.821 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 10:17:09.821 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2707 ms
-2025-04-25 10:17:10.439 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 10:17:10.604 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a22302c
-2025-04-25 10:17:10.605 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 10:17:10.606 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 10:17:10.606 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 10:17:13.670 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 10:17:13.671 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 10:17:14.185 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 10:17:14.464 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 10:17:15.017 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:17:15.029 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 10:17:15.047 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.553 seconds (process running for 9.233)
-2025-04-25 10:23:25.614 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 10:23:25.669 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 10304 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 10:23:25.670 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 10:23:27.233 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:23:27.235 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 10:23:27.328 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 87 ms. Found 0 JDBC repository interfaces.
-2025-04-25 10:23:27.349 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:23:27.351 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 10:23:27.397 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
-2025-04-25 10:23:28.452 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 10:23:28.463 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:23:28.464 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 10:23:28.464 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 10:23:28.552 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 10:23:28.553 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2829 ms
-2025-04-25 10:23:29.217 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 10:23:29.387 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@752180c4
-2025-04-25 10:23:29.388 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 10:23:29.389 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 10:23:29.389 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 10:23:31.074 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource start closing ....
-2025-04-25 10:23:31.075 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
-2025-04-25 10:23:31.082 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
-2025-04-25 10:23:31.082 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
-2025-04-25 10:23:31.581 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
-2025-04-25 10:23:31.601 [main] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-04-25 10:27:03.021 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 10:27:03.064 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 20904 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 10:27:03.066 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 10:27:04.568 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:27:04.570 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 10:27:04.638 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 64 ms. Found 0 JDBC repository interfaces.
-2025-04-25 10:27:04.652 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:27:04.653 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 10:27:04.684 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 0 Redis repository interfaces.
-2025-04-25 10:27:05.752 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 10:27:05.763 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:27:05.765 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 10:27:05.766 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 10:27:05.856 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 10:27:05.856 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2748 ms
-2025-04-25 10:27:06.557 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 10:27:06.735 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@33622388
-2025-04-25 10:27:06.737 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 10:27:06.737 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 10:27:06.738 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 10:27:08.333 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource start closing ....
-2025-04-25 10:27:08.333 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
-2025-04-25 10:27:08.339 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
-2025-04-25 10:27:08.339 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
-2025-04-25 10:27:08.353 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
-2025-04-25 10:27:08.370 [main] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-04-25 10:27:49.648 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 10:27:49.698 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 35212 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 10:27:49.698 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 10:27:51.182 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:27:51.184 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 10:27:51.248 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 0 JDBC repository interfaces.
-2025-04-25 10:27:51.259 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:27:51.261 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 10:27:51.288 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
-2025-04-25 10:27:52.304 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 10:27:52.315 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:27:52.317 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 10:27:52.317 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 10:27:52.405 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 10:27:52.405 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2663 ms
-2025-04-25 10:27:53.143 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 10:27:53.338 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@33622388
-2025-04-25 10:27:53.340 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 10:27:53.340 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 10:27:53.341 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 10:29:47.852 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource start closing ....
-2025-04-25 10:29:47.853 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
-2025-04-25 10:29:47.858 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
-2025-04-25 10:29:47.858 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
-2025-04-25 10:29:47.979 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
-2025-04-25 10:29:47.995 [main] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-04-25 10:31:10.068 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 10:31:10.119 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 9816 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 10:31:10.120 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 10:31:11.653 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:31:11.655 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 10:31:11.738 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78 ms. Found 0 JDBC repository interfaces.
-2025-04-25 10:31:11.752 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:31:11.754 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 10:31:11.786 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
-2025-04-25 10:31:12.835 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 10:31:12.845 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:31:12.846 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 10:31:12.847 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 10:31:12.941 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 10:31:12.941 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2780 ms
-2025-04-25 10:31:13.598 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 10:31:13.772 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@3e0b1f03
-2025-04-25 10:31:13.774 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 10:31:13.774 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 10:31:13.774 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 10:31:16.979 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 10:31:16.980 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 10:31:17.405 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 10:31:17.682 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 10:31:18.156 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:31:18.167 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 10:31:18.182 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.663 seconds (process running for 9.354)
-2025-04-25 10:35:18.369 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 10:35:18.370 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 10:35:18.373 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-2025-04-25 10:53:52.725 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 10:53:52.782 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 37744 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 10:53:52.783 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 10:53:54.369 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:53:54.371 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 10:53:54.457 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 0 JDBC repository interfaces.
-2025-04-25 10:53:54.468 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 10:53:54.469 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 10:53:54.496 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
-2025-04-25 10:53:55.653 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 10:53:55.664 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:53:55.665 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 10:53:55.666 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 10:53:55.760 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 10:53:55.760 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2935 ms
-2025-04-25 10:53:56.436 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 10:53:56.618 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@1bfb60b7
-2025-04-25 10:53:56.620 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 10:53:56.621 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 10:53:56.621 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 10:53:59.927 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 10:53:59.928 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 10:54:00.396 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 10:54:00.676 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 10:54:01.349 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 10:54:01.359 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 10:54:01.376 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.231 seconds (process running for 9.933)
-2025-04-25 10:54:06.216 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 10:54:06.216 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 10:54:06.218 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2025-04-25 11:23:48.053 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 11:23:48.097 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 35132 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 11:23:48.098 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 11:23:49.713 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 11:23:49.715 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 11:23:49.791 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 70 ms. Found 0 JDBC repository interfaces.
-2025-04-25 11:23:49.812 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 11:23:49.816 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 11:23:49.855 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28 ms. Found 0 Redis repository interfaces.
-2025-04-25 11:23:50.987 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 11:23:51.000 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 11:23:51.002 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 11:23:51.002 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 11:23:51.119 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 11:23:51.119 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2977 ms
-2025-04-25 11:23:51.801 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 11:23:51.986 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@2afe825a
-2025-04-25 11:23:51.989 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 11:23:51.990 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 11:23:51.990 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 11:23:55.145 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 11:23:55.146 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 11:23:55.549 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 11:23:55.815 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 11:23:56.399 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 11:23:56.410 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 11:23:56.426 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.909 seconds (process running for 9.614)
-2025-04-25 11:24:13.313 [http-nio-7000-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 11:24:13.313 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 11:24:13.316 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-2025-04-25 12:55:02.105 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 12:55:02.156 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 36264 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 12:55:02.157 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 12:55:03.671 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 12:55:03.672 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 12:55:03.732 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 55 ms. Found 0 JDBC repository interfaces.
-2025-04-25 12:55:03.742 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 12:55:03.743 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 12:55:03.774 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
-2025-04-25 12:55:04.852 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 12:55:04.865 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 12:55:04.867 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 12:55:04.867 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 12:55:04.956 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 12:55:04.956 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2754 ms
-2025-04-25 12:55:05.671 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 12:55:05.854 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@2e03bb74
-2025-04-25 12:55:05.856 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 12:55:05.856 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 12:55:05.857 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 12:55:08.954 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 12:55:08.955 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 12:55:09.439 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 12:55:09.732 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 12:55:10.250 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 12:55:10.262 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 12:55:10.278 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.715 seconds (process running for 9.375)
-2025-04-25 12:55:16.408 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 12:55:16.408 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 12:55:16.412 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-2025-04-25 13:08:39.794 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 13:08:39.841 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 15764 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 13:08:39.842 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 13:08:41.354 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:08:41.356 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 13:08:41.420 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 0 JDBC repository interfaces.
-2025-04-25 13:08:41.432 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:08:41.434 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 13:08:41.461 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
-2025-04-25 13:08:42.487 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 13:08:42.497 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:08:42.499 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 13:08:42.499 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 13:08:42.646 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 13:08:42.646 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2760 ms
-2025-04-25 13:08:43.277 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 13:08:43.446 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@45482f82
-2025-04-25 13:08:43.447 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 13:08:43.448 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 13:08:43.448 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 13:08:46.618 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 13:08:46.619 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 13:08:47.009 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 13:08:47.257 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 13:08:47.809 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:08:47.823 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 13:08:47.845 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.584 seconds (process running for 9.242)
-2025-04-25 13:08:53.546 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 13:08:53.547 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 13:08:53.550 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-2025-04-25 13:26:16.126 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 13:26:16.172 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 22324 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 13:26:16.173 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 13:26:17.662 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:26:17.663 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 13:26:17.728 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 0 JDBC repository interfaces.
-2025-04-25 13:26:17.740 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:26:17.742 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 13:26:17.766 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
-2025-04-25 13:26:18.807 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 13:26:18.818 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:26:18.820 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 13:26:18.820 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 13:26:18.915 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 13:26:18.915 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2698 ms
-2025-04-25 13:26:19.559 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 13:26:19.744 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@1802f60c
-2025-04-25 13:26:19.745 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 13:26:19.746 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 13:26:19.747 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 13:26:22.877 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 13:26:22.879 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 13:26:23.281 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 13:26:23.524 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 13:26:24.006 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:26:24.019 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 13:26:24.035 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.445 seconds (process running for 9.132)
-2025-04-25 13:26:25.193 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 13:26:25.194 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 13:26:25.205 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 11 ms
-2025-04-25 13:30:59.264 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 13:30:59.312 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 19396 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 13:30:59.313 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 13:31:00.847 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:31:00.849 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 13:31:00.921 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 67 ms. Found 0 JDBC repository interfaces.
-2025-04-25 13:31:00.935 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:31:00.937 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 13:31:00.970 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
-2025-04-25 13:31:02.039 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 13:31:02.049 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:31:02.051 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 13:31:02.051 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 13:31:02.149 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 13:31:02.150 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2792 ms
-2025-04-25 13:31:02.877 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 13:31:03.049 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@33622388
-2025-04-25 13:31:03.051 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 13:31:03.052 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 13:31:03.052 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 13:31:06.172 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 13:31:06.173 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 13:31:06.592 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 13:31:06.899 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 13:31:07.393 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:31:07.404 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 13:31:07.419 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.687 seconds (process running for 9.408)
-2025-04-25 13:31:08.434 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 13:31:08.434 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 13:31:08.436 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2025-04-25 13:39:49.580 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 13:39:49.630 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 39552 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 13:39:49.631 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 13:39:51.159 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:39:51.161 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 13:39:51.230 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 64 ms. Found 0 JDBC repository interfaces.
-2025-04-25 13:39:51.242 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:39:51.244 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 13:39:51.276 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
-2025-04-25 13:39:52.344 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 13:39:52.357 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:39:52.359 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 13:39:52.359 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 13:39:52.456 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 13:39:52.457 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2779 ms
-2025-04-25 13:39:53.113 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 13:39:53.298 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@d60cbad
-2025-04-25 13:39:53.299 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 13:39:53.300 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 13:39:53.300 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 13:39:56.499 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 13:39:56.500 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 13:39:57.027 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 13:39:57.328 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 13:39:57.868 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:39:57.883 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 13:39:57.903 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.887 seconds (process running for 9.549)
-2025-04-25 13:59:08.707 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-04-25 13:59:08.753 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 18308 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
-2025-04-25 13:59:08.754 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
-2025-04-25 13:59:10.255 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:59:10.256 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-25 13:59:10.317 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 57 ms. Found 0 JDBC repository interfaces.
-2025-04-25 13:59:10.328 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-25 13:59:10.329 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-25 13:59:10.355 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
-2025-04-25 13:59:11.394 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
-2025-04-25 13:59:11.404 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:59:11.406 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2025-04-25 13:59:11.406 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2025-04-25 13:59:11.487 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-04-25 13:59:11.487 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2691 ms
-2025-04-25 13:59:12.166 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
-2025-04-25 13:59:12.350 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@2cfd9b0a
-2025-04-25 13:59:12.352 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
-2025-04-25 13:59:12.353 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
-2025-04-25 13:59:12.353 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
-2025-04-25 13:59:15.495 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
-2025-04-25 13:59:15.496 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-04-25 13:59:15.938 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2025-04-25 13:59:16.234 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
-2025-04-25 13:59:16.740 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
-2025-04-25 13:59:16.751 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
-2025-04-25 13:59:16.768 [main] INFO  com.dlshouwen.swda.Application - Started Application in 8.613 seconds (process running for 9.291)
-2025-04-25 13:59:34.584 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-25 13:59:34.584 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-04-25 13:59:34.587 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-04-27 06:54:10.217 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-04-27 06:54:10.285 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 52920 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
+2025-04-27 06:54:10.287 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
+2025-04-27 06:54:12.206 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 06:54:12.208 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-27 06:54:12.282 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69 ms. Found 0 JDBC repository interfaces.
+2025-04-27 06:54:12.298 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 06:54:12.300 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-27 06:54:12.339 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 27 ms. Found 0 Redis repository interfaces.
+2025-04-27 06:54:13.565 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
+2025-04-27 06:54:13.579 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
+2025-04-27 06:54:13.581 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 06:54:13.581 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-04-27 06:54:13.678 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 06:54:13.679 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3339 ms
+2025-04-27 06:54:14.410 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-04-27 06:54:14.636 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@51d9479c
+2025-04-27 06:54:14.637 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-04-27 06:54:14.638 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-04-27 06:54:14.639 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-04-27 06:54:17.989 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2025-04-27 06:54:17.991 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-04-27 06:54:18.454 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2025-04-27 06:54:18.745 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2025-04-27 06:54:19.343 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
+2025-04-27 06:54:19.357 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
+2025-04-27 06:54:19.376 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.825 seconds (process running for 10.647)
+2025-04-27 06:54:28.366 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 06:54:28.366 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 06:54:28.369 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-04-27 07:35:32.161 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-04-27 07:35:32.214 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 42264 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
+2025-04-27 07:35:32.215 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
+2025-04-27 07:35:33.853 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 07:35:33.855 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-27 07:35:33.933 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 0 JDBC repository interfaces.
+2025-04-27 07:35:33.948 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 07:35:33.949 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-27 07:35:33.982 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2025-04-27 07:35:35.139 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
+2025-04-27 07:35:35.150 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
+2025-04-27 07:35:35.152 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 07:35:35.152 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-04-27 07:35:35.243 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 07:35:35.244 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2977 ms
+2025-04-27 07:35:35.944 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-04-27 07:35:36.128 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@1bfb60b7
+2025-04-27 07:35:36.130 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-04-27 07:35:36.130 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-04-27 07:35:36.131 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-04-27 07:35:39.576 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2025-04-27 07:35:39.578 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-04-27 07:35:40.071 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2025-04-27 07:35:40.365 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2025-04-27 07:35:40.919 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
+2025-04-27 07:35:40.931 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
+2025-04-27 07:35:40.949 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.36 seconds (process running for 10.054)
+2025-04-27 07:36:04.673 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 07:36:04.673 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 07:36:04.677 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2025-04-27 07:40:18.327 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-04-27 07:40:18.387 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 17692 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
+2025-04-27 07:40:18.388 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
+2025-04-27 07:40:20.051 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 07:40:20.052 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-27 07:40:20.124 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 67 ms. Found 0 JDBC repository interfaces.
+2025-04-27 07:40:20.136 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 07:40:20.137 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-27 07:40:20.165 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
+2025-04-27 07:40:21.301 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
+2025-04-27 07:40:21.314 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
+2025-04-27 07:40:21.317 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 07:40:21.317 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-04-27 07:40:21.408 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 07:40:21.409 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2968 ms
+2025-04-27 07:40:22.152 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-04-27 07:40:22.353 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@4af50246
+2025-04-27 07:40:22.355 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-04-27 07:40:22.355 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-04-27 07:40:22.356 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-04-27 07:40:25.635 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2025-04-27 07:40:25.636 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-04-27 07:40:26.122 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2025-04-27 07:40:26.397 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2025-04-27 07:40:27.055 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
+2025-04-27 07:40:27.077 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
+2025-04-27 07:40:27.100 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.342 seconds (process running for 10.053)
+2025-04-27 07:40:42.118 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 07:40:42.119 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 07:40:42.122 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-04-27 07:41:21.709 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-04-27 07:41:21.769 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 47908 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
+2025-04-27 07:41:21.771 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
+2025-04-27 07:41:23.372 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 07:41:23.374 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-27 07:41:23.446 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 0 JDBC repository interfaces.
+2025-04-27 07:41:23.458 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 07:41:23.459 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-27 07:41:23.491 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 0 Redis repository interfaces.
+2025-04-27 07:41:24.607 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
+2025-04-27 07:41:24.621 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
+2025-04-27 07:41:24.624 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 07:41:24.624 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-04-27 07:41:24.715 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 07:41:24.715 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2890 ms
+2025-04-27 07:41:25.405 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-04-27 07:41:25.605 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@2aa65672
+2025-04-27 07:41:25.607 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-04-27 07:41:25.608 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-04-27 07:41:25.608 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-04-27 07:41:29.219 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2025-04-27 07:41:29.222 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-04-27 07:41:29.770 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2025-04-27 07:41:30.162 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2025-04-27 07:41:30.858 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
+2025-04-27 07:41:30.872 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
+2025-04-27 07:41:30.893 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.814 seconds (process running for 10.541)
+2025-04-27 07:41:32.998 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 07:41:32.998 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 07:41:33.002 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-04-27 08:07:14.734 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-04-27 08:07:14.797 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 54628 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
+2025-04-27 08:07:14.799 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
+2025-04-27 08:07:16.465 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 08:07:16.467 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-27 08:07:16.531 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 0 JDBC repository interfaces.
+2025-04-27 08:07:16.543 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 08:07:16.544 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-27 08:07:16.575 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 0 Redis repository interfaces.
+2025-04-27 08:07:17.706 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
+2025-04-27 08:07:17.718 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
+2025-04-27 08:07:17.721 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 08:07:17.721 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-04-27 08:07:17.811 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 08:07:17.811 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2956 ms
+2025-04-27 08:07:18.534 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-04-27 08:07:18.733 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@6e664075
+2025-04-27 08:07:18.734 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-04-27 08:07:18.735 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-04-27 08:07:18.736 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-04-27 08:07:22.036 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2025-04-27 08:07:22.038 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-04-27 08:07:22.582 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2025-04-27 08:07:22.896 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2025-04-27 08:07:23.460 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
+2025-04-27 08:07:23.474 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
+2025-04-27 08:07:23.493 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.336 seconds (process running for 10.074)
+2025-04-27 08:07:29.355 [http-nio-7000-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 08:07:29.355 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 08:07:29.357 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-04-27 08:13:33.353 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-04-27 08:13:33.410 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 51244 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
+2025-04-27 08:13:33.412 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
+2025-04-27 08:13:35.106 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 08:13:35.108 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-27 08:13:35.185 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 0 JDBC repository interfaces.
+2025-04-27 08:13:35.198 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 08:13:35.199 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-27 08:13:35.232 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2025-04-27 08:13:36.441 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
+2025-04-27 08:13:36.456 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
+2025-04-27 08:13:36.459 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 08:13:36.461 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-04-27 08:13:36.562 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 08:13:36.563 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3100 ms
+2025-04-27 08:13:37.480 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-04-27 08:13:37.851 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@426bf2f2
+2025-04-27 08:13:37.853 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-04-27 08:13:37.854 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-04-27 08:13:37.855 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-04-27 08:13:41.938 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2025-04-27 08:13:41.939 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-04-27 08:13:42.479 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2025-04-27 08:13:42.839 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2025-04-27 08:13:43.471 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
+2025-04-27 08:13:43.494 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
+2025-04-27 08:13:43.514 [main] INFO  com.dlshouwen.swda.Application - Started Application in 10.745 seconds (process running for 11.467)
+2025-04-27 08:13:43.571 [http-nio-7000-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 08:13:43.571 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 08:13:43.573 [http-nio-7000-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-04-27 08:17:40.045 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-04-27 08:17:40.098 [main] INFO  com.dlshouwen.swda.Application - Starting Application using Java 17.0.10 with PID 11780 (D:\Workspace\eclipse\dlshouwen\swda-server\swda-app\target\classes started by liuji in D:\Workspace\eclipse\dlshouwen\swda-server\swda-app)
+2025-04-27 08:17:40.099 [main] INFO  com.dlshouwen.swda.Application - The following 1 profile is active: "dev"
+2025-04-27 08:17:41.760 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 08:17:41.762 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-27 08:17:41.832 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 0 JDBC repository interfaces.
+2025-04-27 08:17:41.845 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-27 08:17:41.846 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-27 08:17:41.878 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
+2025-04-27 08:17:43.051 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7000 (http)
+2025-04-27 08:17:43.065 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7000"]
+2025-04-27 08:17:43.067 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 08:17:43.067 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-04-27 08:17:43.166 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 08:17:43.167 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3019 ms
+2025-04-27 08:17:43.896 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-04-27 08:17:44.091 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@642d971f
+2025-04-27 08:17:44.093 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-04-27 08:17:44.094 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-04-27 08:17:44.094 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-04-27 08:17:47.169 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [daoAuthenticationProvider, mobileAuthenticationProvider, thirdAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+2025-04-27 08:17:47.171 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-04-27 08:17:47.617 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2025-04-27 08:17:47.915 [main] INFO  com.fhs.common.spring.SpringContextUtil - ------SpringContextUtil setApplicationContext-------
+2025-04-27 08:17:48.470 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7000"]
+2025-04-27 08:17:48.484 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7000 (http) with context path '/'
+2025-04-27 08:17:48.502 [main] INFO  com.dlshouwen.swda.Application - Started Application in 9.022 seconds (process running for 9.718)
+2025-04-27 08:18:01.886 [http-nio-7000-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 08:18:01.887 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 08:18:01.892 [http-nio-7000-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms

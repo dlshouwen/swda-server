@@ -1,0 +1,2 @@
+2025-04-26 09:25:45.608 [pool-6-thread-1] WARN  com.zaxxer.hikari.pool.PoolBase - master - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@8d6cdd2 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-04-26 09:25:45.624 [pool-6-thread-1] WARN  com.zaxxer.hikari.pool.PoolBase - master - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7a46cb49 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.loader.DataLoader;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
@@ -28,6 +29,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implements IDictService {
+	
+	/** data loader */
+	private final DataLoader loader;
 
 	/**
 	 * get dict page result
@@ -78,6 +82,8 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 		dict = DictConvert.INSTANCE.convert(dictVO);
 //		insert dict
 		this.save(dict);
+//		reload
+		loader.load();
 	}
 
 	/**
@@ -98,6 +104,8 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 		dict = DictConvert.INSTANCE.convert(dictVO);
 //		update
 		this.save(dict);
+//		reload
+		loader.load();
 	}
 
 	/**
@@ -109,6 +117,8 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 	public void deleteDict(List<Long> dictIdList) {
 //		delete dict
 		this.removeByIds(dictIdList);
+//		reload
+		loader.load();
 	}
 
 }

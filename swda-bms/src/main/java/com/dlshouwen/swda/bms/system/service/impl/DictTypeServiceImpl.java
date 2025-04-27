@@ -6,6 +6,7 @@ import com.fhs.trans.service.impl.DictionaryTransService;
 import lombok.AllArgsConstructor;
 
 import com.dlshouwen.swda.core.base.exception.SwdaException;
+import com.dlshouwen.swda.core.base.loader.DataLoader;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
@@ -39,6 +40,9 @@ public class DictTypeServiceImpl extends BaseServiceImpl<DictTypeMapper, DictTyp
 	
 	/** dict mapper */
 	private final DictMapper dictMapper;
+	
+	/** data loader */
+	private final DataLoader loader;
 	
 	/** dict trans service */
 	private final DictionaryTransService dictionaryTransService;
@@ -80,6 +84,8 @@ public class DictTypeServiceImpl extends BaseServiceImpl<DictTypeMapper, DictTyp
 		DictType dictType = DictTypeConvert.INSTANCE.convert(dictTypeVO);
 //		insert dict type
 		baseMapper.insert(dictType);
+//		reload
+		loader.load();
 	}
 
 	/**
@@ -93,6 +99,8 @@ public class DictTypeServiceImpl extends BaseServiceImpl<DictTypeMapper, DictTyp
 		DictType dictType = DictTypeConvert.INSTANCE.convert(dictTypeVO);
 //		update dict type
 		updateById(dictType);
+//		reload
+		loader.load();
 	}
 
 	/**
@@ -104,6 +112,8 @@ public class DictTypeServiceImpl extends BaseServiceImpl<DictTypeMapper, DictTyp
 	public void deleteDictType(List<Long> dictTypeIdList) {
 //		delete dict type
 		removeByIds(dictTypeIdList);
+//		reload
+		loader.load();
 	}
 
 	/**

@@ -1,6 +1,9 @@
 package com.dlshouwen.swda.core.security.service;
 
 import lombok.AllArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,8 @@ import com.dlshouwen.swda.bms.permission.entity.Organ;
 import com.dlshouwen.swda.bms.permission.entity.User;
 import com.dlshouwen.swda.bms.permission.mapper.UserMapper;
 import com.dlshouwen.swda.bms.permission.service.IOrganService;
+import com.dlshouwen.swda.bms.permission.service.IPostService;
+import com.dlshouwen.swda.bms.permission.service.IUserPostService;
 import com.dlshouwen.swda.core.log.dict.LoginType;
 import com.dlshouwen.swda.core.security.account.UserDetailsService;
 import com.dlshouwen.swda.core.security.mobile.MobileUserDetailsService;
@@ -29,6 +34,12 @@ public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
 	
 	/** organ service */
 	private final IOrganService organService;
+	
+	/** post service */
+	private final IPostService postService;
+	
+	/** user post service */
+	private final IUserPostService userPostService;
 
 	/** user mapper */
 	private final UserMapper userMapper;
@@ -55,6 +66,17 @@ public class MobileUserDetailsServiceImpl implements MobileUserDetailsService {
 		if(organ != null) {
 //			set organ name
 			userDetail.setOrganName(organ.getOrganName());
+		}
+//		get post id list
+		List<Long> postIdList = userPostService.getPostIdList(user.getUserId());
+//		set post id list
+		userDetail.setPostIdList(postIdList);
+//		if post id list not empty
+		if(postIdList!=null&&postIdList.size()>0) {
+//			get post name list
+			List<String> postNameList = postService.getPostNameList(postIdList);
+//			set post name list
+			userDetail.setPostNameList(postNameList);
 		}
 //		set login type
 		userDetail.setLoginType(LoginType.MOBILE);
