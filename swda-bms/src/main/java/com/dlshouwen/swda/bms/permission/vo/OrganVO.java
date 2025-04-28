@@ -1,5 +1,6 @@
 package com.dlshouwen.swda.bms.permission.vo;
 
+import com.dlshouwen.swda.bms.permission.entity.Organ;
 import com.dlshouwen.swda.bms.system.entity.Region;
 import com.dlshouwen.swda.core.base.entity.TreeNode;
 import com.dlshouwen.swda.core.base.utils.DateUtils;
@@ -33,6 +34,7 @@ public class OrganVO extends TreeNode<OrganVO> implements TransPojo {
 	private Long organId;
 	
 	@Schema(description = "pre organ id")
+	@Trans(type = TransType.SIMPLE, target = Organ.class, fields="organName", ref="preOrganName")
 	private Long preOrganId;
 	
 	@Schema(description = "pre organ name")

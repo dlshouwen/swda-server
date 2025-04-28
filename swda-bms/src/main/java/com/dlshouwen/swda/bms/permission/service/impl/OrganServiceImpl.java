@@ -64,13 +64,6 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganMapper, Organ> implem
 		Organ organ = this.getById(organId);
 //		convert organ to vo
 		OrganVO organVO = OrganConvert.INSTANCE.convert2VO(organ);
-//		if has parent organ
-		if(organ.getPreOrganId()!=null) {
-//			get parent organ
-			Organ parent = this.getById(organ.getPreOrganId());
-//			set parent name
-			organVO.setPreOrganName(parent.getOrganName());
-		}
 //		return organ
 		return organVO;
 	}

@@ -18,6 +18,7 @@ import com.dlshouwen.swda.bms.permission.service.IPostService;
 import com.dlshouwen.swda.bms.permission.service.IUserPostService;
 import com.dlshouwen.swda.bms.permission.service.IUserRoleService;
 import com.dlshouwen.swda.bms.permission.service.IUserService;
+import com.dlshouwen.swda.bms.permission.service.IUserSystemService;
 import com.dlshouwen.swda.bms.permission.vo.UserVO;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,6 +42,9 @@ public class UserController {
 	
 	/** user service */
 	private final IUserService userService;
+	
+	/** system service */
+	private final IUserSystemService userSystemService;
 	
 	/** role service */
 	private final IUserRoleService userRoleService;
@@ -99,6 +103,9 @@ public class UserController {
 	public R<UserVO> getUserData(@PathVariable("userId") Long userId) {
 //		get user data
 		UserVO user = userService.getUserData(userId);
+//		get system id list set to user
+		List<Long> systemIdList = userSystemService.getSystemIdList(userId);
+		user.setSystemIdList(systemIdList);
 //		get role id list set to user
 		List<Long> roleIdList = userRoleService.getRoleIdList(userId);
 		user.setRoleIdList(roleIdList);
