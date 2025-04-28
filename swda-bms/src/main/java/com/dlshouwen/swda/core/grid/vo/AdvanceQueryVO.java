@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fhs.core.trans.vo.TransPojo;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -19,7 +17,7 @@ import lombok.Data;
  */
 @Data
 @Schema(description = "advance query")
-public class AdvanceQueryVO implements Serializable, TransPojo {
+public class AdvanceQueryVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

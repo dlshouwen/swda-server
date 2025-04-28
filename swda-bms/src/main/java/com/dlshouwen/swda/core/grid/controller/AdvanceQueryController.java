@@ -1,12 +1,11 @@
 package com.dlshouwen.swda.core.grid.controller;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +22,7 @@ import com.dlshouwen.swda.core.log.enums.OperateType;
 import com.dlshouwen.swda.core.security.user.SecurityUser;
 import com.dlshouwen.swda.core.security.user.UserDetail;
 
+import cn.hutool.core.map.MapUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -52,9 +52,11 @@ public class AdvanceQueryController {
 	 * @param functionCode
 	 * @return advance query list
 	 */
-	@GetMapping(value="/list/{functionCode}")
+	@PostMapping(value="/list")
 	@Operation(name = "get advance query list", type = OperateType.SEARCH)
-	public R<List<AdvanceQueryVO>> getAdvanceQuery(@PathVariable("functionCode") String functionCode) {
+	public R<List<AdvanceQueryVO>> getAdvanceQuery(@RequestBody Map<String, String> params) {
+//		get function fode
+		String functionCode = MapUtil.getStr(params, "functionCode");
 //		get user detail
 		UserDetail user = SecurityUser.getUser();
 //		if no user
@@ -73,7 +75,7 @@ public class AdvanceQueryController {
 	 * @param advanceQueryId
 	 * @return advance query
 	 */
-	@GetMapping(value="/data/{advanceQueryId}")
+	@GetMapping(value="/{advanceQueryId}/data")
 	@Operation(name = "get advance query data", type = OperateType.SEARCH)
 	public R<AdvanceQueryVO> getAdvanceQueryData(@PathVariable("advanceQueryId") Long advanceQueryId) throws Exception{
 //		get advance query
@@ -97,6 +99,8 @@ public class AdvanceQueryController {
 	@PostMapping(value="/add")
 	@Operation(name = "add advance query", type = OperateType.INSERT)
 	public R<String> addAdvanceQuery(@RequestBody @Valid AdvanceQueryVO advanceQuery) {
+//		set null
+		advanceQuery.setAdvanceQueryId(null);
 //		add advance query
 		Long advanceQueryId = advanceQueryService.addAdvanceQuery(advanceQuery);
 //		get advance query condition list
@@ -109,6 +113,8 @@ public class AdvanceQueryController {
 			int sequence = 0;
 //			for each condition
 			for(AdvanceQueryConditionVO condition : conditionList) {
+//				set null
+				condition.setConditionId(null);
 //				set sort
 				condition.setSort(sequence);
 //				sequence ++
@@ -127,6 +133,8 @@ public class AdvanceQueryController {
 			int sequence = 0;
 //			for each condition
 			for(AdvanceQuerySortVO sort : sortList) {
+//				set null
+				sort.setSortId(null);
 //				set sort
 				sort.setSort(sequence);
 //				sequence ++
@@ -144,7 +152,7 @@ public class AdvanceQueryController {
 	 * @param advance query
 	 * @return result
 	 */
-	@PutMapping(value="/update")
+	@PostMapping(value="/update")
 	@Operation(name = "update advance query", type = OperateType.UPDATE)
 	public R<String> updateAdvanceQuery(@RequestBody @Valid AdvanceQueryVO advanceQuery) {
 //		update advance query
@@ -163,6 +171,8 @@ public class AdvanceQueryController {
 			int sequence = 0;
 //			for each condition
 			for(AdvanceQueryConditionVO condition : conditionList) {
+//				set null
+				condition.setConditionId(null);
 //				set sort
 				condition.setSort(sequence);
 //				sequence ++
@@ -183,6 +193,8 @@ public class AdvanceQueryController {
 			int sequence = 0;
 //			for each condition
 			for(AdvanceQuerySortVO sort : sortList) {
+//				set null
+				sort.setSortId(null);
 //				set sort
 				sort.setSort(sequence);
 //				sequence ++
@@ -200,9 +212,9 @@ public class AdvanceQueryController {
 	 * @param advanceQueryId
 	 * @return result
 	 */
-	@DeleteMapping(value="/delete")
+	@PostMapping(value="/delete")
 	@Operation(name = "delete advance query", type = OperateType.DELETE)
-	public R<String> deleteAdvanceQuery(Long advanceQueryId) {
+	public R<String> deleteAdvanceQuery(@RequestBody Long advanceQueryId) {
 //		delete advance query
 		advanceQueryService.deleteAdvanceQuery(advanceQueryId);
 //		delete advance query condition list
@@ -218,9 +230,9 @@ public class AdvanceQueryController {
 	 * @param advanceQueryId
 	 * @return result
 	 */
-	@PutMapping(value="/copy")
+	@PostMapping(value="/copy")
 	@Operation(name = "copy advance query", type = OperateType.INSERT)
-	public R<String> copyAdvanceQuery(Long advanceQueryId) {
+	public R<String> copyAdvanceQuery(@RequestBody Long advanceQueryId) {
 //		get advance query
 		AdvanceQueryVO advanceQuery = advanceQueryService.getAdvanceQueryData(advanceQueryId);
 //		get advance query condition list
@@ -232,14 +244,14 @@ public class AdvanceQueryController {
 //		condition list is not empty
 		if(conditionList != null && conditionList.size()>0) {
 //			set advance query id to condition list
-			conditionList.forEach(condition -> condition.setAdvanceQueryId(newAdvanceQueryId));
+			conditionList.forEach(condition -> { condition.setConditionId(null);condition.setAdvanceQueryId(newAdvanceQueryId); });
 //			add advance query condition list
 			advanceQueryConditionService.addAdvanceQueryConditionList(conditionList);
 		}
 //		sort list is not empty
 		if(sortList != null && sortList.size() > 0) {
 //			set advance query id to sort list
-			sortList.forEach(sort -> sort.setAdvanceQueryId(newAdvanceQueryId));
+			sortList.forEach(sort -> { sort.setSortId(null);sort.setAdvanceQueryId(newAdvanceQueryId); });
 //			add advance query sort list
 			advanceQuerySortService.addAdvanceQuerySortList(sortList);
 		}

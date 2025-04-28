@@ -19,8 +19,8 @@ public class Query<T> {
 	/** parameters */
 	private Map<String, Object> parameters;
 
-	/** manual query parameters */
-	private Map<String, Object> manualQueryParameters;
+	/** search query parameters */
+	private Map<String, Object> searchQueryParameters;
 
 	/** fast query parameters */
 	private Map<String, Object> fastQueryParameters;

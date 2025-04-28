@@ -3,7 +3,7 @@
 
 <mapper namespace="com.dlshouwen.swda.bms.permission.mapper.RoleMapper">
 
-	<select id="getDataScopeByUserId" resultType="integer">
+	<select id="getDataScopeByUserId" resultType="string">
 		select min(r.data_scope)
 		from bms_user_role ur
 		left join bms_role r on ur.role_id=r.role_id

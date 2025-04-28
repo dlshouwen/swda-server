@@ -5,7 +5,6 @@ import java.io.Serializable;
 import org.hibernate.validator.constraints.Length;
 
 import com.dlshouwen.swda.core.grid.dict.SortLogic;
-import com.fhs.core.trans.vo.TransPojo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -19,7 +18,7 @@ import lombok.Data;
  */
 @Data
 @Schema(description = "advance query sort")
-public class AdvanceQuerySortVO implements Serializable, TransPojo {
+public class AdvanceQuerySortVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;

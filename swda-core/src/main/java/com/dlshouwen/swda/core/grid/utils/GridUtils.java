@@ -37,8 +37,8 @@ public class GridUtils {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<T>();
 //		put parameter
 		Map<String, Object> params = new HashMap<>();
-		if (query.getManualQueryParameters() != null)
-			params.putAll(query.getManualQueryParameters());
+		if (query.getSearchQueryParameters() != null)
+			params.putAll(query.getSearchQueryParameters());
 		if (query.getFastQueryParameters() != null)
 			params.putAll(query.getFastQueryParameters());
 //		if has params
@@ -116,65 +116,80 @@ public class GridUtils {
 //		if has conditions
 		if (query.getAdvanceQueryConditions() != null && query.getAdvanceQueryConditions().size() > 0) {
 //			builde sql
-			StringBuilder sql = new StringBuilder(" and ");
+			StringBuilder sql = new StringBuilder();
 //			defined args
 			List<Object> args = new ArrayList<>();
+//			defined sequence
+			int sequence = 0;
 //			for each condition
 			for (Condition condition : query.getAdvanceQueryConditions()) {
+//				condition field
+				String conditionField = StrUtil.toUnderlineCase(condition.getConditionField());
 //				append left parentheses
-				sql.append(" ").append(condition.getLeftParentheses()).append(" ");
+				if(condition.getLeftParentheses()!=null) sql.append(" ").append(condition.getLeftParentheses()).append(" ");
 //				append condition
 				if (condition.getConditionType().equals(ConditionType.EQUALS)) {
 //					equals
-					sql.append(" ").append(condition.getConditionField()).append(" = ? ");
+					sql.append(" ").append(conditionField).append(" = {").append(sequence).append("} ");
 					args.add(condition.getConditionValue());
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.NOT_EQUALS)) {
 //					not equals
-					sql.append(" ").append(condition.getConditionField()).append(" != ? ");
+					sql.append(" ").append(conditionField).append(" != {").append(sequence).append("} ");
 					args.add(condition.getConditionValue());
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.LIKE)) {
 //					like
-					sql.append(" ").append(condition.getConditionField()).append(" like ? escape '\' ");
+					sql.append(" ").append(conditionField).append(" like {").append(sequence).append("} escape '\' ");
 					args.add("%" + SqlUtils.escape(condition.getConditionValue()) + "%");
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.RIGHT_LIKE)) {
 //					right like
-					sql.append(" ").append(condition.getConditionField()).append(" like ? escape '\' ");
+					sql.append(" ").append(conditionField).append(" like {").append(sequence).append("} escape '\' ");
 					args.add(SqlUtils.escape(condition.getConditionValue()) + "%");
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.LEFT_LIKE)) {
 //					left like
-					sql.append(" ").append(condition.getConditionField()).append(" like ? escape '\' ");
+					sql.append(" ").append(conditionField).append(" like {").append(sequence).append("} escape '\' ");
 					args.add("%" + SqlUtils.escape(condition.getConditionValue()));
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.GREATER_THAN)) {
 //					greater than
-					sql.append(" ").append(condition.getConditionField()).append(" > ? ");
+					sql.append(" ").append(conditionField).append(" > {").append(sequence).append("} ");
 					args.add(condition.getConditionValue());
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.GREATER_THAN_EQUALS)) {
 //					greater than equals
-					sql.append(" ").append(condition.getConditionField()).append(" >= ? ");
+					sql.append(" ").append(conditionField).append(" >= {").append(sequence).append("} ");
 					args.add(condition.getConditionValue());
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.LESS_THAN)) {
 //					less than
-					sql.append(" ").append(condition.getConditionField()).append(" < ? ");
+					sql.append(" ").append(conditionField).append(" < {").append(sequence).append("} ");
 					args.add(condition.getConditionValue());
+					sequence++;
 				} else if (condition.getConditionType().equals(ConditionType.LESS_THAN_EQUALS)) {
 //					less than equals
-					sql.append(" ").append(condition.getConditionField()).append(" <= ? ");
+					sql.append(" ").append(conditionField).append(" <= {").append(sequence).append("} ");
 					args.add(condition.getConditionValue());
-				} else if (condition.getConditionType().equals(ConditionType.NULL)) {
+					sequence++;
+				} else if (condition.getConditionType().equals(ConditionType.IS_NULL)) {
 //					null
-					sql.append(" ").append(condition.getConditionField()).append(" is null ");
-				} else if (condition.getConditionType().equals(ConditionType.NOT_NULL)) {
+					sql.append(" ").append(conditionField).append(" is null ");
+				} else if (condition.getConditionType().equals(ConditionType.IS_NOT_NULL)) {
 //					not null
-					sql.append(" ").append(condition.getConditionField()).append(" is not null ");
+					sql.append(" ").append(conditionField).append(" is not null ");
 				}
 //				append right parentheses
-				sql.append(" ").append(condition.getRightParentheses()).append(" ");
+				if(condition.getRightParentheses()!=null) sql.append(" ").append(condition.getRightParentheses()).append(" ");
 //				append condition logic
-				if(condition.getConditionLogic().equals(ConditionLogic.AND)) {
-					sql.append(" and ");
-				}
-				if(condition.getConditionLogic().equals(ConditionLogic.OR)) {
-					sql.append(" or ");
+				if(condition.getConditionLogic()!=null) {
+					if(condition.getConditionLogic().equals(ConditionLogic.AND)) {
+						sql.append(" and ");
+					}
+					if(condition.getConditionLogic().equals(ConditionLogic.OR)) {
+						sql.append(" or ");
+					}
 				}
 			}
 //			apply sql
@@ -184,6 +199,10 @@ public class GridUtils {
 		if (query.getAdvanceQuerySorts() != null && query.getAdvanceQuerySorts().size() > 0) {
 //			for each sort
 			for (Sort sort : query.getAdvanceQuerySorts()) {
+//				reset
+				if(sort.getSortLogic()==null) {
+					sort.setSortLogic(SortLogic.ASC);
+				}
 //				asc
 				if (sort.getSortLogic().equals(SortLogic.ASC)) {
 					queryWrapper.orderByAsc(sort.getSortField());

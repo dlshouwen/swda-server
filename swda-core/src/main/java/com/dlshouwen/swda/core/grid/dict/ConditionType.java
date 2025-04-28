@@ -25,28 +25,22 @@ public interface ConditionType {
 	@Schema(description = "left like")
 	String LEFT_LIKE = "4";
 
-	@Schema(description = "start with")
-	String START_WITH = "5";
-
-	@Schema(description = "end with")
-	String END_WITH = "6";
-
 	@Schema(description = "greater than")
-	String GREATER_THAN = "7";
+	String GREATER_THAN = "5";
 
 	@Schema(description = "greater than equals")
-	String GREATER_THAN_EQUALS = "9";
+	String GREATER_THAN_EQUALS = "6";
 
 	@Schema(description = "less than")
-	String LESS_THAN = "9";
+	String LESS_THAN = "7";
 
 	@Schema(description = "less than equals")
-	String LESS_THAN_EQUALS = "10";
+	String LESS_THAN_EQUALS = "8";
 
-	@Schema(description = "null")
-	String NULL = "11";
+	@Schema(description = "is null")
+	String IS_NULL = "9";
 
-	@Schema(description = "not null")
-	String NOT_NULL = "12";
+	@Schema(description = "is not null")
+	String IS_NOT_NULL = "10";
 
 }
