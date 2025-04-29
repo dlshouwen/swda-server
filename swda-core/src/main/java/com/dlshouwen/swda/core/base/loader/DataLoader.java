@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component;
 import com.dlshouwen.swda.core.base.entity.Data;
 import com.dlshouwen.swda.core.unique.properties.UniqueProperties;
 
+import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -72,22 +74,49 @@ public class DataLoader {
 		 * 2. get dict
 		 */
 //		defined dict
-		Map<String, Map<String, String>> dict = new HashMap<String, Map<String, String>>();
+		Map<String, Map<String, Object>> dict = new HashMap<String, Map<String, Object>>();
 //		get dict list
-		List<Map<String, Object>> dictList = template.queryForList("select dict_type, dict_value, dict_label from bms_dict order by dict_type, sort");
-//		set dicts to dict
-		Map<String, String> dictCategoryMap = null;
-		String dictCategoryId;
-		for (Map<String, Object> nowDict : dictList) {
-			dictCategoryId = MapUtil.getStr(nowDict, "dict_type");
-			if (dict.containsKey(dictCategoryId)) {
-				dictCategoryMap = dict.get(dictCategoryId);
-				dictCategoryMap.put(MapUtil.getStr(nowDict, "dict_value"), MapUtil.getStr(nowDict, "dict_label"));
-			} else {
-				dictCategoryMap = new LinkedHashMap<>();
-				dictCategoryMap.put(MapUtil.getStr(nowDict, "dict_value"), MapUtil.getStr(nowDict, "dict_label"));
-				dict.put(dictCategoryId, dictCategoryMap);
+		List<Map<String, Object>> dictList = template.queryForList("select dict_id, dict_name, dict_type, dict_label, dict_value, dict_style from bms_dict order by dict_type, sort");
+//		for each dict
+		for (Map<String, Object> _dict : dictList) {
+//			get dict type
+			String dictType = MapUtil.getStr(_dict, "dict_type");
+//			no key
+			if (!dict.containsKey(dictType)) {
+//				defined info
+				Map<String, Object> info = new LinkedHashMap<String, Object>();
+//				defined datas
+				List<Map<String, Object>> datas = new ArrayList<Map<String,Object>>();
+//				set datas to info
+				info.put("datas", datas);
+//				set info
+				dict.put(dictType, info);
 			}
+//			get id, name, label, value, style
+			String id = MapUtil.getStr(_dict, "dict_id");
+			String name = MapUtil.getStr(_dict, "dict_name");
+			String label = MapUtil.getStr(_dict, "dict_label");
+			String value = MapUtil.getStr(_dict, "dict_value");
+			String style = MapUtil.getStr(_dict, "dict_style");
+//			get info
+			Map<String, Object> info = dict.get(dictType);
+//			set data
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("id", id);
+			data.put("name", name);
+			data.put("label", label);
+			data.put("value", value);
+			data.put("style", style);
+//			set data
+			info.put(value, data);
+//			get datas
+			List<Map<String, Object>> datas = MapUtil.get(info, "datas", new TypeReference<List<Map<String, Object>>>() {});
+//			add data
+			datas.add(data);
+//			put datas
+			info.put("datas", datas);
+//			set info
+			dict.put(dictType, info);
 		}
 //		set to data
 		Data.dict = dict;
