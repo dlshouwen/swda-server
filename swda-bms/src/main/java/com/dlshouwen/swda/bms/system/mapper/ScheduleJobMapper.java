@@ -1,13 +1,13 @@
 package com.dlshouwen.swda.bms.system.mapper;
 
-import com.dlshouwen.swda.bms.system.entity.Task;
+import com.dlshouwen.swda.bms.system.entity.ScheduleJob;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
 /**
- * task mapper
+ * schedule job mapper
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-public interface TaskMapper extends BaseMapper<Task> {
+public interface ScheduleJobMapper extends BaseMapper<ScheduleJob> {
 
 }

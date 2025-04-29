@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "task")
-public class TaskVO implements Serializable {
+public class ScheduleJobVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
