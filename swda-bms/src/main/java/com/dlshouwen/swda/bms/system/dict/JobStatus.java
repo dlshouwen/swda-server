@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @version 1.0.0
  */
 @Schema(description = "schedule job status")
-public interface ScheduleJobStatus {
+public interface JobStatus {
 
 	@Schema(description = "normal")
 	String NORMAL = "1";

@@ -7,31 +7,31 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * schedule job log vo
+ * job log vo
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
 @Data
-@Schema(description = "schedule job log")
-public class ScheduleJobLogVO implements Serializable {
+@Schema(description = "job log")
+public class JobLogVO implements Serializable {
 
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "schedule job log id")
-	private Long scheduleJobLogId;
+	@Schema(description = "job log id")
+	private Long jobLogId;
 
-	@Schema(description = "schedule job id")
-	private Long scheduleJobId;
+	@Schema(description = "job id")
+	private Long jobId;
 
-	@Schema(description = "schedule job code")
-	private String scheduleJobCode;
+	@Schema(description = "job code")
+	private String jobCode;
 
-	@Schema(description = "schedule job name")
-	private String scheduleJobName;
+	@Schema(description = "job name")
+	private String jobName;
 
-	@Schema(description = "schedule job group")
-	private String scheduleJobGroup;
+	@Schema(description = "job group")
+	private String jobGroup;
 
 	@Schema(description = "bean name")
 	private String beanName;

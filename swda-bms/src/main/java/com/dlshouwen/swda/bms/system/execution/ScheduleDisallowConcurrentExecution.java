@@ -3,11 +3,9 @@ package com.dlshouwen.swda.bms.system.execution;
 import org.quartz.DisallowConcurrentExecution;
 
 /**
- * 禁止并发
- *
- * @author 阿沐 babamu@126.com
- * <a href="https://maku.net">MAKU</a>
- *
+ * schedule disallow concurrent execution
+ * @author liujingcheng@live.cn
+ * @version 1.0.0
  */
 @DisallowConcurrentExecution
 public class ScheduleDisallowConcurrentExecution extends AbstractScheduleJob {

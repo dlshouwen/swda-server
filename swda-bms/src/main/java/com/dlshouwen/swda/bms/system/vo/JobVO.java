@@ -10,35 +10,35 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * task vo
+ * job vo
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
 @Data
-@Schema(description = "task")
-public class ScheduleJobVO implements Serializable {
+@Schema(description = "job")
+public class JobVO implements Serializable {
 	
 	/** serial version uid */
 	private static final long serialVersionUID = 1L;
 
-	@Schema(description = "task id")
-	private Long taskId;
+	@Schema(description = "job id")
+	private Long jobId;
 	
-	@Schema(description = "task code")
+	@Schema(description = "job code")
 	@NotBlank(message = "任务编码不能为空")
-	private String taskCode;
+	private String jobCode;
 
-	@Schema(description = "task name")
+	@Schema(description = "job name")
 	@NotBlank(message = "任务名称不能为空")
-	private String taskName;
+	private String jobName;
 	
-	@Schema(description = "task group")
+	@Schema(description = "job group")
 	@NotBlank(message = "任务分组不能为空")
-	private String taskGroup;
+	private String jobGroup;
 	
-	@Schema(description = "task status")
+	@Schema(description = "job status")
 	@NotBlank(message = "任务状态不能为空")
-	private String taskStatus;
+	private String jobStatus;
 	
 	@Schema(description = "allow concurrent")
 	@NotBlank(message = "允许并发不能为空")
@@ -55,9 +55,9 @@ public class ScheduleJobVO implements Serializable {
 	@Schema(description = "params")
 	private String params;
 	
-	@Schema(description = "core expression")
-	@NotBlank(message = "Core表达式不能为空")
-	private String coreExpression;
+	@Schema(description = "cron expression")
+	@NotBlank(message = "Cron表达式不能为空")
+	private String cronExpression;
 	
 	@Schema(description = "assist_search")
 	private String assistSearch;

@@ -14,25 +14,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * schedule job
+ * job
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bms_schedule_job")
-public class ScheduleJob extends BaseEntity {
+@TableName("bms_job")
+public class Job extends BaseEntity {
 
 	@TableId
-	private Long scheduleJobId;
+	private Long jobId;
 
-	private String scheduleJobCode;
+	private String jobCode;
 
-	private String scheduleJobName;
+	private String jobName;
 	
-	private String scheduleJobGroup;
+	private String jobGroup;
 	
-	private String scheduleJobStatus;
+	private String jobStatus;
 	
 	private String allowConcurrent;
 	

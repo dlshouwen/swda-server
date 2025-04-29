@@ -10,25 +10,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * schedule job log
+ * job log
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bms_schedule_job_log")
-public class ScheduleJobLog extends BaseEntity {
+@TableName("bms_job_log")
+public class JobLog extends BaseEntity {
 	
 	@TableId
-	private Long scheduleJobLogId;
+	private Long jobLogId;
 
-	private Long scheduleJobId;
+	private Long jobId;
 
-	private String scheduleJobCode;
+	private String jobCode;
 
-	private String scheduleJobName;
+	private String jobName;
 	
-	private String scheduleJobGroup;
+	private String jobGroup;
 	
 	private String beanName;
 	

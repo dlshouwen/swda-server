@@ -2,7 +2,6 @@ package com.dlshouwen.swda.bms.system.utils;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
-import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -12,8 +11,8 @@ import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 
-import com.dlshouwen.swda.bms.system.dict.ScheduleJobStatus;
-import com.dlshouwen.swda.bms.system.entity.ScheduleJob;
+import com.dlshouwen.swda.bms.system.dict.JobStatus;
+import com.dlshouwen.swda.bms.system.entity.Job;
 import com.dlshouwen.swda.bms.system.execution.ScheduleConcurrentExecution;
 import com.dlshouwen.swda.bms.system.execution.ScheduleDisallowConcurrentExecution;
 import com.dlshouwen.swda.core.base.dict.ZeroOne;
@@ -34,12 +33,12 @@ public class ScheduleUtils {
 
 	/**
 	 * get job class
-	 * @params scheduleJob
+	 * @params job
 	 * @return job class
 	 */
-	public static Class<? extends Job> getJobClass(ScheduleJob scheduleJob) {
+	public static Class<? extends org.quartz.Job> getJobClass(Job job) {
 //		disallow concurrent
-		if (scheduleJob.getAllowConcurrent().equals(ZeroOne.NO)) {
+		if (job.getAllowConcurrent().equals(ZeroOne.NO)) {
 //			return disallow concurrent execution
 			return ScheduleDisallowConcurrentExecution.class;
 		} else {
@@ -50,42 +49,42 @@ public class ScheduleUtils {
 
 	/**
 	 * get trigger key
-	 * @params scheduleJob
+	 * @params job
 	 * @return trigger key
 	 */
-	public static TriggerKey getTriggerKey(ScheduleJob scheduleJob) {
+	public static TriggerKey getTriggerKey(Job job) {
 //		get trigger key
-		return TriggerKey.triggerKey(JOB_NAME + scheduleJob.getScheduleJobId(), scheduleJob.getScheduleJobGroup());
+		return TriggerKey.triggerKey(JOB_NAME + job.getJobId(), job.getJobGroup());
 	}
 
 	/**
 	 * get job key
-	 * @params scheduleJob
+	 * @params job
 	 * @return job key
 	 */
-	public static JobKey getJobKey(ScheduleJob scheduleJob) {
+	public static JobKey getJobKey(Job job) {
 //		get job key
-		return JobKey.jobKey(JOB_NAME + scheduleJob.getScheduleJobId(), scheduleJob.getScheduleJobGroup());
+		return JobKey.jobKey(JOB_NAME + job.getJobId(), job.getJobGroup());
 	}
 
 	/**
-	 * create schedule job
+	 * create job
 	 * @params scheduler
-	 * @params schedule job
+	 * @params job
 	 */
-	public static void createScheduleJob(Scheduler scheduler, ScheduleJob scheduleJob) {
+	public static void createJob(Scheduler scheduler, Job job) {
 //		try catch
 		try {
 //			get job key
-			JobKey jobKey = getJobKey(scheduleJob);
+			JobKey jobKey = getJobKey(job);
 //			get job detail
-			JobDetail jobDetail = JobBuilder.newJob(getJobClass(scheduleJob)).withIdentity(jobKey).build();
+			JobDetail jobDetail = JobBuilder.newJob(getJobClass(job)).withIdentity(jobKey).build();
 //			create schedule builder
-			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression()).withMisfireHandlingInstructionDoNothing();
+			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression()).withMisfireHandlingInstructionDoNothing();
 //			get trigger
-			CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(getTriggerKey(scheduleJob)).withSchedule(scheduleBuilder).build();
+			CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(getTriggerKey(job)).withSchedule(scheduleBuilder).build();
 //			set schedule job to params
-			jobDetail.getJobDataMap().put(JOB_PARAM_KEY, scheduleJob);
+			jobDetail.getJobDataMap().put(JOB_PARAM_KEY, job);
 //			set schedule job
 			scheduler.scheduleJob(jobDetail, trigger);
 //			if exists
@@ -94,35 +93,35 @@ public class ScheduleUtils {
 				scheduler.deleteJob(jobKey);
 			}
 //			if has next execution date
-			if (CronUtils.getNextExecution(scheduleJob.getCronExpression()) != null) {
+			if (CronUtils.getNextExecution(job.getCronExpression()) != null) {
 //				execute schedule job
 				scheduler.scheduleJob(jobDetail, trigger);
 			}
 //			if schedule job status is pause
-			if (scheduleJob.getScheduleJobStatus().equals(ScheduleJobStatus.PAUSE)) {
+			if (job.getJobStatus().equals(JobStatus.PAUSE)) {
 //				pause job
 				scheduler.pauseJob(jobKey);
 			}
 		} catch (SchedulerException e) {
 //			throw exception
-			throw new SwdaException("create schedule job failure", e);
+			throw new SwdaException("create job failure", e);
 		}
 	}
 
 	/**
-	 * run schedule job
+	 * run job
 	 * @params scheduler
-	 * @params schedule job
+	 * @params job
 	 */
-	public static void runScheduleJob(Scheduler scheduler, ScheduleJob scheduleJob) {
+	public static void runJob(Scheduler scheduler, Job job) {
 //		try catch
 		try {
 //			create data map
 			JobDataMap dataMap = new JobDataMap();
 //			set schedule job to param
-			dataMap.put(JOB_PARAM_KEY, scheduleJob);
+			dataMap.put(JOB_PARAM_KEY, job);
 //			get job key
-			JobKey jobKey = getJobKey(scheduleJob);
+			JobKey jobKey = getJobKey(job);
 //			if exists
 			if (scheduler.checkExists(jobKey)) {
 //				trigger job
@@ -130,78 +129,78 @@ public class ScheduleUtils {
 			}
 		} catch (SchedulerException e) {
 //			throw exception
-			throw new SwdaException("schedule run failure", e);
+			throw new SwdaException("run job failure", e);
 		}
 	}
 
 	/**
-	 * pause schedule job
+	 * pause job
 	 * @params scheduler
-	 * @params schedule job
+	 * @params job
 	 */
-	public static void pauseScheduleJob(Scheduler scheduler, ScheduleJob scheduleJob) {
+	public static void pauseJob(Scheduler scheduler, Job job) {
 //		try catch
 		try {
-//			pause schedule job
-			scheduler.pauseJob(getJobKey(scheduleJob));
+//			pause job
+			scheduler.pauseJob(getJobKey(job));
 		} catch (SchedulerException e) {
 //			throw exception
-			throw new SwdaException("pause schedule job failure", e);
+			throw new SwdaException("pause job failure", e);
 		}
 	}
 
 	/**
-	 * resule schedule job
+	 * resule job
 	 * @params scheduler
-	 * @params schedule job
+	 * @params job
 	 */
-	public static void resumeScheduleJob(Scheduler scheduler, ScheduleJob scheduleJob) {
+	public static void resumeJob(Scheduler scheduler, Job job) {
 //		try catch
 		try {
-//			resume schedule job
-			scheduler.resumeJob(getJobKey(scheduleJob));
+//			resume job
+			scheduler.resumeJob(getJobKey(job));
 		} catch (SchedulerException e) {
 //			throw exception
-			throw new SwdaException("resume schedule job failure", e);
+			throw new SwdaException("resume job failure", e);
 		}
 	}
 
 	/**
-	 * update schedule job
+	 * update job
 	 * @params scheduler
-	 * @params schedule job
+	 * @params job
 	 */
-	public static void updateScheduleJob(Scheduler scheduler, ScheduleJob scheduleJob) {
+	public static void updateJob(Scheduler scheduler, Job job) {
 //		get job key
-		JobKey jobKey = ScheduleUtils.getJobKey(scheduleJob);
+		JobKey jobKey = ScheduleUtils.getJobKey(job);
 //		try catch
 		try {
 //			if exists
 			if (scheduler.checkExists(jobKey)) {
-//				delete schedule job
+//				delete job
 				scheduler.deleteJob(jobKey);
 			}
 		} catch (SchedulerException e) {
 //			throw exception
-			throw new SwdaException("update schedule job failure", e);
+			throw new SwdaException("update job failure", e);
 		}
-//		create schedule job
-		ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
+//		create job
+		ScheduleUtils.createJob(scheduler, job);
 	}
 
 	/**
-	 * delete schedule job
+	 * delete job
 	 * @params scheduler
-	 * @params schedule job
+	 * @params job
 	 */
-	public static void deleteScheduleJob(Scheduler scheduler, ScheduleJob scheduleJob) {
+	public static void deleteJob(Scheduler scheduler, Job job) {
 //		try catch
 		try {
-//			delete schedule job
-			scheduler.deleteJob(getJobKey(scheduleJob));
+//			delete job
+			scheduler.deleteJob(getJobKey(job));
 		} catch (SchedulerException e) {
 //			throw exception
-			throw new SwdaException("delete schedule job failure", e);
+			throw new SwdaException("delete job failure", e);
 		}
 	}
 
