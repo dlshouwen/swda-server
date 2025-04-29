@@ -8,6 +8,9 @@ import com.dlshouwen.swda.core.base.exception.SwdaException;
 import com.dlshouwen.swda.core.grid.dto.PageResult;
 import com.dlshouwen.swda.core.grid.dto.Query;
 import com.dlshouwen.swda.core.mybatis.service.impl.BaseServiceImpl;
+
+import jakarta.annotation.PostConstruct;
+
 import com.dlshouwen.swda.bms.system.convert.JobConvert;
 import com.dlshouwen.swda.bms.system.dict.JobStatus;
 import com.dlshouwen.swda.bms.system.entity.Job;
@@ -17,6 +20,7 @@ import com.dlshouwen.swda.bms.system.utils.ScheduleUtils;
 import com.dlshouwen.swda.bms.system.vo.JobVO;
 
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +37,23 @@ public class JobServiceImpl extends BaseServiceImpl<JobMapper, Job> implements I
 	
 	/** scheduler */
 	private final Scheduler scheduler;
+
+	/**
+	 * init
+	 * @throws SchedulerException
+	 */
+	@PostConstruct
+	public void init() throws SchedulerException {
+//		clear all scheduler
+		scheduler.clear();
+//		get all job list
+		List<Job> jobList = baseMapper.selectList(null);
+//		for each job
+		for (Job job : jobList) {
+//			create job
+			ScheduleUtils.createJob(scheduler, job);
+		}
+	}
 
 	/**
 	 * get job page result

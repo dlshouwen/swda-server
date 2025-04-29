@@ -21,6 +21,7 @@ import com.dlshouwen.swda.bms.log.vo.DataLogVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -71,18 +72,26 @@ public class DataLogServiceImpl extends BaseServiceImpl<DataLogMapper, DataLog> 
 		scheduledService.scheduleWithFixedDelay(() -> {
 //			try catch
 			try {
+//				defined data log list
+				List<DataLog> dataLogList = new ArrayList<>();
 //				per 10
 				for (int i = 0; i < 10; i++) {
 //					get log
 					DataLogDTO log = (DataLogDTO) redisCache.rightPop(Constant.DATA_LOG_KEY);
 //					if log is null
 					if (log == null) {
-						return;
+//						continue
+						continue;
 					}
 //					convert to data log
 					DataLog dataLog = DataLogConvert.INSTANCE.convert(log);
-//					insert
-					baseMapper.insert(dataLog);
+//					add to data log list
+					dataLogList.add(dataLog);
+				}
+//				has data log list
+				if(dataLogList.size()>0) {
+//					batch insert
+					baseMapper.insert(dataLogList);
 				}
 			} catch (Exception e) {
 //				log error

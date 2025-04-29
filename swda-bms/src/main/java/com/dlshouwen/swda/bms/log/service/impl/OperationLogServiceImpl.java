@@ -22,6 +22,7 @@ import com.dlshouwen.swda.bms.log.vo.OperationLogVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -72,18 +73,26 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper,
 		scheduledService.scheduleWithFixedDelay(() -> {
 //			try catch
 			try {
+//				defined operation log list
+				List<OperationLog> operationLogList = new ArrayList<>();
 //				per 10
 				for (int i = 0; i < 10; i++) {
 //					get log
 					OperationLogDTO log = (OperationLogDTO) redisCache.rightPop(Constant.OPERATION_LOG_KEY);
 //					if log is null
 					if (log == null) {
-						return;
+//						break
+						break;
 					}
 //					convert to operation log
 					OperationLog operationLog = OperationLogConvert.INSTANCE.convert(log);
-//					insert
-					baseMapper.insert(operationLog);
+//					add to operation log list
+					operationLogList.add(operationLog);
+				}
+//				if has operation log list
+				if(operationLogList.size()>0) {
+//					batch insert
+					baseMapper.insert(operationLogList);
 				}
 			} catch (Exception e) {
 //				log error

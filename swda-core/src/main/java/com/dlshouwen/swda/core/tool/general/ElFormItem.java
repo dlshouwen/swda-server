@@ -18,7 +18,7 @@ import cn.hutool.core.util.StrUtil;
  * @author liujingcheng@live.cn
  * @version 1.0.0
  */
-public class FormItem {
+public class ElFormItem {
 	
 	/** db */
 	private static String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";

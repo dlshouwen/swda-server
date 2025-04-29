@@ -51,9 +51,9 @@ swda:
     bms.system.menu.menu_id.add: select count(*) from bms_menu where menu_id=?
     bms.system.menu.menu_code.add: select count(*) from bms_menu where menu_code=?
     bms.system.menu.menu_code.update: select count(*) from bms_menu where menu_code=? and menu_id<>?
-    # system - task
-    bms.system.task.task_code.add: select count(*) from bms_task where task_code=?
-    bms.system.task.task_code.update: select count(*) from bms_task where task_code=? and task_id<>?
+    # system - job
+    bms.system.job.job_code.add: select count(*) from bms_job where job_code=?
+    bms.system.job.job_code.update: select count(*) from bms_job where job_code=? and job_id<>?
     # permission - user
     bms.permission.user.username.add: select count(*) from bms_user where username=?
     bms.permission.user.username.update: select count(*) from bms_user where username=? and user_id<>?
