@@ -1,8 +1,11 @@
 package com.dlshouwen.swda.bms.system.mapper;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.dlshouwen.swda.bms.system.entity.Region;
+import com.dlshouwen.swda.bms.system.provider.RegionProvider;
 import com.dlshouwen.swda.core.mybatis.mapper.BaseMapper;
 
 import java.util.List;
@@ -13,7 +16,11 @@ import java.util.List;
  * @version 1.0.0
  */
 public interface RegionMapper extends BaseMapper<Region> {
-
+	
+	@Cacheable(cacheNames = "com.dlshouwen.swda:bms:system.region", key = "#root.methodName+#regionId")
+	@SelectProvider(type = RegionProvider.class, method = "getRedisData")
+	Region getRedisData(Integer regionId);
+	
 	/**
 	 * get region list
 	 * @prarms regionId

@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_attachment")
 public class Attachment extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -711864628049269144L;
+
 	@TableId
 	private Long attachmentId;
 

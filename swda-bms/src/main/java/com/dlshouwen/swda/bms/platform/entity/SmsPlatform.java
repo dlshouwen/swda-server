@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("sms_platform")
 public class SmsPlatform extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = 6389949199555486024L;
+
 	@TableId
 	private Long smsPlatformId;
 	

@@ -24,6 +24,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_region")
 public class Region extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = 9030077761941234168L;
+
 	@TableId(type=IdType.INPUT)
 	private Integer regionId;
 

@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_dict_type")
 public class DictType extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -2131190488098999927L;
+
 	@TableId
 	private Long dictTypeId;
 

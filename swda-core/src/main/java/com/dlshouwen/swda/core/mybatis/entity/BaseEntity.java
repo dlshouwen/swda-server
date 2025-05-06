@@ -5,6 +5,7 @@ import com.fhs.core.trans.vo.TransPojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +15,11 @@ import java.util.Map;
  * @version 1.0.0
  */
 @Data
-public abstract class BaseEntity implements TransPojo {
+public abstract class BaseEntity implements TransPojo, Serializable {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -5634620377160411649L;
+	
 	/**
 	 * info
 	 */

@@ -12,6 +12,8 @@ spring:
     multipart:
       max-file-size: 1024MB
       max-request-size: 1024MB
+  cache:
+    type: redis
 
 # Actuator 配置
 management:

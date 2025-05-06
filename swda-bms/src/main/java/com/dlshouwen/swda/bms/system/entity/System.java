@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_system")
 public class System extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = 4522185034304948811L;
+
 	@TableId
 	private Long systemId;
 

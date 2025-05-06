@@ -22,7 +22,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("bms_dict")
 public class Dict extends BaseEntity {
-	
+
+	/** serial version uid */
+	private static final long serialVersionUID = 1316100639091471467L;
+
 	@TableId
 	private Long dictId;
 	

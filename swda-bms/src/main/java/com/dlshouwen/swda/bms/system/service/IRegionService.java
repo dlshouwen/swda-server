@@ -12,6 +12,13 @@ import java.util.List;
  * @version 1.0.0
  */
 public interface IRegionService extends BaseService<Region> {
+	
+	/**
+	 * test
+	 * @params type
+	 * @return data
+	 */
+	Object test(String type);
 
 	/**
 	 * get region list

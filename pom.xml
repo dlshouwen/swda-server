@@ -187,13 +187,6 @@
 				<artifactId>hutool-all</artifactId>
 				<version>${hutool.version}</version>
 			</dependency>
-			<!-- spring boot starter test -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-test</artifactId>
-				<version>${spring.boot.test.version}</version>
-				<scope>test</scope>
-			</dependency>
 			<!-- micrometer-->
 			<dependency>
 				<groupId>io.micrometer</groupId>

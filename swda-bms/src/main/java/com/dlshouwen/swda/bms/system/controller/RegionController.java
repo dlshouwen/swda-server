@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import com.dlshouwen.swda.bms.system.service.IRegionService;
 import com.dlshouwen.swda.bms.system.vo.RegionVO;
 import com.dlshouwen.swda.core.base.entity.R;
+import com.dlshouwen.swda.core.grid.dto.TreeNode;
 import com.dlshouwen.swda.core.log.annotation.Operation;
 import com.dlshouwen.swda.core.log.enums.OperateType;
 
@@ -30,6 +31,20 @@ public class RegionController {
 	private final IRegionService regionService;
 
 	/**
+	 * test
+	 * @param type
+	 * @return data
+	 */
+	@PostMapping("/test/{type}")
+	@Operation(name = "test", type = OperateType.SEARCH)
+	public R<Object> test(@PathVariable String type) {
+//		test
+		Object data = regionService.test(type);
+//		return
+		return R.ok(data);
+	}
+
+	/**
 	 * get region list
 	 * @param regionId
 	 * @return region list
@@ -37,9 +52,9 @@ public class RegionController {
 	@PostMapping("/list")
 	@Operation(name = "get region list", type = OperateType.SEARCH)
 	@PreAuthorize("hasAuthority('bms:system:region:list')")
-	public R<List<RegionVO>> getRegionList(@RequestBody Integer regionId) {
+	public R<List<RegionVO>> getRegionList(@RequestBody TreeNode<Integer> treeNode) {
 //		get region list
-		List<RegionVO> regionList = regionService.getRegionList(regionId);
+		List<RegionVO> regionList = regionService.getRegionList(treeNode.getKey());
 //		return
 		return R.ok(regionList);
 	}

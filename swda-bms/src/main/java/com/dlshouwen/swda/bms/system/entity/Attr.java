@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_attr")
 public class Attr extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -8581501890537686165L;
+
 	@TableId
 	private String attrId;
 

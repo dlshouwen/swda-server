@@ -28,12 +28,32 @@ import java.util.List;
 public class RegionServiceImpl extends BaseServiceImpl<RegionMapper, Region> implements IRegionService {
 	
 	/**
+	 * test
+	 * @prarms type
+	 * @return data
+	 */
+	@Override
+	public Object test(String type) {
+//		data
+		Object data = null;
+//		test redis
+		if("redis".equals(type)) {
+//			get redis data
+			data = baseMapper.getRedisData(120000);
+		}
+//		return data
+		return data;
+	}
+	
+	/**
 	 * get region list
 	 * @prarms regionId
 	 * @return region list
 	 */
 	@Override
 	public List<RegionVO> getRegionList(Integer regionId) {
+//		default region id
+		regionId = regionId==null?0:regionId;
 //		get region list
 		List<Region> regionList = baseMapper.getRegionList(regionId);
 //		build region tree for return

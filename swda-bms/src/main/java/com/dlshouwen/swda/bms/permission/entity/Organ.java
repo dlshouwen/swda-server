@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_organ")
 public class Organ extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = 2581073616475242239L;
+
 	@TableId
 	private Long organId;
 	

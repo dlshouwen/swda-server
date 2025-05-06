@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_advance_query")
 public class AdvanceQuery extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = 4929202657706453264L;
+
 	@TableId
 	private Long advanceQueryId;
 

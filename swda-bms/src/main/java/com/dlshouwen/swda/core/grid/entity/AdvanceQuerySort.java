@@ -18,6 +18,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_advance_query_sort")
 public class AdvanceQuerySort extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -1118733438495368189L;
+
 	@TableId
 	private Long sort_id;
 

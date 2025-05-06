@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 @TableName("bms_operation_log")
 public class OperationLog extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -873071037096265793L;
+
 	@TableId
 	private Long operationLogId;
 	

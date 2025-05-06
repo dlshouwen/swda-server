@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_menu")
 public class Menu extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -1233326849196066954L;
+
 	@TableId
 	private Long menuId;
 

@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_role_menu")
 public class RoleMenu extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -8430759775226822215L;
+
 	@TableId
 	private Long relationId;
 	

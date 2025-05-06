@@ -18,7 +18,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("bms_job_log")
 public class JobLog extends BaseEntity {
-	
+
+	/** serial version uid */
+	private static final long serialVersionUID = 2815124847727063478L;
+
 	@TableId
 	private Long jobLogId;
 

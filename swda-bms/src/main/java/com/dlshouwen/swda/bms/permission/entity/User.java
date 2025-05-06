@@ -23,6 +23,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_user")
 public class User extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -7641950186407961310L;
+
 	@TableId
 	private Long userId;
 	

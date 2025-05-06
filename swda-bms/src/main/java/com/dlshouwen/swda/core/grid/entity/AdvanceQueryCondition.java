@@ -18,6 +18,9 @@ import lombok.EqualsAndHashCode;
 @TableName("bms_advance_query_condition")
 public class AdvanceQueryCondition extends BaseEntity {
 
+	/** serial version uid */
+	private static final long serialVersionUID = -359741323067668889L;
+
 	@TableId
 	private Long conditionId;
 
